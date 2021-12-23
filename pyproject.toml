@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "tinkoff-investments"
+version = "0.1.2"
+description = ""
+authors = ["Danil Akhtarov <d.akhtarov@tinkoff.ru>"]
+license = "Apache 2"
+packages = [
+    { include = "tinkoff" },
+]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+grpcio = "^1.39.0"
+tinkoff = "^0.1.0"
+
+[tool.poetry.dev-dependencies]
+grpcio-tools = "^1.39.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
