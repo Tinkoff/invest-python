@@ -17,7 +17,7 @@ pip install tinkoff-investments
 
 ## Contribution
 
-We appreciate feedback and contribution to this template! Before you get started, please see the following:
+We appreciate feedback and contribution to this project! Before you get started, please see the following:
 
 - [Tinkoff Invest's general contribution guidelines](CONTRIBUTING.md)
 
