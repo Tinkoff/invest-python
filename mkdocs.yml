@@ -1,0 +1,39 @@
+site_name: Tinkoff Invest
+site_url: https://tinkoff.github.io/invest-python-sdk/
+site_description: 'Tinkoff Invest Python SDK'
+
+repo_name: 'invest-python-sdk'
+repo_url: 'https://github.com/tinkoff/invest-python-sdk'
+
+copyright: 'Copyright &copy; 2021 Tinkoff'
+
+use_directory_urls: true
+nav:
+  - 'Home': 'README.md'
+
+theme:
+  name: material
+  language: ru
+  palette:
+    primary: black
+    accent: yellow
+
+plugins:
+- search:
+    lang: ru
+- mkdocstrings:
+    default_handler: python
+    handlers:
+      python:
+        rendering:
+          show_source: false
+    watch:
+      - tinkoff
+
+extra_css:
+  - custom.css
+
+markdown_extensions:
+  - admonition
+  - codehilite
+  - pymdownx.superfences
