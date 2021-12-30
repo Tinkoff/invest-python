@@ -1,11 +1,12 @@
 PYTHONPATH = PYTHONPATH=./
+POETRY_RUN = poetry run
 
 PROTO_DIR = protos/tinkoff/invest/grpc
 PACKAGE_PROTO_DIR = tinkoff/invest/grpc
 OUT = .
 PROTOS = protos
 
-TEST = pytest $(args) --verbosity=2 --showlocals --strict-markers --log-level=DEBUG
+TEST = $(POETRY_RUN) pytest $(args) --verbosity=2 --showlocals --strict-markers --log-level=DEBUG
 CODE = tests tinkoff examples
 EXCLUDE_CODE = tinkoff/invest/grpc
 
@@ -15,38 +16,42 @@ test:
 
 .PHONY: lint
 lint:
-	flake8 --jobs 1 --statistics --show-source $(CODE)
-	pylint --jobs 1 --rcfile=setup.cfg $(CODE)
-	black --line-length=88 --exclude=$(EXCLUDE_CODE) --check $(CODE)
-	pytest --dead-fixtures --dup-fixtures
-	mypy $(CODE)
-	poetry check
-	toml-sort --check pyproject.toml
+	$(POETRY_RUN) flake8 --jobs 1 --statistics --show-source $(CODE)
+	$(POETRY_RUN) pylint --jobs 1 --rcfile=setup.cfg $(CODE)
+	$(POETRY_RUN) black --line-length=88 --exclude=$(EXCLUDE_CODE) --check $(CODE)
+	$(POETRY_RUN) pytest --dead-fixtures --dup-fixtures
+	$(POETRY_RUN) mypy $(CODE)
+	$(POETRY_RUN) poetry check
+	$(POETRY_RUN) toml-sort --check pyproject.toml
 
 .PHONY: format
 format:
-	autoflake --recursive --in-place --remove-all-unused-imports --exclude=$(EXCLUDE_CODE) $(CODE)
-	isort $(CODE)
-	black --line-length=88 --exclude=$(EXCLUDE_CODE) $(CODE)
-	toml-sort --in-place pyproject.toml
+	$(POETRY_RUN) autoflake --recursive --in-place --remove-all-unused-imports --exclude=$(EXCLUDE_CODE) $(CODE)
+	$(POETRY_RUN) isort $(CODE)
+	$(POETRY_RUN) black --line-length=88 --exclude=$(EXCLUDE_CODE) $(CODE)
+	$(POETRY_RUN) toml-sort --in-place pyproject.toml
 
 .PHONY: docs
 docs:
-	mkdocs build -s -v
+	$(POETRY_RUN) mkdocs build -s -v
 
 .PHONY: docs-serve
 docs-serve:
-	mkdocs serve
+	$(POETRY_RUN) mkdocs serve
 
 .PHONY: docs-changelog
 docs-changelog:
-	git-changelog -o CHANGELOG.md  .
+	$(POETRY_RUN) git-changelog -o CHANGELOG.md  .
 
 .PHONY: grpc-gen
 grpc-gen:
 	rm -r ${PACKAGE_PROTO_DIR}
-	python -m grpc_tools.protoc -I${PROTOS} --python_out=${OUT} --grpc_python_out=${OUT} ${PROTO_DIR}/*.proto
+	$(POETRY_RUN) python -m grpc_tools.protoc -I${PROTOS} --python_out=${OUT} --grpc_python_out=${OUT} ${PROTO_DIR}/*.proto
 	touch ${PACKAGE_PROTO_DIR}/__init__.py
+
+.PHONY: install
+install:
+	poetry install
 
 .PHONY: publish
 publish:

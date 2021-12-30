@@ -46,7 +46,7 @@ Use poetry
 
 ```
 pip install poetry
-poetry install
+make install
 ```
 
 ```
