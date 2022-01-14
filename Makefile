@@ -46,8 +46,14 @@ docs-changelog:
 .PHONY: grpc-gen
 grpc-gen:
 	rm -r ${PACKAGE_PROTO_DIR}
-	$(POETRY_RUN) python -m grpc_tools.protoc -I${PROTOS} --python_out=${OUT} --grpc_python_out=${OUT} ${PROTO_DIR}/*.proto
+	$(POETRY_RUN) python -m grpc_tools.protoc -I${PROTOS} --python_out=${OUT} --mypy_out=${OUT} --grpc_python_out=${OUT} ${PROTO_DIR}/*.proto
 	touch ${PACKAGE_PROTO_DIR}/__init__.py
+
+.PHONY: grpc-schemas
+grpc-schemas:
+	# rm -r ${PACKAGE_PROTO_DIR}
+	$(POETRY_RUN) python -m grpc_tools.protoc -I${PROTOS} --python_betterproto_out=tinkoff/invest/schemas ${PROTO_DIR}/*.proto
+	# touch ${PACKAGE_PROTO_DIR}/__init__.py
 
 .PHONY: install
 install:
