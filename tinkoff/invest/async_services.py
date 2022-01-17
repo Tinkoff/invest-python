@@ -20,6 +20,7 @@ from tinkoff.invest.grpc import (
 )
 
 from . import grpc_helpers
+from .constants import APP_NAME
 from .schemas import (
     BondResponse,
     BondsResponse,
@@ -106,7 +107,7 @@ from .schemas import (
 
 class AsyncServices:
     def __init__(self, channel, token: str) -> None:
-        metadata = [("authorization", f"Bearer {token}")]
+        metadata = [("authorization", f"Bearer {token}"), ("x-app-name", APP_NAME)]
         self.instruments = InstrumentsService(channel, metadata)
         self.market_data = MarketDataService(channel, metadata)
         self.market_data_stream = MarketDataStreamService(channel, metadata)
