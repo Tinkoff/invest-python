@@ -459,7 +459,7 @@ class MarketDataStreamService(grpc_helpers.Service):
         request_iterator: AsyncIterable[MarketDataRequest],
     ) -> AsyncIterable[MarketDataResponse]:
         async for response in self.stub.MarketDataStream(
-            request=self._convert_market_data_stream_request(request_iterator),
+            request_iterator=self._convert_market_data_stream_request(request_iterator),
             metadata=self.metadata,
         ):
             yield grpc_helpers.protobuf_to_dataclass(response, MarketDataResponse)
@@ -535,7 +535,7 @@ class OrdersStreamService(grpc_helpers.Service):
     async def trades_stream(self) -> AsyncIterable[TradesStreamResponse]:
         request = TradesStreamRequest()
         async for response in self.stub.TradesStream(
-            grpc_helpers.dataclass_to_protobuff(
+            request=grpc_helpers.dataclass_to_protobuff(
                 request, operations_pb2.WithdrawLimitsRequest()
             ),
             metadata=self.metadata,
