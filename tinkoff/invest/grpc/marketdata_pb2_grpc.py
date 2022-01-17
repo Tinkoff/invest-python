@@ -42,28 +42,28 @@ class MarketDataServiceServicer(object):
     """
 
     def GetCandles(self, request, context):
-        """Метод запроса исторических свечей по инструменту
+        """Метод запроса исторических свечей по инструменту.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetLastPrices(self, request, context):
-        """Метод запроса последних цен по инструментам
+        """Метод запроса последних цен по инструментам.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetOrderBook(self, request, context):
-        """Метод получения стакана по инструменту
+        """Метод получения стакана по инструменту.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetTradingStatus(self, request, context):
-        """Метод запроса статуса торгов по инструментам
+        """Метод запроса статуса торгов по инструментам.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -192,7 +192,7 @@ class MarketDataStreamServiceServicer(object):
     """Missing associated documentation comment in .proto file."""
 
     def MarketDataStream(self, request_iterator, context):
-        """Двусторонний стрим предоставления биржевой информации
+        """Двусторонний стрим предоставления биржевой информации.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')

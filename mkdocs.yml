@@ -1,6 +1,6 @@
 site_name: Tinkoff Invest
 site_url: https://tinkoff.github.io/invest-python/
-site_description: 'Tinkoff Invest Python SDK'
+site_description: 'Tinkoff Invest Python'
 
 repo_name: 'invest-python'
 repo_url: 'https://github.com/tinkoff/invest-python'

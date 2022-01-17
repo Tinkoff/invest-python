@@ -6,9 +6,9 @@ from tinkoff.invest.grpc import instruments_pb2 as tinkoff_dot_invest_dot_grpc_d
 
 
 class InstrumentsServiceStub(object):
-    """Сервис предназначен для получения:</br> **1**.  информации об инструментах;</br> **2**.
-    расписания торговых сессий;</br> **3**. календаря выплат купонов по облигациям;</br> **4**.
-    размера гарантийного обеспечения по фьючерсам;</br> **5**. дивидендов по ценной бумаге.
+    """Сервис предназначен для получения:</br>**1**. информации об инструментах;</br>**2**.
+    расписания торговых сессий;</br>**3**. календаря выплат купонов по облигациям;</br>**4**.
+    размера гарантийного обеспечения по фьючерсам;</br>**5**. дивидендов по ценной бумаге.
     """
 
     def __init__(self, channel):
@@ -62,15 +62,15 @@ class InstrumentsServiceStub(object):
                 request_serializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.InstrumentsRequest.SerializeToString,
                 response_deserializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.FuturesResponse.FromString,
                 )
-        self.StockBy = channel.unary_unary(
-                '/tinkoff.public.invest.api.contract.v1.InstrumentsService/StockBy',
+        self.ShareBy = channel.unary_unary(
+                '/tinkoff.public.invest.api.contract.v1.InstrumentsService/ShareBy',
                 request_serializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.InstrumentRequest.SerializeToString,
-                response_deserializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.StockResponse.FromString,
+                response_deserializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.ShareResponse.FromString,
                 )
-        self.Stocks = channel.unary_unary(
-                '/tinkoff.public.invest.api.contract.v1.InstrumentsService/Stocks',
+        self.Shares = channel.unary_unary(
+                '/tinkoff.public.invest.api.contract.v1.InstrumentsService/Shares',
                 request_serializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.InstrumentsRequest.SerializeToString,
-                response_deserializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.StocksResponse.FromString,
+                response_deserializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.SharesResponse.FromString,
                 )
         self.GetAccruedInterests = channel.unary_unary(
                 '/tinkoff.public.invest.api.contract.v1.InstrumentsService/GetAccruedInterests',
@@ -95,104 +95,104 @@ class InstrumentsServiceStub(object):
 
 
 class InstrumentsServiceServicer(object):
-    """Сервис предназначен для получения:</br> **1**.  информации об инструментах;</br> **2**.
-    расписания торговых сессий;</br> **3**. календаря выплат купонов по облигациям;</br> **4**.
-    размера гарантийного обеспечения по фьючерсам;</br> **5**. дивидендов по ценной бумаге.
+    """Сервис предназначен для получения:</br>**1**. информации об инструментах;</br>**2**.
+    расписания торговых сессий;</br>**3**. календаря выплат купонов по облигациям;</br>**4**.
+    размера гарантийного обеспечения по фьючерсам;</br>**5**. дивидендов по ценной бумаге.
     """
 
     def TradingSchedules(self, request, context):
-        """Метод получения расписания торгов торговых площадок
+        """Метод получения расписания торгов торговых площадок.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def BondBy(self, request, context):
-        """Метод получения списка облигаций.
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def Bonds(self, request, context):
         """Метод получения облигации по её идентификатору.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def Bonds(self, request, context):
+        """Метод получения списка облигаций.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def CurrencyBy(self, request, context):
-        """Метод получения списка валют
+        """Метод получения валюты по её идентификатору.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def Currencies(self, request, context):
-        """Метод получения валюты по её идентификатору
+        """Метод получения списка валют.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def EtfBy(self, request, context):
-        """Метод получения списка инвестиционных фондов
+        """Метод получения инвестиционного фонда по его идентификатору.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def Etfs(self, request, context):
-        """Метод получения инвестиционного фонда по его идентификатору
+        """Метод получения списка инвестиционных фондов.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def FutureBy(self, request, context):
-        """Метод получения фьючерса по его идентификатору
+        """Метод получения фьючерса по его идентификатору.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def Futures(self, request, context):
-        """Метод получения списка фьючерсов
+        """Метод получения списка фьючерсов.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def StockBy(self, request, context):
-        """Метод получения списка акций
+    def ShareBy(self, request, context):
+        """Метод получения акции по её идентификатору.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def Stocks(self, request, context):
-        """Метод получения акции по её идентификатору
+    def Shares(self, request, context):
+        """Метод получения списка акций.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetAccruedInterests(self, request, context):
-        """Метод получения календаря выплат купонов по облигациям
+        """Метод получения календаря выплат купонов по облигациям.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetFuturesMargin(self, request, context):
-        """Метод получения размера гарантийного обеспечения по фьючерсам
+        """Метод получения размера гарантийного обеспечения по фьючерсам.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetInstrumentBy(self, request, context):
-        """Метод получения основной информации об инструменте
+        """Метод получения основной информации об инструменте.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -253,15 +253,15 @@ def add_InstrumentsServiceServicer_to_server(servicer, server):
                     request_deserializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.InstrumentsRequest.FromString,
                     response_serializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.FuturesResponse.SerializeToString,
             ),
-            'StockBy': grpc.unary_unary_rpc_method_handler(
-                    servicer.StockBy,
+            'ShareBy': grpc.unary_unary_rpc_method_handler(
+                    servicer.ShareBy,
                     request_deserializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.InstrumentRequest.FromString,
-                    response_serializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.StockResponse.SerializeToString,
+                    response_serializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.ShareResponse.SerializeToString,
             ),
-            'Stocks': grpc.unary_unary_rpc_method_handler(
-                    servicer.Stocks,
+            'Shares': grpc.unary_unary_rpc_method_handler(
+                    servicer.Shares,
                     request_deserializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.InstrumentsRequest.FromString,
-                    response_serializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.StocksResponse.SerializeToString,
+                    response_serializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.SharesResponse.SerializeToString,
             ),
             'GetAccruedInterests': grpc.unary_unary_rpc_method_handler(
                     servicer.GetAccruedInterests,
@@ -291,9 +291,9 @@ def add_InstrumentsServiceServicer_to_server(servicer, server):
 
  # This class is part of an EXPERIMENTAL API.
 class InstrumentsService(object):
-    """Сервис предназначен для получения:</br> **1**.  информации об инструментах;</br> **2**.
-    расписания торговых сессий;</br> **3**. календаря выплат купонов по облигациям;</br> **4**.
-    размера гарантийного обеспечения по фьючерсам;</br> **5**. дивидендов по ценной бумаге.
+    """Сервис предназначен для получения:</br>**1**. информации об инструментах;</br>**2**.
+    расписания торговых сессий;</br>**3**. календаря выплат купонов по облигациям;</br>**4**.
+    размера гарантийного обеспечения по фьючерсам;</br>**5**. дивидендов по ценной бумаге.
     """
 
     @staticmethod
@@ -450,7 +450,7 @@ class InstrumentsService(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def StockBy(request,
+    def ShareBy(request,
             target,
             options=(),
             channel_credentials=None,
@@ -460,14 +460,14 @@ class InstrumentsService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/tinkoff.public.invest.api.contract.v1.InstrumentsService/StockBy',
+        return grpc.experimental.unary_unary(request, target, '/tinkoff.public.invest.api.contract.v1.InstrumentsService/ShareBy',
             tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.InstrumentRequest.SerializeToString,
-            tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.StockResponse.FromString,
+            tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.ShareResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def Stocks(request,
+    def Shares(request,
             target,
             options=(),
             channel_credentials=None,
@@ -477,9 +477,9 @@ class InstrumentsService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/tinkoff.public.invest.api.contract.v1.InstrumentsService/Stocks',
+        return grpc.experimental.unary_unary(request, target, '/tinkoff.public.invest.api.contract.v1.InstrumentsService/Shares',
             tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.InstrumentsRequest.SerializeToString,
-            tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.StocksResponse.FromString,
+            tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.SharesResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
