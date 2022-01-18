@@ -19,7 +19,7 @@ from google.protobuf.timestamp_pb2 import Timestamp  # noqa:I900
 
 _sym_db = symbol_database.Default()
 
-T = TypeVar('T')
+T = TypeVar("T")
 
 
 def ts_to_datetime(value: Timestamp) -> datetime:
@@ -251,7 +251,7 @@ def protobuf_to_dataclass(pb_obj: Any, dataclass_type: Type[T]) -> T:  # noqa:C9
     for field_name, field_type in dataclass_hints.items():
         pb_value = getattr(pb_obj, field_name)
         field_value = _UNKNOWN
-        oneof = dataclass_fields[field_name].metadata['proto'].group
+        oneof = dataclass_fields[field_name].metadata["proto"].group
         if oneof and pb_obj.WhichOneof(oneof) != field_name:
             setattr(dataclass_obj, field_name, None)
             continue
@@ -302,8 +302,8 @@ def dataclass_to_protobuff(dataclass_obj: Any, protobuff_obj: T) -> T:  # noqa:C
                 setattr(protobuff_obj, field_name, field_value)
             elif field_type == datetime:
                 field_name_ = field_name
-                if field_name == 'from_':
-                    field_name_ = 'from'
+                if field_name == "from_":
+                    field_name_ = "from"
                 pb_value = getattr(protobuff_obj, field_name_)
                 seconds, nanos = datetime_to_ts(field_value)
                 pb_value.seconds = seconds
@@ -314,7 +314,7 @@ def dataclass_to_protobuff(dataclass_obj: Any, protobuff_obj: T) -> T:  # noqa:C
             elif issubclass(field_type, Enum):
                 setattr(protobuff_obj, field_name, field_value.value)
             else:
-                raise UnknownType(f'type {field_type} unknown')
+                raise UnknownType(f"type {field_type} unknown")
         elif origin == list:
             args = get_args(field_type)
             first_arg = args[0]
@@ -331,8 +331,8 @@ def dataclass_to_protobuff(dataclass_obj: Any, protobuff_obj: T) -> T:  # noqa:C
             elif issubclass(first_arg, Enum):
                 pb_value.extend(item.value for item in field_value)
             else:
-                raise UnknownType(f'type {field_type} unknown')
+                raise UnknownType(f"type {field_type} unknown")
         else:
-            raise UnknownType(f'type {field_type} unknown')
+            raise UnknownType(f"type {field_type} unknown")
 
     return protobuff_obj

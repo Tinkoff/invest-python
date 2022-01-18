@@ -1,4 +1,6 @@
 from .clients import AsyncClient, Client
+from .exceptions import AioRequestError, InvestError, RequestError
+from .logging import get_current_tracking_id
 from .schemas import (
     Account,
     AccountStatus,
@@ -134,6 +136,9 @@ from .schemas import (
 )
 
 __all__ = (
+    "InvestError",
+    "AioRequestError",
+    "RequestError",
     "AsyncClient",
     "Client",
     "SecurityTradingStatus",
@@ -267,4 +272,5 @@ __all__ = (
     "CancelStopOrderRequest",
     "CancelStopOrderResponse",
     "StopOrder",
+    "get_current_tracking_id",
 )
