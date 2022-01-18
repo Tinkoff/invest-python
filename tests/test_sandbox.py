@@ -15,10 +15,12 @@ from tinkoff.invest import (
     OrderType,
 )
 
+pytestmark = pytest.mark.xfail
+
 
 @pytest.fixture()
 def sandbox_service():
-    with Client(token=os.environ["INVEST_TOKEN"]) as client:
+    with Client(token=os.environ["INVEST_SANDBOX_TOKEN"]) as client:
         yield client.sandbox
 
 
