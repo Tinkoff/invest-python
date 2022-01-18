@@ -19,17 +19,16 @@ jobs:
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-    # Specifying the docker container to run
-    container: acidrain/python-poetry:3.9
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      # Install dependencies
-      - name: Poetry install dependencies
-        run: poetry install
+      - name: Install poetry
+        run: pip install poetry
 
-      # Run linters
+      - name: Install poetry dependencies
+        run: make install
+
       - name: Run linters
         run: make lint

@@ -18,13 +18,11 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      # Publish python poetry package
-      - name: Publish python poetry package
-        uses: JRubics/poetry-publish@v1.9
-        with:
-          python_version: "3.7.1"
-          poetry_version: "==1.0.5" # (PIP version specifier syntax)
-          pypi_token: ${{ secrets.PYPI_TOKEN }}
-          build_format: "sdist"
-          allow_poetry_pre_release: "yes"
-          ignore_dev_requirements: "yes"
+      - name: Install poetry
+        run: pip install poetry
+
+      - name: Install poetry dependencies
+        run: make install
+
+      - name: Publish package to pypi
+        run: make publish
