@@ -5,6 +5,8 @@ from .async_services import AsyncServices
 from .channels import create_channel
 from .services import Services
 
+__all__ = ("Client", "AsyncClient")
+
 
 @contextmanager
 def Client(token: str) -> Generator[Services, None, None]:
