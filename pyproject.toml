@@ -4,7 +4,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "tinkoff-investments"
-version = "0.1.2"
+version = "0.2.0-beta0"
 description = ""
 authors = ["Danil Akhtarov <d.akhtarov@tinkoff.ru>"]
 license = "Apache 2"
@@ -14,9 +14,9 @@ packages = [
 exclude = ["tinkoff/__init__.py"]
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = "^3.8"
 grpcio = "^1.39.0"
-tinkoff = "^0.1.0"
+tinkoff = "^0.1.1"
 
 [tool.poetry.dev-dependencies]
 autoflake = "^1.4"

@@ -3,24 +3,20 @@
 [![PyPI](https://img.shields.io/pypi/v/tinkoff-investments)](https://pypi.org/project/tinkoff-investments/)
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/tinkoff-investments)](https://www.python.org/downloads/)
 
-## Table of Contents
-
-- [Getting Started](#getting-started)
-- [Contribution](#contribution)
-- [License](#license)
-
-## Getting Started
+## Начало работы
 
 ```
 pip install tinkoff-investments
 ```
 
+## Примеры
+
+Примеры доступны [здесь](https://github.com/Tinkoff/invest-python/tree/main/examples).
+
 ## Contribution
 
-We appreciate feedback and contribution to this project! Before you get started, please see the following:
-
-- [Tinkoff Invest's general contribution guidelines](CONTRIBUTING.md)
+- [CONTRIBUTING](https://github.com/Tinkoff/invest-python/blob/main/CONTRIBUTING.md)
 
 ## License
 
-This repo is covered under [The Apache License](LICENSE).
+Лицензия [The Apache License](https://github.com/Tinkoff/invest-python/blob/main/LICENSE).
