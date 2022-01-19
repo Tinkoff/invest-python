@@ -87,14 +87,14 @@ global___AccountStatus = AccountStatus
 
 
 class GetAccountsRequest(google.protobuf.message.Message):
-    """Запрос получения счетов не имеет входных параметров"""
+    """Запрос получения счетов пользователя."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     def __init__(self,
         ) -> None: ...
 global___GetAccountsRequest = GetAccountsRequest
 
 class GetAccountsResponse(google.protobuf.message.Message):
-    """Ответ на запрос получения счетов."""
+    """Список счетов пользователя."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     ACCOUNTS_FIELD_NUMBER: builtins.int
     @property
@@ -109,7 +109,7 @@ class GetAccountsResponse(google.protobuf.message.Message):
 global___GetAccountsResponse = GetAccountsResponse
 
 class Account(google.protobuf.message.Message):
-    """Счёт клиента."""
+    """Информация о счёте."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     ID_FIELD_NUMBER: builtins.int
     TYPE_FIELD_NUMBER: builtins.int
@@ -205,12 +205,14 @@ class GetMarginAttributesResponse(google.protobuf.message.Message):
 global___GetMarginAttributesResponse = GetMarginAttributesResponse
 
 class GetUserTariffRequest(google.protobuf.message.Message):
+    """Запрос текущих лимитов пользователя."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     def __init__(self,
         ) -> None: ...
 global___GetUserTariffRequest = GetUserTariffRequest
 
 class GetUserTariffResponse(google.protobuf.message.Message):
+    """Текущие лимиты пользователя."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     UNARY_LIMITS_FIELD_NUMBER: builtins.int
     STREAM_LIMITS_FIELD_NUMBER: builtins.int
@@ -231,6 +233,7 @@ class GetUserTariffResponse(google.protobuf.message.Message):
 global___GetUserTariffResponse = GetUserTariffResponse
 
 class UnaryLimit(google.protobuf.message.Message):
+    """Лимит unary-методов."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     LIMIT_PER_MINUTE_FIELD_NUMBER: builtins.int
     METHODS_FIELD_NUMBER: builtins.int
@@ -250,6 +253,7 @@ class UnaryLimit(google.protobuf.message.Message):
 global___UnaryLimit = UnaryLimit
 
 class StreamLimit(google.protobuf.message.Message):
+    """Лимит stream-соединений."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     LIMIT_FIELD_NUMBER: builtins.int
     STREAMS_FIELD_NUMBER: builtins.int
@@ -269,12 +273,14 @@ class StreamLimit(google.protobuf.message.Message):
 global___StreamLimit = StreamLimit
 
 class GetInfoRequest(google.protobuf.message.Message):
+    """Запрос информации о пользователе."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     def __init__(self,
         ) -> None: ...
 global___GetInfoRequest = GetInfoRequest
 
 class GetInfoResponse(google.protobuf.message.Message):
+    """Информация о пользователе."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     PREM_STATUS_FIELD_NUMBER: builtins.int
     QUAL_STATUS_FIELD_NUMBER: builtins.int

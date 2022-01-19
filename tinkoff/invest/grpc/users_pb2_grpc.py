@@ -44,28 +44,28 @@ class UsersServiceServicer(object):
     """
 
     def GetAccounts(self, request, context):
-        """Метод получения счетов пользователя
+        """Метод получения счетов пользователя.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetMarginAttributes(self, request, context):
-        """Расчёт маржинальных показателей по счёту
+        """Расчёт маржинальных показателей по счёту.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetUserTariff(self, request, context):
-        """Запрос тарифа пользователя
+        """Запрос тарифа пользователя.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetInfo(self, request, context):
-        """Метод получения информации о пользователе
+        """Метод получения информации о пользователе.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')

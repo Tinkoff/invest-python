@@ -46,28 +46,28 @@ class OperationsServiceServicer(object):
     """
 
     def GetOperations(self, request, context):
-        """Метод получения списка операций по счёту
+        """Метод получения списка операций по счёту.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetPortfolio(self, request, context):
-        """Метод получения портфеля по счёту
+        """Метод получения портфеля по счёту.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetPositions(self, request, context):
-        """Метод получения списка позиций по счёту
+        """Метод получения списка позиций по счёту.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetWithdrawLimits(self, request, context):
-        """Метод получения доступного остатка для вывода средств
+        """Метод получения доступного остатка для вывода средств.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')

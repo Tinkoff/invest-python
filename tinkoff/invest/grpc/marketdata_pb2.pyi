@@ -29,6 +29,7 @@ class _SubscriptionActionEnumTypeWrapper(google.protobuf.internal.enum_type_wrap
     """Отписаться."""
 
 class SubscriptionAction(_SubscriptionAction, metaclass=_SubscriptionActionEnumTypeWrapper):
+    """Тип операции со списком подписок."""
     pass
 
 SUBSCRIPTION_ACTION_UNSPECIFIED: SubscriptionAction.ValueType = ...  # 0
@@ -58,6 +59,7 @@ class _SubscriptionIntervalEnumTypeWrapper(google.protobuf.internal.enum_type_wr
     """Пятиминутные свечи."""
 
 class SubscriptionInterval(_SubscriptionInterval, metaclass=_SubscriptionIntervalEnumTypeWrapper):
+    """Интервал свечи."""
     pass
 
 SUBSCRIPTION_INTERVAL_UNSPECIFIED: SubscriptionInterval.ValueType = ...  # 0
@@ -90,7 +92,7 @@ class _SubscriptionStatusEnumTypeWrapper(google.protobuf.internal.enum_type_wrap
     """Некорректный статус подписки, список возможных значений: [SubscriptionAction](/investAPI/marketdata#subscriptionaction)"""
 
     SUBSCRIPTION_STATUS_DEPTH_IS_INVALID: SubscriptionStatus.ValueType = ...  # 4
-    """Некорректная глубина стакана, требуется указать целое число от 1 до 50."""
+    """Некорректная глубина стакана, доступные значения: 10, 20, 30, 40, 50."""
 
     SUBSCRIPTION_STATUS_INTERVAL_IS_INVALID: SubscriptionStatus.ValueType = ...  # 5
     """Некорректный интервал свечей, список возможных значений: [SubscriptionInterval](/investAPI/marketdata#subscriptioninterval)"""
@@ -102,6 +104,7 @@ class _SubscriptionStatusEnumTypeWrapper(google.protobuf.internal.enum_type_wrap
     """Внутренняя ошибка сервиса."""
 
 class SubscriptionStatus(_SubscriptionStatus, metaclass=_SubscriptionStatusEnumTypeWrapper):
+    """Результат подписки."""
     pass
 
 SUBSCRIPTION_STATUS_UNSPECIFIED: SubscriptionStatus.ValueType = ...  # 0
@@ -117,7 +120,7 @@ SUBSCRIPTION_STATUS_SUBSCRIPTION_ACTION_IS_INVALID: SubscriptionStatus.ValueType
 """Некорректный статус подписки, список возможных значений: [SubscriptionAction](/investAPI/marketdata#subscriptionaction)"""
 
 SUBSCRIPTION_STATUS_DEPTH_IS_INVALID: SubscriptionStatus.ValueType = ...  # 4
-"""Некорректная глубина стакана, требуется указать целое число от 1 до 50."""
+"""Некорректная глубина стакана, доступные значения: 10, 20, 30, 40, 50."""
 
 SUBSCRIPTION_STATUS_INTERVAL_IS_INVALID: SubscriptionStatus.ValueType = ...  # 5
 """Некорректный интервал свечей, список возможных значений: [SubscriptionInterval](/investAPI/marketdata#subscriptioninterval)"""
@@ -146,6 +149,7 @@ class _TradeDirectionEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper.
     """Продажа."""
 
 class TradeDirection(_TradeDirection, metaclass=_TradeDirectionEnumTypeWrapper):
+    """Направление сделки."""
     pass
 
 TRADE_DIRECTION_UNSPECIFIED: TradeDirection.ValueType = ...  # 0
@@ -184,6 +188,7 @@ class _CandleIntervalEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper.
     """1 день."""
 
 class CandleInterval(_CandleInterval, metaclass=_CandleIntervalEnumTypeWrapper):
+    """Интервал свечей."""
     pass
 
 CANDLE_INTERVAL_UNSPECIFIED: CandleInterval.ValueType = ...  # 0
@@ -322,6 +327,7 @@ class SubscribeCandlesRequest(google.protobuf.message.Message):
 global___SubscribeCandlesRequest = SubscribeCandlesRequest
 
 class CandleInstrument(google.protobuf.message.Message):
+    """Запрос изменения статус подписки на свечи."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     FIGI_FIELD_NUMBER: builtins.int
     INTERVAL_FIELD_NUMBER: builtins.int
@@ -340,6 +346,7 @@ class CandleInstrument(google.protobuf.message.Message):
 global___CandleInstrument = CandleInstrument
 
 class SubscribeCandlesResponse(google.protobuf.message.Message):
+    """Результат изменения статус подписки на свечи."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     TRACKING_ID_FIELD_NUMBER: builtins.int
     CANDLES_SUBSCRIPTIONS_FIELD_NUMBER: builtins.int
@@ -359,6 +366,7 @@ class SubscribeCandlesResponse(google.protobuf.message.Message):
 global___SubscribeCandlesResponse = SubscribeCandlesResponse
 
 class CandleSubscription(google.protobuf.message.Message):
+    """Статус подписки на свечи."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     FIGI_FIELD_NUMBER: builtins.int
     INTERVAL_FIELD_NUMBER: builtins.int
@@ -382,7 +390,7 @@ class CandleSubscription(google.protobuf.message.Message):
 global___CandleSubscription = CandleSubscription
 
 class SubscribeOrderBookRequest(google.protobuf.message.Message):
-    """subscribeOrderbook | Изменение статуса подписки на стаканы."""
+    """Запрос на изменение статуса подписки на стаканы."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     SUBSCRIPTION_ACTION_FIELD_NUMBER: builtins.int
     INSTRUMENTS_FIELD_NUMBER: builtins.int
@@ -402,6 +410,7 @@ class SubscribeOrderBookRequest(google.protobuf.message.Message):
 global___SubscribeOrderBookRequest = SubscribeOrderBookRequest
 
 class OrderBookInstrument(google.protobuf.message.Message):
+    """Запрос подписки на стаканы."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     FIGI_FIELD_NUMBER: builtins.int
     DEPTH_FIELD_NUMBER: builtins.int
@@ -420,6 +429,7 @@ class OrderBookInstrument(google.protobuf.message.Message):
 global___OrderBookInstrument = OrderBookInstrument
 
 class SubscribeOrderBookResponse(google.protobuf.message.Message):
+    """Результат изменения статуса подписки на стаканы."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     TRACKING_ID_FIELD_NUMBER: builtins.int
     ORDER_BOOK_SUBSCRIPTIONS_FIELD_NUMBER: builtins.int
@@ -439,6 +449,7 @@ class SubscribeOrderBookResponse(google.protobuf.message.Message):
 global___SubscribeOrderBookResponse = SubscribeOrderBookResponse
 
 class OrderBookSubscription(google.protobuf.message.Message):
+    """Статус подписки."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     FIGI_FIELD_NUMBER: builtins.int
     DEPTH_FIELD_NUMBER: builtins.int
@@ -462,7 +473,7 @@ class OrderBookSubscription(google.protobuf.message.Message):
 global___OrderBookSubscription = OrderBookSubscription
 
 class SubscribeTradesRequest(google.protobuf.message.Message):
-    """subscribeTrades | Изменение статуса подписки на поток обезличенных сделок."""
+    """Изменение статуса подписки на поток обезличенных сделок."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     SUBSCRIPTION_ACTION_FIELD_NUMBER: builtins.int
     INSTRUMENTS_FIELD_NUMBER: builtins.int
@@ -482,6 +493,7 @@ class SubscribeTradesRequest(google.protobuf.message.Message):
 global___SubscribeTradesRequest = SubscribeTradesRequest
 
 class TradeInstrument(google.protobuf.message.Message):
+    """Запрос подписки на поток обезличенных сделок."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     FIGI_FIELD_NUMBER: builtins.int
     figi: typing.Text = ...
@@ -495,6 +507,7 @@ class TradeInstrument(google.protobuf.message.Message):
 global___TradeInstrument = TradeInstrument
 
 class SubscribeTradesResponse(google.protobuf.message.Message):
+    """Результат изменения статуса подписки на поток обезличенных сделок."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     TRACKING_ID_FIELD_NUMBER: builtins.int
     TRADE_SUBSCRIPTIONS_FIELD_NUMBER: builtins.int
@@ -514,6 +527,7 @@ class SubscribeTradesResponse(google.protobuf.message.Message):
 global___SubscribeTradesResponse = SubscribeTradesResponse
 
 class TradeSubscription(google.protobuf.message.Message):
+    """Статус подписки."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     FIGI_FIELD_NUMBER: builtins.int
     SUBSCRIPTION_STATUS_FIELD_NUMBER: builtins.int
@@ -532,7 +546,7 @@ class TradeSubscription(google.protobuf.message.Message):
 global___TradeSubscription = TradeSubscription
 
 class SubscribeInfoRequest(google.protobuf.message.Message):
-    """subscribeInfo | Изменение статуса подписки на торговый статус инструмента."""
+    """Изменение статуса подписки на торговый статус инструмента."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     SUBSCRIPTION_ACTION_FIELD_NUMBER: builtins.int
     INSTRUMENTS_FIELD_NUMBER: builtins.int
@@ -552,6 +566,7 @@ class SubscribeInfoRequest(google.protobuf.message.Message):
 global___SubscribeInfoRequest = SubscribeInfoRequest
 
 class InfoInstrument(google.protobuf.message.Message):
+    """Запрос подписки на торговый статус."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     FIGI_FIELD_NUMBER: builtins.int
     figi: typing.Text = ...
@@ -565,6 +580,7 @@ class InfoInstrument(google.protobuf.message.Message):
 global___InfoInstrument = InfoInstrument
 
 class SubscribeInfoResponse(google.protobuf.message.Message):
+    """Результат изменения статуса подписки на торговый статус."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     TRACKING_ID_FIELD_NUMBER: builtins.int
     INFO_SUBSCRIPTIONS_FIELD_NUMBER: builtins.int
@@ -584,6 +600,7 @@ class SubscribeInfoResponse(google.protobuf.message.Message):
 global___SubscribeInfoResponse = SubscribeInfoResponse
 
 class InfoSubscription(google.protobuf.message.Message):
+    """Статус подписки."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     FIGI_FIELD_NUMBER: builtins.int
     SUBSCRIPTION_STATUS_FIELD_NUMBER: builtins.int
@@ -602,7 +619,7 @@ class InfoSubscription(google.protobuf.message.Message):
 global___InfoSubscription = InfoSubscription
 
 class Candle(google.protobuf.message.Message):
-    """Выходные параметры. Пакет Candles."""
+    """Пакет свечей в рамках стрима."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     FIGI_FIELD_NUMBER: builtins.int
     INTERVAL_FIELD_NUMBER: builtins.int
@@ -657,6 +674,7 @@ class Candle(google.protobuf.message.Message):
 global___Candle = Candle
 
 class OrderBook(google.protobuf.message.Message):
+    """Пакет стаканов в рамках стрима."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     FIGI_FIELD_NUMBER: builtins.int
     DEPTH_FIELD_NUMBER: builtins.int
@@ -699,6 +717,7 @@ class OrderBook(google.protobuf.message.Message):
 global___OrderBook = OrderBook
 
 class Order(google.protobuf.message.Message):
+    """Массив предложений/спроса."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     PRICE_FIELD_NUMBER: builtins.int
     QUANTITY_FIELD_NUMBER: builtins.int
@@ -719,6 +738,7 @@ class Order(google.protobuf.message.Message):
 global___Order = Order
 
 class Trade(google.protobuf.message.Message):
+    """Информация о сделке."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     FIGI_FIELD_NUMBER: builtins.int
     DIRECTION_FIELD_NUMBER: builtins.int
@@ -755,6 +775,7 @@ class Trade(google.protobuf.message.Message):
 global___Trade = Trade
 
 class TradingStatus(google.protobuf.message.Message):
+    """Пакет изменения торгового статуса."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     FIGI_FIELD_NUMBER: builtins.int
     TRADING_STATUS_FIELD_NUMBER: builtins.int
@@ -773,6 +794,7 @@ class TradingStatus(google.protobuf.message.Message):
 global___TradingStatus = TradingStatus
 
 class GetCandlesRequest(google.protobuf.message.Message):
+    """Запрос исторических свечей."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     FIGI_FIELD_NUMBER: builtins.int
     FROM_FIELD_NUMBER: builtins.int
@@ -799,6 +821,7 @@ class GetCandlesRequest(google.protobuf.message.Message):
 global___GetCandlesRequest = GetCandlesRequest
 
 class GetCandlesResponse(google.protobuf.message.Message):
+    """Список свечей."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     CANDLES_FIELD_NUMBER: builtins.int
     @property
@@ -813,6 +836,7 @@ class GetCandlesResponse(google.protobuf.message.Message):
 global___GetCandlesResponse = GetCandlesResponse
 
 class HistoricCandle(google.protobuf.message.Message):
+    """Информация о свече."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     OPEN_FIELD_NUMBER: builtins.int
     HIGH_FIELD_NUMBER: builtins.int
@@ -862,6 +886,7 @@ class HistoricCandle(google.protobuf.message.Message):
 global___HistoricCandle = HistoricCandle
 
 class GetLastPricesRequest(google.protobuf.message.Message):
+    """Запрос получения последних цен."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     FIGI_FIELD_NUMBER: builtins.int
     @property
@@ -876,6 +901,7 @@ class GetLastPricesRequest(google.protobuf.message.Message):
 global___GetLastPricesRequest = GetLastPricesRequest
 
 class GetLastPricesResponse(google.protobuf.message.Message):
+    """Список последних цен."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     LAST_PRICES_FIELD_NUMBER: builtins.int
     @property
@@ -890,6 +916,7 @@ class GetLastPricesResponse(google.protobuf.message.Message):
 global___GetLastPricesResponse = GetLastPricesResponse
 
 class LastPrice(google.protobuf.message.Message):
+    """Информация о цене."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     FIGI_FIELD_NUMBER: builtins.int
     PRICE_FIELD_NUMBER: builtins.int
@@ -916,6 +943,7 @@ class LastPrice(google.protobuf.message.Message):
 global___LastPrice = LastPrice
 
 class GetOrderBookRequest(google.protobuf.message.Message):
+    """Запрос стакана."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     FIGI_FIELD_NUMBER: builtins.int
     DEPTH_FIELD_NUMBER: builtins.int
@@ -934,6 +962,7 @@ class GetOrderBookRequest(google.protobuf.message.Message):
 global___GetOrderBookRequest = GetOrderBookRequest
 
 class GetOrderBookResponse(google.protobuf.message.Message):
+    """Информация о стакане."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     FIGI_FIELD_NUMBER: builtins.int
     DEPTH_FIELD_NUMBER: builtins.int
@@ -977,6 +1006,7 @@ class GetOrderBookResponse(google.protobuf.message.Message):
 global___GetOrderBookResponse = GetOrderBookResponse
 
 class GetTradingStatusRequest(google.protobuf.message.Message):
+    """Запрос получения торгового статуса."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     FIGI_FIELD_NUMBER: builtins.int
     figi: typing.Text = ...
@@ -990,6 +1020,7 @@ class GetTradingStatusRequest(google.protobuf.message.Message):
 global___GetTradingStatusRequest = GetTradingStatusRequest
 
 class GetTradingStatusResponse(google.protobuf.message.Message):
+    """Информация о торговом статусе."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     FIGI_FIELD_NUMBER: builtins.int
     TRADING_STATUS_FIELD_NUMBER: builtins.int

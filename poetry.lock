@@ -1016,6 +1016,25 @@ python-versions = "*"
 types-futures = "*"
 
 [[package]]
+name = "types-requests"
+version = "2.27.7"
+description = "Typing stubs for requests"
+category = "dev"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+types-urllib3 = "<1.27"
+
+[[package]]
+name = "types-urllib3"
+version = "1.26.7"
+description = "Typing stubs for urllib3"
+category = "dev"
+optional = false
+python-versions = "*"
+
+[[package]]
 name = "typing-extensions"
 version = "4.0.1"
 description = "Backported and Experimental Type Hints for Python 3.6+"
@@ -1070,7 +1089,7 @@ testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytest-
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "c3169bb7ed6e80ffbba7bd306ec015d2ed074f88bec535c5961e8d7e81234886"
+content-hash = "65d36c963ab6cce89a3e4bed9f8beb3fae1275248966f64246680546bfc795a2"
 
 [metadata.files]
 astroid = [
@@ -1709,6 +1728,14 @@ types-futures = [
 types-protobuf = [
     {file = "types-protobuf-3.19.1.tar.gz", hash = "sha256:b1e6855780988a28bcb5f0306c0e1d0fee07154261742383da5bf7e5c2460a36"},
     {file = "types_protobuf-3.19.1-py3-none-any.whl", hash = "sha256:7f7fd4628e0abd06a38559d3999fca8ed7a4f0ffe46694a4107fa46292790193"},
+]
+types-requests = [
+    {file = "types-requests-2.27.7.tar.gz", hash = "sha256:f38bd488528cdcbce5b01dc953972f3cead0d060cfd9ee35b363066c25bab13c"},
+    {file = "types_requests-2.27.7-py3-none-any.whl", hash = "sha256:2e0e100dd489f83870d4f61949d3a7eae4821e7bfbf46c57e463c38f92d473d4"},
+]
+types-urllib3 = [
+    {file = "types-urllib3-1.26.7.tar.gz", hash = "sha256:cfd1fbbe4ba9a605ed148294008aac8a7b8b7472651d1cc357d507ae5962e3d2"},
+    {file = "types_urllib3-1.26.7-py3-none-any.whl", hash = "sha256:3adcf2cb5981809091dbff456e6999fe55f201652d8c360f99997de5ac2f556e"},
 ]
 typing-extensions = [
     {file = "typing_extensions-4.0.1-py3-none-any.whl", hash = "sha256:7f001e5ac290a0c0401508864c7ec868be4e701886d5b573a9528ed3973d9d3b"},

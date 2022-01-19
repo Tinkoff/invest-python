@@ -2,14 +2,14 @@ syntax = "proto3";
 
 package tinkoff.public.invest.api.contract.v1;
 
-option go_package = "Tinkoff/investAPI";
+option go_package = "./;investapi";
 option java_package = "ru.tinkoff.piapi.contract.v1";
 option java_multiple_files = true;
-option csharp_namespace = "Tinkoff.InvestAPI.V1";
+option csharp_namespace = "Tinkoff.InvestApi.V1";
 option objc_class_prefix = "TIAPI";
 option php_namespace = "Tinkoff\\Invest\\V1";
 
-// Денежная сумма в определенной валюте
+//Денежная сумма в определенной валюте
 message MoneyValue {
 
   // строковый ISO-код валюты
@@ -22,7 +22,7 @@ message MoneyValue {
   int32 nano = 3;
 }
 
-// Котировка - денежная сумма без указания валюты
+//Котировка - денежная сумма без указания валюты
 message Quotation {
 
   // целая часть суммы, может быть отрицательным числом
@@ -32,7 +32,7 @@ message Quotation {
   int32 nano = 2;
 }
 
-// Режим торгов инструмента
+//Режим торгов инструмента
 enum SecurityTradingStatus {
   SECURITY_TRADING_STATUS_UNSPECIFIED = 0; //Торговый статус не определён
   SECURITY_TRADING_STATUS_NOT_AVAILABLE_FOR_TRADING = 1; //Недоступен для торгов
@@ -45,4 +45,10 @@ enum SecurityTradingStatus {
   SECURITY_TRADING_STATUS_DISCRETE_AUCTION = 8; //Дискретный аукцион
   SECURITY_TRADING_STATUS_OPENING_AUCTION_PERIOD = 9; //Аукцион открытия
   SECURITY_TRADING_STATUS_TRADING_AT_CLOSING_AUCTION_PRICE = 10; //Период торгов по цене аукциона закрытия
+  SECURITY_TRADING_STATUS_SESSION_ASSIGNED = 11; //Сессия назначена
+  SECURITY_TRADING_STATUS_SESSION_CLOSE = 12; //Сессия закрыта
+  SECURITY_TRADING_STATUS_SESSION_OPEN = 13; //Сессия открыта
+  SECURITY_TRADING_STATUS_DEALER_NORMAL_TRADING = 14; //Доступна торговля в режиме внутренней ликвидности брокера
+  SECURITY_TRADING_STATUS_DEALER_BREAK_IN_TRADING = 15; //Перерыв торговли в режиме внутренней ликвидности брокера
+  SECURITY_TRADING_STATUS_DEALER_NOT_AVAILABLE_FOR_TRADING = 16; //Недоступна торговля в режиме внутренней ликвидности брокера
 }

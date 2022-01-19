@@ -19,6 +19,12 @@ class SecurityTradingStatus(_grpc_helpers.Enum):
     SECURITY_TRADING_STATUS_DISCRETE_AUCTION = 8
     SECURITY_TRADING_STATUS_OPENING_AUCTION_PERIOD = 9
     SECURITY_TRADING_STATUS_TRADING_AT_CLOSING_AUCTION_PRICE = 10
+    SECURITY_TRADING_STATUS_SESSION_ASSIGNED = 11
+    SECURITY_TRADING_STATUS_SESSION_CLOSE = 12
+    SECURITY_TRADING_STATUS_SESSION_OPEN = 13
+    SECURITY_TRADING_STATUS_DEALER_NORMAL_TRADING = 14
+    SECURITY_TRADING_STATUS_DEALER_BREAK_IN_TRADING = 15
+    SECURITY_TRADING_STATUS_DEALER_NOT_AVAILABLE_FOR_TRADING = 16
 
 
 class InstrumentIdType(_grpc_helpers.Enum):
@@ -141,6 +147,53 @@ class StopOrderType(_grpc_helpers.Enum):
     STOP_ORDER_TYPE_TAKE_PROFIT = 1
     STOP_ORDER_TYPE_STOP_LOSS = 2
     STOP_ORDER_TYPE_STOP_LIMIT = 3
+
+
+class OperationType(_grpc_helpers.Enum):
+    OPERATION_TYPE_UNSPECIFIED = 0
+    OPERATION_TYPE_INPUT = 1
+    OPERATION_TYPE_BOND_TAX = 2
+    OPERATION_TYPE_OUTPUT_SECURITIES = 3
+    OPERATION_TYPE_OVERNIGHT = 4
+    OPERATION_TYPE_TAX = 5
+    OPERATION_TYPE_BOND_REPAYMENT_FULL = 6
+    OPERATION_TYPE_SELL_CARD = 7
+    OPERATION_TYPE_DIVIDEND_TAX = 8
+    OPERATION_TYPE_OUTPUT = 9
+    OPERATION_TYPE_BOND_REPAYMENT = 10
+    OPERATION_TYPE_TAX_CORRECTION = 11
+    OPERATION_TYPE_SERVICE_FEE = 12
+    OPERATION_TYPE_BENEFIT_TAX = 13
+    OPERATION_TYPE_MARGIN_FEE = 14
+    OPERATION_TYPE_BUY = 15
+    OPERATION_TYPE_BUY_CARD = 16
+    OPERATION_TYPE_INPUT_SECURITIES = 17
+    OPERATION_TYPE_SELL_MARJIN = 18
+    OPERATION_TYPE_BROKER_FEE = 19
+    OPERATION_TYPE_BUY_MARGIN = 20
+    OPERATION_TYPE_DIVIDEND = 21
+    OPERATION_TYPE_SELL = 22
+    OPERATION_TYPE_COUPON = 23
+    OPERATION_TYPE_SUCCESS_FEE = 24
+    OPERATION_TYPE_DIVIDEND_TRANSFER = 25
+    OPERATION_TYPE_ACCRUING_VARMARJIN = 26
+    OPERATION_TYPE_WRITING_OFF_VARMARJIN = 27
+    OPERATION_TYPE_DELIVERY_BUY = 28
+    OPERATION_TYPE_DELIVERY_SELL = 29
+    OPERATION_TYPE_TRACK_MFEE = 30
+    OPERATION_TYPE_TRACK_PFEE = 31
+    OPERATION_TYPE_TAX_PROGRESSIVE = 32
+    OPERATION_TYPE_BOND_TAX_PROGRESSIVE = 33
+    OPERATION_TYPE_DIVIDEND_TAX_PROGRESSIVE = 34
+    OPERATION_TYPE_BENEFIT_TAX_PROGRESSIVE = 35
+    OPERATION_TYPE_TAX_CORRECTION_PROGRESSIVE = 36
+    OPERATION_TYPE_TAX_REPO_PROGRESSIVE = 37
+    OPERATION_TYPE_TAX_REPO = 38
+    OPERATION_TYPE_TAX_REPO_HOLD = 39
+    OPERATION_TYPE_TAX_REPO_REFUND = 40
+    OPERATION_TYPE_TAX_REPO_HOLD_PROGRESSIVE = 41
+    OPERATION_TYPE_TAX_REPO_REFUND_PROGRESSIVE = 42
+    OPERATION_TYPE_DIV_EXT = 43
 
 
 @dataclass(eq=False, repr=True)
@@ -446,6 +499,8 @@ class GetFuturesMarginRequest(_grpc_helpers.Message):
 class GetFuturesMarginResponse(_grpc_helpers.Message):
     initial_margin_on_buy: "MoneyValue" = _grpc_helpers.message_field(1)
     initial_margin_on_sell: "MoneyValue" = _grpc_helpers.message_field(2)
+    min_price_increment: Decimal = _grpc_helpers.message_field(3)
+    min_price_increment_amount: "Quotation" = _grpc_helpers.message_field(4)
 
 
 @dataclass(eq=False, repr=True)
@@ -780,6 +835,7 @@ class Operation(_grpc_helpers.Message):  # pylint:disable=too-many-instance-attr
     instrument_type: str = _grpc_helpers.string_field(10)
     date: datetime = _grpc_helpers.message_field(11)
     type: str = _grpc_helpers.string_field(12)
+    operation_type: "OperationType" = _grpc_helpers.string_field(13)
 
 
 @dataclass(eq=False, repr=True)
@@ -820,6 +876,7 @@ class WithdrawLimitsRequest(_grpc_helpers.Message):
 class WithdrawLimitsResponse(_grpc_helpers.Message):
     money: List["MoneyValue"] = _grpc_helpers.message_field(1)
     blocked: List["MoneyValue"] = _grpc_helpers.message_field(2)
+    blocked_guarantee: List["MoneyValue"] = _grpc_helpers.message_field(3)
 
 
 @dataclass(eq=False, repr=True)

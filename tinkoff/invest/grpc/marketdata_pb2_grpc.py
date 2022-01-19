@@ -192,7 +192,7 @@ class MarketDataStreamServiceServicer(object):
     """Missing associated documentation comment in .proto file."""
 
     def MarketDataStream(self, request_iterator, context):
-        """Двусторонний стрим предоставления биржевой информации.
+        """Bi-directional стрим предоставления биржевой информации.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')

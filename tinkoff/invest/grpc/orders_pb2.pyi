@@ -119,12 +119,14 @@ global___OrderExecutionReportStatus = OrderExecutionReportStatus
 
 
 class TradesStreamRequest(google.protobuf.message.Message):
+    """Запрос установки соединения."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     def __init__(self,
         ) -> None: ...
 global___TradesStreamRequest = TradesStreamRequest
 
 class TradesStreamResponse(google.protobuf.message.Message):
+    """Информация об исполнении торгового поручения."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     ORDER_ID_FIELD_NUMBER: builtins.int
     CREATED_AT_FIELD_NUMBER: builtins.int
@@ -161,6 +163,7 @@ class TradesStreamResponse(google.protobuf.message.Message):
 global___TradesStreamResponse = TradesStreamResponse
 
 class OrderTrade(google.protobuf.message.Message):
+    """Информация о сделке."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     DATE_TIME_FIELD_NUMBER: builtins.int
     PRICE_FIELD_NUMBER: builtins.int
@@ -187,6 +190,7 @@ class OrderTrade(google.protobuf.message.Message):
 global___OrderTrade = OrderTrade
 
 class PostOrderRequest(google.protobuf.message.Message):
+    """Запрос выставления торгового поручения."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     FIGI_FIELD_NUMBER: builtins.int
     QUANTITY_FIELD_NUMBER: builtins.int
@@ -232,6 +236,7 @@ class PostOrderRequest(google.protobuf.message.Message):
 global___PostOrderRequest = PostOrderRequest
 
 class PostOrderResponse(google.protobuf.message.Message):
+    """Информация о выставлении поручения."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     ORDER_ID_FIELD_NUMBER: builtins.int
     EXECUTION_REPORT_STATUS_FIELD_NUMBER: builtins.int
@@ -329,6 +334,7 @@ class PostOrderResponse(google.protobuf.message.Message):
 global___PostOrderResponse = PostOrderResponse
 
 class CancelOrderRequest(google.protobuf.message.Message):
+    """Запрос отмены торгового поручения."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     ACCOUNT_ID_FIELD_NUMBER: builtins.int
     ORDER_ID_FIELD_NUMBER: builtins.int
@@ -347,6 +353,7 @@ class CancelOrderRequest(google.protobuf.message.Message):
 global___CancelOrderRequest = CancelOrderRequest
 
 class CancelOrderResponse(google.protobuf.message.Message):
+    """Результат отмены торгового поручения."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     TIME_FIELD_NUMBER: builtins.int
     @property
@@ -362,6 +369,7 @@ class CancelOrderResponse(google.protobuf.message.Message):
 global___CancelOrderResponse = CancelOrderResponse
 
 class GetOrderStateRequest(google.protobuf.message.Message):
+    """Запрос получения статуса торгового поручения."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     ACCOUNT_ID_FIELD_NUMBER: builtins.int
     ORDER_ID_FIELD_NUMBER: builtins.int
@@ -380,6 +388,7 @@ class GetOrderStateRequest(google.protobuf.message.Message):
 global___GetOrderStateRequest = GetOrderStateRequest
 
 class GetOrdersRequest(google.protobuf.message.Message):
+    """Запрос получения списка активных торговых поручений."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     ACCOUNT_ID_FIELD_NUMBER: builtins.int
     account_id: typing.Text = ...
@@ -393,6 +402,7 @@ class GetOrdersRequest(google.protobuf.message.Message):
 global___GetOrdersRequest = GetOrdersRequest
 
 class GetOrdersResponse(google.protobuf.message.Message):
+    """Список активных торговых поручений."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     ORDERS_FIELD_NUMBER: builtins.int
     @property
@@ -407,6 +417,7 @@ class GetOrdersResponse(google.protobuf.message.Message):
 global___GetOrdersResponse = GetOrdersResponse
 
 class OrderState(google.protobuf.message.Message):
+    """Информация о торговом поручении."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     ORDER_ID_FIELD_NUMBER: builtins.int
     EXECUTION_REPORT_STATUS_FIELD_NUMBER: builtins.int
@@ -516,6 +527,7 @@ class OrderState(google.protobuf.message.Message):
 global___OrderState = OrderState
 
 class OrderStage(google.protobuf.message.Message):
+    """Сделки в рамках торгового поручения."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     PRICE_FIELD_NUMBER: builtins.int
     QUANTITY_FIELD_NUMBER: builtins.int

@@ -12,13 +12,16 @@ import typing_extensions
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor = ...
 
 class OpenSandboxAccountRequest(google.protobuf.message.Message):
-    """пустой запрос"""
+    """Запрос открытия счёта в песочнице.
+    пустой запрос
+    """
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     def __init__(self,
         ) -> None: ...
 global___OpenSandboxAccountRequest = OpenSandboxAccountRequest
 
 class OpenSandboxAccountResponse(google.protobuf.message.Message):
+    """Номер открытого счёта в песочнице."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     ACCOUNT_ID_FIELD_NUMBER: builtins.int
     account_id: typing.Text = ...
@@ -32,6 +35,7 @@ class OpenSandboxAccountResponse(google.protobuf.message.Message):
 global___OpenSandboxAccountResponse = OpenSandboxAccountResponse
 
 class CloseSandboxAccountRequest(google.protobuf.message.Message):
+    """Запрос закрытия счёта в песочнице."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     ACCOUNT_ID_FIELD_NUMBER: builtins.int
     account_id: typing.Text = ...
@@ -45,13 +49,16 @@ class CloseSandboxAccountRequest(google.protobuf.message.Message):
 global___CloseSandboxAccountRequest = CloseSandboxAccountRequest
 
 class CloseSandboxAccountResponse(google.protobuf.message.Message):
-    """пустой ответ"""
+    """Результат закрытия счёта в песочнице.
+    пустой ответ
+    """
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     def __init__(self,
         ) -> None: ...
 global___CloseSandboxAccountResponse = CloseSandboxAccountResponse
 
 class SandboxPayInRequest(google.protobuf.message.Message):
+    """Запрос пополнения счёта в песочнице."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     ACCOUNT_ID_FIELD_NUMBER: builtins.int
     AMOUNT_FIELD_NUMBER: builtins.int
@@ -72,6 +79,7 @@ class SandboxPayInRequest(google.protobuf.message.Message):
 global___SandboxPayInRequest = SandboxPayInRequest
 
 class SandboxPayInResponse(google.protobuf.message.Message):
+    """Результат пополнения счёта, текущий баланс."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     BALANCE_FIELD_NUMBER: builtins.int
     @property

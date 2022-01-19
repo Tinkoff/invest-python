@@ -107,6 +107,7 @@ class _ShareTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._Enum
     """Траст недвижимости"""
 
 class ShareType(_ShareType, metaclass=_ShareTypeEnumTypeWrapper):
+    """Тип акций."""
     pass
 
 SHARE_TYPE_UNSPECIFIED: ShareType.ValueType = ...  # 0
@@ -140,6 +141,7 @@ global___ShareType = ShareType
 
 
 class TradingSchedulesRequest(google.protobuf.message.Message):
+    """Запрос расписания торгов"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     EXCHANGE_FIELD_NUMBER: builtins.int
     FROM_FIELD_NUMBER: builtins.int
@@ -161,6 +163,7 @@ class TradingSchedulesRequest(google.protobuf.message.Message):
 global___TradingSchedulesRequest = TradingSchedulesRequest
 
 class TradingSchedulesResponse(google.protobuf.message.Message):
+    """Список торговых площадок"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     EXCHANGES_FIELD_NUMBER: builtins.int
     @property
@@ -1251,6 +1254,7 @@ class Share(google.protobuf.message.Message):
 global___Share = Share
 
 class GetAccruedInterestsRequest(google.protobuf.message.Message):
+    """Запрос НКД по облигации"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     FIGI_FIELD_NUMBER: builtins.int
     FROM_FIELD_NUMBER: builtins.int
@@ -1272,6 +1276,7 @@ class GetAccruedInterestsRequest(google.protobuf.message.Message):
 global___GetAccruedInterestsRequest = GetAccruedInterestsRequest
 
 class GetAccruedInterestsResponse(google.protobuf.message.Message):
+    """НКД облигации"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     ACCRUED_INTERESTS_FIELD_NUMBER: builtins.int
     @property
@@ -1319,6 +1324,7 @@ class AccruedInterest(google.protobuf.message.Message):
 global___AccruedInterest = AccruedInterest
 
 class GetFuturesMarginRequest(google.protobuf.message.Message):
+    """Запрос информации о фьючерсе"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     FIGI_FIELD_NUMBER: builtins.int
     figi: typing.Text = ...
@@ -1332,9 +1338,12 @@ class GetFuturesMarginRequest(google.protobuf.message.Message):
 global___GetFuturesMarginRequest = GetFuturesMarginRequest
 
 class GetFuturesMarginResponse(google.protobuf.message.Message):
+    """Данные по фьючерсу"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     INITIAL_MARGIN_ON_BUY_FIELD_NUMBER: builtins.int
     INITIAL_MARGIN_ON_SELL_FIELD_NUMBER: builtins.int
+    MIN_PRICE_INCREMENT_FIELD_NUMBER: builtins.int
+    MIN_PRICE_INCREMENT_AMOUNT_FIELD_NUMBER: builtins.int
     @property
     def initial_margin_on_buy(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
         """Гарантийное обеспечение при покупке."""
@@ -1343,13 +1352,22 @@ class GetFuturesMarginResponse(google.protobuf.message.Message):
     def initial_margin_on_sell(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
         """Гарантийное обеспечение при продаже."""
         pass
+    min_price_increment: builtins.float = ...
+    """Шаг цены."""
+
+    @property
+    def min_price_increment_amount(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Стоимость шага цены."""
+        pass
     def __init__(self,
         *,
         initial_margin_on_buy : typing.Optional[tinkoff.invest.grpc.common_pb2.MoneyValue] = ...,
         initial_margin_on_sell : typing.Optional[tinkoff.invest.grpc.common_pb2.MoneyValue] = ...,
+        min_price_increment : builtins.float = ...,
+        min_price_increment_amount : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
         ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["initial_margin_on_buy",b"initial_margin_on_buy","initial_margin_on_sell",b"initial_margin_on_sell"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["initial_margin_on_buy",b"initial_margin_on_buy","initial_margin_on_sell",b"initial_margin_on_sell"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["initial_margin_on_buy",b"initial_margin_on_buy","initial_margin_on_sell",b"initial_margin_on_sell","min_price_increment_amount",b"min_price_increment_amount"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["initial_margin_on_buy",b"initial_margin_on_buy","initial_margin_on_sell",b"initial_margin_on_sell","min_price_increment",b"min_price_increment","min_price_increment_amount",b"min_price_increment_amount"]) -> None: ...
 global___GetFuturesMarginResponse = GetFuturesMarginResponse
 
 class InstrumentResponse(google.protobuf.message.Message):
@@ -1498,6 +1516,7 @@ class Instrument(google.protobuf.message.Message):
 global___Instrument = Instrument
 
 class GetDividendsRequest(google.protobuf.message.Message):
+    """Запрос дивидендов."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     FIGI_FIELD_NUMBER: builtins.int
     FROM_FIELD_NUMBER: builtins.int
@@ -1519,6 +1538,7 @@ class GetDividendsRequest(google.protobuf.message.Message):
 global___GetDividendsRequest = GetDividendsRequest
 
 class GetDividendsResponse(google.protobuf.message.Message):
+    """Дивиденды."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     DIVIDENDS_FIELD_NUMBER: builtins.int
     @property
@@ -1531,6 +1551,7 @@ class GetDividendsResponse(google.protobuf.message.Message):
 global___GetDividendsResponse = GetDividendsResponse
 
 class Dividend(google.protobuf.message.Message):
+    """Информация о выплате."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     DIVIDEND_NET_FIELD_NUMBER: builtins.int
     PAYMENT_DATE_FIELD_NUMBER: builtins.int

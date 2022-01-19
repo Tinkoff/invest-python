@@ -9,7 +9,7 @@ from tinkoff.invest.grpc import users_pb2 as tinkoff_dot_invest_dot_grpc_dot_use
 
 
 class SandboxServiceStub(object):
-    """Сервис для работы с песочницей Public API
+    """Сервис для работы с песочницей TINKOFF INVEST API
     """
 
     def __init__(self, channel):
@@ -76,81 +76,81 @@ class SandboxServiceStub(object):
 
 
 class SandboxServiceServicer(object):
-    """Сервис для работы с песочницей Public API
+    """Сервис для работы с песочницей TINKOFF INVEST API
     """
 
     def OpenSandboxAccount(self, request, context):
-        """Метод регистрации счёта в песочнице
+        """Метод регистрации счёта в песочнице.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetSandboxAccounts(self, request, context):
-        """Метод получения счетов в песочнице
+        """Метод получения счетов в песочнице.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def CloseSandboxAccount(self, request, context):
-        """Метод закрытия счёта в песочнице
+        """Метод закрытия счёта в песочнице.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def PostSandboxOrder(self, request, context):
-        """Метод выставления торгового поручения в песочнице
+        """Метод выставления торгового поручения в песочнице.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetSandboxOrders(self, request, context):
-        """Метод получения списка активных заявок по счёту в песочнице
+        """Метод получения списка активных заявок по счёту в песочнице.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def CancelSandboxOrder(self, request, context):
-        """Метод отмены торгового поручения в песочнице
+        """Метод отмены торгового поручения в песочнице.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetSandboxOrderState(self, request, context):
-        """Метод получения статуса заявки в песочнице
+        """Метод получения статуса заявки в песочнице.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetSandboxPositions(self, request, context):
-        """Метод получения позиций по виртуальному счёту песочницы
+        """Метод получения позиций по виртуальному счёту песочницы.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetSandboxOperations(self, request, context):
-        """Метод получения операций в песочнице по номеру счёта
+        """Метод получения операций в песочнице по номеру счёта.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetSandboxPortfolio(self, request, context):
-        """Метод получения портфолио в песочнице
+        """Метод получения портфолио в песочнице.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def SandboxPayIn(self, request, context):
-        """Метод пополнения счёта в песочнице
+        """Метод пополнения счёта в песочнице.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -222,7 +222,7 @@ def add_SandboxServiceServicer_to_server(servicer, server):
 
  # This class is part of an EXPERIMENTAL API.
 class SandboxService(object):
-    """Сервис для работы с песочницей Public API
+    """Сервис для работы с песочницей TINKOFF INVEST API
     """
 
     @staticmethod

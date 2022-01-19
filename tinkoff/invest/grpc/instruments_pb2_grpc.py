@@ -178,7 +178,7 @@ class InstrumentsServiceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def GetAccruedInterests(self, request, context):
-        """Метод получения календаря выплат купонов по облигациям.
+        """Метод получения накопленного купонного дохода по облигации.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')

@@ -7,7 +7,7 @@ OUT = .
 PROTOS = protos
 
 TEST = $(POETRY_RUN) pytest $(args) --verbosity=2 --showlocals --strict-markers --log-level=DEBUG
-CODE = tests tinkoff examples
+CODE = tests tinkoff examples scripts
 EXCLUDE_CODE = tinkoff/invest/grpc
 
 .PHONY: test
@@ -49,12 +49,6 @@ grpc-gen:
 	$(POETRY_RUN) python -m grpc_tools.protoc -I${PROTOS} --python_out=${OUT} --mypy_out=${OUT} --grpc_python_out=${OUT} ${PROTO_DIR}/*.proto
 	touch ${PACKAGE_PROTO_DIR}/__init__.py
 
-.PHONY: grpc-schemas
-grpc-schemas:
-	# rm -r ${PACKAGE_PROTO_DIR}
-	$(POETRY_RUN) python -m grpc_tools.protoc -I${PROTOS} --python_betterproto_out=tinkoff/invest/schemas ${PROTO_DIR}/*.proto
-	# touch ${PACKAGE_PROTO_DIR}/__init__.py
-
 .PHONY: install
 install:
 	poetry install
@@ -62,3 +56,7 @@ install:
 .PHONY: publish
 publish:
 	poetry publish --build --no-interaction --username=$(pypi_username) --password=$(pypi_password)
+
+.PHONY: download-protos
+download-protos:
+	$(POETRY_RUN) python -m scripts.download_protos

@@ -20,9 +20,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='tinkoff/invest/grpc/operations.proto',
   package='tinkoff.public.invest.api.contract.v1',
   syntax='proto3',
-  serialized_options=b'\n\034ru.tinkoff.piapi.contract.v1P\001Z\021Tinkoff/investAPI\242\002\005TIAPI\252\002\024Tinkoff.InvestAPI.V1\312\002\021Tinkoff\\Invest\\V1',
+  serialized_options=b'\n\034ru.tinkoff.piapi.contract.v1P\001Z\014./;investapi\242\002\005TIAPI\252\002\024Tinkoff.InvestApi.V1\312\002\021Tinkoff\\Invest\\V1',
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n$tinkoff/invest/grpc/operations.proto\x12%tinkoff.public.invest.api.contract.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a tinkoff/invest/grpc/common.proto\"\xcd\x01\n\x11OperationsRequest\x12\x12\n\naccount_id\x18\x01 \x01(\t\x12(\n\x04\x66rom\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12&\n\x02to\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x44\n\x05state\x18\x04 \x01(\x0e\x32\x35.tinkoff.public.invest.api.contract.v1.OperationState\x12\x0c\n\x04\x66igi\x18\x05 \x01(\t\"Z\n\x12OperationsResponse\x12\x44\n\noperations\x18\x01 \x03(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Operation\"\x9a\x03\n\tOperation\x12\n\n\x02id\x18\x01 \x01(\t\x12\x1b\n\x13parent_operation_id\x18\x02 \x01(\t\x12\x10\n\x08\x63urrency\x18\x03 \x01(\t\x12\x42\n\x07payment\x18\x04 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12@\n\x05price\x18\x05 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12\x44\n\x05state\x18\x06 \x01(\x0e\x32\x35.tinkoff.public.invest.api.contract.v1.OperationState\x12\x10\n\x08quantity\x18\x07 \x01(\x03\x12\x15\n\rquantity_rest\x18\x08 \x01(\x03\x12\x0c\n\x04\x66igi\x18\t \x01(\t\x12\x17\n\x0finstrument_type\x18\n \x01(\t\x12(\n\x04\x64\x61te\x18\x0b \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x0c\n\x04type\x18\x0c \x01(\t\"&\n\x10PortfolioRequest\x12\x12\n\naccount_id\x18\x01 \x01(\t\"\x89\x04\n\x11PortfolioResponse\x12N\n\x13total_amount_shares\x18\x01 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12M\n\x12total_amount_bonds\x18\x02 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12K\n\x10total_amount_etf\x18\x03 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12R\n\x17total_amount_currencies\x18\x04 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12O\n\x14total_amount_futures\x18\x05 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12\x16\n\x0e\x65xpected_yield\x18\x06 \x01(\x02\x12K\n\tpositions\x18\x07 \x03(\x0b\x32\x38.tinkoff.public.invest.api.contract.v1.PortfolioPosition\"&\n\x10PositionsRequest\x12\x12\n\naccount_id\x18\x01 \x01(\t\"\x8d\x02\n\x11PositionsResponse\x12@\n\x05money\x18\x01 \x03(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12\x42\n\x07\x62locked\x18\x02 \x03(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12N\n\nsecurities\x18\x03 \x03(\x0b\x32:.tinkoff.public.invest.api.contract.v1.PositionsSecurities\x12\"\n\x1alimits_loading_in_progress\x18\x04 \x01(\x08\"+\n\x15WithdrawLimitsRequest\x12\x12\n\naccount_id\x18\x01 \x01(\t\"\x9e\x01\n\x16WithdrawLimitsResponse\x12@\n\x05money\x18\x01 \x03(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12\x42\n\x07\x62locked\x18\x02 \x03(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\"\xd4\x02\n\x11PortfolioPosition\x12\x0c\n\x04\x66igi\x18\x01 \x01(\t\x12\x17\n\x0finstrument_type\x18\x02 \x01(\t\x12\x10\n\x08quantity\x18\x03 \x01(\x02\x12Q\n\x16\x61verage_position_price\x18\x04 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12\x16\n\x0e\x65xpected_yield\x18\x05 \x01(\x02\x12\x46\n\x0b\x63urrent_nkd\x18\x06 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12S\n\x19\x61verage_position_price_pt\x18\x07 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\"E\n\x13PositionsSecurities\x12\x0c\n\x04\x66igi\x18\x01 \x01(\t\x12\x0f\n\x07\x62locked\x18\x02 \x01(\x03\x12\x0f\n\x07\x62\x61lance\x18\x03 \x01(\x03*m\n\x0eOperationState\x12\x1f\n\x1bOPERATION_STATE_UNSPECIFIED\x10\x00\x12\x1c\n\x18OPERATION_STATE_EXECUTED\x10\x01\x12\x1c\n\x18OPERATION_STATE_CANCELED\x10\x02\x32\xb5\x04\n\x11OperationsService\x12\x84\x01\n\rGetOperations\x12\x38.tinkoff.public.invest.api.contract.v1.OperationsRequest\x1a\x39.tinkoff.public.invest.api.contract.v1.OperationsResponse\x12\x81\x01\n\x0cGetPortfolio\x12\x37.tinkoff.public.invest.api.contract.v1.PortfolioRequest\x1a\x38.tinkoff.public.invest.api.contract.v1.PortfolioResponse\x12\x81\x01\n\x0cGetPositions\x12\x37.tinkoff.public.invest.api.contract.v1.PositionsRequest\x1a\x38.tinkoff.public.invest.api.contract.v1.PositionsResponse\x12\x90\x01\n\x11GetWithdrawLimits\x12<.tinkoff.public.invest.api.contract.v1.WithdrawLimitsRequest\x1a=.tinkoff.public.invest.api.contract.v1.WithdrawLimitsResponseBf\n\x1cru.tinkoff.piapi.contract.v1P\x01Z\x11Tinkoff/investAPI\xa2\x02\x05TIAPI\xaa\x02\x14Tinkoff.InvestAPI.V1\xca\x02\x11Tinkoff\\Invest\\V1b\x06proto3'
+  serialized_pb=b'\n$tinkoff/invest/grpc/operations.proto\x12%tinkoff.public.invest.api.contract.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a tinkoff/invest/grpc/common.proto\"\xcd\x01\n\x11OperationsRequest\x12\x12\n\naccount_id\x18\x01 \x01(\t\x12(\n\x04\x66rom\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12&\n\x02to\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x44\n\x05state\x18\x04 \x01(\x0e\x32\x35.tinkoff.public.invest.api.contract.v1.OperationState\x12\x0c\n\x04\x66igi\x18\x05 \x01(\t\"Z\n\x12OperationsResponse\x12\x44\n\noperations\x18\x01 \x03(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Operation\"\xe8\x03\n\tOperation\x12\n\n\x02id\x18\x01 \x01(\t\x12\x1b\n\x13parent_operation_id\x18\x02 \x01(\t\x12\x10\n\x08\x63urrency\x18\x03 \x01(\t\x12\x42\n\x07payment\x18\x04 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12@\n\x05price\x18\x05 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12\x44\n\x05state\x18\x06 \x01(\x0e\x32\x35.tinkoff.public.invest.api.contract.v1.OperationState\x12\x10\n\x08quantity\x18\x07 \x01(\x03\x12\x15\n\rquantity_rest\x18\x08 \x01(\x03\x12\x0c\n\x04\x66igi\x18\t \x01(\t\x12\x17\n\x0finstrument_type\x18\n \x01(\t\x12(\n\x04\x64\x61te\x18\x0b \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x0c\n\x04type\x18\x0c \x01(\t\x12L\n\x0eoperation_type\x18\r \x01(\x0e\x32\x34.tinkoff.public.invest.api.contract.v1.OperationType\"&\n\x10PortfolioRequest\x12\x12\n\naccount_id\x18\x01 \x01(\t\"\x89\x04\n\x11PortfolioResponse\x12N\n\x13total_amount_shares\x18\x01 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12M\n\x12total_amount_bonds\x18\x02 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12K\n\x10total_amount_etf\x18\x03 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12R\n\x17total_amount_currencies\x18\x04 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12O\n\x14total_amount_futures\x18\x05 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12\x16\n\x0e\x65xpected_yield\x18\x06 \x01(\x02\x12K\n\tpositions\x18\x07 \x03(\x0b\x32\x38.tinkoff.public.invest.api.contract.v1.PortfolioPosition\"&\n\x10PositionsRequest\x12\x12\n\naccount_id\x18\x01 \x01(\t\"\x8d\x02\n\x11PositionsResponse\x12@\n\x05money\x18\x01 \x03(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12\x42\n\x07\x62locked\x18\x02 \x03(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12N\n\nsecurities\x18\x03 \x03(\x0b\x32:.tinkoff.public.invest.api.contract.v1.PositionsSecurities\x12\"\n\x1alimits_loading_in_progress\x18\x04 \x01(\x08\"+\n\x15WithdrawLimitsRequest\x12\x12\n\naccount_id\x18\x01 \x01(\t\"\xec\x01\n\x16WithdrawLimitsResponse\x12@\n\x05money\x18\x01 \x03(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12\x42\n\x07\x62locked\x18\x02 \x03(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12L\n\x11\x62locked_guarantee\x18\x03 \x03(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\"\xd4\x02\n\x11PortfolioPosition\x12\x0c\n\x04\x66igi\x18\x01 \x01(\t\x12\x17\n\x0finstrument_type\x18\x02 \x01(\t\x12\x10\n\x08quantity\x18\x03 \x01(\x02\x12Q\n\x16\x61verage_position_price\x18\x04 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12\x16\n\x0e\x65xpected_yield\x18\x05 \x01(\x02\x12\x46\n\x0b\x63urrent_nkd\x18\x06 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12S\n\x19\x61verage_position_price_pt\x18\x07 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\"E\n\x13PositionsSecurities\x12\x0c\n\x04\x66igi\x18\x01 \x01(\t\x12\x0f\n\x07\x62locked\x18\x02 \x01(\x03\x12\x0f\n\x07\x62\x61lance\x18\x03 \x01(\x03*m\n\x0eOperationState\x12\x1f\n\x1bOPERATION_STATE_UNSPECIFIED\x10\x00\x12\x1c\n\x18OPERATION_STATE_EXECUTED\x10\x01\x12\x1c\n\x18OPERATION_STATE_CANCELED\x10\x02*\xe5\x0b\n\rOperationType\x12\x1e\n\x1aOPERATION_TYPE_UNSPECIFIED\x10\x00\x12\x18\n\x14OPERATION_TYPE_INPUT\x10\x01\x12\x1b\n\x17OPERATION_TYPE_BOND_TAX\x10\x02\x12$\n OPERATION_TYPE_OUTPUT_SECURITIES\x10\x03\x12\x1c\n\x18OPERATION_TYPE_OVERNIGHT\x10\x04\x12\x16\n\x12OPERATION_TYPE_TAX\x10\x05\x12&\n\"OPERATION_TYPE_BOND_REPAYMENT_FULL\x10\x06\x12\x1c\n\x18OPERATION_TYPE_SELL_CARD\x10\x07\x12\x1f\n\x1bOPERATION_TYPE_DIVIDEND_TAX\x10\x08\x12\x19\n\x15OPERATION_TYPE_OUTPUT\x10\t\x12!\n\x1dOPERATION_TYPE_BOND_REPAYMENT\x10\n\x12!\n\x1dOPERATION_TYPE_TAX_CORRECTION\x10\x0b\x12\x1e\n\x1aOPERATION_TYPE_SERVICE_FEE\x10\x0c\x12\x1e\n\x1aOPERATION_TYPE_BENEFIT_TAX\x10\r\x12\x1d\n\x19OPERATION_TYPE_MARGIN_FEE\x10\x0e\x12\x16\n\x12OPERATION_TYPE_BUY\x10\x0f\x12\x1b\n\x17OPERATION_TYPE_BUY_CARD\x10\x10\x12#\n\x1fOPERATION_TYPE_INPUT_SECURITIES\x10\x11\x12\x1e\n\x1aOPERATION_TYPE_SELL_MARJIN\x10\x12\x12\x1d\n\x19OPERATION_TYPE_BROKER_FEE\x10\x13\x12\x1d\n\x19OPERATION_TYPE_BUY_MARGIN\x10\x14\x12\x1b\n\x17OPERATION_TYPE_DIVIDEND\x10\x15\x12\x17\n\x13OPERATION_TYPE_SELL\x10\x16\x12\x19\n\x15OPERATION_TYPE_COUPON\x10\x17\x12\x1e\n\x1aOPERATION_TYPE_SUCCESS_FEE\x10\x18\x12$\n OPERATION_TYPE_DIVIDEND_TRANSFER\x10\x19\x12%\n!OPERATION_TYPE_ACCRUING_VARMARJIN\x10\x1a\x12(\n$OPERATION_TYPE_WRITING_OFF_VARMARJIN\x10\x1b\x12\x1f\n\x1bOPERATION_TYPE_DELIVERY_BUY\x10\x1c\x12 \n\x1cOPERATION_TYPE_DELIVERY_SELL\x10\x1d\x12\x1d\n\x19OPERATION_TYPE_TRACK_MFEE\x10\x1e\x12\x1d\n\x19OPERATION_TYPE_TRACK_PFEE\x10\x1f\x12\"\n\x1eOPERATION_TYPE_TAX_PROGRESSIVE\x10 \x12\'\n#OPERATION_TYPE_BOND_TAX_PROGRESSIVE\x10!\x12+\n\'OPERATION_TYPE_DIVIDEND_TAX_PROGRESSIVE\x10\"\x12*\n&OPERATION_TYPE_BENEFIT_TAX_PROGRESSIVE\x10#\x12-\n)OPERATION_TYPE_TAX_CORRECTION_PROGRESSIVE\x10$\x12\'\n#OPERATION_TYPE_TAX_REPO_PROGRESSIVE\x10%\x12\x1b\n\x17OPERATION_TYPE_TAX_REPO\x10&\x12 \n\x1cOPERATION_TYPE_TAX_REPO_HOLD\x10\'\x12\"\n\x1eOPERATION_TYPE_TAX_REPO_REFUND\x10(\x12,\n(OPERATION_TYPE_TAX_REPO_HOLD_PROGRESSIVE\x10)\x12.\n*OPERATION_TYPE_TAX_REPO_REFUND_PROGRESSIVE\x10*\x12\x1a\n\x16OPERATION_TYPE_DIV_EXT\x10+2\xb5\x04\n\x11OperationsService\x12\x84\x01\n\rGetOperations\x12\x38.tinkoff.public.invest.api.contract.v1.OperationsRequest\x1a\x39.tinkoff.public.invest.api.contract.v1.OperationsResponse\x12\x81\x01\n\x0cGetPortfolio\x12\x37.tinkoff.public.invest.api.contract.v1.PortfolioRequest\x1a\x38.tinkoff.public.invest.api.contract.v1.PortfolioResponse\x12\x81\x01\n\x0cGetPositions\x12\x37.tinkoff.public.invest.api.contract.v1.PositionsRequest\x1a\x38.tinkoff.public.invest.api.contract.v1.PositionsResponse\x12\x90\x01\n\x11GetWithdrawLimits\x12<.tinkoff.public.invest.api.contract.v1.WithdrawLimitsRequest\x1a=.tinkoff.public.invest.api.contract.v1.WithdrawLimitsResponseBa\n\x1cru.tinkoff.piapi.contract.v1P\x01Z\x0c./;investapi\xa2\x02\x05TIAPI\xaa\x02\x14Tinkoff.InvestApi.V1\xca\x02\x11Tinkoff\\Invest\\V1b\x06proto3'
   ,
   dependencies=[google_dot_protobuf_dot_timestamp__pb2.DESCRIPTOR,tinkoff_dot_invest_dot_grpc_dot_common__pb2.DESCRIPTOR,])
 
@@ -51,15 +51,295 @@ _OPERATIONSTATE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=2355,
-  serialized_end=2464,
+  serialized_start=2511,
+  serialized_end=2620,
 )
 _sym_db.RegisterEnumDescriptor(_OPERATIONSTATE)
 
 OperationState = enum_type_wrapper.EnumTypeWrapper(_OPERATIONSTATE)
+_OPERATIONTYPE = _descriptor.EnumDescriptor(
+  name='OperationType',
+  full_name='tinkoff.public.invest.api.contract.v1.OperationType',
+  filename=None,
+  file=DESCRIPTOR,
+  create_key=_descriptor._internal_create_key,
+  values=[
+    _descriptor.EnumValueDescriptor(
+      name='OPERATION_TYPE_UNSPECIFIED', index=0, number=0,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+    _descriptor.EnumValueDescriptor(
+      name='OPERATION_TYPE_INPUT', index=1, number=1,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+    _descriptor.EnumValueDescriptor(
+      name='OPERATION_TYPE_BOND_TAX', index=2, number=2,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+    _descriptor.EnumValueDescriptor(
+      name='OPERATION_TYPE_OUTPUT_SECURITIES', index=3, number=3,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+    _descriptor.EnumValueDescriptor(
+      name='OPERATION_TYPE_OVERNIGHT', index=4, number=4,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+    _descriptor.EnumValueDescriptor(
+      name='OPERATION_TYPE_TAX', index=5, number=5,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+    _descriptor.EnumValueDescriptor(
+      name='OPERATION_TYPE_BOND_REPAYMENT_FULL', index=6, number=6,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+    _descriptor.EnumValueDescriptor(
+      name='OPERATION_TYPE_SELL_CARD', index=7, number=7,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+    _descriptor.EnumValueDescriptor(
+      name='OPERATION_TYPE_DIVIDEND_TAX', index=8, number=8,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+    _descriptor.EnumValueDescriptor(
+      name='OPERATION_TYPE_OUTPUT', index=9, number=9,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+    _descriptor.EnumValueDescriptor(
+      name='OPERATION_TYPE_BOND_REPAYMENT', index=10, number=10,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+    _descriptor.EnumValueDescriptor(
+      name='OPERATION_TYPE_TAX_CORRECTION', index=11, number=11,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+    _descriptor.EnumValueDescriptor(
+      name='OPERATION_TYPE_SERVICE_FEE', index=12, number=12,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+    _descriptor.EnumValueDescriptor(
+      name='OPERATION_TYPE_BENEFIT_TAX', index=13, number=13,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+    _descriptor.EnumValueDescriptor(
+      name='OPERATION_TYPE_MARGIN_FEE', index=14, number=14,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+    _descriptor.EnumValueDescriptor(
+      name='OPERATION_TYPE_BUY', index=15, number=15,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+    _descriptor.EnumValueDescriptor(
+      name='OPERATION_TYPE_BUY_CARD', index=16, number=16,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+    _descriptor.EnumValueDescriptor(
+      name='OPERATION_TYPE_INPUT_SECURITIES', index=17, number=17,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+    _descriptor.EnumValueDescriptor(
+      name='OPERATION_TYPE_SELL_MARJIN', index=18, number=18,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+    _descriptor.EnumValueDescriptor(
+      name='OPERATION_TYPE_BROKER_FEE', index=19, number=19,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+    _descriptor.EnumValueDescriptor(
+      name='OPERATION_TYPE_BUY_MARGIN', index=20, number=20,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+    _descriptor.EnumValueDescriptor(
+      name='OPERATION_TYPE_DIVIDEND', index=21, number=21,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+    _descriptor.EnumValueDescriptor(
+      name='OPERATION_TYPE_SELL', index=22, number=22,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+    _descriptor.EnumValueDescriptor(
+      name='OPERATION_TYPE_COUPON', index=23, number=23,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+    _descriptor.EnumValueDescriptor(
+      name='OPERATION_TYPE_SUCCESS_FEE', index=24, number=24,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+    _descriptor.EnumValueDescriptor(
+      name='OPERATION_TYPE_DIVIDEND_TRANSFER', index=25, number=25,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+    _descriptor.EnumValueDescriptor(
+      name='OPERATION_TYPE_ACCRUING_VARMARJIN', index=26, number=26,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+    _descriptor.EnumValueDescriptor(
+      name='OPERATION_TYPE_WRITING_OFF_VARMARJIN', index=27, number=27,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+    _descriptor.EnumValueDescriptor(
+      name='OPERATION_TYPE_DELIVERY_BUY', index=28, number=28,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+    _descriptor.EnumValueDescriptor(
+      name='OPERATION_TYPE_DELIVERY_SELL', index=29, number=29,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+    _descriptor.EnumValueDescriptor(
+      name='OPERATION_TYPE_TRACK_MFEE', index=30, number=30,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+    _descriptor.EnumValueDescriptor(
+      name='OPERATION_TYPE_TRACK_PFEE', index=31, number=31,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+    _descriptor.EnumValueDescriptor(
+      name='OPERATION_TYPE_TAX_PROGRESSIVE', index=32, number=32,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+    _descriptor.EnumValueDescriptor(
+      name='OPERATION_TYPE_BOND_TAX_PROGRESSIVE', index=33, number=33,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+    _descriptor.EnumValueDescriptor(
+      name='OPERATION_TYPE_DIVIDEND_TAX_PROGRESSIVE', index=34, number=34,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+    _descriptor.EnumValueDescriptor(
+      name='OPERATION_TYPE_BENEFIT_TAX_PROGRESSIVE', index=35, number=35,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+    _descriptor.EnumValueDescriptor(
+      name='OPERATION_TYPE_TAX_CORRECTION_PROGRESSIVE', index=36, number=36,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+    _descriptor.EnumValueDescriptor(
+      name='OPERATION_TYPE_TAX_REPO_PROGRESSIVE', index=37, number=37,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+    _descriptor.EnumValueDescriptor(
+      name='OPERATION_TYPE_TAX_REPO', index=38, number=38,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+    _descriptor.EnumValueDescriptor(
+      name='OPERATION_TYPE_TAX_REPO_HOLD', index=39, number=39,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+    _descriptor.EnumValueDescriptor(
+      name='OPERATION_TYPE_TAX_REPO_REFUND', index=40, number=40,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+    _descriptor.EnumValueDescriptor(
+      name='OPERATION_TYPE_TAX_REPO_HOLD_PROGRESSIVE', index=41, number=41,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+    _descriptor.EnumValueDescriptor(
+      name='OPERATION_TYPE_TAX_REPO_REFUND_PROGRESSIVE', index=42, number=42,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+    _descriptor.EnumValueDescriptor(
+      name='OPERATION_TYPE_DIV_EXT', index=43, number=43,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+  ],
+  containing_type=None,
+  serialized_options=None,
+  serialized_start=2623,
+  serialized_end=4132,
+)
+_sym_db.RegisterEnumDescriptor(_OPERATIONTYPE)
+
+OperationType = enum_type_wrapper.EnumTypeWrapper(_OPERATIONTYPE)
 OPERATION_STATE_UNSPECIFIED = 0
 OPERATION_STATE_EXECUTED = 1
 OPERATION_STATE_CANCELED = 2
+OPERATION_TYPE_UNSPECIFIED = 0
+OPERATION_TYPE_INPUT = 1
+OPERATION_TYPE_BOND_TAX = 2
+OPERATION_TYPE_OUTPUT_SECURITIES = 3
+OPERATION_TYPE_OVERNIGHT = 4
+OPERATION_TYPE_TAX = 5
+OPERATION_TYPE_BOND_REPAYMENT_FULL = 6
+OPERATION_TYPE_SELL_CARD = 7
+OPERATION_TYPE_DIVIDEND_TAX = 8
+OPERATION_TYPE_OUTPUT = 9
+OPERATION_TYPE_BOND_REPAYMENT = 10
+OPERATION_TYPE_TAX_CORRECTION = 11
+OPERATION_TYPE_SERVICE_FEE = 12
+OPERATION_TYPE_BENEFIT_TAX = 13
+OPERATION_TYPE_MARGIN_FEE = 14
+OPERATION_TYPE_BUY = 15
+OPERATION_TYPE_BUY_CARD = 16
+OPERATION_TYPE_INPUT_SECURITIES = 17
+OPERATION_TYPE_SELL_MARJIN = 18
+OPERATION_TYPE_BROKER_FEE = 19
+OPERATION_TYPE_BUY_MARGIN = 20
+OPERATION_TYPE_DIVIDEND = 21
+OPERATION_TYPE_SELL = 22
+OPERATION_TYPE_COUPON = 23
+OPERATION_TYPE_SUCCESS_FEE = 24
+OPERATION_TYPE_DIVIDEND_TRANSFER = 25
+OPERATION_TYPE_ACCRUING_VARMARJIN = 26
+OPERATION_TYPE_WRITING_OFF_VARMARJIN = 27
+OPERATION_TYPE_DELIVERY_BUY = 28
+OPERATION_TYPE_DELIVERY_SELL = 29
+OPERATION_TYPE_TRACK_MFEE = 30
+OPERATION_TYPE_TRACK_PFEE = 31
+OPERATION_TYPE_TAX_PROGRESSIVE = 32
+OPERATION_TYPE_BOND_TAX_PROGRESSIVE = 33
+OPERATION_TYPE_DIVIDEND_TAX_PROGRESSIVE = 34
+OPERATION_TYPE_BENEFIT_TAX_PROGRESSIVE = 35
+OPERATION_TYPE_TAX_CORRECTION_PROGRESSIVE = 36
+OPERATION_TYPE_TAX_REPO_PROGRESSIVE = 37
+OPERATION_TYPE_TAX_REPO = 38
+OPERATION_TYPE_TAX_REPO_HOLD = 39
+OPERATION_TYPE_TAX_REPO_REFUND = 40
+OPERATION_TYPE_TAX_REPO_HOLD_PROGRESSIVE = 41
+OPERATION_TYPE_TAX_REPO_REFUND_PROGRESSIVE = 42
+OPERATION_TYPE_DIV_EXT = 43
 
 
 
@@ -247,6 +527,13 @@ _OPERATION = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='operation_type', full_name='tinkoff.public.invest.api.contract.v1.Operation.operation_type', index=12,
+      number=13, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
@@ -260,7 +547,7 @@ _OPERATION = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=447,
-  serialized_end=857,
+  serialized_end=935,
 )
 
 
@@ -291,8 +578,8 @@ _PORTFOLIOREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=859,
-  serialized_end=897,
+  serialized_start=937,
+  serialized_end=975,
 )
 
 
@@ -365,8 +652,8 @@ _PORTFOLIORESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=900,
-  serialized_end=1421,
+  serialized_start=978,
+  serialized_end=1499,
 )
 
 
@@ -397,8 +684,8 @@ _POSITIONSREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1423,
-  serialized_end=1461,
+  serialized_start=1501,
+  serialized_end=1539,
 )
 
 
@@ -450,8 +737,8 @@ _POSITIONSRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1464,
-  serialized_end=1733,
+  serialized_start=1542,
+  serialized_end=1811,
 )
 
 
@@ -482,8 +769,8 @@ _WITHDRAWLIMITSREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1735,
-  serialized_end=1778,
+  serialized_start=1813,
+  serialized_end=1856,
 )
 
 
@@ -509,6 +796,13 @@ _WITHDRAWLIMITSRESPONSE = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='blocked_guarantee', full_name='tinkoff.public.invest.api.contract.v1.WithdrawLimitsResponse.blocked_guarantee', index=2,
+      number=3, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
@@ -521,8 +815,8 @@ _WITHDRAWLIMITSRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1781,
-  serialized_end=1939,
+  serialized_start=1859,
+  serialized_end=2095,
 )
 
 
@@ -595,8 +889,8 @@ _PORTFOLIOPOSITION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1942,
-  serialized_end=2282,
+  serialized_start=2098,
+  serialized_end=2438,
 )
 
 
@@ -641,8 +935,8 @@ _POSITIONSSECURITIES = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2284,
-  serialized_end=2353,
+  serialized_start=2440,
+  serialized_end=2509,
 )
 
 _OPERATIONSREQUEST.fields_by_name['from'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
@@ -653,6 +947,7 @@ _OPERATION.fields_by_name['payment'].message_type = tinkoff_dot_invest_dot_grpc_
 _OPERATION.fields_by_name['price'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._MONEYVALUE
 _OPERATION.fields_by_name['state'].enum_type = _OPERATIONSTATE
 _OPERATION.fields_by_name['date'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
+_OPERATION.fields_by_name['operation_type'].enum_type = _OPERATIONTYPE
 _PORTFOLIORESPONSE.fields_by_name['total_amount_shares'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._MONEYVALUE
 _PORTFOLIORESPONSE.fields_by_name['total_amount_bonds'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._MONEYVALUE
 _PORTFOLIORESPONSE.fields_by_name['total_amount_etf'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._MONEYVALUE
@@ -664,6 +959,7 @@ _POSITIONSRESPONSE.fields_by_name['blocked'].message_type = tinkoff_dot_invest_d
 _POSITIONSRESPONSE.fields_by_name['securities'].message_type = _POSITIONSSECURITIES
 _WITHDRAWLIMITSRESPONSE.fields_by_name['money'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._MONEYVALUE
 _WITHDRAWLIMITSRESPONSE.fields_by_name['blocked'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._MONEYVALUE
+_WITHDRAWLIMITSRESPONSE.fields_by_name['blocked_guarantee'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._MONEYVALUE
 _PORTFOLIOPOSITION.fields_by_name['average_position_price'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._MONEYVALUE
 _PORTFOLIOPOSITION.fields_by_name['current_nkd'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._MONEYVALUE
 _PORTFOLIOPOSITION.fields_by_name['average_position_price_pt'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._QUOTATION
@@ -679,6 +975,7 @@ DESCRIPTOR.message_types_by_name['WithdrawLimitsResponse'] = _WITHDRAWLIMITSRESP
 DESCRIPTOR.message_types_by_name['PortfolioPosition'] = _PORTFOLIOPOSITION
 DESCRIPTOR.message_types_by_name['PositionsSecurities'] = _POSITIONSSECURITIES
 DESCRIPTOR.enum_types_by_name['OperationState'] = _OPERATIONSTATE
+DESCRIPTOR.enum_types_by_name['OperationType'] = _OPERATIONTYPE
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 OperationsRequest = _reflection.GeneratedProtocolMessageType('OperationsRequest', (_message.Message,), {
@@ -768,8 +1065,8 @@ _OPERATIONSSERVICE = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=2467,
-  serialized_end=3032,
+  serialized_start=4135,
+  serialized_end=4700,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetOperations',

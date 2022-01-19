@@ -18,9 +18,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='tinkoff/invest/grpc/common.proto',
   package='tinkoff.public.invest.api.contract.v1',
   syntax='proto3',
-  serialized_options=b'\n\034ru.tinkoff.piapi.contract.v1P\001Z\021Tinkoff/investAPI\242\002\005TIAPI\252\002\024Tinkoff.InvestAPI.V1\312\002\021Tinkoff\\Invest\\V1',
+  serialized_options=b'\n\034ru.tinkoff.piapi.contract.v1P\001Z\014./;investapi\242\002\005TIAPI\252\002\024Tinkoff.InvestApi.V1\312\002\021Tinkoff\\Invest\\V1',
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n tinkoff/invest/grpc/common.proto\x12%tinkoff.public.invest.api.contract.v1\";\n\nMoneyValue\x12\x10\n\x08\x63urrency\x18\x01 \x01(\t\x12\r\n\x05units\x18\x02 \x01(\x03\x12\x0c\n\x04nano\x18\x03 \x01(\x05\"(\n\tQuotation\x12\r\n\x05units\x18\x01 \x01(\x03\x12\x0c\n\x04nano\x18\x02 \x01(\x05*\xa5\x04\n\x15SecurityTradingStatus\x12\'\n#SECURITY_TRADING_STATUS_UNSPECIFIED\x10\x00\x12\x35\n1SECURITY_TRADING_STATUS_NOT_AVAILABLE_FOR_TRADING\x10\x01\x12*\n&SECURITY_TRADING_STATUS_OPENING_PERIOD\x10\x02\x12*\n&SECURITY_TRADING_STATUS_CLOSING_PERIOD\x10\x03\x12,\n(SECURITY_TRADING_STATUS_BREAK_IN_TRADING\x10\x04\x12*\n&SECURITY_TRADING_STATUS_NORMAL_TRADING\x10\x05\x12+\n\'SECURITY_TRADING_STATUS_CLOSING_AUCTION\x10\x06\x12-\n)SECURITY_TRADING_STATUS_DARK_POOL_AUCTION\x10\x07\x12,\n(SECURITY_TRADING_STATUS_DISCRETE_AUCTION\x10\x08\x12\x32\n.SECURITY_TRADING_STATUS_OPENING_AUCTION_PERIOD\x10\t\x12<\n8SECURITY_TRADING_STATUS_TRADING_AT_CLOSING_AUCTION_PRICE\x10\nBf\n\x1cru.tinkoff.piapi.contract.v1P\x01Z\x11Tinkoff/investAPI\xa2\x02\x05TIAPI\xaa\x02\x14Tinkoff.InvestAPI.V1\xca\x02\x11Tinkoff\\Invest\\V1b\x06proto3'
+  serialized_pb=b'\n tinkoff/invest/grpc/common.proto\x12%tinkoff.public.invest.api.contract.v1\";\n\nMoneyValue\x12\x10\n\x08\x63urrency\x18\x01 \x01(\t\x12\r\n\x05units\x18\x02 \x01(\x03\x12\x0c\n\x04nano\x18\x03 \x01(\x05\"(\n\tQuotation\x12\r\n\x05units\x18\x01 \x01(\x03\x12\x0c\n\x04nano\x18\x02 \x01(\x05*\xce\x06\n\x15SecurityTradingStatus\x12\'\n#SECURITY_TRADING_STATUS_UNSPECIFIED\x10\x00\x12\x35\n1SECURITY_TRADING_STATUS_NOT_AVAILABLE_FOR_TRADING\x10\x01\x12*\n&SECURITY_TRADING_STATUS_OPENING_PERIOD\x10\x02\x12*\n&SECURITY_TRADING_STATUS_CLOSING_PERIOD\x10\x03\x12,\n(SECURITY_TRADING_STATUS_BREAK_IN_TRADING\x10\x04\x12*\n&SECURITY_TRADING_STATUS_NORMAL_TRADING\x10\x05\x12+\n\'SECURITY_TRADING_STATUS_CLOSING_AUCTION\x10\x06\x12-\n)SECURITY_TRADING_STATUS_DARK_POOL_AUCTION\x10\x07\x12,\n(SECURITY_TRADING_STATUS_DISCRETE_AUCTION\x10\x08\x12\x32\n.SECURITY_TRADING_STATUS_OPENING_AUCTION_PERIOD\x10\t\x12<\n8SECURITY_TRADING_STATUS_TRADING_AT_CLOSING_AUCTION_PRICE\x10\n\x12,\n(SECURITY_TRADING_STATUS_SESSION_ASSIGNED\x10\x0b\x12)\n%SECURITY_TRADING_STATUS_SESSION_CLOSE\x10\x0c\x12(\n$SECURITY_TRADING_STATUS_SESSION_OPEN\x10\r\x12\x31\n-SECURITY_TRADING_STATUS_DEALER_NORMAL_TRADING\x10\x0e\x12\x33\n/SECURITY_TRADING_STATUS_DEALER_BREAK_IN_TRADING\x10\x0f\x12<\n8SECURITY_TRADING_STATUS_DEALER_NOT_AVAILABLE_FOR_TRADING\x10\x10\x42\x61\n\x1cru.tinkoff.piapi.contract.v1P\x01Z\x0c./;investapi\xa2\x02\x05TIAPI\xaa\x02\x14Tinkoff.InvestApi.V1\xca\x02\x11Tinkoff\\Invest\\V1b\x06proto3'
 )
 
 _SECURITYTRADINGSTATUS = _descriptor.EnumDescriptor(
@@ -85,11 +85,41 @@ _SECURITYTRADINGSTATUS = _descriptor.EnumDescriptor(
       serialized_options=None,
       type=None,
       create_key=_descriptor._internal_create_key),
+    _descriptor.EnumValueDescriptor(
+      name='SECURITY_TRADING_STATUS_SESSION_ASSIGNED', index=11, number=11,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+    _descriptor.EnumValueDescriptor(
+      name='SECURITY_TRADING_STATUS_SESSION_CLOSE', index=12, number=12,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+    _descriptor.EnumValueDescriptor(
+      name='SECURITY_TRADING_STATUS_SESSION_OPEN', index=13, number=13,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+    _descriptor.EnumValueDescriptor(
+      name='SECURITY_TRADING_STATUS_DEALER_NORMAL_TRADING', index=14, number=14,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+    _descriptor.EnumValueDescriptor(
+      name='SECURITY_TRADING_STATUS_DEALER_BREAK_IN_TRADING', index=15, number=15,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+    _descriptor.EnumValueDescriptor(
+      name='SECURITY_TRADING_STATUS_DEALER_NOT_AVAILABLE_FOR_TRADING', index=16, number=16,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
   ],
   containing_type=None,
   serialized_options=None,
   serialized_start=179,
-  serialized_end=728,
+  serialized_end=1025,
 )
 _sym_db.RegisterEnumDescriptor(_SECURITYTRADINGSTATUS)
 
@@ -105,6 +135,12 @@ SECURITY_TRADING_STATUS_DARK_POOL_AUCTION = 7
 SECURITY_TRADING_STATUS_DISCRETE_AUCTION = 8
 SECURITY_TRADING_STATUS_OPENING_AUCTION_PERIOD = 9
 SECURITY_TRADING_STATUS_TRADING_AT_CLOSING_AUCTION_PRICE = 10
+SECURITY_TRADING_STATUS_SESSION_ASSIGNED = 11
+SECURITY_TRADING_STATUS_SESSION_CLOSE = 12
+SECURITY_TRADING_STATUS_SESSION_OPEN = 13
+SECURITY_TRADING_STATUS_DEALER_NORMAL_TRADING = 14
+SECURITY_TRADING_STATUS_DEALER_BREAK_IN_TRADING = 15
+SECURITY_TRADING_STATUS_DEALER_NOT_AVAILABLE_FOR_TRADING = 16
 
 
 

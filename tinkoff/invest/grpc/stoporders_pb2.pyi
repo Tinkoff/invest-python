@@ -29,7 +29,7 @@ class _StopOrderDirectionEnumTypeWrapper(google.protobuf.internal.enum_type_wrap
     """Продажа"""
 
 class StopOrderDirection(_StopOrderDirection, metaclass=_StopOrderDirectionEnumTypeWrapper):
-    """Направление операции"""
+    """Направление сделки стоп-заявки."""
     pass
 
 STOP_ORDER_DIRECTION_UNSPECIFIED: StopOrderDirection.ValueType = ...  # 0
@@ -59,6 +59,7 @@ class _StopOrderExpirationTypeEnumTypeWrapper(google.protobuf.internal.enum_type
     """Действительно до даты снятия."""
 
 class StopOrderExpirationType(_StopOrderExpirationType, metaclass=_StopOrderExpirationTypeEnumTypeWrapper):
+    """Тип экспирации стоп-заявке."""
     pass
 
 STOP_ORDER_EXPIRATION_TYPE_UNSPECIFIED: StopOrderExpirationType.ValueType = ...  # 0
@@ -91,6 +92,7 @@ class _StopOrderTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._
     """Stop-limit заявка"""
 
 class StopOrderType(_StopOrderType, metaclass=_StopOrderTypeEnumTypeWrapper):
+    """Тип стоп-заявки."""
     pass
 
 STOP_ORDER_TYPE_UNSPECIFIED: StopOrderType.ValueType = ...  # 0
@@ -109,6 +111,7 @@ global___StopOrderType = StopOrderType
 
 
 class PostStopOrderRequest(google.protobuf.message.Message):
+    """Запрос выставления стоп-заявки"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     FIGI_FIELD_NUMBER: builtins.int
     QUANTITY_FIELD_NUMBER: builtins.int
@@ -166,6 +169,7 @@ class PostStopOrderRequest(google.protobuf.message.Message):
 global___PostStopOrderRequest = PostStopOrderRequest
 
 class PostStopOrderResponse(google.protobuf.message.Message):
+    """Результат выставления стоп-заявки."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     STOP_ORDER_ID_FIELD_NUMBER: builtins.int
     stop_order_id: typing.Text = ...
@@ -179,6 +183,7 @@ class PostStopOrderResponse(google.protobuf.message.Message):
 global___PostStopOrderResponse = PostStopOrderResponse
 
 class GetStopOrdersRequest(google.protobuf.message.Message):
+    """Запрос получения списка активных стоп-заявок."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     ACCOUNT_ID_FIELD_NUMBER: builtins.int
     account_id: typing.Text = ...
@@ -192,6 +197,7 @@ class GetStopOrdersRequest(google.protobuf.message.Message):
 global___GetStopOrdersRequest = GetStopOrdersRequest
 
 class GetStopOrdersResponse(google.protobuf.message.Message):
+    """Список активных стоп-заявок."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     STOP_ORDERS_FIELD_NUMBER: builtins.int
     @property
@@ -206,6 +212,7 @@ class GetStopOrdersResponse(google.protobuf.message.Message):
 global___GetStopOrdersResponse = GetStopOrdersResponse
 
 class CancelStopOrderRequest(google.protobuf.message.Message):
+    """Запрос отмены выставленной стоп-заявки."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     ACCOUNT_ID_FIELD_NUMBER: builtins.int
     STOP_ORDER_ID_FIELD_NUMBER: builtins.int
@@ -224,6 +231,7 @@ class CancelStopOrderRequest(google.protobuf.message.Message):
 global___CancelStopOrderRequest = CancelStopOrderRequest
 
 class CancelStopOrderResponse(google.protobuf.message.Message):
+    """Результат отмены выставленной стоп-заявки."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     TIME_FIELD_NUMBER: builtins.int
     @property
@@ -239,6 +247,7 @@ class CancelStopOrderResponse(google.protobuf.message.Message):
 global___CancelStopOrderResponse = CancelStopOrderResponse
 
 class StopOrder(google.protobuf.message.Message):
+    """Информация о стоп-заявке."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     STOP_ORDER_ID_FIELD_NUMBER: builtins.int
     LOTS_REQUESTED_FIELD_NUMBER: builtins.int

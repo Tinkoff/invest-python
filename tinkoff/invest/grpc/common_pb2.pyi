@@ -49,6 +49,24 @@ class _SecurityTradingStatusEnumTypeWrapper(google.protobuf.internal.enum_type_w
     SECURITY_TRADING_STATUS_TRADING_AT_CLOSING_AUCTION_PRICE: SecurityTradingStatus.ValueType = ...  # 10
     """Период торгов по цене аукциона закрытия"""
 
+    SECURITY_TRADING_STATUS_SESSION_ASSIGNED: SecurityTradingStatus.ValueType = ...  # 11
+    """Сессия назначена"""
+
+    SECURITY_TRADING_STATUS_SESSION_CLOSE: SecurityTradingStatus.ValueType = ...  # 12
+    """Сессия закрыта"""
+
+    SECURITY_TRADING_STATUS_SESSION_OPEN: SecurityTradingStatus.ValueType = ...  # 13
+    """Сессия открыта"""
+
+    SECURITY_TRADING_STATUS_DEALER_NORMAL_TRADING: SecurityTradingStatus.ValueType = ...  # 14
+    """Доступна торговля в режиме внутренней ликвидности брокера"""
+
+    SECURITY_TRADING_STATUS_DEALER_BREAK_IN_TRADING: SecurityTradingStatus.ValueType = ...  # 15
+    """Перерыв торговли в режиме внутренней ликвидности брокера"""
+
+    SECURITY_TRADING_STATUS_DEALER_NOT_AVAILABLE_FOR_TRADING: SecurityTradingStatus.ValueType = ...  # 16
+    """Недоступна торговля в режиме внутренней ликвидности брокера"""
+
 class SecurityTradingStatus(_SecurityTradingStatus, metaclass=_SecurityTradingStatusEnumTypeWrapper):
     """Режим торгов инструмента"""
     pass
@@ -85,6 +103,24 @@ SECURITY_TRADING_STATUS_OPENING_AUCTION_PERIOD: SecurityTradingStatus.ValueType 
 
 SECURITY_TRADING_STATUS_TRADING_AT_CLOSING_AUCTION_PRICE: SecurityTradingStatus.ValueType = ...  # 10
 """Период торгов по цене аукциона закрытия"""
+
+SECURITY_TRADING_STATUS_SESSION_ASSIGNED: SecurityTradingStatus.ValueType = ...  # 11
+"""Сессия назначена"""
+
+SECURITY_TRADING_STATUS_SESSION_CLOSE: SecurityTradingStatus.ValueType = ...  # 12
+"""Сессия закрыта"""
+
+SECURITY_TRADING_STATUS_SESSION_OPEN: SecurityTradingStatus.ValueType = ...  # 13
+"""Сессия открыта"""
+
+SECURITY_TRADING_STATUS_DEALER_NORMAL_TRADING: SecurityTradingStatus.ValueType = ...  # 14
+"""Доступна торговля в режиме внутренней ликвидности брокера"""
+
+SECURITY_TRADING_STATUS_DEALER_BREAK_IN_TRADING: SecurityTradingStatus.ValueType = ...  # 15
+"""Перерыв торговли в режиме внутренней ликвидности брокера"""
+
+SECURITY_TRADING_STATUS_DEALER_NOT_AVAILABLE_FOR_TRADING: SecurityTradingStatus.ValueType = ...  # 16
+"""Недоступна торговля в режиме внутренней ликвидности брокера"""
 
 global___SecurityTradingStatus = SecurityTradingStatus
 

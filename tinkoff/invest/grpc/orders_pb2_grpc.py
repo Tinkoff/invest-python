@@ -25,7 +25,7 @@ class OrdersStreamServiceServicer(object):
     """Missing associated documentation comment in .proto file."""
 
     def TradesStream(self, request, context):
-        """Bidirectional stream работы со сделками
+        """Stream сделок пользователя
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
