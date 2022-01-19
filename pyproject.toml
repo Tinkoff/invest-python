@@ -4,10 +4,13 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "tinkoff-investments"
-version = "0.2.0-beta1"
+version = "0.2.0-beta3"
 description = ""
 authors = ["Danil Akhtarov <d.akhtarov@tinkoff.ru>"]
 license = "Apache 2"
+readme = "README.md"
+repository = "https://github.com/Tinkoff/invest-python"
+homepage = "https://github.com/Tinkoff/invest-python"
 packages = [
     { include = "tinkoff" },
 ]
