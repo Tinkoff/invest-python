@@ -473,14 +473,6 @@ optional = false
 python-versions = "*"
 
 [[package]]
-name = "interval"
-version = "1.0.0"
-description = "Python interval and interval set implementation"
-category = "main"
-optional = false
-python-versions = "*"
-
-[[package]]
 name = "isort"
 version = "5.10.1"
 description = "A Python utility / library to sort Python imports."
@@ -1097,7 +1089,7 @@ testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytest-
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "ec13ea142819ed8ec385eaef73b8b1d17fcf1a2be9b43423b391a0327467dced"
+content-hash = "65d36c963ab6cce89a3e4bed9f8beb3fae1275248966f64246680546bfc795a2"
 
 [metadata.files]
 astroid = [
@@ -1384,10 +1376,6 @@ importlib-metadata = [
 iniconfig = [
     {file = "iniconfig-1.1.1-py2.py3-none-any.whl", hash = "sha256:011e24c64b7f47f6ebd835bb12a743f2fbe9a26d4cecaa7f53bc4f35ee9da8b3"},
     {file = "iniconfig-1.1.1.tar.gz", hash = "sha256:bc3af051d7d14b2ee5ef9969666def0cd1a000e121eaea580d4a313df4b37f32"},
-]
-interval = [
-    {file = "interval-1.0.0.tar.bz2", hash = "sha256:6619937f3fcb5cf85bb3a60b4e4391664e8d7b30ae3dc4d04c3fc1d063ff1c3b"},
-    {file = "interval-1.0.0.zip", hash = "sha256:912c1175179ef8f7d22d204da00345c3af0e4625918a8e6020e7e629604e8c8e"},
 ]
 isort = [
     {file = "isort-5.10.1-py3-none-any.whl", hash = "sha256:6f62d78e2f89b4500b080fe3a81690850cd254227f27f75c3a0c491a1f351ba7"},
