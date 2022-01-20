@@ -6,6 +6,7 @@ import builtins
 import google.protobuf.descriptor
 import google.protobuf.internal.enum_type_wrapper
 import google.protobuf.message
+import google.protobuf.timestamp_pb2
 import typing
 import typing_extensions
 
@@ -167,3 +168,19 @@ class Quotation(google.protobuf.message.Message):
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["nano",b"nano","units",b"units"]) -> None: ...
 global___Quotation = Quotation
+
+class Ping(google.protobuf.message.Message):
+    """Проверка активности стрима."""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    TIME_FIELD_NUMBER: builtins.int
+    @property
+    def time(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Время проверки."""
+        pass
+    def __init__(self,
+        *,
+        time : typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["time",b"time"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["time",b"time"]) -> None: ...
+global___Ping = Ping

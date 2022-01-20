@@ -126,6 +126,29 @@ class TradesStreamRequest(google.protobuf.message.Message):
 global___TradesStreamRequest = TradesStreamRequest
 
 class TradesStreamResponse(google.protobuf.message.Message):
+    """Информация о торговых поручениях."""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    ORDER_TRADES_FIELD_NUMBER: builtins.int
+    PING_FIELD_NUMBER: builtins.int
+    @property
+    def order_trades(self) -> global___OrderTrades:
+        """Информация об исполнении торгового поручения."""
+        pass
+    @property
+    def ping(self) -> tinkoff.invest.grpc.common_pb2.Ping:
+        """Проверка активности стрима."""
+        pass
+    def __init__(self,
+        *,
+        order_trades : typing.Optional[global___OrderTrades] = ...,
+        ping : typing.Optional[tinkoff.invest.grpc.common_pb2.Ping] = ...,
+        ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["order_trades",b"order_trades","payload",b"payload","ping",b"ping"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["order_trades",b"order_trades","payload",b"payload","ping",b"ping"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["payload",b"payload"]) -> typing.Optional[typing_extensions.Literal["order_trades","ping"]]: ...
+global___TradesStreamResponse = TradesStreamResponse
+
+class OrderTrades(google.protobuf.message.Message):
     """Информация об исполнении торгового поручения."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     ORDER_ID_FIELD_NUMBER: builtins.int
@@ -160,7 +183,7 @@ class TradesStreamResponse(google.protobuf.message.Message):
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["created_at",b"created_at"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions.Literal["created_at",b"created_at","direction",b"direction","figi",b"figi","order_id",b"order_id","trades",b"trades"]) -> None: ...
-global___TradesStreamResponse = TradesStreamResponse
+global___OrderTrades = OrderTrades
 
 class OrderTrade(google.protobuf.message.Message):
     """Информация о сделке."""

@@ -43,12 +43,6 @@ docs-serve:
 docs-changelog:
 	$(POETRY_RUN) git-changelog -o CHANGELOG.md  .
 
-.PHONY: grpc-gen
-grpc-gen:
-	rm -r ${PACKAGE_PROTO_DIR}
-	$(POETRY_RUN) python -m grpc_tools.protoc -I${PROTOS} --python_out=${OUT} --mypy_out=${OUT} --grpc_python_out=${OUT} ${PROTO_DIR}/*.proto
-	touch ${PACKAGE_PROTO_DIR}/__init__.py
-
 .PHONY: install
 install:
 	poetry install
@@ -60,3 +54,12 @@ publish:
 .PHONY: download-protos
 download-protos:
 	$(POETRY_RUN) python -m scripts.download_protos
+
+.PHONY: gen-grpc
+gen-grpc:
+	rm -r ${PACKAGE_PROTO_DIR}
+	$(POETRY_RUN) python -m grpc_tools.protoc -I${PROTOS} --python_out=${OUT} --mypy_out=${OUT} --grpc_python_out=${OUT} ${PROTO_DIR}/*.proto
+	touch ${PACKAGE_PROTO_DIR}/__init__.py
+
+.PHONY: gen-client
+gen-client: download-protos gen-grpc

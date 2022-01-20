@@ -258,6 +258,7 @@ class MarketDataResponse(google.protobuf.message.Message):
     TRADE_FIELD_NUMBER: builtins.int
     ORDERBOOK_FIELD_NUMBER: builtins.int
     TRADING_STATUS_FIELD_NUMBER: builtins.int
+    PING_FIELD_NUMBER: builtins.int
     @property
     def subscribe_candles_response(self) -> global___SubscribeCandlesResponse:
         """Результат подписки на свечи."""
@@ -290,6 +291,10 @@ class MarketDataResponse(google.protobuf.message.Message):
     def trading_status(self) -> global___TradingStatus:
         """Торговый статус."""
         pass
+    @property
+    def ping(self) -> tinkoff.invest.grpc.common_pb2.Ping:
+        """Проверка активности стрима."""
+        pass
     def __init__(self,
         *,
         subscribe_candles_response : typing.Optional[global___SubscribeCandlesResponse] = ...,
@@ -300,10 +305,11 @@ class MarketDataResponse(google.protobuf.message.Message):
         trade : typing.Optional[global___Trade] = ...,
         orderbook : typing.Optional[global___OrderBook] = ...,
         trading_status : typing.Optional[global___TradingStatus] = ...,
+        ping : typing.Optional[tinkoff.invest.grpc.common_pb2.Ping] = ...,
         ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["candle",b"candle","orderbook",b"orderbook","payload",b"payload","subscribe_candles_response",b"subscribe_candles_response","subscribe_info_response",b"subscribe_info_response","subscribe_order_book_response",b"subscribe_order_book_response","subscribe_trades_response",b"subscribe_trades_response","trade",b"trade","trading_status",b"trading_status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["candle",b"candle","orderbook",b"orderbook","payload",b"payload","subscribe_candles_response",b"subscribe_candles_response","subscribe_info_response",b"subscribe_info_response","subscribe_order_book_response",b"subscribe_order_book_response","subscribe_trades_response",b"subscribe_trades_response","trade",b"trade","trading_status",b"trading_status"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing_extensions.Literal["payload",b"payload"]) -> typing.Optional[typing_extensions.Literal["subscribe_candles_response","subscribe_order_book_response","subscribe_trades_response","subscribe_info_response","candle","trade","orderbook","trading_status"]]: ...
+    def HasField(self, field_name: typing_extensions.Literal["candle",b"candle","orderbook",b"orderbook","payload",b"payload","ping",b"ping","subscribe_candles_response",b"subscribe_candles_response","subscribe_info_response",b"subscribe_info_response","subscribe_order_book_response",b"subscribe_order_book_response","subscribe_trades_response",b"subscribe_trades_response","trade",b"trade","trading_status",b"trading_status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["candle",b"candle","orderbook",b"orderbook","payload",b"payload","ping",b"ping","subscribe_candles_response",b"subscribe_candles_response","subscribe_info_response",b"subscribe_info_response","subscribe_order_book_response",b"subscribe_order_book_response","subscribe_trades_response",b"subscribe_trades_response","trade",b"trade","trading_status",b"trading_status"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["payload",b"payload"]) -> typing.Optional[typing_extensions.Literal["subscribe_candles_response","subscribe_order_book_response","subscribe_trades_response","subscribe_info_response","candle","trade","orderbook","trading_status","ping"]]: ...
 global___MarketDataResponse = MarketDataResponse
 
 class SubscribeCandlesRequest(google.protobuf.message.Message):

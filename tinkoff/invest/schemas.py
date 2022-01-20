@@ -210,6 +210,11 @@ class Quotation(_grpc_helpers.Message):
 
 
 @dataclass(eq=False, repr=True)
+class Ping(_grpc_helpers.Message):
+    time: datetime = _grpc_helpers.int64_field(1)
+
+
+@dataclass(eq=False, repr=True)
 class TradingSchedulesRequest(_grpc_helpers.Message):
     exchange: str = _grpc_helpers.string_field(1)
     from_: datetime = _grpc_helpers.message_field(2)
@@ -596,6 +601,7 @@ class MarketDataResponse(_grpc_helpers.Message):
     trade: "Trade" = _grpc_helpers.message_field(6, group="payload")
     orderbook: "OrderBook" = _grpc_helpers.message_field(7, group="payload")
     trading_status: "TradingStatus" = _grpc_helpers.message_field(8, group="payload")
+    ping: "Ping" = _grpc_helpers.message_field(9, group="payload")
 
 
 @dataclass(eq=False, repr=True)
@@ -904,6 +910,12 @@ class TradesStreamRequest(_grpc_helpers.Message):
 
 @dataclass(eq=False, repr=True)
 class TradesStreamResponse(_grpc_helpers.Message):
+    order_trades: "OrderTrades" = _grpc_helpers.message_field(1, group="payload")
+    ping: "Ping" = _grpc_helpers.message_field(2, group="payload")
+
+
+@dataclass(eq=False, repr=True)
+class OrderTrades(_grpc_helpers.Message):
     order_id: str = _grpc_helpers.string_field(1)
     created_at: datetime = _grpc_helpers.message_field(2)
     direction: "OrderDirection" = _grpc_helpers.enum_field(3)
