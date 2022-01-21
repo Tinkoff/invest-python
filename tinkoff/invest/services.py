@@ -1,6 +1,6 @@
 # pylint:disable=redefined-builtin,too-many-lines
-from datetime import datetime, timedelta
-from typing import Generator, Iterable, List, Optional
+from datetime import datetime
+from typing import Iterable, List, Optional
 
 import grpc
 
@@ -120,8 +120,6 @@ __all__ = (
     "SandboxService",
     "StopOrdersService",
 )
-
-DAYS_IN_YEAR = 365
 
 
 class Services:
@@ -441,27 +439,11 @@ class MarketDataService(_grpc_helpers.Service):
     ) -> GetCandlesResponse:
         request = GetCandlesRequest()
         request.figi = figi
+        if from_ is not None:
+            request.from_ = from_
+        if to is not None:
+            request.to = to
         request.interval = interval
-
-        if not from_ or not to:
-            if from_ is not None:
-                request.from_ = from_
-            if to is not None:
-                request.to = to
-            return self._request_candles(request)
-
-        result = GetCandlesResponse(candles=[])
-        for local_from_, local_to in self._separate_date_for_intervals(
-            from_, to, interval
-        ):
-            request.from_ = local_from_
-            request.to = local_to
-            candles_response = self._request_candles(request)
-            result.candles.extend(candles_response.candles)
-
-        return result
-
-    def _request_candles(self, request: GetCandlesRequest) -> GetCandlesResponse:
         response, call = self.stub.GetCandles.with_call(
             request=_grpc_helpers.dataclass_to_protobuff(
                 request, marketdata_pb2.GetCandlesRequest()
@@ -470,27 +452,6 @@ class MarketDataService(_grpc_helpers.Service):
         )
         log_request(get_tracking_id_from_call(call), "GetCandles")
         return _grpc_helpers.protobuf_to_dataclass(response, GetCandlesResponse)
-
-    @staticmethod
-    def _separate_date_for_intervals(
-        from_: datetime,
-        to: datetime,
-        candle_interval: CandleInterval,
-    ) -> Generator[tuple[datetime, datetime], None, None]:
-        max_interval_for_candle_intervals = {
-            CandleInterval.CANDLE_INTERVAL_1_MIN: timedelta(days=1),
-            CandleInterval.CANDLE_INTERVAL_5_MIN: timedelta(days=1),
-            CandleInterval.CANDLE_INTERVAL_15_MIN: timedelta(days=1),
-            CandleInterval.CANDLE_INTERVAL_HOUR: timedelta(weeks=1),
-            CandleInterval.CANDLE_INTERVAL_DAY: timedelta(days=DAYS_IN_YEAR),
-        }
-        max_interval_for_candle_interval = max_interval_for_candle_intervals[
-            candle_interval
-        ]
-        while from_ + max_interval_for_candle_interval < to:
-            yield to - max_interval_for_candle_interval, to
-            to -= max_interval_for_candle_interval
-        yield from_, to
 
     @handle_request_error("GetLastPrices")
     def get_last_prices(
