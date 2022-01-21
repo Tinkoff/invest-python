@@ -1,5 +1,5 @@
 from datetime import datetime, timedelta
-from typing import Generator, Optional
+from typing import Generator, Optional, Tuple
 
 from tinkoff.invest import (
     CandleInterval,
@@ -65,7 +65,7 @@ class MarketDataServiceHelper:
         from_: datetime,
         to: datetime,
         candle_interval: CandleInterval,
-    ) -> Generator[tuple[datetime, datetime], None, None]:
+    ) -> Generator[Tuple[datetime, datetime], None, None]:
         max_interval_for_candle_intervals = {
             CandleInterval.CANDLE_INTERVAL_1_MIN: timedelta(days=1),
             CandleInterval.CANDLE_INTERVAL_5_MIN: timedelta(days=1),
