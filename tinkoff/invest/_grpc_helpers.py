@@ -239,7 +239,7 @@ class Service(ABC):
         self.metadata = metadata
 
 
-class StorageService(Generic[TItemId, TItem], Service): 
+class StorageService(Generic[TItemId, TItem], Service):  # type: ignore
     _stub_factory: Any
 
     def __init__(

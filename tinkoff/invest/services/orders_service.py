@@ -56,7 +56,7 @@ class IOrderService(abc.ABC):
         ...
 
 
-class OrdersService(StorageService[str, OrderState], IOrderService):
+class OrdersService(StorageService[str, OrderState], IOrderService):  # type: ignore
     _stub_factory = orders_pb2_grpc.OrdersServiceStub
 
     @handle_request_error("PostOrder")
