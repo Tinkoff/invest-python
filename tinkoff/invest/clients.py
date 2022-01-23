@@ -1,9 +1,10 @@
 from contextlib import asynccontextmanager, contextmanager
 from typing import AsyncGenerator, Generator
 
+from tinkoff.invest.services.services import Services
+
 from .async_services import AsyncServices
 from .channels import create_channel
-from tinkoff.invest.services.services import Services
 
 __all__ = ("Client", "AsyncClient")
 

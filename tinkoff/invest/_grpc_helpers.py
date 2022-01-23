@@ -5,13 +5,15 @@ from datetime import datetime, timezone
 from decimal import Decimal
 from typing import (
     Any,
+    Generic,
+    List,
     Optional,
     Tuple,
     Type,
     TypeVar,
     get_args,
     get_origin,
-    get_type_hints, List, Generic,
+    get_type_hints,
 )
 
 import grpc
@@ -240,7 +242,12 @@ class Service(ABC):
 class StorageService(Generic[TId, TItem], Service):
     _stub_factory: Any
 
-    def __init__(self, channel: grpc.Channel, metadata: Headers, storage: IItemStorage[TId, TItem]):
+    def __init__(
+        self,
+        channel: grpc.Channel,
+        metadata: Headers,
+        storage: IItemStorage[TId, TItem],
+    ):
         super().__init__(channel, metadata)
         self._storage = storage
 

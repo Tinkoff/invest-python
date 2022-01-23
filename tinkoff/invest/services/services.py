@@ -4,6 +4,9 @@ from typing import Iterable, List, Optional
 
 import grpc
 
+from tinkoff.invest import _grpc_helpers
+from tinkoff.invest._errors import handle_request_error, handle_request_error_gen
+from tinkoff.invest.constants import APP_NAME
 from tinkoff.invest.grpc import (
     instruments_pb2,
     instruments_pb2_grpc,
@@ -20,10 +23,6 @@ from tinkoff.invest.grpc import (
     users_pb2,
     users_pb2_grpc,
 )
-
-from tinkoff.invest import _grpc_helpers
-from tinkoff.invest._errors import handle_request_error, handle_request_error_gen
-from tinkoff.invest.constants import APP_NAME
 from tinkoff.invest.logging import get_tracking_id_from_call, log_request
 from tinkoff.invest.schemas import (
     BondResponse,
@@ -107,7 +106,6 @@ from tinkoff.invest.schemas import (
     WithdrawLimitsRequest,
     WithdrawLimitsResponse,
 )
-
 from tinkoff.invest.services.orders_service import OrdersService
 from tinkoff.invest.storage.local_order_storage import OrdersStorage
 
