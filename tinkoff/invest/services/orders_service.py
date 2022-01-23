@@ -5,8 +5,7 @@ from typing import Optional, Iterator
 from grpc import StatusCode
 
 from tinkoff.invest._errors import handle_request_error
-from tinkoff.invest._grpc_helpers import StorageService, dataclass_to_protobuff, \
-    protobuf_to_dataclass
+from tinkoff.invest._grpc_helpers import StorageService, dataclass_to_protobuff, protobuf_to_dataclass
 from tinkoff.invest.exceptions import OrderNotFoundError, RequestError
 from tinkoff.invest.grpc import (
     orders_pb2,
@@ -60,16 +59,6 @@ class IOrderService(abc.ABC):
         ...
 
 
-@contextlib.contextmanager
-def wrapping_orders_errors(order_id: str) -> Iterator[None]:
-    try:
-        yield
-    except RequestError as e:
-        if e.code == StatusCode.NOT_FOUND:
-            raise OrderNotFoundError(order_id=order_id) from e
-        raise
-
-
 class OrdersService(StorageService[str, OrderState], IOrderService):
     _stub_factory = orders_pb2_grpc.OrdersServiceStub
 
@@ -85,63 +74,60 @@ class OrdersService(StorageService[str, OrderState], IOrderService):
         order_type: OrderType = OrderType(0),
         order_id: str = "",
     ) -> PostOrderResponse:
-        with wrapping_orders_errors(order_id=order_id):
-            request = PostOrderRequest()
-            request.figi = figi
-            request.quantity = quantity
-            if price is not None:
-                request.price = price
-            request.direction = direction
-            request.account_id = account_id
-            request.order_type = order_type
-            request.order_id = order_id
-            response, call = self.stub.PostOrder.with_call(
-                request=_grpc_helpers.dataclass_to_protobuff(
-                    request, orders_pb2.PostOrderRequest()
-                ),
-                metadata=self.metadata,
-            )
-            log_request(get_tracking_id_from_call(call), "PostOrder")
-            order_state = self.get_order_state(account_id=account_id, order_id=order_id)
-            self._storage.add(order_state)
-            return _grpc_helpers.protobuf_to_dataclass(response, PostOrderResponse)
+        request = PostOrderRequest()
+        request.figi = figi
+        request.quantity = quantity
+        if price is not None:
+            request.price = price
+        request.direction = direction
+        request.account_id = account_id
+        request.order_type = order_type
+        request.order_id = order_id
+        response, call = self.stub.PostOrder.with_call(
+            request=dataclass_to_protobuff(
+                request, orders_pb2.PostOrderRequest()
+            ),
+            metadata=self.metadata,
+        )
+        log_request(get_tracking_id_from_call(call), "PostOrder")
+        order_state = self.get_order_state(account_id=account_id, order_id=order_id)
+        self._storage.add(order_state)
+        return protobuf_to_dataclass(response, PostOrderResponse)
 
     @handle_request_error("CancelOrder")
     def cancel_order(
             self, *, account_id: str = "", order_id: str = ""
     ) -> CancelOrderResponse:
-        with wrapping_orders_errors(order_id=order_id):
-            request = CancelOrderRequest()
-            request.account_id = account_id
-            request.order_id = order_id
-            response, call = self.stub.CancelOrder.with_call(
-                request=_grpc_helpers.dataclass_to_protobuff(
-                    request, orders_pb2.CancelOrderRequest()
-                ),
-                metadata=self.metadata,
-            )
-            log_request(get_tracking_id_from_call(call), "CancelOrder")
-            self._storage.delete(order_id)
-            return _grpc_helpers.protobuf_to_dataclass(response, CancelOrderResponse)
+        request = CancelOrderRequest()
+        request.account_id = account_id
+        request.order_id = order_id
+        response, call = self.stub.CancelOrder.with_call(
+            request= dataclass_to_protobuff(
+                request, orders_pb2.CancelOrderRequest()
+            ),
+            metadata=self.metadata,
+        )
+        log_request(get_tracking_id_from_call(call), "CancelOrder")
+        self._storage.delete(order_id)
+        return protobuf_to_dataclass(response, CancelOrderResponse)
 
     @handle_request_error("GetOrderState")
     def get_order_state(
         self, *, account_id: str = "", order_id: str = ""
     ) -> OrderState:
-        with wrapping_orders_errors(order_id=order_id):
-            request = GetOrderStateRequest()
-            request.account_id = account_id
-            request.order_id = order_id
-            response, call = self.stub.GetOrderState.with_call(
-                request=_grpc_helpers.dataclass_to_protobuff(
-                    request, orders_pb2.GetOrderStateRequest()
-                ),
-                metadata=self.metadata,
-            )
-            log_request(get_tracking_id_from_call(call), "GetOrderState")
-            order_state = self.get_order_state(account_id=account_id, order_id=order_id)
-            self._storage.update(order_state.order_id, order_state)
-            return _grpc_helpers.protobuf_to_dataclass(response, OrderState)
+        request = GetOrderStateRequest()
+        request.account_id = account_id
+        request.order_id = order_id
+        response, call = self.stub.GetOrderState.with_call(
+            request=dataclass_to_protobuff(
+                request, orders_pb2.GetOrderStateRequest()
+            ),
+            metadata=self.metadata,
+        )
+        log_request(get_tracking_id_from_call(call), "GetOrderState")
+        order_state = self.get_order_state(account_id=account_id, order_id=order_id)
+        self._storage.update(order_state.order_id, order_state)
+        return protobuf_to_dataclass(response, OrderState)
 
     @handle_request_error("GetOrders")
     def get_orders(self, *, account_id: str = "") -> GetOrdersResponse:
