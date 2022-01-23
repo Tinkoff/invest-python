@@ -21,11 +21,11 @@ from tinkoff.invest.grpc import (
     users_pb2_grpc,
 )
 
-from . import _grpc_helpers
-from ._errors import handle_request_error, handle_request_error_gen
-from .constants import APP_NAME
-from .logging import get_tracking_id_from_call, log_request
-from .schemas import (
+from tinkoff.invest import _grpc_helpers
+from tinkoff.invest._errors import handle_request_error, handle_request_error_gen
+from tinkoff.invest.constants import APP_NAME
+from tinkoff.invest.logging import get_tracking_id_from_call, log_request
+from tinkoff.invest.schemas import (
     BondResponse,
     BondsResponse,
     CancelOrderRequest,
@@ -108,29 +108,20 @@ from .schemas import (
     WithdrawLimitsResponse,
 )
 
-__all__ = (
-    "Services",
-    "InstrumentsService",
-    "MarketDataService",
-    "MarketDataStreamService",
-    "OperationsService",
-    "OrdersStreamService",
-    "OrdersService",
-    "UsersService",
-    "SandboxService",
-    "StopOrdersService",
-)
+from tinkoff.invest.services.orders_service import OrdersService
+from tinkoff.invest.storage.local_order_storage import OrdersStorage
 
 
 class Services:
     def __init__(self, channel: grpc.Channel, token: str) -> None:
         metadata = [("authorization", f"Bearer {token}"), ("x-app-name", APP_NAME)]
+        orders_storage = OrdersStorage()
         self.instruments = InstrumentsService(channel, metadata)
         self.market_data = MarketDataService(channel, metadata)
         self.market_data_stream = MarketDataStreamService(channel, metadata)
         self.operations = OperationsService(channel, metadata)
         self.orders_stream = OrdersStreamService(channel, metadata)
-        self.orders = OrdersService(channel, metadata)
+        self.orders = OrdersService(channel, metadata, orders_storage)
         self.users = UsersService(channel, metadata)
         self.sandbox = SandboxService(channel, metadata)
         self.stop_orders = StopOrdersService(channel, metadata)
@@ -605,85 +596,6 @@ class OrdersStreamService(_grpc_helpers.Service):
             metadata=self.metadata,
         ):
             yield _grpc_helpers.protobuf_to_dataclass(response, TradesStreamResponse)
-
-
-class OrdersService(_grpc_helpers.Service):
-    _stub_factory = orders_pb2_grpc.OrdersServiceStub
-
-    @handle_request_error("PostOrder")
-    def post_order(
-        self,
-        *,
-        figi: str = "",
-        quantity: int = 0,
-        price: Optional[Quotation] = None,
-        direction: OrderDirection = OrderDirection(0),
-        account_id: str = "",
-        order_type: OrderType = OrderType(0),
-        order_id: str = "",
-    ) -> PostOrderResponse:
-        request = PostOrderRequest()
-        request.figi = figi
-        request.quantity = quantity
-        if price is not None:
-            request.price = price
-        request.direction = direction
-        request.account_id = account_id
-        request.order_type = order_type
-        request.order_id = order_id
-        response, call = self.stub.PostOrder.with_call(
-            request=_grpc_helpers.dataclass_to_protobuff(
-                request, orders_pb2.PostOrderRequest()
-            ),
-            metadata=self.metadata,
-        )
-        log_request(get_tracking_id_from_call(call), "PostOrder")
-        return _grpc_helpers.protobuf_to_dataclass(response, PostOrderResponse)
-
-    @handle_request_error("CancelOrder")
-    def cancel_order(
-        self, *, account_id: str = "", order_id: str = ""
-    ) -> CancelOrderResponse:
-        request = CancelOrderRequest()
-        request.account_id = account_id
-        request.order_id = order_id
-        response, call = self.stub.CancelOrder.with_call(
-            request=_grpc_helpers.dataclass_to_protobuff(
-                request, orders_pb2.CancelOrderRequest()
-            ),
-            metadata=self.metadata,
-        )
-        log_request(get_tracking_id_from_call(call), "CancelOrder")
-        return _grpc_helpers.protobuf_to_dataclass(response, CancelOrderResponse)
-
-    @handle_request_error("GetOrderState")
-    def get_order_state(
-        self, *, account_id: str = "", order_id: str = ""
-    ) -> OrderState:
-        request = GetOrderStateRequest()
-        request.account_id = account_id
-        request.order_id = order_id
-        response, call = self.stub.GetOrderState.with_call(
-            request=_grpc_helpers.dataclass_to_protobuff(
-                request, orders_pb2.GetOrderStateRequest()
-            ),
-            metadata=self.metadata,
-        )
-        log_request(get_tracking_id_from_call(call), "GetOrderState")
-        return _grpc_helpers.protobuf_to_dataclass(response, OrderState)
-
-    @handle_request_error("GetOrders")
-    def get_orders(self, *, account_id: str = "") -> GetOrdersResponse:
-        request = GetOrdersRequest()
-        request.account_id = account_id
-        response, call = self.stub.GetOrders.with_call(
-            request=_grpc_helpers.dataclass_to_protobuff(
-                request, orders_pb2.GetOrdersRequest()
-            ),
-            metadata=self.metadata,
-        )
-        log_request(get_tracking_id_from_call(call), "GetOrders")
-        return _grpc_helpers.protobuf_to_dataclass(response, GetOrdersResponse)
 
 
 class UsersService(_grpc_helpers.Service):

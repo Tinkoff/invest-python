@@ -30,7 +30,7 @@ def handle_request_error(name: str):
                     ) from e
                 raise
 
-        return cast(TFunc, wrapper)
+        return cast('TFunc', wrapper)
 
     return decorator
 

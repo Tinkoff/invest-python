@@ -3,7 +3,7 @@ from typing import AsyncGenerator, Generator
 
 from .async_services import AsyncServices
 from .channels import create_channel
-from .services import Services
+from tinkoff.invest.services.services import Services
 
 __all__ = ("Client", "AsyncClient")
 

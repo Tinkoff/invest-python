@@ -11,11 +11,14 @@ from typing import (
     TypeVar,
     get_args,
     get_origin,
-    get_type_hints,
+    get_type_hints, List, Generic,
 )
 
+import grpc
 from google.protobuf import symbol_database  # noqa:I900
 from google.protobuf.timestamp_pb2 import Timestamp  # noqa:I900
+
+from tinkoff.invest.storage.item_storage import IItemStorage, TId, TItem
 
 _sym_db = symbol_database.Default()
 
@@ -223,12 +226,23 @@ class Message(ABC):
     ...
 
 
+Headers = List[Tuple[str, str]]
+
+
 class Service(ABC):
     _stub_factory: Any
 
-    def __init__(self, channel, metadata):
+    def __init__(self, channel: grpc.Channel, metadata: Headers):
         self.stub = self._stub_factory(channel)
         self.metadata = metadata
+
+
+class StorageService(Generic[TId, TItem], Service):
+    _stub_factory: Any
+
+    def __init__(self, channel: grpc.Channel, metadata: Headers, storage: IItemStorage[TId, TItem]):
+        super().__init__(channel, metadata)
+        self._storage = storage
 
 
 _UNKNOWN: Any = object()
