@@ -20,7 +20,7 @@ import grpc
 from google.protobuf import symbol_database  # noqa:I900
 from google.protobuf.timestamp_pb2 import Timestamp  # noqa:I900
 
-from tinkoff.invest.storage.item_storage import IItemStorage, TId, TItem
+from tinkoff.invest.storage.item_storage import IItemStorage, TItem, TItemId
 
 _sym_db = symbol_database.Default()
 
@@ -239,14 +239,14 @@ class Service(ABC):
         self.metadata = metadata
 
 
-class StorageService(Generic[TId, TItem], Service):
+class StorageService(Generic[TItemId, TItem], Service): 
     _stub_factory: Any
 
     def __init__(
         self,
         channel: grpc.Channel,
         metadata: Headers,
-        storage: IItemStorage[TId, TItem],
+        storage: IItemStorage[TItemId, TItem],
     ):
         super().__init__(channel, metadata)
         self._storage = storage
