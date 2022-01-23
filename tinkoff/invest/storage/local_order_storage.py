@@ -9,7 +9,7 @@ class OrdersStorage(IOrdersStorage):
         self._orders: Dict[str, OrderState] = {}
 
     def get_all(self) -> Iterable[OrderState]:
-        yield from self._orders
+        yield from self._orders.values()
 
     def update(self, item_id: str, new_item: OrderState) -> None:
         if item_id in self._orders:
