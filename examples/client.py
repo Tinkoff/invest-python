@@ -1,8 +1,7 @@
 import os
 import sys
-import uuid
 
-from tinkoff.invest import Client, GetAccountsResponse, Account
+from tinkoff.invest import Client
 
 
 def main() -> int:
@@ -12,14 +11,7 @@ def main() -> int:
         print("env INVEST_TOKEN not found")  # noqa:T001
         return 1
     with Client(token) as client:
-        r: GetAccountsResponse = client.users.get_accounts()  # noqa:T001
-        print('Acc res:', r)
-        acc, *_ = r.accounts
-        assert not _
-        acc: Account = acc
-
-        s = client.orders.get_orders(account_id=acc.id)
-        print('orders: ', s)
+        print(client.users.get_accounts())  # noqa:T001
 
     return 0
 
