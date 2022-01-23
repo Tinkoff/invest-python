@@ -258,6 +258,8 @@ class StopOrder(google.protobuf.message.Message):
     CREATE_DATE_FIELD_NUMBER: builtins.int
     ACTIVATION_DATE_TIME_FIELD_NUMBER: builtins.int
     EXPIRATION_TIME_FIELD_NUMBER: builtins.int
+    PRICE_FIELD_NUMBER: builtins.int
+    STOP_PRICE_FIELD_NUMBER: builtins.int
     stop_order_id: typing.Text = ...
     """Идентификатор-идентификатор стоп-заявки"""
 
@@ -288,6 +290,14 @@ class StopOrder(google.protobuf.message.Message):
     def expiration_time(self) -> google.protobuf.timestamp_pb2.Timestamp:
         """Дата и время снятия заявки в часовом поясе UTC"""
         pass
+    @property
+    def price(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
+        """Цена заявки"""
+        pass
+    @property
+    def stop_price(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
+        """Цена активации стоп-заявки"""
+        pass
     def __init__(self,
         *,
         stop_order_id : typing.Text = ...,
@@ -299,7 +309,9 @@ class StopOrder(google.protobuf.message.Message):
         create_date : typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
         activation_date_time : typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
         expiration_time : typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        price : typing.Optional[tinkoff.invest.grpc.common_pb2.MoneyValue] = ...,
+        stop_price : typing.Optional[tinkoff.invest.grpc.common_pb2.MoneyValue] = ...,
         ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["activation_date_time",b"activation_date_time","create_date",b"create_date","expiration_time",b"expiration_time"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["activation_date_time",b"activation_date_time","create_date",b"create_date","currency",b"currency","direction",b"direction","expiration_time",b"expiration_time","figi",b"figi","lots_requested",b"lots_requested","order_type",b"order_type","stop_order_id",b"stop_order_id"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["activation_date_time",b"activation_date_time","create_date",b"create_date","expiration_time",b"expiration_time","price",b"price","stop_price",b"stop_price"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["activation_date_time",b"activation_date_time","create_date",b"create_date","currency",b"currency","direction",b"direction","expiration_time",b"expiration_time","figi",b"figi","lots_requested",b"lots_requested","order_type",b"order_type","price",b"price","stop_order_id",b"stop_order_id","stop_price",b"stop_price"]) -> None: ...
 global___StopOrder = StopOrder

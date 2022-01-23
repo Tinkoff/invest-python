@@ -633,7 +633,7 @@ class Candle(google.protobuf.message.Message):
     HIGH_FIELD_NUMBER: builtins.int
     LOW_FIELD_NUMBER: builtins.int
     CLOSE_FIELD_NUMBER: builtins.int
-    VALUE_FIELD_NUMBER: builtins.int
+    VOLUME_FIELD_NUMBER: builtins.int
     TIME_FIELD_NUMBER: builtins.int
     figi: typing.Text = ...
     """Figi-идентификатор инструмента."""
@@ -657,7 +657,7 @@ class Candle(google.protobuf.message.Message):
     def close(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
         """Цена закрытия за 1 лот."""
         pass
-    value: builtins.int = ...
+    volume: builtins.int = ...
     """Объём сделок в лотах."""
 
     @property
@@ -672,11 +672,11 @@ class Candle(google.protobuf.message.Message):
         high : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
         low : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
         close : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
-        value : builtins.int = ...,
+        volume : builtins.int = ...,
         time : typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["close",b"close","high",b"high","low",b"low","open",b"open","time",b"time"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["close",b"close","figi",b"figi","high",b"high","interval",b"interval","low",b"low","open",b"open","time",b"time","value",b"value"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["close",b"close","figi",b"figi","high",b"high","interval",b"interval","low",b"low","open",b"open","time",b"time","volume",b"volume"]) -> None: ...
 global___Candle = Candle
 
 class OrderBook(google.protobuf.message.Message):

@@ -710,7 +710,7 @@ class Candle(_grpc_helpers.Message):
     high: "Quotation" = _grpc_helpers.message_field(4)
     low: "Quotation" = _grpc_helpers.message_field(5)
     close: "Quotation" = _grpc_helpers.message_field(6)
-    value: int = _grpc_helpers.int64_field(7)
+    volume: int = _grpc_helpers.int64_field(7)
     time: datetime = _grpc_helpers.message_field(8)
 
 
@@ -1170,7 +1170,7 @@ class CancelStopOrderResponse(_grpc_helpers.Message):
 
 
 @dataclass(eq=False, repr=True)
-class StopOrder(_grpc_helpers.Message):
+class StopOrder(_grpc_helpers.Message):  # pylint:disable=too-many-instance-attributes
     stop_order_id: str = _grpc_helpers.string_field(1)
     lots_requested: int = _grpc_helpers.int64_field(2)
     figi: str = _grpc_helpers.string_field(3)
@@ -1180,3 +1180,5 @@ class StopOrder(_grpc_helpers.Message):
     create_date: datetime = _grpc_helpers.message_field(7)
     activation_date_time: datetime = _grpc_helpers.message_field(8)
     expiration_time: datetime = _grpc_helpers.message_field(9)
+    price: "MoneyValue" = _grpc_helpers.message_field(10)
+    stop_price: "MoneyValue" = _grpc_helpers.message_field(11)
