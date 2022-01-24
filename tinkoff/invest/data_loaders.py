@@ -12,39 +12,41 @@ from tinkoff.invest.grpc import marketdata_pb2
 from tinkoff.invest.logging import get_tracking_id_from_call, log_request
 from tinkoff.invest.services import MarketDataService
 
-__all__ = ("MarketDataServiceHelper",)
+__all__ = ("MarketDataLoader",)
 
 DAYS_IN_YEAR = 365
 
 
-class MarketDataServiceHelper:
-    def __init__(self, service: MarketDataService) -> None:
-        self._service = service
+class MarketDataLoaderException(Exception):
+    pass
 
-    def get_candles(
+
+class MarketDataLoader:
+    def __init__(
         self,
         *,
-        figi: str = "",
-        from_: Optional[datetime] = None,
+        service: MarketDataService,
+        from_: datetime,
         to: Optional[datetime] = None,
         interval: CandleInterval = CandleInterval(0),
-    ) -> Generator[HistoricCandle, None, None]:
+        figi: str = "",
+    ) -> None:
+        self._service: MarketDataService = service
+        self._figi: str = figi
+        self._interval: CandleInterval = interval
+        self._from: datetime = from_
+        self._to: datetime = to or datetime.utcnow()
+
+    def __iter__(self):
+        yield from self.candles
+
+    @property
+    def candles(self) -> Generator[HistoricCandle, None, None]:
         request = GetCandlesRequest()
-        request.figi = figi
-        request.interval = interval
+        request.figi = self._figi
+        request.interval = self._interval
 
-        if not from_ or not to:
-            if from_ is not None:
-                request.from_ = from_
-            if to is not None:
-                request.to = to
-            candles_response = self._request_candles(request)
-            yield from candles_response.candles
-            return
-
-        for local_from_, local_to in self._separate_date_for_intervals(
-            from_, to, interval
-        ):
+        for local_from_, local_to in self.separated_date_for_intervals:
             request.from_ = local_from_
             request.to = local_to
             candles_response = self._request_candles(request)
@@ -60,11 +62,9 @@ class MarketDataServiceHelper:
         log_request(get_tracking_id_from_call(call), "GetCandles")
         return _grpc_helpers.protobuf_to_dataclass(response, GetCandlesResponse)
 
-    @staticmethod
-    def _separate_date_for_intervals(
-        from_: datetime,
-        to: datetime,
-        candle_interval: CandleInterval,
+    @property
+    def separated_date_for_intervals(
+        self,
     ) -> Generator[Tuple[datetime, datetime], None, None]:
         max_interval_for_candle_intervals = {
             CandleInterval.CANDLE_INTERVAL_1_MIN: timedelta(days=1),
@@ -74,9 +74,10 @@ class MarketDataServiceHelper:
             CandleInterval.CANDLE_INTERVAL_DAY: timedelta(days=DAYS_IN_YEAR),
         }
         max_interval_for_candle_interval = max_interval_for_candle_intervals[
-            candle_interval
+            self._interval
         ]
-        while from_ + max_interval_for_candle_interval < to:
-            yield to - max_interval_for_candle_interval, to
-            to -= max_interval_for_candle_interval
-        yield from_, to
+        local_to = self._to
+        while self._from + max_interval_for_candle_interval < local_to:
+            yield local_to - max_interval_for_candle_interval, local_to
+            local_to -= max_interval_for_candle_interval
+        yield self._from, local_to
