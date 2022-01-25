@@ -1,5 +1,5 @@
 import abc
-from typing import Generic, Iterable, TypeVar, Tuple
+from typing import Generic, Iterable, Tuple, TypeVar
 
 TItemId = TypeVar("TItemId")
 TItem = TypeVar("TItem")
