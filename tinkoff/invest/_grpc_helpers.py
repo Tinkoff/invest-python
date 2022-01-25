@@ -239,19 +239,6 @@ class Service(ABC):
         self.metadata = metadata
 
 
-class StorageService(Generic[TItemId, TItem], Service):  # type: ignore
-    _stub_factory: Any
-
-    def __init__(
-        self,
-        channel: grpc.Channel,
-        metadata: Headers,
-        storage: IItemStorage[TItemId, TItem],
-    ):
-        super().__init__(channel, metadata)
-        self._storage = storage
-
-
 _UNKNOWN: Any = object()
 PRIMITIVE_TYPES = (str, float, bool, int)
 
