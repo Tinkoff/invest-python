@@ -1,4 +1,5 @@
 from .clients import AsyncClient, Client
+from .data_loaders import get_all_candles
 from .exceptions import AioRequestError, InvestError, RequestError
 from .logging import get_current_tracking_id
 from .schemas import (
@@ -277,4 +278,5 @@ __all__ = (
     "CancelStopOrderResponse",
     "StopOrder",
     "get_current_tracking_id",
+    "get_all_candles",
 )

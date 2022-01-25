@@ -18,7 +18,7 @@ class RequestError(InvestError):
         self, code: StatusCode, details: str, metadata: Any
     ) -> None:
         self.code = code
-        self.dtails = details
+        self.details = details
         self.metadata = metadata
 
 
@@ -27,5 +27,5 @@ class AioRequestError(InvestError):
         self, code: StatusCode, details: str, metadata: Any
     ) -> None:
         self.code = code
-        self.dtails = details
+        self.details = details
         self.metadata = metadata
