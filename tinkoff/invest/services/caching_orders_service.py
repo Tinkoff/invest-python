@@ -76,5 +76,5 @@ class CachingOrdersService(IOrdersService):
         current_orders = response.orders
         self._delete_outdated_orders(current_orders=current_orders)
         for order_state in current_orders:
-            self._orders_storage.set(order_state.order_id, order_state)
+            self._orders_storage.set(item_id=order_state.order_id, new_item=order_state)
         return response

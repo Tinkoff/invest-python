@@ -1,13 +1,14 @@
 import random
 import uuid
+from unittest.mock import call
 
 import pytest
 
-from tinkoff.invest import OrderState, GetOrdersResponse
+from tinkoff.invest import GetOrdersResponse, OrderState
 from tinkoff.invest.services.caching_orders_service import CachingOrdersService
 from tinkoff.invest.services.orders_service import IOrdersService
 from tinkoff.invest.storages.orders_storage import IOrdersStorage
-from unittest.mock import call
+
 
 @pytest.fixture()
 def orders_service(mocker) -> IOrdersService:
@@ -81,16 +82,17 @@ class TestCachingOrdersService:
         orders_service,
         orders_storage,
     ):
-        local_orders = [OrderState() for _ in range(10)]
+        local_orders = [OrderState(order_id=uuid.uuid4().hex) for _ in range(5)]
         server_orders = random.choices(local_orders, k=3)
-        orders_storage.items.return_value = [(order.order_id, order) for order in local_orders]
+        orders_storage.items.return_value = [
+            (order.order_id, order) for order in local_orders
+        ]
         orders_service.get_orders.return_value = GetOrdersResponse(orders=server_orders)
         orders_deleted_expected = set(local_orders) - set(server_orders)
 
         caching_orders_service.get_orders()
 
         orders_service.get_orders.assert_called_once()
-        orders_storage.items.assert_called_once()
         orders_storage.delete.assert_has_calls(
             [call(item_id=order.order_id) for order in orders_deleted_expected]
         )
