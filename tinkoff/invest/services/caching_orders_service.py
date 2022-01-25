@@ -42,7 +42,7 @@ class CachingOrdersService(IOrdersService):
             account_id=account_id, order_id=order_id
         )
         self._orders_storage.set(item_id=order_id, new_item=order_state)
-        return response
+        return response  # noqa: R504
 
     def cancel_order(
         self, *, account_id: str = "", order_id: str = ""
@@ -52,7 +52,7 @@ class CachingOrdersService(IOrdersService):
             order_id=order_id,
         )
         self._orders_storage.delete(item_id=order_id)
-        return response
+        return response  # noqa: R504
 
     def get_order_state(
         self, *, account_id: str = "", order_id: str = ""
