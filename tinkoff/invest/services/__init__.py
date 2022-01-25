@@ -11,7 +11,7 @@ __all__ = (
     "StopOrdersService",
 )
 
-from tinkoff.invest.services.services import (
+from tinkoff.invest.services.all_services import (
     InstrumentsService,
     MarketDataService,
     MarketDataStreamService,
