@@ -1,5 +1,5 @@
 import abc
-from typing import Generic, Iterable, TypeVar
+from typing import Generic, Iterable, TypeVar, Tuple
 
 TItemId = TypeVar("TItemId")
 TItem = TypeVar("TItem")
@@ -7,17 +7,17 @@ TItem = TypeVar("TItem")
 
 class IItemStorage(Generic[TItemId, TItem], abc.ABC):
     @abc.abstractmethod
-    def get_all(self) -> Iterable[TItem]:
+    def items(self) -> Iterable[Tuple[TItemId, TItem]]:
         ...
 
     @abc.abstractmethod
-    def update(self, item_id: TItemId, new_item: TItem) -> None:
+    def get(self, item_id: TItemId) -> TItem:
         ...
 
     @abc.abstractmethod
-    def add(self, item: TItem) -> None:
+    def set(self, item_id: TItemId, new_item: TItem) -> None:
         ...
 
     @abc.abstractmethod
-    def delete(self, item: TItemId) -> None:
+    def delete(self, item_id: TItemId) -> None:
         ...
