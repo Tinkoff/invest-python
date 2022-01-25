@@ -83,7 +83,7 @@ class TestCachingOrdersService:
         orders_storage,
     ):
         local_orders = [OrderState(order_id=uuid.uuid4().hex) for _ in range(5)]
-        server_orders = random.choices(local_orders, k=3)
+        server_orders = random.choices(local_orders, k=3)  # noqa: S311
         orders_storage.items.return_value = [
             (order.order_id, order) for order in local_orders
         ]
