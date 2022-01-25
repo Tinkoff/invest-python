@@ -1,5 +1,5 @@
 # pylint: disable=redefined-outer-name,unused-variable
-
+# pylint: disable=protected-access
 from unittest import mock
 
 import pytest

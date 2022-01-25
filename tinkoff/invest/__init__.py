@@ -1,4 +1,5 @@
 from .clients import AsyncClient, Client
+from .data_loaders import get_all_candles
 from .exceptions import AioRequestError, InvestError, RequestError
 from .logging import get_current_tracking_id
 from .schemas import (
@@ -75,6 +76,7 @@ from .schemas import (
     OperationsRequest,
     OperationsResponse,
     OperationState,
+    OperationType,
     Order,
     OrderBook,
     OrderBookInstrument,
@@ -152,6 +154,7 @@ __all__ = (
     "TradeDirection",
     "CandleInterval",
     "OperationState",
+    "OperationType",
     "OrderDirection",
     "OrderType",
     "OrderExecutionReportStatus",
@@ -275,4 +278,5 @@ __all__ = (
     "CancelStopOrderResponse",
     "StopOrder",
     "get_current_tracking_id",
+    "get_all_candles",
 )

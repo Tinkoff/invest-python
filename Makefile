@@ -31,6 +31,12 @@ format:
 	$(POETRY_RUN) black --line-length=88 --exclude=$(EXCLUDE_CODE) $(CODE)
 	$(POETRY_RUN) toml-sort --in-place pyproject.toml
 
+.PHONY: flint
+flint: format lint
+
+.PHONY: check
+check: flint test
+
 .PHONY: docs
 docs:
 	$(POETRY_RUN) mkdocs build -s -v

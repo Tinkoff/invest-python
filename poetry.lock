@@ -393,6 +393,18 @@ python-dateutil = ">=2.8.1"
 dev = ["twine", "markdown", "flake8", "wheel"]
 
 [[package]]
+name = "git-changelog"
+version = "0.5.0"
+description = "Automatic Changelog generator using Jinja2 templates."
+category = "dev"
+optional = false
+python-versions = ">=3.6.2"
+
+[package.dependencies]
+Jinja2 = ">=2.10,<4"
+semver = ">=2.13,<3.0"
+
+[[package]]
 name = "gitdb"
 version = "4.0.9"
 description = "Git Object Database"
@@ -913,6 +925,14 @@ socks = ["PySocks (>=1.5.6,!=1.5.7)", "win-inet-pton"]
 use_chardet_on_py3 = ["chardet (>=3.0.2,<5)"]
 
 [[package]]
+name = "semver"
+version = "2.13.0"
+description = "Python helper for Semantic Versioning (http://semver.org/)"
+category = "dev"
+optional = false
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
+
+[[package]]
 name = "six"
 version = "1.16.0"
 description = "Python 2 and 3 compatibility utilities"
@@ -998,7 +1018,7 @@ python-versions = ">=3.6,<4.0"
 
 [[package]]
 name = "types-futures"
-version = "3.3.4"
+version = "3.3.7"
 description = "Typing stubs for futures"
 category = "dev"
 optional = false
@@ -1006,7 +1026,7 @@ python-versions = "*"
 
 [[package]]
 name = "types-protobuf"
-version = "3.19.1"
+version = "3.19.5"
 description = "Typing stubs for protobuf"
 category = "dev"
 optional = false
@@ -1089,7 +1109,7 @@ testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytest-
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "65d36c963ab6cce89a3e4bed9f8beb3fae1275248966f64246680546bfc795a2"
+content-hash = "22fb0a357bc26a54d8173e5935147c16fbe9d483742a9b20f5ddc55c23c7a9a2"
 
 [metadata.files]
 astroid = [
@@ -1264,6 +1284,10 @@ flake8-return = [
 ghp-import = [
     {file = "ghp-import-2.0.2.tar.gz", hash = "sha256:947b3771f11be850c852c64b561c600fdddf794bab363060854c1ee7ad05e071"},
     {file = "ghp_import-2.0.2-py3-none-any.whl", hash = "sha256:5f8962b30b20652cdffa9c5a9812f7de6bcb56ec475acac579807719bf242c46"},
+]
+git-changelog = [
+    {file = "git-changelog-0.5.0.tar.gz", hash = "sha256:6a1b43d21edb2b42e6c21250de97761602ff01deb8f139c84ba1b11cc591bd92"},
+    {file = "git_changelog-0.5.0-py3-none-any.whl", hash = "sha256:ca7fd3371dd6918c6c19202bbccadc59030da48a5fe350601f15fc5c36c1431a"},
 ]
 gitdb = [
     {file = "gitdb-4.0.9-py3-none-any.whl", hash = "sha256:8033ad4e853066ba6ca92050b9df2f89301b8fc8bf7e9324d412a63f8bf1a8fd"},
@@ -1685,6 +1709,10 @@ requests = [
     {file = "requests-2.27.1-py2.py3-none-any.whl", hash = "sha256:f22fa1e554c9ddfd16e6e41ac79759e17be9e492b3587efa038054674760e72d"},
     {file = "requests-2.27.1.tar.gz", hash = "sha256:68d7c56fd5a8999887728ef304a6d12edc7be74f1cfa47714fc8b414525c9a61"},
 ]
+semver = [
+    {file = "semver-2.13.0-py2.py3-none-any.whl", hash = "sha256:ced8b23dceb22134307c1b8abfa523da14198793d9787ac838e70e29e77458d4"},
+    {file = "semver-2.13.0.tar.gz", hash = "sha256:fa0fe2722ee1c3f57eac478820c3a5ae2f624af8264cbdf9000c980ff7f75e3f"},
+]
 six = [
     {file = "six-1.16.0-py2.py3-none-any.whl", hash = "sha256:8abb2f1d86890a2dfb989f9a77cfcfd3e47c2a354b01111771326f8aa26e0254"},
     {file = "six-1.16.0.tar.gz", hash = "sha256:1e61c37477a1626458e36f7b1d82aa5c9b094fa4802892072e49de9c60c4c926"},
@@ -1722,12 +1750,12 @@ tomlkit = [
     {file = "tomlkit-0.8.0.tar.gz", hash = "sha256:29e84a855712dfe0e88a48f6d05c21118dbafb283bb2eed614d46f80deb8e9a1"},
 ]
 types-futures = [
-    {file = "types-futures-3.3.4.tar.gz", hash = "sha256:adb3c869c08cd2651df31134780f9e2e6062e9f478277387956342564c8db279"},
-    {file = "types_futures-3.3.4-py3-none-any.whl", hash = "sha256:47a9683254adde7d57ecb2f26abfc90c08929b1d5b22805a2855f9df90d2719c"},
+    {file = "types-futures-3.3.7.tar.gz", hash = "sha256:d286db818fb67e3ce5c28acd9058c067329b91865acc443ac3cf91497fa36f05"},
+    {file = "types_futures-3.3.7-py3-none-any.whl", hash = "sha256:67fcd373796c8b4fb94fdb9cb006718c34be306f292b1e1f1e01f980d3630be5"},
 ]
 types-protobuf = [
-    {file = "types-protobuf-3.19.1.tar.gz", hash = "sha256:b1e6855780988a28bcb5f0306c0e1d0fee07154261742383da5bf7e5c2460a36"},
-    {file = "types_protobuf-3.19.1-py3-none-any.whl", hash = "sha256:7f7fd4628e0abd06a38559d3999fca8ed7a4f0ffe46694a4107fa46292790193"},
+    {file = "types-protobuf-3.19.5.tar.gz", hash = "sha256:9e3d954de5f5693817514b8da3476daa22f035d2b8060217c78c3831a1a49c23"},
+    {file = "types_protobuf-3.19.5-py3-none-any.whl", hash = "sha256:d0f501e897e17e8dd1f99d20c30b002b1900a3d6ff18124ada3d70c6ac6ea4f6"},
 ]
 types-requests = [
     {file = "types-requests-2.27.7.tar.gz", hash = "sha256:f38bd488528cdcbce5b01dc953972f3cead0d060cfd9ee35b363066c25bab13c"},
