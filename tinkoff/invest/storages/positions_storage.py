@@ -2,7 +2,7 @@ from abc import ABC
 from typing import Iterable, Tuple
 
 from tinkoff.invest import PortfolioPosition
-from tinkoff.invest.storage.item_storage import IItemStorage
+from tinkoff.invest.storages.item_storage import IItemStorage
 
 
 class IPositionsStorage(IItemStorage[str, PortfolioPosition], ABC):

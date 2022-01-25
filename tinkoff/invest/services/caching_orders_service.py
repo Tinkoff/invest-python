@@ -10,7 +10,7 @@ from tinkoff.invest.schemas import (
     Quotation,
 )
 from tinkoff.invest.services.orders_service import IOrdersService
-from tinkoff.invest.storage.order_storage import IOrdersStorage
+from tinkoff.invest.storages.orders_storage import IOrdersStorage
 
 
 class CachingOrdersService(IOrdersService):
@@ -41,7 +41,7 @@ class CachingOrdersService(IOrdersService):
         order_state = self._orders_service.get_order_state(
             account_id=account_id, order_id=order_id
         )
-        self._orders_storage.set(item_id=order_id, new_item=order_state)
+        self._orders_storage.set(item_id=order_state.order_id, new_item=order_state)
         return response  # noqa: R504
 
     def cancel_order(
