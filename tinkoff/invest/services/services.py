@@ -618,11 +618,12 @@ class OrdersService(_grpc_helpers.Service):
         request.order_type = order_type
         request.order_id = order_id
         response, call = self.stub.PostOrder.with_call(
-            request=_grpc_helpers.dataclass_to_protobuff(request, orders_pb2.PostOrderRequest()),
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, orders_pb2.PostOrderRequest()
+            ),
             metadata=self.metadata,
         )
         log_request(get_tracking_id_from_call(call), "PostOrder")
-        order_state = self.get_order_state(account_id=account_id, order_id=order_id)
         return _grpc_helpers.protobuf_to_dataclass(response, PostOrderResponse)
 
     @handle_request_error("CancelOrder")
@@ -633,7 +634,9 @@ class OrdersService(_grpc_helpers.Service):
         request.account_id = account_id
         request.order_id = order_id
         response, call = self.stub.CancelOrder.with_call(
-            request=_grpc_helpers.dataclass_to_protobuff(request, orders_pb2.CancelOrderRequest()),
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, orders_pb2.CancelOrderRequest()
+            ),
             metadata=self.metadata,
         )
         log_request(get_tracking_id_from_call(call), "CancelOrder")
@@ -647,7 +650,9 @@ class OrdersService(_grpc_helpers.Service):
         request.account_id = account_id
         request.order_id = order_id
         response, call = self.stub.GetOrderState.with_call(
-            request=_grpc_helpers.dataclass_to_protobuff(request, orders_pb2.GetOrderStateRequest()),
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, orders_pb2.GetOrderStateRequest()
+            ),
             metadata=self.metadata,
         )
         log_request(get_tracking_id_from_call(call), "GetOrderState")
@@ -658,13 +663,13 @@ class OrdersService(_grpc_helpers.Service):
         request = GetOrdersRequest()
         request.account_id = account_id
         response, call = self.stub.GetOrders.with_call(
-            request=_grpc_helpers.dataclass_to_protobuff(request, orders_pb2.GetOrdersRequest()),
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, orders_pb2.GetOrdersRequest()
+            ),
             metadata=self.metadata,
         )
         log_request(get_tracking_id_from_call(call), "GetOrders")
-        return  _grpc_helpers.protobuf_to_dataclass(
-            response, GetOrdersResponse
-        )
+        return _grpc_helpers.protobuf_to_dataclass(response, GetOrdersResponse)
 
 
 class UsersService(_grpc_helpers.Service):

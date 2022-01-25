@@ -5,7 +5,6 @@ from datetime import datetime, timezone
 from decimal import Decimal
 from typing import (
     Any,
-    Generic,
     List,
     Optional,
     Tuple,
@@ -19,8 +18,6 @@ from typing import (
 import grpc
 from google.protobuf import symbol_database  # noqa:I900
 from google.protobuf.timestamp_pb2 import Timestamp  # noqa:I900
-
-from tinkoff.invest.storage.item_storage import IItemStorage, TItem, TItemId
 
 _sym_db = symbol_database.Default()
 
