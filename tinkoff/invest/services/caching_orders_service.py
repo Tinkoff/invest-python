@@ -61,13 +61,13 @@ class CachingOrdersService(IOrdersService):
             account_id=account_id,
             order_id=order_id,
         )
-        self._orders_storage.set(item_id=order_id, new_item=order_state)
+        self._orders_storage.set(item_id=order_state.order_id, new_item=order_state)
         return order_state
 
     def _delete_outdated_orders(self, current_orders: List[OrderState]) -> None:
         for order_id, order_state in self._orders_storage.items():
             if order_state not in current_orders:
-                self._orders_storage.delete(order_id)
+                self._orders_storage.delete(item_id=order_id)
 
     def get_orders(self, *, account_id: str = "") -> GetOrdersResponse:
         response = self._orders_service.get_orders(
