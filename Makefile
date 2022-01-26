@@ -39,6 +39,10 @@ check: flint test
 
 .PHONY: docs
 docs:
+	mkdir -p ./docs
+	cp README.md ./docs/
+	cp CHANGELOG.md ./docs/
+	cp CONTRIBUTING.md ./docs/
 	$(POETRY_RUN) mkdocs build -s -v
 
 .PHONY: docs-serve

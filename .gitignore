@@ -138,3 +138,7 @@ dmypy.json
 cython_debug/
 
 .env
+
+docs/README.md
+docs/CHANGELOG.md
+docs/CONTRIBUTING.md

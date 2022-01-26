@@ -9,7 +9,9 @@ copyright: 'Copyright &copy; 2021 Tinkoff'
 
 use_directory_urls: true
 nav:
-  - 'Home': 'README.md'
+  - 'Главная': 'README.md'
+  - 'Список изменений': 'CHANGELOG.md'
+  - 'Участие в проекте': 'CONTRIBUTING.md'
 
 theme:
   name: material
