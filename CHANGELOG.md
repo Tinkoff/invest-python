@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [0.2.0-beta8](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta8) - 2022-01-28
+
+<small>[Compare with 0.2.0-beta7](https://github.com/tinkoff/invest-python/compare/0.2.0-beta7...0.2.0-beta8)</small>
+
+### Added
+- Add getbrokerreport ([7914d2d](https://github.com/tinkoff/invest-python/commit/7914d2d805d40541dce6f12a4ed1849c04d7b893) by Danil Akhtarov).
+
+
 ## [0.2.0-beta7](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta7) - 2022-01-28
 
 <small>[Compare with 0.2.0-beta6](https://github.com/tinkoff/invest-python/compare/0.2.0-beta6...0.2.0-beta7)</small>
@@ -74,3 +82,5 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Fixed
 - Fix stream wrapper ([b5be10d](https://github.com/tinkoff/invest-python/commit/b5be10da2c2f6a7b220c7d745549d2404b64cd0d) by Danil Akhtarov).
+
+
