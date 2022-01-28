@@ -1,8 +1,5 @@
-from typing import NewType
-
+from tinkoff.invest.models import AccountId
 from tinkoff.invest.services import OrdersService, StopOrdersService
-
-AccountId = NewType("AccountId", str)
 
 
 class OrdersCanceler:
