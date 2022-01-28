@@ -142,3 +142,5 @@ cython_debug/
 docs/README.md
 docs/CHANGELOG.md
 docs/CONTRIBUTING.md
+
+.idea
