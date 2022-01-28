@@ -44,7 +44,7 @@ def orders_canceler(
 
 
 class TestAsyncOrdersCanceler:
-    @pytest.mark.asyncio
+    @pytest.mark.asyncio()
     @pytest.mark.parametrize(
         "orders",
         [
