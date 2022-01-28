@@ -7,7 +7,7 @@ class OrdersCanceler:
         self,
         orders_service: OrdersService,
         stop_orders_service: StopOrdersService,
-        account_id: AccountId = "",
+        account_id: AccountId,
     ):
         self._orders_service = orders_service
         self._stop_orders_service = stop_orders_service
