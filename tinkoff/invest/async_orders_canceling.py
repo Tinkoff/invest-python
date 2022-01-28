@@ -16,12 +16,15 @@ class AsyncOrdersCanceler:
         self._account_id = account_id
 
     def cancel_all(self) -> None:
-        orders_response = await self._orders_service.get_orders(account_id=self._account_id)
+        orders_response = await self._orders_service.get_orders(
+            account_id=self._account_id
+        )
         await asyncio.gather(
             [
                 self._orders_service.cancel_order(
                     account_id=self._account_id, order_id=order.order_id
-                ) for order in orders_response.orders
+                )
+                for order in orders_response.orders
             ]
         )
 
@@ -32,6 +35,7 @@ class AsyncOrdersCanceler:
             [
                 self._stop_orders_service.cancel_stop_order(
                     account_id=self._account_id, stop_order_id=stop_order.stop_order_id
-                ) for stop_order in stop_orders_response.stop_orders
+                )
+                for stop_order in stop_orders_response.stop_orders
             ]
         )
