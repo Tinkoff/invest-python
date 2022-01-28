@@ -1,6 +1,7 @@
 import logging
 
-from tinkoff.invest import INVEST_TOKEN, Client
+from tinkoff.invest import Client
+from tinkoff.invest.invest_token import INVEST_TOKEN
 from tinkoff.invest.orders_canceling import OrdersCanceler
 
 logger = logging.getLogger(__name__)
