@@ -89,16 +89,16 @@ class _SubscriptionStatusEnumTypeWrapper(google.protobuf.internal.enum_type_wrap
     """Инструмент не найден."""
 
     SUBSCRIPTION_STATUS_SUBSCRIPTION_ACTION_IS_INVALID: SubscriptionStatus.ValueType = ...  # 3
-    """Некорректный статус подписки, список возможных значений: [SubscriptionAction](/investAPI/marketdata#subscriptionaction)"""
+    """Некорректный статус подписки, список возможных значений: [SubscriptionAction](https://tinkoff.github.io/investAPI/marketdata#subscriptionaction)"""
 
     SUBSCRIPTION_STATUS_DEPTH_IS_INVALID: SubscriptionStatus.ValueType = ...  # 4
     """Некорректная глубина стакана, доступные значения: 10, 20, 30, 40, 50."""
 
     SUBSCRIPTION_STATUS_INTERVAL_IS_INVALID: SubscriptionStatus.ValueType = ...  # 5
-    """Некорректный интервал свечей, список возможных значений: [SubscriptionInterval](/investAPI/marketdata#subscriptioninterval)"""
+    """Некорректный интервал свечей, список возможных значений: [SubscriptionInterval](https://tinkoff.github.io/investAPI/marketdata#subscriptioninterval)"""
 
     SUBSCRIPTION_STATUS_LIMIT_IS_EXCEEDED: SubscriptionStatus.ValueType = ...  # 6
-    """Превышен лимит подписок в рамках стрима, подробнее: [Лимитная политика](/investAPI/limits/)"""
+    """Превышен лимит подписок в рамках стрима, подробнее: [Лимитная политика](https://tinkoff.github.io/investAPI/limits/)"""
 
     SUBSCRIPTION_STATUS_INTERNAL_ERROR: SubscriptionStatus.ValueType = ...  # 7
     """Внутренняя ошибка сервиса."""
@@ -117,16 +117,16 @@ SUBSCRIPTION_STATUS_INSTRUMENT_NOT_FOUND: SubscriptionStatus.ValueType = ...  # 
 """Инструмент не найден."""
 
 SUBSCRIPTION_STATUS_SUBSCRIPTION_ACTION_IS_INVALID: SubscriptionStatus.ValueType = ...  # 3
-"""Некорректный статус подписки, список возможных значений: [SubscriptionAction](/investAPI/marketdata#subscriptionaction)"""
+"""Некорректный статус подписки, список возможных значений: [SubscriptionAction](https://tinkoff.github.io/investAPI/marketdata#subscriptionaction)"""
 
 SUBSCRIPTION_STATUS_DEPTH_IS_INVALID: SubscriptionStatus.ValueType = ...  # 4
 """Некорректная глубина стакана, доступные значения: 10, 20, 30, 40, 50."""
 
 SUBSCRIPTION_STATUS_INTERVAL_IS_INVALID: SubscriptionStatus.ValueType = ...  # 5
-"""Некорректный интервал свечей, список возможных значений: [SubscriptionInterval](/investAPI/marketdata#subscriptioninterval)"""
+"""Некорректный интервал свечей, список возможных значений: [SubscriptionInterval](https://tinkoff.github.io/investAPI/marketdata#subscriptioninterval)"""
 
 SUBSCRIPTION_STATUS_LIMIT_IS_EXCEEDED: SubscriptionStatus.ValueType = ...  # 6
-"""Превышен лимит подписок в рамках стрима, подробнее: [Лимитная политика](/investAPI/limits/)"""
+"""Превышен лимит подписок в рамках стрима, подробнее: [Лимитная политика](https://tinkoff.github.io/investAPI/limits/)"""
 
 SUBSCRIPTION_STATUS_INTERNAL_ERROR: SubscriptionStatus.ValueType = ...  # 7
 """Внутренняя ошибка сервиса."""
@@ -357,7 +357,7 @@ class SubscribeCandlesResponse(google.protobuf.message.Message):
     TRACKING_ID_FIELD_NUMBER: builtins.int
     CANDLES_SUBSCRIPTIONS_FIELD_NUMBER: builtins.int
     tracking_id: typing.Text = ...
-    """Уникальный идентификатор запроса, подробнее: [tracking_id](/investAPI/grpc#tracking-id)"""
+    """Уникальный идентификатор запроса, подробнее: [tracking_id](https://tinkoff.github.io/investAPI/grpc#tracking-id)"""
 
     @property
     def candles_subscriptions(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___CandleSubscription]:
@@ -440,7 +440,7 @@ class SubscribeOrderBookResponse(google.protobuf.message.Message):
     TRACKING_ID_FIELD_NUMBER: builtins.int
     ORDER_BOOK_SUBSCRIPTIONS_FIELD_NUMBER: builtins.int
     tracking_id: typing.Text = ...
-    """Уникальный идентификатор запроса, подробнее: [tracking_id](/investAPI/grpc#tracking-id)"""
+    """Уникальный идентификатор запроса, подробнее: [tracking_id](https://tinkoff.github.io/investAPI/grpc#tracking-id)"""
 
     @property
     def order_book_subscriptions(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___OrderBookSubscription]:
@@ -518,7 +518,7 @@ class SubscribeTradesResponse(google.protobuf.message.Message):
     TRACKING_ID_FIELD_NUMBER: builtins.int
     TRADE_SUBSCRIPTIONS_FIELD_NUMBER: builtins.int
     tracking_id: typing.Text = ...
-    """Уникальный идентификатор запроса, подробнее: [tracking_id](/investAPI/grpc#tracking-id)"""
+    """Уникальный идентификатор запроса, подробнее: [tracking_id](https://tinkoff.github.io/investAPI/grpc#tracking-id)"""
 
     @property
     def trade_subscriptions(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___TradeSubscription]:
@@ -591,7 +591,7 @@ class SubscribeInfoResponse(google.protobuf.message.Message):
     TRACKING_ID_FIELD_NUMBER: builtins.int
     INFO_SUBSCRIPTIONS_FIELD_NUMBER: builtins.int
     tracking_id: typing.Text = ...
-    """Уникальный идентификатор запроса, подробнее: [tracking_id](/investAPI/grpc#tracking-id)"""
+    """Уникальный идентификатор запроса, подробнее: [tracking_id](https://tinkoff.github.io/investAPI/grpc#tracking-id)"""
 
     @property
     def info_subscriptions(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___InfoSubscription]:
@@ -750,7 +750,7 @@ class Trade(google.protobuf.message.Message):
     DIRECTION_FIELD_NUMBER: builtins.int
     PRICE_FIELD_NUMBER: builtins.int
     QUANTITY_FIELD_NUMBER: builtins.int
-    TIMESTAMP_FIELD_NUMBER: builtins.int
+    TIME_FIELD_NUMBER: builtins.int
     figi: typing.Text = ...
     """Figi-идентификатор инструмента."""
 
@@ -765,7 +765,7 @@ class Trade(google.protobuf.message.Message):
     """Количество лотов."""
 
     @property
-    def timestamp(self) -> google.protobuf.timestamp_pb2.Timestamp:
+    def time(self) -> google.protobuf.timestamp_pb2.Timestamp:
         """Время сделки в часовом поясе UTC по времени биржи."""
         pass
     def __init__(self,
@@ -774,10 +774,10 @@ class Trade(google.protobuf.message.Message):
         direction : global___TradeDirection.ValueType = ...,
         price : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
         quantity : builtins.int = ...,
-        timestamp : typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        time : typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
         ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["price",b"price","timestamp",b"timestamp"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["direction",b"direction","figi",b"figi","price",b"price","quantity",b"quantity","timestamp",b"timestamp"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["price",b"price","time",b"time"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["direction",b"direction","figi",b"figi","price",b"price","quantity",b"quantity","time",b"time"]) -> None: ...
 global___Trade = Trade
 
 class TradingStatus(google.protobuf.message.Message):
@@ -785,18 +785,25 @@ class TradingStatus(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     FIGI_FIELD_NUMBER: builtins.int
     TRADING_STATUS_FIELD_NUMBER: builtins.int
+    TIME_FIELD_NUMBER: builtins.int
     figi: typing.Text = ...
     """Figi-идентификатор инструмента."""
 
     trading_status: tinkoff.invest.grpc.common_pb2.SecurityTradingStatus.ValueType = ...
     """Статус торговли инструментом."""
 
+    @property
+    def time(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Время изменения торгового статуса в часовом поясе UTC."""
+        pass
     def __init__(self,
         *,
         figi : typing.Text = ...,
         trading_status : tinkoff.invest.grpc.common_pb2.SecurityTradingStatus.ValueType = ...,
+        time : typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
         ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["figi",b"figi","trading_status",b"trading_status"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["time",b"time"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["figi",b"figi","time",b"time","trading_status",b"trading_status"]) -> None: ...
 global___TradingStatus = TradingStatus
 
 class GetCandlesRequest(google.protobuf.message.Message):

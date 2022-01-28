@@ -29,7 +29,7 @@ class _InstrumentIdTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrappe
     """Ticker."""
 
 class InstrumentIdType(_InstrumentIdType, metaclass=_InstrumentIdTypeEnumTypeWrapper):
-    """Тип идентификатора инструмента. Подробнее об идентификации инструментов: [Идентификация инструментов](/investAPI/faq_identification/)"""
+    """Тип идентификатора инструмента. Подробнее об идентификации инструментов: [Идентификация инструментов](https://tinkoff.github.io/investAPI/faq_identification/)"""
     pass
 
 INSTRUMENT_ID_UNSPECIFIED: InstrumentIdType.ValueType = ...  # 0
@@ -249,7 +249,7 @@ class InstrumentRequest(google.protobuf.message.Message):
     CLASS_CODE_FIELD_NUMBER: builtins.int
     ID_FIELD_NUMBER: builtins.int
     id_type: global___InstrumentIdType.ValueType = ...
-    """Тип идентификатора инструмента. Возможные значения: figi, ticker, isin. Подробнее об идентификации инструментов: [Идентификация инструментов](/investAPI/faq_identification/)"""
+    """Тип идентификатора инструмента. Возможные значения: figi, ticker, isin. Подробнее об идентификации инструментов: [Идентификация инструментов](https://tinkoff.github.io/investAPI/faq_identification/)"""
 
     class_code: typing.Text = ...
     """Идентификатор class_code. Обязателен при id_type = ticker."""
@@ -488,7 +488,7 @@ class Bond(google.protobuf.message.Message):
     """Isin-идентификатор инструмента."""
 
     lot: builtins.int = ...
-    """Лотность инструмента. Возможно совершение операций только на количества ценной бумаги, кратные параметру *lot*. Подробнее: [лот](/investAPI/glossary#lot)"""
+    """Лотность инструмента. Возможно совершение операций только на количества ценной бумаги, кратные параметру *lot*. Подробнее: [лот](https://tinkoff.github.io/investAPI/glossary#lot)"""
 
     currency: typing.Text = ...
     """Валюта расчётов."""
@@ -677,7 +677,7 @@ class Currency(google.protobuf.message.Message):
     """Isin-идентификатор инструмента."""
 
     lot: builtins.int = ...
-    """Лотность инструмента. Возможно совершение операций только на количества ценной бумаги, кратные параметру *lot*. Подробнее: [лот](/investAPI/glossary#lot)"""
+    """Лотность инструмента. Возможно совершение операций только на количества ценной бумаги, кратные параметру *lot*. Подробнее: [лот](https://tinkoff.github.io/investAPI/glossary#lot)"""
 
     currency: typing.Text = ...
     """Валюта расчётов."""
@@ -817,7 +817,7 @@ class Etf(google.protobuf.message.Message):
     """Isin-идентификатор инструмента."""
 
     lot: builtins.int = ...
-    """Лотность инструмента. Возможно совершение операций только на количества ценной бумаги, кратные параметру *lot*. Подробнее: [лот](/investAPI/glossary#lot)"""
+    """Лотность инструмента. Возможно совершение операций только на количества ценной бумаги, кратные параметру *lot*. Подробнее: [лот](https://tinkoff.github.io/investAPI/glossary#lot)"""
 
     currency: typing.Text = ...
     """Валюта расчётов."""
@@ -971,7 +971,7 @@ class Future(google.protobuf.message.Message):
     """Класс-код (секция торгов)."""
 
     lot: builtins.int = ...
-    """Лотность инструмента. Возможно совершение операций только на количества ценной бумаги, кратные параметру *lot*. Подробнее: [лот](/investAPI/glossary#lot)"""
+    """Лотность инструмента. Возможно совершение операций только на количества ценной бумаги, кратные параметру *lot*. Подробнее: [лот](https://tinkoff.github.io/investAPI/glossary#lot)"""
 
     currency: typing.Text = ...
     """Валюта расчётов."""
@@ -1137,7 +1137,7 @@ class Share(google.protobuf.message.Message):
     """Isin-идентификатор инструмента."""
 
     lot: builtins.int = ...
-    """Лотность инструмента. Возможно совершение операций только на количества ценной бумаги, кратные параметру *lot*. Подробнее: [лот](/investAPI/glossary#lot)"""
+    """Лотность инструмента. Возможно совершение операций только на количества ценной бумаги, кратные параметру *lot*. Подробнее: [лот](https://tinkoff.github.io/investAPI/glossary#lot)"""
 
     currency: typing.Text = ...
     """Валюта расчётов."""
@@ -1208,7 +1208,7 @@ class Share(google.protobuf.message.Message):
     """Признак наличия дивидендной доходности."""
 
     share_type: global___ShareType.ValueType = ...
-    """Тип акции. Возможные значения: [ShareType](/investAPI/instruments#sharetype)"""
+    """Тип акции. Возможные значения: [ShareType](https://tinkoff.github.io/investAPI/instruments#sharetype)"""
 
     min_price_increment: builtins.float = ...
     """Шаг цены."""
@@ -1426,7 +1426,7 @@ class Instrument(google.protobuf.message.Message):
     """Isin-идентификатор инструмента."""
 
     lot: builtins.int = ...
-    """Лотность инструмента. Возможно совершение операций только на количества ценной бумаги, кратные параметру *lot*. Подробнее: [лот](/investAPI/glossary#lot)"""
+    """Лотность инструмента. Возможно совершение операций только на количества ценной бумаги, кратные параметру *lot*. Подробнее: [лот](https://tinkoff.github.io/investAPI/glossary#lot)"""
 
     currency: typing.Text = ...
     """Валюта расчётов."""

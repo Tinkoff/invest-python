@@ -28,6 +28,8 @@ from .logging import get_tracking_id_from_call, log_request
 from .schemas import (
     BondResponse,
     BondsResponse,
+    BrokerReportRequest,
+    BrokerReportResponse,
     CancelOrderRequest,
     CancelOrderResponse,
     CancelStopOrderRequest,
@@ -41,10 +43,12 @@ from .schemas import (
     EtfsResponse,
     FutureResponse,
     FuturesResponse,
+    GenerateBrokerReportRequest,
     GetAccountsRequest,
     GetAccountsResponse,
     GetAccruedInterestsRequest,
     GetAccruedInterestsResponse,
+    GetBrokerReportRequest,
     GetCandlesRequest,
     GetCandlesResponse,
     GetDividendsRequest,
@@ -590,6 +594,27 @@ class OperationsService(_grpc_helpers.Service):
         )
         log_request(get_tracking_id_from_call(call), "GetWithdrawLimits")
         return _grpc_helpers.protobuf_to_dataclass(response, WithdrawLimitsResponse)
+
+    @handle_request_error("GetBrokerReport")
+    def get_broker_report(
+        self,
+        *,
+        generate_broker_report_request: Optional[GenerateBrokerReportRequest] = None,
+        get_broker_report_request: Optional[GetBrokerReportRequest] = None,
+    ) -> BrokerReportResponse:
+        request = BrokerReportRequest()
+        if generate_broker_report_request:
+            request.generate_broker_report_request = generate_broker_report_request
+        if get_broker_report_request:
+            request.get_broker_report_request = get_broker_report_request
+        response, call = self.stub.GetBrokerReport.with_call(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, operations_pb2.BrokerReportRequest()
+            ),
+            metadata=self.metadata,
+        )
+        log_request(get_tracking_id_from_call(call), "GetBrokerReport")
+        return _grpc_helpers.protobuf_to_dataclass(response, BrokerReportResponse)
 
 
 class OrdersStreamService(_grpc_helpers.Service):

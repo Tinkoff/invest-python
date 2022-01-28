@@ -311,7 +311,7 @@ class PostOrderResponse(google.protobuf.message.Message):
         pass
     @property
     def aci_value(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
-        """Значение НКД (накопленного купонного дохода) на дату. Подробнее: [НКД при выставлении торговых поручений](/investAPI/head-orders#coupon)"""
+        """Значение НКД (накопленного купонного дохода) на дату. Подробнее: [НКД при выставлении торговых поручений](https://tinkoff.github.io/investAPI/head-orders#coupon)"""
         pass
     figi: typing.Text = ...
     """Figi-идентификатор инструмента."""

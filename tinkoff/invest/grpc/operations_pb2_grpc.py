@@ -37,6 +37,11 @@ class OperationsServiceStub(object):
                 request_serializer=tinkoff_dot_invest_dot_grpc_dot_operations__pb2.WithdrawLimitsRequest.SerializeToString,
                 response_deserializer=tinkoff_dot_invest_dot_grpc_dot_operations__pb2.WithdrawLimitsResponse.FromString,
                 )
+        self.GetBrokerReport = channel.unary_unary(
+                '/tinkoff.public.invest.api.contract.v1.OperationsService/GetBrokerReport',
+                request_serializer=tinkoff_dot_invest_dot_grpc_dot_operations__pb2.BrokerReportRequest.SerializeToString,
+                response_deserializer=tinkoff_dot_invest_dot_grpc_dot_operations__pb2.BrokerReportResponse.FromString,
+                )
 
 
 class OperationsServiceServicer(object):
@@ -73,6 +78,12 @@ class OperationsServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def GetBrokerReport(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_OperationsServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -95,6 +106,11 @@ def add_OperationsServiceServicer_to_server(servicer, server):
                     servicer.GetWithdrawLimits,
                     request_deserializer=tinkoff_dot_invest_dot_grpc_dot_operations__pb2.WithdrawLimitsRequest.FromString,
                     response_serializer=tinkoff_dot_invest_dot_grpc_dot_operations__pb2.WithdrawLimitsResponse.SerializeToString,
+            ),
+            'GetBrokerReport': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetBrokerReport,
+                    request_deserializer=tinkoff_dot_invest_dot_grpc_dot_operations__pb2.BrokerReportRequest.FromString,
+                    response_serializer=tinkoff_dot_invest_dot_grpc_dot_operations__pb2.BrokerReportResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -174,5 +190,22 @@ class OperationsService(object):
         return grpc.experimental.unary_unary(request, target, '/tinkoff.public.invest.api.contract.v1.OperationsService/GetWithdrawLimits',
             tinkoff_dot_invest_dot_grpc_dot_operations__pb2.WithdrawLimitsRequest.SerializeToString,
             tinkoff_dot_invest_dot_grpc_dot_operations__pb2.WithdrawLimitsResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetBrokerReport(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/tinkoff.public.invest.api.contract.v1.OperationsService/GetBrokerReport',
+            tinkoff_dot_invest_dot_grpc_dot_operations__pb2.BrokerReportRequest.SerializeToString,
+            tinkoff_dot_invest_dot_grpc_dot_operations__pb2.BrokerReportResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

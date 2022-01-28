@@ -736,13 +736,14 @@ class Trade(_grpc_helpers.Message):
     direction: "TradeDirection" = _grpc_helpers.enum_field(2)
     price: "Quotation" = _grpc_helpers.message_field(3)
     quantity: int = _grpc_helpers.int64_field(4)
-    timestamp: datetime = _grpc_helpers.message_field(5)
+    time: datetime = _grpc_helpers.message_field(5)
 
 
 @dataclass(eq=False, repr=True)
 class TradingStatus(_grpc_helpers.Message):
     figi: str = _grpc_helpers.string_field(1)
     trading_status: "SecurityTradingStatus" = _grpc_helpers.enum_field(2)
+    time: datetime = _grpc_helpers.enum_field(3)
 
 
 @dataclass(eq=False, repr=True)
@@ -1182,3 +1183,82 @@ class StopOrder(_grpc_helpers.Message):  # pylint:disable=too-many-instance-attr
     expiration_time: datetime = _grpc_helpers.message_field(9)
     price: "MoneyValue" = _grpc_helpers.message_field(10)
     stop_price: "MoneyValue" = _grpc_helpers.message_field(11)
+
+
+@dataclass(eq=False, repr=True)
+class BrokerReportRequest(_grpc_helpers.Message):
+    generate_broker_report_request: "GenerateBrokerReportRequest" = (
+        _grpc_helpers.message_field(1, group="payload")
+    )
+    get_broker_report_request: "GetBrokerReportRequest" = _grpc_helpers.message_field(
+        2, group="payload"
+    )
+
+
+@dataclass(eq=False, repr=True)
+class BrokerReportResponse(_grpc_helpers.Message):
+    generate_broker_report_response: "GenerateBrokerReportResponse" = (
+        _grpc_helpers.message_field(1, group="payload")
+    )
+    get_broker_report_response: "GetBrokerReportResponse" = _grpc_helpers.message_field(
+        2, group="payload"
+    )
+
+
+@dataclass(eq=False, repr=True)
+class GenerateBrokerReportRequest(_grpc_helpers.Message):
+    account_id: str = _grpc_helpers.string_field(1)
+    from_: datetime = _grpc_helpers.message_field(2)
+    to: datetime = _grpc_helpers.message_field(3)
+
+
+@dataclass(eq=False, repr=True)
+class GenerateBrokerReportResponse(_grpc_helpers.Message):
+    task_id: str = _grpc_helpers.string_field(1)
+
+
+@dataclass(eq=False, repr=True)
+class GetBrokerReportRequest(_grpc_helpers.Message):
+    task_id: str = _grpc_helpers.string_field(1)
+    page: int = _grpc_helpers.int32_field(2)
+
+
+@dataclass(eq=False, repr=True)
+class GetBrokerReportResponse(_grpc_helpers.Message):
+    broker_report: List["BrokerReport"] = _grpc_helpers.message_field(1)
+    itemsCount: int = _grpc_helpers.int32_field(2)
+    pagesCount: int = _grpc_helpers.int32_field(3)
+    page: int = _grpc_helpers.int32_field(4)
+
+
+@dataclass(eq=False, repr=True)
+class BrokerReport(  # pylint:disable=too-many-instance-attributes
+    _grpc_helpers.Message
+):
+    trade_id: str = _grpc_helpers.string_field(1)
+    order_id: str = _grpc_helpers.string_field(2)
+    figi: str = _grpc_helpers.string_field(3)
+    execute_sign: str = _grpc_helpers.string_field(4)
+    trade_datetime: datetime = _grpc_helpers.message_field(5)
+    exchange: str = _grpc_helpers.string_field(6)
+    class_code: str = _grpc_helpers.string_field(7)
+    direction: str = _grpc_helpers.string_field(8)
+    name: str = _grpc_helpers.string_field(9)
+    ticker: str = _grpc_helpers.string_field(10)
+    price: "MoneyValue" = _grpc_helpers.message_field(11)
+    quantity: int = _grpc_helpers.int64_field(12)
+    order_amount: "MoneyValue" = _grpc_helpers.message_field(13)
+    aci_value: float = _grpc_helpers.double_field(14)
+    total_order_amount: "MoneyValue" = _grpc_helpers.message_field(15)
+    broker_commission: "MoneyValue" = _grpc_helpers.message_field(16)
+    exchange_commission: "MoneyValue" = _grpc_helpers.message_field(17)
+    exchange_clearing_commission: "MoneyValue" = _grpc_helpers.message_field(18)
+    repo_rate: float = _grpc_helpers.double_field(19)
+    party: str = _grpc_helpers.string_field(20)
+    clear_value_date: datetime = _grpc_helpers.message_field(21)
+    sec_value_date: datetime = _grpc_helpers.message_field(22)
+    broker_status: str = _grpc_helpers.string_field(23)
+    separate_agreement_type: str = _grpc_helpers.string_field(24)
+    separate_agreement_number: str = _grpc_helpers.string_field(25)
+    separate_agreement_date: str = _grpc_helpers.string_field(26)
+    delivery_type: str = _grpc_helpers.string_field(27)

@@ -74,5 +74,3 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Fixed
 - Fix stream wrapper ([b5be10d](https://github.com/tinkoff/invest-python/commit/b5be10da2c2f6a7b220c7d745549d2404b64cd0d) by Danil Akhtarov).
-
-
