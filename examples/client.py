@@ -12,6 +12,7 @@ def main() -> int:
         return 1
     with Client(token) as client:
         print(client.users.get_accounts())  # noqa:T001
+        print(client.instruments.bonds(instrument_status=1))  # noqa:T001
 
     return 0
 

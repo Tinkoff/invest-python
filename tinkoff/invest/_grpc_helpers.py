@@ -312,6 +312,8 @@ def dataclass_to_protobuff(dataclass_obj: Any, protobuff_obj: T) -> T:  # noqa:C
                 pb_value = getattr(protobuff_obj, field_name)
                 dataclass_to_protobuff(field_value, pb_value)
             elif issubclass(field_type, Enum):
+                if isinstance(field_value, int):
+                    field_value = field_type(field_value)
                 setattr(protobuff_obj, field_name, field_value.value)
             else:
                 raise UnknownType(f"type {field_type} unknown")
