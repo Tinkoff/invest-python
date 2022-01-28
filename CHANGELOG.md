@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [0.2.0-beta7](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta7) - 2022-01-28
+
+<small>[Compare with 0.2.0-beta6](https://github.com/tinkoff/invest-python/compare/0.2.0-beta6...0.2.0-beta7)</small>
+
+### Added
+- Add use int as enum ([52623e3](https://github.com/tinkoff/invest-python/commit/52623e38401ec5c718f57ad05badde3beaedb887) by Danil Akhtarov).
+- Add generate docs ([a43f18a](https://github.com/tinkoff/invest-python/commit/a43f18a00e3640897ea28c8719587971a8235c2a) by Danil Akhtarov).
+- Add changelog ([2a1eb7a](https://github.com/tinkoff/invest-python/commit/2a1eb7a239c284134ce24882cc7c190172fd783c) by Danil Akhtarov).
+
+
 ## [0.2.0-beta6](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta6) - 2022-01-25
 
 <small>[Compare with 0.2.0-beta5](https://github.com/tinkoff/invest-python/compare/0.2.0-beta5...0.2.0-beta6)</small>
