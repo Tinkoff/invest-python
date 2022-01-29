@@ -10,8 +10,12 @@ from tinkoff.invest import (
     OrderState,
     StopOrder,
 )
-from tinkoff.invest.async_orders_canceling import AsyncOrdersCanceler
-from tinkoff.invest.async_services import OrdersService, StopOrdersService
+from tinkoff.invest.async_orders_canceling import cancel_all_orders
+from tinkoff.invest.async_services import (
+    AsyncServices,
+    OrdersService,
+    StopOrdersService,
+)
 from tinkoff.invest.models import AccountId
 
 
@@ -26,24 +30,21 @@ def stop_orders_service(mocker) -> StopOrdersService:
 
 
 @pytest.fixture()
+def async_services(
+    mocker, orders_service: OrdersService, stop_orders_service: StopOrdersService
+) -> AsyncServices:
+    async_services = mocker.create_autospec(AsyncServices)
+    async_services.orders = orders_service
+    async_services.stop_orders = stop_orders_service
+    return async_services
+
+
+@pytest.fixture()
 def account_id() -> AccountId:
     return AccountId(uuid.uuid4().hex)
 
 
-@pytest.fixture()
-def orders_canceler(
-    orders_service: OrdersService,
-    stop_orders_service: StopOrdersService,
-    account_id: AccountId,
-) -> AsyncOrdersCanceler:
-    return AsyncOrdersCanceler(
-        orders_service=orders_service,
-        stop_orders_service=stop_orders_service,
-        account_id=account_id,
-    )
-
-
-class TestAsyncOrdersCanceler:
+class TestAsyncOrdersCanceling:
     @pytest.mark.parametrize(
         "orders",
         [
@@ -72,7 +73,7 @@ class TestAsyncOrdersCanceler:
     )
     async def test_cancels_all_orders(
         self,
-        orders_canceler: AsyncOrdersCanceler,
+        async_services: AsyncServices,
         orders_service: OrdersService,
         stop_orders_service: StopOrdersService,
         account_id: AccountId,
@@ -84,7 +85,7 @@ class TestAsyncOrdersCanceler:
             stop_orders=stop_orders
         )
 
-        await orders_canceler.cancel_all()
+        await cancel_all_orders(async_services=async_services, account_id=account_id)
 
         orders_service.get_orders.assert_called_once()
         orders_service.cancel_order.assert_has_calls(

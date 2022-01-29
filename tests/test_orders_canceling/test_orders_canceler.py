@@ -11,8 +11,8 @@ from tinkoff.invest import (
     StopOrder,
 )
 from tinkoff.invest.models import AccountId
-from tinkoff.invest.orders_canceling import OrdersCanceler
-from tinkoff.invest.services import OrdersService, StopOrdersService
+from tinkoff.invest.orders_canceling import cancel_all_orders
+from tinkoff.invest.services import OrdersService, Services, StopOrdersService
 
 
 @pytest.fixture()
@@ -26,21 +26,18 @@ def stop_orders_service(mocker) -> StopOrdersService:
 
 
 @pytest.fixture()
-def account_id() -> AccountId:
-    return AccountId(uuid.uuid4().hex)
+def services(
+    mocker, orders_service: OrdersService, stop_orders_service: StopOrdersService
+) -> Services:
+    services = mocker.create_autospec(Services)
+    services.orders = orders_service
+    services.stop_orders = stop_orders_service
+    return services
 
 
 @pytest.fixture()
-def orders_canceler(
-    orders_service: OrdersService,
-    stop_orders_service: StopOrdersService,
-    account_id: AccountId,
-) -> OrdersCanceler:
-    return OrdersCanceler(
-        orders_service=orders_service,
-        stop_orders_service=stop_orders_service,
-        account_id=account_id,
-    )
+def account_id() -> AccountId:
+    return AccountId(uuid.uuid4().hex)
 
 
 class TestOrdersCanceler:
@@ -72,7 +69,7 @@ class TestOrdersCanceler:
     )
     def test_cancels_all_orders(
         self,
-        orders_canceler: OrdersCanceler,
+        services: Services,
         orders_service: OrdersService,
         stop_orders_service: StopOrdersService,
         account_id: AccountId,
@@ -84,7 +81,7 @@ class TestOrdersCanceler:
             stop_orders=stop_orders
         )
 
-        orders_canceler.cancel_all()
+        cancel_all_orders(services=services, account_id=account_id)
 
         orders_service.get_orders.assert_called_once()
         orders_service.cancel_order.assert_has_calls(
