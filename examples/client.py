@@ -6,7 +6,7 @@ from tinkoff.invest.token import TOKEN
 
 def main() -> int:
     with Client(TOKEN) as client:
-        print(client.users.get_accounts())  # noqa:T001
+        print(client.users.get_accounts())
 
     return 0
 

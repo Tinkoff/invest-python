@@ -7,7 +7,7 @@ from tinkoff.invest.token import TOKEN
 
 async def main() -> int:
     async with AsyncClient(TOKEN) as client:
-        print(await client.users.get_accounts())  # noqa:T001
+        print(await client.users.get_accounts())
 
     return 0
 

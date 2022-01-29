@@ -13,7 +13,7 @@ def main() -> int:
             from_=datetime.utcnow() - timedelta(days=365),
             interval=CandleInterval.CANDLE_INTERVAL_HOUR,
         ):
-            print(candle)  # noqa:T001
+            print(candle)
 
     return 0
 

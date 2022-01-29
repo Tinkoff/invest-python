@@ -32,7 +32,7 @@ def main() -> int:
         for marketdata in client.market_data_stream.market_data_stream(
             request_iterator()
         ):
-            print(marketdata)  # noqa:T001
+            print(marketdata)
 
     return 0
 
