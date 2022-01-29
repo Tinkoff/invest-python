@@ -1,5 +1,5 @@
-from tinkoff.invest.models import AccountId
 from tinkoff.invest.services import OrdersService, Services, StopOrdersService
+from tinkoff.invest.typedefs import AccountId
 
 
 def cancel_all_orders(services: Services, account_id: AccountId) -> None:

@@ -16,7 +16,7 @@ from tinkoff.invest.async_services import (
     OrdersService,
     StopOrdersService,
 )
-from tinkoff.invest.models import AccountId
+from tinkoff.invest.typedefs import AccountId
 
 
 @pytest.fixture()

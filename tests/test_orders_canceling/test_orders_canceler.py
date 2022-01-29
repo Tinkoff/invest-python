@@ -10,9 +10,9 @@ from tinkoff.invest import (
     OrderState,
     StopOrder,
 )
-from tinkoff.invest.models import AccountId
 from tinkoff.invest.orders_canceling import cancel_all_orders
 from tinkoff.invest.services import OrdersService, Services, StopOrdersService
+from tinkoff.invest.typedefs import AccountId
 
 
 @pytest.fixture()
