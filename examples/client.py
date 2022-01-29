@@ -1,16 +1,11 @@
-import os
 import sys
 
 from tinkoff.invest import Client
+from tinkoff.invest.token import TOKEN
 
 
 def main() -> int:
-    try:
-        token = os.environ["INVEST_TOKEN"]
-    except KeyError:
-        print("env INVEST_TOKEN not found")  # noqa:T001
-        return 1
-    with Client(token) as client:
+    with Client(TOKEN) as client:
         print(client.users.get_accounts())  # noqa:T001
 
     return 0

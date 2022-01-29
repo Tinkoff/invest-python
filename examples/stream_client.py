@@ -1,4 +1,3 @@
-import os
 import sys
 import time
 
@@ -10,15 +9,10 @@ from tinkoff.invest import (
     SubscriptionAction,
     SubscriptionInterval,
 )
+from tinkoff.invest.token import TOKEN
 
 
 def main() -> int:
-    try:
-        token = os.environ["INVEST_TOKEN"]
-    except KeyError:
-        print("env INVEST_TOKEN not found")  # noqa:T001
-        return 1
-
     def request_iterator():
         yield MarketDataRequest(
             subscribe_candles_request=SubscribeCandlesRequest(
@@ -34,7 +28,7 @@ def main() -> int:
         while True:
             time.sleep(1)
 
-    with Client(token) as client:
+    with Client(TOKEN) as client:
         for marketdata in client.market_data_stream.market_data_stream(
             request_iterator()
         ):
