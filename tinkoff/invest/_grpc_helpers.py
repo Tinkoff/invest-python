@@ -1,7 +1,7 @@
 import dataclasses
 import enum
 from abc import ABC
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from decimal import Decimal
 from typing import (
     Any,
@@ -24,7 +24,7 @@ T = TypeVar("T")
 
 def ts_to_datetime(value: Timestamp) -> datetime:
     ts = value.seconds + (value.nanos / 1e9)
-    return datetime.fromtimestamp(ts, tz=timezone.utc)
+    return datetime(1970, 1, 1, tzinfo=timezone.utc) + timedelta(seconds=ts)
 
 
 def datetime_to_ts(value: datetime) -> Tuple[int, int]:
