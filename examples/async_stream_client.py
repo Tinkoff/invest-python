@@ -1,5 +1,4 @@
 import asyncio
-import os
 import sys
 
 from tinkoff.invest import (
@@ -10,15 +9,10 @@ from tinkoff.invest import (
     SubscriptionAction,
     SubscriptionInterval,
 )
+from tinkoff.invest.token import TOKEN
 
 
 async def main() -> int:
-    try:
-        token = os.environ["INVEST_TOKEN"]
-    except KeyError:
-        print("env INVEST_TOKEN not found")  # noqa:T001
-        return 1
-
     async def request_iterator():
         yield MarketDataRequest(
             subscribe_candles_request=SubscribeCandlesRequest(
@@ -34,11 +28,11 @@ async def main() -> int:
         while True:
             await asyncio.sleep(1)
 
-    async with AsyncClient(token) as client:
+    async with AsyncClient(TOKEN) as client:
         async for marketdata in client.market_data_stream.market_data_stream(
             request_iterator()
         ):
-            print(marketdata)  # noqa:T001
+            print(marketdata)
 
     return 0
 
