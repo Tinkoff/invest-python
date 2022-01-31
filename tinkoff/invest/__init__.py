@@ -2,6 +2,7 @@ from .clients import AsyncClient, Client
 from .data_loaders import get_all_candles
 from .exceptions import AioRequestError, InvestError, RequestError
 from .logging import get_current_tracking_id
+from .orders_canceling import cancel_all_orders
 from .schemas import (
     Account,
     AccountStatus,
@@ -287,4 +288,5 @@ __all__ = (
     "GetBrokerReportRequest",
     "get_current_tracking_id",
     "get_all_candles",
+    "cancel_all_orders",
 )
