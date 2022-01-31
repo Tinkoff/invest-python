@@ -53,7 +53,7 @@ class _InstrumentStatusEnumTypeWrapper(google.protobuf.internal.enum_type_wrappe
     """Значение не определено."""
 
     INSTRUMENT_STATUS_BASE: InstrumentStatus.ValueType = ...  # 1
-    """Базовый список инструментов (по умолчанию)."""
+    """Базовый список инструментов (по умолчанию). Инструменты доступные для торговли через TINKOFF INVEST API."""
 
     INSTRUMENT_STATUS_ALL: InstrumentStatus.ValueType = ...  # 2
     """Список всех инструментов."""
@@ -66,7 +66,7 @@ INSTRUMENT_STATUS_UNSPECIFIED: InstrumentStatus.ValueType = ...  # 0
 """Значение не определено."""
 
 INSTRUMENT_STATUS_BASE: InstrumentStatus.ValueType = ...  # 1
-"""Базовый список инструментов (по умолчанию)."""
+"""Базовый список инструментов (по умолчанию). Инструменты доступные для торговли через TINKOFF INVEST API."""
 
 INSTRUMENT_STATUS_ALL: InstrumentStatus.ValueType = ...  # 2
 """Список всех инструментов."""
@@ -493,24 +493,30 @@ class Bond(google.protobuf.message.Message):
     currency: typing.Text = ...
     """Валюта расчётов."""
 
-    klong: builtins.float = ...
-    """Коэффициент ставки риска длинной позиции по инструменту."""
-
-    kshort: builtins.float = ...
-    """Коэффициент ставки риска короткой позиции по инструменту."""
-
-    dlong: builtins.float = ...
-    """Ставка риска минимальной маржи в лонг. Подробнее: [ставка риска в лонг](https://help.tinkoff.ru/margin-trade/long/risk-rate/)"""
-
-    dshort: builtins.float = ...
-    """Ставка риска минимальной маржи в шорт. Подробнее: [ставка риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)"""
-
-    dlong_min: builtins.float = ...
-    """Ставка риска начальной маржи в лонг. Подробнее: [ставка риска в лонг](https://help.tinkoff.ru/margin-trade/long/risk-rate/)"""
-
-    dshort_min: builtins.float = ...
-    """Ставка риска начальной маржи в шорт. Подробнее: [ставка риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)"""
-
+    @property
+    def klong(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Коэффициент ставки риска длинной позиции по инструменту."""
+        pass
+    @property
+    def kshort(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Коэффициент ставки риска короткой позиции по инструменту."""
+        pass
+    @property
+    def dlong(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Ставка риска минимальной маржи в лонг. Подробнее: [ставка риска в лонг](https://help.tinkoff.ru/margin-trade/long/risk-rate/)"""
+        pass
+    @property
+    def dshort(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Ставка риска минимальной маржи в шорт. Подробнее: [ставка риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)"""
+        pass
+    @property
+    def dlong_min(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Ставка риска начальной маржи в лонг. Подробнее: [ставка риска в лонг](https://help.tinkoff.ru/margin-trade/long/risk-rate/)"""
+        pass
+    @property
+    def dshort_min(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Ставка риска начальной маржи в шорт. Подробнее: [ставка риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)"""
+        pass
     short_enabled_flag: builtins.bool = ...
     """Признак доступности для операций в шорт."""
 
@@ -586,9 +592,10 @@ class Bond(google.protobuf.message.Message):
     amortization_flag: builtins.bool = ...
     """Признак облигации с амортизацией долга."""
 
-    min_price_increment: builtins.float = ...
-    """Шаг цены."""
-
+    @property
+    def min_price_increment(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Шаг цены."""
+        pass
     api_trade_available_flag: builtins.bool = ...
     """Признак доступности торгов через API."""
 
@@ -600,12 +607,12 @@ class Bond(google.protobuf.message.Message):
         isin : typing.Text = ...,
         lot : builtins.int = ...,
         currency : typing.Text = ...,
-        klong : builtins.float = ...,
-        kshort : builtins.float = ...,
-        dlong : builtins.float = ...,
-        dshort : builtins.float = ...,
-        dlong_min : builtins.float = ...,
-        dshort_min : builtins.float = ...,
+        klong : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        kshort : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        dlong : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        dshort : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        dlong_min : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        dshort_min : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
         short_enabled_flag : builtins.bool = ...,
         name : typing.Text = ...,
         exchange : typing.Text = ...,
@@ -629,10 +636,10 @@ class Bond(google.protobuf.message.Message):
         floating_coupon_flag : builtins.bool = ...,
         perpetual_flag : builtins.bool = ...,
         amortization_flag : builtins.bool = ...,
-        min_price_increment : builtins.float = ...,
+        min_price_increment : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
         api_trade_available_flag : builtins.bool = ...,
         ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["aci_value",b"aci_value","maturity_date",b"maturity_date","nominal",b"nominal","placement_date",b"placement_date","placement_price",b"placement_price","state_reg_date",b"state_reg_date"]) -> builtins.bool: ...
+    def HasField(self, field_name: typing_extensions.Literal["aci_value",b"aci_value","dlong",b"dlong","dlong_min",b"dlong_min","dshort",b"dshort","dshort_min",b"dshort_min","klong",b"klong","kshort",b"kshort","maturity_date",b"maturity_date","min_price_increment",b"min_price_increment","nominal",b"nominal","placement_date",b"placement_date","placement_price",b"placement_price","state_reg_date",b"state_reg_date"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions.Literal["aci_value",b"aci_value","amortization_flag",b"amortization_flag","api_trade_available_flag",b"api_trade_available_flag","buy_available_flag",b"buy_available_flag","class_code",b"class_code","country_of_risk",b"country_of_risk","country_of_risk_name",b"country_of_risk_name","coupon_quantity_per_year",b"coupon_quantity_per_year","currency",b"currency","dlong",b"dlong","dlong_min",b"dlong_min","dshort",b"dshort","dshort_min",b"dshort_min","exchange",b"exchange","figi",b"figi","floating_coupon_flag",b"floating_coupon_flag","isin",b"isin","issue_kind",b"issue_kind","issue_size",b"issue_size","issue_size_plan",b"issue_size_plan","klong",b"klong","kshort",b"kshort","lot",b"lot","maturity_date",b"maturity_date","min_price_increment",b"min_price_increment","name",b"name","nominal",b"nominal","otc_flag",b"otc_flag","perpetual_flag",b"perpetual_flag","placement_date",b"placement_date","placement_price",b"placement_price","sector",b"sector","sell_available_flag",b"sell_available_flag","short_enabled_flag",b"short_enabled_flag","state_reg_date",b"state_reg_date","ticker",b"ticker","trading_status",b"trading_status"]) -> None: ...
 global___Bond = Bond
 
@@ -682,24 +689,30 @@ class Currency(google.protobuf.message.Message):
     currency: typing.Text = ...
     """Валюта расчётов."""
 
-    klong: builtins.float = ...
-    """Коэффициент ставки риска длинной позиции по инструменту."""
-
-    kshort: builtins.float = ...
-    """Коэффициент ставки риска короткой позиции по инструменту."""
-
-    dlong: builtins.float = ...
-    """Ставка риска минимальной маржи в лонг. Подробнее: [ставка риска в лонг](https://help.tinkoff.ru/margin-trade/long/risk-rate/)"""
-
-    dshort: builtins.float = ...
-    """Ставка риска минимальной маржи в шорт. Подробнее: [ставка риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)"""
-
-    dlong_min: builtins.float = ...
-    """Ставка риска начальной маржи в лонг. Подробнее: [ставка риска в лонг](https://help.tinkoff.ru/margin-trade/long/risk-rate/)"""
-
-    dshort_min: builtins.float = ...
-    """Ставка риска начальной маржи в шорт. Подробнее: [ставка риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)"""
-
+    @property
+    def klong(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Коэффициент ставки риска длинной позиции по инструменту."""
+        pass
+    @property
+    def kshort(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Коэффициент ставки риска короткой позиции по инструменту."""
+        pass
+    @property
+    def dlong(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Ставка риска минимальной маржи в лонг. Подробнее: [ставка риска в лонг](https://help.tinkoff.ru/margin-trade/long/risk-rate/)"""
+        pass
+    @property
+    def dshort(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Ставка риска минимальной маржи в шорт. Подробнее: [ставка риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)"""
+        pass
+    @property
+    def dlong_min(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Ставка риска начальной маржи в лонг. Подробнее: [ставка риска в лонг](https://help.tinkoff.ru/margin-trade/long/risk-rate/)"""
+        pass
+    @property
+    def dshort_min(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Ставка риска начальной маржи в шорт. Подробнее: [ставка риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)"""
+        pass
     short_enabled_flag: builtins.bool = ...
     """Признак доступности для операций в шорт."""
 
@@ -734,9 +747,10 @@ class Currency(google.protobuf.message.Message):
     iso_currency_name: typing.Text = ...
     """Строковый ISO-код валюты."""
 
-    min_price_increment: builtins.float = ...
-    """Шаг цены."""
-
+    @property
+    def min_price_increment(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Шаг цены."""
+        pass
     api_trade_available_flag: builtins.bool = ...
     """Признак доступности торгов через API."""
 
@@ -748,12 +762,12 @@ class Currency(google.protobuf.message.Message):
         isin : typing.Text = ...,
         lot : builtins.int = ...,
         currency : typing.Text = ...,
-        klong : builtins.float = ...,
-        kshort : builtins.float = ...,
-        dlong : builtins.float = ...,
-        dshort : builtins.float = ...,
-        dlong_min : builtins.float = ...,
-        dshort_min : builtins.float = ...,
+        klong : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        kshort : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        dlong : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        dshort : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        dlong_min : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        dshort_min : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
         short_enabled_flag : builtins.bool = ...,
         name : typing.Text = ...,
         exchange : typing.Text = ...,
@@ -765,10 +779,10 @@ class Currency(google.protobuf.message.Message):
         buy_available_flag : builtins.bool = ...,
         sell_available_flag : builtins.bool = ...,
         iso_currency_name : typing.Text = ...,
-        min_price_increment : builtins.float = ...,
+        min_price_increment : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
         api_trade_available_flag : builtins.bool = ...,
         ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["nominal",b"nominal"]) -> builtins.bool: ...
+    def HasField(self, field_name: typing_extensions.Literal["dlong",b"dlong","dlong_min",b"dlong_min","dshort",b"dshort","dshort_min",b"dshort_min","klong",b"klong","kshort",b"kshort","min_price_increment",b"min_price_increment","nominal",b"nominal"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions.Literal["api_trade_available_flag",b"api_trade_available_flag","buy_available_flag",b"buy_available_flag","class_code",b"class_code","country_of_risk",b"country_of_risk","country_of_risk_name",b"country_of_risk_name","currency",b"currency","dlong",b"dlong","dlong_min",b"dlong_min","dshort",b"dshort","dshort_min",b"dshort_min","exchange",b"exchange","figi",b"figi","isin",b"isin","iso_currency_name",b"iso_currency_name","klong",b"klong","kshort",b"kshort","lot",b"lot","min_price_increment",b"min_price_increment","name",b"name","nominal",b"nominal","otc_flag",b"otc_flag","sell_available_flag",b"sell_available_flag","short_enabled_flag",b"short_enabled_flag","ticker",b"ticker","trading_status",b"trading_status"]) -> None: ...
 global___Currency = Currency
 
@@ -822,24 +836,30 @@ class Etf(google.protobuf.message.Message):
     currency: typing.Text = ...
     """Валюта расчётов."""
 
-    klong: builtins.float = ...
-    """Коэффициент ставки риска длинной позиции по инструменту."""
-
-    kshort: builtins.float = ...
-    """Коэффициент ставки риска короткой позиции по инструменту."""
-
-    dlong: builtins.float = ...
-    """Ставка риска минимальной маржи в лонг. Подробнее: [ставка риска в лонг](https://help.tinkoff.ru/margin-trade/long/risk-rate/)"""
-
-    dshort: builtins.float = ...
-    """Ставка риска минимальной маржи в шорт. Подробнее: [ставка риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)"""
-
-    dlong_min: builtins.float = ...
-    """Ставка риска начальной маржи в лонг. Подробнее: [ставка риска в лонг](https://help.tinkoff.ru/margin-trade/long/risk-rate/)"""
-
-    dshort_min: builtins.float = ...
-    """Ставка риска начальной маржи в шорт. Подробнее: [ставка риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)"""
-
+    @property
+    def klong(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Коэффициент ставки риска длинной позиции по инструменту."""
+        pass
+    @property
+    def kshort(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Коэффициент ставки риска короткой позиции по инструменту."""
+        pass
+    @property
+    def dlong(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Ставка риска минимальной маржи в лонг. Подробнее: [ставка риска в лонг](https://help.tinkoff.ru/margin-trade/long/risk-rate/)"""
+        pass
+    @property
+    def dshort(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Ставка риска минимальной маржи в шорт. Подробнее: [ставка риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)"""
+        pass
+    @property
+    def dlong_min(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Ставка риска начальной маржи в лонг. Подробнее: [ставка риска в лонг](https://help.tinkoff.ru/margin-trade/long/risk-rate/)"""
+        pass
+    @property
+    def dshort_min(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Ставка риска начальной маржи в шорт. Подробнее: [ставка риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)"""
+        pass
     short_enabled_flag: builtins.bool = ...
     """Признак доступности для операций в шорт."""
 
@@ -849,9 +869,10 @@ class Etf(google.protobuf.message.Message):
     exchange: typing.Text = ...
     """Торговая площадка."""
 
-    fixed_commission: builtins.float = ...
-    """Размер фиксированной комиссии фонда."""
-
+    @property
+    def fixed_commission(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Размер фиксированной комиссии фонда."""
+        pass
     focus_type: typing.Text = ...
     """Возможные значения: </br>**equity** — акции;</br>**fixed_income** — облигации;</br>**mixed_allocation** — смешанный;</br>**money_market** — денежный рынок;</br>**real_estate** — недвижимость;</br>**commodity** — товары;</br>**specialty** — специальный;</br>**private_equity** — private equity;</br>**alternative_investment** — альтернативные инвестиции."""
 
@@ -859,9 +880,10 @@ class Etf(google.protobuf.message.Message):
     def released_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
         """Дата выпуска в часовом поясе UTC."""
         pass
-    num_shares: builtins.float = ...
-    """Количество акций фонда в обращении."""
-
+    @property
+    def num_shares(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Количество акций фонда в обращении."""
+        pass
     country_of_risk: typing.Text = ...
     """Код страны эмитента."""
 
@@ -886,9 +908,10 @@ class Etf(google.protobuf.message.Message):
     sell_available_flag: builtins.bool = ...
     """Признак доступности для продажи."""
 
-    min_price_increment: builtins.float = ...
-    """Шаг цены."""
-
+    @property
+    def min_price_increment(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Шаг цены."""
+        pass
     api_trade_available_flag: builtins.bool = ...
     """Признак доступности торгов через API."""
 
@@ -900,19 +923,19 @@ class Etf(google.protobuf.message.Message):
         isin : typing.Text = ...,
         lot : builtins.int = ...,
         currency : typing.Text = ...,
-        klong : builtins.float = ...,
-        kshort : builtins.float = ...,
-        dlong : builtins.float = ...,
-        dshort : builtins.float = ...,
-        dlong_min : builtins.float = ...,
-        dshort_min : builtins.float = ...,
+        klong : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        kshort : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        dlong : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        dshort : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        dlong_min : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        dshort_min : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
         short_enabled_flag : builtins.bool = ...,
         name : typing.Text = ...,
         exchange : typing.Text = ...,
-        fixed_commission : builtins.float = ...,
+        fixed_commission : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
         focus_type : typing.Text = ...,
         released_date : typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
-        num_shares : builtins.float = ...,
+        num_shares : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
         country_of_risk : typing.Text = ...,
         country_of_risk_name : typing.Text = ...,
         sector : typing.Text = ...,
@@ -921,10 +944,10 @@ class Etf(google.protobuf.message.Message):
         otc_flag : builtins.bool = ...,
         buy_available_flag : builtins.bool = ...,
         sell_available_flag : builtins.bool = ...,
-        min_price_increment : builtins.float = ...,
+        min_price_increment : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
         api_trade_available_flag : builtins.bool = ...,
         ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["released_date",b"released_date"]) -> builtins.bool: ...
+    def HasField(self, field_name: typing_extensions.Literal["dlong",b"dlong","dlong_min",b"dlong_min","dshort",b"dshort","dshort_min",b"dshort_min","fixed_commission",b"fixed_commission","klong",b"klong","kshort",b"kshort","min_price_increment",b"min_price_increment","num_shares",b"num_shares","released_date",b"released_date"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions.Literal["api_trade_available_flag",b"api_trade_available_flag","buy_available_flag",b"buy_available_flag","class_code",b"class_code","country_of_risk",b"country_of_risk","country_of_risk_name",b"country_of_risk_name","currency",b"currency","dlong",b"dlong","dlong_min",b"dlong_min","dshort",b"dshort","dshort_min",b"dshort_min","exchange",b"exchange","figi",b"figi","fixed_commission",b"fixed_commission","focus_type",b"focus_type","isin",b"isin","klong",b"klong","kshort",b"kshort","lot",b"lot","min_price_increment",b"min_price_increment","name",b"name","num_shares",b"num_shares","otc_flag",b"otc_flag","rebalancing_freq",b"rebalancing_freq","released_date",b"released_date","sector",b"sector","sell_available_flag",b"sell_available_flag","short_enabled_flag",b"short_enabled_flag","ticker",b"ticker","trading_status",b"trading_status"]) -> None: ...
 global___Etf = Etf
 
@@ -976,24 +999,30 @@ class Future(google.protobuf.message.Message):
     currency: typing.Text = ...
     """Валюта расчётов."""
 
-    klong: builtins.float = ...
-    """Коэффициент ставки риска длинной позиции по клиенту."""
-
-    kshort: builtins.float = ...
-    """Коэффициент ставки риска короткой позиции по клиенту."""
-
-    dlong: builtins.float = ...
-    """Ставка риска минимальной маржи в лонг. Подробнее: [ставка риска в лонг](https://help.tinkoff.ru/margin-trade/long/risk-rate/)"""
-
-    dshort: builtins.float = ...
-    """Ставка риска минимальной маржи в шорт. Подробнее: [ставка риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)"""
-
-    dlong_min: builtins.float = ...
-    """Ставка риска начальной маржи в лонг. Подробнее: [ставка риска в лонг](https://help.tinkoff.ru/margin-trade/long/risk-rate/)"""
-
-    dshort_min: builtins.float = ...
-    """Ставка риска начальной маржи в шорт. Подробнее: [ставка риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)"""
-
+    @property
+    def klong(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Коэффициент ставки риска длинной позиции по клиенту."""
+        pass
+    @property
+    def kshort(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Коэффициент ставки риска короткой позиции по клиенту."""
+        pass
+    @property
+    def dlong(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Ставка риска минимальной маржи в лонг. Подробнее: [ставка риска в лонг](https://help.tinkoff.ru/margin-trade/long/risk-rate/)"""
+        pass
+    @property
+    def dshort(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Ставка риска минимальной маржи в шорт. Подробнее: [ставка риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)"""
+        pass
+    @property
+    def dlong_min(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Ставка риска начальной маржи в лонг. Подробнее: [ставка риска в лонг](https://help.tinkoff.ru/margin-trade/long/risk-rate/)"""
+        pass
+    @property
+    def dshort_min(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Ставка риска начальной маржи в шорт. Подробнее: [ставка риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)"""
+        pass
     short_enabled_flag: builtins.bool = ...
     """Признак доступности для операций шорт."""
 
@@ -1020,9 +1049,10 @@ class Future(google.protobuf.message.Message):
     basic_asset: typing.Text = ...
     """Основной актив."""
 
-    basic_asset_size: builtins.float = ...
-    """Размер основного актива."""
-
+    @property
+    def basic_asset_size(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Размер основного актива."""
+        pass
     country_of_risk: typing.Text = ...
     """Код страны эмитента."""
 
@@ -1048,9 +1078,10 @@ class Future(google.protobuf.message.Message):
     sell_available_flag: builtins.bool = ...
     """Признак доступности для продажи."""
 
-    min_price_increment: builtins.float = ...
-    """Шаг цены."""
-
+    @property
+    def min_price_increment(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Шаг цены."""
+        pass
     api_trade_available_flag: builtins.bool = ...
     """Признак доступности торгов через API."""
 
@@ -1061,12 +1092,12 @@ class Future(google.protobuf.message.Message):
         class_code : typing.Text = ...,
         lot : builtins.int = ...,
         currency : typing.Text = ...,
-        klong : builtins.float = ...,
-        kshort : builtins.float = ...,
-        dlong : builtins.float = ...,
-        dshort : builtins.float = ...,
-        dlong_min : builtins.float = ...,
-        dshort_min : builtins.float = ...,
+        klong : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        kshort : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        dlong : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        dshort : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        dlong_min : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        dshort_min : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
         short_enabled_flag : builtins.bool = ...,
         name : typing.Text = ...,
         exchange : typing.Text = ...,
@@ -1075,7 +1106,7 @@ class Future(google.protobuf.message.Message):
         futures_type : typing.Text = ...,
         asset_type : typing.Text = ...,
         basic_asset : typing.Text = ...,
-        basic_asset_size : builtins.float = ...,
+        basic_asset_size : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
         country_of_risk : typing.Text = ...,
         country_of_risk_name : typing.Text = ...,
         sector : typing.Text = ...,
@@ -1084,10 +1115,10 @@ class Future(google.protobuf.message.Message):
         otc_flag : builtins.bool = ...,
         buy_available_flag : builtins.bool = ...,
         sell_available_flag : builtins.bool = ...,
-        min_price_increment : builtins.float = ...,
+        min_price_increment : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
         api_trade_available_flag : builtins.bool = ...,
         ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["expiration_date",b"expiration_date","first_trade_date",b"first_trade_date","last_trade_date",b"last_trade_date"]) -> builtins.bool: ...
+    def HasField(self, field_name: typing_extensions.Literal["basic_asset_size",b"basic_asset_size","dlong",b"dlong","dlong_min",b"dlong_min","dshort",b"dshort","dshort_min",b"dshort_min","expiration_date",b"expiration_date","first_trade_date",b"first_trade_date","klong",b"klong","kshort",b"kshort","last_trade_date",b"last_trade_date","min_price_increment",b"min_price_increment"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions.Literal["api_trade_available_flag",b"api_trade_available_flag","asset_type",b"asset_type","basic_asset",b"basic_asset","basic_asset_size",b"basic_asset_size","buy_available_flag",b"buy_available_flag","class_code",b"class_code","country_of_risk",b"country_of_risk","country_of_risk_name",b"country_of_risk_name","currency",b"currency","dlong",b"dlong","dlong_min",b"dlong_min","dshort",b"dshort","dshort_min",b"dshort_min","exchange",b"exchange","expiration_date",b"expiration_date","figi",b"figi","first_trade_date",b"first_trade_date","futures_type",b"futures_type","klong",b"klong","kshort",b"kshort","last_trade_date",b"last_trade_date","lot",b"lot","min_price_increment",b"min_price_increment","name",b"name","otc_flag",b"otc_flag","sector",b"sector","sell_available_flag",b"sell_available_flag","short_enabled_flag",b"short_enabled_flag","ticker",b"ticker","trading_status",b"trading_status"]) -> None: ...
 global___Future = Future
 
@@ -1142,24 +1173,30 @@ class Share(google.protobuf.message.Message):
     currency: typing.Text = ...
     """Валюта расчётов."""
 
-    klong: builtins.float = ...
-    """Коэффициент ставки риска длинной позиции по инструменту."""
-
-    kshort: builtins.float = ...
-    """Коэффициент ставки риска короткой позиции по инструменту."""
-
-    dlong: builtins.float = ...
-    """Ставка риска минимальной маржи в лонг. Подробнее: [ставка риска в лонг](https://help.tinkoff.ru/margin-trade/long/risk-rate/)"""
-
-    dshort: builtins.float = ...
-    """Ставка риска минимальной маржи в шорт. Подробнее: [ставка риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)"""
-
-    dlong_min: builtins.float = ...
-    """Ставка риска начальной маржи в лонг. Подробнее: [ставка риска в лонг](https://help.tinkoff.ru/margin-trade/long/risk-rate/)"""
-
-    dshort_min: builtins.float = ...
-    """Ставка риска начальной маржи в шорт. Подробнее: [ставка риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)"""
-
+    @property
+    def klong(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Коэффициент ставки риска длинной позиции по инструменту."""
+        pass
+    @property
+    def kshort(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Коэффициент ставки риска короткой позиции по инструменту."""
+        pass
+    @property
+    def dlong(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Ставка риска минимальной маржи в лонг. Подробнее: [ставка риска в лонг](https://help.tinkoff.ru/margin-trade/long/risk-rate/)"""
+        pass
+    @property
+    def dshort(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Ставка риска минимальной маржи в шорт. Подробнее: [ставка риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)"""
+        pass
+    @property
+    def dlong_min(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Ставка риска начальной маржи в лонг. Подробнее: [ставка риска в лонг](https://help.tinkoff.ru/margin-trade/long/risk-rate/)"""
+        pass
+    @property
+    def dshort_min(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Ставка риска начальной маржи в шорт. Подробнее: [ставка риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)"""
+        pass
     short_enabled_flag: builtins.bool = ...
     """Признак доступности для операций в шорт."""
 
@@ -1210,9 +1247,10 @@ class Share(google.protobuf.message.Message):
     share_type: global___ShareType.ValueType = ...
     """Тип акции. Возможные значения: [ShareType](https://tinkoff.github.io/investAPI/instruments#sharetype)"""
 
-    min_price_increment: builtins.float = ...
-    """Шаг цены."""
-
+    @property
+    def min_price_increment(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Шаг цены."""
+        pass
     api_trade_available_flag: builtins.bool = ...
     """Признак доступности торгов через API."""
 
@@ -1224,12 +1262,12 @@ class Share(google.protobuf.message.Message):
         isin : typing.Text = ...,
         lot : builtins.int = ...,
         currency : typing.Text = ...,
-        klong : builtins.float = ...,
-        kshort : builtins.float = ...,
-        dlong : builtins.float = ...,
-        dshort : builtins.float = ...,
-        dlong_min : builtins.float = ...,
-        dshort_min : builtins.float = ...,
+        klong : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        kshort : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        dlong : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        dshort : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        dlong_min : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        dshort_min : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
         short_enabled_flag : builtins.bool = ...,
         name : typing.Text = ...,
         exchange : typing.Text = ...,
@@ -1246,10 +1284,10 @@ class Share(google.protobuf.message.Message):
         sell_available_flag : builtins.bool = ...,
         div_yield_flag : builtins.bool = ...,
         share_type : global___ShareType.ValueType = ...,
-        min_price_increment : builtins.float = ...,
+        min_price_increment : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
         api_trade_available_flag : builtins.bool = ...,
         ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["ipo_date",b"ipo_date","nominal",b"nominal"]) -> builtins.bool: ...
+    def HasField(self, field_name: typing_extensions.Literal["dlong",b"dlong","dlong_min",b"dlong_min","dshort",b"dshort","dshort_min",b"dshort_min","ipo_date",b"ipo_date","klong",b"klong","kshort",b"kshort","min_price_increment",b"min_price_increment","nominal",b"nominal"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions.Literal["api_trade_available_flag",b"api_trade_available_flag","buy_available_flag",b"buy_available_flag","class_code",b"class_code","country_of_risk",b"country_of_risk","country_of_risk_name",b"country_of_risk_name","currency",b"currency","div_yield_flag",b"div_yield_flag","dlong",b"dlong","dlong_min",b"dlong_min","dshort",b"dshort","dshort_min",b"dshort_min","exchange",b"exchange","figi",b"figi","ipo_date",b"ipo_date","isin",b"isin","issue_size",b"issue_size","issue_size_plan",b"issue_size_plan","klong",b"klong","kshort",b"kshort","lot",b"lot","min_price_increment",b"min_price_increment","name",b"name","nominal",b"nominal","otc_flag",b"otc_flag","sector",b"sector","sell_available_flag",b"sell_available_flag","share_type",b"share_type","short_enabled_flag",b"short_enabled_flag","ticker",b"ticker","trading_status",b"trading_status"]) -> None: ...
 global___Share = Share
 
@@ -1305,9 +1343,10 @@ class AccruedInterest(google.protobuf.message.Message):
     def value(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
         """Величина выплаты."""
         pass
-    value_percent: builtins.float = ...
-    """Величина выплаты в процентах от номинала."""
-
+    @property
+    def value_percent(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Величина выплаты в процентах от номинала."""
+        pass
     @property
     def nominal(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
         """Номинал облигации."""
@@ -1316,10 +1355,10 @@ class AccruedInterest(google.protobuf.message.Message):
         *,
         date : typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
         value : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
-        value_percent : builtins.float = ...,
+        value_percent : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
         nominal : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
         ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["date",b"date","nominal",b"nominal","value",b"value"]) -> builtins.bool: ...
+    def HasField(self, field_name: typing_extensions.Literal["date",b"date","nominal",b"nominal","value",b"value","value_percent",b"value_percent"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions.Literal["date",b"date","nominal",b"nominal","value",b"value","value_percent",b"value_percent"]) -> None: ...
 global___AccruedInterest = AccruedInterest
 
@@ -1352,9 +1391,10 @@ class GetFuturesMarginResponse(google.protobuf.message.Message):
     def initial_margin_on_sell(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
         """Гарантийное обеспечение при продаже."""
         pass
-    min_price_increment: builtins.float = ...
-    """Шаг цены."""
-
+    @property
+    def min_price_increment(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Шаг цены."""
+        pass
     @property
     def min_price_increment_amount(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
         """Стоимость шага цены."""
@@ -1363,10 +1403,10 @@ class GetFuturesMarginResponse(google.protobuf.message.Message):
         *,
         initial_margin_on_buy : typing.Optional[tinkoff.invest.grpc.common_pb2.MoneyValue] = ...,
         initial_margin_on_sell : typing.Optional[tinkoff.invest.grpc.common_pb2.MoneyValue] = ...,
-        min_price_increment : builtins.float = ...,
+        min_price_increment : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
         min_price_increment_amount : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
         ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["initial_margin_on_buy",b"initial_margin_on_buy","initial_margin_on_sell",b"initial_margin_on_sell","min_price_increment_amount",b"min_price_increment_amount"]) -> builtins.bool: ...
+    def HasField(self, field_name: typing_extensions.Literal["initial_margin_on_buy",b"initial_margin_on_buy","initial_margin_on_sell",b"initial_margin_on_sell","min_price_increment",b"min_price_increment","min_price_increment_amount",b"min_price_increment_amount"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions.Literal["initial_margin_on_buy",b"initial_margin_on_buy","initial_margin_on_sell",b"initial_margin_on_sell","min_price_increment",b"min_price_increment","min_price_increment_amount",b"min_price_increment_amount"]) -> None: ...
 global___GetFuturesMarginResponse = GetFuturesMarginResponse
 
@@ -1431,24 +1471,30 @@ class Instrument(google.protobuf.message.Message):
     currency: typing.Text = ...
     """Валюта расчётов."""
 
-    klong: builtins.float = ...
-    """Коэффициент ставки риска длинной позиции по инструменту."""
-
-    kshort: builtins.float = ...
-    """Коэффициент ставки риска короткой позиции по инструменту."""
-
-    dlong: builtins.float = ...
-    """Ставка риска минимальной маржи в лонг. Подробнее: [ставка риска в лонг](https://help.tinkoff.ru/margin-trade/long/risk-rate/)"""
-
-    dshort: builtins.float = ...
-    """Ставка риска минимальной маржи в шорт. Подробнее: [ставка риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)"""
-
-    dlong_min: builtins.float = ...
-    """Ставка риска начальной маржи в лонг. Подробнее: [ставка риска в лонг](https://help.tinkoff.ru/margin-trade/long/risk-rate/)"""
-
-    dshort_min: builtins.float = ...
-    """Ставка риска начальной маржи в шорт. Подробнее: [ставка риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)"""
-
+    @property
+    def klong(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Коэффициент ставки риска длинной позиции по инструменту."""
+        pass
+    @property
+    def kshort(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Коэффициент ставки риска короткой позиции по инструменту."""
+        pass
+    @property
+    def dlong(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Ставка риска минимальной маржи в лонг. Подробнее: [ставка риска в лонг](https://help.tinkoff.ru/margin-trade/long/risk-rate/)"""
+        pass
+    @property
+    def dshort(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Ставка риска минимальной маржи в шорт. Подробнее: [ставка риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)"""
+        pass
+    @property
+    def dlong_min(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Ставка риска начальной маржи в лонг. Подробнее: [ставка риска в лонг](https://help.tinkoff.ru/margin-trade/long/risk-rate/)"""
+        pass
+    @property
+    def dshort_min(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Ставка риска начальной маржи в шорт. Подробнее: [ставка риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)"""
+        pass
     short_enabled_flag: builtins.bool = ...
     """Признак доступности для операций в шорт."""
 
@@ -1479,9 +1525,10 @@ class Instrument(google.protobuf.message.Message):
     sell_available_flag: builtins.bool = ...
     """Признак доступности для продажи."""
 
-    min_price_increment: builtins.float = ...
-    """Шаг цены."""
-
+    @property
+    def min_price_increment(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Шаг цены."""
+        pass
     api_trade_available_flag: builtins.bool = ...
     """Признак доступности торгов через API."""
 
@@ -1493,12 +1540,12 @@ class Instrument(google.protobuf.message.Message):
         isin : typing.Text = ...,
         lot : builtins.int = ...,
         currency : typing.Text = ...,
-        klong : builtins.float = ...,
-        kshort : builtins.float = ...,
-        dlong : builtins.float = ...,
-        dshort : builtins.float = ...,
-        dlong_min : builtins.float = ...,
-        dshort_min : builtins.float = ...,
+        klong : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        kshort : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        dlong : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        dshort : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        dlong_min : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        dshort_min : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
         short_enabled_flag : builtins.bool = ...,
         name : typing.Text = ...,
         exchange : typing.Text = ...,
@@ -1509,9 +1556,10 @@ class Instrument(google.protobuf.message.Message):
         otc_flag : builtins.bool = ...,
         buy_available_flag : builtins.bool = ...,
         sell_available_flag : builtins.bool = ...,
-        min_price_increment : builtins.float = ...,
+        min_price_increment : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
         api_trade_available_flag : builtins.bool = ...,
         ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["dlong",b"dlong","dlong_min",b"dlong_min","dshort",b"dshort","dshort_min",b"dshort_min","klong",b"klong","kshort",b"kshort","min_price_increment",b"min_price_increment"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions.Literal["api_trade_available_flag",b"api_trade_available_flag","buy_available_flag",b"buy_available_flag","class_code",b"class_code","country_of_risk",b"country_of_risk","country_of_risk_name",b"country_of_risk_name","currency",b"currency","dlong",b"dlong","dlong_min",b"dlong_min","dshort",b"dshort","dshort_min",b"dshort_min","exchange",b"exchange","figi",b"figi","instrument_type",b"instrument_type","isin",b"isin","klong",b"klong","kshort",b"kshort","lot",b"lot","min_price_increment",b"min_price_increment","name",b"name","otc_flag",b"otc_flag","sell_available_flag",b"sell_available_flag","short_enabled_flag",b"short_enabled_flag","ticker",b"ticker","trading_status",b"trading_status"]) -> None: ...
 global___Instrument = Instrument
 

@@ -118,7 +118,7 @@ def test_get_sandbox_positions(sandbox_service, account_id, order):
         account_id=account_id,
     )
     assert isinstance(response.money[0], MoneyValue)
-    assert response.money[0].currency == "RUB"
+    assert response.money[0].currency == "rub"
 
 
 def test_get_sandbox_operations(sandbox_service, account_id, order):
@@ -137,19 +137,19 @@ def test_get_sandbox_portfolio(sandbox_service, account_id):
         account_id=account_id,
     )
     assert str(response.total_amount_bonds) == str(
-        MoneyValue(currency="RUB", units=0, nano=0)
+        MoneyValue(currency="rub", units=0, nano=0)
     )
     assert str(response.total_amount_currencies) == str(
-        MoneyValue(currency="RUB", units=0, nano=0)
+        MoneyValue(currency="rub", units=0, nano=0)
     )
     assert str(response.total_amount_etf) == str(
-        MoneyValue(currency="RUB", units=0, nano=0)
+        MoneyValue(currency="rub", units=0, nano=0)
     )
     assert str(response.total_amount_futures) == str(
-        MoneyValue(currency="RUB", units=0, nano=0)
+        MoneyValue(currency="rub", units=0, nano=0)
     )
     assert str(response.total_amount_shares) == str(
-        MoneyValue(currency="RUB", units=0, nano=0)
+        MoneyValue(currency="rub", units=0, nano=0)
     )
 
 

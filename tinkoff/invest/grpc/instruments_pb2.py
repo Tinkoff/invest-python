@@ -22,7 +22,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=b'\n\034ru.tinkoff.piapi.contract.v1P\001Z\014./;investapi\242\002\005TIAPI\252\002\024Tinkoff.InvestApi.V1\312\002\021Tinkoff\\Invest\\V1',
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n%tinkoff/invest/grpc/instruments.proto\x12%tinkoff.public.invest.api.contract.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a tinkoff/invest/grpc/common.proto\"}\n\x17TradingSchedulesRequest\x12\x10\n\x08\x65xchange\x18\x01 \x01(\t\x12(\n\x04\x66rom\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12&\n\x02to\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"e\n\x18TradingSchedulesResponse\x12I\n\texchanges\x18\x01 \x03(\x0b\x32\x36.tinkoff.public.invest.api.contract.v1.TradingSchedule\"d\n\x0fTradingSchedule\x12\x10\n\x08\x65xchange\x18\x01 \x01(\t\x12?\n\x04\x64\x61ys\x18\x02 \x03(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.TradingDay\"\xa4\x02\n\nTradingDay\x12(\n\x04\x64\x61te\x18\x01 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x16\n\x0eis_trading_day\x18\x02 \x01(\x08\x12.\n\nstart_time\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12,\n\x08\x65nd_time\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12;\n\x17market_order_start_time\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x39\n\x15market_order_end_time\x18\x06 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"}\n\x11InstrumentRequest\x12H\n\x07id_type\x18\x01 \x01(\x0e\x32\x37.tinkoff.public.invest.api.contract.v1.InstrumentIdType\x12\x12\n\nclass_code\x18\x02 \x01(\t\x12\n\n\x02id\x18\x03 \x01(\t\"h\n\x12InstrumentsRequest\x12R\n\x11instrument_status\x18\x01 \x01(\x0e\x32\x37.tinkoff.public.invest.api.contract.v1.InstrumentStatus\"O\n\x0c\x42ondResponse\x12?\n\ninstrument\x18\x01 \x01(\x0b\x32+.tinkoff.public.invest.api.contract.v1.Bond\"Q\n\rBondsResponse\x12@\n\x0binstruments\x18\x01 \x03(\x0b\x32+.tinkoff.public.invest.api.contract.v1.Bond\"W\n\x10\x43urrencyResponse\x12\x43\n\ninstrument\x18\x01 \x01(\x0b\x32/.tinkoff.public.invest.api.contract.v1.Currency\"Z\n\x12\x43urrenciesResponse\x12\x44\n\x0binstruments\x18\x01 \x03(\x0b\x32/.tinkoff.public.invest.api.contract.v1.Currency\"M\n\x0b\x45tfResponse\x12>\n\ninstrument\x18\x01 \x01(\x0b\x32*.tinkoff.public.invest.api.contract.v1.Etf\"O\n\x0c\x45tfsResponse\x12?\n\x0binstruments\x18\x01 \x03(\x0b\x32*.tinkoff.public.invest.api.contract.v1.Etf\"S\n\x0e\x46utureResponse\x12\x41\n\ninstrument\x18\x01 \x01(\x0b\x32-.tinkoff.public.invest.api.contract.v1.Future\"U\n\x0f\x46uturesResponse\x12\x42\n\x0binstruments\x18\x01 \x03(\x0b\x32-.tinkoff.public.invest.api.contract.v1.Future\"Q\n\rShareResponse\x12@\n\ninstrument\x18\x01 \x01(\x0b\x32,.tinkoff.public.invest.api.contract.v1.Share\"S\n\x0eSharesResponse\x12\x41\n\x0binstruments\x18\x01 \x03(\x0b\x32,.tinkoff.public.invest.api.contract.v1.Share\"\xd2\x08\n\x04\x42ond\x12\x0c\n\x04\x66igi\x18\x01 \x01(\t\x12\x0e\n\x06ticker\x18\x02 \x01(\t\x12\x12\n\nclass_code\x18\x03 \x01(\t\x12\x0c\n\x04isin\x18\x04 \x01(\t\x12\x0b\n\x03lot\x18\x05 \x01(\x05\x12\x10\n\x08\x63urrency\x18\x06 \x01(\t\x12\r\n\x05klong\x18\x07 \x01(\x01\x12\x0e\n\x06kshort\x18\x08 \x01(\x01\x12\r\n\x05\x64long\x18\t \x01(\x01\x12\x0e\n\x06\x64short\x18\n \x01(\x01\x12\x11\n\tdlong_min\x18\x0b \x01(\x01\x12\x12\n\ndshort_min\x18\x0c \x01(\x01\x12\x1a\n\x12short_enabled_flag\x18\r \x01(\x08\x12\x0c\n\x04name\x18\x0f \x01(\t\x12\x10\n\x08\x65xchange\x18\x10 \x01(\t\x12 \n\x18\x63oupon_quantity_per_year\x18\x11 \x01(\x05\x12\x31\n\rmaturity_date\x18\x12 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x42\n\x07nominal\x18\x13 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12\x32\n\x0estate_reg_date\x18\x15 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x32\n\x0eplacement_date\x18\x16 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12J\n\x0fplacement_price\x18\x17 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12\x44\n\taci_value\x18\x18 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12\x17\n\x0f\x63ountry_of_risk\x18\x19 \x01(\t\x12\x1c\n\x14\x63ountry_of_risk_name\x18\x1a \x01(\t\x12\x0e\n\x06sector\x18\x1b \x01(\t\x12\x12\n\nissue_kind\x18\x1c \x01(\t\x12\x12\n\nissue_size\x18\x1d \x01(\x03\x12\x17\n\x0fissue_size_plan\x18\x1e \x01(\x03\x12T\n\x0etrading_status\x18\x1f \x01(\x0e\x32<.tinkoff.public.invest.api.contract.v1.SecurityTradingStatus\x12\x10\n\x08otc_flag\x18  \x01(\x08\x12\x1a\n\x12\x62uy_available_flag\x18! \x01(\x08\x12\x1b\n\x13sell_available_flag\x18\" \x01(\x08\x12\x1c\n\x14\x66loating_coupon_flag\x18# \x01(\x08\x12\x16\n\x0eperpetual_flag\x18$ \x01(\x08\x12\x19\n\x11\x61mortization_flag\x18% \x01(\x08\x12\x1b\n\x13min_price_increment\x18& \x01(\x02\x12 \n\x18\x61pi_trade_available_flag\x18\' \x01(\x08\"\x80\x05\n\x08\x43urrency\x12\x0c\n\x04\x66igi\x18\x01 \x01(\t\x12\x0e\n\x06ticker\x18\x02 \x01(\t\x12\x12\n\nclass_code\x18\x03 \x01(\t\x12\x0c\n\x04isin\x18\x04 \x01(\t\x12\x0b\n\x03lot\x18\x05 \x01(\x05\x12\x10\n\x08\x63urrency\x18\x06 \x01(\t\x12\r\n\x05klong\x18\x07 \x01(\x01\x12\x0e\n\x06kshort\x18\x08 \x01(\x01\x12\r\n\x05\x64long\x18\t \x01(\x01\x12\x0e\n\x06\x64short\x18\n \x01(\x01\x12\x11\n\tdlong_min\x18\x0b \x01(\x01\x12\x12\n\ndshort_min\x18\x0c \x01(\x01\x12\x1a\n\x12short_enabled_flag\x18\r \x01(\x08\x12\x0c\n\x04name\x18\x0f \x01(\t\x12\x10\n\x08\x65xchange\x18\x10 \x01(\t\x12\x42\n\x07nominal\x18\x11 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12\x17\n\x0f\x63ountry_of_risk\x18\x12 \x01(\t\x12\x1c\n\x14\x63ountry_of_risk_name\x18\x13 \x01(\t\x12T\n\x0etrading_status\x18\x14 \x01(\x0e\x32<.tinkoff.public.invest.api.contract.v1.SecurityTradingStatus\x12\x10\n\x08otc_flag\x18\x15 \x01(\x08\x12\x1a\n\x12\x62uy_available_flag\x18\x16 \x01(\x08\x12\x1b\n\x13sell_available_flag\x18\x17 \x01(\x08\x12\x19\n\x11iso_currency_name\x18\x18 \x01(\t\x12\x1b\n\x13min_price_increment\x18\x19 \x01(\x02\x12 \n\x18\x61pi_trade_available_flag\x18\x1a \x01(\x08\"\xbb\x05\n\x03\x45tf\x12\x0c\n\x04\x66igi\x18\x01 \x01(\t\x12\x0e\n\x06ticker\x18\x02 \x01(\t\x12\x12\n\nclass_code\x18\x03 \x01(\t\x12\x0c\n\x04isin\x18\x04 \x01(\t\x12\x0b\n\x03lot\x18\x05 \x01(\x05\x12\x10\n\x08\x63urrency\x18\x06 \x01(\t\x12\r\n\x05klong\x18\x07 \x01(\x01\x12\x0e\n\x06kshort\x18\x08 \x01(\x01\x12\r\n\x05\x64long\x18\t \x01(\x01\x12\x0e\n\x06\x64short\x18\n \x01(\x01\x12\x11\n\tdlong_min\x18\x0b \x01(\x01\x12\x12\n\ndshort_min\x18\x0c \x01(\x01\x12\x1a\n\x12short_enabled_flag\x18\r \x01(\x08\x12\x0c\n\x04name\x18\x0f \x01(\t\x12\x10\n\x08\x65xchange\x18\x10 \x01(\t\x12\x18\n\x10\x66ixed_commission\x18\x11 \x01(\x01\x12\x12\n\nfocus_type\x18\x12 \x01(\t\x12\x31\n\rreleased_date\x18\x13 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x12\n\nnum_shares\x18\x14 \x01(\x01\x12\x17\n\x0f\x63ountry_of_risk\x18\x15 \x01(\t\x12\x1c\n\x14\x63ountry_of_risk_name\x18\x16 \x01(\t\x12\x0e\n\x06sector\x18\x17 \x01(\t\x12\x18\n\x10rebalancing_freq\x18\x18 \x01(\t\x12T\n\x0etrading_status\x18\x19 \x01(\x0e\x32<.tinkoff.public.invest.api.contract.v1.SecurityTradingStatus\x12\x10\n\x08otc_flag\x18\x1a \x01(\x08\x12\x1a\n\x12\x62uy_available_flag\x18\x1b \x01(\x08\x12\x1b\n\x13sell_available_flag\x18\x1c \x01(\x08\x12\x1b\n\x13min_price_increment\x18\x1d \x01(\x02\x12 \n\x18\x61pi_trade_available_flag\x18\x1e \x01(\x08\"\x9a\x06\n\x06\x46uture\x12\x0c\n\x04\x66igi\x18\x01 \x01(\t\x12\x0e\n\x06ticker\x18\x02 \x01(\t\x12\x12\n\nclass_code\x18\x03 \x01(\t\x12\x0b\n\x03lot\x18\x04 \x01(\x05\x12\x10\n\x08\x63urrency\x18\x05 \x01(\t\x12\r\n\x05klong\x18\x06 \x01(\x01\x12\x0e\n\x06kshort\x18\x07 \x01(\x01\x12\r\n\x05\x64long\x18\x08 \x01(\x01\x12\x0e\n\x06\x64short\x18\t \x01(\x01\x12\x11\n\tdlong_min\x18\n \x01(\x01\x12\x12\n\ndshort_min\x18\x0b \x01(\x01\x12\x1a\n\x12short_enabled_flag\x18\x0c \x01(\x08\x12\x0c\n\x04name\x18\r \x01(\t\x12\x10\n\x08\x65xchange\x18\x0e \x01(\t\x12\x34\n\x10\x66irst_trade_date\x18\x0f \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x33\n\x0flast_trade_date\x18\x10 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x14\n\x0c\x66utures_type\x18\x11 \x01(\t\x12\x12\n\nasset_type\x18\x12 \x01(\t\x12\x13\n\x0b\x62\x61sic_asset\x18\x13 \x01(\t\x12\x18\n\x10\x62\x61sic_asset_size\x18\x14 \x01(\x01\x12\x17\n\x0f\x63ountry_of_risk\x18\x15 \x01(\t\x12\x1c\n\x14\x63ountry_of_risk_name\x18\x16 \x01(\t\x12\x0e\n\x06sector\x18\x17 \x01(\t\x12\x33\n\x0f\x65xpiration_date\x18\x18 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12T\n\x0etrading_status\x18\x19 \x01(\x0e\x32<.tinkoff.public.invest.api.contract.v1.SecurityTradingStatus\x12\x10\n\x08otc_flag\x18\x1a \x01(\x08\x12\x1a\n\x12\x62uy_available_flag\x18\x1b \x01(\x08\x12\x1b\n\x13sell_available_flag\x18\x1c \x01(\x08\x12\x1b\n\x13min_price_increment\x18\x1d \x01(\x02\x12 \n\x18\x61pi_trade_available_flag\x18\x1e \x01(\x08\"\xab\x06\n\x05Share\x12\x0c\n\x04\x66igi\x18\x01 \x01(\t\x12\x0e\n\x06ticker\x18\x02 \x01(\t\x12\x12\n\nclass_code\x18\x03 \x01(\t\x12\x0c\n\x04isin\x18\x04 \x01(\t\x12\x0b\n\x03lot\x18\x05 \x01(\x05\x12\x10\n\x08\x63urrency\x18\x06 \x01(\t\x12\r\n\x05klong\x18\x07 \x01(\x01\x12\x0e\n\x06kshort\x18\x08 \x01(\x01\x12\r\n\x05\x64long\x18\t \x01(\x01\x12\x0e\n\x06\x64short\x18\n \x01(\x01\x12\x11\n\tdlong_min\x18\x0b \x01(\x01\x12\x12\n\ndshort_min\x18\x0c \x01(\x01\x12\x1a\n\x12short_enabled_flag\x18\r \x01(\x08\x12\x0c\n\x04name\x18\x0f \x01(\t\x12\x10\n\x08\x65xchange\x18\x10 \x01(\t\x12,\n\x08ipo_date\x18\x11 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x12\n\nissue_size\x18\x12 \x01(\x03\x12\x17\n\x0f\x63ountry_of_risk\x18\x13 \x01(\t\x12\x1c\n\x14\x63ountry_of_risk_name\x18\x14 \x01(\t\x12\x0e\n\x06sector\x18\x15 \x01(\t\x12\x17\n\x0fissue_size_plan\x18\x16 \x01(\x03\x12\x42\n\x07nominal\x18\x17 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12T\n\x0etrading_status\x18\x19 \x01(\x0e\x32<.tinkoff.public.invest.api.contract.v1.SecurityTradingStatus\x12\x10\n\x08otc_flag\x18\x1a \x01(\x08\x12\x1a\n\x12\x62uy_available_flag\x18\x1b \x01(\x08\x12\x1b\n\x13sell_available_flag\x18\x1c \x01(\x08\x12\x16\n\x0e\x64iv_yield_flag\x18\x1d \x01(\x08\x12\x44\n\nshare_type\x18\x1e \x01(\x0e\x32\x30.tinkoff.public.invest.api.contract.v1.ShareType\x12\x1b\n\x13min_price_increment\x18\x1f \x01(\x02\x12 \n\x18\x61pi_trade_available_flag\x18  \x01(\x08\"|\n\x1aGetAccruedInterestsRequest\x12\x0c\n\x04\x66igi\x18\x01 \x01(\t\x12(\n\x04\x66rom\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12&\n\x02to\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"p\n\x1bGetAccruedInterestsResponse\x12Q\n\x11\x61\x63\x63rued_interests\x18\x01 \x03(\x0b\x32\x36.tinkoff.public.invest.api.contract.v1.AccruedInterest\"\xd6\x01\n\x0f\x41\x63\x63ruedInterest\x12(\n\x04\x64\x61te\x18\x01 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12?\n\x05value\x18\x02 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x15\n\rvalue_percent\x18\x03 \x01(\x02\x12\x41\n\x07nominal\x18\x04 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\"\'\n\x17GetFuturesMarginRequest\x12\x0c\n\x04\x66igi\x18\x01 \x01(\t\"\xb2\x02\n\x18GetFuturesMarginResponse\x12P\n\x15initial_margin_on_buy\x18\x01 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12Q\n\x16initial_margin_on_sell\x18\x02 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12\x1b\n\x13min_price_increment\x18\x03 \x01(\x02\x12T\n\x1amin_price_increment_amount\x18\x04 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\"[\n\x12InstrumentResponse\x12\x45\n\ninstrument\x18\x01 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.Instrument\"\xbc\x04\n\nInstrument\x12\x0c\n\x04\x66igi\x18\x01 \x01(\t\x12\x0e\n\x06ticker\x18\x02 \x01(\t\x12\x12\n\nclass_code\x18\x03 \x01(\t\x12\x0c\n\x04isin\x18\x04 \x01(\t\x12\x0b\n\x03lot\x18\x05 \x01(\x05\x12\x10\n\x08\x63urrency\x18\x06 \x01(\t\x12\r\n\x05klong\x18\x07 \x01(\x01\x12\x0e\n\x06kshort\x18\x08 \x01(\x01\x12\r\n\x05\x64long\x18\t \x01(\x01\x12\x0e\n\x06\x64short\x18\n \x01(\x01\x12\x11\n\tdlong_min\x18\x0b \x01(\x01\x12\x12\n\ndshort_min\x18\x0c \x01(\x01\x12\x1a\n\x12short_enabled_flag\x18\r \x01(\x08\x12\x0c\n\x04name\x18\x0e \x01(\t\x12\x10\n\x08\x65xchange\x18\x0f \x01(\t\x12\x17\n\x0f\x63ountry_of_risk\x18\x10 \x01(\t\x12\x1c\n\x14\x63ountry_of_risk_name\x18\x11 \x01(\t\x12\x17\n\x0finstrument_type\x18\x12 \x01(\t\x12T\n\x0etrading_status\x18\x13 \x01(\x0e\x32<.tinkoff.public.invest.api.contract.v1.SecurityTradingStatus\x12\x10\n\x08otc_flag\x18\x14 \x01(\x08\x12\x1a\n\x12\x62uy_available_flag\x18\x15 \x01(\x08\x12\x1b\n\x13sell_available_flag\x18\x16 \x01(\x08\x12\x1b\n\x13min_price_increment\x18\x17 \x01(\x02\x12 \n\x18\x61pi_trade_available_flag\x18\x18 \x01(\x08\"u\n\x13GetDividendsRequest\x12\x0c\n\x04\x66igi\x18\x01 \x01(\t\x12(\n\x04\x66rom\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12&\n\x02to\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"Z\n\x14GetDividendsResponse\x12\x42\n\tdividends\x18\x01 \x03(\x0b\x32/.tinkoff.public.invest.api.contract.v1.Dividend\"\x86\x04\n\x08\x44ividend\x12G\n\x0c\x64ividend_net\x18\x01 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12\x30\n\x0cpayment_date\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x31\n\rdeclared_date\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x31\n\rlast_buy_date\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x15\n\rdividend_type\x18\x05 \x01(\t\x12/\n\x0brecord_date\x18\x06 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x12\n\nregularity\x18\x07 \x01(\t\x12\x46\n\x0b\x63lose_price\x18\x08 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12\x45\n\x0byield_value\x18\t \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12.\n\ncreated_at\x18\n \x01(\x0b\x32\x1a.google.protobuf.Timestamp*m\n\x10InstrumentIdType\x12\x1d\n\x19INSTRUMENT_ID_UNSPECIFIED\x10\x00\x12\x1b\n\x17INSTRUMENT_ID_TYPE_FIGI\x10\x01\x12\x1d\n\x19INSTRUMENT_ID_TYPE_TICKER\x10\x02*l\n\x10InstrumentStatus\x12!\n\x1dINSTRUMENT_STATUS_UNSPECIFIED\x10\x00\x12\x1a\n\x16INSTRUMENT_STATUS_BASE\x10\x01\x12\x19\n\x15INSTRUMENT_STATUS_ALL\x10\x02*\xe5\x01\n\tShareType\x12\x1a\n\x16SHARE_TYPE_UNSPECIFIED\x10\x00\x12\x15\n\x11SHARE_TYPE_COMMON\x10\x01\x12\x18\n\x14SHARE_TYPE_PREFERRED\x10\x02\x12\x12\n\x0eSHARE_TYPE_ADR\x10\x03\x12\x12\n\x0eSHARE_TYPE_GDR\x10\x04\x12\x12\n\x0eSHARE_TYPE_MLP\x10\x05\x12\x1a\n\x16SHARE_TYPE_NY_REG_SHRS\x10\x06\x12\x1e\n\x1aSHARE_TYPE_CLOSED_END_FUND\x10\x07\x12\x13\n\x0fSHARE_TYPE_REIT\x10\x08\x32\xcc\x0f\n\x12InstrumentsService\x12\x93\x01\n\x10TradingSchedules\x12>.tinkoff.public.invest.api.contract.v1.TradingSchedulesRequest\x1a?.tinkoff.public.invest.api.contract.v1.TradingSchedulesResponse\x12w\n\x06\x42ondBy\x12\x38.tinkoff.public.invest.api.contract.v1.InstrumentRequest\x1a\x33.tinkoff.public.invest.api.contract.v1.BondResponse\x12x\n\x05\x42onds\x12\x39.tinkoff.public.invest.api.contract.v1.InstrumentsRequest\x1a\x34.tinkoff.public.invest.api.contract.v1.BondsResponse\x12\x7f\n\nCurrencyBy\x12\x38.tinkoff.public.invest.api.contract.v1.InstrumentRequest\x1a\x37.tinkoff.public.invest.api.contract.v1.CurrencyResponse\x12\x82\x01\n\nCurrencies\x12\x39.tinkoff.public.invest.api.contract.v1.InstrumentsRequest\x1a\x39.tinkoff.public.invest.api.contract.v1.CurrenciesResponse\x12u\n\x05\x45tfBy\x12\x38.tinkoff.public.invest.api.contract.v1.InstrumentRequest\x1a\x32.tinkoff.public.invest.api.contract.v1.EtfResponse\x12v\n\x04\x45tfs\x12\x39.tinkoff.public.invest.api.contract.v1.InstrumentsRequest\x1a\x33.tinkoff.public.invest.api.contract.v1.EtfsResponse\x12{\n\x08\x46utureBy\x12\x38.tinkoff.public.invest.api.contract.v1.InstrumentRequest\x1a\x35.tinkoff.public.invest.api.contract.v1.FutureResponse\x12|\n\x07\x46utures\x12\x39.tinkoff.public.invest.api.contract.v1.InstrumentsRequest\x1a\x36.tinkoff.public.invest.api.contract.v1.FuturesResponse\x12y\n\x07ShareBy\x12\x38.tinkoff.public.invest.api.contract.v1.InstrumentRequest\x1a\x34.tinkoff.public.invest.api.contract.v1.ShareResponse\x12z\n\x06Shares\x12\x39.tinkoff.public.invest.api.contract.v1.InstrumentsRequest\x1a\x35.tinkoff.public.invest.api.contract.v1.SharesResponse\x12\x9c\x01\n\x13GetAccruedInterests\x12\x41.tinkoff.public.invest.api.contract.v1.GetAccruedInterestsRequest\x1a\x42.tinkoff.public.invest.api.contract.v1.GetAccruedInterestsResponse\x12\x93\x01\n\x10GetFuturesMargin\x12>.tinkoff.public.invest.api.contract.v1.GetFuturesMarginRequest\x1a?.tinkoff.public.invest.api.contract.v1.GetFuturesMarginResponse\x12\x86\x01\n\x0fGetInstrumentBy\x12\x38.tinkoff.public.invest.api.contract.v1.InstrumentRequest\x1a\x39.tinkoff.public.invest.api.contract.v1.InstrumentResponse\x12\x87\x01\n\x0cGetDividends\x12:.tinkoff.public.invest.api.contract.v1.GetDividendsRequest\x1a;.tinkoff.public.invest.api.contract.v1.GetDividendsResponseBa\n\x1cru.tinkoff.piapi.contract.v1P\x01Z\x0c./;investapi\xa2\x02\x05TIAPI\xaa\x02\x14Tinkoff.InvestApi.V1\xca\x02\x11Tinkoff\\Invest\\V1b\x06proto3'
+  serialized_pb=b'\n%tinkoff/invest/grpc/instruments.proto\x12%tinkoff.public.invest.api.contract.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a tinkoff/invest/grpc/common.proto\"}\n\x17TradingSchedulesRequest\x12\x10\n\x08\x65xchange\x18\x01 \x01(\t\x12(\n\x04\x66rom\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12&\n\x02to\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"e\n\x18TradingSchedulesResponse\x12I\n\texchanges\x18\x01 \x03(\x0b\x32\x36.tinkoff.public.invest.api.contract.v1.TradingSchedule\"d\n\x0fTradingSchedule\x12\x10\n\x08\x65xchange\x18\x01 \x01(\t\x12?\n\x04\x64\x61ys\x18\x02 \x03(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.TradingDay\"\xa4\x02\n\nTradingDay\x12(\n\x04\x64\x61te\x18\x01 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x16\n\x0eis_trading_day\x18\x02 \x01(\x08\x12.\n\nstart_time\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12,\n\x08\x65nd_time\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12;\n\x17market_order_start_time\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x39\n\x15market_order_end_time\x18\x06 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"}\n\x11InstrumentRequest\x12H\n\x07id_type\x18\x01 \x01(\x0e\x32\x37.tinkoff.public.invest.api.contract.v1.InstrumentIdType\x12\x12\n\nclass_code\x18\x02 \x01(\t\x12\n\n\x02id\x18\x03 \x01(\t\"h\n\x12InstrumentsRequest\x12R\n\x11instrument_status\x18\x01 \x01(\x0e\x32\x37.tinkoff.public.invest.api.contract.v1.InstrumentStatus\"O\n\x0c\x42ondResponse\x12?\n\ninstrument\x18\x01 \x01(\x0b\x32+.tinkoff.public.invest.api.contract.v1.Bond\"Q\n\rBondsResponse\x12@\n\x0binstruments\x18\x01 \x03(\x0b\x32+.tinkoff.public.invest.api.contract.v1.Bond\"W\n\x10\x43urrencyResponse\x12\x43\n\ninstrument\x18\x01 \x01(\x0b\x32/.tinkoff.public.invest.api.contract.v1.Currency\"Z\n\x12\x43urrenciesResponse\x12\x44\n\x0binstruments\x18\x01 \x03(\x0b\x32/.tinkoff.public.invest.api.contract.v1.Currency\"M\n\x0b\x45tfResponse\x12>\n\ninstrument\x18\x01 \x01(\x0b\x32*.tinkoff.public.invest.api.contract.v1.Etf\"O\n\x0c\x45tfsResponse\x12?\n\x0binstruments\x18\x01 \x03(\x0b\x32*.tinkoff.public.invest.api.contract.v1.Etf\"S\n\x0e\x46utureResponse\x12\x41\n\ninstrument\x18\x01 \x01(\x0b\x32-.tinkoff.public.invest.api.contract.v1.Future\"U\n\x0f\x46uturesResponse\x12\x42\n\x0binstruments\x18\x01 \x03(\x0b\x32-.tinkoff.public.invest.api.contract.v1.Future\"Q\n\rShareResponse\x12@\n\ninstrument\x18\x01 \x01(\x0b\x32,.tinkoff.public.invest.api.contract.v1.Share\"S\n\x0eSharesResponse\x12\x41\n\x0binstruments\x18\x01 \x03(\x0b\x32,.tinkoff.public.invest.api.contract.v1.Share\"\xb0\x0b\n\x04\x42ond\x12\x0c\n\x04\x66igi\x18\x01 \x01(\t\x12\x0e\n\x06ticker\x18\x02 \x01(\t\x12\x12\n\nclass_code\x18\x03 \x01(\t\x12\x0c\n\x04isin\x18\x04 \x01(\t\x12\x0b\n\x03lot\x18\x05 \x01(\x05\x12\x10\n\x08\x63urrency\x18\x06 \x01(\t\x12?\n\x05klong\x18\x07 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12@\n\x06kshort\x18\x08 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12?\n\x05\x64long\x18\t \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12@\n\x06\x64short\x18\n \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x43\n\tdlong_min\x18\x0b \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x44\n\ndshort_min\x18\x0c \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x1a\n\x12short_enabled_flag\x18\r \x01(\x08\x12\x0c\n\x04name\x18\x0f \x01(\t\x12\x10\n\x08\x65xchange\x18\x10 \x01(\t\x12 \n\x18\x63oupon_quantity_per_year\x18\x11 \x01(\x05\x12\x31\n\rmaturity_date\x18\x12 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x42\n\x07nominal\x18\x13 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12\x32\n\x0estate_reg_date\x18\x15 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x32\n\x0eplacement_date\x18\x16 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12J\n\x0fplacement_price\x18\x17 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12\x44\n\taci_value\x18\x18 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12\x17\n\x0f\x63ountry_of_risk\x18\x19 \x01(\t\x12\x1c\n\x14\x63ountry_of_risk_name\x18\x1a \x01(\t\x12\x0e\n\x06sector\x18\x1b \x01(\t\x12\x12\n\nissue_kind\x18\x1c \x01(\t\x12\x12\n\nissue_size\x18\x1d \x01(\x03\x12\x17\n\x0fissue_size_plan\x18\x1e \x01(\x03\x12T\n\x0etrading_status\x18\x1f \x01(\x0e\x32<.tinkoff.public.invest.api.contract.v1.SecurityTradingStatus\x12\x10\n\x08otc_flag\x18  \x01(\x08\x12\x1a\n\x12\x62uy_available_flag\x18! \x01(\x08\x12\x1b\n\x13sell_available_flag\x18\" \x01(\x08\x12\x1c\n\x14\x66loating_coupon_flag\x18# \x01(\x08\x12\x16\n\x0eperpetual_flag\x18$ \x01(\x08\x12\x19\n\x11\x61mortization_flag\x18% \x01(\x08\x12M\n\x13min_price_increment\x18& \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12 \n\x18\x61pi_trade_available_flag\x18\' \x01(\x08\"\xde\x07\n\x08\x43urrency\x12\x0c\n\x04\x66igi\x18\x01 \x01(\t\x12\x0e\n\x06ticker\x18\x02 \x01(\t\x12\x12\n\nclass_code\x18\x03 \x01(\t\x12\x0c\n\x04isin\x18\x04 \x01(\t\x12\x0b\n\x03lot\x18\x05 \x01(\x05\x12\x10\n\x08\x63urrency\x18\x06 \x01(\t\x12?\n\x05klong\x18\x07 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12@\n\x06kshort\x18\x08 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12?\n\x05\x64long\x18\t \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12@\n\x06\x64short\x18\n \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x43\n\tdlong_min\x18\x0b \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x44\n\ndshort_min\x18\x0c \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x1a\n\x12short_enabled_flag\x18\r \x01(\x08\x12\x0c\n\x04name\x18\x0f \x01(\t\x12\x10\n\x08\x65xchange\x18\x10 \x01(\t\x12\x42\n\x07nominal\x18\x11 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12\x17\n\x0f\x63ountry_of_risk\x18\x12 \x01(\t\x12\x1c\n\x14\x63ountry_of_risk_name\x18\x13 \x01(\t\x12T\n\x0etrading_status\x18\x14 \x01(\x0e\x32<.tinkoff.public.invest.api.contract.v1.SecurityTradingStatus\x12\x10\n\x08otc_flag\x18\x15 \x01(\x08\x12\x1a\n\x12\x62uy_available_flag\x18\x16 \x01(\x08\x12\x1b\n\x13sell_available_flag\x18\x17 \x01(\x08\x12\x19\n\x11iso_currency_name\x18\x18 \x01(\t\x12M\n\x13min_price_increment\x18\x19 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12 \n\x18\x61pi_trade_available_flag\x18\x1a \x01(\x08\"\xfd\x08\n\x03\x45tf\x12\x0c\n\x04\x66igi\x18\x01 \x01(\t\x12\x0e\n\x06ticker\x18\x02 \x01(\t\x12\x12\n\nclass_code\x18\x03 \x01(\t\x12\x0c\n\x04isin\x18\x04 \x01(\t\x12\x0b\n\x03lot\x18\x05 \x01(\x05\x12\x10\n\x08\x63urrency\x18\x06 \x01(\t\x12?\n\x05klong\x18\x07 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12@\n\x06kshort\x18\x08 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12?\n\x05\x64long\x18\t \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12@\n\x06\x64short\x18\n \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x43\n\tdlong_min\x18\x0b \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x44\n\ndshort_min\x18\x0c \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x1a\n\x12short_enabled_flag\x18\r \x01(\x08\x12\x0c\n\x04name\x18\x0f \x01(\t\x12\x10\n\x08\x65xchange\x18\x10 \x01(\t\x12J\n\x10\x66ixed_commission\x18\x11 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x12\n\nfocus_type\x18\x12 \x01(\t\x12\x31\n\rreleased_date\x18\x13 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x44\n\nnum_shares\x18\x14 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x17\n\x0f\x63ountry_of_risk\x18\x15 \x01(\t\x12\x1c\n\x14\x63ountry_of_risk_name\x18\x16 \x01(\t\x12\x0e\n\x06sector\x18\x17 \x01(\t\x12\x18\n\x10rebalancing_freq\x18\x18 \x01(\t\x12T\n\x0etrading_status\x18\x19 \x01(\x0e\x32<.tinkoff.public.invest.api.contract.v1.SecurityTradingStatus\x12\x10\n\x08otc_flag\x18\x1a \x01(\x08\x12\x1a\n\x12\x62uy_available_flag\x18\x1b \x01(\x08\x12\x1b\n\x13sell_available_flag\x18\x1c \x01(\x08\x12M\n\x13min_price_increment\x18\x1d \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12 \n\x18\x61pi_trade_available_flag\x18\x1e \x01(\x08\"\xaa\t\n\x06\x46uture\x12\x0c\n\x04\x66igi\x18\x01 \x01(\t\x12\x0e\n\x06ticker\x18\x02 \x01(\t\x12\x12\n\nclass_code\x18\x03 \x01(\t\x12\x0b\n\x03lot\x18\x04 \x01(\x05\x12\x10\n\x08\x63urrency\x18\x05 \x01(\t\x12?\n\x05klong\x18\x06 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12@\n\x06kshort\x18\x07 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12?\n\x05\x64long\x18\x08 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12@\n\x06\x64short\x18\t \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x43\n\tdlong_min\x18\n \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x44\n\ndshort_min\x18\x0b \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x1a\n\x12short_enabled_flag\x18\x0c \x01(\x08\x12\x0c\n\x04name\x18\r \x01(\t\x12\x10\n\x08\x65xchange\x18\x0e \x01(\t\x12\x34\n\x10\x66irst_trade_date\x18\x0f \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x33\n\x0flast_trade_date\x18\x10 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x14\n\x0c\x66utures_type\x18\x11 \x01(\t\x12\x12\n\nasset_type\x18\x12 \x01(\t\x12\x13\n\x0b\x62\x61sic_asset\x18\x13 \x01(\t\x12J\n\x10\x62\x61sic_asset_size\x18\x14 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x17\n\x0f\x63ountry_of_risk\x18\x15 \x01(\t\x12\x1c\n\x14\x63ountry_of_risk_name\x18\x16 \x01(\t\x12\x0e\n\x06sector\x18\x17 \x01(\t\x12\x33\n\x0f\x65xpiration_date\x18\x18 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12T\n\x0etrading_status\x18\x19 \x01(\x0e\x32<.tinkoff.public.invest.api.contract.v1.SecurityTradingStatus\x12\x10\n\x08otc_flag\x18\x1a \x01(\x08\x12\x1a\n\x12\x62uy_available_flag\x18\x1b \x01(\x08\x12\x1b\n\x13sell_available_flag\x18\x1c \x01(\x08\x12M\n\x13min_price_increment\x18\x1d \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12 \n\x18\x61pi_trade_available_flag\x18\x1e \x01(\x08\"\x89\t\n\x05Share\x12\x0c\n\x04\x66igi\x18\x01 \x01(\t\x12\x0e\n\x06ticker\x18\x02 \x01(\t\x12\x12\n\nclass_code\x18\x03 \x01(\t\x12\x0c\n\x04isin\x18\x04 \x01(\t\x12\x0b\n\x03lot\x18\x05 \x01(\x05\x12\x10\n\x08\x63urrency\x18\x06 \x01(\t\x12?\n\x05klong\x18\x07 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12@\n\x06kshort\x18\x08 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12?\n\x05\x64long\x18\t \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12@\n\x06\x64short\x18\n \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x43\n\tdlong_min\x18\x0b \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x44\n\ndshort_min\x18\x0c \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x1a\n\x12short_enabled_flag\x18\r \x01(\x08\x12\x0c\n\x04name\x18\x0f \x01(\t\x12\x10\n\x08\x65xchange\x18\x10 \x01(\t\x12,\n\x08ipo_date\x18\x11 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x12\n\nissue_size\x18\x12 \x01(\x03\x12\x17\n\x0f\x63ountry_of_risk\x18\x13 \x01(\t\x12\x1c\n\x14\x63ountry_of_risk_name\x18\x14 \x01(\t\x12\x0e\n\x06sector\x18\x15 \x01(\t\x12\x17\n\x0fissue_size_plan\x18\x16 \x01(\x03\x12\x42\n\x07nominal\x18\x17 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12T\n\x0etrading_status\x18\x19 \x01(\x0e\x32<.tinkoff.public.invest.api.contract.v1.SecurityTradingStatus\x12\x10\n\x08otc_flag\x18\x1a \x01(\x08\x12\x1a\n\x12\x62uy_available_flag\x18\x1b \x01(\x08\x12\x1b\n\x13sell_available_flag\x18\x1c \x01(\x08\x12\x16\n\x0e\x64iv_yield_flag\x18\x1d \x01(\x08\x12\x44\n\nshare_type\x18\x1e \x01(\x0e\x32\x30.tinkoff.public.invest.api.contract.v1.ShareType\x12M\n\x13min_price_increment\x18\x1f \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12 \n\x18\x61pi_trade_available_flag\x18  \x01(\x08\"|\n\x1aGetAccruedInterestsRequest\x12\x0c\n\x04\x66igi\x18\x01 \x01(\t\x12(\n\x04\x66rom\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12&\n\x02to\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"p\n\x1bGetAccruedInterestsResponse\x12Q\n\x11\x61\x63\x63rued_interests\x18\x01 \x03(\x0b\x32\x36.tinkoff.public.invest.api.contract.v1.AccruedInterest\"\x88\x02\n\x0f\x41\x63\x63ruedInterest\x12(\n\x04\x64\x61te\x18\x01 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12?\n\x05value\x18\x02 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12G\n\rvalue_percent\x18\x03 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x41\n\x07nominal\x18\x04 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\"\'\n\x17GetFuturesMarginRequest\x12\x0c\n\x04\x66igi\x18\x01 \x01(\t\"\xe4\x02\n\x18GetFuturesMarginResponse\x12P\n\x15initial_margin_on_buy\x18\x01 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12Q\n\x16initial_margin_on_sell\x18\x02 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12M\n\x13min_price_increment\x18\x03 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12T\n\x1amin_price_increment_amount\x18\x04 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\"[\n\x12InstrumentResponse\x12\x45\n\ninstrument\x18\x01 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.Instrument\"\x9a\x07\n\nInstrument\x12\x0c\n\x04\x66igi\x18\x01 \x01(\t\x12\x0e\n\x06ticker\x18\x02 \x01(\t\x12\x12\n\nclass_code\x18\x03 \x01(\t\x12\x0c\n\x04isin\x18\x04 \x01(\t\x12\x0b\n\x03lot\x18\x05 \x01(\x05\x12\x10\n\x08\x63urrency\x18\x06 \x01(\t\x12?\n\x05klong\x18\x07 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12@\n\x06kshort\x18\x08 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12?\n\x05\x64long\x18\t \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12@\n\x06\x64short\x18\n \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x43\n\tdlong_min\x18\x0b \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x44\n\ndshort_min\x18\x0c \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x1a\n\x12short_enabled_flag\x18\r \x01(\x08\x12\x0c\n\x04name\x18\x0e \x01(\t\x12\x10\n\x08\x65xchange\x18\x0f \x01(\t\x12\x17\n\x0f\x63ountry_of_risk\x18\x10 \x01(\t\x12\x1c\n\x14\x63ountry_of_risk_name\x18\x11 \x01(\t\x12\x17\n\x0finstrument_type\x18\x12 \x01(\t\x12T\n\x0etrading_status\x18\x13 \x01(\x0e\x32<.tinkoff.public.invest.api.contract.v1.SecurityTradingStatus\x12\x10\n\x08otc_flag\x18\x14 \x01(\x08\x12\x1a\n\x12\x62uy_available_flag\x18\x15 \x01(\x08\x12\x1b\n\x13sell_available_flag\x18\x16 \x01(\x08\x12M\n\x13min_price_increment\x18\x17 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12 \n\x18\x61pi_trade_available_flag\x18\x18 \x01(\x08\"u\n\x13GetDividendsRequest\x12\x0c\n\x04\x66igi\x18\x01 \x01(\t\x12(\n\x04\x66rom\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12&\n\x02to\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"Z\n\x14GetDividendsResponse\x12\x42\n\tdividends\x18\x01 \x03(\x0b\x32/.tinkoff.public.invest.api.contract.v1.Dividend\"\x86\x04\n\x08\x44ividend\x12G\n\x0c\x64ividend_net\x18\x01 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12\x30\n\x0cpayment_date\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x31\n\rdeclared_date\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x31\n\rlast_buy_date\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x15\n\rdividend_type\x18\x05 \x01(\t\x12/\n\x0brecord_date\x18\x06 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x12\n\nregularity\x18\x07 \x01(\t\x12\x46\n\x0b\x63lose_price\x18\x08 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12\x45\n\x0byield_value\x18\t \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12.\n\ncreated_at\x18\n \x01(\x0b\x32\x1a.google.protobuf.Timestamp*m\n\x10InstrumentIdType\x12\x1d\n\x19INSTRUMENT_ID_UNSPECIFIED\x10\x00\x12\x1b\n\x17INSTRUMENT_ID_TYPE_FIGI\x10\x01\x12\x1d\n\x19INSTRUMENT_ID_TYPE_TICKER\x10\x02*l\n\x10InstrumentStatus\x12!\n\x1dINSTRUMENT_STATUS_UNSPECIFIED\x10\x00\x12\x1a\n\x16INSTRUMENT_STATUS_BASE\x10\x01\x12\x19\n\x15INSTRUMENT_STATUS_ALL\x10\x02*\xe5\x01\n\tShareType\x12\x1a\n\x16SHARE_TYPE_UNSPECIFIED\x10\x00\x12\x15\n\x11SHARE_TYPE_COMMON\x10\x01\x12\x18\n\x14SHARE_TYPE_PREFERRED\x10\x02\x12\x12\n\x0eSHARE_TYPE_ADR\x10\x03\x12\x12\n\x0eSHARE_TYPE_GDR\x10\x04\x12\x12\n\x0eSHARE_TYPE_MLP\x10\x05\x12\x1a\n\x16SHARE_TYPE_NY_REG_SHRS\x10\x06\x12\x1e\n\x1aSHARE_TYPE_CLOSED_END_FUND\x10\x07\x12\x13\n\x0fSHARE_TYPE_REIT\x10\x08\x32\xcc\x0f\n\x12InstrumentsService\x12\x93\x01\n\x10TradingSchedules\x12>.tinkoff.public.invest.api.contract.v1.TradingSchedulesRequest\x1a?.tinkoff.public.invest.api.contract.v1.TradingSchedulesResponse\x12w\n\x06\x42ondBy\x12\x38.tinkoff.public.invest.api.contract.v1.InstrumentRequest\x1a\x33.tinkoff.public.invest.api.contract.v1.BondResponse\x12x\n\x05\x42onds\x12\x39.tinkoff.public.invest.api.contract.v1.InstrumentsRequest\x1a\x34.tinkoff.public.invest.api.contract.v1.BondsResponse\x12\x7f\n\nCurrencyBy\x12\x38.tinkoff.public.invest.api.contract.v1.InstrumentRequest\x1a\x37.tinkoff.public.invest.api.contract.v1.CurrencyResponse\x12\x82\x01\n\nCurrencies\x12\x39.tinkoff.public.invest.api.contract.v1.InstrumentsRequest\x1a\x39.tinkoff.public.invest.api.contract.v1.CurrenciesResponse\x12u\n\x05\x45tfBy\x12\x38.tinkoff.public.invest.api.contract.v1.InstrumentRequest\x1a\x32.tinkoff.public.invest.api.contract.v1.EtfResponse\x12v\n\x04\x45tfs\x12\x39.tinkoff.public.invest.api.contract.v1.InstrumentsRequest\x1a\x33.tinkoff.public.invest.api.contract.v1.EtfsResponse\x12{\n\x08\x46utureBy\x12\x38.tinkoff.public.invest.api.contract.v1.InstrumentRequest\x1a\x35.tinkoff.public.invest.api.contract.v1.FutureResponse\x12|\n\x07\x46utures\x12\x39.tinkoff.public.invest.api.contract.v1.InstrumentsRequest\x1a\x36.tinkoff.public.invest.api.contract.v1.FuturesResponse\x12y\n\x07ShareBy\x12\x38.tinkoff.public.invest.api.contract.v1.InstrumentRequest\x1a\x34.tinkoff.public.invest.api.contract.v1.ShareResponse\x12z\n\x06Shares\x12\x39.tinkoff.public.invest.api.contract.v1.InstrumentsRequest\x1a\x35.tinkoff.public.invest.api.contract.v1.SharesResponse\x12\x9c\x01\n\x13GetAccruedInterests\x12\x41.tinkoff.public.invest.api.contract.v1.GetAccruedInterestsRequest\x1a\x42.tinkoff.public.invest.api.contract.v1.GetAccruedInterestsResponse\x12\x93\x01\n\x10GetFuturesMargin\x12>.tinkoff.public.invest.api.contract.v1.GetFuturesMarginRequest\x1a?.tinkoff.public.invest.api.contract.v1.GetFuturesMarginResponse\x12\x86\x01\n\x0fGetInstrumentBy\x12\x38.tinkoff.public.invest.api.contract.v1.InstrumentRequest\x1a\x39.tinkoff.public.invest.api.contract.v1.InstrumentResponse\x12\x87\x01\n\x0cGetDividends\x12:.tinkoff.public.invest.api.contract.v1.GetDividendsRequest\x1a;.tinkoff.public.invest.api.contract.v1.GetDividendsResponseBa\n\x1cru.tinkoff.piapi.contract.v1P\x01Z\x0c./;investapi\xa2\x02\x05TIAPI\xaa\x02\x14Tinkoff.InvestApi.V1\xca\x02\x11Tinkoff\\Invest\\V1b\x06proto3'
   ,
   dependencies=[google_dot_protobuf_dot_timestamp__pb2.DESCRIPTOR,tinkoff_dot_invest_dot_grpc_dot_common__pb2.DESCRIPTOR,])
 
@@ -51,8 +51,8 @@ _INSTRUMENTIDTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=8124,
-  serialized_end=8233,
+  serialized_start=10474,
+  serialized_end=10583,
 )
 _sym_db.RegisterEnumDescriptor(_INSTRUMENTIDTYPE)
 
@@ -82,8 +82,8 @@ _INSTRUMENTSTATUS = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=8235,
-  serialized_end=8343,
+  serialized_start=10585,
+  serialized_end=10693,
 )
 _sym_db.RegisterEnumDescriptor(_INSTRUMENTSTATUS)
 
@@ -143,8 +143,8 @@ _SHARETYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=8346,
-  serialized_end=8575,
+  serialized_start=10696,
+  serialized_end=10925,
 )
 _sym_db.RegisterEnumDescriptor(_SHARETYPE)
 
@@ -801,43 +801,43 @@ _BOND = _descriptor.Descriptor(
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='klong', full_name='tinkoff.public.invest.api.contract.v1.Bond.klong', index=6,
-      number=7, type=1, cpp_type=5, label=1,
-      has_default_value=False, default_value=float(0),
+      number=7, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='kshort', full_name='tinkoff.public.invest.api.contract.v1.Bond.kshort', index=7,
-      number=8, type=1, cpp_type=5, label=1,
-      has_default_value=False, default_value=float(0),
+      number=8, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='dlong', full_name='tinkoff.public.invest.api.contract.v1.Bond.dlong', index=8,
-      number=9, type=1, cpp_type=5, label=1,
-      has_default_value=False, default_value=float(0),
+      number=9, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='dshort', full_name='tinkoff.public.invest.api.contract.v1.Bond.dshort', index=9,
-      number=10, type=1, cpp_type=5, label=1,
-      has_default_value=False, default_value=float(0),
+      number=10, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='dlong_min', full_name='tinkoff.public.invest.api.contract.v1.Bond.dlong_min', index=10,
-      number=11, type=1, cpp_type=5, label=1,
-      has_default_value=False, default_value=float(0),
+      number=11, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='dshort_min', full_name='tinkoff.public.invest.api.contract.v1.Bond.dshort_min', index=11,
-      number=12, type=1, cpp_type=5, label=1,
-      has_default_value=False, default_value=float(0),
+      number=12, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
@@ -1004,8 +1004,8 @@ _BOND = _descriptor.Descriptor(
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='min_price_increment', full_name='tinkoff.public.invest.api.contract.v1.Bond.min_price_increment', index=35,
-      number=38, type=2, cpp_type=6, label=1,
-      has_default_value=False, default_value=float(0),
+      number=38, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
@@ -1029,7 +1029,7 @@ _BOND = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=1853,
-  serialized_end=2959,
+  serialized_end=3309,
 )
 
 
@@ -1085,43 +1085,43 @@ _CURRENCY = _descriptor.Descriptor(
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='klong', full_name='tinkoff.public.invest.api.contract.v1.Currency.klong', index=6,
-      number=7, type=1, cpp_type=5, label=1,
-      has_default_value=False, default_value=float(0),
+      number=7, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='kshort', full_name='tinkoff.public.invest.api.contract.v1.Currency.kshort', index=7,
-      number=8, type=1, cpp_type=5, label=1,
-      has_default_value=False, default_value=float(0),
+      number=8, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='dlong', full_name='tinkoff.public.invest.api.contract.v1.Currency.dlong', index=8,
-      number=9, type=1, cpp_type=5, label=1,
-      has_default_value=False, default_value=float(0),
+      number=9, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='dshort', full_name='tinkoff.public.invest.api.contract.v1.Currency.dshort', index=9,
-      number=10, type=1, cpp_type=5, label=1,
-      has_default_value=False, default_value=float(0),
+      number=10, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='dlong_min', full_name='tinkoff.public.invest.api.contract.v1.Currency.dlong_min', index=10,
-      number=11, type=1, cpp_type=5, label=1,
-      has_default_value=False, default_value=float(0),
+      number=11, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='dshort_min', full_name='tinkoff.public.invest.api.contract.v1.Currency.dshort_min', index=11,
-      number=12, type=1, cpp_type=5, label=1,
-      has_default_value=False, default_value=float(0),
+      number=12, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
@@ -1204,8 +1204,8 @@ _CURRENCY = _descriptor.Descriptor(
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='min_price_increment', full_name='tinkoff.public.invest.api.contract.v1.Currency.min_price_increment', index=23,
-      number=25, type=2, cpp_type=6, label=1,
-      has_default_value=False, default_value=float(0),
+      number=25, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
@@ -1228,8 +1228,8 @@ _CURRENCY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2962,
-  serialized_end=3602,
+  serialized_start=3312,
+  serialized_end=4302,
 )
 
 
@@ -1285,43 +1285,43 @@ _ETF = _descriptor.Descriptor(
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='klong', full_name='tinkoff.public.invest.api.contract.v1.Etf.klong', index=6,
-      number=7, type=1, cpp_type=5, label=1,
-      has_default_value=False, default_value=float(0),
+      number=7, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='kshort', full_name='tinkoff.public.invest.api.contract.v1.Etf.kshort', index=7,
-      number=8, type=1, cpp_type=5, label=1,
-      has_default_value=False, default_value=float(0),
+      number=8, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='dlong', full_name='tinkoff.public.invest.api.contract.v1.Etf.dlong', index=8,
-      number=9, type=1, cpp_type=5, label=1,
-      has_default_value=False, default_value=float(0),
+      number=9, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='dshort', full_name='tinkoff.public.invest.api.contract.v1.Etf.dshort', index=9,
-      number=10, type=1, cpp_type=5, label=1,
-      has_default_value=False, default_value=float(0),
+      number=10, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='dlong_min', full_name='tinkoff.public.invest.api.contract.v1.Etf.dlong_min', index=10,
-      number=11, type=1, cpp_type=5, label=1,
-      has_default_value=False, default_value=float(0),
+      number=11, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='dshort_min', full_name='tinkoff.public.invest.api.contract.v1.Etf.dshort_min', index=11,
-      number=12, type=1, cpp_type=5, label=1,
-      has_default_value=False, default_value=float(0),
+      number=12, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
@@ -1348,8 +1348,8 @@ _ETF = _descriptor.Descriptor(
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='fixed_commission', full_name='tinkoff.public.invest.api.contract.v1.Etf.fixed_commission', index=15,
-      number=17, type=1, cpp_type=5, label=1,
-      has_default_value=False, default_value=float(0),
+      number=17, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
@@ -1369,8 +1369,8 @@ _ETF = _descriptor.Descriptor(
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='num_shares', full_name='tinkoff.public.invest.api.contract.v1.Etf.num_shares', index=18,
-      number=20, type=1, cpp_type=5, label=1,
-      has_default_value=False, default_value=float(0),
+      number=20, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
@@ -1432,8 +1432,8 @@ _ETF = _descriptor.Descriptor(
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='min_price_increment', full_name='tinkoff.public.invest.api.contract.v1.Etf.min_price_increment', index=27,
-      number=29, type=2, cpp_type=6, label=1,
-      has_default_value=False, default_value=float(0),
+      number=29, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
@@ -1456,8 +1456,8 @@ _ETF = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3605,
-  serialized_end=4304,
+  serialized_start=4305,
+  serialized_end=5454,
 )
 
 
@@ -1506,43 +1506,43 @@ _FUTURE = _descriptor.Descriptor(
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='klong', full_name='tinkoff.public.invest.api.contract.v1.Future.klong', index=5,
-      number=6, type=1, cpp_type=5, label=1,
-      has_default_value=False, default_value=float(0),
+      number=6, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='kshort', full_name='tinkoff.public.invest.api.contract.v1.Future.kshort', index=6,
-      number=7, type=1, cpp_type=5, label=1,
-      has_default_value=False, default_value=float(0),
+      number=7, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='dlong', full_name='tinkoff.public.invest.api.contract.v1.Future.dlong', index=7,
-      number=8, type=1, cpp_type=5, label=1,
-      has_default_value=False, default_value=float(0),
+      number=8, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='dshort', full_name='tinkoff.public.invest.api.contract.v1.Future.dshort', index=8,
-      number=9, type=1, cpp_type=5, label=1,
-      has_default_value=False, default_value=float(0),
+      number=9, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='dlong_min', full_name='tinkoff.public.invest.api.contract.v1.Future.dlong_min', index=9,
-      number=10, type=1, cpp_type=5, label=1,
-      has_default_value=False, default_value=float(0),
+      number=10, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='dshort_min', full_name='tinkoff.public.invest.api.contract.v1.Future.dshort_min', index=10,
-      number=11, type=1, cpp_type=5, label=1,
-      has_default_value=False, default_value=float(0),
+      number=11, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
@@ -1604,8 +1604,8 @@ _FUTURE = _descriptor.Descriptor(
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='basic_asset_size', full_name='tinkoff.public.invest.api.contract.v1.Future.basic_asset_size', index=19,
-      number=20, type=1, cpp_type=5, label=1,
-      has_default_value=False, default_value=float(0),
+      number=20, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
@@ -1667,8 +1667,8 @@ _FUTURE = _descriptor.Descriptor(
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='min_price_increment', full_name='tinkoff.public.invest.api.contract.v1.Future.min_price_increment', index=28,
-      number=29, type=2, cpp_type=6, label=1,
-      has_default_value=False, default_value=float(0),
+      number=29, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
@@ -1691,8 +1691,8 @@ _FUTURE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4307,
-  serialized_end=5101,
+  serialized_start=5457,
+  serialized_end=6651,
 )
 
 
@@ -1748,43 +1748,43 @@ _SHARE = _descriptor.Descriptor(
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='klong', full_name='tinkoff.public.invest.api.contract.v1.Share.klong', index=6,
-      number=7, type=1, cpp_type=5, label=1,
-      has_default_value=False, default_value=float(0),
+      number=7, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='kshort', full_name='tinkoff.public.invest.api.contract.v1.Share.kshort', index=7,
-      number=8, type=1, cpp_type=5, label=1,
-      has_default_value=False, default_value=float(0),
+      number=8, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='dlong', full_name='tinkoff.public.invest.api.contract.v1.Share.dlong', index=8,
-      number=9, type=1, cpp_type=5, label=1,
-      has_default_value=False, default_value=float(0),
+      number=9, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='dshort', full_name='tinkoff.public.invest.api.contract.v1.Share.dshort', index=9,
-      number=10, type=1, cpp_type=5, label=1,
-      has_default_value=False, default_value=float(0),
+      number=10, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='dlong_min', full_name='tinkoff.public.invest.api.contract.v1.Share.dlong_min', index=10,
-      number=11, type=1, cpp_type=5, label=1,
-      has_default_value=False, default_value=float(0),
+      number=11, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='dshort_min', full_name='tinkoff.public.invest.api.contract.v1.Share.dshort_min', index=11,
-      number=12, type=1, cpp_type=5, label=1,
-      has_default_value=False, default_value=float(0),
+      number=12, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
@@ -1902,8 +1902,8 @@ _SHARE = _descriptor.Descriptor(
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='min_price_increment', full_name='tinkoff.public.invest.api.contract.v1.Share.min_price_increment', index=28,
-      number=31, type=2, cpp_type=6, label=1,
-      has_default_value=False, default_value=float(0),
+      number=31, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
@@ -1926,8 +1926,8 @@ _SHARE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5104,
-  serialized_end=5915,
+  serialized_start=6654,
+  serialized_end=7815,
 )
 
 
@@ -1972,8 +1972,8 @@ _GETACCRUEDINTERESTSREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5917,
-  serialized_end=6041,
+  serialized_start=7817,
+  serialized_end=7941,
 )
 
 
@@ -2004,8 +2004,8 @@ _GETACCRUEDINTERESTSRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6043,
-  serialized_end=6155,
+  serialized_start=7943,
+  serialized_end=8055,
 )
 
 
@@ -2033,8 +2033,8 @@ _ACCRUEDINTEREST = _descriptor.Descriptor(
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='value_percent', full_name='tinkoff.public.invest.api.contract.v1.AccruedInterest.value_percent', index=2,
-      number=3, type=2, cpp_type=6, label=1,
-      has_default_value=False, default_value=float(0),
+      number=3, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
@@ -2057,8 +2057,8 @@ _ACCRUEDINTEREST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6158,
-  serialized_end=6372,
+  serialized_start=8058,
+  serialized_end=8322,
 )
 
 
@@ -2089,8 +2089,8 @@ _GETFUTURESMARGINREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6374,
-  serialized_end=6413,
+  serialized_start=8324,
+  serialized_end=8363,
 )
 
 
@@ -2118,8 +2118,8 @@ _GETFUTURESMARGINRESPONSE = _descriptor.Descriptor(
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='min_price_increment', full_name='tinkoff.public.invest.api.contract.v1.GetFuturesMarginResponse.min_price_increment', index=2,
-      number=3, type=2, cpp_type=6, label=1,
-      has_default_value=False, default_value=float(0),
+      number=3, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
@@ -2142,8 +2142,8 @@ _GETFUTURESMARGINRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6416,
-  serialized_end=6722,
+  serialized_start=8366,
+  serialized_end=8722,
 )
 
 
@@ -2174,8 +2174,8 @@ _INSTRUMENTRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6724,
-  serialized_end=6815,
+  serialized_start=8724,
+  serialized_end=8815,
 )
 
 
@@ -2231,43 +2231,43 @@ _INSTRUMENT = _descriptor.Descriptor(
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='klong', full_name='tinkoff.public.invest.api.contract.v1.Instrument.klong', index=6,
-      number=7, type=1, cpp_type=5, label=1,
-      has_default_value=False, default_value=float(0),
+      number=7, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='kshort', full_name='tinkoff.public.invest.api.contract.v1.Instrument.kshort', index=7,
-      number=8, type=1, cpp_type=5, label=1,
-      has_default_value=False, default_value=float(0),
+      number=8, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='dlong', full_name='tinkoff.public.invest.api.contract.v1.Instrument.dlong', index=8,
-      number=9, type=1, cpp_type=5, label=1,
-      has_default_value=False, default_value=float(0),
+      number=9, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='dshort', full_name='tinkoff.public.invest.api.contract.v1.Instrument.dshort', index=9,
-      number=10, type=1, cpp_type=5, label=1,
-      has_default_value=False, default_value=float(0),
+      number=10, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='dlong_min', full_name='tinkoff.public.invest.api.contract.v1.Instrument.dlong_min', index=10,
-      number=11, type=1, cpp_type=5, label=1,
-      has_default_value=False, default_value=float(0),
+      number=11, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='dshort_min', full_name='tinkoff.public.invest.api.contract.v1.Instrument.dshort_min', index=11,
-      number=12, type=1, cpp_type=5, label=1,
-      has_default_value=False, default_value=float(0),
+      number=12, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
@@ -2343,8 +2343,8 @@ _INSTRUMENT = _descriptor.Descriptor(
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='min_price_increment', full_name='tinkoff.public.invest.api.contract.v1.Instrument.min_price_increment', index=22,
-      number=23, type=2, cpp_type=6, label=1,
-      has_default_value=False, default_value=float(0),
+      number=23, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
@@ -2367,8 +2367,8 @@ _INSTRUMENT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6818,
-  serialized_end=7390,
+  serialized_start=8818,
+  serialized_end=9740,
 )
 
 
@@ -2413,8 +2413,8 @@ _GETDIVIDENDSREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=7392,
-  serialized_end=7509,
+  serialized_start=9742,
+  serialized_end=9859,
 )
 
 
@@ -2445,8 +2445,8 @@ _GETDIVIDENDSRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=7511,
-  serialized_end=7601,
+  serialized_start=9861,
+  serialized_end=9951,
 )
 
 
@@ -2540,8 +2540,8 @@ _DIVIDEND = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=7604,
-  serialized_end=8122,
+  serialized_start=9954,
+  serialized_end=10472,
 )
 
 _TRADINGSCHEDULESREQUEST.fields_by_name['from'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
@@ -2565,6 +2565,12 @@ _FUTURERESPONSE.fields_by_name['instrument'].message_type = _FUTURE
 _FUTURESRESPONSE.fields_by_name['instruments'].message_type = _FUTURE
 _SHARERESPONSE.fields_by_name['instrument'].message_type = _SHARE
 _SHARESRESPONSE.fields_by_name['instruments'].message_type = _SHARE
+_BOND.fields_by_name['klong'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._QUOTATION
+_BOND.fields_by_name['kshort'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._QUOTATION
+_BOND.fields_by_name['dlong'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._QUOTATION
+_BOND.fields_by_name['dshort'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._QUOTATION
+_BOND.fields_by_name['dlong_min'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._QUOTATION
+_BOND.fields_by_name['dshort_min'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._QUOTATION
 _BOND.fields_by_name['maturity_date'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
 _BOND.fields_by_name['nominal'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._MONEYVALUE
 _BOND.fields_by_name['state_reg_date'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
@@ -2572,29 +2578,70 @@ _BOND.fields_by_name['placement_date'].message_type = google_dot_protobuf_dot_ti
 _BOND.fields_by_name['placement_price'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._MONEYVALUE
 _BOND.fields_by_name['aci_value'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._MONEYVALUE
 _BOND.fields_by_name['trading_status'].enum_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._SECURITYTRADINGSTATUS
+_BOND.fields_by_name['min_price_increment'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._QUOTATION
+_CURRENCY.fields_by_name['klong'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._QUOTATION
+_CURRENCY.fields_by_name['kshort'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._QUOTATION
+_CURRENCY.fields_by_name['dlong'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._QUOTATION
+_CURRENCY.fields_by_name['dshort'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._QUOTATION
+_CURRENCY.fields_by_name['dlong_min'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._QUOTATION
+_CURRENCY.fields_by_name['dshort_min'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._QUOTATION
 _CURRENCY.fields_by_name['nominal'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._MONEYVALUE
 _CURRENCY.fields_by_name['trading_status'].enum_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._SECURITYTRADINGSTATUS
+_CURRENCY.fields_by_name['min_price_increment'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._QUOTATION
+_ETF.fields_by_name['klong'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._QUOTATION
+_ETF.fields_by_name['kshort'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._QUOTATION
+_ETF.fields_by_name['dlong'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._QUOTATION
+_ETF.fields_by_name['dshort'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._QUOTATION
+_ETF.fields_by_name['dlong_min'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._QUOTATION
+_ETF.fields_by_name['dshort_min'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._QUOTATION
+_ETF.fields_by_name['fixed_commission'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._QUOTATION
 _ETF.fields_by_name['released_date'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
+_ETF.fields_by_name['num_shares'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._QUOTATION
 _ETF.fields_by_name['trading_status'].enum_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._SECURITYTRADINGSTATUS
+_ETF.fields_by_name['min_price_increment'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._QUOTATION
+_FUTURE.fields_by_name['klong'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._QUOTATION
+_FUTURE.fields_by_name['kshort'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._QUOTATION
+_FUTURE.fields_by_name['dlong'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._QUOTATION
+_FUTURE.fields_by_name['dshort'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._QUOTATION
+_FUTURE.fields_by_name['dlong_min'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._QUOTATION
+_FUTURE.fields_by_name['dshort_min'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._QUOTATION
 _FUTURE.fields_by_name['first_trade_date'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
 _FUTURE.fields_by_name['last_trade_date'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
+_FUTURE.fields_by_name['basic_asset_size'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._QUOTATION
 _FUTURE.fields_by_name['expiration_date'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
 _FUTURE.fields_by_name['trading_status'].enum_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._SECURITYTRADINGSTATUS
+_FUTURE.fields_by_name['min_price_increment'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._QUOTATION
+_SHARE.fields_by_name['klong'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._QUOTATION
+_SHARE.fields_by_name['kshort'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._QUOTATION
+_SHARE.fields_by_name['dlong'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._QUOTATION
+_SHARE.fields_by_name['dshort'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._QUOTATION
+_SHARE.fields_by_name['dlong_min'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._QUOTATION
+_SHARE.fields_by_name['dshort_min'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._QUOTATION
 _SHARE.fields_by_name['ipo_date'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
 _SHARE.fields_by_name['nominal'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._MONEYVALUE
 _SHARE.fields_by_name['trading_status'].enum_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._SECURITYTRADINGSTATUS
 _SHARE.fields_by_name['share_type'].enum_type = _SHARETYPE
+_SHARE.fields_by_name['min_price_increment'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._QUOTATION
 _GETACCRUEDINTERESTSREQUEST.fields_by_name['from'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
 _GETACCRUEDINTERESTSREQUEST.fields_by_name['to'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
 _GETACCRUEDINTERESTSRESPONSE.fields_by_name['accrued_interests'].message_type = _ACCRUEDINTEREST
 _ACCRUEDINTEREST.fields_by_name['date'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
 _ACCRUEDINTEREST.fields_by_name['value'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._QUOTATION
+_ACCRUEDINTEREST.fields_by_name['value_percent'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._QUOTATION
 _ACCRUEDINTEREST.fields_by_name['nominal'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._QUOTATION
 _GETFUTURESMARGINRESPONSE.fields_by_name['initial_margin_on_buy'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._MONEYVALUE
 _GETFUTURESMARGINRESPONSE.fields_by_name['initial_margin_on_sell'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._MONEYVALUE
+_GETFUTURESMARGINRESPONSE.fields_by_name['min_price_increment'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._QUOTATION
 _GETFUTURESMARGINRESPONSE.fields_by_name['min_price_increment_amount'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._QUOTATION
 _INSTRUMENTRESPONSE.fields_by_name['instrument'].message_type = _INSTRUMENT
+_INSTRUMENT.fields_by_name['klong'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._QUOTATION
+_INSTRUMENT.fields_by_name['kshort'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._QUOTATION
+_INSTRUMENT.fields_by_name['dlong'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._QUOTATION
+_INSTRUMENT.fields_by_name['dshort'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._QUOTATION
+_INSTRUMENT.fields_by_name['dlong_min'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._QUOTATION
+_INSTRUMENT.fields_by_name['dshort_min'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._QUOTATION
 _INSTRUMENT.fields_by_name['trading_status'].enum_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._SECURITYTRADINGSTATUS
+_INSTRUMENT.fields_by_name['min_price_increment'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._QUOTATION
 _GETDIVIDENDSREQUEST.fields_by_name['from'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
 _GETDIVIDENDSREQUEST.fields_by_name['to'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
 _GETDIVIDENDSRESPONSE.fields_by_name['dividends'].message_type = _DIVIDEND
@@ -2869,8 +2916,8 @@ _INSTRUMENTSSERVICE = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=8578,
-  serialized_end=10574,
+  serialized_start=10928,
+  serialized_end=12924,
   methods=[
   _descriptor.MethodDescriptor(
     name='TradingSchedules',

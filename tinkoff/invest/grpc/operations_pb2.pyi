@@ -103,7 +103,7 @@ class _OperationTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._
     OPERATION_TYPE_INPUT_SECURITIES: OperationType.ValueType = ...  # 17
     """Завод ЦБ"""
 
-    OPERATION_TYPE_SELL_MARJIN: OperationType.ValueType = ...  # 18
+    OPERATION_TYPE_SELL_MARGIN: OperationType.ValueType = ...  # 18
     """Продажа в результате Margin-call"""
 
     OPERATION_TYPE_BROKER_FEE: OperationType.ValueType = ...  # 19
@@ -127,10 +127,10 @@ class _OperationTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._
     OPERATION_TYPE_DIVIDEND_TRANSFER: OperationType.ValueType = ...  # 25
     """Передача дивидендного дохода"""
 
-    OPERATION_TYPE_ACCRUING_VARMARJIN: OperationType.ValueType = ...  # 26
+    OPERATION_TYPE_ACCRUING_VARMARGIN: OperationType.ValueType = ...  # 26
     """Зачисление вариационной маржи"""
 
-    OPERATION_TYPE_WRITING_OFF_VARMARJIN: OperationType.ValueType = ...  # 27
+    OPERATION_TYPE_WRITING_OFF_VARMARGIN: OperationType.ValueType = ...  # 27
     """Списание вариационной маржи"""
 
     OPERATION_TYPE_DELIVERY_BUY: OperationType.ValueType = ...  # 28
@@ -239,7 +239,7 @@ OPERATION_TYPE_BUY_CARD: OperationType.ValueType = ...  # 16
 OPERATION_TYPE_INPUT_SECURITIES: OperationType.ValueType = ...  # 17
 """Завод ЦБ"""
 
-OPERATION_TYPE_SELL_MARJIN: OperationType.ValueType = ...  # 18
+OPERATION_TYPE_SELL_MARGIN: OperationType.ValueType = ...  # 18
 """Продажа в результате Margin-call"""
 
 OPERATION_TYPE_BROKER_FEE: OperationType.ValueType = ...  # 19
@@ -263,10 +263,10 @@ OPERATION_TYPE_SUCCESS_FEE: OperationType.ValueType = ...  # 24
 OPERATION_TYPE_DIVIDEND_TRANSFER: OperationType.ValueType = ...  # 25
 """Передача дивидендного дохода"""
 
-OPERATION_TYPE_ACCRUING_VARMARJIN: OperationType.ValueType = ...  # 26
+OPERATION_TYPE_ACCRUING_VARMARGIN: OperationType.ValueType = ...  # 26
 """Зачисление вариационной маржи"""
 
-OPERATION_TYPE_WRITING_OFF_VARMARJIN: OperationType.ValueType = ...  # 27
+OPERATION_TYPE_WRITING_OFF_VARMARGIN: OperationType.ValueType = ...  # 27
 """Списание вариационной маржи"""
 
 OPERATION_TYPE_DELIVERY_BUY: OperationType.ValueType = ...  # 28
@@ -487,11 +487,12 @@ class PortfolioResponse(google.protobuf.message.Message):
         pass
     @property
     def total_amount_futures(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
-        """Общая стоимость валют в портфеле в рублях"""
+        """Общая стоимость фьючерсов в портфеле в рублях"""
         pass
-    expected_yield: builtins.float = ...
-    """Текущая доходность портфеля"""
-
+    @property
+    def expected_yield(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Текущая доходность портфеля"""
+        pass
     @property
     def positions(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___PortfolioPosition]:
         """Список позиций портфеля"""
@@ -503,10 +504,10 @@ class PortfolioResponse(google.protobuf.message.Message):
         total_amount_etf : typing.Optional[tinkoff.invest.grpc.common_pb2.MoneyValue] = ...,
         total_amount_currencies : typing.Optional[tinkoff.invest.grpc.common_pb2.MoneyValue] = ...,
         total_amount_futures : typing.Optional[tinkoff.invest.grpc.common_pb2.MoneyValue] = ...,
-        expected_yield : builtins.float = ...,
+        expected_yield : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
         positions : typing.Optional[typing.Iterable[global___PortfolioPosition]] = ...,
         ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["total_amount_bonds",b"total_amount_bonds","total_amount_currencies",b"total_amount_currencies","total_amount_etf",b"total_amount_etf","total_amount_futures",b"total_amount_futures","total_amount_shares",b"total_amount_shares"]) -> builtins.bool: ...
+    def HasField(self, field_name: typing_extensions.Literal["expected_yield",b"expected_yield","total_amount_bonds",b"total_amount_bonds","total_amount_currencies",b"total_amount_currencies","total_amount_etf",b"total_amount_etf","total_amount_futures",b"total_amount_futures","total_amount_shares",b"total_amount_shares"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions.Literal["expected_yield",b"expected_yield","positions",b"positions","total_amount_bonds",b"total_amount_bonds","total_amount_currencies",b"total_amount_currencies","total_amount_etf",b"total_amount_etf","total_amount_futures",b"total_amount_futures","total_amount_shares",b"total_amount_shares"]) -> None: ...
 global___PortfolioResponse = PortfolioResponse
 
@@ -531,6 +532,7 @@ class PositionsResponse(google.protobuf.message.Message):
     BLOCKED_FIELD_NUMBER: builtins.int
     SECURITIES_FIELD_NUMBER: builtins.int
     LIMITS_LOADING_IN_PROGRESS_FIELD_NUMBER: builtins.int
+    FUTURES_FIELD_NUMBER: builtins.int
     @property
     def money(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[tinkoff.invest.grpc.common_pb2.MoneyValue]:
         """Массив валютных позиций портфеля"""
@@ -546,14 +548,19 @@ class PositionsResponse(google.protobuf.message.Message):
     limits_loading_in_progress: builtins.bool = ...
     """Признак идущей в данный момент выгрузки лимитов"""
 
+    @property
+    def futures(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___PositionsFutures]:
+        """Список фьючерсов портфеля"""
+        pass
     def __init__(self,
         *,
         money : typing.Optional[typing.Iterable[tinkoff.invest.grpc.common_pb2.MoneyValue]] = ...,
         blocked : typing.Optional[typing.Iterable[tinkoff.invest.grpc.common_pb2.MoneyValue]] = ...,
         securities : typing.Optional[typing.Iterable[global___PositionsSecurities]] = ...,
         limits_loading_in_progress : builtins.bool = ...,
+        futures : typing.Optional[typing.Iterable[global___PositionsFutures]] = ...,
         ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["blocked",b"blocked","limits_loading_in_progress",b"limits_loading_in_progress","money",b"money","securities",b"securities"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["blocked",b"blocked","futures",b"futures","limits_loading_in_progress",b"limits_loading_in_progress","money",b"money","securities",b"securities"]) -> None: ...
 global___PositionsResponse = PositionsResponse
 
 class WithdrawLimitsRequest(google.protobuf.message.Message):
@@ -607,22 +614,25 @@ class PortfolioPosition(google.protobuf.message.Message):
     EXPECTED_YIELD_FIELD_NUMBER: builtins.int
     CURRENT_NKD_FIELD_NUMBER: builtins.int
     AVERAGE_POSITION_PRICE_PT_FIELD_NUMBER: builtins.int
+    CURRENT_PRICE_FIELD_NUMBER: builtins.int
     figi: typing.Text = ...
     """Figi-идентификатора инструмента"""
 
     instrument_type: typing.Text = ...
     """Тип инструмента"""
 
-    quantity: builtins.float = ...
-    """Количество инструмента в портфеле в штуках"""
-
+    @property
+    def quantity(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Количество инструмента в портфеле в штуках"""
+        pass
     @property
     def average_position_price(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
         """Средняя цена лота в позиции"""
         pass
-    expected_yield: builtins.float = ...
-    """Текущая рассчитанная доходность"""
-
+    @property
+    def expected_yield(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Текущая рассчитанная доходность"""
+        pass
     @property
     def current_nkd(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
         """Текущий НКД"""
@@ -631,18 +641,23 @@ class PortfolioPosition(google.protobuf.message.Message):
     def average_position_price_pt(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
         """Средняя цена лота в позиции в пунктах (для фьючерсов)"""
         pass
+    @property
+    def current_price(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
+        """Текущая цена инструмента"""
+        pass
     def __init__(self,
         *,
         figi : typing.Text = ...,
         instrument_type : typing.Text = ...,
-        quantity : builtins.float = ...,
+        quantity : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
         average_position_price : typing.Optional[tinkoff.invest.grpc.common_pb2.MoneyValue] = ...,
-        expected_yield : builtins.float = ...,
+        expected_yield : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
         current_nkd : typing.Optional[tinkoff.invest.grpc.common_pb2.MoneyValue] = ...,
         average_position_price_pt : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        current_price : typing.Optional[tinkoff.invest.grpc.common_pb2.MoneyValue] = ...,
         ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["average_position_price",b"average_position_price","average_position_price_pt",b"average_position_price_pt","current_nkd",b"current_nkd"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["average_position_price",b"average_position_price","average_position_price_pt",b"average_position_price_pt","current_nkd",b"current_nkd","expected_yield",b"expected_yield","figi",b"figi","instrument_type",b"instrument_type","quantity",b"quantity"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["average_position_price",b"average_position_price","average_position_price_pt",b"average_position_price_pt","current_nkd",b"current_nkd","current_price",b"current_price","expected_yield",b"expected_yield","quantity",b"quantity"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["average_position_price",b"average_position_price","average_position_price_pt",b"average_position_price_pt","current_nkd",b"current_nkd","current_price",b"current_price","expected_yield",b"expected_yield","figi",b"figi","instrument_type",b"instrument_type","quantity",b"quantity"]) -> None: ...
 global___PortfolioPosition = PortfolioPosition
 
 class PositionsSecurities(google.protobuf.message.Message):
@@ -669,270 +684,26 @@ class PositionsSecurities(google.protobuf.message.Message):
     def ClearField(self, field_name: typing_extensions.Literal["balance",b"balance","blocked",b"blocked","figi",b"figi"]) -> None: ...
 global___PositionsSecurities = PositionsSecurities
 
-class BrokerReportRequest(google.protobuf.message.Message):
+class PositionsFutures(google.protobuf.message.Message):
+    """Баланс фьючерса."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
-    GENERATE_BROKER_REPORT_REQUEST_FIELD_NUMBER: builtins.int
-    GET_BROKER_REPORT_REQUEST_FIELD_NUMBER: builtins.int
-    @property
-    def generate_broker_report_request(self) -> global___GenerateBrokerReportRequest: ...
-    @property
-    def get_broker_report_request(self) -> global___GetBrokerReportRequest: ...
-    def __init__(self,
-        *,
-        generate_broker_report_request : typing.Optional[global___GenerateBrokerReportRequest] = ...,
-        get_broker_report_request : typing.Optional[global___GetBrokerReportRequest] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["generate_broker_report_request",b"generate_broker_report_request","get_broker_report_request",b"get_broker_report_request","payload",b"payload"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["generate_broker_report_request",b"generate_broker_report_request","get_broker_report_request",b"get_broker_report_request","payload",b"payload"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing_extensions.Literal["payload",b"payload"]) -> typing.Optional[typing_extensions.Literal["generate_broker_report_request","get_broker_report_request"]]: ...
-global___BrokerReportRequest = BrokerReportRequest
-
-class BrokerReportResponse(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
-    GENERATE_BROKER_REPORT_RESPONSE_FIELD_NUMBER: builtins.int
-    GET_BROKER_REPORT_RESPONSE_FIELD_NUMBER: builtins.int
-    @property
-    def generate_broker_report_response(self) -> global___GenerateBrokerReportResponse: ...
-    @property
-    def get_broker_report_response(self) -> global___GetBrokerReportResponse: ...
-    def __init__(self,
-        *,
-        generate_broker_report_response : typing.Optional[global___GenerateBrokerReportResponse] = ...,
-        get_broker_report_response : typing.Optional[global___GetBrokerReportResponse] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["generate_broker_report_response",b"generate_broker_report_response","get_broker_report_response",b"get_broker_report_response","payload",b"payload"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["generate_broker_report_response",b"generate_broker_report_response","get_broker_report_response",b"get_broker_report_response","payload",b"payload"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing_extensions.Literal["payload",b"payload"]) -> typing.Optional[typing_extensions.Literal["generate_broker_report_response","get_broker_report_response"]]: ...
-global___BrokerReportResponse = BrokerReportResponse
-
-class GenerateBrokerReportRequest(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
-    ACCOUNT_ID_FIELD_NUMBER: builtins.int
-    FROM_FIELD_NUMBER: builtins.int
-    TO_FIELD_NUMBER: builtins.int
-    account_id: typing.Text = ...
-    """Идентификатор счёта клиента"""
-
-    @property
-    def to(self) -> google.protobuf.timestamp_pb2.Timestamp:
-        """Окончание периода (по UTC)"""
-        pass
-    def __init__(self,
-        *,
-        account_id : typing.Text = ...,
-        to : typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["from",b"from","to",b"to"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["account_id",b"account_id","from",b"from","to",b"to"]) -> None: ...
-global___GenerateBrokerReportRequest = GenerateBrokerReportRequest
-
-class GenerateBrokerReportResponse(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
-    TASK_ID_FIELD_NUMBER: builtins.int
-    task_id: typing.Text = ...
-    """Идентификатор задачи формирования брокерского отчёта"""
-
-    def __init__(self,
-        *,
-        task_id : typing.Text = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["task_id",b"task_id"]) -> None: ...
-global___GenerateBrokerReportResponse = GenerateBrokerReportResponse
-
-class GetBrokerReportRequest(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
-    TASK_ID_FIELD_NUMBER: builtins.int
-    PAGE_FIELD_NUMBER: builtins.int
-    task_id: typing.Text = ...
-    """Идентификатор задачи формирования брокерского отчёта"""
-
-    page: builtins.int = ...
-    """Номер страницы отчета (начинается с 1), значение по умолчанию: 0"""
-
-    def __init__(self,
-        *,
-        task_id : typing.Text = ...,
-        page : builtins.int = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["page",b"page","task_id",b"task_id"]) -> None: ...
-global___GetBrokerReportRequest = GetBrokerReportRequest
-
-class GetBrokerReportResponse(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
-    BROKER_REPORT_FIELD_NUMBER: builtins.int
-    ITEMSCOUNT_FIELD_NUMBER: builtins.int
-    PAGESCOUNT_FIELD_NUMBER: builtins.int
-    PAGE_FIELD_NUMBER: builtins.int
-    @property
-    def broker_report(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___BrokerReport]: ...
-    itemsCount: builtins.int = ...
-    """Количество записей в отчете"""
-
-    pagesCount: builtins.int = ...
-    """Количество страниц с данными отчета (начинается с 0)"""
-
-    page: builtins.int = ...
-    """Текущая страница (начинается с 0)"""
-
-    def __init__(self,
-        *,
-        broker_report : typing.Optional[typing.Iterable[global___BrokerReport]] = ...,
-        itemsCount : builtins.int = ...,
-        pagesCount : builtins.int = ...,
-        page : builtins.int = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["broker_report",b"broker_report","itemsCount",b"itemsCount","page",b"page","pagesCount",b"pagesCount"]) -> None: ...
-global___GetBrokerReportResponse = GetBrokerReportResponse
-
-class BrokerReport(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
-    TRADE_ID_FIELD_NUMBER: builtins.int
-    ORDER_ID_FIELD_NUMBER: builtins.int
     FIGI_FIELD_NUMBER: builtins.int
-    EXECUTE_SIGN_FIELD_NUMBER: builtins.int
-    TRADE_DATETIME_FIELD_NUMBER: builtins.int
-    EXCHANGE_FIELD_NUMBER: builtins.int
-    CLASS_CODE_FIELD_NUMBER: builtins.int
-    DIRECTION_FIELD_NUMBER: builtins.int
-    NAME_FIELD_NUMBER: builtins.int
-    TICKER_FIELD_NUMBER: builtins.int
-    PRICE_FIELD_NUMBER: builtins.int
-    QUANTITY_FIELD_NUMBER: builtins.int
-    ORDER_AMOUNT_FIELD_NUMBER: builtins.int
-    ACI_VALUE_FIELD_NUMBER: builtins.int
-    TOTAL_ORDER_AMOUNT_FIELD_NUMBER: builtins.int
-    BROKER_COMMISSION_FIELD_NUMBER: builtins.int
-    EXCHANGE_COMMISSION_FIELD_NUMBER: builtins.int
-    EXCHANGE_CLEARING_COMMISSION_FIELD_NUMBER: builtins.int
-    REPO_RATE_FIELD_NUMBER: builtins.int
-    PARTY_FIELD_NUMBER: builtins.int
-    CLEAR_VALUE_DATE_FIELD_NUMBER: builtins.int
-    SEC_VALUE_DATE_FIELD_NUMBER: builtins.int
-    BROKER_STATUS_FIELD_NUMBER: builtins.int
-    SEPARATE_AGREEMENT_TYPE_FIELD_NUMBER: builtins.int
-    SEPARATE_AGREEMENT_NUMBER_FIELD_NUMBER: builtins.int
-    SEPARATE_AGREEMENT_DATE_FIELD_NUMBER: builtins.int
-    DELIVERY_TYPE_FIELD_NUMBER: builtins.int
-    trade_id: typing.Text = ...
-    """Номер сделки"""
-
-    order_id: typing.Text = ...
-    """Номер поручения"""
-
+    BLOCKED_FIELD_NUMBER: builtins.int
+    BALANCE_FIELD_NUMBER: builtins.int
     figi: typing.Text = ...
-    """Figi-идентификатор инструмента"""
+    """Figi-идентификатор фьючерса"""
 
-    execute_sign: typing.Text = ...
-    """Признак исполнения"""
+    blocked: builtins.int = ...
+    """Заблокировано"""
 
-    @property
-    def trade_datetime(self) -> google.protobuf.timestamp_pb2.Timestamp:
-        """Дата и время заключения"""
-        pass
-    exchange: typing.Text = ...
-    """Торговая площадка"""
-
-    class_code: typing.Text = ...
-    """Режим торгов"""
-
-    direction: typing.Text = ...
-    """Вид сделки"""
-
-    name: typing.Text = ...
-    """Сокращённое наименование актива"""
-
-    ticker: typing.Text = ...
-    """Код актива"""
-
-    @property
-    def price(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
-        """Цена за единицу"""
-        pass
-    quantity: builtins.int = ...
-    """Количество"""
-
-    @property
-    def order_amount(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
-        """Сумма (без НКД)"""
-        pass
-    aci_value: builtins.float = ...
-    """НКД"""
-
-    @property
-    def total_order_amount(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
-        """Сумма сделки"""
-        pass
-    @property
-    def broker_commission(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
-        """Комиссия брокера"""
-        pass
-    @property
-    def exchange_commission(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
-        """Комиссия биржи"""
-        pass
-    @property
-    def exchange_clearing_commission(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
-        """Комиссия клир. центра"""
-        pass
-    repo_rate: builtins.float = ...
-    """Ставка РЕПО (%)"""
-
-    party: typing.Text = ...
-    """Контрагент/Брокер"""
-
-    @property
-    def clear_value_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
-        """Дата расчётов"""
-        pass
-    @property
-    def sec_value_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
-        """Дата поставки"""
-        pass
-    broker_status: typing.Text = ...
-    """Статус брокера"""
-
-    separate_agreement_type: typing.Text = ...
-    """Тип дог."""
-
-    separate_agreement_number: typing.Text = ...
-    """Номер дог."""
-
-    separate_agreement_date: typing.Text = ...
-    """Дата дог."""
-
-    delivery_type: typing.Text = ...
-    """Тип расчёта по сделке"""
+    balance: builtins.int = ...
+    """Текущий баланс"""
 
     def __init__(self,
         *,
-        trade_id : typing.Text = ...,
-        order_id : typing.Text = ...,
         figi : typing.Text = ...,
-        execute_sign : typing.Text = ...,
-        trade_datetime : typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
-        exchange : typing.Text = ...,
-        class_code : typing.Text = ...,
-        direction : typing.Text = ...,
-        name : typing.Text = ...,
-        ticker : typing.Text = ...,
-        price : typing.Optional[tinkoff.invest.grpc.common_pb2.MoneyValue] = ...,
-        quantity : builtins.int = ...,
-        order_amount : typing.Optional[tinkoff.invest.grpc.common_pb2.MoneyValue] = ...,
-        aci_value : builtins.float = ...,
-        total_order_amount : typing.Optional[tinkoff.invest.grpc.common_pb2.MoneyValue] = ...,
-        broker_commission : typing.Optional[tinkoff.invest.grpc.common_pb2.MoneyValue] = ...,
-        exchange_commission : typing.Optional[tinkoff.invest.grpc.common_pb2.MoneyValue] = ...,
-        exchange_clearing_commission : typing.Optional[tinkoff.invest.grpc.common_pb2.MoneyValue] = ...,
-        repo_rate : builtins.float = ...,
-        party : typing.Text = ...,
-        clear_value_date : typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
-        sec_value_date : typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
-        broker_status : typing.Text = ...,
-        separate_agreement_type : typing.Text = ...,
-        separate_agreement_number : typing.Text = ...,
-        separate_agreement_date : typing.Text = ...,
-        delivery_type : typing.Text = ...,
+        blocked : builtins.int = ...,
+        balance : builtins.int = ...,
         ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["broker_commission",b"broker_commission","clear_value_date",b"clear_value_date","exchange_clearing_commission",b"exchange_clearing_commission","exchange_commission",b"exchange_commission","order_amount",b"order_amount","price",b"price","sec_value_date",b"sec_value_date","total_order_amount",b"total_order_amount","trade_datetime",b"trade_datetime"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["aci_value",b"aci_value","broker_commission",b"broker_commission","broker_status",b"broker_status","class_code",b"class_code","clear_value_date",b"clear_value_date","delivery_type",b"delivery_type","direction",b"direction","exchange",b"exchange","exchange_clearing_commission",b"exchange_clearing_commission","exchange_commission",b"exchange_commission","execute_sign",b"execute_sign","figi",b"figi","name",b"name","order_amount",b"order_amount","order_id",b"order_id","party",b"party","price",b"price","quantity",b"quantity","repo_rate",b"repo_rate","sec_value_date",b"sec_value_date","separate_agreement_date",b"separate_agreement_date","separate_agreement_number",b"separate_agreement_number","separate_agreement_type",b"separate_agreement_type","ticker",b"ticker","total_order_amount",b"total_order_amount","trade_datetime",b"trade_datetime","trade_id",b"trade_id"]) -> None: ...
-global___BrokerReport = BrokerReport
+    def ClearField(self, field_name: typing_extensions.Literal["balance",b"balance","blocked",b"blocked","figi",b"figi"]) -> None: ...
+global___PositionsFutures = PositionsFutures

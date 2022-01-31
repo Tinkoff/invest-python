@@ -1,7 +1,6 @@
 # pylint:disable=too-many-lines
 from dataclasses import dataclass
 from datetime import datetime
-from decimal import Decimal
 from typing import List
 
 from . import _grpc_helpers
@@ -168,7 +167,7 @@ class OperationType(_grpc_helpers.Enum):
     OPERATION_TYPE_BUY = 15
     OPERATION_TYPE_BUY_CARD = 16
     OPERATION_TYPE_INPUT_SECURITIES = 17
-    OPERATION_TYPE_SELL_MARJIN = 18
+    OPERATION_TYPE_SELL_MARGIN = 18
     OPERATION_TYPE_BROKER_FEE = 19
     OPERATION_TYPE_BUY_MARGIN = 20
     OPERATION_TYPE_DIVIDEND = 21
@@ -176,8 +175,8 @@ class OperationType(_grpc_helpers.Enum):
     OPERATION_TYPE_COUPON = 23
     OPERATION_TYPE_SUCCESS_FEE = 24
     OPERATION_TYPE_DIVIDEND_TRANSFER = 25
-    OPERATION_TYPE_ACCRUING_VARMARJIN = 26
-    OPERATION_TYPE_WRITING_OFF_VARMARJIN = 27
+    OPERATION_TYPE_ACCRUING_VARMARGIN = 26
+    OPERATION_TYPE_WRITING_OFF_VARMARGIN = 27
     OPERATION_TYPE_DELIVERY_BUY = 28
     OPERATION_TYPE_DELIVERY_SELL = 29
     OPERATION_TYPE_TRACK_MFEE = 30
@@ -312,12 +311,12 @@ class Bond(_grpc_helpers.Message):  # pylint:disable=too-many-instance-attribute
     isin: str = _grpc_helpers.string_field(4)
     lot: int = _grpc_helpers.int32_field(5)
     currency: str = _grpc_helpers.string_field(6)
-    klong: Decimal = _grpc_helpers.double_field(7)
-    kshort: Decimal = _grpc_helpers.double_field(8)
-    dlong: Decimal = _grpc_helpers.double_field(9)
-    dshort: Decimal = _grpc_helpers.double_field(10)
-    dlong_min: Decimal = _grpc_helpers.double_field(11)
-    dshort_min: Decimal = _grpc_helpers.double_field(12)
+    klong: "Quotation" = _grpc_helpers.message_field(7)
+    kshort: "Quotation" = _grpc_helpers.message_field(8)
+    dlong: "Quotation" = _grpc_helpers.message_field(9)
+    dshort: "Quotation" = _grpc_helpers.message_field(10)
+    dlong_min: "Quotation" = _grpc_helpers.message_field(11)
+    dshort_min: "Quotation" = _grpc_helpers.message_field(12)
     short_enabled_flag: bool = _grpc_helpers.bool_field(13)
     name: str = _grpc_helpers.string_field(15)
     exchange: str = _grpc_helpers.string_field(16)
@@ -341,7 +340,7 @@ class Bond(_grpc_helpers.Message):  # pylint:disable=too-many-instance-attribute
     floating_coupon_flag: bool = _grpc_helpers.bool_field(35)
     perpetual_flag: bool = _grpc_helpers.bool_field(36)
     amortization_flag: bool = _grpc_helpers.bool_field(37)
-    min_price_increment: Decimal = _grpc_helpers.float_field(38)
+    min_price_increment: "Quotation" = _grpc_helpers.message_field(38)
     api_trade_available_flag: bool = _grpc_helpers.bool_field(39)
 
 
@@ -353,12 +352,12 @@ class Currency(_grpc_helpers.Message):  # pylint:disable=too-many-instance-attri
     isin: str = _grpc_helpers.string_field(4)
     lot: int = _grpc_helpers.int32_field(5)
     currency: str = _grpc_helpers.string_field(6)
-    klong: Decimal = _grpc_helpers.double_field(7)
-    kshort: Decimal = _grpc_helpers.double_field(8)
-    dlong: Decimal = _grpc_helpers.double_field(9)
-    dshort: Decimal = _grpc_helpers.double_field(10)
-    dlong_min: Decimal = _grpc_helpers.double_field(11)
-    dshort_min: Decimal = _grpc_helpers.double_field(12)
+    klong: "Quotation" = _grpc_helpers.message_field(7)
+    kshort: "Quotation" = _grpc_helpers.message_field(8)
+    dlong: "Quotation" = _grpc_helpers.message_field(9)
+    dshort: "Quotation" = _grpc_helpers.message_field(10)
+    dlong_min: "Quotation" = _grpc_helpers.message_field(11)
+    dshort_min: "Quotation" = _grpc_helpers.message_field(12)
     short_enabled_flag: bool = _grpc_helpers.bool_field(13)
     name: str = _grpc_helpers.string_field(15)
     exchange: str = _grpc_helpers.string_field(16)
@@ -370,7 +369,7 @@ class Currency(_grpc_helpers.Message):  # pylint:disable=too-many-instance-attri
     buy_available_flag: bool = _grpc_helpers.bool_field(22)
     sell_available_flag: bool = _grpc_helpers.bool_field(23)
     iso_currency_name: str = _grpc_helpers.string_field(24)
-    min_price_increment: Decimal = _grpc_helpers.float_field(25)
+    min_price_increment: "Quotation" = _grpc_helpers.message_field(25)
     api_trade_available_flag: bool = _grpc_helpers.bool_field(26)
 
 
@@ -382,19 +381,19 @@ class Etf(_grpc_helpers.Message):  # pylint:disable=too-many-instance-attributes
     isin: str = _grpc_helpers.string_field(4)
     lot: int = _grpc_helpers.int32_field(5)
     currency: str = _grpc_helpers.string_field(6)
-    klong: Decimal = _grpc_helpers.double_field(7)
-    kshort: Decimal = _grpc_helpers.double_field(8)
-    dlong: Decimal = _grpc_helpers.double_field(9)
-    dshort: Decimal = _grpc_helpers.double_field(10)
-    dlong_min: Decimal = _grpc_helpers.double_field(11)
-    dshort_min: Decimal = _grpc_helpers.double_field(12)
+    klong: "Quotation" = _grpc_helpers.message_field(7)
+    kshort: "Quotation" = _grpc_helpers.message_field(8)
+    dlong: "Quotation" = _grpc_helpers.message_field(9)
+    dshort: "Quotation" = _grpc_helpers.message_field(10)
+    dlong_min: "Quotation" = _grpc_helpers.message_field(11)
+    dshort_min: "Quotation" = _grpc_helpers.message_field(12)
     short_enabled_flag: bool = _grpc_helpers.bool_field(13)
     name: str = _grpc_helpers.string_field(15)
     exchange: str = _grpc_helpers.string_field(16)
-    fixed_commission: Decimal = _grpc_helpers.double_field(17)
+    fixed_commission: "Quotation" = _grpc_helpers.message_field(17)
     focus_type: str = _grpc_helpers.string_field(18)
     released_date: datetime = _grpc_helpers.message_field(19)
-    num_shares: Decimal = _grpc_helpers.double_field(20)
+    num_shares: "Quotation" = _grpc_helpers.message_field(20)
     country_of_risk: str = _grpc_helpers.string_field(21)
     country_of_risk_name: str = _grpc_helpers.string_field(22)
     sector: str = _grpc_helpers.string_field(23)
@@ -403,7 +402,7 @@ class Etf(_grpc_helpers.Message):  # pylint:disable=too-many-instance-attributes
     otc_flag: bool = _grpc_helpers.bool_field(26)
     buy_available_flag: bool = _grpc_helpers.bool_field(27)
     sell_available_flag: bool = _grpc_helpers.bool_field(28)
-    min_price_increment: Decimal = _grpc_helpers.float_field(29)
+    min_price_increment: "Quotation" = _grpc_helpers.message_field(29)
     api_trade_available_flag: bool = _grpc_helpers.bool_field(30)
 
 
@@ -414,12 +413,12 @@ class Future(_grpc_helpers.Message):  # pylint:disable=too-many-instance-attribu
     class_code: str = _grpc_helpers.string_field(3)
     lot: int = _grpc_helpers.int32_field(4)
     currency: str = _grpc_helpers.string_field(5)
-    klong: Decimal = _grpc_helpers.double_field(6)
-    kshort: Decimal = _grpc_helpers.double_field(7)
-    dlong: Decimal = _grpc_helpers.double_field(8)
-    dshort: Decimal = _grpc_helpers.double_field(9)
-    dlong_min: Decimal = _grpc_helpers.double_field(10)
-    dshort_min: Decimal = _grpc_helpers.double_field(11)
+    klong: "Quotation" = _grpc_helpers.message_field(6)
+    kshort: "Quotation" = _grpc_helpers.message_field(7)
+    dlong: "Quotation" = _grpc_helpers.message_field(8)
+    dshort: "Quotation" = _grpc_helpers.message_field(9)
+    dlong_min: "Quotation" = _grpc_helpers.message_field(10)
+    dshort_min: "Quotation" = _grpc_helpers.message_field(11)
     short_enabled_flag: bool = _grpc_helpers.bool_field(12)
     name: str = _grpc_helpers.string_field(13)
     exchange: str = _grpc_helpers.string_field(14)
@@ -428,7 +427,7 @@ class Future(_grpc_helpers.Message):  # pylint:disable=too-many-instance-attribu
     futures_type: str = _grpc_helpers.string_field(17)
     asset_type: str = _grpc_helpers.string_field(18)
     basic_asset: str = _grpc_helpers.string_field(19)
-    basic_asset_size: Decimal = _grpc_helpers.double_field(20)
+    basic_asset_size: "Quotation" = _grpc_helpers.message_field(20)
     country_of_risk: str = _grpc_helpers.string_field(21)
     country_of_risk_name: str = _grpc_helpers.string_field(22)
     sector: str = _grpc_helpers.string_field(23)
@@ -437,7 +436,7 @@ class Future(_grpc_helpers.Message):  # pylint:disable=too-many-instance-attribu
     otc_flag: bool = _grpc_helpers.bool_field(26)
     buy_available_flag: bool = _grpc_helpers.bool_field(27)
     sell_available_flag: bool = _grpc_helpers.bool_field(28)
-    min_price_increment: Decimal = _grpc_helpers.float_field(29)
+    min_price_increment: "Quotation" = _grpc_helpers.message_field(29)
     api_trade_available_flag: bool = _grpc_helpers.bool_field(30)
 
 
@@ -449,12 +448,12 @@ class Share(_grpc_helpers.Message):  # pylint:disable=too-many-instance-attribut
     isin: str = _grpc_helpers.string_field(4)
     lot: int = _grpc_helpers.int32_field(5)
     currency: str = _grpc_helpers.string_field(6)
-    klong: Decimal = _grpc_helpers.double_field(7)
-    kshort: Decimal = _grpc_helpers.double_field(8)
-    dlong: Decimal = _grpc_helpers.double_field(9)
-    dshort: Decimal = _grpc_helpers.double_field(10)
-    dlong_min: Decimal = _grpc_helpers.double_field(11)
-    dshort_min: Decimal = _grpc_helpers.double_field(12)
+    klong: "Quotation" = _grpc_helpers.message_field(7)
+    kshort: "Quotation" = _grpc_helpers.message_field(8)
+    dlong: "Quotation" = _grpc_helpers.message_field(9)
+    dshort: "Quotation" = _grpc_helpers.message_field(10)
+    dlong_min: "Quotation" = _grpc_helpers.message_field(11)
+    dshort_min: "Quotation" = _grpc_helpers.message_field(12)
     short_enabled_flag: bool = _grpc_helpers.bool_field(13)
     name: str = _grpc_helpers.string_field(15)
     exchange: str = _grpc_helpers.string_field(16)
@@ -471,7 +470,7 @@ class Share(_grpc_helpers.Message):  # pylint:disable=too-many-instance-attribut
     sell_available_flag: bool = _grpc_helpers.bool_field(28)
     div_yield_flag: bool = _grpc_helpers.bool_field(29)
     share_type: "ShareType" = _grpc_helpers.enum_field(30)
-    min_price_increment: Decimal = _grpc_helpers.float_field(31)
+    min_price_increment: "Quotation" = _grpc_helpers.message_field(31)
     api_trade_available_flag: bool = _grpc_helpers.bool_field(32)
 
 
@@ -491,7 +490,7 @@ class GetAccruedInterestsResponse(_grpc_helpers.Message):
 class AccruedInterest(_grpc_helpers.Message):
     date: datetime = _grpc_helpers.message_field(1)
     value: "Quotation" = _grpc_helpers.message_field(2)
-    value_percent: Decimal = _grpc_helpers.float_field(3)
+    value_percent: "Quotation" = _grpc_helpers.message_field(3)
     nominal: "Quotation" = _grpc_helpers.message_field(4)
 
 
@@ -504,7 +503,7 @@ class GetFuturesMarginRequest(_grpc_helpers.Message):
 class GetFuturesMarginResponse(_grpc_helpers.Message):
     initial_margin_on_buy: "MoneyValue" = _grpc_helpers.message_field(1)
     initial_margin_on_sell: "MoneyValue" = _grpc_helpers.message_field(2)
-    min_price_increment: Decimal = _grpc_helpers.message_field(3)
+    min_price_increment: "Quotation" = _grpc_helpers.message_field(3)
     min_price_increment_amount: "Quotation" = _grpc_helpers.message_field(4)
 
 
@@ -521,12 +520,12 @@ class Instrument(_grpc_helpers.Message):  # pylint:disable=too-many-instance-att
     isin: str = _grpc_helpers.string_field(4)
     lot: int = _grpc_helpers.int32_field(5)
     currency: str = _grpc_helpers.string_field(6)
-    klong: Decimal = _grpc_helpers.double_field(7)
-    kshort: Decimal = _grpc_helpers.double_field(8)
-    dlong: Decimal = _grpc_helpers.double_field(9)
-    dshort: Decimal = _grpc_helpers.double_field(10)
-    dlong_min: Decimal = _grpc_helpers.double_field(11)
-    dshort_min: Decimal = _grpc_helpers.double_field(12)
+    klong: "Quotation" = _grpc_helpers.message_field(7)
+    kshort: "Quotation" = _grpc_helpers.message_field(8)
+    dlong: "Quotation" = _grpc_helpers.message_field(9)
+    dshort: "Quotation" = _grpc_helpers.message_field(10)
+    dlong_min: "Quotation" = _grpc_helpers.message_field(11)
+    dshort_min: "Quotation" = _grpc_helpers.message_field(12)
     short_enabled_flag: bool = _grpc_helpers.bool_field(13)
     name: str = _grpc_helpers.string_field(14)
     exchange: str = _grpc_helpers.string_field(15)
@@ -537,7 +536,7 @@ class Instrument(_grpc_helpers.Message):  # pylint:disable=too-many-instance-att
     otc_flag: bool = _grpc_helpers.bool_field(20)
     buy_available_flag: bool = _grpc_helpers.bool_field(21)
     sell_available_flag: bool = _grpc_helpers.bool_field(22)
-    min_price_increment: Decimal = _grpc_helpers.float_field(23)
+    min_price_increment: "Quotation" = _grpc_helpers.message_field(23)
     api_trade_available_flag: bool = _grpc_helpers.bool_field(24)
 
 
@@ -857,7 +856,7 @@ class PortfolioResponse(_grpc_helpers.Message):
     total_amount_etf: "MoneyValue" = _grpc_helpers.message_field(3)
     total_amount_currencies: "MoneyValue" = _grpc_helpers.message_field(4)
     total_amount_futures: "MoneyValue" = _grpc_helpers.message_field(5)
-    expected_yield: Decimal = _grpc_helpers.float_field(6)
+    expected_yield: "Quotation" = _grpc_helpers.message_field(6)
     positions: List["PortfolioPosition"] = _grpc_helpers.message_field(7)
 
 
@@ -872,6 +871,7 @@ class PositionsResponse(_grpc_helpers.Message):
     blocked: List["MoneyValue"] = _grpc_helpers.message_field(2)
     securities: List["PositionsSecurities"] = _grpc_helpers.message_field(3)
     limits_loading_in_progress: bool = _grpc_helpers.bool_field(4)
+    futures: List["PositionsFutures"] = _grpc_helpers.bool_field(5)
 
 
 @dataclass(eq=False, repr=True)
@@ -890,11 +890,12 @@ class WithdrawLimitsResponse(_grpc_helpers.Message):
 class PortfolioPosition(_grpc_helpers.Message):
     figi: str = _grpc_helpers.string_field(1)
     instrument_type: str = _grpc_helpers.string_field(2)
-    quantity: Decimal = _grpc_helpers.float_field(3)
+    quantity: "Quotation" = _grpc_helpers.message_field(3)
     average_position_price: "MoneyValue" = _grpc_helpers.message_field(4)
-    expected_yield: Decimal = _grpc_helpers.float_field(5)
+    expected_yield: "Quotation" = _grpc_helpers.message_field(5)
     current_nkd: "MoneyValue" = _grpc_helpers.message_field(6)
     average_position_price_pt: "Quotation" = _grpc_helpers.message_field(7)
+    current_price: "MoneyValue" = _grpc_helpers.message_field(8)
 
 
 @dataclass(eq=False, repr=True)
@@ -1262,3 +1263,10 @@ class BrokerReport(  # pylint:disable=too-many-instance-attributes
     separate_agreement_number: str = _grpc_helpers.string_field(25)
     separate_agreement_date: str = _grpc_helpers.string_field(26)
     delivery_type: str = _grpc_helpers.string_field(27)
+
+
+@dataclass(eq=False, repr=True)
+class PositionsFutures(_grpc_helpers.Message):
+    figi: str = _grpc_helpers.string_field(1)
+    blocked: int = _grpc_helpers.int64_field(2)
+    balance: int = _grpc_helpers.int64_field(3)
