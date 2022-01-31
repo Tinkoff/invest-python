@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [0.2.0-beta9](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta9) - 2022-01-31
+
+<small>[Compare with 0.2.0-beta8](https://github.com/tinkoff/invest-python/compare/0.2.0-beta8...0.2.0-beta9)</small>
+
+### Added
+- Add new field "message" to logging (#16) ([a47cb42](https://github.com/tinkoff/invest-python/commit/a47cb422dde9f7fe7450417eae77b82f8eabb205) by TerekhinAO).
+
+### Fixed
+- Fix formatting ([dcc7bc0](https://github.com/tinkoff/invest-python/commit/dcc7bc04a8ac0439fcd101891b6f6c349faaa70d) by Danil Akhtarov).
+- Fix: исправлена бага с преобразованием дат до 1970 года (#14) ([e750122](https://github.com/tinkoff/invest-python/commit/e75012241ed2c79f4f05e4e95320c4fb5a58e901) by Aleksandr).
+
+
 ## [0.2.0-beta8](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta8) - 2022-01-28
 
 <small>[Compare with 0.2.0-beta7](https://github.com/tinkoff/invest-python/compare/0.2.0-beta7...0.2.0-beta8)</small>
