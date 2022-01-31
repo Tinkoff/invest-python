@@ -10,7 +10,6 @@ from tinkoff.invest import (
     OrderState,
     StopOrder,
 )
-from tinkoff.invest.orders_canceling import cancel_all_orders
 from tinkoff.invest.services import OrdersService, Services, StopOrdersService
 from tinkoff.invest.typedefs import AccountId
 
@@ -81,7 +80,7 @@ class TestOrdersCanceler:
             stop_orders=stop_orders
         )
 
-        cancel_all_orders(services=services, account_id=account_id)
+        Services.cancel_all_orders(services, account_id=account_id)
 
         orders_service.get_orders.assert_called_once()
         orders_service.cancel_order.assert_has_calls(

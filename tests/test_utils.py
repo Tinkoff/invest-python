@@ -3,8 +3,8 @@ from datetime import datetime
 
 import pytest
 
-from tinkoff.invest.data_loaders import _get_intervals
 from tinkoff.invest.schemas import CandleInterval
+from tinkoff.invest.utils import get_intervals
 
 
 @pytest.mark.parametrize(
@@ -48,7 +48,7 @@ from tinkoff.invest.schemas import CandleInterval
 )
 def test_get_intervals(candle_interval, interval, intervals):
     result = list(
-        _get_intervals(
+        get_intervals(
             candle_interval,
             *interval,
         )

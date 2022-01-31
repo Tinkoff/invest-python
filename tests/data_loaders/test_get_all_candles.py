@@ -4,14 +4,13 @@ from datetime import datetime, timedelta
 
 import pytest
 
-from tinkoff.invest.data_loaders import get_all_candles
 from tinkoff.invest.schemas import (
     CandleInterval,
     GetCandlesResponse,
     HistoricCandle,
     Quotation,
 )
-from tinkoff.invest.services import MarketDataService
+from tinkoff.invest.services import MarketDataService, Services
 
 
 @pytest.fixture()
@@ -64,14 +63,16 @@ def market_data_service(mocker):
     ],
 )
 def test_get_all_candles(
-    figi, market_data_service, from_, to, candles_response, interval, call_count
+    figi, mocker, market_data_service, from_, to, candles_response, interval, call_count
 ):
+    services = mocker.Mock()
+    services.market_data = market_data_service
     market_data_service.get_candles.return_value = candles_response
 
     result = list(
-        get_all_candles(
+        Services.get_all_candles(
+            services,
             figi=figi,
-            service=market_data_service,
             interval=interval,
             from_=from_,
             to=to,

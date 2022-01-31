@@ -1,10 +1,13 @@
 # pylint:disable=redefined-builtin,too-many-lines
+import asyncio
 from datetime import datetime
 from typing import AsyncIterable, List, Optional
 
 import grpc
 
-from tinkoff.invest.grpc import (
+from . import _grpc_helpers
+from ._errors import handle_aio_request_error, handle_aio_request_error_gen
+from .grpc import (
     instruments_pb2,
     instruments_pb2_grpc,
     marketdata_pb2,
@@ -20,9 +23,6 @@ from tinkoff.invest.grpc import (
     users_pb2,
     users_pb2_grpc,
 )
-
-from . import _grpc_helpers
-from ._errors import handle_aio_request_error, handle_aio_request_error_gen
 from .logging import get_tracking_id_from_coro, log_request
 from .metadata import get_metadata
 from .schemas import (
@@ -111,6 +111,7 @@ from .schemas import (
     WithdrawLimitsRequest,
     WithdrawLimitsResponse,
 )
+from .typedefs import AccountId
 
 __all__ = (
     "AsyncServices",
@@ -141,6 +142,32 @@ class AsyncServices:
         self.users = UsersService(channel, metadata)
         self.sandbox = SandboxService(channel, sandbox_metadata)
         self.stop_orders = StopOrdersService(channel, metadata)
+
+    async def cancel_all_orders(self, account_id: AccountId) -> None:
+        orders_service: OrdersService = self.orders
+        stop_orders_service: StopOrdersService = self.stop_orders
+
+        orders_response = await orders_service.get_orders(account_id=account_id)
+        await asyncio.gather(
+            *[
+                orders_service.cancel_order(
+                    account_id=account_id, order_id=order.order_id
+                )
+                for order in orders_response.orders
+            ]
+        )
+
+        stop_orders_response = await stop_orders_service.get_stop_orders(
+            account_id=account_id
+        )
+        await asyncio.gather(
+            *[
+                stop_orders_service.cancel_stop_order(
+                    account_id=account_id, stop_order_id=stop_order.stop_order_id
+                )
+                for stop_order in stop_orders_response.stop_orders
+            ]
+        )
 
 
 class InstrumentsService(_grpc_helpers.Service):

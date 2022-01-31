@@ -1,10 +1,12 @@
 # pylint:disable=redefined-builtin,too-many-lines
 from datetime import datetime
-from typing import Iterable, List, Optional
+from typing import Generator, Iterable, List, Optional
 
 import grpc
 
-from tinkoff.invest.grpc import (
+from . import _grpc_helpers
+from ._errors import handle_request_error, handle_request_error_gen
+from .grpc import (
     instruments_pb2,
     instruments_pb2_grpc,
     marketdata_pb2,
@@ -20,9 +22,6 @@ from tinkoff.invest.grpc import (
     users_pb2,
     users_pb2_grpc,
 )
-
-from . import _grpc_helpers
-from ._errors import handle_request_error, handle_request_error_gen
 from .logging import get_tracking_id_from_call, log_request
 from .metadata import get_metadata
 from .schemas import (
@@ -72,6 +71,7 @@ from .schemas import (
     GetTradingStatusResponse,
     GetUserTariffRequest,
     GetUserTariffResponse,
+    HistoricCandle,
     InstrumentIdType,
     InstrumentRequest,
     InstrumentResponse,
@@ -111,6 +111,8 @@ from .schemas import (
     WithdrawLimitsRequest,
     WithdrawLimitsResponse,
 )
+from .typedefs import AccountId
+from .utils import get_intervals
 
 __all__ = (
     "Services",
@@ -141,6 +143,41 @@ class Services:
         self.users = UsersService(channel, metadata)
         self.sandbox = SandboxService(channel, sandbox_metadata)
         self.stop_orders = StopOrdersService(channel, metadata)
+
+    def cancel_all_orders(self, account_id: AccountId) -> None:
+        orders_service: OrdersService = self.orders
+        stop_orders_service: StopOrdersService = self.stop_orders
+
+        orders_response = orders_service.get_orders(account_id=account_id)
+        for order in orders_response.orders:
+            orders_service.cancel_order(account_id=account_id, order_id=order.order_id)
+
+        stop_orders_response = stop_orders_service.get_stop_orders(
+            account_id=account_id
+        )
+        for stop_order in stop_orders_response.stop_orders:
+            stop_orders_service.cancel_stop_order(
+                account_id=account_id, stop_order_id=stop_order.stop_order_id
+            )
+
+    def get_all_candles(
+        self,
+        *,
+        from_: datetime,
+        to: Optional[datetime] = None,
+        interval: CandleInterval = CandleInterval(0),
+        figi: str = "",
+    ) -> Generator[HistoricCandle, None, None]:
+        to = to or datetime.utcnow()
+
+        for local_from_, local_to in get_intervals(interval, from_, to):
+            candles_response = self.market_data.get_candles(
+                figi=figi,
+                interval=interval,
+                from_=local_from_,
+                to=local_to,
+            )
+            yield from candles_response.candles
 
 
 class InstrumentsService(_grpc_helpers.Service):

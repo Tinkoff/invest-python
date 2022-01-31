@@ -10,7 +10,6 @@ from tinkoff.invest import (
     OrderState,
     StopOrder,
 )
-from tinkoff.invest.async_orders_canceling import cancel_all_orders
 from tinkoff.invest.async_services import (
     AsyncServices,
     OrdersService,
@@ -85,7 +84,7 @@ class TestAsyncOrdersCanceling:
             stop_orders=stop_orders
         )
 
-        await cancel_all_orders(async_services=async_services, account_id=account_id)
+        await AsyncServices.cancel_all_orders(async_services, account_id=account_id)
 
         orders_service.get_orders.assert_called_once()
         orders_service.cancel_order.assert_has_calls(
