@@ -53,6 +53,11 @@ docs-serve:
 docs-changelog:
 	$(POETRY_RUN) git-changelog -o CHANGELOG.md  .
 
+.PHONY: docs-changelog
+update-changelog: docs-changelog
+	git add .
+	git commit -m "Update changelog"
+
 .PHONY: install
 install:
 	poetry install
