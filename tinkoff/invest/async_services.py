@@ -23,8 +23,8 @@ from tinkoff.invest.grpc import (
 
 from . import _grpc_helpers
 from ._errors import handle_aio_request_error, handle_aio_request_error_gen
-from .constants import APP_NAME
 from .logging import get_tracking_id_from_coro, log_request
+from .metadata import get_metadata
 from .schemas import (
     BondResponse,
     BondsResponse,
@@ -127,8 +127,11 @@ __all__ = (
 
 
 class AsyncServices:
-    def __init__(self, channel: grpc.aio.Channel, token: str) -> None:
-        metadata = [("authorization", f"Bearer {token}"), ("x-app-name", APP_NAME)]
+    def __init__(
+        self, channel: grpc.aio.Channel, token: str, sandbox_token: Optional[str] = None
+    ) -> None:
+        metadata = get_metadata(token)
+        sandbox_metadata = get_metadata(sandbox_token or token)
         self.instruments = InstrumentsService(channel, metadata)
         self.market_data = MarketDataService(channel, metadata)
         self.market_data_stream = MarketDataStreamService(channel, metadata)
@@ -136,7 +139,7 @@ class AsyncServices:
         self.orders_stream = OrdersStreamService(channel, metadata)
         self.orders = OrdersService(channel, metadata)
         self.users = UsersService(channel, metadata)
-        self.sandbox = SandboxService(channel, metadata)
+        self.sandbox = SandboxService(channel, sandbox_metadata)
         self.stop_orders = StopOrdersService(channel, metadata)
 
 
