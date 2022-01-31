@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [0.2.0-beta10](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta10) - 2022-01-31
+
+<small>[Compare with 0.2.0-beta9](https://github.com/tinkoff/invest-python/compare/0.2.0-beta9...0.2.0-beta10)</small>
+
+### Added
+- Add options and sandbox_token ([cfa20a3](https://github.com/tinkoff/invest-python/commit/cfa20a31696399ecb740d6601f9ba6a2326c16ca) by Danil Akhtarov).
+
+
 ## [0.2.0-beta9](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta9) - 2022-01-31
 
 <small>[Compare with 0.2.0-beta8](https://github.com/tinkoff/invest-python/compare/0.2.0-beta8...0.2.0-beta9)</small>
