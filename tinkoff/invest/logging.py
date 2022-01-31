@@ -4,11 +4,11 @@ from contextvars import ContextVar
 from typing import Any, Optional
 
 from .constants import (
+    MESSAGE,
     X_RATELIMIT_LIMIT,
     X_RATELIMIT_REMAINING,
     X_RATELIMIT_RESET,
     X_TRACKING_ID,
-    MESSAGE
 )
 
 __all__ = (
@@ -26,7 +26,13 @@ logger = logging.getLogger(__name__)
 _TRACKING_ID: ContextVar[Optional[str]] = ContextVar("tracking_id", default=None)
 Metadata = namedtuple(
     "Metadata",
-    ("tracking_id", "ratelimit_limit", "ratelimit_remaining", "ratelimit_reset", "message"),
+    (
+        "tracking_id",
+        "ratelimit_limit",
+        "ratelimit_remaining",
+        "ratelimit_reset",
+        "message",
+    ),
 )
 
 
@@ -78,9 +84,13 @@ def get_metadata_from_call(call: Any) -> Optional[Metadata]:
             ratelimit_reset = int(item.value)
         elif item.key == MESSAGE:
             message = item.value
-    if not any((tracking_id, ratelimit_limit, ratelimit_remaining, ratelimit_reset, message)):
+    if not any(
+        (tracking_id, ratelimit_limit, ratelimit_remaining, ratelimit_reset, message)
+    ):
         return None
-    return Metadata(tracking_id, ratelimit_limit, ratelimit_remaining, ratelimit_reset, message)
+    return Metadata(
+        tracking_id, ratelimit_limit, ratelimit_remaining, ratelimit_reset, message
+    )
 
 
 def get_metadata_from_aio_error(err: Any) -> Optional[Metadata]:
@@ -101,6 +111,10 @@ def get_metadata_from_aio_error(err: Any) -> Optional[Metadata]:
             ratelimit_reset = int(value)
         elif key == MESSAGE:
             message = value
-    if not any((tracking_id, ratelimit_limit, ratelimit_remaining, ratelimit_reset, message)):
+    if not any(
+        (tracking_id, ratelimit_limit, ratelimit_remaining, ratelimit_reset, message)
+    ):
         return None
-    return Metadata(tracking_id, ratelimit_limit, ratelimit_remaining, ratelimit_reset, message)
+    return Metadata(
+        tracking_id, ratelimit_limit, ratelimit_remaining, ratelimit_reset, message
+    )
