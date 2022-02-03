@@ -195,6 +195,13 @@ class OperationType(_grpc_helpers.Enum):
     OPERATION_TYPE_DIV_EXT = 43
 
 
+class AccessLevel(_grpc_helpers.Enum):
+    ACCOUNT_ACCESS_LEVEL_UNSPECIFIED = 0
+    ACCOUNT_ACCESS_LEVEL_FULL_ACCESS = 1
+    ACCOUNT_ACCESS_LEVEL_READ_ONLY = 2
+    ACCOUNT_ACCESS_LEVEL_NO_ACCESS = 3
+
+
 @dataclass(eq=False, repr=True)
 class MoneyValue(_grpc_helpers.Message):
     currency: str = _grpc_helpers.string_field(1)
@@ -1039,6 +1046,7 @@ class Account(_grpc_helpers.Message):
     status: "AccountStatus" = _grpc_helpers.enum_field(4)
     opened_date: datetime = _grpc_helpers.message_field(5)
     closed_date: datetime = _grpc_helpers.message_field(6)
+    access_level: "AccessLevel" = _grpc_helpers.message_field(7)
 
     @classmethod
     def loads(cls, obj) -> "Account":

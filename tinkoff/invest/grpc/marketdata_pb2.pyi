@@ -12,33 +12,33 @@ import tinkoff.invest.grpc.common_pb2
 import typing
 import typing_extensions
 
-DESCRIPTOR: google.protobuf.descriptor.FileDescriptor = ...
+DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
 class _SubscriptionAction:
     ValueType = typing.NewType('ValueType', builtins.int)
     V: typing_extensions.TypeAlias = ValueType
 class _SubscriptionActionEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_SubscriptionAction.ValueType], builtins.type):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor = ...
-    SUBSCRIPTION_ACTION_UNSPECIFIED: SubscriptionAction.ValueType = ...  # 0
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    SUBSCRIPTION_ACTION_UNSPECIFIED: _SubscriptionAction.ValueType  # 0
     """Статус подписки не определён."""
 
-    SUBSCRIPTION_ACTION_SUBSCRIBE: SubscriptionAction.ValueType = ...  # 1
+    SUBSCRIPTION_ACTION_SUBSCRIBE: _SubscriptionAction.ValueType  # 1
     """Подписаться."""
 
-    SUBSCRIPTION_ACTION_UNSUBSCRIBE: SubscriptionAction.ValueType = ...  # 2
+    SUBSCRIPTION_ACTION_UNSUBSCRIBE: _SubscriptionAction.ValueType  # 2
     """Отписаться."""
 
 class SubscriptionAction(_SubscriptionAction, metaclass=_SubscriptionActionEnumTypeWrapper):
     """Тип операции со списком подписок."""
     pass
 
-SUBSCRIPTION_ACTION_UNSPECIFIED: SubscriptionAction.ValueType = ...  # 0
+SUBSCRIPTION_ACTION_UNSPECIFIED: SubscriptionAction.ValueType  # 0
 """Статус подписки не определён."""
 
-SUBSCRIPTION_ACTION_SUBSCRIBE: SubscriptionAction.ValueType = ...  # 1
+SUBSCRIPTION_ACTION_SUBSCRIBE: SubscriptionAction.ValueType  # 1
 """Подписаться."""
 
-SUBSCRIPTION_ACTION_UNSUBSCRIBE: SubscriptionAction.ValueType = ...  # 2
+SUBSCRIPTION_ACTION_UNSUBSCRIBE: SubscriptionAction.ValueType  # 2
 """Отписаться."""
 
 global___SubscriptionAction = SubscriptionAction
@@ -48,27 +48,27 @@ class _SubscriptionInterval:
     ValueType = typing.NewType('ValueType', builtins.int)
     V: typing_extensions.TypeAlias = ValueType
 class _SubscriptionIntervalEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_SubscriptionInterval.ValueType], builtins.type):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor = ...
-    SUBSCRIPTION_INTERVAL_UNSPECIFIED: SubscriptionInterval.ValueType = ...  # 0
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    SUBSCRIPTION_INTERVAL_UNSPECIFIED: _SubscriptionInterval.ValueType  # 0
     """Интервал свечи не определён."""
 
-    SUBSCRIPTION_INTERVAL_ONE_MINUTE: SubscriptionInterval.ValueType = ...  # 1
+    SUBSCRIPTION_INTERVAL_ONE_MINUTE: _SubscriptionInterval.ValueType  # 1
     """Минутные свечи."""
 
-    SUBSCRIPTION_INTERVAL_FIVE_MINUTES: SubscriptionInterval.ValueType = ...  # 2
+    SUBSCRIPTION_INTERVAL_FIVE_MINUTES: _SubscriptionInterval.ValueType  # 2
     """Пятиминутные свечи."""
 
 class SubscriptionInterval(_SubscriptionInterval, metaclass=_SubscriptionIntervalEnumTypeWrapper):
     """Интервал свечи."""
     pass
 
-SUBSCRIPTION_INTERVAL_UNSPECIFIED: SubscriptionInterval.ValueType = ...  # 0
+SUBSCRIPTION_INTERVAL_UNSPECIFIED: SubscriptionInterval.ValueType  # 0
 """Интервал свечи не определён."""
 
-SUBSCRIPTION_INTERVAL_ONE_MINUTE: SubscriptionInterval.ValueType = ...  # 1
+SUBSCRIPTION_INTERVAL_ONE_MINUTE: SubscriptionInterval.ValueType  # 1
 """Минутные свечи."""
 
-SUBSCRIPTION_INTERVAL_FIVE_MINUTES: SubscriptionInterval.ValueType = ...  # 2
+SUBSCRIPTION_INTERVAL_FIVE_MINUTES: SubscriptionInterval.ValueType  # 2
 """Пятиминутные свечи."""
 
 global___SubscriptionInterval = SubscriptionInterval
@@ -78,57 +78,57 @@ class _SubscriptionStatus:
     ValueType = typing.NewType('ValueType', builtins.int)
     V: typing_extensions.TypeAlias = ValueType
 class _SubscriptionStatusEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_SubscriptionStatus.ValueType], builtins.type):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor = ...
-    SUBSCRIPTION_STATUS_UNSPECIFIED: SubscriptionStatus.ValueType = ...  # 0
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    SUBSCRIPTION_STATUS_UNSPECIFIED: _SubscriptionStatus.ValueType  # 0
     """Статус подписки не определён."""
 
-    SUBSCRIPTION_STATUS_SUCCESS: SubscriptionStatus.ValueType = ...  # 1
+    SUBSCRIPTION_STATUS_SUCCESS: _SubscriptionStatus.ValueType  # 1
     """Успешно."""
 
-    SUBSCRIPTION_STATUS_INSTRUMENT_NOT_FOUND: SubscriptionStatus.ValueType = ...  # 2
+    SUBSCRIPTION_STATUS_INSTRUMENT_NOT_FOUND: _SubscriptionStatus.ValueType  # 2
     """Инструмент не найден."""
 
-    SUBSCRIPTION_STATUS_SUBSCRIPTION_ACTION_IS_INVALID: SubscriptionStatus.ValueType = ...  # 3
+    SUBSCRIPTION_STATUS_SUBSCRIPTION_ACTION_IS_INVALID: _SubscriptionStatus.ValueType  # 3
     """Некорректный статус подписки, список возможных значений: [SubscriptionAction](https://tinkoff.github.io/investAPI/marketdata#subscriptionaction)"""
 
-    SUBSCRIPTION_STATUS_DEPTH_IS_INVALID: SubscriptionStatus.ValueType = ...  # 4
+    SUBSCRIPTION_STATUS_DEPTH_IS_INVALID: _SubscriptionStatus.ValueType  # 4
     """Некорректная глубина стакана, доступные значения: 10, 20, 30, 40, 50."""
 
-    SUBSCRIPTION_STATUS_INTERVAL_IS_INVALID: SubscriptionStatus.ValueType = ...  # 5
+    SUBSCRIPTION_STATUS_INTERVAL_IS_INVALID: _SubscriptionStatus.ValueType  # 5
     """Некорректный интервал свечей, список возможных значений: [SubscriptionInterval](https://tinkoff.github.io/investAPI/marketdata#subscriptioninterval)"""
 
-    SUBSCRIPTION_STATUS_LIMIT_IS_EXCEEDED: SubscriptionStatus.ValueType = ...  # 6
+    SUBSCRIPTION_STATUS_LIMIT_IS_EXCEEDED: _SubscriptionStatus.ValueType  # 6
     """Превышен лимит подписок в рамках стрима, подробнее: [Лимитная политика](https://tinkoff.github.io/investAPI/limits/)"""
 
-    SUBSCRIPTION_STATUS_INTERNAL_ERROR: SubscriptionStatus.ValueType = ...  # 7
+    SUBSCRIPTION_STATUS_INTERNAL_ERROR: _SubscriptionStatus.ValueType  # 7
     """Внутренняя ошибка сервиса."""
 
 class SubscriptionStatus(_SubscriptionStatus, metaclass=_SubscriptionStatusEnumTypeWrapper):
     """Результат подписки."""
     pass
 
-SUBSCRIPTION_STATUS_UNSPECIFIED: SubscriptionStatus.ValueType = ...  # 0
+SUBSCRIPTION_STATUS_UNSPECIFIED: SubscriptionStatus.ValueType  # 0
 """Статус подписки не определён."""
 
-SUBSCRIPTION_STATUS_SUCCESS: SubscriptionStatus.ValueType = ...  # 1
+SUBSCRIPTION_STATUS_SUCCESS: SubscriptionStatus.ValueType  # 1
 """Успешно."""
 
-SUBSCRIPTION_STATUS_INSTRUMENT_NOT_FOUND: SubscriptionStatus.ValueType = ...  # 2
+SUBSCRIPTION_STATUS_INSTRUMENT_NOT_FOUND: SubscriptionStatus.ValueType  # 2
 """Инструмент не найден."""
 
-SUBSCRIPTION_STATUS_SUBSCRIPTION_ACTION_IS_INVALID: SubscriptionStatus.ValueType = ...  # 3
+SUBSCRIPTION_STATUS_SUBSCRIPTION_ACTION_IS_INVALID: SubscriptionStatus.ValueType  # 3
 """Некорректный статус подписки, список возможных значений: [SubscriptionAction](https://tinkoff.github.io/investAPI/marketdata#subscriptionaction)"""
 
-SUBSCRIPTION_STATUS_DEPTH_IS_INVALID: SubscriptionStatus.ValueType = ...  # 4
+SUBSCRIPTION_STATUS_DEPTH_IS_INVALID: SubscriptionStatus.ValueType  # 4
 """Некорректная глубина стакана, доступные значения: 10, 20, 30, 40, 50."""
 
-SUBSCRIPTION_STATUS_INTERVAL_IS_INVALID: SubscriptionStatus.ValueType = ...  # 5
+SUBSCRIPTION_STATUS_INTERVAL_IS_INVALID: SubscriptionStatus.ValueType  # 5
 """Некорректный интервал свечей, список возможных значений: [SubscriptionInterval](https://tinkoff.github.io/investAPI/marketdata#subscriptioninterval)"""
 
-SUBSCRIPTION_STATUS_LIMIT_IS_EXCEEDED: SubscriptionStatus.ValueType = ...  # 6
+SUBSCRIPTION_STATUS_LIMIT_IS_EXCEEDED: SubscriptionStatus.ValueType  # 6
 """Превышен лимит подписок в рамках стрима, подробнее: [Лимитная политика](https://tinkoff.github.io/investAPI/limits/)"""
 
-SUBSCRIPTION_STATUS_INTERNAL_ERROR: SubscriptionStatus.ValueType = ...  # 7
+SUBSCRIPTION_STATUS_INTERNAL_ERROR: SubscriptionStatus.ValueType  # 7
 """Внутренняя ошибка сервиса."""
 
 global___SubscriptionStatus = SubscriptionStatus
@@ -138,27 +138,27 @@ class _TradeDirection:
     ValueType = typing.NewType('ValueType', builtins.int)
     V: typing_extensions.TypeAlias = ValueType
 class _TradeDirectionEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_TradeDirection.ValueType], builtins.type):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor = ...
-    TRADE_DIRECTION_UNSPECIFIED: TradeDirection.ValueType = ...  # 0
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    TRADE_DIRECTION_UNSPECIFIED: _TradeDirection.ValueType  # 0
     """Направление сделки не определено."""
 
-    TRADE_DIRECTION_BUY: TradeDirection.ValueType = ...  # 1
+    TRADE_DIRECTION_BUY: _TradeDirection.ValueType  # 1
     """Покупка."""
 
-    TRADE_DIRECTION_SELL: TradeDirection.ValueType = ...  # 2
+    TRADE_DIRECTION_SELL: _TradeDirection.ValueType  # 2
     """Продажа."""
 
 class TradeDirection(_TradeDirection, metaclass=_TradeDirectionEnumTypeWrapper):
     """Направление сделки."""
     pass
 
-TRADE_DIRECTION_UNSPECIFIED: TradeDirection.ValueType = ...  # 0
+TRADE_DIRECTION_UNSPECIFIED: TradeDirection.ValueType  # 0
 """Направление сделки не определено."""
 
-TRADE_DIRECTION_BUY: TradeDirection.ValueType = ...  # 1
+TRADE_DIRECTION_BUY: TradeDirection.ValueType  # 1
 """Покупка."""
 
-TRADE_DIRECTION_SELL: TradeDirection.ValueType = ...  # 2
+TRADE_DIRECTION_SELL: TradeDirection.ValueType  # 2
 """Продажа."""
 
 global___TradeDirection = TradeDirection
@@ -168,45 +168,45 @@ class _CandleInterval:
     ValueType = typing.NewType('ValueType', builtins.int)
     V: typing_extensions.TypeAlias = ValueType
 class _CandleIntervalEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_CandleInterval.ValueType], builtins.type):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor = ...
-    CANDLE_INTERVAL_UNSPECIFIED: CandleInterval.ValueType = ...  # 0
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    CANDLE_INTERVAL_UNSPECIFIED: _CandleInterval.ValueType  # 0
     """Интервал не определён."""
 
-    CANDLE_INTERVAL_1_MIN: CandleInterval.ValueType = ...  # 1
+    CANDLE_INTERVAL_1_MIN: _CandleInterval.ValueType  # 1
     """1 минута."""
 
-    CANDLE_INTERVAL_5_MIN: CandleInterval.ValueType = ...  # 2
+    CANDLE_INTERVAL_5_MIN: _CandleInterval.ValueType  # 2
     """5 минут."""
 
-    CANDLE_INTERVAL_15_MIN: CandleInterval.ValueType = ...  # 3
+    CANDLE_INTERVAL_15_MIN: _CandleInterval.ValueType  # 3
     """15 минут."""
 
-    CANDLE_INTERVAL_HOUR: CandleInterval.ValueType = ...  # 4
+    CANDLE_INTERVAL_HOUR: _CandleInterval.ValueType  # 4
     """1 час."""
 
-    CANDLE_INTERVAL_DAY: CandleInterval.ValueType = ...  # 5
+    CANDLE_INTERVAL_DAY: _CandleInterval.ValueType  # 5
     """1 день."""
 
 class CandleInterval(_CandleInterval, metaclass=_CandleIntervalEnumTypeWrapper):
     """Интервал свечей."""
     pass
 
-CANDLE_INTERVAL_UNSPECIFIED: CandleInterval.ValueType = ...  # 0
+CANDLE_INTERVAL_UNSPECIFIED: CandleInterval.ValueType  # 0
 """Интервал не определён."""
 
-CANDLE_INTERVAL_1_MIN: CandleInterval.ValueType = ...  # 1
+CANDLE_INTERVAL_1_MIN: CandleInterval.ValueType  # 1
 """1 минута."""
 
-CANDLE_INTERVAL_5_MIN: CandleInterval.ValueType = ...  # 2
+CANDLE_INTERVAL_5_MIN: CandleInterval.ValueType  # 2
 """5 минут."""
 
-CANDLE_INTERVAL_15_MIN: CandleInterval.ValueType = ...  # 3
+CANDLE_INTERVAL_15_MIN: CandleInterval.ValueType  # 3
 """15 минут."""
 
-CANDLE_INTERVAL_HOUR: CandleInterval.ValueType = ...  # 4
+CANDLE_INTERVAL_HOUR: CandleInterval.ValueType  # 4
 """1 час."""
 
-CANDLE_INTERVAL_DAY: CandleInterval.ValueType = ...  # 5
+CANDLE_INTERVAL_DAY: CandleInterval.ValueType  # 5
 """1 день."""
 
 global___CandleInterval = CandleInterval
@@ -214,7 +214,7 @@ global___CandleInterval = CandleInterval
 
 class MarketDataRequest(google.protobuf.message.Message):
     """Запрос подписки или отписки на определённые биржевые данные."""
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     SUBSCRIBE_CANDLES_REQUEST_FIELD_NUMBER: builtins.int
     SUBSCRIBE_ORDER_BOOK_REQUEST_FIELD_NUMBER: builtins.int
     SUBSCRIBE_TRADES_REQUEST_FIELD_NUMBER: builtins.int
@@ -237,10 +237,10 @@ class MarketDataRequest(google.protobuf.message.Message):
         pass
     def __init__(self,
         *,
-        subscribe_candles_request : typing.Optional[global___SubscribeCandlesRequest] = ...,
-        subscribe_order_book_request : typing.Optional[global___SubscribeOrderBookRequest] = ...,
-        subscribe_trades_request : typing.Optional[global___SubscribeTradesRequest] = ...,
-        subscribe_info_request : typing.Optional[global___SubscribeInfoRequest] = ...,
+        subscribe_candles_request: typing.Optional[global___SubscribeCandlesRequest] = ...,
+        subscribe_order_book_request: typing.Optional[global___SubscribeOrderBookRequest] = ...,
+        subscribe_trades_request: typing.Optional[global___SubscribeTradesRequest] = ...,
+        subscribe_info_request: typing.Optional[global___SubscribeInfoRequest] = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["payload",b"payload","subscribe_candles_request",b"subscribe_candles_request","subscribe_info_request",b"subscribe_info_request","subscribe_order_book_request",b"subscribe_order_book_request","subscribe_trades_request",b"subscribe_trades_request"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions.Literal["payload",b"payload","subscribe_candles_request",b"subscribe_candles_request","subscribe_info_request",b"subscribe_info_request","subscribe_order_book_request",b"subscribe_order_book_request","subscribe_trades_request",b"subscribe_trades_request"]) -> None: ...
@@ -249,7 +249,7 @@ global___MarketDataRequest = MarketDataRequest
 
 class MarketDataResponse(google.protobuf.message.Message):
     """Пакет биржевой информации по подписке."""
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     SUBSCRIBE_CANDLES_RESPONSE_FIELD_NUMBER: builtins.int
     SUBSCRIBE_ORDER_BOOK_RESPONSE_FIELD_NUMBER: builtins.int
     SUBSCRIBE_TRADES_RESPONSE_FIELD_NUMBER: builtins.int
@@ -297,15 +297,15 @@ class MarketDataResponse(google.protobuf.message.Message):
         pass
     def __init__(self,
         *,
-        subscribe_candles_response : typing.Optional[global___SubscribeCandlesResponse] = ...,
-        subscribe_order_book_response : typing.Optional[global___SubscribeOrderBookResponse] = ...,
-        subscribe_trades_response : typing.Optional[global___SubscribeTradesResponse] = ...,
-        subscribe_info_response : typing.Optional[global___SubscribeInfoResponse] = ...,
-        candle : typing.Optional[global___Candle] = ...,
-        trade : typing.Optional[global___Trade] = ...,
-        orderbook : typing.Optional[global___OrderBook] = ...,
-        trading_status : typing.Optional[global___TradingStatus] = ...,
-        ping : typing.Optional[tinkoff.invest.grpc.common_pb2.Ping] = ...,
+        subscribe_candles_response: typing.Optional[global___SubscribeCandlesResponse] = ...,
+        subscribe_order_book_response: typing.Optional[global___SubscribeOrderBookResponse] = ...,
+        subscribe_trades_response: typing.Optional[global___SubscribeTradesResponse] = ...,
+        subscribe_info_response: typing.Optional[global___SubscribeInfoResponse] = ...,
+        candle: typing.Optional[global___Candle] = ...,
+        trade: typing.Optional[global___Trade] = ...,
+        orderbook: typing.Optional[global___OrderBook] = ...,
+        trading_status: typing.Optional[global___TradingStatus] = ...,
+        ping: typing.Optional[tinkoff.invest.grpc.common_pb2.Ping] = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["candle",b"candle","orderbook",b"orderbook","payload",b"payload","ping",b"ping","subscribe_candles_response",b"subscribe_candles_response","subscribe_info_response",b"subscribe_info_response","subscribe_order_book_response",b"subscribe_order_book_response","subscribe_trades_response",b"subscribe_trades_response","trade",b"trade","trading_status",b"trading_status"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions.Literal["candle",b"candle","orderbook",b"orderbook","payload",b"payload","ping",b"ping","subscribe_candles_response",b"subscribe_candles_response","subscribe_info_response",b"subscribe_info_response","subscribe_order_book_response",b"subscribe_order_book_response","subscribe_trades_response",b"subscribe_trades_response","trade",b"trade","trading_status",b"trading_status"]) -> None: ...
@@ -314,10 +314,10 @@ global___MarketDataResponse = MarketDataResponse
 
 class SubscribeCandlesRequest(google.protobuf.message.Message):
     """subscribeCandles | Изменения статуса подписки на свечи."""
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     SUBSCRIPTION_ACTION_FIELD_NUMBER: builtins.int
     INSTRUMENTS_FIELD_NUMBER: builtins.int
-    subscription_action: global___SubscriptionAction.ValueType = ...
+    subscription_action: global___SubscriptionAction.ValueType
     """Изменение статуса подписки."""
 
     @property
@@ -326,37 +326,37 @@ class SubscribeCandlesRequest(google.protobuf.message.Message):
         pass
     def __init__(self,
         *,
-        subscription_action : global___SubscriptionAction.ValueType = ...,
-        instruments : typing.Optional[typing.Iterable[global___CandleInstrument]] = ...,
+        subscription_action: global___SubscriptionAction.ValueType = ...,
+        instruments: typing.Optional[typing.Iterable[global___CandleInstrument]] = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["instruments",b"instruments","subscription_action",b"subscription_action"]) -> None: ...
 global___SubscribeCandlesRequest = SubscribeCandlesRequest
 
 class CandleInstrument(google.protobuf.message.Message):
     """Запрос изменения статус подписки на свечи."""
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     FIGI_FIELD_NUMBER: builtins.int
     INTERVAL_FIELD_NUMBER: builtins.int
-    figi: typing.Text = ...
+    figi: typing.Text
     """Figi-идентификатор инструмента."""
 
-    interval: global___SubscriptionInterval.ValueType = ...
+    interval: global___SubscriptionInterval.ValueType
     """Интервал свечей."""
 
     def __init__(self,
         *,
-        figi : typing.Text = ...,
-        interval : global___SubscriptionInterval.ValueType = ...,
+        figi: typing.Text = ...,
+        interval: global___SubscriptionInterval.ValueType = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["figi",b"figi","interval",b"interval"]) -> None: ...
 global___CandleInstrument = CandleInstrument
 
 class SubscribeCandlesResponse(google.protobuf.message.Message):
     """Результат изменения статус подписки на свечи."""
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     TRACKING_ID_FIELD_NUMBER: builtins.int
     CANDLES_SUBSCRIPTIONS_FIELD_NUMBER: builtins.int
-    tracking_id: typing.Text = ...
+    tracking_id: typing.Text
     """Уникальный идентификатор запроса, подробнее: [tracking_id](https://tinkoff.github.io/investAPI/grpc#tracking-id)"""
 
     @property
@@ -365,42 +365,42 @@ class SubscribeCandlesResponse(google.protobuf.message.Message):
         pass
     def __init__(self,
         *,
-        tracking_id : typing.Text = ...,
-        candles_subscriptions : typing.Optional[typing.Iterable[global___CandleSubscription]] = ...,
+        tracking_id: typing.Text = ...,
+        candles_subscriptions: typing.Optional[typing.Iterable[global___CandleSubscription]] = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["candles_subscriptions",b"candles_subscriptions","tracking_id",b"tracking_id"]) -> None: ...
 global___SubscribeCandlesResponse = SubscribeCandlesResponse
 
 class CandleSubscription(google.protobuf.message.Message):
     """Статус подписки на свечи."""
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     FIGI_FIELD_NUMBER: builtins.int
     INTERVAL_FIELD_NUMBER: builtins.int
     SUBSCRIPTION_STATUS_FIELD_NUMBER: builtins.int
-    figi: typing.Text = ...
+    figi: typing.Text
     """Figi-идентификатор инструмента."""
 
-    interval: global___SubscriptionInterval.ValueType = ...
+    interval: global___SubscriptionInterval.ValueType
     """Интервал свечей."""
 
-    subscription_status: global___SubscriptionStatus.ValueType = ...
+    subscription_status: global___SubscriptionStatus.ValueType
     """Статус подписки."""
 
     def __init__(self,
         *,
-        figi : typing.Text = ...,
-        interval : global___SubscriptionInterval.ValueType = ...,
-        subscription_status : global___SubscriptionStatus.ValueType = ...,
+        figi: typing.Text = ...,
+        interval: global___SubscriptionInterval.ValueType = ...,
+        subscription_status: global___SubscriptionStatus.ValueType = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["figi",b"figi","interval",b"interval","subscription_status",b"subscription_status"]) -> None: ...
 global___CandleSubscription = CandleSubscription
 
 class SubscribeOrderBookRequest(google.protobuf.message.Message):
     """Запрос на изменение статуса подписки на стаканы."""
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     SUBSCRIPTION_ACTION_FIELD_NUMBER: builtins.int
     INSTRUMENTS_FIELD_NUMBER: builtins.int
-    subscription_action: global___SubscriptionAction.ValueType = ...
+    subscription_action: global___SubscriptionAction.ValueType
     """Изменение статуса подписки."""
 
     @property
@@ -409,37 +409,37 @@ class SubscribeOrderBookRequest(google.protobuf.message.Message):
         pass
     def __init__(self,
         *,
-        subscription_action : global___SubscriptionAction.ValueType = ...,
-        instruments : typing.Optional[typing.Iterable[global___OrderBookInstrument]] = ...,
+        subscription_action: global___SubscriptionAction.ValueType = ...,
+        instruments: typing.Optional[typing.Iterable[global___OrderBookInstrument]] = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["instruments",b"instruments","subscription_action",b"subscription_action"]) -> None: ...
 global___SubscribeOrderBookRequest = SubscribeOrderBookRequest
 
 class OrderBookInstrument(google.protobuf.message.Message):
     """Запрос подписки на стаканы."""
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     FIGI_FIELD_NUMBER: builtins.int
     DEPTH_FIELD_NUMBER: builtins.int
-    figi: typing.Text = ...
+    figi: typing.Text
     """Figi-идентификатор инструмента."""
 
-    depth: builtins.int = ...
+    depth: builtins.int
     """Глубина стакана."""
 
     def __init__(self,
         *,
-        figi : typing.Text = ...,
-        depth : builtins.int = ...,
+        figi: typing.Text = ...,
+        depth: builtins.int = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["depth",b"depth","figi",b"figi"]) -> None: ...
 global___OrderBookInstrument = OrderBookInstrument
 
 class SubscribeOrderBookResponse(google.protobuf.message.Message):
     """Результат изменения статуса подписки на стаканы."""
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     TRACKING_ID_FIELD_NUMBER: builtins.int
     ORDER_BOOK_SUBSCRIPTIONS_FIELD_NUMBER: builtins.int
-    tracking_id: typing.Text = ...
+    tracking_id: typing.Text
     """Уникальный идентификатор запроса, подробнее: [tracking_id](https://tinkoff.github.io/investAPI/grpc#tracking-id)"""
 
     @property
@@ -448,42 +448,42 @@ class SubscribeOrderBookResponse(google.protobuf.message.Message):
         pass
     def __init__(self,
         *,
-        tracking_id : typing.Text = ...,
-        order_book_subscriptions : typing.Optional[typing.Iterable[global___OrderBookSubscription]] = ...,
+        tracking_id: typing.Text = ...,
+        order_book_subscriptions: typing.Optional[typing.Iterable[global___OrderBookSubscription]] = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["order_book_subscriptions",b"order_book_subscriptions","tracking_id",b"tracking_id"]) -> None: ...
 global___SubscribeOrderBookResponse = SubscribeOrderBookResponse
 
 class OrderBookSubscription(google.protobuf.message.Message):
     """Статус подписки."""
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     FIGI_FIELD_NUMBER: builtins.int
     DEPTH_FIELD_NUMBER: builtins.int
     SUBSCRIPTION_STATUS_FIELD_NUMBER: builtins.int
-    figi: typing.Text = ...
+    figi: typing.Text
     """Figi-идентификатор инструмента."""
 
-    depth: builtins.int = ...
+    depth: builtins.int
     """Глубина стакана."""
 
-    subscription_status: global___SubscriptionStatus.ValueType = ...
+    subscription_status: global___SubscriptionStatus.ValueType
     """Статус подписки."""
 
     def __init__(self,
         *,
-        figi : typing.Text = ...,
-        depth : builtins.int = ...,
-        subscription_status : global___SubscriptionStatus.ValueType = ...,
+        figi: typing.Text = ...,
+        depth: builtins.int = ...,
+        subscription_status: global___SubscriptionStatus.ValueType = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["depth",b"depth","figi",b"figi","subscription_status",b"subscription_status"]) -> None: ...
 global___OrderBookSubscription = OrderBookSubscription
 
 class SubscribeTradesRequest(google.protobuf.message.Message):
     """Изменение статуса подписки на поток обезличенных сделок."""
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     SUBSCRIPTION_ACTION_FIELD_NUMBER: builtins.int
     INSTRUMENTS_FIELD_NUMBER: builtins.int
-    subscription_action: global___SubscriptionAction.ValueType = ...
+    subscription_action: global___SubscriptionAction.ValueType
     """Изменение статуса подписки."""
 
     @property
@@ -492,32 +492,32 @@ class SubscribeTradesRequest(google.protobuf.message.Message):
         pass
     def __init__(self,
         *,
-        subscription_action : global___SubscriptionAction.ValueType = ...,
-        instruments : typing.Optional[typing.Iterable[global___TradeInstrument]] = ...,
+        subscription_action: global___SubscriptionAction.ValueType = ...,
+        instruments: typing.Optional[typing.Iterable[global___TradeInstrument]] = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["instruments",b"instruments","subscription_action",b"subscription_action"]) -> None: ...
 global___SubscribeTradesRequest = SubscribeTradesRequest
 
 class TradeInstrument(google.protobuf.message.Message):
     """Запрос подписки на поток обезличенных сделок."""
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     FIGI_FIELD_NUMBER: builtins.int
-    figi: typing.Text = ...
+    figi: typing.Text
     """Figi-идентификатор инструмента."""
 
     def __init__(self,
         *,
-        figi : typing.Text = ...,
+        figi: typing.Text = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["figi",b"figi"]) -> None: ...
 global___TradeInstrument = TradeInstrument
 
 class SubscribeTradesResponse(google.protobuf.message.Message):
     """Результат изменения статуса подписки на поток обезличенных сделок."""
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     TRACKING_ID_FIELD_NUMBER: builtins.int
     TRADE_SUBSCRIPTIONS_FIELD_NUMBER: builtins.int
-    tracking_id: typing.Text = ...
+    tracking_id: typing.Text
     """Уникальный идентификатор запроса, подробнее: [tracking_id](https://tinkoff.github.io/investAPI/grpc#tracking-id)"""
 
     @property
@@ -526,37 +526,37 @@ class SubscribeTradesResponse(google.protobuf.message.Message):
         pass
     def __init__(self,
         *,
-        tracking_id : typing.Text = ...,
-        trade_subscriptions : typing.Optional[typing.Iterable[global___TradeSubscription]] = ...,
+        tracking_id: typing.Text = ...,
+        trade_subscriptions: typing.Optional[typing.Iterable[global___TradeSubscription]] = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["tracking_id",b"tracking_id","trade_subscriptions",b"trade_subscriptions"]) -> None: ...
 global___SubscribeTradesResponse = SubscribeTradesResponse
 
 class TradeSubscription(google.protobuf.message.Message):
     """Статус подписки."""
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     FIGI_FIELD_NUMBER: builtins.int
     SUBSCRIPTION_STATUS_FIELD_NUMBER: builtins.int
-    figi: typing.Text = ...
+    figi: typing.Text
     """Figi-идентификатор инструмента."""
 
-    subscription_status: global___SubscriptionStatus.ValueType = ...
+    subscription_status: global___SubscriptionStatus.ValueType
     """Статус подписки."""
 
     def __init__(self,
         *,
-        figi : typing.Text = ...,
-        subscription_status : global___SubscriptionStatus.ValueType = ...,
+        figi: typing.Text = ...,
+        subscription_status: global___SubscriptionStatus.ValueType = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["figi",b"figi","subscription_status",b"subscription_status"]) -> None: ...
 global___TradeSubscription = TradeSubscription
 
 class SubscribeInfoRequest(google.protobuf.message.Message):
     """Изменение статуса подписки на торговый статус инструмента."""
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     SUBSCRIPTION_ACTION_FIELD_NUMBER: builtins.int
     INSTRUMENTS_FIELD_NUMBER: builtins.int
-    subscription_action: global___SubscriptionAction.ValueType = ...
+    subscription_action: global___SubscriptionAction.ValueType
     """Изменение статуса подписки."""
 
     @property
@@ -565,32 +565,32 @@ class SubscribeInfoRequest(google.protobuf.message.Message):
         pass
     def __init__(self,
         *,
-        subscription_action : global___SubscriptionAction.ValueType = ...,
-        instruments : typing.Optional[typing.Iterable[global___InfoInstrument]] = ...,
+        subscription_action: global___SubscriptionAction.ValueType = ...,
+        instruments: typing.Optional[typing.Iterable[global___InfoInstrument]] = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["instruments",b"instruments","subscription_action",b"subscription_action"]) -> None: ...
 global___SubscribeInfoRequest = SubscribeInfoRequest
 
 class InfoInstrument(google.protobuf.message.Message):
     """Запрос подписки на торговый статус."""
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     FIGI_FIELD_NUMBER: builtins.int
-    figi: typing.Text = ...
+    figi: typing.Text
     """Figi-идентификатор инструмента."""
 
     def __init__(self,
         *,
-        figi : typing.Text = ...,
+        figi: typing.Text = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["figi",b"figi"]) -> None: ...
 global___InfoInstrument = InfoInstrument
 
 class SubscribeInfoResponse(google.protobuf.message.Message):
     """Результат изменения статуса подписки на торговый статус."""
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     TRACKING_ID_FIELD_NUMBER: builtins.int
     INFO_SUBSCRIPTIONS_FIELD_NUMBER: builtins.int
-    tracking_id: typing.Text = ...
+    tracking_id: typing.Text
     """Уникальный идентификатор запроса, подробнее: [tracking_id](https://tinkoff.github.io/investAPI/grpc#tracking-id)"""
 
     @property
@@ -599,34 +599,34 @@ class SubscribeInfoResponse(google.protobuf.message.Message):
         pass
     def __init__(self,
         *,
-        tracking_id : typing.Text = ...,
-        info_subscriptions : typing.Optional[typing.Iterable[global___InfoSubscription]] = ...,
+        tracking_id: typing.Text = ...,
+        info_subscriptions: typing.Optional[typing.Iterable[global___InfoSubscription]] = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["info_subscriptions",b"info_subscriptions","tracking_id",b"tracking_id"]) -> None: ...
 global___SubscribeInfoResponse = SubscribeInfoResponse
 
 class InfoSubscription(google.protobuf.message.Message):
     """Статус подписки."""
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     FIGI_FIELD_NUMBER: builtins.int
     SUBSCRIPTION_STATUS_FIELD_NUMBER: builtins.int
-    figi: typing.Text = ...
+    figi: typing.Text
     """Figi-идентификатор инструмента."""
 
-    subscription_status: global___SubscriptionStatus.ValueType = ...
+    subscription_status: global___SubscriptionStatus.ValueType
     """Статус подписки."""
 
     def __init__(self,
         *,
-        figi : typing.Text = ...,
-        subscription_status : global___SubscriptionStatus.ValueType = ...,
+        figi: typing.Text = ...,
+        subscription_status: global___SubscriptionStatus.ValueType = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["figi",b"figi","subscription_status",b"subscription_status"]) -> None: ...
 global___InfoSubscription = InfoSubscription
 
 class Candle(google.protobuf.message.Message):
     """Пакет свечей в рамках стрима."""
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     FIGI_FIELD_NUMBER: builtins.int
     INTERVAL_FIELD_NUMBER: builtins.int
     OPEN_FIELD_NUMBER: builtins.int
@@ -635,10 +635,10 @@ class Candle(google.protobuf.message.Message):
     CLOSE_FIELD_NUMBER: builtins.int
     VOLUME_FIELD_NUMBER: builtins.int
     TIME_FIELD_NUMBER: builtins.int
-    figi: typing.Text = ...
+    figi: typing.Text
     """Figi-идентификатор инструмента."""
 
-    interval: global___SubscriptionInterval.ValueType = ...
+    interval: global___SubscriptionInterval.ValueType
     """Интервал свечи."""
 
     @property
@@ -657,7 +657,7 @@ class Candle(google.protobuf.message.Message):
     def close(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
         """Цена закрытия за 1 лот."""
         pass
-    volume: builtins.int = ...
+    volume: builtins.int
     """Объём сделок в лотах."""
 
     @property
@@ -666,14 +666,14 @@ class Candle(google.protobuf.message.Message):
         pass
     def __init__(self,
         *,
-        figi : typing.Text = ...,
-        interval : global___SubscriptionInterval.ValueType = ...,
-        open : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
-        high : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
-        low : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
-        close : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
-        volume : builtins.int = ...,
-        time : typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        figi: typing.Text = ...,
+        interval: global___SubscriptionInterval.ValueType = ...,
+        open: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        high: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        low: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        close: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        volume: builtins.int = ...,
+        time: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["close",b"close","high",b"high","low",b"low","open",b"open","time",b"time"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions.Literal["close",b"close","figi",b"figi","high",b"high","interval",b"interval","low",b"low","open",b"open","time",b"time","volume",b"volume"]) -> None: ...
@@ -681,20 +681,20 @@ global___Candle = Candle
 
 class OrderBook(google.protobuf.message.Message):
     """Пакет стаканов в рамках стрима."""
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     FIGI_FIELD_NUMBER: builtins.int
     DEPTH_FIELD_NUMBER: builtins.int
     IS_CONSISTENT_FIELD_NUMBER: builtins.int
     BIDS_FIELD_NUMBER: builtins.int
     ASKS_FIELD_NUMBER: builtins.int
     TIME_FIELD_NUMBER: builtins.int
-    figi: typing.Text = ...
+    figi: typing.Text
     """Figi-идентификатор инструмента."""
 
-    depth: builtins.int = ...
+    depth: builtins.int
     """Глубина стакана."""
 
-    is_consistent: builtins.bool = ...
+    is_consistent: builtins.bool
     """Флаг консистентности стакана. **false** значит не все заявки попали в стакан по причинам сетевых задержек или нарушения порядка доставки."""
 
     @property
@@ -711,12 +711,12 @@ class OrderBook(google.protobuf.message.Message):
         pass
     def __init__(self,
         *,
-        figi : typing.Text = ...,
-        depth : builtins.int = ...,
-        is_consistent : builtins.bool = ...,
-        bids : typing.Optional[typing.Iterable[global___Order]] = ...,
-        asks : typing.Optional[typing.Iterable[global___Order]] = ...,
-        time : typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        figi: typing.Text = ...,
+        depth: builtins.int = ...,
+        is_consistent: builtins.bool = ...,
+        bids: typing.Optional[typing.Iterable[global___Order]] = ...,
+        asks: typing.Optional[typing.Iterable[global___Order]] = ...,
+        time: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["time",b"time"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions.Literal["asks",b"asks","bids",b"bids","depth",b"depth","figi",b"figi","is_consistent",b"is_consistent","time",b"time"]) -> None: ...
@@ -724,20 +724,20 @@ global___OrderBook = OrderBook
 
 class Order(google.protobuf.message.Message):
     """Массив предложений/спроса."""
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     PRICE_FIELD_NUMBER: builtins.int
     QUANTITY_FIELD_NUMBER: builtins.int
     @property
     def price(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
         """Цена за 1 лот."""
         pass
-    quantity: builtins.int = ...
+    quantity: builtins.int
     """Количество в лотах."""
 
     def __init__(self,
         *,
-        price : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
-        quantity : builtins.int = ...,
+        price: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        quantity: builtins.int = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["price",b"price"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions.Literal["price",b"price","quantity",b"quantity"]) -> None: ...
@@ -745,23 +745,23 @@ global___Order = Order
 
 class Trade(google.protobuf.message.Message):
     """Информация о сделке."""
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     FIGI_FIELD_NUMBER: builtins.int
     DIRECTION_FIELD_NUMBER: builtins.int
     PRICE_FIELD_NUMBER: builtins.int
     QUANTITY_FIELD_NUMBER: builtins.int
     TIME_FIELD_NUMBER: builtins.int
-    figi: typing.Text = ...
+    figi: typing.Text
     """Figi-идентификатор инструмента."""
 
-    direction: global___TradeDirection.ValueType = ...
+    direction: global___TradeDirection.ValueType
     """Направление сделки."""
 
     @property
     def price(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
         """Цена за 1 лот."""
         pass
-    quantity: builtins.int = ...
+    quantity: builtins.int
     """Количество лотов."""
 
     @property
@@ -770,11 +770,11 @@ class Trade(google.protobuf.message.Message):
         pass
     def __init__(self,
         *,
-        figi : typing.Text = ...,
-        direction : global___TradeDirection.ValueType = ...,
-        price : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
-        quantity : builtins.int = ...,
-        time : typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        figi: typing.Text = ...,
+        direction: global___TradeDirection.ValueType = ...,
+        price: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        quantity: builtins.int = ...,
+        time: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["price",b"price","time",b"time"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions.Literal["direction",b"direction","figi",b"figi","price",b"price","quantity",b"quantity","time",b"time"]) -> None: ...
@@ -782,14 +782,14 @@ global___Trade = Trade
 
 class TradingStatus(google.protobuf.message.Message):
     """Пакет изменения торгового статуса."""
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     FIGI_FIELD_NUMBER: builtins.int
     TRADING_STATUS_FIELD_NUMBER: builtins.int
     TIME_FIELD_NUMBER: builtins.int
-    figi: typing.Text = ...
+    figi: typing.Text
     """Figi-идентификатор инструмента."""
 
-    trading_status: tinkoff.invest.grpc.common_pb2.SecurityTradingStatus.ValueType = ...
+    trading_status: tinkoff.invest.grpc.common_pb2.SecurityTradingStatus.ValueType
     """Статус торговли инструментом."""
 
     @property
@@ -798,9 +798,9 @@ class TradingStatus(google.protobuf.message.Message):
         pass
     def __init__(self,
         *,
-        figi : typing.Text = ...,
-        trading_status : tinkoff.invest.grpc.common_pb2.SecurityTradingStatus.ValueType = ...,
-        time : typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        figi: typing.Text = ...,
+        trading_status: tinkoff.invest.grpc.common_pb2.SecurityTradingStatus.ValueType = ...,
+        time: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["time",b"time"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions.Literal["figi",b"figi","time",b"time","trading_status",b"trading_status"]) -> None: ...
@@ -808,26 +808,26 @@ global___TradingStatus = TradingStatus
 
 class GetCandlesRequest(google.protobuf.message.Message):
     """Запрос исторических свечей."""
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     FIGI_FIELD_NUMBER: builtins.int
     FROM_FIELD_NUMBER: builtins.int
     TO_FIELD_NUMBER: builtins.int
     INTERVAL_FIELD_NUMBER: builtins.int
-    figi: typing.Text = ...
+    figi: typing.Text
     """Figi-идентификатор инструмента"""
 
     @property
     def to(self) -> google.protobuf.timestamp_pb2.Timestamp:
         """Окончание запрашиваемого периода в часовом поясе UTC."""
         pass
-    interval: global___CandleInterval.ValueType = ...
+    interval: global___CandleInterval.ValueType
     """Интервал запрошенных свечей."""
 
     def __init__(self,
         *,
-        figi : typing.Text = ...,
-        to : typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
-        interval : global___CandleInterval.ValueType = ...,
+        figi: typing.Text = ...,
+        to: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        interval: global___CandleInterval.ValueType = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["from",b"from","to",b"to"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions.Literal["figi",b"figi","from",b"from","interval",b"interval","to",b"to"]) -> None: ...
@@ -835,7 +835,7 @@ global___GetCandlesRequest = GetCandlesRequest
 
 class GetCandlesResponse(google.protobuf.message.Message):
     """Список свечей."""
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     CANDLES_FIELD_NUMBER: builtins.int
     @property
     def candles(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___HistoricCandle]:
@@ -843,14 +843,14 @@ class GetCandlesResponse(google.protobuf.message.Message):
         pass
     def __init__(self,
         *,
-        candles : typing.Optional[typing.Iterable[global___HistoricCandle]] = ...,
+        candles: typing.Optional[typing.Iterable[global___HistoricCandle]] = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["candles",b"candles"]) -> None: ...
 global___GetCandlesResponse = GetCandlesResponse
 
 class HistoricCandle(google.protobuf.message.Message):
     """Информация о свече."""
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     OPEN_FIELD_NUMBER: builtins.int
     HIGH_FIELD_NUMBER: builtins.int
     LOW_FIELD_NUMBER: builtins.int
@@ -874,25 +874,25 @@ class HistoricCandle(google.protobuf.message.Message):
     def close(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
         """Цена закрытия за 1 лот."""
         pass
-    volume: builtins.int = ...
+    volume: builtins.int
     """Объём торгов в лотах."""
 
     @property
     def time(self) -> google.protobuf.timestamp_pb2.Timestamp:
         """Время свечи в часовом поясе UTC."""
         pass
-    is_complete: builtins.bool = ...
+    is_complete: builtins.bool
     """Признак завершённости свечи. **false** значит, свеча за текущие интервал ещё сформирована не полностью."""
 
     def __init__(self,
         *,
-        open : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
-        high : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
-        low : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
-        close : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
-        volume : builtins.int = ...,
-        time : typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
-        is_complete : builtins.bool = ...,
+        open: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        high: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        low: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        close: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        volume: builtins.int = ...,
+        time: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        is_complete: builtins.bool = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["close",b"close","high",b"high","low",b"low","open",b"open","time",b"time"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions.Literal["close",b"close","high",b"high","is_complete",b"is_complete","low",b"low","open",b"open","time",b"time","volume",b"volume"]) -> None: ...
@@ -900,7 +900,7 @@ global___HistoricCandle = HistoricCandle
 
 class GetLastPricesRequest(google.protobuf.message.Message):
     """Запрос получения последних цен."""
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     FIGI_FIELD_NUMBER: builtins.int
     @property
     def figi(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
@@ -908,14 +908,14 @@ class GetLastPricesRequest(google.protobuf.message.Message):
         pass
     def __init__(self,
         *,
-        figi : typing.Optional[typing.Iterable[typing.Text]] = ...,
+        figi: typing.Optional[typing.Iterable[typing.Text]] = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["figi",b"figi"]) -> None: ...
 global___GetLastPricesRequest = GetLastPricesRequest
 
 class GetLastPricesResponse(google.protobuf.message.Message):
     """Список последних цен."""
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     LAST_PRICES_FIELD_NUMBER: builtins.int
     @property
     def last_prices(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___LastPrice]:
@@ -923,18 +923,18 @@ class GetLastPricesResponse(google.protobuf.message.Message):
         pass
     def __init__(self,
         *,
-        last_prices : typing.Optional[typing.Iterable[global___LastPrice]] = ...,
+        last_prices: typing.Optional[typing.Iterable[global___LastPrice]] = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["last_prices",b"last_prices"]) -> None: ...
 global___GetLastPricesResponse = GetLastPricesResponse
 
 class LastPrice(google.protobuf.message.Message):
     """Информация о цене."""
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     FIGI_FIELD_NUMBER: builtins.int
     PRICE_FIELD_NUMBER: builtins.int
     TIME_FIELD_NUMBER: builtins.int
-    figi: typing.Text = ...
+    figi: typing.Text
     """Идентификатор инструмента."""
 
     @property
@@ -947,9 +947,9 @@ class LastPrice(google.protobuf.message.Message):
         pass
     def __init__(self,
         *,
-        figi : typing.Text = ...,
-        price : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
-        time : typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        figi: typing.Text = ...,
+        price: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        time: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["price",b"price","time",b"time"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions.Literal["figi",b"figi","price",b"price","time",b"time"]) -> None: ...
@@ -957,36 +957,36 @@ global___LastPrice = LastPrice
 
 class GetOrderBookRequest(google.protobuf.message.Message):
     """Запрос стакана."""
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     FIGI_FIELD_NUMBER: builtins.int
     DEPTH_FIELD_NUMBER: builtins.int
-    figi: typing.Text = ...
+    figi: typing.Text
     """Figi-идентификатор инструмента."""
 
-    depth: builtins.int = ...
+    depth: builtins.int
     """Глубина стакана."""
 
     def __init__(self,
         *,
-        figi : typing.Text = ...,
-        depth : builtins.int = ...,
+        figi: typing.Text = ...,
+        depth: builtins.int = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["depth",b"depth","figi",b"figi"]) -> None: ...
 global___GetOrderBookRequest = GetOrderBookRequest
 
 class GetOrderBookResponse(google.protobuf.message.Message):
     """Информация о стакане."""
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     FIGI_FIELD_NUMBER: builtins.int
     DEPTH_FIELD_NUMBER: builtins.int
     BIDS_FIELD_NUMBER: builtins.int
     ASKS_FIELD_NUMBER: builtins.int
     LAST_PRICE_FIELD_NUMBER: builtins.int
     CLOSE_PRICE_FIELD_NUMBER: builtins.int
-    figi: typing.Text = ...
+    figi: typing.Text
     """Figi-идентификатор инструмента."""
 
-    depth: builtins.int = ...
+    depth: builtins.int
     """Глубина стакана."""
 
     @property
@@ -1007,12 +1007,12 @@ class GetOrderBookResponse(google.protobuf.message.Message):
         pass
     def __init__(self,
         *,
-        figi : typing.Text = ...,
-        depth : builtins.int = ...,
-        bids : typing.Optional[typing.Iterable[global___Order]] = ...,
-        asks : typing.Optional[typing.Iterable[global___Order]] = ...,
-        last_price : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
-        close_price : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        figi: typing.Text = ...,
+        depth: builtins.int = ...,
+        bids: typing.Optional[typing.Iterable[global___Order]] = ...,
+        asks: typing.Optional[typing.Iterable[global___Order]] = ...,
+        last_price: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        close_price: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["close_price",b"close_price","last_price",b"last_price"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions.Literal["asks",b"asks","bids",b"bids","close_price",b"close_price","depth",b"depth","figi",b"figi","last_price",b"last_price"]) -> None: ...
@@ -1020,33 +1020,33 @@ global___GetOrderBookResponse = GetOrderBookResponse
 
 class GetTradingStatusRequest(google.protobuf.message.Message):
     """Запрос получения торгового статуса."""
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     FIGI_FIELD_NUMBER: builtins.int
-    figi: typing.Text = ...
+    figi: typing.Text
     """Идентификатор инструмента."""
 
     def __init__(self,
         *,
-        figi : typing.Text = ...,
+        figi: typing.Text = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["figi",b"figi"]) -> None: ...
 global___GetTradingStatusRequest = GetTradingStatusRequest
 
 class GetTradingStatusResponse(google.protobuf.message.Message):
     """Информация о торговом статусе."""
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     FIGI_FIELD_NUMBER: builtins.int
     TRADING_STATUS_FIELD_NUMBER: builtins.int
-    figi: typing.Text = ...
+    figi: typing.Text
     """Figi-идентификатор инструмента."""
 
-    trading_status: tinkoff.invest.grpc.common_pb2.SecurityTradingStatus.ValueType = ...
+    trading_status: tinkoff.invest.grpc.common_pb2.SecurityTradingStatus.ValueType
     """Статус торговли инструментом."""
 
     def __init__(self,
         *,
-        figi : typing.Text = ...,
-        trading_status : tinkoff.invest.grpc.common_pb2.SecurityTradingStatus.ValueType = ...,
+        figi: typing.Text = ...,
+        trading_status: tinkoff.invest.grpc.common_pb2.SecurityTradingStatus.ValueType = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["figi",b"figi","trading_status",b"trading_status"]) -> None: ...
 global___GetTradingStatusResponse = GetTradingStatusResponse

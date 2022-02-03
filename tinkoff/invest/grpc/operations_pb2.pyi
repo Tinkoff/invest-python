@@ -12,33 +12,33 @@ import tinkoff.invest.grpc.common_pb2
 import typing
 import typing_extensions
 
-DESCRIPTOR: google.protobuf.descriptor.FileDescriptor = ...
+DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
 class _OperationState:
     ValueType = typing.NewType('ValueType', builtins.int)
     V: typing_extensions.TypeAlias = ValueType
 class _OperationStateEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_OperationState.ValueType], builtins.type):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor = ...
-    OPERATION_STATE_UNSPECIFIED: OperationState.ValueType = ...  # 0
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    OPERATION_STATE_UNSPECIFIED: _OperationState.ValueType  # 0
     """Статус операции не определён"""
 
-    OPERATION_STATE_EXECUTED: OperationState.ValueType = ...  # 1
+    OPERATION_STATE_EXECUTED: _OperationState.ValueType  # 1
     """Исполнена"""
 
-    OPERATION_STATE_CANCELED: OperationState.ValueType = ...  # 2
+    OPERATION_STATE_CANCELED: _OperationState.ValueType  # 2
     """Отменена"""
 
 class OperationState(_OperationState, metaclass=_OperationStateEnumTypeWrapper):
     """Статус запрашиваемых операций"""
     pass
 
-OPERATION_STATE_UNSPECIFIED: OperationState.ValueType = ...  # 0
+OPERATION_STATE_UNSPECIFIED: OperationState.ValueType  # 0
 """Статус операции не определён"""
 
-OPERATION_STATE_EXECUTED: OperationState.ValueType = ...  # 1
+OPERATION_STATE_EXECUTED: OperationState.ValueType  # 1
 """Исполнена"""
 
-OPERATION_STATE_CANCELED: OperationState.ValueType = ...  # 2
+OPERATION_STATE_CANCELED: OperationState.ValueType  # 2
 """Отменена"""
 
 global___OperationState = OperationState
@@ -48,273 +48,273 @@ class _OperationType:
     ValueType = typing.NewType('ValueType', builtins.int)
     V: typing_extensions.TypeAlias = ValueType
 class _OperationTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_OperationType.ValueType], builtins.type):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor = ...
-    OPERATION_TYPE_UNSPECIFIED: OperationType.ValueType = ...  # 0
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    OPERATION_TYPE_UNSPECIFIED: _OperationType.ValueType  # 0
     """Тип операции не определён"""
 
-    OPERATION_TYPE_INPUT: OperationType.ValueType = ...  # 1
+    OPERATION_TYPE_INPUT: _OperationType.ValueType  # 1
     """Завод денежных средств"""
 
-    OPERATION_TYPE_BOND_TAX: OperationType.ValueType = ...  # 2
+    OPERATION_TYPE_BOND_TAX: _OperationType.ValueType  # 2
     """Удержание налога по купонам"""
 
-    OPERATION_TYPE_OUTPUT_SECURITIES: OperationType.ValueType = ...  # 3
+    OPERATION_TYPE_OUTPUT_SECURITIES: _OperationType.ValueType  # 3
     """Вывод ЦБ"""
 
-    OPERATION_TYPE_OVERNIGHT: OperationType.ValueType = ...  # 4
+    OPERATION_TYPE_OVERNIGHT: _OperationType.ValueType  # 4
     """Доход по сделке РЕПО овернайт"""
 
-    OPERATION_TYPE_TAX: OperationType.ValueType = ...  # 5
+    OPERATION_TYPE_TAX: _OperationType.ValueType  # 5
     """Удержание налога"""
 
-    OPERATION_TYPE_BOND_REPAYMENT_FULL: OperationType.ValueType = ...  # 6
+    OPERATION_TYPE_BOND_REPAYMENT_FULL: _OperationType.ValueType  # 6
     """Полное погашение облигаций"""
 
-    OPERATION_TYPE_SELL_CARD: OperationType.ValueType = ...  # 7
+    OPERATION_TYPE_SELL_CARD: _OperationType.ValueType  # 7
     """Продажа ЦБ с карты"""
 
-    OPERATION_TYPE_DIVIDEND_TAX: OperationType.ValueType = ...  # 8
+    OPERATION_TYPE_DIVIDEND_TAX: _OperationType.ValueType  # 8
     """Удержание налога по дивидендам"""
 
-    OPERATION_TYPE_OUTPUT: OperationType.ValueType = ...  # 9
+    OPERATION_TYPE_OUTPUT: _OperationType.ValueType  # 9
     """Вывод денежных средств"""
 
-    OPERATION_TYPE_BOND_REPAYMENT: OperationType.ValueType = ...  # 10
+    OPERATION_TYPE_BOND_REPAYMENT: _OperationType.ValueType  # 10
     """Частичное погашение облигаций"""
 
-    OPERATION_TYPE_TAX_CORRECTION: OperationType.ValueType = ...  # 11
+    OPERATION_TYPE_TAX_CORRECTION: _OperationType.ValueType  # 11
     """Корректировка налога"""
 
-    OPERATION_TYPE_SERVICE_FEE: OperationType.ValueType = ...  # 12
+    OPERATION_TYPE_SERVICE_FEE: _OperationType.ValueType  # 12
     """Удержание комиссии за обслуживание брокерского счёта"""
 
-    OPERATION_TYPE_BENEFIT_TAX: OperationType.ValueType = ...  # 13
+    OPERATION_TYPE_BENEFIT_TAX: _OperationType.ValueType  # 13
     """Удержание налога за материальную выгоду"""
 
-    OPERATION_TYPE_MARGIN_FEE: OperationType.ValueType = ...  # 14
+    OPERATION_TYPE_MARGIN_FEE: _OperationType.ValueType  # 14
     """Удержание комиссии за непокрытую позицию"""
 
-    OPERATION_TYPE_BUY: OperationType.ValueType = ...  # 15
+    OPERATION_TYPE_BUY: _OperationType.ValueType  # 15
     """Покупка ЦБ"""
 
-    OPERATION_TYPE_BUY_CARD: OperationType.ValueType = ...  # 16
+    OPERATION_TYPE_BUY_CARD: _OperationType.ValueType  # 16
     """Покупка ЦБ с карты"""
 
-    OPERATION_TYPE_INPUT_SECURITIES: OperationType.ValueType = ...  # 17
+    OPERATION_TYPE_INPUT_SECURITIES: _OperationType.ValueType  # 17
     """Завод ЦБ"""
 
-    OPERATION_TYPE_SELL_MARGIN: OperationType.ValueType = ...  # 18
+    OPERATION_TYPE_SELL_MARGIN: _OperationType.ValueType  # 18
     """Продажа в результате Margin-call"""
 
-    OPERATION_TYPE_BROKER_FEE: OperationType.ValueType = ...  # 19
+    OPERATION_TYPE_BROKER_FEE: _OperationType.ValueType  # 19
     """Удержание комиссии за операцию"""
 
-    OPERATION_TYPE_BUY_MARGIN: OperationType.ValueType = ...  # 20
+    OPERATION_TYPE_BUY_MARGIN: _OperationType.ValueType  # 20
     """Покупка в результате Margin-call"""
 
-    OPERATION_TYPE_DIVIDEND: OperationType.ValueType = ...  # 21
+    OPERATION_TYPE_DIVIDEND: _OperationType.ValueType  # 21
     """Выплата дивидендов"""
 
-    OPERATION_TYPE_SELL: OperationType.ValueType = ...  # 22
+    OPERATION_TYPE_SELL: _OperationType.ValueType  # 22
     """Продажа ЦБ"""
 
-    OPERATION_TYPE_COUPON: OperationType.ValueType = ...  # 23
+    OPERATION_TYPE_COUPON: _OperationType.ValueType  # 23
     """Выплата купонов"""
 
-    OPERATION_TYPE_SUCCESS_FEE: OperationType.ValueType = ...  # 24
+    OPERATION_TYPE_SUCCESS_FEE: _OperationType.ValueType  # 24
     """Удержание комиссии SuccessFee"""
 
-    OPERATION_TYPE_DIVIDEND_TRANSFER: OperationType.ValueType = ...  # 25
+    OPERATION_TYPE_DIVIDEND_TRANSFER: _OperationType.ValueType  # 25
     """Передача дивидендного дохода"""
 
-    OPERATION_TYPE_ACCRUING_VARMARGIN: OperationType.ValueType = ...  # 26
+    OPERATION_TYPE_ACCRUING_VARMARGIN: _OperationType.ValueType  # 26
     """Зачисление вариационной маржи"""
 
-    OPERATION_TYPE_WRITING_OFF_VARMARGIN: OperationType.ValueType = ...  # 27
+    OPERATION_TYPE_WRITING_OFF_VARMARGIN: _OperationType.ValueType  # 27
     """Списание вариационной маржи"""
 
-    OPERATION_TYPE_DELIVERY_BUY: OperationType.ValueType = ...  # 28
+    OPERATION_TYPE_DELIVERY_BUY: _OperationType.ValueType  # 28
     """Покупка в рамках экспирации фьючерсного контракта"""
 
-    OPERATION_TYPE_DELIVERY_SELL: OperationType.ValueType = ...  # 29
+    OPERATION_TYPE_DELIVERY_SELL: _OperationType.ValueType  # 29
     """Продажа в рамках экспирации фьючерсного контракта"""
 
-    OPERATION_TYPE_TRACK_MFEE: OperationType.ValueType = ...  # 30
+    OPERATION_TYPE_TRACK_MFEE: _OperationType.ValueType  # 30
     """Комиссия за управление по счёту автоследования"""
 
-    OPERATION_TYPE_TRACK_PFEE: OperationType.ValueType = ...  # 31
+    OPERATION_TYPE_TRACK_PFEE: _OperationType.ValueType  # 31
     """Комиссия за результат по счёту автоследования"""
 
-    OPERATION_TYPE_TAX_PROGRESSIVE: OperationType.ValueType = ...  # 32
+    OPERATION_TYPE_TAX_PROGRESSIVE: _OperationType.ValueType  # 32
     """Удержание налога по ставке 15%"""
 
-    OPERATION_TYPE_BOND_TAX_PROGRESSIVE: OperationType.ValueType = ...  # 33
+    OPERATION_TYPE_BOND_TAX_PROGRESSIVE: _OperationType.ValueType  # 33
     """Удержание налога по купонам по ставке 15%"""
 
-    OPERATION_TYPE_DIVIDEND_TAX_PROGRESSIVE: OperationType.ValueType = ...  # 34
+    OPERATION_TYPE_DIVIDEND_TAX_PROGRESSIVE: _OperationType.ValueType  # 34
     """Удержание налога по дивидендам по ставке 15%"""
 
-    OPERATION_TYPE_BENEFIT_TAX_PROGRESSIVE: OperationType.ValueType = ...  # 35
+    OPERATION_TYPE_BENEFIT_TAX_PROGRESSIVE: _OperationType.ValueType  # 35
     """Удержание налога за материальную выгоду по ставке 15%"""
 
-    OPERATION_TYPE_TAX_CORRECTION_PROGRESSIVE: OperationType.ValueType = ...  # 36
+    OPERATION_TYPE_TAX_CORRECTION_PROGRESSIVE: _OperationType.ValueType  # 36
     """Корректировка налога по ставке 15%"""
 
-    OPERATION_TYPE_TAX_REPO_PROGRESSIVE: OperationType.ValueType = ...  # 37
+    OPERATION_TYPE_TAX_REPO_PROGRESSIVE: _OperationType.ValueType  # 37
     """Удержание налога за возмещение по сделкам РЕПО по ставке 15%"""
 
-    OPERATION_TYPE_TAX_REPO: OperationType.ValueType = ...  # 38
+    OPERATION_TYPE_TAX_REPO: _OperationType.ValueType  # 38
     """Удержание налога за возмещение по сделкам РЕПО"""
 
-    OPERATION_TYPE_TAX_REPO_HOLD: OperationType.ValueType = ...  # 39
+    OPERATION_TYPE_TAX_REPO_HOLD: _OperationType.ValueType  # 39
     """Удержание налога по сделкам РЕПО"""
 
-    OPERATION_TYPE_TAX_REPO_REFUND: OperationType.ValueType = ...  # 40
+    OPERATION_TYPE_TAX_REPO_REFUND: _OperationType.ValueType  # 40
     """Возврат налога по сделкам РЕПО"""
 
-    OPERATION_TYPE_TAX_REPO_HOLD_PROGRESSIVE: OperationType.ValueType = ...  # 41
+    OPERATION_TYPE_TAX_REPO_HOLD_PROGRESSIVE: _OperationType.ValueType  # 41
     """Удержание налога по сделкам РЕПО по ставке 15%"""
 
-    OPERATION_TYPE_TAX_REPO_REFUND_PROGRESSIVE: OperationType.ValueType = ...  # 42
+    OPERATION_TYPE_TAX_REPO_REFUND_PROGRESSIVE: _OperationType.ValueType  # 42
     """Возврат налога по сделкам РЕПО по ставке 15%"""
 
-    OPERATION_TYPE_DIV_EXT: OperationType.ValueType = ...  # 43
+    OPERATION_TYPE_DIV_EXT: _OperationType.ValueType  # 43
     """Выплата дивидендов на карту"""
 
 class OperationType(_OperationType, metaclass=_OperationTypeEnumTypeWrapper):
     """Тип операции"""
     pass
 
-OPERATION_TYPE_UNSPECIFIED: OperationType.ValueType = ...  # 0
+OPERATION_TYPE_UNSPECIFIED: OperationType.ValueType  # 0
 """Тип операции не определён"""
 
-OPERATION_TYPE_INPUT: OperationType.ValueType = ...  # 1
+OPERATION_TYPE_INPUT: OperationType.ValueType  # 1
 """Завод денежных средств"""
 
-OPERATION_TYPE_BOND_TAX: OperationType.ValueType = ...  # 2
+OPERATION_TYPE_BOND_TAX: OperationType.ValueType  # 2
 """Удержание налога по купонам"""
 
-OPERATION_TYPE_OUTPUT_SECURITIES: OperationType.ValueType = ...  # 3
+OPERATION_TYPE_OUTPUT_SECURITIES: OperationType.ValueType  # 3
 """Вывод ЦБ"""
 
-OPERATION_TYPE_OVERNIGHT: OperationType.ValueType = ...  # 4
+OPERATION_TYPE_OVERNIGHT: OperationType.ValueType  # 4
 """Доход по сделке РЕПО овернайт"""
 
-OPERATION_TYPE_TAX: OperationType.ValueType = ...  # 5
+OPERATION_TYPE_TAX: OperationType.ValueType  # 5
 """Удержание налога"""
 
-OPERATION_TYPE_BOND_REPAYMENT_FULL: OperationType.ValueType = ...  # 6
+OPERATION_TYPE_BOND_REPAYMENT_FULL: OperationType.ValueType  # 6
 """Полное погашение облигаций"""
 
-OPERATION_TYPE_SELL_CARD: OperationType.ValueType = ...  # 7
+OPERATION_TYPE_SELL_CARD: OperationType.ValueType  # 7
 """Продажа ЦБ с карты"""
 
-OPERATION_TYPE_DIVIDEND_TAX: OperationType.ValueType = ...  # 8
+OPERATION_TYPE_DIVIDEND_TAX: OperationType.ValueType  # 8
 """Удержание налога по дивидендам"""
 
-OPERATION_TYPE_OUTPUT: OperationType.ValueType = ...  # 9
+OPERATION_TYPE_OUTPUT: OperationType.ValueType  # 9
 """Вывод денежных средств"""
 
-OPERATION_TYPE_BOND_REPAYMENT: OperationType.ValueType = ...  # 10
+OPERATION_TYPE_BOND_REPAYMENT: OperationType.ValueType  # 10
 """Частичное погашение облигаций"""
 
-OPERATION_TYPE_TAX_CORRECTION: OperationType.ValueType = ...  # 11
+OPERATION_TYPE_TAX_CORRECTION: OperationType.ValueType  # 11
 """Корректировка налога"""
 
-OPERATION_TYPE_SERVICE_FEE: OperationType.ValueType = ...  # 12
+OPERATION_TYPE_SERVICE_FEE: OperationType.ValueType  # 12
 """Удержание комиссии за обслуживание брокерского счёта"""
 
-OPERATION_TYPE_BENEFIT_TAX: OperationType.ValueType = ...  # 13
+OPERATION_TYPE_BENEFIT_TAX: OperationType.ValueType  # 13
 """Удержание налога за материальную выгоду"""
 
-OPERATION_TYPE_MARGIN_FEE: OperationType.ValueType = ...  # 14
+OPERATION_TYPE_MARGIN_FEE: OperationType.ValueType  # 14
 """Удержание комиссии за непокрытую позицию"""
 
-OPERATION_TYPE_BUY: OperationType.ValueType = ...  # 15
+OPERATION_TYPE_BUY: OperationType.ValueType  # 15
 """Покупка ЦБ"""
 
-OPERATION_TYPE_BUY_CARD: OperationType.ValueType = ...  # 16
+OPERATION_TYPE_BUY_CARD: OperationType.ValueType  # 16
 """Покупка ЦБ с карты"""
 
-OPERATION_TYPE_INPUT_SECURITIES: OperationType.ValueType = ...  # 17
+OPERATION_TYPE_INPUT_SECURITIES: OperationType.ValueType  # 17
 """Завод ЦБ"""
 
-OPERATION_TYPE_SELL_MARGIN: OperationType.ValueType = ...  # 18
+OPERATION_TYPE_SELL_MARGIN: OperationType.ValueType  # 18
 """Продажа в результате Margin-call"""
 
-OPERATION_TYPE_BROKER_FEE: OperationType.ValueType = ...  # 19
+OPERATION_TYPE_BROKER_FEE: OperationType.ValueType  # 19
 """Удержание комиссии за операцию"""
 
-OPERATION_TYPE_BUY_MARGIN: OperationType.ValueType = ...  # 20
+OPERATION_TYPE_BUY_MARGIN: OperationType.ValueType  # 20
 """Покупка в результате Margin-call"""
 
-OPERATION_TYPE_DIVIDEND: OperationType.ValueType = ...  # 21
+OPERATION_TYPE_DIVIDEND: OperationType.ValueType  # 21
 """Выплата дивидендов"""
 
-OPERATION_TYPE_SELL: OperationType.ValueType = ...  # 22
+OPERATION_TYPE_SELL: OperationType.ValueType  # 22
 """Продажа ЦБ"""
 
-OPERATION_TYPE_COUPON: OperationType.ValueType = ...  # 23
+OPERATION_TYPE_COUPON: OperationType.ValueType  # 23
 """Выплата купонов"""
 
-OPERATION_TYPE_SUCCESS_FEE: OperationType.ValueType = ...  # 24
+OPERATION_TYPE_SUCCESS_FEE: OperationType.ValueType  # 24
 """Удержание комиссии SuccessFee"""
 
-OPERATION_TYPE_DIVIDEND_TRANSFER: OperationType.ValueType = ...  # 25
+OPERATION_TYPE_DIVIDEND_TRANSFER: OperationType.ValueType  # 25
 """Передача дивидендного дохода"""
 
-OPERATION_TYPE_ACCRUING_VARMARGIN: OperationType.ValueType = ...  # 26
+OPERATION_TYPE_ACCRUING_VARMARGIN: OperationType.ValueType  # 26
 """Зачисление вариационной маржи"""
 
-OPERATION_TYPE_WRITING_OFF_VARMARGIN: OperationType.ValueType = ...  # 27
+OPERATION_TYPE_WRITING_OFF_VARMARGIN: OperationType.ValueType  # 27
 """Списание вариационной маржи"""
 
-OPERATION_TYPE_DELIVERY_BUY: OperationType.ValueType = ...  # 28
+OPERATION_TYPE_DELIVERY_BUY: OperationType.ValueType  # 28
 """Покупка в рамках экспирации фьючерсного контракта"""
 
-OPERATION_TYPE_DELIVERY_SELL: OperationType.ValueType = ...  # 29
+OPERATION_TYPE_DELIVERY_SELL: OperationType.ValueType  # 29
 """Продажа в рамках экспирации фьючерсного контракта"""
 
-OPERATION_TYPE_TRACK_MFEE: OperationType.ValueType = ...  # 30
+OPERATION_TYPE_TRACK_MFEE: OperationType.ValueType  # 30
 """Комиссия за управление по счёту автоследования"""
 
-OPERATION_TYPE_TRACK_PFEE: OperationType.ValueType = ...  # 31
+OPERATION_TYPE_TRACK_PFEE: OperationType.ValueType  # 31
 """Комиссия за результат по счёту автоследования"""
 
-OPERATION_TYPE_TAX_PROGRESSIVE: OperationType.ValueType = ...  # 32
+OPERATION_TYPE_TAX_PROGRESSIVE: OperationType.ValueType  # 32
 """Удержание налога по ставке 15%"""
 
-OPERATION_TYPE_BOND_TAX_PROGRESSIVE: OperationType.ValueType = ...  # 33
+OPERATION_TYPE_BOND_TAX_PROGRESSIVE: OperationType.ValueType  # 33
 """Удержание налога по купонам по ставке 15%"""
 
-OPERATION_TYPE_DIVIDEND_TAX_PROGRESSIVE: OperationType.ValueType = ...  # 34
+OPERATION_TYPE_DIVIDEND_TAX_PROGRESSIVE: OperationType.ValueType  # 34
 """Удержание налога по дивидендам по ставке 15%"""
 
-OPERATION_TYPE_BENEFIT_TAX_PROGRESSIVE: OperationType.ValueType = ...  # 35
+OPERATION_TYPE_BENEFIT_TAX_PROGRESSIVE: OperationType.ValueType  # 35
 """Удержание налога за материальную выгоду по ставке 15%"""
 
-OPERATION_TYPE_TAX_CORRECTION_PROGRESSIVE: OperationType.ValueType = ...  # 36
+OPERATION_TYPE_TAX_CORRECTION_PROGRESSIVE: OperationType.ValueType  # 36
 """Корректировка налога по ставке 15%"""
 
-OPERATION_TYPE_TAX_REPO_PROGRESSIVE: OperationType.ValueType = ...  # 37
+OPERATION_TYPE_TAX_REPO_PROGRESSIVE: OperationType.ValueType  # 37
 """Удержание налога за возмещение по сделкам РЕПО по ставке 15%"""
 
-OPERATION_TYPE_TAX_REPO: OperationType.ValueType = ...  # 38
+OPERATION_TYPE_TAX_REPO: OperationType.ValueType  # 38
 """Удержание налога за возмещение по сделкам РЕПО"""
 
-OPERATION_TYPE_TAX_REPO_HOLD: OperationType.ValueType = ...  # 39
+OPERATION_TYPE_TAX_REPO_HOLD: OperationType.ValueType  # 39
 """Удержание налога по сделкам РЕПО"""
 
-OPERATION_TYPE_TAX_REPO_REFUND: OperationType.ValueType = ...  # 40
+OPERATION_TYPE_TAX_REPO_REFUND: OperationType.ValueType  # 40
 """Возврат налога по сделкам РЕПО"""
 
-OPERATION_TYPE_TAX_REPO_HOLD_PROGRESSIVE: OperationType.ValueType = ...  # 41
+OPERATION_TYPE_TAX_REPO_HOLD_PROGRESSIVE: OperationType.ValueType  # 41
 """Удержание налога по сделкам РЕПО по ставке 15%"""
 
-OPERATION_TYPE_TAX_REPO_REFUND_PROGRESSIVE: OperationType.ValueType = ...  # 42
+OPERATION_TYPE_TAX_REPO_REFUND_PROGRESSIVE: OperationType.ValueType  # 42
 """Возврат налога по сделкам РЕПО по ставке 15%"""
 
-OPERATION_TYPE_DIV_EXT: OperationType.ValueType = ...  # 43
+OPERATION_TYPE_DIV_EXT: OperationType.ValueType  # 43
 """Выплата дивидендов на карту"""
 
 global___OperationType = OperationType
@@ -322,31 +322,31 @@ global___OperationType = OperationType
 
 class OperationsRequest(google.protobuf.message.Message):
     """Запрос получения списка операций по счёту."""
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     ACCOUNT_ID_FIELD_NUMBER: builtins.int
     FROM_FIELD_NUMBER: builtins.int
     TO_FIELD_NUMBER: builtins.int
     STATE_FIELD_NUMBER: builtins.int
     FIGI_FIELD_NUMBER: builtins.int
-    account_id: typing.Text = ...
+    account_id: typing.Text
     """Идентификатор счёта клиента"""
 
     @property
     def to(self) -> google.protobuf.timestamp_pb2.Timestamp:
         """Окончание периода (по UTC)"""
         pass
-    state: global___OperationState.ValueType = ...
+    state: global___OperationState.ValueType
     """Статус запрашиваемых операций"""
 
-    figi: typing.Text = ...
+    figi: typing.Text
     """Figi-идентификатор инструмента для фильтрации"""
 
     def __init__(self,
         *,
-        account_id : typing.Text = ...,
-        to : typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
-        state : global___OperationState.ValueType = ...,
-        figi : typing.Text = ...,
+        account_id: typing.Text = ...,
+        to: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        state: global___OperationState.ValueType = ...,
+        figi: typing.Text = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["from",b"from","to",b"to"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions.Literal["account_id",b"account_id","figi",b"figi","from",b"from","state",b"state","to",b"to"]) -> None: ...
@@ -354,7 +354,7 @@ global___OperationsRequest = OperationsRequest
 
 class OperationsResponse(google.protobuf.message.Message):
     """Список операций."""
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     OPERATIONS_FIELD_NUMBER: builtins.int
     @property
     def operations(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Operation]:
@@ -362,14 +362,14 @@ class OperationsResponse(google.protobuf.message.Message):
         pass
     def __init__(self,
         *,
-        operations : typing.Optional[typing.Iterable[global___Operation]] = ...,
+        operations: typing.Optional[typing.Iterable[global___Operation]] = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["operations",b"operations"]) -> None: ...
 global___OperationsResponse = OperationsResponse
 
 class Operation(google.protobuf.message.Message):
     """Данные по операции."""
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     ID_FIELD_NUMBER: builtins.int
     PARENT_OPERATION_ID_FIELD_NUMBER: builtins.int
     CURRENCY_FIELD_NUMBER: builtins.int
@@ -383,13 +383,13 @@ class Operation(google.protobuf.message.Message):
     DATE_FIELD_NUMBER: builtins.int
     TYPE_FIELD_NUMBER: builtins.int
     OPERATION_TYPE_FIELD_NUMBER: builtins.int
-    id: typing.Text = ...
+    id: typing.Text
     """Идентификатор операции"""
 
-    parent_operation_id: typing.Text = ...
+    parent_operation_id: typing.Text
     """Идентификатор родительской операции"""
 
-    currency: typing.Text = ...
+    currency: typing.Text
     """Валюта операции"""
 
     @property
@@ -400,46 +400,46 @@ class Operation(google.protobuf.message.Message):
     def price(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
         """Цена операции"""
         pass
-    state: global___OperationState.ValueType = ...
+    state: global___OperationState.ValueType
     """Статус операции"""
 
-    quantity: builtins.int = ...
+    quantity: builtins.int
     """Количество лотов инструмента"""
 
-    quantity_rest: builtins.int = ...
+    quantity_rest: builtins.int
     """Неисполненный остаток по сделке"""
 
-    figi: typing.Text = ...
+    figi: typing.Text
     """Figi-идентификатор инструмента, связанного с операцией"""
 
-    instrument_type: typing.Text = ...
+    instrument_type: typing.Text
     """Тип инструмента. Возможные значения: </br>**bond** — облигация; </br>**share** — акция; </br>**currency** — валюта; </br>**etf** — фонд; </br>**futures** — фьючерс."""
 
     @property
     def date(self) -> google.protobuf.timestamp_pb2.Timestamp:
         """Дата и время операции в формате часовом поясе UTC"""
         pass
-    type: typing.Text = ...
+    type: typing.Text
     """Текстовое описание типа операции"""
 
-    operation_type: global___OperationType.ValueType = ...
+    operation_type: global___OperationType.ValueType
     """Тип операции"""
 
     def __init__(self,
         *,
-        id : typing.Text = ...,
-        parent_operation_id : typing.Text = ...,
-        currency : typing.Text = ...,
-        payment : typing.Optional[tinkoff.invest.grpc.common_pb2.MoneyValue] = ...,
-        price : typing.Optional[tinkoff.invest.grpc.common_pb2.MoneyValue] = ...,
-        state : global___OperationState.ValueType = ...,
-        quantity : builtins.int = ...,
-        quantity_rest : builtins.int = ...,
-        figi : typing.Text = ...,
-        instrument_type : typing.Text = ...,
-        date : typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
-        type : typing.Text = ...,
-        operation_type : global___OperationType.ValueType = ...,
+        id: typing.Text = ...,
+        parent_operation_id: typing.Text = ...,
+        currency: typing.Text = ...,
+        payment: typing.Optional[tinkoff.invest.grpc.common_pb2.MoneyValue] = ...,
+        price: typing.Optional[tinkoff.invest.grpc.common_pb2.MoneyValue] = ...,
+        state: global___OperationState.ValueType = ...,
+        quantity: builtins.int = ...,
+        quantity_rest: builtins.int = ...,
+        figi: typing.Text = ...,
+        instrument_type: typing.Text = ...,
+        date: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        type: typing.Text = ...,
+        operation_type: global___OperationType.ValueType = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["date",b"date","payment",b"payment","price",b"price"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions.Literal["currency",b"currency","date",b"date","figi",b"figi","id",b"id","instrument_type",b"instrument_type","operation_type",b"operation_type","parent_operation_id",b"parent_operation_id","payment",b"payment","price",b"price","quantity",b"quantity","quantity_rest",b"quantity_rest","state",b"state","type",b"type"]) -> None: ...
@@ -447,21 +447,21 @@ global___Operation = Operation
 
 class PortfolioRequest(google.protobuf.message.Message):
     """Запрос получения текущего портфеля по счёту."""
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     ACCOUNT_ID_FIELD_NUMBER: builtins.int
-    account_id: typing.Text = ...
+    account_id: typing.Text
     """Идентификатор счёта пользователя"""
 
     def __init__(self,
         *,
-        account_id : typing.Text = ...,
+        account_id: typing.Text = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["account_id",b"account_id"]) -> None: ...
 global___PortfolioRequest = PortfolioRequest
 
 class PortfolioResponse(google.protobuf.message.Message):
     """Текущий портфель по счёту."""
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     TOTAL_AMOUNT_SHARES_FIELD_NUMBER: builtins.int
     TOTAL_AMOUNT_BONDS_FIELD_NUMBER: builtins.int
     TOTAL_AMOUNT_ETF_FIELD_NUMBER: builtins.int
@@ -499,13 +499,13 @@ class PortfolioResponse(google.protobuf.message.Message):
         pass
     def __init__(self,
         *,
-        total_amount_shares : typing.Optional[tinkoff.invest.grpc.common_pb2.MoneyValue] = ...,
-        total_amount_bonds : typing.Optional[tinkoff.invest.grpc.common_pb2.MoneyValue] = ...,
-        total_amount_etf : typing.Optional[tinkoff.invest.grpc.common_pb2.MoneyValue] = ...,
-        total_amount_currencies : typing.Optional[tinkoff.invest.grpc.common_pb2.MoneyValue] = ...,
-        total_amount_futures : typing.Optional[tinkoff.invest.grpc.common_pb2.MoneyValue] = ...,
-        expected_yield : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
-        positions : typing.Optional[typing.Iterable[global___PortfolioPosition]] = ...,
+        total_amount_shares: typing.Optional[tinkoff.invest.grpc.common_pb2.MoneyValue] = ...,
+        total_amount_bonds: typing.Optional[tinkoff.invest.grpc.common_pb2.MoneyValue] = ...,
+        total_amount_etf: typing.Optional[tinkoff.invest.grpc.common_pb2.MoneyValue] = ...,
+        total_amount_currencies: typing.Optional[tinkoff.invest.grpc.common_pb2.MoneyValue] = ...,
+        total_amount_futures: typing.Optional[tinkoff.invest.grpc.common_pb2.MoneyValue] = ...,
+        expected_yield: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        positions: typing.Optional[typing.Iterable[global___PortfolioPosition]] = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["expected_yield",b"expected_yield","total_amount_bonds",b"total_amount_bonds","total_amount_currencies",b"total_amount_currencies","total_amount_etf",b"total_amount_etf","total_amount_futures",b"total_amount_futures","total_amount_shares",b"total_amount_shares"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions.Literal["expected_yield",b"expected_yield","positions",b"positions","total_amount_bonds",b"total_amount_bonds","total_amount_currencies",b"total_amount_currencies","total_amount_etf",b"total_amount_etf","total_amount_futures",b"total_amount_futures","total_amount_shares",b"total_amount_shares"]) -> None: ...
@@ -513,21 +513,21 @@ global___PortfolioResponse = PortfolioResponse
 
 class PositionsRequest(google.protobuf.message.Message):
     """Запрос позиций портфеля по счёту."""
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     ACCOUNT_ID_FIELD_NUMBER: builtins.int
-    account_id: typing.Text = ...
+    account_id: typing.Text
     """Идентификатор счёта пользователя"""
 
     def __init__(self,
         *,
-        account_id : typing.Text = ...,
+        account_id: typing.Text = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["account_id",b"account_id"]) -> None: ...
 global___PositionsRequest = PositionsRequest
 
 class PositionsResponse(google.protobuf.message.Message):
     """Список позиций по счёту."""
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     MONEY_FIELD_NUMBER: builtins.int
     BLOCKED_FIELD_NUMBER: builtins.int
     SECURITIES_FIELD_NUMBER: builtins.int
@@ -545,7 +545,7 @@ class PositionsResponse(google.protobuf.message.Message):
     def securities(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___PositionsSecurities]:
         """Список ценно-бумажных позиций портфеля"""
         pass
-    limits_loading_in_progress: builtins.bool = ...
+    limits_loading_in_progress: builtins.bool
     """Признак идущей в данный момент выгрузки лимитов"""
 
     @property
@@ -554,32 +554,32 @@ class PositionsResponse(google.protobuf.message.Message):
         pass
     def __init__(self,
         *,
-        money : typing.Optional[typing.Iterable[tinkoff.invest.grpc.common_pb2.MoneyValue]] = ...,
-        blocked : typing.Optional[typing.Iterable[tinkoff.invest.grpc.common_pb2.MoneyValue]] = ...,
-        securities : typing.Optional[typing.Iterable[global___PositionsSecurities]] = ...,
-        limits_loading_in_progress : builtins.bool = ...,
-        futures : typing.Optional[typing.Iterable[global___PositionsFutures]] = ...,
+        money: typing.Optional[typing.Iterable[tinkoff.invest.grpc.common_pb2.MoneyValue]] = ...,
+        blocked: typing.Optional[typing.Iterable[tinkoff.invest.grpc.common_pb2.MoneyValue]] = ...,
+        securities: typing.Optional[typing.Iterable[global___PositionsSecurities]] = ...,
+        limits_loading_in_progress: builtins.bool = ...,
+        futures: typing.Optional[typing.Iterable[global___PositionsFutures]] = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["blocked",b"blocked","futures",b"futures","limits_loading_in_progress",b"limits_loading_in_progress","money",b"money","securities",b"securities"]) -> None: ...
 global___PositionsResponse = PositionsResponse
 
 class WithdrawLimitsRequest(google.protobuf.message.Message):
     """Запрос доступного для вывода остатка."""
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     ACCOUNT_ID_FIELD_NUMBER: builtins.int
-    account_id: typing.Text = ...
+    account_id: typing.Text
     """Идентификатор счёта пользователя"""
 
     def __init__(self,
         *,
-        account_id : typing.Text = ...,
+        account_id: typing.Text = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["account_id",b"account_id"]) -> None: ...
 global___WithdrawLimitsRequest = WithdrawLimitsRequest
 
 class WithdrawLimitsResponse(google.protobuf.message.Message):
     """Доступный для вывода остаток."""
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     MONEY_FIELD_NUMBER: builtins.int
     BLOCKED_FIELD_NUMBER: builtins.int
     BLOCKED_GUARANTEE_FIELD_NUMBER: builtins.int
@@ -597,16 +597,16 @@ class WithdrawLimitsResponse(google.protobuf.message.Message):
         pass
     def __init__(self,
         *,
-        money : typing.Optional[typing.Iterable[tinkoff.invest.grpc.common_pb2.MoneyValue]] = ...,
-        blocked : typing.Optional[typing.Iterable[tinkoff.invest.grpc.common_pb2.MoneyValue]] = ...,
-        blocked_guarantee : typing.Optional[typing.Iterable[tinkoff.invest.grpc.common_pb2.MoneyValue]] = ...,
+        money: typing.Optional[typing.Iterable[tinkoff.invest.grpc.common_pb2.MoneyValue]] = ...,
+        blocked: typing.Optional[typing.Iterable[tinkoff.invest.grpc.common_pb2.MoneyValue]] = ...,
+        blocked_guarantee: typing.Optional[typing.Iterable[tinkoff.invest.grpc.common_pb2.MoneyValue]] = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["blocked",b"blocked","blocked_guarantee",b"blocked_guarantee","money",b"money"]) -> None: ...
 global___WithdrawLimitsResponse = WithdrawLimitsResponse
 
 class PortfolioPosition(google.protobuf.message.Message):
     """Позиции портфеля."""
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     FIGI_FIELD_NUMBER: builtins.int
     INSTRUMENT_TYPE_FIELD_NUMBER: builtins.int
     QUANTITY_FIELD_NUMBER: builtins.int
@@ -615,10 +615,12 @@ class PortfolioPosition(google.protobuf.message.Message):
     CURRENT_NKD_FIELD_NUMBER: builtins.int
     AVERAGE_POSITION_PRICE_PT_FIELD_NUMBER: builtins.int
     CURRENT_PRICE_FIELD_NUMBER: builtins.int
-    figi: typing.Text = ...
+    AVERAGE_POSITION_PRICE_FIFO_FIELD_NUMBER: builtins.int
+    QUANTITY_LOTS_FIELD_NUMBER: builtins.int
+    figi: typing.Text
     """Figi-идентификатора инструмента"""
 
-    instrument_type: typing.Text = ...
+    instrument_type: typing.Text
     """Тип инструмента"""
 
     @property
@@ -627,7 +629,7 @@ class PortfolioPosition(google.protobuf.message.Message):
         pass
     @property
     def average_position_price(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
-        """Средняя цена лота в позиции"""
+        """Средневзвешенная цена позиции"""
         pass
     @property
     def expected_yield(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
@@ -645,65 +647,345 @@ class PortfolioPosition(google.protobuf.message.Message):
     def current_price(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
         """Текущая цена инструмента"""
         pass
+    @property
+    def average_position_price_fifo(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
+        """Средняя цена лота в позиции по методу FIFO"""
+        pass
+    @property
+    def quantity_lots(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Количество лотов в портфеле"""
+        pass
     def __init__(self,
         *,
-        figi : typing.Text = ...,
-        instrument_type : typing.Text = ...,
-        quantity : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
-        average_position_price : typing.Optional[tinkoff.invest.grpc.common_pb2.MoneyValue] = ...,
-        expected_yield : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
-        current_nkd : typing.Optional[tinkoff.invest.grpc.common_pb2.MoneyValue] = ...,
-        average_position_price_pt : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
-        current_price : typing.Optional[tinkoff.invest.grpc.common_pb2.MoneyValue] = ...,
+        figi: typing.Text = ...,
+        instrument_type: typing.Text = ...,
+        quantity: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        average_position_price: typing.Optional[tinkoff.invest.grpc.common_pb2.MoneyValue] = ...,
+        expected_yield: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        current_nkd: typing.Optional[tinkoff.invest.grpc.common_pb2.MoneyValue] = ...,
+        average_position_price_pt: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        current_price: typing.Optional[tinkoff.invest.grpc.common_pb2.MoneyValue] = ...,
+        average_position_price_fifo: typing.Optional[tinkoff.invest.grpc.common_pb2.MoneyValue] = ...,
+        quantity_lots: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
         ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["average_position_price",b"average_position_price","average_position_price_pt",b"average_position_price_pt","current_nkd",b"current_nkd","current_price",b"current_price","expected_yield",b"expected_yield","quantity",b"quantity"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["average_position_price",b"average_position_price","average_position_price_pt",b"average_position_price_pt","current_nkd",b"current_nkd","current_price",b"current_price","expected_yield",b"expected_yield","figi",b"figi","instrument_type",b"instrument_type","quantity",b"quantity"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["average_position_price",b"average_position_price","average_position_price_fifo",b"average_position_price_fifo","average_position_price_pt",b"average_position_price_pt","current_nkd",b"current_nkd","current_price",b"current_price","expected_yield",b"expected_yield","quantity",b"quantity","quantity_lots",b"quantity_lots"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["average_position_price",b"average_position_price","average_position_price_fifo",b"average_position_price_fifo","average_position_price_pt",b"average_position_price_pt","current_nkd",b"current_nkd","current_price",b"current_price","expected_yield",b"expected_yield","figi",b"figi","instrument_type",b"instrument_type","quantity",b"quantity","quantity_lots",b"quantity_lots"]) -> None: ...
 global___PortfolioPosition = PortfolioPosition
 
 class PositionsSecurities(google.protobuf.message.Message):
     """Баланс позиции ценной бумаги."""
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     FIGI_FIELD_NUMBER: builtins.int
     BLOCKED_FIELD_NUMBER: builtins.int
     BALANCE_FIELD_NUMBER: builtins.int
-    figi: typing.Text = ...
+    figi: typing.Text
     """Figi-идентификатор бумаги"""
 
-    blocked: builtins.int = ...
+    blocked: builtins.int
     """Заблокировано"""
 
-    balance: builtins.int = ...
+    balance: builtins.int
     """Текущий баланс"""
 
     def __init__(self,
         *,
-        figi : typing.Text = ...,
-        blocked : builtins.int = ...,
-        balance : builtins.int = ...,
+        figi: typing.Text = ...,
+        blocked: builtins.int = ...,
+        balance: builtins.int = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["balance",b"balance","blocked",b"blocked","figi",b"figi"]) -> None: ...
 global___PositionsSecurities = PositionsSecurities
 
 class PositionsFutures(google.protobuf.message.Message):
     """Баланс фьючерса."""
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     FIGI_FIELD_NUMBER: builtins.int
     BLOCKED_FIELD_NUMBER: builtins.int
     BALANCE_FIELD_NUMBER: builtins.int
-    figi: typing.Text = ...
+    figi: typing.Text
     """Figi-идентификатор фьючерса"""
 
-    blocked: builtins.int = ...
+    blocked: builtins.int
     """Заблокировано"""
 
-    balance: builtins.int = ...
+    balance: builtins.int
     """Текущий баланс"""
 
     def __init__(self,
         *,
-        figi : typing.Text = ...,
-        blocked : builtins.int = ...,
-        balance : builtins.int = ...,
+        figi: typing.Text = ...,
+        blocked: builtins.int = ...,
+        balance: builtins.int = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["balance",b"balance","blocked",b"blocked","figi",b"figi"]) -> None: ...
 global___PositionsFutures = PositionsFutures
+
+class BrokerReportRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    GENERATE_BROKER_REPORT_REQUEST_FIELD_NUMBER: builtins.int
+    GET_BROKER_REPORT_REQUEST_FIELD_NUMBER: builtins.int
+    @property
+    def generate_broker_report_request(self) -> global___GenerateBrokerReportRequest: ...
+    @property
+    def get_broker_report_request(self) -> global___GetBrokerReportRequest: ...
+    def __init__(self,
+        *,
+        generate_broker_report_request: typing.Optional[global___GenerateBrokerReportRequest] = ...,
+        get_broker_report_request: typing.Optional[global___GetBrokerReportRequest] = ...,
+        ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["generate_broker_report_request",b"generate_broker_report_request","get_broker_report_request",b"get_broker_report_request","payload",b"payload"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["generate_broker_report_request",b"generate_broker_report_request","get_broker_report_request",b"get_broker_report_request","payload",b"payload"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["payload",b"payload"]) -> typing.Optional[typing_extensions.Literal["generate_broker_report_request","get_broker_report_request"]]: ...
+global___BrokerReportRequest = BrokerReportRequest
+
+class BrokerReportResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    GENERATE_BROKER_REPORT_RESPONSE_FIELD_NUMBER: builtins.int
+    GET_BROKER_REPORT_RESPONSE_FIELD_NUMBER: builtins.int
+    @property
+    def generate_broker_report_response(self) -> global___GenerateBrokerReportResponse: ...
+    @property
+    def get_broker_report_response(self) -> global___GetBrokerReportResponse: ...
+    def __init__(self,
+        *,
+        generate_broker_report_response: typing.Optional[global___GenerateBrokerReportResponse] = ...,
+        get_broker_report_response: typing.Optional[global___GetBrokerReportResponse] = ...,
+        ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["generate_broker_report_response",b"generate_broker_report_response","get_broker_report_response",b"get_broker_report_response","payload",b"payload"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["generate_broker_report_response",b"generate_broker_report_response","get_broker_report_response",b"get_broker_report_response","payload",b"payload"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["payload",b"payload"]) -> typing.Optional[typing_extensions.Literal["generate_broker_report_response","get_broker_report_response"]]: ...
+global___BrokerReportResponse = BrokerReportResponse
+
+class GenerateBrokerReportRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    ACCOUNT_ID_FIELD_NUMBER: builtins.int
+    FROM_FIELD_NUMBER: builtins.int
+    TO_FIELD_NUMBER: builtins.int
+    account_id: typing.Text
+    """Идентификатор счёта клиента"""
+
+    @property
+    def to(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Окончание периода в часовом поясе UTC."""
+        pass
+    def __init__(self,
+        *,
+        account_id: typing.Text = ...,
+        to: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["from",b"from","to",b"to"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["account_id",b"account_id","from",b"from","to",b"to"]) -> None: ...
+global___GenerateBrokerReportRequest = GenerateBrokerReportRequest
+
+class GenerateBrokerReportResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    TASK_ID_FIELD_NUMBER: builtins.int
+    task_id: typing.Text
+    """Идентификатор задачи формирования брокерского отчёта"""
+
+    def __init__(self,
+        *,
+        task_id: typing.Text = ...,
+        ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["task_id",b"task_id"]) -> None: ...
+global___GenerateBrokerReportResponse = GenerateBrokerReportResponse
+
+class GetBrokerReportRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    TASK_ID_FIELD_NUMBER: builtins.int
+    PAGE_FIELD_NUMBER: builtins.int
+    task_id: typing.Text
+    """Идентификатор задачи формирования брокерского отчёта"""
+
+    page: builtins.int
+    """Номер страницы отчета (начинается с 1), значение по умолчанию: 0"""
+
+    def __init__(self,
+        *,
+        task_id: typing.Text = ...,
+        page: builtins.int = ...,
+        ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["page",b"page","task_id",b"task_id"]) -> None: ...
+global___GetBrokerReportRequest = GetBrokerReportRequest
+
+class GetBrokerReportResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    BROKER_REPORT_FIELD_NUMBER: builtins.int
+    ITEMSCOUNT_FIELD_NUMBER: builtins.int
+    PAGESCOUNT_FIELD_NUMBER: builtins.int
+    PAGE_FIELD_NUMBER: builtins.int
+    @property
+    def broker_report(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___BrokerReport]: ...
+    itemsCount: builtins.int
+    """Количество записей в отчете"""
+
+    pagesCount: builtins.int
+    """Количество страниц с данными отчета (начинается с 0)"""
+
+    page: builtins.int
+    """Текущая страница (начинается с 0)"""
+
+    def __init__(self,
+        *,
+        broker_report: typing.Optional[typing.Iterable[global___BrokerReport]] = ...,
+        itemsCount: builtins.int = ...,
+        pagesCount: builtins.int = ...,
+        page: builtins.int = ...,
+        ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["broker_report",b"broker_report","itemsCount",b"itemsCount","page",b"page","pagesCount",b"pagesCount"]) -> None: ...
+global___GetBrokerReportResponse = GetBrokerReportResponse
+
+class BrokerReport(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    TRADE_ID_FIELD_NUMBER: builtins.int
+    ORDER_ID_FIELD_NUMBER: builtins.int
+    FIGI_FIELD_NUMBER: builtins.int
+    EXECUTE_SIGN_FIELD_NUMBER: builtins.int
+    TRADE_DATETIME_FIELD_NUMBER: builtins.int
+    EXCHANGE_FIELD_NUMBER: builtins.int
+    CLASS_CODE_FIELD_NUMBER: builtins.int
+    DIRECTION_FIELD_NUMBER: builtins.int
+    NAME_FIELD_NUMBER: builtins.int
+    TICKER_FIELD_NUMBER: builtins.int
+    PRICE_FIELD_NUMBER: builtins.int
+    QUANTITY_FIELD_NUMBER: builtins.int
+    ORDER_AMOUNT_FIELD_NUMBER: builtins.int
+    ACI_VALUE_FIELD_NUMBER: builtins.int
+    TOTAL_ORDER_AMOUNT_FIELD_NUMBER: builtins.int
+    BROKER_COMMISSION_FIELD_NUMBER: builtins.int
+    EXCHANGE_COMMISSION_FIELD_NUMBER: builtins.int
+    EXCHANGE_CLEARING_COMMISSION_FIELD_NUMBER: builtins.int
+    REPO_RATE_FIELD_NUMBER: builtins.int
+    PARTY_FIELD_NUMBER: builtins.int
+    CLEAR_VALUE_DATE_FIELD_NUMBER: builtins.int
+    SEC_VALUE_DATE_FIELD_NUMBER: builtins.int
+    BROKER_STATUS_FIELD_NUMBER: builtins.int
+    SEPARATE_AGREEMENT_TYPE_FIELD_NUMBER: builtins.int
+    SEPARATE_AGREEMENT_NUMBER_FIELD_NUMBER: builtins.int
+    SEPARATE_AGREEMENT_DATE_FIELD_NUMBER: builtins.int
+    DELIVERY_TYPE_FIELD_NUMBER: builtins.int
+    trade_id: typing.Text
+    """Номер сделки"""
+
+    order_id: typing.Text
+    """Номер поручения"""
+
+    figi: typing.Text
+    """Figi-идентификатор инструмента"""
+
+    execute_sign: typing.Text
+    """Признак исполнения"""
+
+    @property
+    def trade_datetime(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Дата и время заключения в часовом поясе UTC."""
+        pass
+    exchange: typing.Text
+    """Торговая площадка"""
+
+    class_code: typing.Text
+    """Режим торгов"""
+
+    direction: typing.Text
+    """Вид сделки"""
+
+    name: typing.Text
+    """Сокращённое наименование актива"""
+
+    ticker: typing.Text
+    """Код актива"""
+
+    @property
+    def price(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
+        """Цена за единицу"""
+        pass
+    quantity: builtins.int
+    """Количество"""
+
+    @property
+    def order_amount(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
+        """Сумма (без НКД)"""
+        pass
+    @property
+    def aci_value(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """НКД"""
+        pass
+    @property
+    def total_order_amount(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
+        """Сумма сделки"""
+        pass
+    @property
+    def broker_commission(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
+        """Комиссия брокера"""
+        pass
+    @property
+    def exchange_commission(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
+        """Комиссия биржи"""
+        pass
+    @property
+    def exchange_clearing_commission(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
+        """Комиссия клир. центра"""
+        pass
+    @property
+    def repo_rate(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Ставка РЕПО (%)"""
+        pass
+    party: typing.Text
+    """Контрагент/Брокер"""
+
+    @property
+    def clear_value_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Дата расчётов в часовом поясе UTC."""
+        pass
+    @property
+    def sec_value_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Дата поставки в часовом поясе UTC."""
+        pass
+    broker_status: typing.Text
+    """Статус брокера"""
+
+    separate_agreement_type: typing.Text
+    """Тип дог."""
+
+    separate_agreement_number: typing.Text
+    """Номер дог."""
+
+    separate_agreement_date: typing.Text
+    """Дата дог."""
+
+    delivery_type: typing.Text
+    """Тип расчёта по сделке"""
+
+    def __init__(self,
+        *,
+        trade_id: typing.Text = ...,
+        order_id: typing.Text = ...,
+        figi: typing.Text = ...,
+        execute_sign: typing.Text = ...,
+        trade_datetime: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        exchange: typing.Text = ...,
+        class_code: typing.Text = ...,
+        direction: typing.Text = ...,
+        name: typing.Text = ...,
+        ticker: typing.Text = ...,
+        price: typing.Optional[tinkoff.invest.grpc.common_pb2.MoneyValue] = ...,
+        quantity: builtins.int = ...,
+        order_amount: typing.Optional[tinkoff.invest.grpc.common_pb2.MoneyValue] = ...,
+        aci_value: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        total_order_amount: typing.Optional[tinkoff.invest.grpc.common_pb2.MoneyValue] = ...,
+        broker_commission: typing.Optional[tinkoff.invest.grpc.common_pb2.MoneyValue] = ...,
+        exchange_commission: typing.Optional[tinkoff.invest.grpc.common_pb2.MoneyValue] = ...,
+        exchange_clearing_commission: typing.Optional[tinkoff.invest.grpc.common_pb2.MoneyValue] = ...,
+        repo_rate: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        party: typing.Text = ...,
+        clear_value_date: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        sec_value_date: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        broker_status: typing.Text = ...,
+        separate_agreement_type: typing.Text = ...,
+        separate_agreement_number: typing.Text = ...,
+        separate_agreement_date: typing.Text = ...,
+        delivery_type: typing.Text = ...,
+        ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["aci_value",b"aci_value","broker_commission",b"broker_commission","clear_value_date",b"clear_value_date","exchange_clearing_commission",b"exchange_clearing_commission","exchange_commission",b"exchange_commission","order_amount",b"order_amount","price",b"price","repo_rate",b"repo_rate","sec_value_date",b"sec_value_date","total_order_amount",b"total_order_amount","trade_datetime",b"trade_datetime"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["aci_value",b"aci_value","broker_commission",b"broker_commission","broker_status",b"broker_status","class_code",b"class_code","clear_value_date",b"clear_value_date","delivery_type",b"delivery_type","direction",b"direction","exchange",b"exchange","exchange_clearing_commission",b"exchange_clearing_commission","exchange_commission",b"exchange_commission","execute_sign",b"execute_sign","figi",b"figi","name",b"name","order_amount",b"order_amount","order_id",b"order_id","party",b"party","price",b"price","quantity",b"quantity","repo_rate",b"repo_rate","sec_value_date",b"sec_value_date","separate_agreement_date",b"separate_agreement_date","separate_agreement_number",b"separate_agreement_number","separate_agreement_type",b"separate_agreement_type","ticker",b"ticker","total_order_amount",b"total_order_amount","trade_datetime",b"trade_datetime","trade_id",b"trade_id"]) -> None: ...
+global___BrokerReport = BrokerReport

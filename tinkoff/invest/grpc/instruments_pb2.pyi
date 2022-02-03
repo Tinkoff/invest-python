@@ -12,33 +12,33 @@ import tinkoff.invest.grpc.common_pb2
 import typing
 import typing_extensions
 
-DESCRIPTOR: google.protobuf.descriptor.FileDescriptor = ...
+DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
 class _InstrumentIdType:
     ValueType = typing.NewType('ValueType', builtins.int)
     V: typing_extensions.TypeAlias = ValueType
 class _InstrumentIdTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_InstrumentIdType.ValueType], builtins.type):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor = ...
-    INSTRUMENT_ID_UNSPECIFIED: InstrumentIdType.ValueType = ...  # 0
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    INSTRUMENT_ID_UNSPECIFIED: _InstrumentIdType.ValueType  # 0
     """Значение не определено."""
 
-    INSTRUMENT_ID_TYPE_FIGI: InstrumentIdType.ValueType = ...  # 1
+    INSTRUMENT_ID_TYPE_FIGI: _InstrumentIdType.ValueType  # 1
     """Figi."""
 
-    INSTRUMENT_ID_TYPE_TICKER: InstrumentIdType.ValueType = ...  # 2
+    INSTRUMENT_ID_TYPE_TICKER: _InstrumentIdType.ValueType  # 2
     """Ticker."""
 
 class InstrumentIdType(_InstrumentIdType, metaclass=_InstrumentIdTypeEnumTypeWrapper):
     """Тип идентификатора инструмента. Подробнее об идентификации инструментов: [Идентификация инструментов](https://tinkoff.github.io/investAPI/faq_identification/)"""
     pass
 
-INSTRUMENT_ID_UNSPECIFIED: InstrumentIdType.ValueType = ...  # 0
+INSTRUMENT_ID_UNSPECIFIED: InstrumentIdType.ValueType  # 0
 """Значение не определено."""
 
-INSTRUMENT_ID_TYPE_FIGI: InstrumentIdType.ValueType = ...  # 1
+INSTRUMENT_ID_TYPE_FIGI: InstrumentIdType.ValueType  # 1
 """Figi."""
 
-INSTRUMENT_ID_TYPE_TICKER: InstrumentIdType.ValueType = ...  # 2
+INSTRUMENT_ID_TYPE_TICKER: InstrumentIdType.ValueType  # 2
 """Ticker."""
 
 global___InstrumentIdType = InstrumentIdType
@@ -48,27 +48,27 @@ class _InstrumentStatus:
     ValueType = typing.NewType('ValueType', builtins.int)
     V: typing_extensions.TypeAlias = ValueType
 class _InstrumentStatusEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_InstrumentStatus.ValueType], builtins.type):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor = ...
-    INSTRUMENT_STATUS_UNSPECIFIED: InstrumentStatus.ValueType = ...  # 0
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    INSTRUMENT_STATUS_UNSPECIFIED: _InstrumentStatus.ValueType  # 0
     """Значение не определено."""
 
-    INSTRUMENT_STATUS_BASE: InstrumentStatus.ValueType = ...  # 1
+    INSTRUMENT_STATUS_BASE: _InstrumentStatus.ValueType  # 1
     """Базовый список инструментов (по умолчанию). Инструменты доступные для торговли через TINKOFF INVEST API."""
 
-    INSTRUMENT_STATUS_ALL: InstrumentStatus.ValueType = ...  # 2
+    INSTRUMENT_STATUS_ALL: _InstrumentStatus.ValueType  # 2
     """Список всех инструментов."""
 
 class InstrumentStatus(_InstrumentStatus, metaclass=_InstrumentStatusEnumTypeWrapper):
     """Статус запрашиваемых инструментов."""
     pass
 
-INSTRUMENT_STATUS_UNSPECIFIED: InstrumentStatus.ValueType = ...  # 0
+INSTRUMENT_STATUS_UNSPECIFIED: InstrumentStatus.ValueType  # 0
 """Значение не определено."""
 
-INSTRUMENT_STATUS_BASE: InstrumentStatus.ValueType = ...  # 1
+INSTRUMENT_STATUS_BASE: InstrumentStatus.ValueType  # 1
 """Базовый список инструментов (по умолчанию). Инструменты доступные для торговли через TINKOFF INVEST API."""
 
-INSTRUMENT_STATUS_ALL: InstrumentStatus.ValueType = ...  # 2
+INSTRUMENT_STATUS_ALL: InstrumentStatus.ValueType  # 2
 """Список всех инструментов."""
 
 global___InstrumentStatus = InstrumentStatus
@@ -78,63 +78,63 @@ class _ShareType:
     ValueType = typing.NewType('ValueType', builtins.int)
     V: typing_extensions.TypeAlias = ValueType
 class _ShareTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_ShareType.ValueType], builtins.type):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor = ...
-    SHARE_TYPE_UNSPECIFIED: ShareType.ValueType = ...  # 0
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    SHARE_TYPE_UNSPECIFIED: _ShareType.ValueType  # 0
     """Значение не определено."""
 
-    SHARE_TYPE_COMMON: ShareType.ValueType = ...  # 1
+    SHARE_TYPE_COMMON: _ShareType.ValueType  # 1
     """Обыкновенная"""
 
-    SHARE_TYPE_PREFERRED: ShareType.ValueType = ...  # 2
+    SHARE_TYPE_PREFERRED: _ShareType.ValueType  # 2
     """Привилегированная"""
 
-    SHARE_TYPE_ADR: ShareType.ValueType = ...  # 3
+    SHARE_TYPE_ADR: _ShareType.ValueType  # 3
     """Американские депозитарные расписки"""
 
-    SHARE_TYPE_GDR: ShareType.ValueType = ...  # 4
+    SHARE_TYPE_GDR: _ShareType.ValueType  # 4
     """Глобальные депозитарные расписки"""
 
-    SHARE_TYPE_MLP: ShareType.ValueType = ...  # 5
+    SHARE_TYPE_MLP: _ShareType.ValueType  # 5
     """Товарищество с ограниченной ответственностью"""
 
-    SHARE_TYPE_NY_REG_SHRS: ShareType.ValueType = ...  # 6
+    SHARE_TYPE_NY_REG_SHRS: _ShareType.ValueType  # 6
     """Акции из реестра Нью-Йорка"""
 
-    SHARE_TYPE_CLOSED_END_FUND: ShareType.ValueType = ...  # 7
+    SHARE_TYPE_CLOSED_END_FUND: _ShareType.ValueType  # 7
     """Закрытый инвестиционный фонд"""
 
-    SHARE_TYPE_REIT: ShareType.ValueType = ...  # 8
+    SHARE_TYPE_REIT: _ShareType.ValueType  # 8
     """Траст недвижимости"""
 
 class ShareType(_ShareType, metaclass=_ShareTypeEnumTypeWrapper):
     """Тип акций."""
     pass
 
-SHARE_TYPE_UNSPECIFIED: ShareType.ValueType = ...  # 0
+SHARE_TYPE_UNSPECIFIED: ShareType.ValueType  # 0
 """Значение не определено."""
 
-SHARE_TYPE_COMMON: ShareType.ValueType = ...  # 1
+SHARE_TYPE_COMMON: ShareType.ValueType  # 1
 """Обыкновенная"""
 
-SHARE_TYPE_PREFERRED: ShareType.ValueType = ...  # 2
+SHARE_TYPE_PREFERRED: ShareType.ValueType  # 2
 """Привилегированная"""
 
-SHARE_TYPE_ADR: ShareType.ValueType = ...  # 3
+SHARE_TYPE_ADR: ShareType.ValueType  # 3
 """Американские депозитарные расписки"""
 
-SHARE_TYPE_GDR: ShareType.ValueType = ...  # 4
+SHARE_TYPE_GDR: ShareType.ValueType  # 4
 """Глобальные депозитарные расписки"""
 
-SHARE_TYPE_MLP: ShareType.ValueType = ...  # 5
+SHARE_TYPE_MLP: ShareType.ValueType  # 5
 """Товарищество с ограниченной ответственностью"""
 
-SHARE_TYPE_NY_REG_SHRS: ShareType.ValueType = ...  # 6
+SHARE_TYPE_NY_REG_SHRS: ShareType.ValueType  # 6
 """Акции из реестра Нью-Йорка"""
 
-SHARE_TYPE_CLOSED_END_FUND: ShareType.ValueType = ...  # 7
+SHARE_TYPE_CLOSED_END_FUND: ShareType.ValueType  # 7
 """Закрытый инвестиционный фонд"""
 
-SHARE_TYPE_REIT: ShareType.ValueType = ...  # 8
+SHARE_TYPE_REIT: ShareType.ValueType  # 8
 """Траст недвижимости"""
 
 global___ShareType = ShareType
@@ -142,11 +142,11 @@ global___ShareType = ShareType
 
 class TradingSchedulesRequest(google.protobuf.message.Message):
     """Запрос расписания торгов"""
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     EXCHANGE_FIELD_NUMBER: builtins.int
     FROM_FIELD_NUMBER: builtins.int
     TO_FIELD_NUMBER: builtins.int
-    exchange: typing.Text = ...
+    exchange: typing.Text
     """Наименование биржи или расчетного календаря. </br>Если не передаётся, возвращается информация по всем доступным торговым площадкам."""
 
     @property
@@ -155,8 +155,8 @@ class TradingSchedulesRequest(google.protobuf.message.Message):
         pass
     def __init__(self,
         *,
-        exchange : typing.Text = ...,
-        to : typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        exchange: typing.Text = ...,
+        to: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["from",b"from","to",b"to"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions.Literal["exchange",b"exchange","from",b"from","to",b"to"]) -> None: ...
@@ -164,7 +164,7 @@ global___TradingSchedulesRequest = TradingSchedulesRequest
 
 class TradingSchedulesResponse(google.protobuf.message.Message):
     """Список торговых площадок"""
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     EXCHANGES_FIELD_NUMBER: builtins.int
     @property
     def exchanges(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___TradingSchedule]:
@@ -172,17 +172,17 @@ class TradingSchedulesResponse(google.protobuf.message.Message):
         pass
     def __init__(self,
         *,
-        exchanges : typing.Optional[typing.Iterable[global___TradingSchedule]] = ...,
+        exchanges: typing.Optional[typing.Iterable[global___TradingSchedule]] = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["exchanges",b"exchanges"]) -> None: ...
 global___TradingSchedulesResponse = TradingSchedulesResponse
 
 class TradingSchedule(google.protobuf.message.Message):
     """Данные по торговой площадке."""
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     EXCHANGE_FIELD_NUMBER: builtins.int
     DAYS_FIELD_NUMBER: builtins.int
-    exchange: typing.Text = ...
+    exchange: typing.Text
     """Наименование торговой площадки."""
 
     @property
@@ -191,15 +191,15 @@ class TradingSchedule(google.protobuf.message.Message):
         pass
     def __init__(self,
         *,
-        exchange : typing.Text = ...,
-        days : typing.Optional[typing.Iterable[global___TradingDay]] = ...,
+        exchange: typing.Text = ...,
+        days: typing.Optional[typing.Iterable[global___TradingDay]] = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["days",b"days","exchange",b"exchange"]) -> None: ...
 global___TradingSchedule = TradingSchedule
 
 class TradingDay(google.protobuf.message.Message):
     """Информация о времени торгов."""
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     DATE_FIELD_NUMBER: builtins.int
     IS_TRADING_DAY_FIELD_NUMBER: builtins.int
     START_TIME_FIELD_NUMBER: builtins.int
@@ -210,7 +210,7 @@ class TradingDay(google.protobuf.message.Message):
     def date(self) -> google.protobuf.timestamp_pb2.Timestamp:
         """Дата."""
         pass
-    is_trading_day: builtins.bool = ...
+    is_trading_day: builtins.bool
     """Признак торгового дня на бирже."""
 
     @property
@@ -231,12 +231,12 @@ class TradingDay(google.protobuf.message.Message):
         pass
     def __init__(self,
         *,
-        date : typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
-        is_trading_day : builtins.bool = ...,
-        start_time : typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
-        end_time : typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
-        market_order_start_time : typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
-        market_order_end_time : typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        date: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        is_trading_day: builtins.bool = ...,
+        start_time: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        end_time: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        market_order_start_time: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        market_order_end_time: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["date",b"date","end_time",b"end_time","market_order_end_time",b"market_order_end_time","market_order_start_time",b"market_order_start_time","start_time",b"start_time"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions.Literal["date",b"date","end_time",b"end_time","is_trading_day",b"is_trading_day","market_order_end_time",b"market_order_end_time","market_order_start_time",b"market_order_start_time","start_time",b"start_time"]) -> None: ...
@@ -244,45 +244,45 @@ global___TradingDay = TradingDay
 
 class InstrumentRequest(google.protobuf.message.Message):
     """Запрос получения инструмента по идентификатору."""
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     ID_TYPE_FIELD_NUMBER: builtins.int
     CLASS_CODE_FIELD_NUMBER: builtins.int
     ID_FIELD_NUMBER: builtins.int
-    id_type: global___InstrumentIdType.ValueType = ...
-    """Тип идентификатора инструмента. Возможные значения: figi, ticker, isin. Подробнее об идентификации инструментов: [Идентификация инструментов](https://tinkoff.github.io/investAPI/faq_identification/)"""
+    id_type: global___InstrumentIdType.ValueType
+    """Тип идентификатора инструмента. Возможные значения: figi, ticker. Подробнее об идентификации инструментов: [Идентификация инструментов](https://tinkoff.github.io/investAPI/faq_identification/)"""
 
-    class_code: typing.Text = ...
+    class_code: typing.Text
     """Идентификатор class_code. Обязателен при id_type = ticker."""
 
-    id: typing.Text = ...
+    id: typing.Text
     """Идентификатор запрашиваемого инструмента."""
 
     def __init__(self,
         *,
-        id_type : global___InstrumentIdType.ValueType = ...,
-        class_code : typing.Text = ...,
-        id : typing.Text = ...,
+        id_type: global___InstrumentIdType.ValueType = ...,
+        class_code: typing.Text = ...,
+        id: typing.Text = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["class_code",b"class_code","id",b"id","id_type",b"id_type"]) -> None: ...
 global___InstrumentRequest = InstrumentRequest
 
 class InstrumentsRequest(google.protobuf.message.Message):
     """Запрос получения инструментов."""
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     INSTRUMENT_STATUS_FIELD_NUMBER: builtins.int
-    instrument_status: global___InstrumentStatus.ValueType = ...
+    instrument_status: global___InstrumentStatus.ValueType
     """Статус запрашиваемых инструментов. Возможные значения: [InstrumentStatus](#instrumentstatus)"""
 
     def __init__(self,
         *,
-        instrument_status : global___InstrumentStatus.ValueType = ...,
+        instrument_status: global___InstrumentStatus.ValueType = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["instrument_status",b"instrument_status"]) -> None: ...
 global___InstrumentsRequest = InstrumentsRequest
 
 class BondResponse(google.protobuf.message.Message):
     """Информация об облигации."""
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     INSTRUMENT_FIELD_NUMBER: builtins.int
     @property
     def instrument(self) -> global___Bond:
@@ -290,7 +290,7 @@ class BondResponse(google.protobuf.message.Message):
         pass
     def __init__(self,
         *,
-        instrument : typing.Optional[global___Bond] = ...,
+        instrument: typing.Optional[global___Bond] = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["instrument",b"instrument"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions.Literal["instrument",b"instrument"]) -> None: ...
@@ -298,7 +298,7 @@ global___BondResponse = BondResponse
 
 class BondsResponse(google.protobuf.message.Message):
     """Список облигаций."""
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     INSTRUMENTS_FIELD_NUMBER: builtins.int
     @property
     def instruments(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Bond]:
@@ -306,14 +306,14 @@ class BondsResponse(google.protobuf.message.Message):
         pass
     def __init__(self,
         *,
-        instruments : typing.Optional[typing.Iterable[global___Bond]] = ...,
+        instruments: typing.Optional[typing.Iterable[global___Bond]] = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["instruments",b"instruments"]) -> None: ...
 global___BondsResponse = BondsResponse
 
 class CurrencyResponse(google.protobuf.message.Message):
     """Данные по валюте."""
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     INSTRUMENT_FIELD_NUMBER: builtins.int
     @property
     def instrument(self) -> global___Currency:
@@ -321,7 +321,7 @@ class CurrencyResponse(google.protobuf.message.Message):
         pass
     def __init__(self,
         *,
-        instrument : typing.Optional[global___Currency] = ...,
+        instrument: typing.Optional[global___Currency] = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["instrument",b"instrument"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions.Literal["instrument",b"instrument"]) -> None: ...
@@ -329,7 +329,7 @@ global___CurrencyResponse = CurrencyResponse
 
 class CurrenciesResponse(google.protobuf.message.Message):
     """Данные по валютам."""
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     INSTRUMENTS_FIELD_NUMBER: builtins.int
     @property
     def instruments(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Currency]:
@@ -337,14 +337,14 @@ class CurrenciesResponse(google.protobuf.message.Message):
         pass
     def __init__(self,
         *,
-        instruments : typing.Optional[typing.Iterable[global___Currency]] = ...,
+        instruments: typing.Optional[typing.Iterable[global___Currency]] = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["instruments",b"instruments"]) -> None: ...
 global___CurrenciesResponse = CurrenciesResponse
 
 class EtfResponse(google.protobuf.message.Message):
     """Данные по фонду."""
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     INSTRUMENT_FIELD_NUMBER: builtins.int
     @property
     def instrument(self) -> global___Etf:
@@ -352,7 +352,7 @@ class EtfResponse(google.protobuf.message.Message):
         pass
     def __init__(self,
         *,
-        instrument : typing.Optional[global___Etf] = ...,
+        instrument: typing.Optional[global___Etf] = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["instrument",b"instrument"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions.Literal["instrument",b"instrument"]) -> None: ...
@@ -360,7 +360,7 @@ global___EtfResponse = EtfResponse
 
 class EtfsResponse(google.protobuf.message.Message):
     """Данные по фондам."""
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     INSTRUMENTS_FIELD_NUMBER: builtins.int
     @property
     def instruments(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Etf]:
@@ -368,14 +368,14 @@ class EtfsResponse(google.protobuf.message.Message):
         pass
     def __init__(self,
         *,
-        instruments : typing.Optional[typing.Iterable[global___Etf]] = ...,
+        instruments: typing.Optional[typing.Iterable[global___Etf]] = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["instruments",b"instruments"]) -> None: ...
 global___EtfsResponse = EtfsResponse
 
 class FutureResponse(google.protobuf.message.Message):
     """Данные по фьючерсу."""
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     INSTRUMENT_FIELD_NUMBER: builtins.int
     @property
     def instrument(self) -> global___Future:
@@ -383,7 +383,7 @@ class FutureResponse(google.protobuf.message.Message):
         pass
     def __init__(self,
         *,
-        instrument : typing.Optional[global___Future] = ...,
+        instrument: typing.Optional[global___Future] = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["instrument",b"instrument"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions.Literal["instrument",b"instrument"]) -> None: ...
@@ -391,7 +391,7 @@ global___FutureResponse = FutureResponse
 
 class FuturesResponse(google.protobuf.message.Message):
     """Данные по фьючерсам."""
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     INSTRUMENTS_FIELD_NUMBER: builtins.int
     @property
     def instruments(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Future]:
@@ -399,14 +399,14 @@ class FuturesResponse(google.protobuf.message.Message):
         pass
     def __init__(self,
         *,
-        instruments : typing.Optional[typing.Iterable[global___Future]] = ...,
+        instruments: typing.Optional[typing.Iterable[global___Future]] = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["instruments",b"instruments"]) -> None: ...
 global___FuturesResponse = FuturesResponse
 
 class ShareResponse(google.protobuf.message.Message):
     """Данные по акции."""
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     INSTRUMENT_FIELD_NUMBER: builtins.int
     @property
     def instrument(self) -> global___Share:
@@ -414,7 +414,7 @@ class ShareResponse(google.protobuf.message.Message):
         pass
     def __init__(self,
         *,
-        instrument : typing.Optional[global___Share] = ...,
+        instrument: typing.Optional[global___Share] = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["instrument",b"instrument"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions.Literal["instrument",b"instrument"]) -> None: ...
@@ -422,7 +422,7 @@ global___ShareResponse = ShareResponse
 
 class SharesResponse(google.protobuf.message.Message):
     """Данные по акциям."""
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     INSTRUMENTS_FIELD_NUMBER: builtins.int
     @property
     def instruments(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Share]:
@@ -430,14 +430,14 @@ class SharesResponse(google.protobuf.message.Message):
         pass
     def __init__(self,
         *,
-        instruments : typing.Optional[typing.Iterable[global___Share]] = ...,
+        instruments: typing.Optional[typing.Iterable[global___Share]] = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["instruments",b"instruments"]) -> None: ...
 global___SharesResponse = SharesResponse
 
 class Bond(google.protobuf.message.Message):
     """Объект передачи информации об облигации."""
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     FIGI_FIELD_NUMBER: builtins.int
     TICKER_FIELD_NUMBER: builtins.int
     CLASS_CODE_FIELD_NUMBER: builtins.int
@@ -475,22 +475,22 @@ class Bond(google.protobuf.message.Message):
     AMORTIZATION_FLAG_FIELD_NUMBER: builtins.int
     MIN_PRICE_INCREMENT_FIELD_NUMBER: builtins.int
     API_TRADE_AVAILABLE_FLAG_FIELD_NUMBER: builtins.int
-    figi: typing.Text = ...
+    figi: typing.Text
     """Figi-идентификатор инструмента."""
 
-    ticker: typing.Text = ...
+    ticker: typing.Text
     """Тикер инструмента."""
 
-    class_code: typing.Text = ...
+    class_code: typing.Text
     """Класс-код (секция торгов)."""
 
-    isin: typing.Text = ...
+    isin: typing.Text
     """Isin-идентификатор инструмента."""
 
-    lot: builtins.int = ...
+    lot: builtins.int
     """Лотность инструмента. Возможно совершение операций только на количества ценной бумаги, кратные параметру *lot*. Подробнее: [лот](https://tinkoff.github.io/investAPI/glossary#lot)"""
 
-    currency: typing.Text = ...
+    currency: typing.Text
     """Валюта расчётов."""
 
     @property
@@ -517,16 +517,16 @@ class Bond(google.protobuf.message.Message):
     def dshort_min(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
         """Ставка риска начальной маржи в шорт. Подробнее: [ставка риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)"""
         pass
-    short_enabled_flag: builtins.bool = ...
+    short_enabled_flag: builtins.bool
     """Признак доступности для операций в шорт."""
 
-    name: typing.Text = ...
+    name: typing.Text
     """Название инструмента."""
 
-    exchange: typing.Text = ...
+    exchange: typing.Text
     """Торговая площадка."""
 
-    coupon_quantity_per_year: builtins.int = ...
+    coupon_quantity_per_year: builtins.int
     """Количество выплат по купонам в год."""
 
     @property
@@ -553,91 +553,91 @@ class Bond(google.protobuf.message.Message):
     def aci_value(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
         """Значение НКД (накопленного купонного дохода) на дату."""
         pass
-    country_of_risk: typing.Text = ...
+    country_of_risk: typing.Text
     """Код страны эмитента."""
 
-    country_of_risk_name: typing.Text = ...
+    country_of_risk_name: typing.Text
     """Наименование страны эмитента."""
 
-    sector: typing.Text = ...
+    sector: typing.Text
     """Сектор экономики."""
 
-    issue_kind: typing.Text = ...
+    issue_kind: typing.Text
     """Форма выпуска. Возможные значения: </br>**documentary** — документарная; </br>**non_documentary** — бездокументарная."""
 
-    issue_size: builtins.int = ...
+    issue_size: builtins.int
     """Размер выпуска."""
 
-    issue_size_plan: builtins.int = ...
+    issue_size_plan: builtins.int
     """Плановый размер выпуска."""
 
-    trading_status: tinkoff.invest.grpc.common_pb2.SecurityTradingStatus.ValueType = ...
+    trading_status: tinkoff.invest.grpc.common_pb2.SecurityTradingStatus.ValueType
     """Текущий режим торгов инструмента."""
 
-    otc_flag: builtins.bool = ...
+    otc_flag: builtins.bool
     """Признак внебиржевой ценной бумаги."""
 
-    buy_available_flag: builtins.bool = ...
+    buy_available_flag: builtins.bool
     """Признак доступности для покупки."""
 
-    sell_available_flag: builtins.bool = ...
+    sell_available_flag: builtins.bool
     """Признак доступности для продажи."""
 
-    floating_coupon_flag: builtins.bool = ...
+    floating_coupon_flag: builtins.bool
     """Признак облигации с плавающим купоном."""
 
-    perpetual_flag: builtins.bool = ...
+    perpetual_flag: builtins.bool
     """Признак бессрочной облигации."""
 
-    amortization_flag: builtins.bool = ...
+    amortization_flag: builtins.bool
     """Признак облигации с амортизацией долга."""
 
     @property
     def min_price_increment(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
         """Шаг цены."""
         pass
-    api_trade_available_flag: builtins.bool = ...
+    api_trade_available_flag: builtins.bool
     """Признак доступности торгов через API."""
 
     def __init__(self,
         *,
-        figi : typing.Text = ...,
-        ticker : typing.Text = ...,
-        class_code : typing.Text = ...,
-        isin : typing.Text = ...,
-        lot : builtins.int = ...,
-        currency : typing.Text = ...,
-        klong : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
-        kshort : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
-        dlong : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
-        dshort : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
-        dlong_min : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
-        dshort_min : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
-        short_enabled_flag : builtins.bool = ...,
-        name : typing.Text = ...,
-        exchange : typing.Text = ...,
-        coupon_quantity_per_year : builtins.int = ...,
-        maturity_date : typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
-        nominal : typing.Optional[tinkoff.invest.grpc.common_pb2.MoneyValue] = ...,
-        state_reg_date : typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
-        placement_date : typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
-        placement_price : typing.Optional[tinkoff.invest.grpc.common_pb2.MoneyValue] = ...,
-        aci_value : typing.Optional[tinkoff.invest.grpc.common_pb2.MoneyValue] = ...,
-        country_of_risk : typing.Text = ...,
-        country_of_risk_name : typing.Text = ...,
-        sector : typing.Text = ...,
-        issue_kind : typing.Text = ...,
-        issue_size : builtins.int = ...,
-        issue_size_plan : builtins.int = ...,
-        trading_status : tinkoff.invest.grpc.common_pb2.SecurityTradingStatus.ValueType = ...,
-        otc_flag : builtins.bool = ...,
-        buy_available_flag : builtins.bool = ...,
-        sell_available_flag : builtins.bool = ...,
-        floating_coupon_flag : builtins.bool = ...,
-        perpetual_flag : builtins.bool = ...,
-        amortization_flag : builtins.bool = ...,
-        min_price_increment : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
-        api_trade_available_flag : builtins.bool = ...,
+        figi: typing.Text = ...,
+        ticker: typing.Text = ...,
+        class_code: typing.Text = ...,
+        isin: typing.Text = ...,
+        lot: builtins.int = ...,
+        currency: typing.Text = ...,
+        klong: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        kshort: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        dlong: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        dshort: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        dlong_min: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        dshort_min: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        short_enabled_flag: builtins.bool = ...,
+        name: typing.Text = ...,
+        exchange: typing.Text = ...,
+        coupon_quantity_per_year: builtins.int = ...,
+        maturity_date: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        nominal: typing.Optional[tinkoff.invest.grpc.common_pb2.MoneyValue] = ...,
+        state_reg_date: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        placement_date: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        placement_price: typing.Optional[tinkoff.invest.grpc.common_pb2.MoneyValue] = ...,
+        aci_value: typing.Optional[tinkoff.invest.grpc.common_pb2.MoneyValue] = ...,
+        country_of_risk: typing.Text = ...,
+        country_of_risk_name: typing.Text = ...,
+        sector: typing.Text = ...,
+        issue_kind: typing.Text = ...,
+        issue_size: builtins.int = ...,
+        issue_size_plan: builtins.int = ...,
+        trading_status: tinkoff.invest.grpc.common_pb2.SecurityTradingStatus.ValueType = ...,
+        otc_flag: builtins.bool = ...,
+        buy_available_flag: builtins.bool = ...,
+        sell_available_flag: builtins.bool = ...,
+        floating_coupon_flag: builtins.bool = ...,
+        perpetual_flag: builtins.bool = ...,
+        amortization_flag: builtins.bool = ...,
+        min_price_increment: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        api_trade_available_flag: builtins.bool = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["aci_value",b"aci_value","dlong",b"dlong","dlong_min",b"dlong_min","dshort",b"dshort","dshort_min",b"dshort_min","klong",b"klong","kshort",b"kshort","maturity_date",b"maturity_date","min_price_increment",b"min_price_increment","nominal",b"nominal","placement_date",b"placement_date","placement_price",b"placement_price","state_reg_date",b"state_reg_date"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions.Literal["aci_value",b"aci_value","amortization_flag",b"amortization_flag","api_trade_available_flag",b"api_trade_available_flag","buy_available_flag",b"buy_available_flag","class_code",b"class_code","country_of_risk",b"country_of_risk","country_of_risk_name",b"country_of_risk_name","coupon_quantity_per_year",b"coupon_quantity_per_year","currency",b"currency","dlong",b"dlong","dlong_min",b"dlong_min","dshort",b"dshort","dshort_min",b"dshort_min","exchange",b"exchange","figi",b"figi","floating_coupon_flag",b"floating_coupon_flag","isin",b"isin","issue_kind",b"issue_kind","issue_size",b"issue_size","issue_size_plan",b"issue_size_plan","klong",b"klong","kshort",b"kshort","lot",b"lot","maturity_date",b"maturity_date","min_price_increment",b"min_price_increment","name",b"name","nominal",b"nominal","otc_flag",b"otc_flag","perpetual_flag",b"perpetual_flag","placement_date",b"placement_date","placement_price",b"placement_price","sector",b"sector","sell_available_flag",b"sell_available_flag","short_enabled_flag",b"short_enabled_flag","state_reg_date",b"state_reg_date","ticker",b"ticker","trading_status",b"trading_status"]) -> None: ...
@@ -645,7 +645,7 @@ global___Bond = Bond
 
 class Currency(google.protobuf.message.Message):
     """Объект передачи информации о валюте."""
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     FIGI_FIELD_NUMBER: builtins.int
     TICKER_FIELD_NUMBER: builtins.int
     CLASS_CODE_FIELD_NUMBER: builtins.int
@@ -671,22 +671,22 @@ class Currency(google.protobuf.message.Message):
     ISO_CURRENCY_NAME_FIELD_NUMBER: builtins.int
     MIN_PRICE_INCREMENT_FIELD_NUMBER: builtins.int
     API_TRADE_AVAILABLE_FLAG_FIELD_NUMBER: builtins.int
-    figi: typing.Text = ...
+    figi: typing.Text
     """Figi-идентификатор инструмента."""
 
-    ticker: typing.Text = ...
+    ticker: typing.Text
     """Тикер инструмента."""
 
-    class_code: typing.Text = ...
+    class_code: typing.Text
     """Класс-код (секция торгов)."""
 
-    isin: typing.Text = ...
+    isin: typing.Text
     """Isin-идентификатор инструмента."""
 
-    lot: builtins.int = ...
+    lot: builtins.int
     """Лотность инструмента. Возможно совершение операций только на количества ценной бумаги, кратные параметру *lot*. Подробнее: [лот](https://tinkoff.github.io/investAPI/glossary#lot)"""
 
-    currency: typing.Text = ...
+    currency: typing.Text
     """Валюта расчётов."""
 
     @property
@@ -713,74 +713,74 @@ class Currency(google.protobuf.message.Message):
     def dshort_min(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
         """Ставка риска начальной маржи в шорт. Подробнее: [ставка риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)"""
         pass
-    short_enabled_flag: builtins.bool = ...
+    short_enabled_flag: builtins.bool
     """Признак доступности для операций в шорт."""
 
-    name: typing.Text = ...
+    name: typing.Text
     """Название инструмента."""
 
-    exchange: typing.Text = ...
+    exchange: typing.Text
     """Торговая площадка."""
 
     @property
     def nominal(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
         """Номинал."""
         pass
-    country_of_risk: typing.Text = ...
+    country_of_risk: typing.Text
     """Код страны эмитента."""
 
-    country_of_risk_name: typing.Text = ...
+    country_of_risk_name: typing.Text
     """Наименование страны эмитента."""
 
-    trading_status: tinkoff.invest.grpc.common_pb2.SecurityTradingStatus.ValueType = ...
+    trading_status: tinkoff.invest.grpc.common_pb2.SecurityTradingStatus.ValueType
     """Текущий режим торгов инструмента."""
 
-    otc_flag: builtins.bool = ...
+    otc_flag: builtins.bool
     """Признак внебиржевой ценной бумаги."""
 
-    buy_available_flag: builtins.bool = ...
+    buy_available_flag: builtins.bool
     """Признак доступности для покупки."""
 
-    sell_available_flag: builtins.bool = ...
+    sell_available_flag: builtins.bool
     """Признак доступности для продажи."""
 
-    iso_currency_name: typing.Text = ...
+    iso_currency_name: typing.Text
     """Строковый ISO-код валюты."""
 
     @property
     def min_price_increment(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
         """Шаг цены."""
         pass
-    api_trade_available_flag: builtins.bool = ...
+    api_trade_available_flag: builtins.bool
     """Признак доступности торгов через API."""
 
     def __init__(self,
         *,
-        figi : typing.Text = ...,
-        ticker : typing.Text = ...,
-        class_code : typing.Text = ...,
-        isin : typing.Text = ...,
-        lot : builtins.int = ...,
-        currency : typing.Text = ...,
-        klong : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
-        kshort : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
-        dlong : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
-        dshort : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
-        dlong_min : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
-        dshort_min : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
-        short_enabled_flag : builtins.bool = ...,
-        name : typing.Text = ...,
-        exchange : typing.Text = ...,
-        nominal : typing.Optional[tinkoff.invest.grpc.common_pb2.MoneyValue] = ...,
-        country_of_risk : typing.Text = ...,
-        country_of_risk_name : typing.Text = ...,
-        trading_status : tinkoff.invest.grpc.common_pb2.SecurityTradingStatus.ValueType = ...,
-        otc_flag : builtins.bool = ...,
-        buy_available_flag : builtins.bool = ...,
-        sell_available_flag : builtins.bool = ...,
-        iso_currency_name : typing.Text = ...,
-        min_price_increment : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
-        api_trade_available_flag : builtins.bool = ...,
+        figi: typing.Text = ...,
+        ticker: typing.Text = ...,
+        class_code: typing.Text = ...,
+        isin: typing.Text = ...,
+        lot: builtins.int = ...,
+        currency: typing.Text = ...,
+        klong: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        kshort: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        dlong: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        dshort: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        dlong_min: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        dshort_min: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        short_enabled_flag: builtins.bool = ...,
+        name: typing.Text = ...,
+        exchange: typing.Text = ...,
+        nominal: typing.Optional[tinkoff.invest.grpc.common_pb2.MoneyValue] = ...,
+        country_of_risk: typing.Text = ...,
+        country_of_risk_name: typing.Text = ...,
+        trading_status: tinkoff.invest.grpc.common_pb2.SecurityTradingStatus.ValueType = ...,
+        otc_flag: builtins.bool = ...,
+        buy_available_flag: builtins.bool = ...,
+        sell_available_flag: builtins.bool = ...,
+        iso_currency_name: typing.Text = ...,
+        min_price_increment: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        api_trade_available_flag: builtins.bool = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["dlong",b"dlong","dlong_min",b"dlong_min","dshort",b"dshort","dshort_min",b"dshort_min","klong",b"klong","kshort",b"kshort","min_price_increment",b"min_price_increment","nominal",b"nominal"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions.Literal["api_trade_available_flag",b"api_trade_available_flag","buy_available_flag",b"buy_available_flag","class_code",b"class_code","country_of_risk",b"country_of_risk","country_of_risk_name",b"country_of_risk_name","currency",b"currency","dlong",b"dlong","dlong_min",b"dlong_min","dshort",b"dshort","dshort_min",b"dshort_min","exchange",b"exchange","figi",b"figi","isin",b"isin","iso_currency_name",b"iso_currency_name","klong",b"klong","kshort",b"kshort","lot",b"lot","min_price_increment",b"min_price_increment","name",b"name","nominal",b"nominal","otc_flag",b"otc_flag","sell_available_flag",b"sell_available_flag","short_enabled_flag",b"short_enabled_flag","ticker",b"ticker","trading_status",b"trading_status"]) -> None: ...
@@ -788,7 +788,7 @@ global___Currency = Currency
 
 class Etf(google.protobuf.message.Message):
     """Объект передачи информации об инвестиционном фонде."""
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     FIGI_FIELD_NUMBER: builtins.int
     TICKER_FIELD_NUMBER: builtins.int
     CLASS_CODE_FIELD_NUMBER: builtins.int
@@ -818,22 +818,22 @@ class Etf(google.protobuf.message.Message):
     SELL_AVAILABLE_FLAG_FIELD_NUMBER: builtins.int
     MIN_PRICE_INCREMENT_FIELD_NUMBER: builtins.int
     API_TRADE_AVAILABLE_FLAG_FIELD_NUMBER: builtins.int
-    figi: typing.Text = ...
+    figi: typing.Text
     """Figi-идентификатор инструмента."""
 
-    ticker: typing.Text = ...
+    ticker: typing.Text
     """Тикер инструмента."""
 
-    class_code: typing.Text = ...
+    class_code: typing.Text
     """Класс-код (секция торгов)."""
 
-    isin: typing.Text = ...
+    isin: typing.Text
     """Isin-идентификатор инструмента."""
 
-    lot: builtins.int = ...
+    lot: builtins.int
     """Лотность инструмента. Возможно совершение операций только на количества ценной бумаги, кратные параметру *lot*. Подробнее: [лот](https://tinkoff.github.io/investAPI/glossary#lot)"""
 
-    currency: typing.Text = ...
+    currency: typing.Text
     """Валюта расчётов."""
 
     @property
@@ -860,20 +860,20 @@ class Etf(google.protobuf.message.Message):
     def dshort_min(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
         """Ставка риска начальной маржи в шорт. Подробнее: [ставка риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)"""
         pass
-    short_enabled_flag: builtins.bool = ...
+    short_enabled_flag: builtins.bool
     """Признак доступности для операций в шорт."""
 
-    name: typing.Text = ...
+    name: typing.Text
     """Название инструмента."""
 
-    exchange: typing.Text = ...
+    exchange: typing.Text
     """Торговая площадка."""
 
     @property
     def fixed_commission(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
         """Размер фиксированной комиссии фонда."""
         pass
-    focus_type: typing.Text = ...
+    focus_type: typing.Text
     """Возможные значения: </br>**equity** — акции;</br>**fixed_income** — облигации;</br>**mixed_allocation** — смешанный;</br>**money_market** — денежный рынок;</br>**real_estate** — недвижимость;</br>**commodity** — товары;</br>**specialty** — специальный;</br>**private_equity** — private equity;</br>**alternative_investment** — альтернативные инвестиции."""
 
     @property
@@ -884,68 +884,68 @@ class Etf(google.protobuf.message.Message):
     def num_shares(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
         """Количество акций фонда в обращении."""
         pass
-    country_of_risk: typing.Text = ...
+    country_of_risk: typing.Text
     """Код страны эмитента."""
 
-    country_of_risk_name: typing.Text = ...
+    country_of_risk_name: typing.Text
     """Наименование страны эмитента."""
 
-    sector: typing.Text = ...
+    sector: typing.Text
     """Сектор экономики."""
 
-    rebalancing_freq: typing.Text = ...
+    rebalancing_freq: typing.Text
     """Частота ребалансировки."""
 
-    trading_status: tinkoff.invest.grpc.common_pb2.SecurityTradingStatus.ValueType = ...
+    trading_status: tinkoff.invest.grpc.common_pb2.SecurityTradingStatus.ValueType
     """Текущий режим торгов инструмента."""
 
-    otc_flag: builtins.bool = ...
+    otc_flag: builtins.bool
     """Признак внебиржевой ценной бумаги."""
 
-    buy_available_flag: builtins.bool = ...
+    buy_available_flag: builtins.bool
     """Признак доступности для покупки."""
 
-    sell_available_flag: builtins.bool = ...
+    sell_available_flag: builtins.bool
     """Признак доступности для продажи."""
 
     @property
     def min_price_increment(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
         """Шаг цены."""
         pass
-    api_trade_available_flag: builtins.bool = ...
+    api_trade_available_flag: builtins.bool
     """Признак доступности торгов через API."""
 
     def __init__(self,
         *,
-        figi : typing.Text = ...,
-        ticker : typing.Text = ...,
-        class_code : typing.Text = ...,
-        isin : typing.Text = ...,
-        lot : builtins.int = ...,
-        currency : typing.Text = ...,
-        klong : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
-        kshort : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
-        dlong : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
-        dshort : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
-        dlong_min : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
-        dshort_min : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
-        short_enabled_flag : builtins.bool = ...,
-        name : typing.Text = ...,
-        exchange : typing.Text = ...,
-        fixed_commission : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
-        focus_type : typing.Text = ...,
-        released_date : typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
-        num_shares : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
-        country_of_risk : typing.Text = ...,
-        country_of_risk_name : typing.Text = ...,
-        sector : typing.Text = ...,
-        rebalancing_freq : typing.Text = ...,
-        trading_status : tinkoff.invest.grpc.common_pb2.SecurityTradingStatus.ValueType = ...,
-        otc_flag : builtins.bool = ...,
-        buy_available_flag : builtins.bool = ...,
-        sell_available_flag : builtins.bool = ...,
-        min_price_increment : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
-        api_trade_available_flag : builtins.bool = ...,
+        figi: typing.Text = ...,
+        ticker: typing.Text = ...,
+        class_code: typing.Text = ...,
+        isin: typing.Text = ...,
+        lot: builtins.int = ...,
+        currency: typing.Text = ...,
+        klong: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        kshort: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        dlong: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        dshort: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        dlong_min: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        dshort_min: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        short_enabled_flag: builtins.bool = ...,
+        name: typing.Text = ...,
+        exchange: typing.Text = ...,
+        fixed_commission: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        focus_type: typing.Text = ...,
+        released_date: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        num_shares: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        country_of_risk: typing.Text = ...,
+        country_of_risk_name: typing.Text = ...,
+        sector: typing.Text = ...,
+        rebalancing_freq: typing.Text = ...,
+        trading_status: tinkoff.invest.grpc.common_pb2.SecurityTradingStatus.ValueType = ...,
+        otc_flag: builtins.bool = ...,
+        buy_available_flag: builtins.bool = ...,
+        sell_available_flag: builtins.bool = ...,
+        min_price_increment: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        api_trade_available_flag: builtins.bool = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["dlong",b"dlong","dlong_min",b"dlong_min","dshort",b"dshort","dshort_min",b"dshort_min","fixed_commission",b"fixed_commission","klong",b"klong","kshort",b"kshort","min_price_increment",b"min_price_increment","num_shares",b"num_shares","released_date",b"released_date"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions.Literal["api_trade_available_flag",b"api_trade_available_flag","buy_available_flag",b"buy_available_flag","class_code",b"class_code","country_of_risk",b"country_of_risk","country_of_risk_name",b"country_of_risk_name","currency",b"currency","dlong",b"dlong","dlong_min",b"dlong_min","dshort",b"dshort","dshort_min",b"dshort_min","exchange",b"exchange","figi",b"figi","fixed_commission",b"fixed_commission","focus_type",b"focus_type","isin",b"isin","klong",b"klong","kshort",b"kshort","lot",b"lot","min_price_increment",b"min_price_increment","name",b"name","num_shares",b"num_shares","otc_flag",b"otc_flag","rebalancing_freq",b"rebalancing_freq","released_date",b"released_date","sector",b"sector","sell_available_flag",b"sell_available_flag","short_enabled_flag",b"short_enabled_flag","ticker",b"ticker","trading_status",b"trading_status"]) -> None: ...
@@ -953,7 +953,7 @@ global___Etf = Etf
 
 class Future(google.protobuf.message.Message):
     """Объект передачи информации о фьючерсе."""
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     FIGI_FIELD_NUMBER: builtins.int
     TICKER_FIELD_NUMBER: builtins.int
     CLASS_CODE_FIELD_NUMBER: builtins.int
@@ -984,19 +984,19 @@ class Future(google.protobuf.message.Message):
     SELL_AVAILABLE_FLAG_FIELD_NUMBER: builtins.int
     MIN_PRICE_INCREMENT_FIELD_NUMBER: builtins.int
     API_TRADE_AVAILABLE_FLAG_FIELD_NUMBER: builtins.int
-    figi: typing.Text = ...
+    figi: typing.Text
     """Figi-идентификатор инструмента."""
 
-    ticker: typing.Text = ...
+    ticker: typing.Text
     """Тикер инструмента."""
 
-    class_code: typing.Text = ...
+    class_code: typing.Text
     """Класс-код (секция торгов)."""
 
-    lot: builtins.int = ...
+    lot: builtins.int
     """Лотность инструмента. Возможно совершение операций только на количества ценной бумаги, кратные параметру *lot*. Подробнее: [лот](https://tinkoff.github.io/investAPI/glossary#lot)"""
 
-    currency: typing.Text = ...
+    currency: typing.Text
     """Валюта расчётов."""
 
     @property
@@ -1023,13 +1023,13 @@ class Future(google.protobuf.message.Message):
     def dshort_min(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
         """Ставка риска начальной маржи в шорт. Подробнее: [ставка риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)"""
         pass
-    short_enabled_flag: builtins.bool = ...
+    short_enabled_flag: builtins.bool
     """Признак доступности для операций шорт."""
 
-    name: typing.Text = ...
+    name: typing.Text
     """Название инструмента."""
 
-    exchange: typing.Text = ...
+    exchange: typing.Text
     """Торговая площадка."""
 
     @property
@@ -1040,83 +1040,83 @@ class Future(google.protobuf.message.Message):
     def last_trade_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
         """Дата в часовом поясе UTC, до которой возможно проведение операций с фьючерсом."""
         pass
-    futures_type: typing.Text = ...
+    futures_type: typing.Text
     """Тип фьючерса. Возможные значения: </br>**physical_delivery** — физические поставки; </br>**cash_settlement** — денежный эквивалент."""
 
-    asset_type: typing.Text = ...
+    asset_type: typing.Text
     """Тип актива. Возможные значения: </br>**commodity** — товар; </br>**currency** — валюта; </br>**security** — ценная бумага; </br>**index** — индекс."""
 
-    basic_asset: typing.Text = ...
+    basic_asset: typing.Text
     """Основной актив."""
 
     @property
     def basic_asset_size(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
         """Размер основного актива."""
         pass
-    country_of_risk: typing.Text = ...
+    country_of_risk: typing.Text
     """Код страны эмитента."""
 
-    country_of_risk_name: typing.Text = ...
+    country_of_risk_name: typing.Text
     """Наименование страны эмитента."""
 
-    sector: typing.Text = ...
+    sector: typing.Text
     """Сектор экономики."""
 
     @property
     def expiration_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
-        """Дата истечения срока."""
+        """Дата истечения срока в часов поясе UTC."""
         pass
-    trading_status: tinkoff.invest.grpc.common_pb2.SecurityTradingStatus.ValueType = ...
+    trading_status: tinkoff.invest.grpc.common_pb2.SecurityTradingStatus.ValueType
     """Текущий режим торгов инструмента."""
 
-    otc_flag: builtins.bool = ...
+    otc_flag: builtins.bool
     """Признак внебиржевой ценной бумаги."""
 
-    buy_available_flag: builtins.bool = ...
+    buy_available_flag: builtins.bool
     """Признак доступности для покупки."""
 
-    sell_available_flag: builtins.bool = ...
+    sell_available_flag: builtins.bool
     """Признак доступности для продажи."""
 
     @property
     def min_price_increment(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
         """Шаг цены."""
         pass
-    api_trade_available_flag: builtins.bool = ...
+    api_trade_available_flag: builtins.bool
     """Признак доступности торгов через API."""
 
     def __init__(self,
         *,
-        figi : typing.Text = ...,
-        ticker : typing.Text = ...,
-        class_code : typing.Text = ...,
-        lot : builtins.int = ...,
-        currency : typing.Text = ...,
-        klong : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
-        kshort : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
-        dlong : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
-        dshort : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
-        dlong_min : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
-        dshort_min : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
-        short_enabled_flag : builtins.bool = ...,
-        name : typing.Text = ...,
-        exchange : typing.Text = ...,
-        first_trade_date : typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
-        last_trade_date : typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
-        futures_type : typing.Text = ...,
-        asset_type : typing.Text = ...,
-        basic_asset : typing.Text = ...,
-        basic_asset_size : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
-        country_of_risk : typing.Text = ...,
-        country_of_risk_name : typing.Text = ...,
-        sector : typing.Text = ...,
-        expiration_date : typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
-        trading_status : tinkoff.invest.grpc.common_pb2.SecurityTradingStatus.ValueType = ...,
-        otc_flag : builtins.bool = ...,
-        buy_available_flag : builtins.bool = ...,
-        sell_available_flag : builtins.bool = ...,
-        min_price_increment : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
-        api_trade_available_flag : builtins.bool = ...,
+        figi: typing.Text = ...,
+        ticker: typing.Text = ...,
+        class_code: typing.Text = ...,
+        lot: builtins.int = ...,
+        currency: typing.Text = ...,
+        klong: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        kshort: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        dlong: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        dshort: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        dlong_min: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        dshort_min: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        short_enabled_flag: builtins.bool = ...,
+        name: typing.Text = ...,
+        exchange: typing.Text = ...,
+        first_trade_date: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        last_trade_date: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        futures_type: typing.Text = ...,
+        asset_type: typing.Text = ...,
+        basic_asset: typing.Text = ...,
+        basic_asset_size: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        country_of_risk: typing.Text = ...,
+        country_of_risk_name: typing.Text = ...,
+        sector: typing.Text = ...,
+        expiration_date: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        trading_status: tinkoff.invest.grpc.common_pb2.SecurityTradingStatus.ValueType = ...,
+        otc_flag: builtins.bool = ...,
+        buy_available_flag: builtins.bool = ...,
+        sell_available_flag: builtins.bool = ...,
+        min_price_increment: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        api_trade_available_flag: builtins.bool = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["basic_asset_size",b"basic_asset_size","dlong",b"dlong","dlong_min",b"dlong_min","dshort",b"dshort","dshort_min",b"dshort_min","expiration_date",b"expiration_date","first_trade_date",b"first_trade_date","klong",b"klong","kshort",b"kshort","last_trade_date",b"last_trade_date","min_price_increment",b"min_price_increment"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions.Literal["api_trade_available_flag",b"api_trade_available_flag","asset_type",b"asset_type","basic_asset",b"basic_asset","basic_asset_size",b"basic_asset_size","buy_available_flag",b"buy_available_flag","class_code",b"class_code","country_of_risk",b"country_of_risk","country_of_risk_name",b"country_of_risk_name","currency",b"currency","dlong",b"dlong","dlong_min",b"dlong_min","dshort",b"dshort","dshort_min",b"dshort_min","exchange",b"exchange","expiration_date",b"expiration_date","figi",b"figi","first_trade_date",b"first_trade_date","futures_type",b"futures_type","klong",b"klong","kshort",b"kshort","last_trade_date",b"last_trade_date","lot",b"lot","min_price_increment",b"min_price_increment","name",b"name","otc_flag",b"otc_flag","sector",b"sector","sell_available_flag",b"sell_available_flag","short_enabled_flag",b"short_enabled_flag","ticker",b"ticker","trading_status",b"trading_status"]) -> None: ...
@@ -1124,7 +1124,7 @@ global___Future = Future
 
 class Share(google.protobuf.message.Message):
     """Объект передачи информации об акции."""
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     FIGI_FIELD_NUMBER: builtins.int
     TICKER_FIELD_NUMBER: builtins.int
     CLASS_CODE_FIELD_NUMBER: builtins.int
@@ -1155,22 +1155,22 @@ class Share(google.protobuf.message.Message):
     SHARE_TYPE_FIELD_NUMBER: builtins.int
     MIN_PRICE_INCREMENT_FIELD_NUMBER: builtins.int
     API_TRADE_AVAILABLE_FLAG_FIELD_NUMBER: builtins.int
-    figi: typing.Text = ...
+    figi: typing.Text
     """Figi-идентификатор инструмента."""
 
-    ticker: typing.Text = ...
+    ticker: typing.Text
     """Тикер инструмента."""
 
-    class_code: typing.Text = ...
+    class_code: typing.Text
     """Класс-код (секция торгов)."""
 
-    isin: typing.Text = ...
+    isin: typing.Text
     """Isin-идентификатор инструмента."""
 
-    lot: builtins.int = ...
+    lot: builtins.int
     """Лотность инструмента. Возможно совершение операций только на количества ценной бумаги, кратные параметру *lot*. Подробнее: [лот](https://tinkoff.github.io/investAPI/glossary#lot)"""
 
-    currency: typing.Text = ...
+    currency: typing.Text
     """Валюта расчётов."""
 
     @property
@@ -1197,95 +1197,95 @@ class Share(google.protobuf.message.Message):
     def dshort_min(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
         """Ставка риска начальной маржи в шорт. Подробнее: [ставка риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)"""
         pass
-    short_enabled_flag: builtins.bool = ...
+    short_enabled_flag: builtins.bool
     """Признак доступности для операций в шорт."""
 
-    name: typing.Text = ...
+    name: typing.Text
     """Название инструмента."""
 
-    exchange: typing.Text = ...
+    exchange: typing.Text
     """Торговая площадка."""
 
     @property
     def ipo_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
         """Дата IPO акции в часовом поясе UTC."""
         pass
-    issue_size: builtins.int = ...
+    issue_size: builtins.int
     """Размер выпуска."""
 
-    country_of_risk: typing.Text = ...
+    country_of_risk: typing.Text
     """Код страны эмитента."""
 
-    country_of_risk_name: typing.Text = ...
+    country_of_risk_name: typing.Text
     """Наименование страны эмитента."""
 
-    sector: typing.Text = ...
+    sector: typing.Text
     """Сектор экономики."""
 
-    issue_size_plan: builtins.int = ...
+    issue_size_plan: builtins.int
     """Плановый размер выпуска."""
 
     @property
     def nominal(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
         """Номинал."""
         pass
-    trading_status: tinkoff.invest.grpc.common_pb2.SecurityTradingStatus.ValueType = ...
+    trading_status: tinkoff.invest.grpc.common_pb2.SecurityTradingStatus.ValueType
     """Текущий режим торгов инструмента."""
 
-    otc_flag: builtins.bool = ...
+    otc_flag: builtins.bool
     """Признак внебиржевой ценной бумаги."""
 
-    buy_available_flag: builtins.bool = ...
+    buy_available_flag: builtins.bool
     """Признак доступности для покупки."""
 
-    sell_available_flag: builtins.bool = ...
+    sell_available_flag: builtins.bool
     """Признак доступности для продажи."""
 
-    div_yield_flag: builtins.bool = ...
+    div_yield_flag: builtins.bool
     """Признак наличия дивидендной доходности."""
 
-    share_type: global___ShareType.ValueType = ...
+    share_type: global___ShareType.ValueType
     """Тип акции. Возможные значения: [ShareType](https://tinkoff.github.io/investAPI/instruments#sharetype)"""
 
     @property
     def min_price_increment(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
         """Шаг цены."""
         pass
-    api_trade_available_flag: builtins.bool = ...
+    api_trade_available_flag: builtins.bool
     """Признак доступности торгов через API."""
 
     def __init__(self,
         *,
-        figi : typing.Text = ...,
-        ticker : typing.Text = ...,
-        class_code : typing.Text = ...,
-        isin : typing.Text = ...,
-        lot : builtins.int = ...,
-        currency : typing.Text = ...,
-        klong : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
-        kshort : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
-        dlong : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
-        dshort : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
-        dlong_min : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
-        dshort_min : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
-        short_enabled_flag : builtins.bool = ...,
-        name : typing.Text = ...,
-        exchange : typing.Text = ...,
-        ipo_date : typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
-        issue_size : builtins.int = ...,
-        country_of_risk : typing.Text = ...,
-        country_of_risk_name : typing.Text = ...,
-        sector : typing.Text = ...,
-        issue_size_plan : builtins.int = ...,
-        nominal : typing.Optional[tinkoff.invest.grpc.common_pb2.MoneyValue] = ...,
-        trading_status : tinkoff.invest.grpc.common_pb2.SecurityTradingStatus.ValueType = ...,
-        otc_flag : builtins.bool = ...,
-        buy_available_flag : builtins.bool = ...,
-        sell_available_flag : builtins.bool = ...,
-        div_yield_flag : builtins.bool = ...,
-        share_type : global___ShareType.ValueType = ...,
-        min_price_increment : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
-        api_trade_available_flag : builtins.bool = ...,
+        figi: typing.Text = ...,
+        ticker: typing.Text = ...,
+        class_code: typing.Text = ...,
+        isin: typing.Text = ...,
+        lot: builtins.int = ...,
+        currency: typing.Text = ...,
+        klong: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        kshort: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        dlong: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        dshort: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        dlong_min: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        dshort_min: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        short_enabled_flag: builtins.bool = ...,
+        name: typing.Text = ...,
+        exchange: typing.Text = ...,
+        ipo_date: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        issue_size: builtins.int = ...,
+        country_of_risk: typing.Text = ...,
+        country_of_risk_name: typing.Text = ...,
+        sector: typing.Text = ...,
+        issue_size_plan: builtins.int = ...,
+        nominal: typing.Optional[tinkoff.invest.grpc.common_pb2.MoneyValue] = ...,
+        trading_status: tinkoff.invest.grpc.common_pb2.SecurityTradingStatus.ValueType = ...,
+        otc_flag: builtins.bool = ...,
+        buy_available_flag: builtins.bool = ...,
+        sell_available_flag: builtins.bool = ...,
+        div_yield_flag: builtins.bool = ...,
+        share_type: global___ShareType.ValueType = ...,
+        min_price_increment: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        api_trade_available_flag: builtins.bool = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["dlong",b"dlong","dlong_min",b"dlong_min","dshort",b"dshort","dshort_min",b"dshort_min","ipo_date",b"ipo_date","klong",b"klong","kshort",b"kshort","min_price_increment",b"min_price_increment","nominal",b"nominal"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions.Literal["api_trade_available_flag",b"api_trade_available_flag","buy_available_flag",b"buy_available_flag","class_code",b"class_code","country_of_risk",b"country_of_risk","country_of_risk_name",b"country_of_risk_name","currency",b"currency","div_yield_flag",b"div_yield_flag","dlong",b"dlong","dlong_min",b"dlong_min","dshort",b"dshort","dshort_min",b"dshort_min","exchange",b"exchange","figi",b"figi","ipo_date",b"ipo_date","isin",b"isin","issue_size",b"issue_size","issue_size_plan",b"issue_size_plan","klong",b"klong","kshort",b"kshort","lot",b"lot","min_price_increment",b"min_price_increment","name",b"name","nominal",b"nominal","otc_flag",b"otc_flag","sector",b"sector","sell_available_flag",b"sell_available_flag","share_type",b"share_type","short_enabled_flag",b"short_enabled_flag","ticker",b"ticker","trading_status",b"trading_status"]) -> None: ...
@@ -1293,11 +1293,11 @@ global___Share = Share
 
 class GetAccruedInterestsRequest(google.protobuf.message.Message):
     """Запрос НКД по облигации"""
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     FIGI_FIELD_NUMBER: builtins.int
     FROM_FIELD_NUMBER: builtins.int
     TO_FIELD_NUMBER: builtins.int
-    figi: typing.Text = ...
+    figi: typing.Text
     """Figi-идентификатор инструмента."""
 
     @property
@@ -1306,8 +1306,8 @@ class GetAccruedInterestsRequest(google.protobuf.message.Message):
         pass
     def __init__(self,
         *,
-        figi : typing.Text = ...,
-        to : typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        figi: typing.Text = ...,
+        to: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["from",b"from","to",b"to"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions.Literal["figi",b"figi","from",b"from","to",b"to"]) -> None: ...
@@ -1315,7 +1315,7 @@ global___GetAccruedInterestsRequest = GetAccruedInterestsRequest
 
 class GetAccruedInterestsResponse(google.protobuf.message.Message):
     """НКД облигации"""
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     ACCRUED_INTERESTS_FIELD_NUMBER: builtins.int
     @property
     def accrued_interests(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___AccruedInterest]:
@@ -1323,14 +1323,14 @@ class GetAccruedInterestsResponse(google.protobuf.message.Message):
         pass
     def __init__(self,
         *,
-        accrued_interests : typing.Optional[typing.Iterable[global___AccruedInterest]] = ...,
+        accrued_interests: typing.Optional[typing.Iterable[global___AccruedInterest]] = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["accrued_interests",b"accrued_interests"]) -> None: ...
 global___GetAccruedInterestsResponse = GetAccruedInterestsResponse
 
 class AccruedInterest(google.protobuf.message.Message):
     """Операция начисления купонов."""
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     DATE_FIELD_NUMBER: builtins.int
     VALUE_FIELD_NUMBER: builtins.int
     VALUE_PERCENT_FIELD_NUMBER: builtins.int
@@ -1353,10 +1353,10 @@ class AccruedInterest(google.protobuf.message.Message):
         pass
     def __init__(self,
         *,
-        date : typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
-        value : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
-        value_percent : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
-        nominal : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        date: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        value: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        value_percent: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        nominal: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["date",b"date","nominal",b"nominal","value",b"value","value_percent",b"value_percent"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions.Literal["date",b"date","nominal",b"nominal","value",b"value","value_percent",b"value_percent"]) -> None: ...
@@ -1364,21 +1364,21 @@ global___AccruedInterest = AccruedInterest
 
 class GetFuturesMarginRequest(google.protobuf.message.Message):
     """Запрос информации о фьючерсе"""
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     FIGI_FIELD_NUMBER: builtins.int
-    figi: typing.Text = ...
+    figi: typing.Text
     """Идентификатор инструмента."""
 
     def __init__(self,
         *,
-        figi : typing.Text = ...,
+        figi: typing.Text = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["figi",b"figi"]) -> None: ...
 global___GetFuturesMarginRequest = GetFuturesMarginRequest
 
 class GetFuturesMarginResponse(google.protobuf.message.Message):
     """Данные по фьючерсу"""
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     INITIAL_MARGIN_ON_BUY_FIELD_NUMBER: builtins.int
     INITIAL_MARGIN_ON_SELL_FIELD_NUMBER: builtins.int
     MIN_PRICE_INCREMENT_FIELD_NUMBER: builtins.int
@@ -1401,10 +1401,10 @@ class GetFuturesMarginResponse(google.protobuf.message.Message):
         pass
     def __init__(self,
         *,
-        initial_margin_on_buy : typing.Optional[tinkoff.invest.grpc.common_pb2.MoneyValue] = ...,
-        initial_margin_on_sell : typing.Optional[tinkoff.invest.grpc.common_pb2.MoneyValue] = ...,
-        min_price_increment : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
-        min_price_increment_amount : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        initial_margin_on_buy: typing.Optional[tinkoff.invest.grpc.common_pb2.MoneyValue] = ...,
+        initial_margin_on_sell: typing.Optional[tinkoff.invest.grpc.common_pb2.MoneyValue] = ...,
+        min_price_increment: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        min_price_increment_amount: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["initial_margin_on_buy",b"initial_margin_on_buy","initial_margin_on_sell",b"initial_margin_on_sell","min_price_increment",b"min_price_increment","min_price_increment_amount",b"min_price_increment_amount"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions.Literal["initial_margin_on_buy",b"initial_margin_on_buy","initial_margin_on_sell",b"initial_margin_on_sell","min_price_increment",b"min_price_increment","min_price_increment_amount",b"min_price_increment_amount"]) -> None: ...
@@ -1412,7 +1412,7 @@ global___GetFuturesMarginResponse = GetFuturesMarginResponse
 
 class InstrumentResponse(google.protobuf.message.Message):
     """Данные по инструменту."""
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     INSTRUMENT_FIELD_NUMBER: builtins.int
     @property
     def instrument(self) -> global___Instrument:
@@ -1420,7 +1420,7 @@ class InstrumentResponse(google.protobuf.message.Message):
         pass
     def __init__(self,
         *,
-        instrument : typing.Optional[global___Instrument] = ...,
+        instrument: typing.Optional[global___Instrument] = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["instrument",b"instrument"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions.Literal["instrument",b"instrument"]) -> None: ...
@@ -1428,7 +1428,7 @@ global___InstrumentResponse = InstrumentResponse
 
 class Instrument(google.protobuf.message.Message):
     """Объект передачи основной информации об инструменте."""
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     FIGI_FIELD_NUMBER: builtins.int
     TICKER_FIELD_NUMBER: builtins.int
     CLASS_CODE_FIELD_NUMBER: builtins.int
@@ -1453,22 +1453,22 @@ class Instrument(google.protobuf.message.Message):
     SELL_AVAILABLE_FLAG_FIELD_NUMBER: builtins.int
     MIN_PRICE_INCREMENT_FIELD_NUMBER: builtins.int
     API_TRADE_AVAILABLE_FLAG_FIELD_NUMBER: builtins.int
-    figi: typing.Text = ...
+    figi: typing.Text
     """Figi-идентификатор инструмента."""
 
-    ticker: typing.Text = ...
+    ticker: typing.Text
     """Тикер инструмента."""
 
-    class_code: typing.Text = ...
+    class_code: typing.Text
     """Класс-код инструмента."""
 
-    isin: typing.Text = ...
+    isin: typing.Text
     """Isin-идентификатор инструмента."""
 
-    lot: builtins.int = ...
+    lot: builtins.int
     """Лотность инструмента. Возможно совершение операций только на количества ценной бумаги, кратные параметру *lot*. Подробнее: [лот](https://tinkoff.github.io/investAPI/glossary#lot)"""
 
-    currency: typing.Text = ...
+    currency: typing.Text
     """Валюта расчётов."""
 
     @property
@@ -1495,69 +1495,69 @@ class Instrument(google.protobuf.message.Message):
     def dshort_min(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
         """Ставка риска начальной маржи в шорт. Подробнее: [ставка риска в шорт](https://help.tinkoff.ru/margin-trade/short/risk-rate/)"""
         pass
-    short_enabled_flag: builtins.bool = ...
+    short_enabled_flag: builtins.bool
     """Признак доступности для операций в шорт."""
 
-    name: typing.Text = ...
+    name: typing.Text
     """Название инструмента."""
 
-    exchange: typing.Text = ...
+    exchange: typing.Text
     """Торговая площадка."""
 
-    country_of_risk: typing.Text = ...
+    country_of_risk: typing.Text
     """Код страны эмитента."""
 
-    country_of_risk_name: typing.Text = ...
+    country_of_risk_name: typing.Text
     """Наименование страны эмитента."""
 
-    instrument_type: typing.Text = ...
+    instrument_type: typing.Text
     """Тип инструмента."""
 
-    trading_status: tinkoff.invest.grpc.common_pb2.SecurityTradingStatus.ValueType = ...
+    trading_status: tinkoff.invest.grpc.common_pb2.SecurityTradingStatus.ValueType
     """Текущий режим торгов инструмента."""
 
-    otc_flag: builtins.bool = ...
+    otc_flag: builtins.bool
     """Признак внебиржевой ценной бумаги."""
 
-    buy_available_flag: builtins.bool = ...
+    buy_available_flag: builtins.bool
     """Признак доступности для покупки."""
 
-    sell_available_flag: builtins.bool = ...
+    sell_available_flag: builtins.bool
     """Признак доступности для продажи."""
 
     @property
     def min_price_increment(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
         """Шаг цены."""
         pass
-    api_trade_available_flag: builtins.bool = ...
+    api_trade_available_flag: builtins.bool
     """Признак доступности торгов через API."""
 
     def __init__(self,
         *,
-        figi : typing.Text = ...,
-        ticker : typing.Text = ...,
-        class_code : typing.Text = ...,
-        isin : typing.Text = ...,
-        lot : builtins.int = ...,
-        currency : typing.Text = ...,
-        klong : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
-        kshort : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
-        dlong : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
-        dshort : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
-        dlong_min : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
-        dshort_min : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
-        short_enabled_flag : builtins.bool = ...,
-        name : typing.Text = ...,
-        exchange : typing.Text = ...,
-        country_of_risk : typing.Text = ...,
-        country_of_risk_name : typing.Text = ...,
-        instrument_type : typing.Text = ...,
-        trading_status : tinkoff.invest.grpc.common_pb2.SecurityTradingStatus.ValueType = ...,
-        otc_flag : builtins.bool = ...,
-        buy_available_flag : builtins.bool = ...,
-        sell_available_flag : builtins.bool = ...,
-        min_price_increment : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
-        api_trade_available_flag : builtins.bool = ...,
+        figi: typing.Text = ...,
+        ticker: typing.Text = ...,
+        class_code: typing.Text = ...,
+        isin: typing.Text = ...,
+        lot: builtins.int = ...,
+        currency: typing.Text = ...,
+        klong: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        kshort: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        dlong: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        dshort: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        dlong_min: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        dshort_min: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        short_enabled_flag: builtins.bool = ...,
+        name: typing.Text = ...,
+        exchange: typing.Text = ...,
+        country_of_risk: typing.Text = ...,
+        country_of_risk_name: typing.Text = ...,
+        instrument_type: typing.Text = ...,
+        trading_status: tinkoff.invest.grpc.common_pb2.SecurityTradingStatus.ValueType = ...,
+        otc_flag: builtins.bool = ...,
+        buy_available_flag: builtins.bool = ...,
+        sell_available_flag: builtins.bool = ...,
+        min_price_increment: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        api_trade_available_flag: builtins.bool = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["dlong",b"dlong","dlong_min",b"dlong_min","dshort",b"dshort","dshort_min",b"dshort_min","klong",b"klong","kshort",b"kshort","min_price_increment",b"min_price_increment"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions.Literal["api_trade_available_flag",b"api_trade_available_flag","buy_available_flag",b"buy_available_flag","class_code",b"class_code","country_of_risk",b"country_of_risk","country_of_risk_name",b"country_of_risk_name","currency",b"currency","dlong",b"dlong","dlong_min",b"dlong_min","dshort",b"dshort","dshort_min",b"dshort_min","exchange",b"exchange","figi",b"figi","instrument_type",b"instrument_type","isin",b"isin","klong",b"klong","kshort",b"kshort","lot",b"lot","min_price_increment",b"min_price_increment","name",b"name","otc_flag",b"otc_flag","sell_available_flag",b"sell_available_flag","short_enabled_flag",b"short_enabled_flag","ticker",b"ticker","trading_status",b"trading_status"]) -> None: ...
@@ -1565,11 +1565,11 @@ global___Instrument = Instrument
 
 class GetDividendsRequest(google.protobuf.message.Message):
     """Запрос дивидендов."""
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     FIGI_FIELD_NUMBER: builtins.int
     FROM_FIELD_NUMBER: builtins.int
     TO_FIELD_NUMBER: builtins.int
-    figi: typing.Text = ...
+    figi: typing.Text
     """Figi-идентификатор инструмента."""
 
     @property
@@ -1578,8 +1578,8 @@ class GetDividendsRequest(google.protobuf.message.Message):
         pass
     def __init__(self,
         *,
-        figi : typing.Text = ...,
-        to : typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        figi: typing.Text = ...,
+        to: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["from",b"from","to",b"to"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions.Literal["figi",b"figi","from",b"from","to",b"to"]) -> None: ...
@@ -1587,20 +1587,20 @@ global___GetDividendsRequest = GetDividendsRequest
 
 class GetDividendsResponse(google.protobuf.message.Message):
     """Дивиденды."""
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     DIVIDENDS_FIELD_NUMBER: builtins.int
     @property
     def dividends(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Dividend]: ...
     def __init__(self,
         *,
-        dividends : typing.Optional[typing.Iterable[global___Dividend]] = ...,
+        dividends: typing.Optional[typing.Iterable[global___Dividend]] = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["dividends",b"dividends"]) -> None: ...
 global___GetDividendsResponse = GetDividendsResponse
 
 class Dividend(google.protobuf.message.Message):
     """Информация о выплате."""
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     DIVIDEND_NET_FIELD_NUMBER: builtins.int
     PAYMENT_DATE_FIELD_NUMBER: builtins.int
     DECLARED_DATE_FIELD_NUMBER: builtins.int
@@ -1617,24 +1617,24 @@ class Dividend(google.protobuf.message.Message):
         pass
     @property
     def payment_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
-        """Дата фактических выплат."""
+        """Дата фактических выплат в часовом поясе UTC."""
         pass
     @property
     def declared_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
-        """Дата объявления дивидендов."""
+        """Дата объявления дивидендов в часовом поясе UTC."""
         pass
     @property
     def last_buy_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
-        """Последний день (включительно) покупки для получения выплаты."""
+        """Последний день (включительно) покупки для получения выплаты в часовом поясе UTC."""
         pass
-    dividend_type: typing.Text = ...
+    dividend_type: typing.Text
     """Тип выплаты. Возможные значения: Regular Cash – регулярные выплаты, Cancelled – выплата отменена, Daily Accrual – ежедневное начисление, Return of Capital – возврат капитала, прочие типы выплат."""
 
     @property
     def record_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
-        """Дата фиксации реестра"""
+        """Дата фиксации реестра в часовом поясе UTC."""
         pass
-    regularity: typing.Text = ...
+    regularity: typing.Text
     """Регулярность выплаты. Возможные значения: Annual – ежегодная, Semi-Anl – каждые полгода, прочие типы выплат."""
 
     @property
@@ -1647,20 +1647,20 @@ class Dividend(google.protobuf.message.Message):
         pass
     @property
     def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
-        """Дата и время создания записи."""
+        """Дата и время создания записи в часовом поясе UTC."""
         pass
     def __init__(self,
         *,
-        dividend_net : typing.Optional[tinkoff.invest.grpc.common_pb2.MoneyValue] = ...,
-        payment_date : typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
-        declared_date : typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
-        last_buy_date : typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
-        dividend_type : typing.Text = ...,
-        record_date : typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
-        regularity : typing.Text = ...,
-        close_price : typing.Optional[tinkoff.invest.grpc.common_pb2.MoneyValue] = ...,
-        yield_value : typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
-        created_at : typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        dividend_net: typing.Optional[tinkoff.invest.grpc.common_pb2.MoneyValue] = ...,
+        payment_date: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        declared_date: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        last_buy_date: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        dividend_type: typing.Text = ...,
+        record_date: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        regularity: typing.Text = ...,
+        close_price: typing.Optional[tinkoff.invest.grpc.common_pb2.MoneyValue] = ...,
+        yield_value: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        created_at: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["close_price",b"close_price","created_at",b"created_at","declared_date",b"declared_date","dividend_net",b"dividend_net","last_buy_date",b"last_buy_date","payment_date",b"payment_date","record_date",b"record_date","yield_value",b"yield_value"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions.Literal["close_price",b"close_price","created_at",b"created_at","declared_date",b"declared_date","dividend_net",b"dividend_net","dividend_type",b"dividend_type","last_buy_date",b"last_buy_date","payment_date",b"payment_date","record_date",b"record_date","regularity",b"regularity","yield_value",b"yield_value"]) -> None: ...
