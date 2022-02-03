@@ -1,7 +1,7 @@
 # pylint:disable=redefined-builtin,too-many-lines
 import asyncio
 from datetime import datetime
-from typing import AsyncIterable, List, Optional
+from typing import AsyncGenerator, AsyncIterable, List, Optional
 
 import grpc
 
@@ -68,6 +68,7 @@ from .schemas import (
     GetTradingStatusResponse,
     GetUserTariffRequest,
     GetUserTariffResponse,
+    HistoricCandle,
     InstrumentIdType,
     InstrumentRequest,
     InstrumentResponse,
@@ -108,6 +109,7 @@ from .schemas import (
     WithdrawLimitsResponse,
 )
 from .typedefs import AccountId
+from .utils import get_intervals
 
 __all__ = (
     "AsyncServices",
@@ -164,6 +166,26 @@ class AsyncServices:
                 for stop_order in stop_orders_response.stop_orders
             ]
         )
+
+    async def get_all_candles(
+        self,
+        *,
+        from_: datetime,
+        to: Optional[datetime] = None,
+        interval: CandleInterval = CandleInterval(0),
+        figi: str = "",
+    ) -> AsyncGenerator[HistoricCandle, None]:
+        to = to or datetime.utcnow()
+
+        for local_from_, local_to in get_intervals(interval, from_, to):
+            candles_response = await self.market_data.get_candles(
+                figi=figi,
+                interval=interval,
+                from_=local_from_,
+                to=local_to,
+            )
+            for candle in candles_response.candles:
+                yield candle
 
 
 class InstrumentsService(_grpc_helpers.Service):
