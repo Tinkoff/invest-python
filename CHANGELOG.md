@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [0.2.0-beta14](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta14) - 2022-02-03
+
+<small>[Compare with 0.2.0-beta13](https://github.com/tinkoff/invest-python/compare/0.2.0-beta13...0.2.0-beta14)</small>
+
+### Added
+- Add get_broker_report ([a3bede1](https://github.com/tinkoff/invest-python/commit/a3bede10d1dd72bc973909d8a8ea49c6583824e6) by Danil Akhtarov).
+- Add async get_all_candles ([fce017c](https://github.com/tinkoff/invest-python/commit/fce017c48c953b9cb7fa4e232f8aa6e8c7ba7e7d) by Danil Akhtarov).
+
+
 ## [0.2.0-beta13](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta13) - 2022-02-01
 
 <small>[Compare with 0.2.0-beta12](https://github.com/tinkoff/invest-python/compare/0.2.0-beta12...0.2.0-beta13)</small>
