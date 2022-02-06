@@ -1,7 +1,8 @@
 from datetime import datetime, timedelta
+from decimal import Decimal
 from typing import Generator, Tuple
 
-from .schemas import CandleInterval
+from .schemas import CandleInterval, Quotation, SubscriptionInterval
 
 __all__ = ("get_intervals",)
 
@@ -25,3 +26,20 @@ def get_intervals(
     while local_from < to:
         yield local_from, min(local_from + max_interval, to)
         local_from += max_interval
+
+
+def quotation_to_decimal(quotation: Quotation) -> Decimal:
+    return Decimal(f'{quotation.units}.{quotation.nano}')
+
+
+_CANDLE_INTERVAL_TO_SUBSCRIPTION_INTERVAL_MAPPING = {
+    CandleInterval.CANDLE_INTERVAL_1_MIN: SubscriptionInterval.SUBSCRIPTION_INTERVAL_ONE_MINUTE,
+    CandleInterval.CANDLE_INTERVAL_5_MIN: SubscriptionInterval.SUBSCRIPTION_INTERVAL_FIVE_MINUTES,
+    CandleInterval.CANDLE_INTERVAL_UNSPECIFIED: SubscriptionInterval.SUBSCRIPTION_INTERVAL_UNSPECIFIED,
+}
+
+
+def candle_interval_to_subscription_interval(candle_interval: CandleInterval) -> SubscriptionInterval:
+    return _CANDLE_INTERVAL_TO_SUBSCRIPTION_INTERVAL_MAPPING.get(
+        candle_interval, default=SubscriptionInterval.SUBSCRIPTION_INTERVAL_UNSPECIFIED
+    )
