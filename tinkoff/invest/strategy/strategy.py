@@ -140,7 +140,7 @@ class MovingAverageStrategy(InvestStrategy):
         event = self._get_first_before(date)
         self._MA_LONG_START = float(event.candle.close)
 
-    def predict(self) -> Iterable[Signal]:
+    def predict(self) -> Iterable[Signal]:  # noqa: C901
         self._init_MA_LONG_START()
         MA_LONG_START = self._MA_LONG_START
         PRICE = float(self._data[-1].candle.close)
