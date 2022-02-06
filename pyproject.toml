@@ -22,6 +22,7 @@ grpcio = "^1.39.0"
 protobuf = "^3.19.3"
 tinkoff = "^0.1.1"
 pandas = "^1.4.0"
+numpy = "^1.22.2"
 
 [tool.poetry.dev-dependencies]
 autoflake = "^1.4"
