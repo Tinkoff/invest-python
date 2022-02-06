@@ -166,7 +166,17 @@ class MovingAverageStrategyTrader(Trader):
             return
 
     def trade(self) -> None:
-        """Делает один оборот стратегии. После выполнения остается вне позиции."""
-        self._refresh_data()
+        """Следует стратегии пока не остается вне позиции."""
 
-        signals = self._strategy.predict()
+        while True:
+            self._refresh_data()
+
+            signals = self._strategy.predict()
+            logger.info("Got signals")
+            for signal in signals:
+                logger.info("Trying to execute signal %s", signal)
+                self._signal_executor.execute(signal)
+
+            if self._state.position == 0:
+                logger.info("Strategy run complete")
+                return
