@@ -29,7 +29,7 @@ def get_intervals(
 
 
 def quotation_to_decimal(quotation: Quotation) -> Decimal:
-    return Decimal(f'{quotation.units}.{quotation.nano}')
+    return Decimal(f"{quotation.units}.{quotation.nano}")
 
 
 _CANDLE_INTERVAL_TO_SUBSCRIPTION_INTERVAL_MAPPING = {
@@ -39,7 +39,9 @@ _CANDLE_INTERVAL_TO_SUBSCRIPTION_INTERVAL_MAPPING = {
 }
 
 
-def candle_interval_to_subscription_interval(candle_interval: CandleInterval) -> SubscriptionInterval:
+def candle_interval_to_subscription_interval(
+    candle_interval: CandleInterval,
+) -> SubscriptionInterval:
     return _CANDLE_INTERVAL_TO_SUBSCRIPTION_INTERVAL_MAPPING.get(
         candle_interval, default=SubscriptionInterval.SUBSCRIPTION_INTERVAL_UNSPECIFIED
     )

@@ -4,8 +4,13 @@ from functools import singledispatchmethod
 
 from tinkoff.invest.async_services import AsyncServices
 from tinkoff.invest.strategy.errors import UnknownSignal
-from tinkoff.invest.strategy.signal import Signal, OpenLongMarketOrder, \
-    CloseLongMarketOrder, OpenShortMarketOrder, CloseShortMarketOrder
+from tinkoff.invest.strategy.signal import (
+    CloseLongMarketOrder,
+    CloseShortMarketOrder,
+    OpenLongMarketOrder,
+    OpenShortMarketOrder,
+    Signal,
+)
 from tinkoff.invest.strategy.strategy import MovingAverageStrategyState
 
 

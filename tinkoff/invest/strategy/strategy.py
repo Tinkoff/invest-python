@@ -1,17 +1,21 @@
 import abc
 import dataclasses
-from datetime import timedelta, datetime
+from datetime import datetime, timedelta
 from decimal import Decimal
-from typing import Iterable, List, Callable
+from typing import Callable, Iterable, List
 
 import numpy as np
 
 from tinkoff.invest import CandleInterval
 from tinkoff.invest._grpc_helpers import Service
 from tinkoff.invest.strategy.errors import CandleEventForDateNotFound
-from tinkoff.invest.strategy.signal import Signal, OpenLongMarketOrder, \
-    OpenShortMarketOrder, CloseLongMarketOrder
 from tinkoff.invest.strategy.models import CandleEvent
+from tinkoff.invest.strategy.signal import (
+    CloseLongMarketOrder,
+    OpenLongMarketOrder,
+    OpenShortMarketOrder,
+    Signal,
+)
 from tinkoff.invest.typedefs import ShareId
 
 
@@ -91,12 +95,17 @@ class MovingAverageStrategy(InvestStrategy):
         self._data.append(candle)
 
     @staticmethod
-    def _get_newer_than_datetime_predicate(anchor: datetime) -> Callable[[CandleEvent], bool]:
+    def _get_newer_than_datetime_predicate(
+        anchor: datetime,
+    ) -> Callable[[CandleEvent], bool]:
         def _(event: CandleEvent) -> bool:
             return event.time > anchor
+
         return _
 
-    def _filter_from_the_end_with_early_stop(self, predicate: Callable[[CandleEvent], bool]) -> Iterable[CandleEvent]:
+    def _filter_from_the_end_with_early_stop(
+        self, predicate: Callable[[CandleEvent], bool]
+    ) -> Iterable[CandleEvent]:
         for event in reversed(self._data):
             if not predicate(event):
                 break

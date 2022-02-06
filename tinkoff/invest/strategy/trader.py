@@ -2,21 +2,32 @@ import abc
 import asyncio
 import logging
 from datetime import datetime, timedelta
-from typing import Iterable, List, AsyncIterable, AsyncIterator
+from typing import AsyncIterator, Iterable, List
 
 import tinkoff
-
-from tinkoff.invest import HistoricCandle, SubscribeCandlesRequest, SubscriptionAction, \
-    CandleInstrument, MarketDataRequest, MarketDataResponse
+from tinkoff.invest import (
+    CandleInstrument,
+    HistoricCandle,
+    MarketDataRequest,
+    MarketDataResponse,
+    SubscribeCandlesRequest,
+    SubscriptionAction,
+)
 from tinkoff.invest.async_services import AsyncServices
-from tinkoff.invest.services import Services
 from tinkoff.invest.strategy.errors import NotEnoughData
-from tinkoff.invest.strategy.models import CandleEvent, Candle
+from tinkoff.invest.strategy.models import Candle, CandleEvent
 from tinkoff.invest.strategy.signal_executor import SignalExecutor
-from tinkoff.invest.strategy.strategy import MovingAverageStrategySettings, \
-    MovingAverageStrategy, InvestStrategy, StrategySettings, MovingAverageStrategyState
-from tinkoff.invest.utils import quotation_to_decimal, \
-    candle_interval_to_subscription_interval
+from tinkoff.invest.strategy.strategy import (
+    InvestStrategy,
+    MovingAverageStrategy,
+    MovingAverageStrategySettings,
+    MovingAverageStrategyState,
+    StrategySettings,
+)
+from tinkoff.invest.utils import (
+    candle_interval_to_subscription_interval,
+    quotation_to_decimal,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -40,7 +51,7 @@ class Trader(ITrader, abc.ABC):
 
     @staticmethod
     def _convert_historic_candles_into_candle_events(
-        historic_candles: Iterable[HistoricCandle]
+        historic_candles: Iterable[HistoricCandle],
     ) -> Iterable[CandleEvent]:
         for candle in historic_candles:
             yield CandleEvent(
@@ -52,7 +63,7 @@ class Trader(ITrader, abc.ABC):
                 ),
                 volume=candle.volume,
                 time=candle.time,
-                is_complete=candle.is_complete
+                is_complete=candle.is_complete,
             )
 
     def _load_candles(self, period: timedelta) -> Iterable[CandleEvent]:
@@ -96,14 +107,19 @@ class MovingAverageStrategyTrader(Trader):
         self._state = state
         self._signal_executor = signal_executor
 
-        self._data = list(self._load_candles(self._settings.short_period + self._settings.long_period))
+        self._data = list(
+            self._load_candles(self._settings.short_period + self._settings.long_period)
+        )
         self._ensure_enough_candles()
         self._ensure_marginal_trade_active()
 
         self._strategy.fit(self._data)
 
     def _ensure_enough_candles(self) -> None:
-        if len(self._data) < self._settings.short_period.days + self._settings.long_period.days:
+        if (
+            len(self._data)
+            < self._settings.short_period.days + self._settings.long_period.days
+        ):
             raise NotEnoughData()
         logger.info("Got enough data for strategy")
 
@@ -116,7 +132,9 @@ class MovingAverageStrategyTrader(Trader):
     def _subscribe(self):
         current_instrument = CandleInstrument(
             figi=self._settings.share_id,
-            interval=candle_interval_to_subscription_interval(self._settings.candle_interval),
+            interval=candle_interval_to_subscription_interval(
+                self._settings.candle_interval
+            ),
         )
         candle_subscribe_request = MarketDataRequest(
             subscribe_candles_request=SubscribeCandlesRequest(
@@ -136,7 +154,9 @@ class MovingAverageStrategyTrader(Trader):
     def _refresh_data(self) -> None:
         try:
             while True:
-                market_data_response: MarketDataResponse = await self._market_data_stream.__anext__()
+                market_data_response: MarketDataResponse = (
+                    await self._market_data_stream.__anext__()
+                )
                 candle = market_data_response.candle
                 self._strategy.observe(self._convert_candle(candle))
                 if self._is_candle_fresh(candle):
@@ -146,7 +166,7 @@ class MovingAverageStrategyTrader(Trader):
             return
 
     def trade(self) -> None:
-        """ Делает один оборот стратегии. После выполнения остается вне позиции. """
+        """Делает один оборот стратегии. После выполнения остается вне позиции."""
         self._refresh_data()
 
         signals = self._strategy.predict()
