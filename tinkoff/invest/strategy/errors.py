@@ -12,3 +12,7 @@ class MarginalTradeIsNotActive(StrategyError):
 
 class CandleEventForDateNotFound(StrategyError):
     pass
+
+
+class UnknownSignal(StrategyError):
+    pass
