@@ -46,6 +46,8 @@
     
       <link rel="stylesheet" href="custom.css">
     
+      <link rel="stylesheet" href="termynal.css">
+    
     <script>__md_scope=new URL(".",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -255,6 +257,13 @@
       
         <li class="md-nav__item">
   <a href="#_2" class="md-nav__link">
+    Возможности
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
     Примеры
   </a>
   
@@ -347,6 +356,13 @@
       
         <li class="md-nav__item">
   <a href="#_2" class="md-nav__link">
+    Возможности
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
     Примеры
   </a>
   
@@ -386,11 +402,38 @@
 <h1 id="tinkoff-invest">Tinkoff Invest</h1>
 <p><a href="https://pypi.org/project/tinkoff-investments/"><img alt="PyPI" src="https://img.shields.io/pypi/v/tinkoff-investments" /></a>
 <a href="https://www.python.org/downloads/"><img alt="PyPI - Python Version" src="https://img.shields.io/pypi/pyversions/tinkoff-investments" /></a></p>
+<p>Данный репозиторий предоставляет клиент для взаимодействия с торговой платформой <a href="https://www.tinkoff.ru/invest/">Тинькофф Инвестиции</a> на языке Python.</p>
+<ul>
+<li><a href="https://tinkoff.github.io/invest-python/">Документация</a></li>
+<li><a href="https://github.com/Tinkoff/investAPI">Основной репозиторий с документацией</a></li>
+<li><a href="https://tinkoff.github.io/investAPI/">Документация для разработчиков</a></li>
+</ul>
 <h2 id="_1">Начало работы</h2>
-<div class="highlight"><pre><span></span><code>pip install tinkoff-investments
-</code></pre></div>
-<h2 id="_2">Примеры</h2>
+<!-- termynal -->
+
+<p>
+<div class="termy" data-termynal>
+<span data-ty="input">pip install tinkoff-investments</span>
+<span data-ty></span>
+</div></p>
+<h2 id="_2">Возможности</h2>
+<ul>
+<li>&#9745; Синхронный и асинхронный GRPC клиент</li>
+<li>&#9745; Возможность отменить все заявки</li>
+<li>&#9745; Выгрузка истории котировок "от" и "до"</li>
+<li>&#9744; Кеширование данных</li>
+<li>&#9744; Торговая стратегия</li>
+</ul>
+<h2 id="_3">Примеры</h2>
 <p>Примеры доступны <a href="https://github.com/Tinkoff/invest-python/tree/main/examples">здесь</a>.</p>
+<p>Для запуска примеров, нужно добавить токен в переменную окружения.</p>
+<!-- termynal -->
+
+<p>
+<div class="termy" data-termynal>
+<span data-ty="input">export INVEST_TOKEN=YOU_TOKEN</span>
+<span data-ty></span>
+</div></p>
 <h2 id="contribution">Contribution</h2>
 <ul>
 <li><a href="https://github.com/Tinkoff/invest-python/blob/main/CONTRIBUTING.md">CONTRIBUTING</a></li>
@@ -455,6 +498,8 @@
     
     
       <script src="assets/javascripts/bundle.960e086b.min.js"></script>
+      
+        <script src="termynal.js"></script>
       
     
   </body>
