@@ -1,4 +1,3 @@
-import sys
 import time
 
 from tinkoff.invest import (
@@ -12,7 +11,7 @@ from tinkoff.invest import (
 from tinkoff.invest.token import TOKEN
 
 
-def main() -> int:
+def main():
     def request_iterator():
         yield MarketDataRequest(
             subscribe_candles_request=SubscribeCandlesRequest(
@@ -34,8 +33,6 @@ def main() -> int:
         ):
             print(marketdata)
 
-    return 0
-
 
 if __name__ == "__main__":
-    sys.exit(main())
+    main()

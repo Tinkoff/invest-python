@@ -1,5 +1,4 @@
 import asyncio
-import sys
 
 from tinkoff.invest import (
     AsyncClient,
@@ -12,7 +11,7 @@ from tinkoff.invest import (
 from tinkoff.invest.token import TOKEN
 
 
-async def main() -> int:
+async def main():
     async def request_iterator():
         yield MarketDataRequest(
             subscribe_candles_request=SubscribeCandlesRequest(
@@ -34,8 +33,6 @@ async def main() -> int:
         ):
             print(marketdata)
 
-    return 0
-
 
 if __name__ == "__main__":
-    sys.exit(asyncio.run(main()))
+    asyncio.run(main())

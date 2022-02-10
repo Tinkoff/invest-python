@@ -1,11 +1,10 @@
-import sys
 from datetime import datetime, timedelta
 
 from tinkoff.invest import CandleInterval, Client
 from tinkoff.invest.token import TOKEN
 
 
-def main() -> int:
+def main():
     with Client(TOKEN) as client:
         for candle in client.get_all_candles(
             figi="BBG004730N88",
@@ -18,4 +17,4 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    main()
