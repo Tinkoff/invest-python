@@ -34,7 +34,7 @@ $ pip install tinkoff-investments
 <!-- termynal -->
 
 ```
-$ export INVEST_TOKEN=YOU_TOKEN
+$ export INVEST_TOKEN=YOUR_TOKEN
 ```
 
 ## Contribution
