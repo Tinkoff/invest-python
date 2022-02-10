@@ -21,6 +21,7 @@ theme:
     accent: yellow
 
 plugins:
+- termynal: {}
 - search:
     lang: ru
 - mkdocstrings:
