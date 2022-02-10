@@ -29,6 +29,14 @@ $ pip install tinkoff-investments
 
 Примеры доступны [здесь](https://github.com/Tinkoff/invest-python/tree/main/examples).
 
+```python
+from tinkoff.invest import Client
+from tinkoff.invest.token import TOKEN
+
+with Client(TOKEN) as client:
+    print(client.users.get_accounts())
+```
+
 Для запуска примеров, нужно добавить токен в переменную окружения.
 
 <!-- termynal -->
