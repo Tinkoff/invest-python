@@ -426,6 +426,12 @@
 </ul>
 <h2 id="_3">Примеры</h2>
 <p>Примеры доступны <a href="https://github.com/Tinkoff/invest-python/tree/main/examples">здесь</a>.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">tinkoff.invest</span> <span class="kn">import</span> <span class="n">Client</span>
+<span class="kn">from</span> <span class="nn">tinkoff.invest.token</span> <span class="kn">import</span> <span class="n">TOKEN</span>
+
+<span class="k">with</span> <span class="n">Client</span><span class="p">(</span><span class="n">TOKEN</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">client</span><span class="o">.</span><span class="n">users</span><span class="o">.</span><span class="n">get_accounts</span><span class="p">())</span>
+</code></pre></div>
 <p>Для запуска примеров, нужно добавить токен в переменную окружения.</p>
 <!-- termynal -->
 
