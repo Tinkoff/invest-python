@@ -29,7 +29,8 @@ def get_intervals(
 
 
 def quotation_to_decimal(quotation: Quotation) -> Decimal:
-    return Decimal(f"{quotation.units}.{quotation.nano}")
+    fractional = quotation.nano / Decimal('10e8')
+    return Decimal(quotation.units) + fractional
 
 
 _CANDLE_INTERVAL_TO_SUBSCRIPTION_INTERVAL_MAPPING = {
