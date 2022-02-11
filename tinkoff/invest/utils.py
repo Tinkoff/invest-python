@@ -33,11 +33,16 @@ def quotation_to_decimal(quotation: Quotation) -> Decimal:
     return Decimal(quotation.units) + fractional
 
 
+# fmt: off
 _CANDLE_INTERVAL_TO_SUBSCRIPTION_INTERVAL_MAPPING = {
-    CandleInterval.CANDLE_INTERVAL_1_MIN: SubscriptionInterval.SUBSCRIPTION_INTERVAL_ONE_MINUTE,  # noqa: E501 форматтер и линтер конфликтуют
-    CandleInterval.CANDLE_INTERVAL_5_MIN: SubscriptionInterval.SUBSCRIPTION_INTERVAL_FIVE_MINUTES,  # noqa: E501 форматтер и линтер конфликтуют
-    CandleInterval.CANDLE_INTERVAL_UNSPECIFIED: SubscriptionInterval.SUBSCRIPTION_INTERVAL_UNSPECIFIED,  # noqa: E501 форматтер и линтер конфликтуют
+    CandleInterval.CANDLE_INTERVAL_1_MIN:
+        SubscriptionInterval.SUBSCRIPTION_INTERVAL_ONE_MINUTE,
+    CandleInterval.CANDLE_INTERVAL_5_MIN:
+        SubscriptionInterval.SUBSCRIPTION_INTERVAL_FIVE_MINUTES,
+    CandleInterval.CANDLE_INTERVAL_UNSPECIFIED:
+        SubscriptionInterval.SUBSCRIPTION_INTERVAL_UNSPECIFIED,
 }
+# fmt: on
 
 
 def candle_interval_to_subscription_interval(
