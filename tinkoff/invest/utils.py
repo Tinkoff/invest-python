@@ -29,7 +29,7 @@ def get_intervals(
 
 
 def quotation_to_decimal(quotation: Quotation) -> Decimal:
-    fractional = quotation.nano / Decimal('10e8')
+    fractional = quotation.nano / Decimal("10e8")
     return Decimal(quotation.units) + fractional
 
 
