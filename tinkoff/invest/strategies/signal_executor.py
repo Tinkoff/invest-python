@@ -3,15 +3,15 @@ from abc import ABC
 from functools import singledispatchmethod
 
 from tinkoff.invest.async_services import AsyncServices
-from tinkoff.invest.strategy.errors import UnknownSignal
-from tinkoff.invest.strategy.signal import (
+from tinkoff.invest.strategies.errors import UnknownSignal
+from tinkoff.invest.strategies.signal import (
     CloseLongMarketOrder,
     CloseShortMarketOrder,
     OpenLongMarketOrder,
     OpenShortMarketOrder,
     Signal,
 )
-from tinkoff.invest.strategy.strategy import MovingAverageStrategyState
+from tinkoff.invest.strategies.strategy import MovingAverageStrategyState
 
 
 class ISignalExecutor(abc.ABC):

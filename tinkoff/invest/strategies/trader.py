@@ -14,10 +14,10 @@ from tinkoff.invest import (
     SubscriptionAction,
 )
 from tinkoff.invest.async_services import AsyncServices
-from tinkoff.invest.strategy.errors import MarginalTradeIsNotActive, NotEnoughData
-from tinkoff.invest.strategy.models import Candle, CandleEvent
-from tinkoff.invest.strategy.signal_executor import SignalExecutor
-from tinkoff.invest.strategy.strategy import (
+from tinkoff.invest.strategies.errors import MarginalTradeIsNotActive, NotEnoughData
+from tinkoff.invest.strategies.models import Candle, CandleEvent
+from tinkoff.invest.strategies.signal_executor import SignalExecutor
+from tinkoff.invest.strategies.strategy import (
     InvestStrategy,
     MovingAverageStrategy,
     MovingAverageStrategySettings,

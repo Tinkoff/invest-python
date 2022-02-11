@@ -8,9 +8,9 @@ import numpy as np
 
 from tinkoff.invest import CandleInterval
 from tinkoff.invest._grpc_helpers import Service
-from tinkoff.invest.strategy.errors import CandleEventForDateNotFound
-from tinkoff.invest.strategy.models import CandleEvent
-from tinkoff.invest.strategy.signal import (
+from tinkoff.invest.strategies.errors import CandleEventForDateNotFound
+from tinkoff.invest.strategies.models import CandleEvent
+from tinkoff.invest.strategies.signal import (
     CloseLongMarketOrder,
     OpenLongMarketOrder,
     OpenShortMarketOrder,
