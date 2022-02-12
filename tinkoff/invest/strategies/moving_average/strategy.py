@@ -76,7 +76,7 @@ class MovingAverageStrategy(InvestStrategy):
         prices = self._get_prices(self._select_for_period(period))
         return np.std(prices, axis=0)
 
-    def _get_first_before(self, date: datetime) -> CandleEvent:
+    def _get_first_candle_before(self, date: datetime) -> CandleEvent:
         predicate = self._get_newer_than_datetime_predicate(date)
         for event in reversed(self._data):
             if not predicate(event):
@@ -85,7 +85,7 @@ class MovingAverageStrategy(InvestStrategy):
 
     def _init_MA_LONG_START(self):
         date = now() - self._settings.short_period
-        event = self._get_first_before(date)
+        event = self._get_first_candle_before(date)
         self._MA_LONG_START = float(event.candle.close)
 
     def predict(self) -> Iterable[Signal]:  # noqa: C901
