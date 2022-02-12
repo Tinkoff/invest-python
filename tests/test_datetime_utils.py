@@ -3,8 +3,12 @@ from datetime import timedelta
 import pytest
 
 from tinkoff.invest import CandleInterval
-from tinkoff.invest.utils import now, ceil_datetime, floor_datetime, \
-    candle_interval_to_timedelta
+from tinkoff.invest.utils import (
+    candle_interval_to_timedelta,
+    ceil_datetime,
+    floor_datetime,
+    now,
+)
 
 
 @pytest.fixture(params=[i.value for i in CandleInterval])

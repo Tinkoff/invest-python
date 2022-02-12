@@ -33,7 +33,7 @@ from tinkoff.invest.strategies.moving_average.strategy_state import (
 )
 from tinkoff.invest.strategies.moving_average.trader import MovingAverageStrategyTrader
 from tinkoff.invest.typedefs import AccountId, ShareId
-from tinkoff.invest.utils import decimal_to_quotation, now, candle_interval_to_timedelta
+from tinkoff.invest.utils import candle_interval_to_timedelta, decimal_to_quotation, now
 
 logging.basicConfig(format="%(asctime)s %(levelname)s:%(message)s", level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -76,7 +76,7 @@ def stock_prices_generator() -> Callable[[int], Iterable[float]]:
 @pytest.fixture()
 def initial_candles(
     settings: MovingAverageStrategySettings,
-    stock_prices_generator: Callable[[int], Iterable[float]]
+    stock_prices_generator: Callable[[int], Iterable[float]],
 ) -> Iterable[HistoricCandle]:
     now_ = now()
     candles = []
@@ -292,11 +292,13 @@ def moving_average_strategy_trader(
 
 
 class TestMovingAverageStrategyTrader:
-    def test_trade(self, moving_average_strategy_trader: MovingAverageStrategyTrader, caplog):
+    def test_trade(
+        self, moving_average_strategy_trader: MovingAverageStrategyTrader, caplog
+    ):
         caplog.set_level(logging.DEBUG)
 
         for i in range(100):
-            logger.info('Trade %s', i)
+            logger.info("Trade %s", i)
             moving_average_strategy_trader.trade()
 
         assert 0

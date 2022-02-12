@@ -13,7 +13,6 @@ from tinkoff.invest import (
 )
 from tinkoff.invest.services import Services
 from tinkoff.invest.strategies.base.account_manager import AccountManager
-from tinkoff.invest.strategies.base.errors import NotEnoughData
 from tinkoff.invest.strategies.base.models import CandleEvent
 from tinkoff.invest.strategies.base.signal_executor_base import SignalExecutor
 from tinkoff.invest.strategies.base.trader_base import Trader
@@ -83,7 +82,12 @@ class MovingAverageStrategyTrader(Trader):
     @staticmethod
     def _is_candle_fresh(candle: tinkoff.invest.Candle) -> bool:
         is_fresh_border = now() - timedelta(seconds=5)
-        logger.debug("Checking if candle is fresh: candle.time=%s > is_fresh_border=%s  %s)", candle.time, is_fresh_border, candle.time > is_fresh_border)
+        logger.debug(
+            "Checking if candle is fresh: candle.time=%s > is_fresh_border=%s  %s)",
+            candle.time,
+            is_fresh_border,
+            candle.time > is_fresh_border,
+        )
         return candle.time > is_fresh_border
 
     def _make_observations(self) -> None:

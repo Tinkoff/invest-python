@@ -6,9 +6,12 @@ from typing import Callable, Iterable, List
 import numpy as np
 
 from tinkoff.invest.strategies.base.account_manager import AccountManager
-from tinkoff.invest.strategies.base.errors import CandleEventForDateNotFound, \
-    OldCandleObservingError, NotEnoughData
-from tinkoff.invest.strategies.base.models import CandleEvent, Candle
+from tinkoff.invest.strategies.base.errors import (
+    CandleEventForDateNotFound,
+    NotEnoughData,
+    OldCandleObservingError,
+)
+from tinkoff.invest.strategies.base.models import Candle, CandleEvent
 from tinkoff.invest.strategies.base.signal import (
     CloseLongMarketOrder,
     OpenLongMarketOrder,
@@ -22,8 +25,12 @@ from tinkoff.invest.strategies.moving_average.strategy_settings import (
 from tinkoff.invest.strategies.moving_average.strategy_state import (
     MovingAverageStrategyState,
 )
-from tinkoff.invest.utils import now, candle_interval_to_timedelta, ceil_datetime, \
-    floor_datetime
+from tinkoff.invest.utils import (
+    candle_interval_to_timedelta,
+    ceil_datetime,
+    floor_datetime,
+    now,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -42,7 +49,9 @@ class MovingAverageStrategy(InvestStrategy):
 
         self._state = state
         self._MA_LONG_START: Decimal
-        self._candle_interval_timedelta = candle_interval_to_timedelta(self._settings.candle_interval)
+        self._candle_interval_timedelta = candle_interval_to_timedelta(
+            self._settings.candle_interval
+        )
 
     def _ensure_enough_candles(self) -> None:
         date = now() - (self._settings.short_period + self._settings.long_period)
@@ -58,7 +67,9 @@ class MovingAverageStrategy(InvestStrategy):
             self.observe(candle)
         self._ensure_enough_candles()
 
-    def _merge_candles(self, last_candle_event: CandleEvent, new_candle_event: CandleEvent) -> CandleEvent:
+    def _merge_candles(
+        self, last_candle_event: CandleEvent, new_candle_event: CandleEvent
+    ) -> CandleEvent:
         last_candle = last_candle_event.candle
         new_candle = new_candle_event.candle
         return CandleEvent(
@@ -75,8 +86,12 @@ class MovingAverageStrategy(InvestStrategy):
 
     def _append_candle_event(self, candle_event: CandleEvent) -> None:
         last_candle_event = self._data[-1]
-        last_interval_floor = floor_datetime(last_candle_event.time, self._candle_interval_timedelta)
-        last_interval_ceil = ceil_datetime(last_candle_event.time, self._candle_interval_timedelta)
+        last_interval_floor = floor_datetime(
+            last_candle_event.time, self._candle_interval_timedelta
+        )
+        last_interval_ceil = ceil_datetime(
+            last_candle_event.time, self._candle_interval_timedelta
+        )
 
         if candle_event.time < last_interval_floor:
             raise OldCandleObservingError()
@@ -87,7 +102,7 @@ class MovingAverageStrategy(InvestStrategy):
             self._data.append(candle_event)
 
     def observe(self, candle: CandleEvent) -> None:
-        logger.debug('Observing candle event: %s', candle)
+        logger.debug("Observing candle event: %s", candle)
 
         if len(self._data):
             self._append_candle_event(candle)
@@ -122,7 +137,7 @@ class MovingAverageStrategy(InvestStrategy):
 
     def _calculate_moving_average(self, period: timedelta) -> Decimal:
         prices = list(self._get_prices(self._select_for_period(period)))
-        logger.info('Selected prices: %s', prices)
+        logger.info("Selected prices: %s", prices)
         return np.mean(prices, axis=0)  # type: ignore
 
     def _calculate_std(self, period: timedelta) -> Decimal:
@@ -147,17 +162,20 @@ class MovingAverageStrategy(InvestStrategy):
         MA_LONG: Decimal,
         PRICE: Decimal,
         STD: Decimal,
-        MA_LONG_START: Decimal
+        MA_LONG_START: Decimal,
     ) -> bool:
-        logger.debug('Try long opening')
-        logger.debug('\tMA_SHORT > MA_LONG, %s', MA_SHORT > MA_LONG)
-        logger.debug('\tand abs((PRICE - MA_LONG) / MA_LONG) < STD, %s', abs((PRICE - MA_LONG) / MA_LONG) < STD)
-        logger.debug('\tand MA_LONG < MA_LONG_START, %s', MA_LONG < MA_LONG_START)
+        logger.debug("Try long opening")
+        logger.debug("\tMA_SHORT > MA_LONG, %s", MA_SHORT > MA_LONG)
         logger.debug(
-            '== %s',
+            "\tand abs((PRICE - MA_LONG) / MA_LONG) < STD, %s",
+            abs((PRICE - MA_LONG) / MA_LONG) < STD,
+        )
+        logger.debug("\tand MA_LONG < MA_LONG_START, %s", MA_LONG < MA_LONG_START)
+        logger.debug(
+            "== %s",
             MA_SHORT > MA_LONG
             and abs((PRICE - MA_LONG) / MA_LONG) < STD
-            and MA_LONG < MA_LONG_START
+            and MA_LONG < MA_LONG_START,
         )
         return (
             MA_SHORT > MA_LONG
@@ -171,17 +189,20 @@ class MovingAverageStrategy(InvestStrategy):
         MA_LONG: Decimal,
         PRICE: Decimal,
         STD: Decimal,
-        MA_LONG_START: Decimal
+        MA_LONG_START: Decimal,
     ) -> bool:
-        logger.debug('Try short opening')
-        logger.debug('\tMA_SHORT < MA_LONG, %s', MA_SHORT < MA_LONG)
-        logger.debug('\tand abs((PRICE - MA_LONG) / MA_LONG) < STD, %s', abs((PRICE - MA_LONG) / MA_LONG) < STD)
-        logger.debug('\tand MA_LONG > MA_LONG_START, %s', MA_LONG > MA_LONG_START)
+        logger.debug("Try short opening")
+        logger.debug("\tMA_SHORT < MA_LONG, %s", MA_SHORT < MA_LONG)
         logger.debug(
-            '== %s',
+            "\tand abs((PRICE - MA_LONG) / MA_LONG) < STD, %s",
+            abs((PRICE - MA_LONG) / MA_LONG) < STD,
+        )
+        logger.debug("\tand MA_LONG > MA_LONG_START, %s", MA_LONG > MA_LONG_START)
+        logger.debug(
+            "== %s",
             MA_SHORT < MA_LONG
             and abs((PRICE - MA_LONG) / MA_LONG) < STD
-            and MA_LONG > MA_LONG_START
+            and MA_LONG > MA_LONG_START,
         )
         return (
             MA_SHORT < MA_LONG
@@ -196,15 +217,15 @@ class MovingAverageStrategy(InvestStrategy):
         STD: Decimal,
         has_short_open_signal: bool,
     ) -> bool:
-        logger.debug('Try short opening')
-        logger.debug('\tPRICE > MA_LONG + 10 * STD, %s', PRICE > MA_LONG + 10 * STD)
-        logger.debug('\tor has_short_open_signal, %s', has_short_open_signal)
-        logger.debug('\tor PRICE < MA_LONG - 3 * STD, %s', PRICE < MA_LONG - 3 * STD)
+        logger.debug("Try short opening")
+        logger.debug("\tPRICE > MA_LONG + 10 * STD, %s", PRICE > MA_LONG + 10 * STD)
+        logger.debug("\tor has_short_open_signal, %s", has_short_open_signal)
+        logger.debug("\tor PRICE < MA_LONG - 3 * STD, %s", PRICE < MA_LONG - 3 * STD)
         logger.debug(
-            '== %s',
+            "== %s",
             PRICE > MA_LONG + 10 * STD
             or has_short_open_signal
-            or PRICE < MA_LONG - 3 * STD
+            or PRICE < MA_LONG - 3 * STD,
         )
         return (
             PRICE > MA_LONG + 10 * STD
@@ -219,15 +240,15 @@ class MovingAverageStrategy(InvestStrategy):
         STD: Decimal,
         has_long_open_signal: bool,
     ) -> bool:
-        logger.debug('Try short opening')
-        logger.debug('\tPRICE < MA_LONG - 10 * STD, %s', PRICE < MA_LONG - 10 * STD)
-        logger.debug('\tor has_long_open_signal, %s', has_long_open_signal)
-        logger.debug('\tor PRICE > MA_LONG + 3 * STD, %s', PRICE > MA_LONG + 3 * STD)
+        logger.debug("Try short opening")
+        logger.debug("\tPRICE < MA_LONG - 10 * STD, %s", PRICE < MA_LONG - 10 * STD)
+        logger.debug("\tor has_long_open_signal, %s", has_long_open_signal)
+        logger.debug("\tor PRICE > MA_LONG + 3 * STD, %s", PRICE > MA_LONG + 3 * STD)
         logger.debug(
-            '== %s',
+            "== %s",
             PRICE < MA_LONG - 10 * STD
             or has_long_open_signal
-            or PRICE > MA_LONG + 3 * STD
+            or PRICE > MA_LONG + 3 * STD,
         )
         return (
             PRICE < MA_LONG - 10 * STD
@@ -236,20 +257,20 @@ class MovingAverageStrategy(InvestStrategy):
         )
 
     def predict(self) -> Iterable[Signal]:  # noqa: C901
-        logger.info('Strategy predict')
+        logger.info("Strategy predict")
         self._init_MA_LONG_START()
         MA_LONG_START = self._MA_LONG_START
-        logger.debug('MA_LONG_START: %s', MA_LONG_START)
+        logger.debug("MA_LONG_START: %s", MA_LONG_START)
         PRICE = self._data[-1].candle.close
-        logger.debug('PRICE: %s', PRICE)
+        logger.debug("PRICE: %s", PRICE)
         MA_LONG = self._calculate_moving_average(self._settings.long_period)
-        logger.debug('MA_LONG: %s', MA_LONG)
+        logger.debug("MA_LONG: %s", MA_LONG)
         MA_SHORT = self._calculate_moving_average(self._settings.short_period)
-        logger.debug('MA_SHORT: %s', MA_SHORT)
+        logger.debug("MA_SHORT: %s", MA_SHORT)
         STD = self._calculate_std(self._settings.std_period)
-        logger.debug('STD: %s', STD)
+        logger.debug("STD: %s", STD)
         MONEY = self._account_manager.get_current_balance()
-        logger.debug('MONEY: %s', MONEY)
+        logger.debug("MONEY: %s", MONEY)
 
         has_long_open_signal = False
         has_short_open_signal = False
@@ -259,7 +280,7 @@ class MovingAverageStrategy(InvestStrategy):
             MA_LONG=MA_LONG,
             PRICE=PRICE,
             STD=STD,
-            MA_LONG_START=MA_LONG_START
+            MA_LONG_START=MA_LONG_START,
         ):
             has_long_open_signal = True
             yield OpenLongMarketOrder(lots=int(MONEY // PRICE))
@@ -269,7 +290,7 @@ class MovingAverageStrategy(InvestStrategy):
             MA_LONG=MA_LONG,
             PRICE=PRICE,
             STD=STD,
-            MA_LONG_START=MA_LONG_START
+            MA_LONG_START=MA_LONG_START,
         ):
             has_short_open_signal = True
             yield OpenShortMarketOrder(lots=int(MONEY // PRICE))
