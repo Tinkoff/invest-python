@@ -12,6 +12,7 @@ from tinkoff.invest import (
     SubscriptionAction,
 )
 from tinkoff.invest.services import Services
+from tinkoff.invest.strategies.base.account_manager import AccountManager
 from tinkoff.invest.strategies.base.errors import (
     MarginalTradeIsNotActive,
     NotEnoughData,
@@ -39,6 +40,7 @@ class MovingAverageStrategyTrader(Trader):
         services: Services,
         state: MovingAverageStrategyState,
         signal_executor: SignalExecutor,
+        account_manager: AccountManager,
     ):
         super().__init__(strategy, services, settings)
         self._settings = settings
@@ -48,6 +50,7 @@ class MovingAverageStrategyTrader(Trader):
         self._market_data_stream: AsyncIterator[MarketDataResponse]
         self._state = state
         self._signal_executor = signal_executor
+        self._account_manager = account_manager
 
         self._data = list(
             self._load_candles(self._settings.short_period + self._settings.long_period)
@@ -67,9 +70,8 @@ class MovingAverageStrategyTrader(Trader):
             raise NotEnoughData()
         logger.info("Got enough data for strategy")
 
-    @staticmethod
-    def _ensure_marginal_trade_active() -> None:
-        if False:  # todo ask: how to check?
+    def _ensure_marginal_trade_active(self) -> None:
+        if self._account_manager.ensure_marginal_trade():
             raise MarginalTradeIsNotActive()
         logger.info("Marginal trade is active")
 

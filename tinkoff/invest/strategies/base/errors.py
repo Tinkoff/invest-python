@@ -10,6 +10,10 @@ class MarginalTradeIsNotActive(StrategyError):
     pass
 
 
+class InsufficientMarginalTradeFunds(StrategyError):
+    pass
+
+
 class CandleEventForDateNotFound(StrategyError):
     pass
 

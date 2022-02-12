@@ -17,7 +17,7 @@ from tinkoff.invest import (
     PortfolioPosition,
     PortfolioResponse,
     Quotation,
-    SubscriptionInterval,
+    SubscriptionInterval, GetMarginAttributesResponse,
 )
 from tinkoff.invest.services import Services, MarketDataService
 from tinkoff.invest.strategies.base.account_manager import AccountManager
@@ -180,11 +180,29 @@ def mock_operations_service(
 
 
 @pytest.fixture()
+def mock_users_service(
+    real_services: Services,
+    mocker,
+) -> Services:
+    real_services.users = mocker.Mock(wraps=real_services.users)
+    real_services.users.get_margin_attributes.return_value = GetMarginAttributesResponse(
+        liquid_portfolio=MoneyValue(currency="", units=0, nano=0),
+        starting_margin=MoneyValue(currency="", units=0, nano=0),
+        minimal_margin=MoneyValue(currency="", units=0, nano=0),
+        funds_sufficiency_level=Quotation(units=322, nano=0),
+        amount_of_missing_funds=MoneyValue(currency="", units=0, nano=0),
+    )
+
+    return real_services
+
+
+@pytest.fixture()
 def mocked_services(
     real_services: Services,
     mock_market_data_service,
     mock_market_data_stream_service,
     mock_operations_service,
+    mock_users_service,
 ) -> Services:
     return real_services
 
@@ -253,6 +271,7 @@ def moving_average_strategy_trader(
     mocked_services: Services,
     state: MovingAverageStrategyState,
     signal_executor: SignalExecutor,
+    account_manager: AccountManager,
 ) -> MovingAverageStrategyTrader:
     return MovingAverageStrategyTrader(
         strategy=strategy,
@@ -260,6 +279,7 @@ def moving_average_strategy_trader(
         services=mocked_services,
         state=state,
         signal_executor=signal_executor,
+        account_manager=account_manager,
     )
 
 
