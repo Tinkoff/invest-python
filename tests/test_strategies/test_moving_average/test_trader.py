@@ -37,10 +37,10 @@ from tinkoff.invest.utils import decimal_to_quotation, now
 seed(1234)
 
 
-def create_GBM(s0, mu, sigma):
+def create_GBM(s0, mu, sigma) -> Callable[[int], Iterable[float]]:
     """
-    Generates a price following a geometric brownian motion process based on the input of the arguments:
-    - s0: Asset inital price.
+    Generates a price following a geometric brownian motion process based on the input.
+    - s0: Asset initial price.
     - mu: Interest rate expressed annual terms.
     - sigma: Volatility expressed annual terms.
     """
