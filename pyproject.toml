@@ -24,6 +24,10 @@ tinkoff = "^0.1.1"
 pandas = { version = "^1.4.0", optional = true }
 numpy = { version = "^1.22.2", optional = true }
 matplotlib = {version = "^3.5.1", optional = true}
+mpl-finance = {version = "^0.10.1", optional = true}
+
+[tool.poetry.extras]
+dev = ["pandas", "numpy", "matplotlib", "mpl-finance"]
 
 [tool.poetry.dev-dependencies]
 autoflake = "^1.4"
