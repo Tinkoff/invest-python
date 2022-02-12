@@ -30,6 +30,7 @@ class MovingAverageStrategy(InvestStrategy):
         account_manager: AccountManager,
         state: MovingAverageStrategyState,
     ):
+        super().__init__()
         self._data: List[CandleEvent] = []
         self._settings = settings
         self._account_manager = account_manager

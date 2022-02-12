@@ -13,6 +13,7 @@ class SignalExecutor(ISignalExecutor):
         self,
         services: Services,
     ):
+        super().__init__()
         self._services = services
 
     def execute_open_long_market_order(self, signal: OpenLongMarketOrder) -> None:

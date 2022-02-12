@@ -28,23 +28,23 @@ class MovingAverageSignalExecutor(SignalExecutor):
     @execute.register
     def execute_open_long_market_order(self, signal: OpenLongMarketOrder) -> None:
         self.execute_open_long_market_order(signal)
-        self._state._long_open = True
-        self._state._position = signal.lots
+        self._state.long_open = True
+        self._state.position = signal.lots
 
     @execute.register
     def execute_close_long_market_order(self, signal: CloseLongMarketOrder) -> None:
         self.execute_close_long_market_order(signal)
-        self._state._long_open = False
-        self._state._position = 0
+        self._state.long_open = False
+        self._state.position = 0
 
     @execute.register
     def execute_open_short_market_order(self, signal: OpenShortMarketOrder) -> None:
         self.execute_open_short_market_order(signal)
-        self._state._short_open = True
-        self._state._position = signal.lots
+        self._state.short_open = True
+        self._state.position = signal.lots
 
     @execute.register
     def execute_close_short_market_order(self, signal: CloseShortMarketOrder) -> None:
         self.execute_close_short_market_order(signal)
-        self._state._short_open = False
-        self._state._position = 0
+        self._state.short_open = False
+        self._state.position = 0

@@ -22,6 +22,7 @@ class Trader(ITrader, abc.ABC):
         services: Services,
         settings: StrategySettings,
     ):
+        super().__init__()
         self._strategy = strategy
         self._services = services
         self._settings = settings

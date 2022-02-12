@@ -30,9 +30,9 @@ class AccountManager:
         account_id = self._strategy_settings.account_id
         try:
             response = self._services.users.get_margin_attributes(account_id=account_id)
-        except Exception:
-            logger.info("Marginal trade is active")
-            raise MarginalTradeIsNotActive()
+        except Exception as e:
+            raise MarginalTradeIsNotActive() from e
         value = quotation_to_decimal(response.funds_sufficiency_level)
         if value <= 1:
             raise InsufficientMarginalTradeFunds()
+        logger.info("Marginal trade is active")
