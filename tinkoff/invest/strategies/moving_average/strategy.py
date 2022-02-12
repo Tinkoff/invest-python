@@ -99,12 +99,16 @@ class MovingAverageStrategy(InvestStrategy):
         STD = self._calculate_std(self._settings.std_period)
         MONEY = self._account_manager.get_current_balance()
 
+        has_long_open_signal = False
+        has_short_open_signal = False
+
         if not self._state.long_open:
             if (
                 MA_SHORT > MA_LONG
                 and abs((PRICE - MA_LONG) / MA_LONG) < STD
                 and MA_LONG < MA_LONG_START
             ):
+                has_long_open_signal = True
                 yield OpenLongMarketOrder(lots=int(MONEY // PRICE))
 
         if not self._state.short_open:
@@ -113,12 +117,13 @@ class MovingAverageStrategy(InvestStrategy):
                 and abs((PRICE - MA_LONG) / MA_LONG) < STD
                 and MA_LONG > MA_LONG_START
             ):
+                has_short_open_signal = True
                 yield OpenShortMarketOrder(lots=int(MONEY // PRICE))
 
         if self._state.long_open:
             if (
                 PRICE > MA_LONG + 10 * STD
-                or False  # todo add predicate: есть сигнал на открытие в шорт
+                or has_short_open_signal
                 or PRICE < MA_LONG - 3 * STD
             ):
                 yield CloseLongMarketOrder(lots=self._state.position)
@@ -126,7 +131,7 @@ class MovingAverageStrategy(InvestStrategy):
         if self._state.short_open:
             if (
                 PRICE < MA_LONG - 10 * STD
-                or False  # todo add predicate: есть сигнал на открытие в лонг
+                or has_long_open_signal
                 or PRICE > MA_LONG + 3 * STD
             ):
                 yield CloseLongMarketOrder(lots=self._state.position)
