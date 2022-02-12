@@ -20,3 +20,7 @@ class CandleEventForDateNotFound(StrategyError):
 
 class UnknownSignal(StrategyError):
     pass
+
+
+class OldCandleObservingError(StrategyError):
+    pass

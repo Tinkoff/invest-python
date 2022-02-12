@@ -33,7 +33,7 @@ from tinkoff.invest.strategies.moving_average.strategy_state import (
 )
 from tinkoff.invest.strategies.moving_average.trader import MovingAverageStrategyTrader
 from tinkoff.invest.typedefs import AccountId, ShareId
-from tinkoff.invest.utils import decimal_to_quotation, now
+from tinkoff.invest.utils import decimal_to_quotation, now, candle_interval_to_timedelta
 
 logging.basicConfig(format="%(asctime)s %(levelname)s:%(message)s", level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -75,8 +75,9 @@ def stock_prices_generator() -> Callable[[int], Iterable[float]]:
 
 @pytest.fixture()
 def initial_candles(
+    settings: MovingAverageStrategySettings,
     stock_prices_generator: Callable[[int], Iterable[float]]
-) -> List[HistoricCandle]:
+) -> Iterable[HistoricCandle]:
     now_ = now()
     candles = []
 
@@ -88,11 +89,11 @@ def initial_candles(
             low=quotation,
             close=quotation,
             volume=100,
-            time=now_ - timedelta(days=i),
+            time=now_ - candle_interval_to_timedelta(settings.candle_interval) * i,
             is_complete=False,
         )
         candles.append(candle)
-    return candles
+    return reversed(candles)
 
 
 @pytest.fixture()
@@ -243,9 +244,9 @@ def settings(figi: str, account_id: AccountId) -> MovingAverageStrategySettings:
         account_id=account_id,
         max_transaction_price=Decimal(10000),
         candle_interval=CandleInterval.CANDLE_INTERVAL_HOUR,
-        long_period=timedelta(days=100),
-        short_period=timedelta(days=30),
-        std_period=timedelta(days=30),
+        long_period=timedelta(hours=100),
+        short_period=timedelta(hours=60),
+        std_period=timedelta(hours=30),
     )
 
 
@@ -294,5 +295,8 @@ class TestMovingAverageStrategyTrader:
     def test_trade(self, moving_average_strategy_trader: MovingAverageStrategyTrader, caplog):
         caplog.set_level(logging.DEBUG)
 
-        moving_average_strategy_trader.trade()
+        for i in range(100):
+            logger.info('Trade %s', i)
+            moving_average_strategy_trader.trade()
+
         assert 0

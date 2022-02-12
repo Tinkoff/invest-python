@@ -52,20 +52,11 @@ class MovingAverageStrategyTrader(Trader):
         self._data = list(
             self._load_candles(self._settings.short_period + self._settings.long_period)
         )
-        self._ensure_enough_candles()
         self._ensure_marginal_trade_active()
 
         self._subscribe()
 
         self._strategy.fit(self._data)
-
-    def _ensure_enough_candles(self) -> None:
-        if (
-            len(self._data)
-            < self._settings.short_period.days + self._settings.long_period.days
-        ):
-            raise NotEnoughData()
-        logger.info("Got enough data for strategy")
 
     def _ensure_marginal_trade_active(self) -> None:
         self._account_manager.ensure_marginal_trade()

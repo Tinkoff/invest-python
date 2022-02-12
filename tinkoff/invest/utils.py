@@ -60,3 +60,28 @@ def candle_interval_to_subscription_interval(
 
 def now() -> datetime:
     return datetime.utcnow().replace(tzinfo=timezone.utc)
+
+
+_CANDLE_INTERVAL_TO_TIMEDELTA_MAPPING = {
+    CandleInterval.CANDLE_INTERVAL_1_MIN: timedelta(minutes=1),
+    CandleInterval.CANDLE_INTERVAL_5_MIN: timedelta(minutes=5),
+    CandleInterval.CANDLE_INTERVAL_15_MIN: timedelta(minutes=15),
+    CandleInterval.CANDLE_INTERVAL_HOUR: timedelta(hours=1),
+    CandleInterval.CANDLE_INTERVAL_DAY: timedelta(days=1),
+    CandleInterval.CANDLE_INTERVAL_UNSPECIFIED: timedelta(minutes=1),
+}
+
+
+def candle_interval_to_timedelta(candle_interval: CandleInterval) -> timedelta:
+    return _CANDLE_INTERVAL_TO_TIMEDELTA_MAPPING.get(candle_interval)
+
+
+_DATETIME_MIN = datetime.min.replace(tzinfo=timezone.utc)
+
+
+def ceil_datetime(datetime_: datetime, delta: timedelta):
+    return datetime_ + (_DATETIME_MIN - datetime_) % delta
+
+
+def floor_datetime(datetime_: datetime, delta: timedelta):
+    return datetime_ - (datetime_ - _DATETIME_MIN) % delta
