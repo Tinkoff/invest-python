@@ -7,7 +7,7 @@ class Signal:
 
 
 @dataclass
-class OrderSignal:
+class OrderSignal(Signal):
     lots: int
 
 
