@@ -2,7 +2,7 @@ from datetime import timedelta
 from decimal import Decimal
 from math import exp, sqrt
 from random import gauss, seed
-from typing import Callable, Iterable, List
+from typing import Callable, Iterable, Iterator, List
 
 import pytest
 
@@ -92,7 +92,7 @@ def initial_candles(
 
 
 @pytest.fixture()
-def real_services(token: str) -> Services:
+def real_services(token: str) -> Iterator[Services]:
     with Client(token) as services:
         yield services
 
@@ -141,7 +141,7 @@ def mock_market_data_stream_service(
         responses.append(response)
 
     real_services.market_data_stream.market_data_stream.return_value = [
-        MarketDataResponse(candle=None),
+        MarketDataResponse(candle=None),  # type: ignore
         *responses,
     ]
 

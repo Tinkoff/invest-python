@@ -1,7 +1,7 @@
 import asyncio
 import logging
 from datetime import timedelta
-from typing import AsyncIterator, List
+from typing import Iterator, List
 
 import tinkoff
 from tinkoff.invest import (
@@ -40,11 +40,11 @@ class MovingAverageStrategyTrader(Trader):
         account_manager: AccountManager,
     ):
         super().__init__(strategy, services, settings)
-        self._settings = settings
+        self._settings: MovingAverageStrategySettings = settings
         self._strategy = strategy
         self._services = services
         self._data: List[CandleEvent]
-        self._market_data_stream: AsyncIterator[MarketDataResponse]
+        self._market_data_stream: Iterator[MarketDataResponse]
         self._state = state
         self._signal_executor = signal_executor
         self._account_manager = account_manager
