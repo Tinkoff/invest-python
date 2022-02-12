@@ -26,7 +26,7 @@ from tinkoff.invest.strategies.moving_average.strategy_settings import (
 from tinkoff.invest.strategies.moving_average.strategy_state import (
     MovingAverageStrategyState,
 )
-from tinkoff.invest.utils import candle_interval_to_subscription_interval
+from tinkoff.invest.utils import candle_interval_to_subscription_interval, now
 
 logger = logging.getLogger(__name__)
 
@@ -90,7 +90,7 @@ class MovingAverageStrategyTrader(Trader):
 
     @staticmethod
     def _is_candle_fresh(candle: tinkoff.invest.Candle) -> bool:
-        is_fresh_border = datetime.now() - timedelta(seconds=5)
+        is_fresh_border = now() - timedelta(seconds=5)
         return candle.time > is_fresh_border
 
     def _refresh_data(self) -> None:

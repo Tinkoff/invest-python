@@ -19,6 +19,7 @@ from tinkoff.invest.strategies.moving_average.strategy_settings import (
 from tinkoff.invest.strategies.moving_average.strategy_state import (
     MovingAverageStrategyState,
 )
+from tinkoff.invest.utils import now
 
 
 class MovingAverageStrategy(InvestStrategy):
@@ -59,7 +60,7 @@ class MovingAverageStrategy(InvestStrategy):
             yield event
 
     def _select_for_period(self, period: timedelta):
-        predicate = self._get_newer_than_datetime_predicate(datetime.now() - period)
+        predicate = self._get_newer_than_datetime_predicate(now() - period)
         return self._filter_from_the_end_with_early_stop(predicate)
 
     @staticmethod
@@ -83,7 +84,7 @@ class MovingAverageStrategy(InvestStrategy):
         raise CandleEventForDateNotFound()
 
     def _init_MA_LONG_START(self):
-        date = datetime.now() - self._settings.short_period
+        date = now() - self._settings.short_period
         event = self._get_first_before(date)
         self._MA_LONG_START = float(event.candle.close)
 

@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from decimal import Decimal
 from typing import Generator, Tuple
 
@@ -51,3 +51,7 @@ def candle_interval_to_subscription_interval(
     return _CANDLE_INTERVAL_TO_SUBSCRIPTION_INTERVAL_MAPPING.get(
         candle_interval, default=SubscriptionInterval.SUBSCRIPTION_INTERVAL_UNSPECIFIED
     )
+
+
+def now() -> datetime:
+    return datetime.utcnow().replace(tzinfo=timezone.utc)
