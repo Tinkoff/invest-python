@@ -1,3 +1,4 @@
+import logging
 from datetime import datetime, timedelta
 from decimal import Decimal
 from typing import Callable, Iterable, List
@@ -22,6 +23,8 @@ from tinkoff.invest.strategies.moving_average.strategy_state import (
 )
 from tinkoff.invest.utils import now
 
+logger = logging.getLogger(__name__)
+
 
 class MovingAverageStrategy(InvestStrategy):
     def __init__(
@@ -39,9 +42,11 @@ class MovingAverageStrategy(InvestStrategy):
         self._MA_LONG_START: Decimal
 
     def fit(self, candles: Iterable[CandleEvent]) -> None:
+        logger.debug("Strategy fitting with candles %s", candles)
         self._data.extend(candles)
 
     def observe(self, candle: CandleEvent) -> None:
+        logger.debug('Observing candle event: %s', candle)
         self._data.append(candle)
 
     @staticmethod
@@ -90,7 +95,102 @@ class MovingAverageStrategy(InvestStrategy):
         event = self._get_first_candle_before(date)
         self._MA_LONG_START = event.candle.close
 
+    @staticmethod
+    def _is_long_open_signal(
+        MA_SHORT: Decimal,
+        MA_LONG: Decimal,
+        PRICE: Decimal,
+        STD: Decimal,
+        MA_LONG_START: Decimal
+    ) -> bool:
+        logger.debug('Try long opening')
+        logger.debug('\tMA_SHORT > MA_LONG, %s', MA_SHORT > MA_LONG)
+        logger.debug('\tand abs((PRICE - MA_LONG) / MA_LONG) < STD, %s', abs((PRICE - MA_LONG) / MA_LONG) < STD)
+        logger.debug('\tand MA_LONG < MA_LONG_START, %s', MA_LONG < MA_LONG_START)
+        logger.debug(
+            '== %s',
+            MA_SHORT > MA_LONG
+            and abs((PRICE - MA_LONG) / MA_LONG) < STD
+            and MA_LONG < MA_LONG_START
+        )
+        return (
+            MA_SHORT > MA_LONG
+            and abs((PRICE - MA_LONG) / MA_LONG) < STD
+            and MA_LONG < MA_LONG_START
+        )
+
+    @staticmethod
+    def _is_short_open_signal(
+        MA_SHORT: Decimal,
+        MA_LONG: Decimal,
+        PRICE: Decimal,
+        STD: Decimal,
+        MA_LONG_START: Decimal
+    ) -> bool:
+        logger.debug('Try short opening')
+        logger.debug('\tMA_SHORT < MA_LONG, %s', MA_SHORT < MA_LONG)
+        logger.debug('\tand abs((PRICE - MA_LONG) / MA_LONG) < STD, %s', abs((PRICE - MA_LONG) / MA_LONG) < STD)
+        logger.debug('\tand MA_LONG > MA_LONG_START, %s', MA_LONG > MA_LONG_START)
+        logger.debug(
+            '== %s',
+            MA_SHORT < MA_LONG
+            and abs((PRICE - MA_LONG) / MA_LONG) < STD
+            and MA_LONG > MA_LONG_START
+        )
+        return (
+            MA_SHORT < MA_LONG
+            and abs((PRICE - MA_LONG) / MA_LONG) < STD
+            and MA_LONG > MA_LONG_START
+        )
+
+    @staticmethod
+    def _is_long_close_signal(
+        MA_LONG: Decimal,
+        PRICE: Decimal,
+        STD: Decimal,
+        has_short_open_signal: bool,
+    ) -> bool:
+        logger.debug('Try short opening')
+        logger.debug('\tPRICE > MA_LONG + 10 * STD, %s', PRICE > MA_LONG + 10 * STD)
+        logger.debug('\tor has_short_open_signal, %s', has_short_open_signal)
+        logger.debug('\tor PRICE < MA_LONG - 3 * STD, %s', PRICE < MA_LONG - 3 * STD)
+        logger.debug(
+            '== %s',
+            PRICE > MA_LONG + 10 * STD
+            or has_short_open_signal
+            or PRICE < MA_LONG - 3 * STD
+        )
+        return (
+            PRICE > MA_LONG + 10 * STD
+            or has_short_open_signal
+            or PRICE < MA_LONG - 3 * STD
+        )
+
+    @staticmethod
+    def _is_short_close_signal(
+        MA_LONG: Decimal,
+        PRICE: Decimal,
+        STD: Decimal,
+        has_long_open_signal: bool,
+    ) -> bool:
+        logger.debug('Try short opening')
+        logger.debug('\tPRICE < MA_LONG - 10 * STD, %s', PRICE < MA_LONG - 10 * STD)
+        logger.debug('\tor has_long_open_signal, %s', has_long_open_signal)
+        logger.debug('\tor PRICE > MA_LONG + 3 * STD, %s', PRICE > MA_LONG + 3 * STD)
+        logger.debug(
+            '== %s',
+            PRICE < MA_LONG - 10 * STD
+            or has_long_open_signal
+            or PRICE > MA_LONG + 3 * STD
+        )
+        return (
+            PRICE < MA_LONG - 10 * STD
+            or has_long_open_signal
+            or PRICE > MA_LONG + 3 * STD
+        )
+
     def predict(self) -> Iterable[Signal]:  # noqa: C901
+        logger.info('Strategy predict')
         self._init_MA_LONG_START()
         MA_LONG_START = self._MA_LONG_START
         PRICE = self._data[-1].candle.close
@@ -99,39 +199,48 @@ class MovingAverageStrategy(InvestStrategy):
         STD = self._calculate_std(self._settings.std_period)
         MONEY = self._account_manager.get_current_balance()
 
+        logger.debug('MA_LONG_START: %s', MA_LONG_START)
+        logger.debug('PRICE: %s', PRICE)
+        logger.debug('MA_LONG: %s', MA_LONG)
+        logger.debug('MA_SHORT: %s', MA_SHORT)
+        logger.debug('STD: %s', STD)
+        logger.debug('MONEY: %s', MONEY)
+
         has_long_open_signal = False
         has_short_open_signal = False
 
-        if not self._state.long_open:
-            if (
-                MA_SHORT > MA_LONG
-                and abs((PRICE - MA_LONG) / MA_LONG) < STD
-                and MA_LONG < MA_LONG_START
-            ):
-                has_long_open_signal = True
-                yield OpenLongMarketOrder(lots=int(MONEY // PRICE))
+        if not self._state.long_open and self._is_long_open_signal(
+            MA_SHORT=MA_SHORT,
+            MA_LONG=MA_LONG,
+            PRICE=PRICE,
+            STD=STD,
+            MA_LONG_START=MA_LONG_START
+        ):
+            has_long_open_signal = True
+            yield OpenLongMarketOrder(lots=int(MONEY // PRICE))
 
-        if not self._state.short_open:
-            if (
-                MA_SHORT < MA_LONG
-                and abs((PRICE - MA_LONG) / MA_LONG) < STD
-                and MA_LONG > MA_LONG_START
-            ):
-                has_short_open_signal = True
-                yield OpenShortMarketOrder(lots=int(MONEY // PRICE))
+        if not self._state.short_open and self._is_short_open_signal(
+            MA_SHORT=MA_SHORT,
+            MA_LONG=MA_LONG,
+            PRICE=PRICE,
+            STD=STD,
+            MA_LONG_START=MA_LONG_START
+        ):
+            has_short_open_signal = True
+            yield OpenShortMarketOrder(lots=int(MONEY // PRICE))
 
-        if self._state.long_open:
-            if (
-                PRICE > MA_LONG + 10 * STD
-                or has_short_open_signal
-                or PRICE < MA_LONG - 3 * STD
-            ):
-                yield CloseLongMarketOrder(lots=self._state.position)
+        if self._state.long_open and self._is_long_close_signal(
+            MA_LONG=MA_LONG,
+            PRICE=PRICE,
+            STD=STD,
+            has_short_open_signal=has_short_open_signal,
+        ):
+            yield CloseLongMarketOrder(lots=self._state.position)
 
-        if self._state.short_open:
-            if (
-                PRICE < MA_LONG - 10 * STD
-                or has_long_open_signal
-                or PRICE > MA_LONG + 3 * STD
-            ):
-                yield CloseLongMarketOrder(lots=self._state.position)
+        if self._state.short_open and self._is_short_close_signal(
+            MA_LONG=MA_LONG,
+            PRICE=PRICE,
+            STD=STD,
+            has_long_open_signal=has_long_open_signal,
+        ):
+            yield CloseLongMarketOrder(lots=self._state.position)

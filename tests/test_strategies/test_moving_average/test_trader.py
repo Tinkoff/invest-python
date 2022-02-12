@@ -1,3 +1,4 @@
+import logging
 from datetime import timedelta
 from decimal import Decimal
 from math import exp, sqrt
@@ -33,6 +34,9 @@ from tinkoff.invest.strategies.moving_average.strategy_state import (
 from tinkoff.invest.strategies.moving_average.trader import MovingAverageStrategyTrader
 from tinkoff.invest.typedefs import AccountId, ShareId
 from tinkoff.invest.utils import decimal_to_quotation, now
+
+logging.basicConfig(format="%(asctime)s %(levelname)s:%(message)s", level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 seed(1234)
 
@@ -287,5 +291,8 @@ def moving_average_strategy_trader(
 
 
 class TestMovingAverageStrategyTrader:
-    def test_trade(self, moving_average_strategy_trader: MovingAverageStrategyTrader):
+    def test_trade(self, moving_average_strategy_trader: MovingAverageStrategyTrader, caplog):
+        caplog.set_level(logging.DEBUG)
+
         moving_average_strategy_trader.trade()
+        assert 0

@@ -92,19 +92,25 @@ class MovingAverageStrategyTrader(Trader):
     @staticmethod
     def _is_candle_fresh(candle: tinkoff.invest.Candle) -> bool:
         is_fresh_border = now() - timedelta(seconds=5)
+        logger.debug("Checking if candle is fresh: candle.time=%s > is_fresh_border=%s  %s)", candle.time, is_fresh_border, candle.time > is_fresh_border)
         return candle.time > is_fresh_border
 
     def _make_observations(self) -> None:
         while True:
             market_data_response: MarketDataResponse = next(self._market_data_stream)
+            logger.debug("got market_data_response: %s", market_data_response)
             if market_data_response.candle is None:
+                logger.debug("market_data_response didn't have candle")
                 continue
             candle = market_data_response.candle
+            logger.debug("candle extracted: %s", candle)
             self._strategy.observe(self._convert_candle(candle))
             if self._is_candle_fresh(candle):
+                logger.info("Data refreshed")
                 break
 
     def _refresh_data(self) -> None:
+        logger.info("Refreshing data")
         try:
             self._make_observations()
         except asyncio.TimeoutError:
@@ -118,7 +124,6 @@ class MovingAverageStrategyTrader(Trader):
             self._refresh_data()
 
             signals = self._strategy.predict()
-            logger.info("Got signals")
             for signal in signals:
                 logger.info("Trying to execute signal %s", signal)
                 self._signal_executor.execute(signal)
