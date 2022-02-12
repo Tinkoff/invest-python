@@ -1,77 +1,24 @@
-import abc
-import dataclasses
 from datetime import datetime, timedelta
-from decimal import Decimal
 from typing import Callable, Iterable, List
 
 import numpy as np
 
-from tinkoff.invest import CandleInterval
-from tinkoff.invest._grpc_helpers import Service
-from tinkoff.invest.strategies.errors import CandleEventForDateNotFound
-from tinkoff.invest.strategies.models import CandleEvent
-from tinkoff.invest.strategies.signal import (
+from tinkoff.invest.strategies.base.account_manager import AccountManager
+from tinkoff.invest.strategies.base.errors import CandleEventForDateNotFound
+from tinkoff.invest.strategies.base.models import CandleEvent
+from tinkoff.invest.strategies.base.signal import (
     CloseLongMarketOrder,
     OpenLongMarketOrder,
     OpenShortMarketOrder,
     Signal,
 )
-from tinkoff.invest.typedefs import ShareId
-
-
-class InvestStrategy(abc.ABC):
-    @abc.abstractmethod
-    def fit(self, candles: Iterable[CandleEvent]) -> None:
-        pass
-
-    @abc.abstractmethod
-    def observe(self, candle: CandleEvent) -> None:
-        pass
-
-    @abc.abstractmethod
-    def predict(self) -> Iterable[Signal]:
-        pass
-
-
-@dataclasses.dataclass
-class StrategySettings:
-    share_id: ShareId
-    max_transaction_price: Decimal
-    candle_interval: CandleInterval
-
-
-@dataclasses.dataclass
-class MovingAverageStrategySettings(StrategySettings):
-    long_period: timedelta
-    short_period: timedelta
-    std_period: timedelta
-
-
-class AccountManager:
-    def __init__(self, service: Service):
-        self._service = service
-
-    def get_current_balance(self) -> Decimal:
-        raise NotImplementedError()
-
-
-class MovingAverageStrategyState:
-    def __init__(self):
-        self._long_open: bool = False
-        self._short_open: bool = False
-        self._position: int = 0
-
-    @property
-    def long_open(self) -> bool:
-        return self._long_open
-
-    @property
-    def short_open(self) -> bool:
-        return self._short_open
-
-    @property
-    def position(self) -> int:
-        return self._position
+from tinkoff.invest.strategies.base.strategy_interface import InvestStrategy
+from tinkoff.invest.strategies.moving_average.strategy_settings import (
+    MovingAverageStrategySettings,
+)
+from tinkoff.invest.strategies.moving_average.strategy_state import (
+    MovingAverageStrategyState,
+)
 
 
 class MovingAverageStrategy(InvestStrategy):

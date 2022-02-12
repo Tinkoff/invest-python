@@ -1,92 +1,34 @@
-import abc
 import asyncio
 import logging
 from datetime import datetime, timedelta
-from typing import AsyncIterator, Iterable, List
+from typing import AsyncIterator, List
 
 import tinkoff
 from tinkoff.invest import (
     CandleInstrument,
-    HistoricCandle,
     MarketDataRequest,
     MarketDataResponse,
     SubscribeCandlesRequest,
     SubscriptionAction,
 )
 from tinkoff.invest.async_services import AsyncServices
-from tinkoff.invest.strategies.errors import MarginalTradeIsNotActive, NotEnoughData
-from tinkoff.invest.strategies.models import Candle, CandleEvent
-from tinkoff.invest.strategies.signal_executor import SignalExecutor
-from tinkoff.invest.strategies.strategy import (
-    InvestStrategy,
-    MovingAverageStrategy,
+from tinkoff.invest.strategies.base.errors import (
+    MarginalTradeIsNotActive,
+    NotEnoughData,
+)
+from tinkoff.invest.strategies.base.models import CandleEvent
+from tinkoff.invest.strategies.base.signal_executor_base import SignalExecutor
+from tinkoff.invest.strategies.base.trader_base import Trader
+from tinkoff.invest.strategies.moving_average.strategy import MovingAverageStrategy
+from tinkoff.invest.strategies.moving_average.strategy_settings import (
     MovingAverageStrategySettings,
+)
+from tinkoff.invest.strategies.moving_average.strategy_state import (
     MovingAverageStrategyState,
-    StrategySettings,
 )
-from tinkoff.invest.utils import (
-    candle_interval_to_subscription_interval,
-    quotation_to_decimal,
-)
+from tinkoff.invest.utils import candle_interval_to_subscription_interval
 
 logger = logging.getLogger(__name__)
-
-
-class ITrader(abc.ABC):
-    @abc.abstractmethod
-    def trade(self):
-        pass
-
-
-class Trader(ITrader, abc.ABC):
-    def __init__(
-        self,
-        strategy: InvestStrategy,
-        services: AsyncServices,
-        settings: StrategySettings,
-    ):
-        self._strategy = strategy
-        self._services = services
-        self._settings = settings
-
-    @staticmethod
-    def _convert_historic_candles_into_candle_events(
-        historic_candles: Iterable[HistoricCandle],
-    ) -> Iterable[CandleEvent]:
-        for candle in historic_candles:
-            yield CandleEvent(
-                candle=Candle(
-                    open=quotation_to_decimal(candle.open),
-                    close=quotation_to_decimal(candle.close),
-                    high=quotation_to_decimal(candle.high),
-                    low=quotation_to_decimal(candle.low),
-                ),
-                volume=candle.volume,
-                time=candle.time,
-                is_complete=candle.is_complete,
-            )
-
-    def _load_candles(self, period: timedelta) -> Iterable[CandleEvent]:
-        logger.info("Loading candles for period %s", period)
-        yield from self._services.get_all_candles(
-            figi=self._settings.share_id,  # todo ask: figi == share_id?
-            from_=datetime.utcnow() - period,
-            interval=self._settings.candle_interval,
-        )
-
-    @staticmethod
-    def _convert_candle(candle: tinkoff.invest.schemas.Candle) -> CandleEvent:
-        return CandleEvent(
-            candle=Candle(
-                open=quotation_to_decimal(candle.open),
-                close=quotation_to_decimal(candle.close),
-                high=quotation_to_decimal(candle.high),
-                low=quotation_to_decimal(candle.low),
-            ),
-            volume=candle.volume,
-            time=candle.time,
-            is_complete=False,
-        )
 
 
 class MovingAverageStrategyTrader(Trader):
