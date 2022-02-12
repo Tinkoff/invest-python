@@ -86,9 +86,11 @@ class MovingAverageStrategyTrader(Trader):
                 instruments=[current_instrument],
             )
         )
-        self._market_data_stream = iter(self._services.market_data_stream.market_data_stream(
-            [candle_subscribe_request]
-        ))
+        self._market_data_stream = iter(
+            self._services.market_data_stream.market_data_stream(
+                [candle_subscribe_request]
+            )
+        )
 
     @staticmethod
     def _is_candle_fresh(candle: tinkoff.invest.Candle) -> bool:

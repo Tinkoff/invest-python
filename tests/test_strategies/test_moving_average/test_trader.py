@@ -1,12 +1,24 @@
-import random
 from datetime import timedelta
 from decimal import Decimal
-from typing import List, Callable, Iterable
+from math import exp, sqrt
+from random import gauss, seed
+from typing import Callable, Iterable, List
 
 import pytest
 
-from tinkoff.invest import CandleInterval, Client, GetCandlesResponse, HistoricCandle, \
-    Quotation, MarketDataResponse, Candle, SubscriptionInterval
+from tinkoff.invest import (
+    Candle,
+    CandleInterval,
+    Client,
+    GetCandlesResponse,
+    HistoricCandle,
+    MarketDataResponse,
+    MoneyValue,
+    PortfolioPosition,
+    PortfolioResponse,
+    Quotation,
+    SubscriptionInterval,
+)
 from tinkoff.invest.services import Services
 from tinkoff.invest.strategies.base.account_manager import AccountManager
 from tinkoff.invest.strategies.base.signal_executor_base import SignalExecutor
@@ -18,11 +30,10 @@ from tinkoff.invest.strategies.moving_average.strategy_state import (
     MovingAverageStrategyState,
 )
 from tinkoff.invest.strategies.moving_average.trader import MovingAverageStrategyTrader
-from tinkoff.invest.typedefs import ShareId
-from tinkoff.invest.utils import now, decimal_to_quotation
+from tinkoff.invest.typedefs import AccountId, ShareId
+from tinkoff.invest.utils import decimal_to_quotation, now
 
-from random import gauss, seed
-from math import sqrt, exp
+seed(1234)
 
 
 def create_GBM(s0, mu, sigma):
@@ -39,8 +50,9 @@ def create_GBM(s0, mu, sigma):
 
         for i in range(limit):
             st *= exp(
-                (mu - 0.5 * sigma ** 2) * (1. / 365.) + sigma * sqrt(1. / 365.) * gauss(
-                    mu=0, sigma=1))
+                (mu - 0.5 * sigma ** 2) * (1.0 / 365.0)
+                + sigma * sqrt(1.0 / 365.0) * gauss(mu=0, sigma=1)
+            )
             yield st
 
     return generate_range
@@ -57,10 +69,11 @@ def stock_prices_generator() -> Callable[[int], Iterable[float]]:
 
 
 @pytest.fixture()
-def initial_candles(stock_prices_generator: Callable[[int], Iterable[float]]) -> List[HistoricCandle]:
+def initial_candles(
+    stock_prices_generator: Callable[[int], Iterable[float]]
+) -> List[HistoricCandle]:
     now_ = now()
     candles = []
-    seed(1234)
 
     for i, st in enumerate(stock_prices_generator(365)):
         quotation = decimal_to_quotation(Decimal(st))
@@ -79,7 +92,10 @@ def initial_candles(stock_prices_generator: Callable[[int], Iterable[float]]) ->
 
 @pytest.fixture()
 def services(
-    token: str, mocker, initial_candles: List[HistoricCandle], figi: str,
+    token: str,
+    mocker,
+    initial_candles: List[HistoricCandle],
+    figi: str,
     stock_prices_generator: Callable[[int], Iterable[float]],
 ) -> Services:
     with Client(token) as services:
@@ -102,7 +118,7 @@ def services(
                     low=quotation,
                     close=quotation,
                     volume=100,
-                    time=now()
+                    time=now(),
                 )
             )
             responses.append(response)
@@ -112,12 +128,40 @@ def services(
             *responses,
         ]
 
+        services.operations = mocker.Mock(wraps=services.operations)
+        services.operations.get_portfolio.return_value = PortfolioResponse(
+            total_amount_shares=MoneyValue(currency="rub", units=28691, nano=300000000),
+            total_amount_bonds=MoneyValue(currency="rub", units=0, nano=0),
+            total_amount_etf=MoneyValue(currency="rub", units=0, nano=0),
+            total_amount_currencies=MoneyValue(
+                currency="rub", units=2005, nano=690000000
+            ),
+            total_amount_futures=MoneyValue(currency="rub", units=0, nano=0),
+            expected_yield=Quotation(units=0, nano=-350000000),
+            positions=[
+                PortfolioPosition(
+                    figi="BBG004730N88",
+                    instrument_type="share",
+                    quantity=Quotation(units=110, nano=0),
+                    average_position_price=MoneyValue(
+                        currency="rub", units=261, nano=800000000
+                    ),
+                    expected_yield=Quotation(units=-106, nano=-700000000),
+                    current_nkd=MoneyValue(currency="", units=0, nano=0),
+                    average_position_price_pt=Quotation(units=0, nano=0),
+                    current_price=MoneyValue(currency="rub", units=260, nano=830000000),
+                )
+            ],
+        )
+
         yield services
 
 
 @pytest.fixture()
-def account_manager(services: Services) -> AccountManager:
-    return AccountManager(services=services)
+def account_manager(
+    services: Services, settings: MovingAverageStrategySettings
+) -> AccountManager:
+    return AccountManager(services=services, strategy_settings=settings)
 
 
 @pytest.fixture()
@@ -131,9 +175,15 @@ def figi() -> str:
 
 
 @pytest.fixture()
-def settings(figi: str) -> MovingAverageStrategySettings:
+def account_id() -> str:
+    return AccountId("1337007228")
+
+
+@pytest.fixture()
+def settings(figi: str, account_id: AccountId) -> MovingAverageStrategySettings:
     return MovingAverageStrategySettings(
         share_id=ShareId(figi),
+        account_id=account_id,
         max_transaction_price=Decimal(10000),
         candle_interval=CandleInterval.CANDLE_INTERVAL_HOUR,
         long_period=timedelta(days=100),

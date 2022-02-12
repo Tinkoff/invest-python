@@ -3,7 +3,7 @@ from decimal import Decimal
 import pytest
 
 from tinkoff.invest import Quotation
-from tinkoff.invest.utils import quotation_to_decimal, decimal_to_quotation
+from tinkoff.invest.utils import decimal_to_quotation, quotation_to_decimal
 
 
 @pytest.fixture()
