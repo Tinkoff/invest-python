@@ -1,4 +1,5 @@
 from datetime import datetime, timedelta
+from decimal import Decimal
 from typing import Callable, Iterable, List
 
 import numpy as np
@@ -34,7 +35,7 @@ class MovingAverageStrategy(InvestStrategy):
         self._account_manager = account_manager
 
         self._state = state
-        self._MA_LONG_START: float
+        self._MA_LONG_START: Decimal
 
     def fit(self, candles: Iterable[CandleEvent]) -> None:
         self._data.extend(candles)
@@ -64,15 +65,15 @@ class MovingAverageStrategy(InvestStrategy):
         return self._filter_from_the_end_with_early_stop(predicate)
 
     @staticmethod
-    def _get_prices(events: Iterable[CandleEvent]) -> Iterable[float]:
+    def _get_prices(events: Iterable[CandleEvent]) -> Iterable[Decimal]:
         for event in events:
-            yield float(event.candle.close)
+            yield event.candle.close
 
-    def _calculate_moving_average(self, period: timedelta) -> float:
+    def _calculate_moving_average(self, period: timedelta) -> Decimal:
         prices = self._get_prices(self._select_for_period(period))
         return np.mean(prices, axis=0)
 
-    def _calculate_std(self, period: timedelta) -> float:
+    def _calculate_std(self, period: timedelta) -> Decimal:
         prices = self._get_prices(self._select_for_period(period))
         return np.std(prices, axis=0)
 
@@ -86,16 +87,16 @@ class MovingAverageStrategy(InvestStrategy):
     def _init_MA_LONG_START(self):
         date = now() - self._settings.short_period
         event = self._get_first_candle_before(date)
-        self._MA_LONG_START = float(event.candle.close)
+        self._MA_LONG_START = event.candle.close
 
     def predict(self) -> Iterable[Signal]:  # noqa: C901
         self._init_MA_LONG_START()
         MA_LONG_START = self._MA_LONG_START
-        PRICE = float(self._data[-1].candle.close)
+        PRICE = self._data[-1].candle.close
         MA_LONG = self._calculate_moving_average(self._settings.long_period)
         MA_SHORT = self._calculate_moving_average(self._settings.short_period)
         STD = self._calculate_std(self._settings.std_period)
-        MONEY = float(self._account_manager.get_current_balance())
+        MONEY = self._account_manager.get_current_balance()
 
         if not self._state.long_open:
             if (
