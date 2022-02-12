@@ -72,11 +72,11 @@ class MovingAverageStrategy(InvestStrategy):
 
     def _calculate_moving_average(self, period: timedelta) -> Decimal:
         prices = list(self._get_prices(self._select_for_period(period)))
-        return np.mean(prices, axis=0)
+        return np.mean(prices, axis=0)  # type: ignore
 
     def _calculate_std(self, period: timedelta) -> Decimal:
         prices = list(self._get_prices(self._select_for_period(period)))
-        return np.std(prices, axis=0)
+        return np.std(prices, axis=0)  # type: ignore
 
     def _get_first_candle_before(self, date: datetime) -> CandleEvent:
         predicate = self._get_newer_than_datetime_predicate(date)
