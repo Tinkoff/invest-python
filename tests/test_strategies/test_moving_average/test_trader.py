@@ -19,7 +19,7 @@ from tinkoff.invest import (
     Quotation,
     SubscriptionInterval,
 )
-from tinkoff.invest.services import Services
+from tinkoff.invest.services import Services, MarketDataService
 from tinkoff.invest.strategies.base.account_manager import AccountManager
 from tinkoff.invest.strategies.base.signal_executor_base import SignalExecutor
 from tinkoff.invest.strategies.moving_average.strategy import MovingAverageStrategy
@@ -48,7 +48,7 @@ def create_GBM(s0, mu, sigma):
     def generate_range(limit: int):
         nonlocal st
 
-        for i in range(limit):
+        for _ in range(limit):
             st *= exp(
                 (mu - 0.5 * sigma ** 2) * (1.0 / 365.0)
                 + sigma * sqrt(1.0 / 365.0) * gauss(mu=0, sigma=1)
@@ -91,77 +91,109 @@ def initial_candles(
 
 
 @pytest.fixture()
-def services(
-    token: str,
-    mocker,
-    initial_candles: List[HistoricCandle],
-    figi: str,
-    stock_prices_generator: Callable[[int], Iterable[float]],
-) -> Services:
+def real_services(token: str) -> Services:
     with Client(token) as services:
-        services.market_data = mocker.Mock(wraps=services.market_data)
-        services.market_data.get_candles = mocker.Mock()
-        services.market_data.get_candles.return_value = GetCandlesResponse(
-            candles=initial_candles
-        )
-        services.market_data_stream = mocker.Mock(wraps=services.market_data_stream)
-
-        responses = []
-        for p in stock_prices_generator(100):
-            quotation = decimal_to_quotation(Decimal(p))
-            response = MarketDataResponse(
-                candle=Candle(
-                    figi=figi,
-                    interval=SubscriptionInterval.SUBSCRIPTION_INTERVAL_ONE_MINUTE,
-                    open=quotation,
-                    high=quotation,
-                    low=quotation,
-                    close=quotation,
-                    volume=100,
-                    time=now(),
-                )
-            )
-            responses.append(response)
-
-        services.market_data_stream.market_data_stream.return_value = [
-            MarketDataResponse(candle=None),
-            *responses,
-        ]
-
-        services.operations = mocker.Mock(wraps=services.operations)
-        services.operations.get_portfolio.return_value = PortfolioResponse(
-            total_amount_shares=MoneyValue(currency="rub", units=28691, nano=300000000),
-            total_amount_bonds=MoneyValue(currency="rub", units=0, nano=0),
-            total_amount_etf=MoneyValue(currency="rub", units=0, nano=0),
-            total_amount_currencies=MoneyValue(
-                currency="rub", units=2005, nano=690000000
-            ),
-            total_amount_futures=MoneyValue(currency="rub", units=0, nano=0),
-            expected_yield=Quotation(units=0, nano=-350000000),
-            positions=[
-                PortfolioPosition(
-                    figi="BBG004730N88",
-                    instrument_type="share",
-                    quantity=Quotation(units=110, nano=0),
-                    average_position_price=MoneyValue(
-                        currency="rub", units=261, nano=800000000
-                    ),
-                    expected_yield=Quotation(units=-106, nano=-700000000),
-                    current_nkd=MoneyValue(currency="", units=0, nano=0),
-                    average_position_price_pt=Quotation(units=0, nano=0),
-                    current_price=MoneyValue(currency="rub", units=260, nano=830000000),
-                )
-            ],
-        )
-
         yield services
 
 
 @pytest.fixture()
+def mock_market_data_service(
+    real_services: Services,
+    mocker,
+    initial_candles: List[HistoricCandle],
+) -> Services:
+    real_services.market_data = mocker.Mock(wraps=real_services.market_data)
+
+    real_services.market_data.get_candles = mocker.Mock()
+    real_services.market_data.get_candles.return_value = GetCandlesResponse(
+        candles=initial_candles
+    )
+
+    return real_services
+
+
+@pytest.fixture()
+def mock_market_data_stream_service(
+    real_services: Services,
+    mocker,
+    figi: str,
+    stock_prices_generator: Callable[[int], Iterable[float]],
+) -> Services:
+    real_services.market_data_stream = mocker.Mock(wraps=real_services.market_data_stream)
+    responses = []
+    for price in stock_prices_generator(100):
+        quotation = decimal_to_quotation(Decimal(price))
+        response = MarketDataResponse(
+            candle=Candle(
+                figi=figi,
+                interval=SubscriptionInterval.SUBSCRIPTION_INTERVAL_ONE_MINUTE,
+                open=quotation,
+                high=quotation,
+                low=quotation,
+                close=quotation,
+                volume=100,
+                time=now(),
+            )
+        )
+        responses.append(response)
+
+    real_services.market_data_stream.market_data_stream.return_value = [
+        MarketDataResponse(candle=None),
+        *responses,
+    ]
+
+    return real_services
+
+
+@pytest.fixture()
+def mock_operations_service(
+    real_services: Services,
+    mocker,
+) -> Services:
+    real_services.operations = mocker.Mock(wraps=real_services.operations)
+    real_services.operations.get_portfolio.return_value = PortfolioResponse(
+        total_amount_shares=MoneyValue(currency="rub", units=28691, nano=300000000),
+        total_amount_bonds=MoneyValue(currency="rub", units=0, nano=0),
+        total_amount_etf=MoneyValue(currency="rub", units=0, nano=0),
+        total_amount_currencies=MoneyValue(
+            currency="rub", units=2005, nano=690000000
+        ),
+        total_amount_futures=MoneyValue(currency="rub", units=0, nano=0),
+        expected_yield=Quotation(units=0, nano=-350000000),
+        positions=[
+            PortfolioPosition(
+                figi="BBG004730N88",
+                instrument_type="share",
+                quantity=Quotation(units=110, nano=0),
+                average_position_price=MoneyValue(
+                    currency="rub", units=261, nano=800000000
+                ),
+                expected_yield=Quotation(units=-106, nano=-700000000),
+                current_nkd=MoneyValue(currency="", units=0, nano=0),
+                average_position_price_pt=Quotation(units=0, nano=0),
+                current_price=MoneyValue(currency="rub", units=260, nano=830000000),
+            )
+        ],
+    )
+
+    return real_services
+
+
+@pytest.fixture()
+def mocked_services(
+    real_services: Services,
+    mock_market_data_service,
+    mock_market_data_stream_service,
+    mock_operations_service,
+) -> Services:
+    return real_services
+
+
+@pytest.fixture()
 def account_manager(
-    services: Services, settings: MovingAverageStrategySettings
+    mocked_services: Services, settings: MovingAverageStrategySettings
 ) -> AccountManager:
-    return AccountManager(services=services, strategy_settings=settings)
+    return AccountManager(services=mocked_services, strategy_settings=settings)
 
 
 @pytest.fixture()
@@ -207,10 +239,10 @@ def strategy(
 
 @pytest.fixture()
 def signal_executor(
-    services: Services,
+    mocked_services: Services,
 ) -> SignalExecutor:
     return SignalExecutor(
-        services=services,
+        services=mocked_services,
     )
 
 
@@ -218,14 +250,14 @@ def signal_executor(
 def moving_average_strategy_trader(
     strategy: MovingAverageStrategy,
     settings: MovingAverageStrategySettings,
-    services: Services,
+    mocked_services: Services,
     state: MovingAverageStrategyState,
     signal_executor: SignalExecutor,
 ) -> MovingAverageStrategyTrader:
     return MovingAverageStrategyTrader(
         strategy=strategy,
         settings=settings,
-        services=services,
+        services=mocked_services,
         state=state,
         signal_executor=signal_executor,
     )
