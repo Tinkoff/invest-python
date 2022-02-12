@@ -3,7 +3,7 @@ from decimal import Decimal
 import pytest
 
 from tinkoff.invest import Quotation
-from tinkoff.invest.utils import quotation_to_decimal
+from tinkoff.invest.utils import quotation_to_decimal, decimal_to_quotation
 
 
 @pytest.fixture()
@@ -13,15 +13,31 @@ def quotation(request) -> Quotation:
 
 
 @pytest.mark.parametrize(
-    ("quotation", "expected"),
+    ("quotation", "decimal"),
     [
-        ({"units": "114", "nano": 250000000}, Decimal("114.25")),
-        ({"units": "-200", "nano": -200000000}, Decimal("-200.20")),
-        ({"units": "-0", "nano": -10000000}, Decimal("-0.01")),
+        ({"units": 114, "nano": 250000000}, Decimal("114.25")),
+        ({"units": -200, "nano": -200000000}, Decimal("-200.20")),
+        ({"units": -0, "nano": -10000000}, Decimal("-0.01")),
     ],
     indirect=["quotation"],
 )
-def test_quotation_to_decimal(quotation: Quotation, expected: Decimal):
+def test_quotation_to_decimal(quotation: Quotation, decimal: Decimal):
     actual = quotation_to_decimal(quotation)
 
-    assert actual == expected
+    assert actual == decimal
+
+
+@pytest.mark.parametrize(
+    ("quotation", "decimal"),
+    [
+        ({"units": 114, "nano": 250000000}, Decimal("114.25")),
+        ({"units": -200, "nano": -200000000}, Decimal("-200.20")),
+        ({"units": -0, "nano": -10000000}, Decimal("-0.01")),
+    ],
+    indirect=["quotation"],
+)
+def test_decimal_to_quotation(decimal: Decimal, quotation: Quotation):
+    actual = decimal_to_quotation(decimal)
+
+    assert actual.units == quotation.units
+    assert actual.nano == quotation.nano

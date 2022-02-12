@@ -33,6 +33,11 @@ def quotation_to_decimal(quotation: Quotation) -> Decimal:
     return Decimal(quotation.units) + fractional
 
 
+def decimal_to_quotation(decimal: Decimal) -> Quotation:
+    fractional = decimal % 1
+    return Quotation(units=int(decimal // 1), nano=int(fractional * Decimal("10e8")))
+
+
 # fmt: off
 _CANDLE_INTERVAL_TO_SUBSCRIPTION_INTERVAL_MAPPING = {
     CandleInterval.CANDLE_INTERVAL_1_MIN:
