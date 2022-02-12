@@ -1,7 +1,6 @@
-import abc
+from typing import Protocol
 
 
-class ITrader(abc.ABC):
-    @abc.abstractmethod
+class ITrader(Protocol):
     def trade(self):
         pass
