@@ -94,17 +94,19 @@ class MovingAverageStrategyTrader(Trader):
         is_fresh_border = now() - timedelta(seconds=5)
         return candle.time > is_fresh_border
 
+    def _make_observations(self) -> None:
+        while True:
+            market_data_response: MarketDataResponse = next(self._market_data_stream)
+            if market_data_response.candle is None:
+                continue
+            candle = market_data_response.candle
+            self._strategy.observe(self._convert_candle(candle))
+            if self._is_candle_fresh(candle):
+                break
+
     def _refresh_data(self) -> None:
         try:
-            while True:
-                market_data_response: MarketDataResponse = next(
-                    self._market_data_stream
-                )
-                if market_data_response.candle is not None:
-                    candle = market_data_response.candle
-                    self._strategy.observe(self._convert_candle(candle))
-                    if self._is_candle_fresh(candle):
-                        break
+            self._make_observations()
         except asyncio.TimeoutError:
             logger.info("Fresh quotations loaded")
             return
