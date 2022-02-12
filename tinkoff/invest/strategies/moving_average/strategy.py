@@ -70,11 +70,11 @@ class MovingAverageStrategy(InvestStrategy):
             yield event.candle.close
 
     def _calculate_moving_average(self, period: timedelta) -> Decimal:
-        prices = self._get_prices(self._select_for_period(period))
+        prices = list(self._get_prices(self._select_for_period(period)))
         return np.mean(prices, axis=0)
 
     def _calculate_std(self, period: timedelta) -> Decimal:
-        prices = self._get_prices(self._select_for_period(period))
+        prices = list(self._get_prices(self._select_for_period(period)))
         return np.std(prices, axis=0)
 
     def _get_first_candle_before(self, date: datetime) -> CandleEvent:

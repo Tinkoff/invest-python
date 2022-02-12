@@ -1,6 +1,6 @@
 import asyncio
 import logging
-from datetime import datetime, timedelta
+from datetime import timedelta
 from typing import AsyncIterator, List
 
 import tinkoff
@@ -11,7 +11,7 @@ from tinkoff.invest import (
     SubscribeCandlesRequest,
     SubscriptionAction,
 )
-from tinkoff.invest.async_services import AsyncServices
+from tinkoff.invest.services import Services
 from tinkoff.invest.strategies.base.errors import (
     MarginalTradeIsNotActive,
     NotEnoughData,
@@ -36,7 +36,7 @@ class MovingAverageStrategyTrader(Trader):
         self,
         strategy: MovingAverageStrategy,
         settings: MovingAverageStrategySettings,
-        services: AsyncServices,
+        services: Services,
         state: MovingAverageStrategyState,
         signal_executor: SignalExecutor,
     ):
@@ -54,6 +54,8 @@ class MovingAverageStrategyTrader(Trader):
         )
         self._ensure_enough_candles()
         self._ensure_marginal_trade_active()
+
+        self._subscribe()
 
         self._strategy.fit(self._data)
 
@@ -84,9 +86,9 @@ class MovingAverageStrategyTrader(Trader):
                 instruments=[current_instrument],
             )
         )
-        self._market_data_stream = self._services.market_data_stream.market_data_stream(
+        self._market_data_stream = iter(self._services.market_data_stream.market_data_stream(
             [candle_subscribe_request]
-        ).__aiter__()
+        ))
 
     @staticmethod
     def _is_candle_fresh(candle: tinkoff.invest.Candle) -> bool:
@@ -96,14 +98,15 @@ class MovingAverageStrategyTrader(Trader):
     def _refresh_data(self) -> None:
         try:
             while True:
-                market_data_response: MarketDataResponse = (
-                    await self._market_data_stream.__anext__()
+                market_data_response: MarketDataResponse = next(
+                    self._market_data_stream
                 )
-                candle = market_data_response.candle
-                self._strategy.observe(self._convert_candle(candle))
-                if self._is_candle_fresh(candle):
-                    break
-        except asyncio.futures.TimeoutError:
+                if market_data_response.candle is not None:
+                    candle = market_data_response.candle
+                    self._strategy.observe(self._convert_candle(candle))
+                    if self._is_candle_fresh(candle):
+                        break
+        except asyncio.TimeoutError:
             logger.info("Fresh quotations loaded")
             return
 

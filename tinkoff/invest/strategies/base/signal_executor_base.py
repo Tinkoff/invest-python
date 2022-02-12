@@ -1,6 +1,6 @@
 from abc import ABC
 
-from tinkoff.invest.async_services import AsyncServices
+from tinkoff.invest.services import Services
 from tinkoff.invest.strategies.base.signal import (
     CloseLongMarketOrder,
     CloseShortMarketOrder,
@@ -13,7 +13,7 @@ from tinkoff.invest.strategies.base.signal_executor_interface import ISignalExec
 class SignalExecutor(ISignalExecutor, ABC):
     def __init__(
         self,
-        services: AsyncServices,
+        services: Services,
     ):
         self._services = services
 

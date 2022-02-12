@@ -54,7 +54,7 @@ def candle_interval_to_subscription_interval(
     candle_interval: CandleInterval,
 ) -> SubscriptionInterval:
     return _CANDLE_INTERVAL_TO_SUBSCRIPTION_INTERVAL_MAPPING.get(
-        candle_interval, default=SubscriptionInterval.SUBSCRIPTION_INTERVAL_UNSPECIFIED
+        candle_interval, SubscriptionInterval.SUBSCRIPTION_INTERVAL_UNSPECIFIED
     )
 
 
