@@ -13,10 +13,7 @@ from tinkoff.invest import (
 )
 from tinkoff.invest.services import Services
 from tinkoff.invest.strategies.base.account_manager import AccountManager
-from tinkoff.invest.strategies.base.errors import (
-    MarginalTradeIsNotActive,
-    NotEnoughData,
-)
+from tinkoff.invest.strategies.base.errors import NotEnoughData
 from tinkoff.invest.strategies.base.models import CandleEvent
 from tinkoff.invest.strategies.base.signal_executor_base import SignalExecutor
 from tinkoff.invest.strategies.base.trader_base import Trader
@@ -71,9 +68,7 @@ class MovingAverageStrategyTrader(Trader):
         logger.info("Got enough data for strategy")
 
     def _ensure_marginal_trade_active(self) -> None:
-        if self._account_manager.ensure_marginal_trade():
-            raise MarginalTradeIsNotActive()
-        logger.info("Marginal trade is active")
+        self._account_manager.ensure_marginal_trade()
 
     def _subscribe(self):
         current_instrument = CandleInstrument(

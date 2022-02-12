@@ -11,15 +11,16 @@ from tinkoff.invest import (
     CandleInterval,
     Client,
     GetCandlesResponse,
+    GetMarginAttributesResponse,
     HistoricCandle,
     MarketDataResponse,
     MoneyValue,
     PortfolioPosition,
     PortfolioResponse,
     Quotation,
-    SubscriptionInterval, GetMarginAttributesResponse,
+    SubscriptionInterval,
 )
-from tinkoff.invest.services import Services, MarketDataService
+from tinkoff.invest.services import Services
 from tinkoff.invest.strategies.base.account_manager import AccountManager
 from tinkoff.invest.strategies.base.signal_executor_base import SignalExecutor
 from tinkoff.invest.strategies.moving_average.strategy import MovingAverageStrategy
@@ -119,7 +120,9 @@ def mock_market_data_stream_service(
     figi: str,
     stock_prices_generator: Callable[[int], Iterable[float]],
 ) -> Services:
-    real_services.market_data_stream = mocker.Mock(wraps=real_services.market_data_stream)
+    real_services.market_data_stream = mocker.Mock(
+        wraps=real_services.market_data_stream
+    )
     responses = []
     for price in stock_prices_generator(100):
         quotation = decimal_to_quotation(Decimal(price))
@@ -155,9 +158,7 @@ def mock_operations_service(
         total_amount_shares=MoneyValue(currency="rub", units=28691, nano=300000000),
         total_amount_bonds=MoneyValue(currency="rub", units=0, nano=0),
         total_amount_etf=MoneyValue(currency="rub", units=0, nano=0),
-        total_amount_currencies=MoneyValue(
-            currency="rub", units=2005, nano=690000000
-        ),
+        total_amount_currencies=MoneyValue(currency="rub", units=2005, nano=690000000),
         total_amount_futures=MoneyValue(currency="rub", units=0, nano=0),
         expected_yield=Quotation(units=0, nano=-350000000),
         positions=[
@@ -185,12 +186,14 @@ def mock_users_service(
     mocker,
 ) -> Services:
     real_services.users = mocker.Mock(wraps=real_services.users)
-    real_services.users.get_margin_attributes.return_value = GetMarginAttributesResponse(
-        liquid_portfolio=MoneyValue(currency="", units=0, nano=0),
-        starting_margin=MoneyValue(currency="", units=0, nano=0),
-        minimal_margin=MoneyValue(currency="", units=0, nano=0),
-        funds_sufficiency_level=Quotation(units=322, nano=0),
-        amount_of_missing_funds=MoneyValue(currency="", units=0, nano=0),
+    real_services.users.get_margin_attributes.return_value = (
+        GetMarginAttributesResponse(
+            liquid_portfolio=MoneyValue(currency="", units=0, nano=0),
+            starting_margin=MoneyValue(currency="", units=0, nano=0),
+            minimal_margin=MoneyValue(currency="", units=0, nano=0),
+            funds_sufficiency_level=Quotation(units=322, nano=0),
+            amount_of_missing_funds=MoneyValue(currency="", units=0, nano=0),
+        )
     )
 
     return real_services

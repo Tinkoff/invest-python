@@ -1,10 +1,16 @@
+import logging
 from decimal import Decimal
 
 from tinkoff.invest import Quotation
 from tinkoff.invest.services import Services
-from tinkoff.invest.strategies.base.errors import InsufficientMarginalTradeFunds
+from tinkoff.invest.strategies.base.errors import (
+    InsufficientMarginalTradeFunds,
+    MarginalTradeIsNotActive,
+)
 from tinkoff.invest.strategies.base.strategy_settings_base import StrategySettings
 from tinkoff.invest.utils import quotation_to_decimal
+
+logger = logging.getLogger(__name__)
 
 
 class AccountManager:
@@ -22,9 +28,11 @@ class AccountManager:
 
     def ensure_marginal_trade(self) -> None:
         account_id = self._strategy_settings.account_id
-        response = self._services.users.get_margin_attributes(
-            account_id=account_id
-        )
+        try:
+            response = self._services.users.get_margin_attributes(account_id=account_id)
+        except Exception:
+            logger.info("Marginal trade is active")
+            raise MarginalTradeIsNotActive()
         value = quotation_to_decimal(response.funds_sufficiency_level)
         if value <= 1:
             raise InsufficientMarginalTradeFunds()
