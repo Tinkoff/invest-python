@@ -38,7 +38,7 @@ from tinkoff.invest.utils import candle_interval_to_timedelta, decimal_to_quotat
 logging.basicConfig(format="%(asctime)s %(levelname)s:%(message)s", level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-seed(1234)
+seed(1337)
 
 
 def create_GBM(s0, mu, sigma) -> Callable[[int], Iterable[float]]:
@@ -70,30 +70,42 @@ def token() -> str:
 
 @pytest.fixture()
 def stock_prices_generator() -> Callable[[int], Iterable[float]]:
-    return create_GBM(100, 0.1, 0.05)
+    return create_GBM(100, 0.1, 0.1)
+
+
+@pytest.fixture()
+def stock_volume_generator() -> Callable[[int], Iterable[float]]:
+    return create_GBM(1000, 0.9, 1.1)
 
 
 @pytest.fixture()
 def initial_candles(
     settings: MovingAverageStrategySettings,
     stock_prices_generator: Callable[[int], Iterable[float]],
+    stock_volume_generator: Callable[[int], Iterable[float]],
 ) -> Iterable[HistoricCandle]:
-    now_ = now()
     candles = []
+    (close,) = stock_prices_generator(1)
+    intervals = 365
+    interval_delta = candle_interval_to_timedelta(settings.candle_interval)
+    base = now() - interval_delta * intervals
 
-    for i, st in enumerate(stock_prices_generator(365)):
-        quotation = decimal_to_quotation(Decimal(st))
+    for i in range(intervals):
+        open_ = close
+        low, high, close = stock_prices_generator(3)
+        low, high = min(low, high, open_, close), max(low, high, open_, close)
+        (volume,) = stock_volume_generator(1)
         candle = HistoricCandle(
-            open=quotation,
-            high=quotation,
-            low=quotation,
-            close=quotation,
-            volume=100,
-            time=now_ - candle_interval_to_timedelta(settings.candle_interval) * i,
+            open=decimal_to_quotation(Decimal(open_)),
+            high=decimal_to_quotation(Decimal(high)),
+            low=decimal_to_quotation(Decimal(low)),
+            close=decimal_to_quotation(Decimal(close)),
+            volume=int(volume),
+            time=base + interval_delta * i,
             is_complete=False,
         )
         candles.append(candle)
-    return reversed(candles)
+    return candles
 
 
 @pytest.fixture()
@@ -128,27 +140,27 @@ def mock_market_data_stream_service(
     real_services.market_data_stream = mocker.Mock(
         wraps=real_services.market_data_stream
     )
-    responses = []
-    for price in stock_prices_generator(100):
-        quotation = decimal_to_quotation(Decimal(price))
-        response = MarketDataResponse(
-            candle=Candle(
-                figi=figi,
-                interval=SubscriptionInterval.SUBSCRIPTION_INTERVAL_ONE_MINUTE,
-                open=quotation,
-                high=quotation,
-                low=quotation,
-                close=quotation,
-                volume=100,
-                time=now(),
-            )
-        )
-        responses.append(response)
 
-    real_services.market_data_stream.market_data_stream.return_value = [
-        MarketDataResponse(candle=None),  # type: ignore
-        *responses,
-    ]
+    def _market_data_stream(*args, **kwargs):
+        yield MarketDataResponse(candle=None)  # type: ignore
+
+        while True:
+            for price in stock_prices_generator(100):
+                quotation = decimal_to_quotation(Decimal(price))
+                yield MarketDataResponse(
+                    candle=Candle(
+                        figi=figi,
+                        interval=SubscriptionInterval.SUBSCRIPTION_INTERVAL_ONE_MINUTE,
+                        open=quotation,
+                        high=quotation,
+                        low=quotation,
+                        close=quotation,
+                        volume=100,
+                        time=now(),
+                    )
+                )
+
+    real_services.market_data_stream.market_data_stream = _market_data_stream
 
     return real_services
 
@@ -243,10 +255,10 @@ def settings(figi: str, account_id: AccountId) -> MovingAverageStrategySettings:
         share_id=ShareId(figi),
         account_id=account_id,
         max_transaction_price=Decimal(10000),
-        candle_interval=CandleInterval.CANDLE_INTERVAL_HOUR,
-        long_period=timedelta(hours=100),
-        short_period=timedelta(hours=60),
-        std_period=timedelta(hours=30),
+        candle_interval=CandleInterval.CANDLE_INTERVAL_1_MIN,
+        long_period=timedelta(minutes=100),
+        short_period=timedelta(minutes=20),
+        std_period=timedelta(minutes=30),
     )
 
 
@@ -293,12 +305,15 @@ def moving_average_strategy_trader(
 
 class TestMovingAverageStrategyTrader:
     def test_trade(
-        self, moving_average_strategy_trader: MovingAverageStrategyTrader, caplog
+        self,
+        moving_average_strategy_trader: MovingAverageStrategyTrader,
+        strategy: MovingAverageStrategy,
+        caplog,
     ):
-        caplog.set_level(logging.DEBUG)
+        caplog.set_level(logging.INFO)
 
         for i in range(100):
             logger.info("Trade %s", i)
             moving_average_strategy_trader.trade()
-
+        strategy.plot()
         assert 0

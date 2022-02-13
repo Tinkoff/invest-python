@@ -696,15 +696,16 @@ pymdown-extensions = ">=6.3"
 pytkdocs = ">=0.14.0"
 
 [[package]]
-name = "mpl-finance"
-version = "0.10.1"
-description = "Finance plots using matplotlib"
+name = "mplfinance"
+version = "0.12.8b9"
+description = "Utilities for the visualization, and visual analysis, of financial data"
 category = "main"
 optional = true
 python-versions = "*"
 
 [package.dependencies]
 matplotlib = "*"
+pandas = "*"
 
 [[package]]
 name = "mypy"
@@ -1253,10 +1254,13 @@ python-versions = ">=3.7"
 docs = ["sphinx", "jaraco.packaging (>=8.2)", "rst.linker (>=1.9)"]
 testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytest-cov", "pytest-enabler (>=1.0.1)", "jaraco.itertools", "func-timeout", "pytest-black (>=0.3.7)", "pytest-mypy"]
 
+[extras]
+dev = ["pandas", "numpy", "matplotlib"]
+
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "ac31210879d8b4d92beccf7763d082ebd31c76af22a98b01a12c7712ed2ef147"
+content-hash = "818bc6d17eb53d0c9e4b35fb7d71421ec05c316be4196266392294bb3fec424c"
 
 [metadata.files]
 astroid = [
@@ -1771,9 +1775,9 @@ mkdocstrings = [
     {file = "mkdocstrings-0.17.0-py3-none-any.whl", hash = "sha256:103fc1dd58cb23b7e0a6da5292435f01b29dc6fa0ba829132537f3f556f985de"},
     {file = "mkdocstrings-0.17.0.tar.gz", hash = "sha256:75b5cfa2039aeaf3a5f5cf0aa438507b0330ce76c8478da149d692daa7213a98"},
 ]
-mpl-finance = [
-    {file = "mpl_finance-0.10.1-py3-none-any.whl", hash = "sha256:63e712b300f2d479930a5c6e70a1c51ef31c330a1a7f4d2d3182a3706c3540f5"},
-    {file = "mpl_finance-0.10.1.tar.gz", hash = "sha256:1b33c11ecf11ea0824c6493707a410dcfa542ed498f42e37f28958a0e5d4090e"},
+mplfinance = [
+    {file = "mplfinance-0.12.8b9-py3-none-any.whl", hash = "sha256:e57c6fbc579f36c4db0c34828269f56935513fc64d941558be5d7bcac131ad64"},
+    {file = "mplfinance-0.12.8b9.tar.gz", hash = "sha256:7e5adc924ca044620b1aeabd88a85209cacc56b6ddaf376f3ce0492c0cb1434c"},
 ]
 mypy = [
     {file = "mypy-0.930-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:221cc94dc6a801ccc2be7c0c9fd791c5e08d1fa2c5e1c12dec4eab15b2469871"},

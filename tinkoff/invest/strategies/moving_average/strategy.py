@@ -11,7 +11,7 @@ from tinkoff.invest.strategies.base.errors import (
     NotEnoughData,
     OldCandleObservingError,
 )
-from tinkoff.invest.strategies.base.models import Candle, CandleEvent
+from tinkoff.invest.strategies.base.models import CandleEvent
 from tinkoff.invest.strategies.base.signal import (
     CloseLongMarketOrder,
     OpenLongMarketOrder,
@@ -53,6 +53,39 @@ class MovingAverageStrategy(InvestStrategy):
             self._settings.candle_interval
         )
 
+    def plot(self):
+        quotes = {
+            "open": [float(e.candle.open) for e in self._data],
+            "close": [float(e.candle.close) for e in self._data],
+            "high": [float(e.candle.high) for e in self._data],
+            "low": [float(e.candle.low) for e in self._data],
+            "volume": [float(e.volume) for e in self._data],
+            "time": [e.time for e in self._data],
+        }
+        import pandas as pd
+
+        df = pd.DataFrame(quotes, index=quotes["time"])
+        import mplfinance as mpf
+        mav = {
+            "ma_short": int(self._settings.short_period / self._candle_interval_timedelta),
+            "ma_long": int(self._settings.long_period / self._candle_interval_timedelta),
+        }
+        fig, axes = mpf.plot(
+            df,
+            type="candle",
+            volume=True,
+            figsize=(11, 8),
+            panel_ratios=(2, 1),
+            mav=tuple(mav.values()),
+            title=self._settings.share_id,
+            style='charles',
+            returnfig=True,
+
+        )
+        axes[0].legend(mav)
+
+        mpf.show()
+
     def _ensure_enough_candles(self) -> None:
         date = now() - (self._settings.short_period + self._settings.long_period)
         try:
@@ -67,23 +100,6 @@ class MovingAverageStrategy(InvestStrategy):
             self.observe(candle)
         self._ensure_enough_candles()
 
-    def _merge_candles(
-        self, last_candle_event: CandleEvent, new_candle_event: CandleEvent
-    ) -> CandleEvent:
-        last_candle = last_candle_event.candle
-        new_candle = new_candle_event.candle
-        return CandleEvent(
-            candle=Candle(
-                open=last_candle.open,
-                close=new_candle.close,
-                high=max(last_candle.high, new_candle.high),
-                low=min(last_candle.low, new_candle.low),
-            ),
-            volume=new_candle_event.volume,
-            time=new_candle_event.time,
-            is_complete=new_candle_event.is_complete,
-        )
-
     def _append_candle_event(self, candle_event: CandleEvent) -> None:
         last_candle_event = self._data[-1]
         last_interval_floor = floor_datetime(
@@ -96,8 +112,7 @@ class MovingAverageStrategy(InvestStrategy):
         if candle_event.time < last_interval_floor:
             raise OldCandleObservingError()
         if candle_event.time < last_interval_ceil:
-            merged_candle_event = self._merge_candles(last_candle_event, candle_event)
-            self._data[-1] = merged_candle_event
+            self._data[-1] = candle_event
         else:
             self._data.append(candle_event)
 
@@ -137,7 +152,7 @@ class MovingAverageStrategy(InvestStrategy):
 
     def _calculate_moving_average(self, period: timedelta) -> Decimal:
         prices = list(self._get_prices(self._select_for_period(period)))
-        logger.info("Selected prices: %s", prices)
+        logger.debug("Selected prices: %s", prices)
         return np.mean(prices, axis=0)  # type: ignore
 
     def _calculate_std(self, period: timedelta) -> Decimal:
