@@ -1,7 +1,7 @@
 import contextlib
 import logging
 from functools import singledispatchmethod
-from typing import Iterable
+from typing import Generator
 
 from tinkoff.invest import InvestError
 from tinkoff.invest.services import Services
@@ -25,9 +25,9 @@ logger = logging.getLogger(__name__)
 
 
 @contextlib.contextmanager
-def suppress_traceback() -> Iterable[None]:
+def suppress_traceback() -> Generator[None, None, None]:
     try:
-        yield None
+        yield
     except InvestError:
         logger.exception("Suppressed error")
 
