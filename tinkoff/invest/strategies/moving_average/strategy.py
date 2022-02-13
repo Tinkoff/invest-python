@@ -294,15 +294,17 @@ class MovingAverageStrategy(InvestStrategy):
         has_long_open_signal = False
         has_short_open_signal = False
 
+        possible_lots = int(MONEY // PRICE)
+
         if not self._state.long_open and self._is_long_open_signal(
             MA_SHORT=MA_SHORT,
             MA_LONG=MA_LONG,
             PRICE=PRICE,
             STD=STD,
             MA_LONG_START=MA_LONG_START,
-        ):
+        ) and possible_lots > 0:
             has_long_open_signal = True
-            yield OpenLongMarketOrder(lots=int(MONEY // PRICE))
+            yield OpenLongMarketOrder(lots=possible_lots)
 
         if not self._state.short_open and self._is_short_open_signal(
             MA_SHORT=MA_SHORT,
@@ -310,9 +312,9 @@ class MovingAverageStrategy(InvestStrategy):
             PRICE=PRICE,
             STD=STD,
             MA_LONG_START=MA_LONG_START,
-        ):
+        ) and possible_lots > 0:
             has_short_open_signal = True
-            yield OpenShortMarketOrder(lots=int(MONEY // PRICE))
+            yield OpenShortMarketOrder(lots=possible_lots)
 
         if self._state.long_open and self._is_long_close_signal(
             MA_LONG=MA_LONG,

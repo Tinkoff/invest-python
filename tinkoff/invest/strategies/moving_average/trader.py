@@ -14,6 +14,7 @@ from tinkoff.invest import (
 from tinkoff.invest.services import Services
 from tinkoff.invest.strategies.base.account_manager import AccountManager
 from tinkoff.invest.strategies.base.models import CandleEvent
+from tinkoff.invest.strategies.base.signal import Signal, CloseSignal, OpenSignal
 from tinkoff.invest.strategies.base.signal_executor_base import SignalExecutor
 from tinkoff.invest.strategies.base.trader_base import Trader
 from tinkoff.invest.strategies.moving_average.strategy import MovingAverageStrategy
@@ -110,14 +111,23 @@ class MovingAverageStrategyTrader(Trader):
             logger.info("Fresh quotations loaded")
             return
 
+    def _filter_closing_signals(self, signals: List[Signal]) -> List[Signal]:
+        return list(filter(lambda signal: isinstance(signal, CloseSignal), signals))
+
+    def _filter_opening_signals(self, signals: List[Signal]) -> List[Signal]:
+        return list(filter(lambda signal: isinstance(signal, OpenSignal), signals))
+
     def trade(self) -> None:
         """Следует стратегии пока не останется вне позиции."""
 
         while True:
+            logger.info('Balance: %s', self._account_manager.get_current_balance())
             self._refresh_data()
 
-            signals = self._strategy.predict()
-            for signal in signals:
+            signals = list(self._strategy.predict())
+            ordered_signals = [*self._filter_closing_signals(signals), *self._filter_opening_signals(signals)]
+            logger.info('Got signals %s', ordered_signals)
+            for signal in ordered_signals:
                 logger.info("Trying to execute signal %s", signal)
                 self._signal_executor.execute(signal)
 

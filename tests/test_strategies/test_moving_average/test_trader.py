@@ -42,7 +42,7 @@ from tinkoff.invest.utils import candle_interval_to_timedelta, decimal_to_quotat
 logging.basicConfig(format="%(asctime)s %(levelname)s:%(message)s", level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-seed(1337)
+seed(1338)
 
 
 def create_GBM(s0, mu, sigma) -> Callable[[int], Iterable[float]]:
@@ -74,7 +74,7 @@ def token() -> str:
 
 @pytest.fixture()
 def stock_prices_generator() -> Callable[[int], Iterable[float]]:
-    return create_GBM(100, 0.01, 0.5)
+    return create_GBM(100, 0.01, 0.1)
 
 
 @pytest.fixture()
@@ -147,6 +147,7 @@ def mock_market_data_stream_service(
     stock_volume_generator: Callable[[int], Iterable[float]],
     settings: MovingAverageStrategySettings,
     current_market_data: List[Candle],
+    freezer,
 ) -> Services:
     real_services.market_data_stream = mocker.Mock(
         wraps=real_services.market_data_stream
@@ -175,6 +176,7 @@ def mock_market_data_stream_service(
             )
             current_market_data.append(candle)
             yield MarketDataResponse(candle=candle)
+            freezer.move_to(now() + timedelta(minutes=1))
 
     real_services.market_data_stream.market_data_stream = _market_data_stream
 
@@ -202,13 +204,13 @@ def portfolio_positions() -> Dict[str, PortfolioPosition]:
 
 @pytest.fixture()
 def balance() -> MoneyValue:
-    return MoneyValue(currency="rub", units=2005, nano=690000000)
+    return MoneyValue(currency="rub", units=20050, nano=690000000)
 
 
 @pytest.fixture()
 def portfolio_response(
-        portfolio_positions: Dict[str, PortfolioPosition],
-        balance: MoneyValue,
+    portfolio_positions: Dict[str, PortfolioPosition],
+    balance: MoneyValue,
 ) -> PortfolioResponse:
     return PortfolioResponse(
         total_amount_shares=MoneyValue(currency="rub", units=28691, nano=300000000),
@@ -237,19 +239,32 @@ def mock_operations_service(
 def mock_users_service(
     real_services: Services,
     mocker,
+    marginal_trade_active: bool,
 ) -> Services:
     real_services.users = mocker.Mock(wraps=real_services.users)
-    real_services.users.get_margin_attributes.return_value = (
-        GetMarginAttributesResponse(
-            liquid_portfolio=MoneyValue(currency="", units=0, nano=0),
-            starting_margin=MoneyValue(currency="", units=0, nano=0),
-            minimal_margin=MoneyValue(currency="", units=0, nano=0),
-            funds_sufficiency_level=Quotation(units=322, nano=0),
-            amount_of_missing_funds=MoneyValue(currency="", units=0, nano=0),
+    if marginal_trade_active:
+        real_services.users.get_margin_attributes.return_value = (
+            GetMarginAttributesResponse(
+                liquid_portfolio=MoneyValue(currency="", units=0, nano=0),
+                starting_margin=MoneyValue(currency="", units=0, nano=0),
+                minimal_margin=MoneyValue(currency="", units=0, nano=0),
+                funds_sufficiency_level=Quotation(units=322, nano=0),
+                amount_of_missing_funds=MoneyValue(currency="", units=0, nano=0),
+            )
         )
-    )
+    else:
+        real_services.users.get_margin_attributes.side_effect = RequestError(
+            code=StatusCode.PERMISSION_DENIED,
+            details=f'Marginal trade disabled',
+            metadata=None
+        )
 
     return real_services
+
+
+@pytest.fixture()
+def marginal_trade_active() -> bool:
+    return True
 
 
 @pytest.fixture()
@@ -260,6 +275,7 @@ def mock_orders_service(
     balance: MoneyValue,
     current_market_data: List[Candle],
     settings: MovingAverageStrategySettings,
+    marginal_trade_active: bool,
 ) -> Services:
     real_services.orders = mocker.Mock(wraps=real_services.orders)
     def _post_order(
@@ -287,16 +303,28 @@ def mock_orders_service(
                 quantity=decimal_to_quotation(Decimal(0)),
             )
 
+        is_marginal = False
+        if quotation_to_decimal(position.quantity) <= 0:
+            is_marginal = True
+
+        balance_delta = 0
         if direction == OrderDirection.ORDER_DIRECTION_SELL:
-            balance_delta = last_market_price * quantity
             quantity_delta = -quantity
+            # if not is_marginal:
+            balance_delta = last_market_price * quantity
         elif direction == OrderDirection.ORDER_DIRECTION_BUY:
-            balance_delta = -(last_market_price * quantity)
             quantity_delta = +quantity
+            # if not is_marginal:
+            balance_delta = -(last_market_price * quantity)
+
         else:
             raise AssertionError('Incorrect direction')
+
+        logger.warning('Operation: %s, %s', direction, balance_delta)
+
         old_quantity = quotation_to_decimal(position.quantity)
         new_quantity = decimal_to_quotation(old_quantity + quantity_delta)
+
         position.quantity.units = new_quantity.units
         position.quantity.nano = new_quantity.nano
 
@@ -305,9 +333,10 @@ def mock_orders_service(
         new_balance = decimal_to_quotation(old_balance + balance_delta)
 
         if quotation_to_decimal(new_balance) < 0:
+            logger.warning('You have debt!, Balance: %s', quotation_to_decimal(new_balance))
             raise RequestError(code=StatusCode.ABORTED,
-                               details=f'Not enough money: {old_balance}',
-                               metadata=None)
+                           details=f'Not enough money: {old_balance}',
+                           metadata=None)
 
         balance.units = new_balance.units
         balance.nano = new_balance.nano
@@ -422,10 +451,9 @@ class TestMovingAverageStrategyTrader:
     ):
         caplog.set_level(logging.DEBUG)
         caplog.set_level(logging.INFO)
+        # caplog.set_level(logging.ERROR)
 
-        for i in range(1000):
-            freezer.move_to(now() + timedelta(minutes=1))
+        for i in range(5):
             logger.info("Trade %s", i)
             moving_average_strategy_trader.trade()
-        # strategy.plot()
-        assert 0
+        strategy.plot()

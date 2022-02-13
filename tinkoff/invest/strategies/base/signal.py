@@ -12,20 +12,30 @@ class OrderSignal(Signal):
 
 
 @dataclass
-class OpenLongMarketOrder(OrderSignal):
+class CloseSignal(OrderSignal):
     pass
 
 
 @dataclass
-class CloseLongMarketOrder(OrderSignal):
+class OpenSignal(OrderSignal):
     pass
 
 
 @dataclass
-class OpenShortMarketOrder(OrderSignal):
+class OpenLongMarketOrder(OpenSignal):
     pass
 
 
 @dataclass
-class CloseShortMarketOrder(OrderSignal):
+class CloseLongMarketOrder(CloseSignal):
+    pass
+
+
+@dataclass
+class OpenShortMarketOrder(OpenSignal):
+    pass
+
+
+@dataclass
+class CloseShortMarketOrder(CloseSignal):
     pass
