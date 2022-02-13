@@ -1,5 +1,9 @@
+import contextlib
+import logging
 from functools import singledispatchmethod
+from typing import Callable, Any, Iterable
 
+from tinkoff.invest import InvestError
 from tinkoff.invest.services import Services
 from tinkoff.invest.strategies.base.errors import UnknownSignal
 from tinkoff.invest.strategies.base.signal import (
@@ -16,6 +20,17 @@ from tinkoff.invest.strategies.moving_average.strategy_state import (
     MovingAverageStrategyState,
 )
 
+logger = logging.getLogger(__name__)
+
+
+@contextlib.contextmanager
+def suppress_traceback() -> Iterable[None]:
+    try:
+        yield None
+    except InvestError:
+        logger.exception('Suppressed error')
+
+
 
 class MovingAverageSignalExecutor(SignalExecutor):
     def __init__(self, services: Services, state: MovingAverageStrategyState, settings: MovingAverageStrategySettings):
@@ -29,24 +44,28 @@ class MovingAverageSignalExecutor(SignalExecutor):
 
     @execute.register
     def _execute_open_long_market_order(self, signal: OpenLongMarketOrder) -> None:
-        self.execute_open_long_market_order(signal)
-        self._state.long_open = True
-        self._state.position = signal.lots
+        with suppress_traceback():
+            self.execute_open_long_market_order(signal)
+            self._state.long_open = True
+            self._state.position = signal.lots
 
     @execute.register
     def _execute_close_long_market_order(self, signal: CloseLongMarketOrder) -> None:
-        self.execute_close_long_market_order(signal)
-        self._state.long_open = False
-        self._state.position = 0
+        with suppress_traceback():
+            self.execute_close_long_market_order(signal)
+            self._state.long_open = False
+            self._state.position = 0
 
     @execute.register
     def _execute_open_short_market_order(self, signal: OpenShortMarketOrder) -> None:
-        self.execute_open_short_market_order(signal)
-        self._state.short_open = True
-        self._state.position = signal.lots
+        with suppress_traceback():
+            self.execute_open_short_market_order(signal)
+            self._state.short_open = True
+            self._state.position = signal.lots
 
     @execute.register
     def _execute_close_short_market_order(self, signal: CloseShortMarketOrder) -> None:
-        self.execute_close_short_market_order(signal)
-        self._state.short_open = False
-        self._state.position = 0
+        with suppress_traceback():
+            self.execute_close_short_market_order(signal)
+            self._state.short_open = False
+            self._state.position = 0

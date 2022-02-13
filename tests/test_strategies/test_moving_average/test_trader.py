@@ -6,6 +6,7 @@ from random import gauss, seed
 from typing import Callable, Iterable, Iterator, List, Optional, Dict
 
 import pytest
+from grpc import StatusCode
 
 from tinkoff.invest import (
     Candle,
@@ -19,7 +20,7 @@ from tinkoff.invest import (
     PortfolioPosition,
     PortfolioResponse,
     Quotation,
-    SubscriptionInterval, OrderDirection, OrderType,
+    SubscriptionInterval, OrderDirection, OrderType, PostOrderResponse, RequestError,
 )
 from tinkoff.invest.services import Services
 from tinkoff.invest.strategies.base.account_manager import AccountManager
@@ -303,11 +304,15 @@ def mock_orders_service(
             Quotation(units=balance.units, nano=balance.nano))
         new_balance = decimal_to_quotation(old_balance + balance_delta)
 
+        if quotation_to_decimal(new_balance) < 0:
+            raise RequestError(code=StatusCode.ABORTED,
+                               details=f'Not enough money: {old_balance}',
+                               metadata=None)
+
         balance.units = new_balance.units
         balance.nano = new_balance.nano
 
         portfolio_positions[figi] = position
-
 
     real_services.orders.post_order = _post_order
 
@@ -415,6 +420,7 @@ class TestMovingAverageStrategyTrader:
         caplog,
         freezer
     ):
+        caplog.set_level(logging.DEBUG)
         caplog.set_level(logging.INFO)
 
         for i in range(1000):

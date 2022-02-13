@@ -18,7 +18,7 @@ from tinkoff.invest.strategies.base.signal import (
     CloseLongMarketOrder,
     OpenLongMarketOrder,
     OpenShortMarketOrder,
-    Signal,
+    Signal, CloseShortMarketOrder,
 )
 from tinkoff.invest.strategies.base.strategy_interface import InvestStrategy
 from tinkoff.invest.strategies.moving_average.strategy_settings import (
@@ -236,7 +236,7 @@ class MovingAverageStrategy(InvestStrategy):
         STD: Decimal,
         has_short_open_signal: bool,
     ) -> bool:
-        logger.debug("Try short opening")
+        logger.debug("Try long closing")
         logger.debug("\tPRICE > MA_LONG + 10 * STD, %s", PRICE > MA_LONG + 10 * STD)
         logger.debug("\tor has_short_open_signal, %s", has_short_open_signal)
         logger.debug("\tor PRICE < MA_LONG - 3 * STD, %s", PRICE < MA_LONG - 3 * STD)
@@ -259,7 +259,7 @@ class MovingAverageStrategy(InvestStrategy):
         STD: Decimal,
         has_long_open_signal: bool,
     ) -> bool:
-        logger.debug("Try short opening")
+        logger.debug("Try short closing")
         logger.debug("\tPRICE < MA_LONG - 10 * STD, %s", PRICE < MA_LONG - 10 * STD)
         logger.debug("\tor has_long_open_signal, %s", has_long_open_signal)
         logger.debug("\tor PRICE > MA_LONG + 3 * STD, %s", PRICE > MA_LONG + 3 * STD)
@@ -328,4 +328,4 @@ class MovingAverageStrategy(InvestStrategy):
             STD=STD,
             has_long_open_signal=has_long_open_signal,
         ):
-            yield CloseLongMarketOrder(lots=self._state.position)
+            yield CloseShortMarketOrder(lots=self._state.position)
