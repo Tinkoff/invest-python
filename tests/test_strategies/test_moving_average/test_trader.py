@@ -261,7 +261,7 @@ def mock_users_service(
     else:
         real_services.users.get_margin_attributes.side_effect = RequestError(
             code=StatusCode.PERMISSION_DENIED,
-            details=f"Marginal trade disabled",
+            details="Marginal trade disabled",
             metadata=None,
         )
 
@@ -310,18 +310,11 @@ def mock_orders_service(
                 quantity=decimal_to_quotation(Decimal(0)),
             )
 
-        is_marginal = False
-        if quotation_to_decimal(position.quantity) <= 0:
-            is_marginal = True
-
-        balance_delta = 0
         if direction == OrderDirection.ORDER_DIRECTION_SELL:
             quantity_delta = -quantity
-            # if not is_marginal:
             balance_delta = last_market_price * quantity
         elif direction == OrderDirection.ORDER_DIRECTION_BUY:
             quantity_delta = +quantity
-            # if not is_marginal:
             balance_delta = -(last_market_price * quantity)
 
         else:
@@ -453,7 +446,7 @@ def moving_average_strategy_trader(
 
 
 class TestMovingAverageStrategyTrader:
-    @pytest.mark.freeze_time
+    @pytest.mark.freeze_time()
     def test_trade(
         self,
         moving_average_strategy_trader: MovingAverageStrategyTrader,
