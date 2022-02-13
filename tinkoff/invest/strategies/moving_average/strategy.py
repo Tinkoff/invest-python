@@ -16,9 +16,10 @@ from tinkoff.invest.strategies.base.errors import (
 from tinkoff.invest.strategies.base.models import CandleEvent
 from tinkoff.invest.strategies.base.signal import (
     CloseLongMarketOrder,
+    CloseShortMarketOrder,
     OpenLongMarketOrder,
     OpenShortMarketOrder,
-    Signal, CloseShortMarketOrder,
+    Signal,
 )
 from tinkoff.invest.strategies.base.strategy_interface import InvestStrategy
 from tinkoff.invest.strategies.moving_average.strategy_settings import (
@@ -296,23 +297,31 @@ class MovingAverageStrategy(InvestStrategy):
 
         possible_lots = int(MONEY // PRICE)
 
-        if not self._state.long_open and self._is_long_open_signal(
-            MA_SHORT=MA_SHORT,
-            MA_LONG=MA_LONG,
-            PRICE=PRICE,
-            STD=STD,
-            MA_LONG_START=MA_LONG_START,
-        ) and possible_lots > 0:
+        if (
+            not self._state.long_open
+            and self._is_long_open_signal(
+                MA_SHORT=MA_SHORT,
+                MA_LONG=MA_LONG,
+                PRICE=PRICE,
+                STD=STD,
+                MA_LONG_START=MA_LONG_START,
+            )
+            and possible_lots > 0
+        ):
             has_long_open_signal = True
             yield OpenLongMarketOrder(lots=possible_lots)
 
-        if not self._state.short_open and self._is_short_open_signal(
-            MA_SHORT=MA_SHORT,
-            MA_LONG=MA_LONG,
-            PRICE=PRICE,
-            STD=STD,
-            MA_LONG_START=MA_LONG_START,
-        ) and possible_lots > 0:
+        if (
+            not self._state.short_open
+            and self._is_short_open_signal(
+                MA_SHORT=MA_SHORT,
+                MA_LONG=MA_LONG,
+                PRICE=PRICE,
+                STD=STD,
+                MA_LONG_START=MA_LONG_START,
+            )
+            and possible_lots > 0
+        ):
             has_short_open_signal = True
             yield OpenShortMarketOrder(lots=possible_lots)
 

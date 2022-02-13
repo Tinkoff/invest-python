@@ -1,4 +1,4 @@
-from tinkoff.invest import OrderType, OrderDirection
+from tinkoff.invest import OrderDirection, OrderType
 from tinkoff.invest.services import Services
 from tinkoff.invest.strategies.base.signal import (
     CloseLongMarketOrder,

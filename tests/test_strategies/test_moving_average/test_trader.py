@@ -3,7 +3,7 @@ from datetime import timedelta
 from decimal import Decimal
 from math import exp, sqrt
 from random import gauss, seed
-from typing import Callable, Iterable, Iterator, List, Optional, Dict
+from typing import Callable, Dict, Iterable, Iterator, List, Optional
 
 import pytest
 from grpc import StatusCode
@@ -17,16 +17,18 @@ from tinkoff.invest import (
     HistoricCandle,
     MarketDataResponse,
     MoneyValue,
+    OrderDirection,
+    OrderType,
     PortfolioPosition,
     PortfolioResponse,
     Quotation,
-    SubscriptionInterval, OrderDirection, OrderType, PostOrderResponse, RequestError,
+    RequestError,
 )
 from tinkoff.invest.services import Services
 from tinkoff.invest.strategies.base.account_manager import AccountManager
-from tinkoff.invest.strategies.base.signal_executor_base import SignalExecutor
-from tinkoff.invest.strategies.moving_average.signal_executor import \
-    MovingAverageSignalExecutor
+from tinkoff.invest.strategies.moving_average.signal_executor import (
+    MovingAverageSignalExecutor,
+)
 from tinkoff.invest.strategies.moving_average.strategy import MovingAverageStrategy
 from tinkoff.invest.strategies.moving_average.strategy_settings import (
     MovingAverageStrategySettings,
@@ -36,8 +38,13 @@ from tinkoff.invest.strategies.moving_average.strategy_state import (
 )
 from tinkoff.invest.strategies.moving_average.trader import MovingAverageStrategyTrader
 from tinkoff.invest.typedefs import AccountId, ShareId
-from tinkoff.invest.utils import candle_interval_to_timedelta, decimal_to_quotation, \
-    now, candle_interval_to_subscription_interval, quotation_to_decimal
+from tinkoff.invest.utils import (
+    candle_interval_to_subscription_interval,
+    candle_interval_to_timedelta,
+    decimal_to_quotation,
+    now,
+    quotation_to_decimal,
+)
 
 logging.basicConfig(format="%(asctime)s %(levelname)s:%(message)s", level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -161,7 +168,7 @@ def mock_market_data_stream_service(
             open_ = close
             low, high, close = stock_prices_generator(3)
             low, high = min(low, high, open_, close), max(low, high, open_, close)
-            volume, = stock_volume_generator(1)
+            (volume,) = stock_volume_generator(1)
             candle = Candle(
                 figi=figi,
                 interval=candle_interval_to_subscription_interval(
@@ -186,8 +193,7 @@ def mock_market_data_stream_service(
 @pytest.fixture()
 def portfolio_positions() -> Dict[str, PortfolioPosition]:
     return {
-        "BBG004730N88":
-        PortfolioPosition(
+        "BBG004730N88": PortfolioPosition(
             figi="BBG004730N88",
             instrument_type="share",
             quantity=Quotation(units=110, nano=0),
@@ -255,8 +261,8 @@ def mock_users_service(
     else:
         real_services.users.get_margin_attributes.side_effect = RequestError(
             code=StatusCode.PERMISSION_DENIED,
-            details=f'Marginal trade disabled',
-            metadata=None
+            details=f"Marginal trade disabled",
+            metadata=None,
         )
 
     return real_services
@@ -278,6 +284,7 @@ def mock_orders_service(
     marginal_trade_active: bool,
 ) -> Services:
     real_services.orders = mocker.Mock(wraps=real_services.orders)
+
     def _post_order(
         *,
         figi: str = "",
@@ -318,9 +325,9 @@ def mock_orders_service(
             balance_delta = -(last_market_price * quantity)
 
         else:
-            raise AssertionError('Incorrect direction')
+            raise AssertionError("Incorrect direction")
 
-        logger.warning('Operation: %s, %s', direction, balance_delta)
+        logger.warning("Operation: %s, %s", direction, balance_delta)
 
         old_quantity = quotation_to_decimal(position.quantity)
         new_quantity = decimal_to_quotation(old_quantity + quantity_delta)
@@ -329,14 +336,19 @@ def mock_orders_service(
         position.quantity.nano = new_quantity.nano
 
         old_balance = quotation_to_decimal(
-            Quotation(units=balance.units, nano=balance.nano))
+            Quotation(units=balance.units, nano=balance.nano)
+        )
         new_balance = decimal_to_quotation(old_balance + balance_delta)
 
         if quotation_to_decimal(new_balance) < 0:
-            logger.warning('You have debt!, Balance: %s', quotation_to_decimal(new_balance))
-            raise RequestError(code=StatusCode.ABORTED,
-                           details=f'Not enough money: {old_balance}',
-                           metadata=None)
+            logger.warning(
+                "You have debt!, Balance: %s", quotation_to_decimal(new_balance)
+            )
+            raise RequestError(
+                code=StatusCode.ABORTED,
+                details=f"Not enough money: {old_balance}",
+                metadata=None,
+            )
 
         balance.units = new_balance.units
         balance.nano = new_balance.nano
@@ -447,11 +459,10 @@ class TestMovingAverageStrategyTrader:
         moving_average_strategy_trader: MovingAverageStrategyTrader,
         strategy: MovingAverageStrategy,
         caplog,
-        freezer
+        freezer,
     ):
         caplog.set_level(logging.DEBUG)
         caplog.set_level(logging.INFO)
-        # caplog.set_level(logging.ERROR)
 
         for i in range(5):
             logger.info("Trade %s", i)

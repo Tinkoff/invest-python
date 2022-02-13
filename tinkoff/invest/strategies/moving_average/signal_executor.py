@@ -1,7 +1,7 @@
 import contextlib
 import logging
 from functools import singledispatchmethod
-from typing import Callable, Any, Iterable
+from typing import Iterable
 
 from tinkoff.invest import InvestError
 from tinkoff.invest.services import Services
@@ -14,8 +14,9 @@ from tinkoff.invest.strategies.base.signal import (
     Signal,
 )
 from tinkoff.invest.strategies.base.signal_executor_base import SignalExecutor
-from tinkoff.invest.strategies.moving_average.strategy_settings import \
-    MovingAverageStrategySettings
+from tinkoff.invest.strategies.moving_average.strategy_settings import (
+    MovingAverageStrategySettings,
+)
 from tinkoff.invest.strategies.moving_average.strategy_state import (
     MovingAverageStrategyState,
 )
@@ -28,11 +29,16 @@ def suppress_traceback() -> Iterable[None]:
     try:
         yield None
     except InvestError:
-        logger.exception('Suppressed error')
+        logger.exception("Suppressed error")
 
 
 class MovingAverageSignalExecutor(SignalExecutor):
-    def __init__(self, services: Services, state: MovingAverageStrategyState, settings: MovingAverageStrategySettings):
+    def __init__(
+        self,
+        services: Services,
+        state: MovingAverageStrategyState,
+        settings: MovingAverageStrategySettings,
+    ):
         super().__init__(services, settings)
         self._services = services
         self._state = state
@@ -47,7 +53,7 @@ class MovingAverageSignalExecutor(SignalExecutor):
             self.execute_open_long_market_order(signal)
             self._state.long_open = True
             self._state.position = signal.lots
-            logger.info('Signal executed %s', signal)
+            logger.info("Signal executed %s", signal)
 
     @execute.register
     def _execute_close_long_market_order(self, signal: CloseLongMarketOrder) -> None:
@@ -55,7 +61,7 @@ class MovingAverageSignalExecutor(SignalExecutor):
             self.execute_close_long_market_order(signal)
             self._state.long_open = False
             self._state.position = 0
-            logger.info('Signal executed %s', signal)
+            logger.info("Signal executed %s", signal)
 
     @execute.register
     def _execute_open_short_market_order(self, signal: OpenShortMarketOrder) -> None:
@@ -63,7 +69,7 @@ class MovingAverageSignalExecutor(SignalExecutor):
             self.execute_open_short_market_order(signal)
             self._state.short_open = True
             self._state.position = signal.lots
-            logger.info('Signal executed %s', signal)
+            logger.info("Signal executed %s", signal)
 
     @execute.register
     def _execute_close_short_market_order(self, signal: CloseShortMarketOrder) -> None:
@@ -71,4 +77,4 @@ class MovingAverageSignalExecutor(SignalExecutor):
             self.execute_close_short_market_order(signal)
             self._state.short_open = False
             self._state.position = 0
-            logger.info('Signal executed %s', signal)
+            logger.info("Signal executed %s", signal)
