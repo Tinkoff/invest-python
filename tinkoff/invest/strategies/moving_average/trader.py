@@ -111,7 +111,7 @@ class MovingAverageStrategyTrader(Trader):
             return
 
     def trade(self) -> None:
-        """Следует стратегии пока не остается вне позиции."""
+        """Следует стратегии пока не останется вне позиции."""
 
         while True:
             self._refresh_data()
