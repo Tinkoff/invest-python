@@ -3,7 +3,9 @@ from datetime import datetime, timedelta
 from decimal import Decimal
 from typing import Callable, Iterable, List
 
+import mplfinance as mpf
 import numpy as np
+import pandas as pd
 
 from tinkoff.invest.strategies.base.account_manager import AccountManager
 from tinkoff.invest.strategies.base.errors import (
@@ -62,15 +64,18 @@ class MovingAverageStrategy(InvestStrategy):
             "volume": [float(e.volume) for e in self._data],
             "time": [e.time for e in self._data],
         }
-        import pandas as pd
 
         df = pd.DataFrame(quotes, index=quotes["time"])
-        import mplfinance as mpf
+
         mav = {
-            "ma_short": int(self._settings.short_period / self._candle_interval_timedelta),
-            "ma_long": int(self._settings.long_period / self._candle_interval_timedelta),
+            "ma_short": int(
+                self._settings.short_period / self._candle_interval_timedelta
+            ),
+            "ma_long": int(
+                self._settings.long_period / self._candle_interval_timedelta
+            ),
         }
-        fig, axes = mpf.plot(
+        _, axes = mpf.plot(
             df,
             type="candle",
             volume=True,
@@ -78,9 +83,8 @@ class MovingAverageStrategy(InvestStrategy):
             panel_ratios=(2, 1),
             mav=tuple(mav.values()),
             title=self._settings.share_id,
-            style='charles',
+            style="charles",
             returnfig=True,
-
         )
         axes[0].legend(mav)
 
@@ -119,7 +123,7 @@ class MovingAverageStrategy(InvestStrategy):
     def observe(self, candle: CandleEvent) -> None:
         logger.debug("Observing candle event: %s", candle)
 
-        if len(self._data):
+        if len(self._data) > 0:
             self._append_candle_event(candle)
         else:
             self._data.append(candle)

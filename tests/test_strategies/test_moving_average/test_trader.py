@@ -316,4 +316,3 @@ class TestMovingAverageStrategyTrader:
             logger.info("Trade %s", i)
             moving_average_strategy_trader.trade()
         strategy.plot()
-        assert 0

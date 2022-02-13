@@ -73,7 +73,9 @@ _CANDLE_INTERVAL_TO_TIMEDELTA_MAPPING = {
 
 
 def candle_interval_to_timedelta(candle_interval: CandleInterval) -> timedelta:
-    return _CANDLE_INTERVAL_TO_TIMEDELTA_MAPPING.get(candle_interval)
+    if delta := _CANDLE_INTERVAL_TO_TIMEDELTA_MAPPING.get(candle_interval):
+        return delta
+    raise ValueError(f"Cannot convert {candle_interval} to timedelta")
 
 
 _DATETIME_MIN = datetime.min.replace(tzinfo=timezone.utc)
