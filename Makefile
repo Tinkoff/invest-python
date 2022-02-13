@@ -63,7 +63,7 @@ install:
 	poetry install
 
 .PHONY: install-dev
-install:
+install-dev:
 	poetry install -E dev
 
 .PHONY: publish
