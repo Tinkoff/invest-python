@@ -451,13 +451,22 @@ class TestMovingAverageStrategyTrader:
         self,
         moving_average_strategy_trader: MovingAverageStrategyTrader,
         strategy: MovingAverageStrategy,
+        account_manager: AccountManager,
+        signal_executor: MovingAverageSignalExecutor,
         caplog,
         freezer,
     ):
         caplog.set_level(logging.DEBUG)
         caplog.set_level(logging.INFO)
 
+        initial_balance = account_manager.get_current_balance()
+
         for i in range(5):
             logger.info("Trade %s", i)
             moving_average_strategy_trader.trade()
+
+        current_balance = account_manager.get_current_balance()
+        assert initial_balance != current_balance
+        logger.info("Initial balance %s", initial_balance)
+        logger.info("Current balance %s", current_balance)
         strategy.plot()
