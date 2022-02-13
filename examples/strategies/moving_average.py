@@ -15,7 +15,7 @@ from tinkoff.invest.strategies.moving_average.strategy_state import (
     MovingAverageStrategyState,
 )
 from tinkoff.invest.strategies.moving_average.trader import MovingAverageStrategyTrader
-from tinkoff.invest.token import TOKEN
+from tinkoff.invest.env_tools.token import TOKEN
 from tinkoff.invest.typedefs import AccountId, ShareId
 
 logging.basicConfig(format="%(asctime)s %(levelname)s:%(message)s", level=logging.INFO)

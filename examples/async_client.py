@@ -1,7 +1,7 @@
 import asyncio
 
 from tinkoff.invest import AsyncClient
-from tinkoff.invest.token import TOKEN
+from tinkoff.invest.env_tools.token import TOKEN
 
 
 async def main():
