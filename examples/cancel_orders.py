@@ -1,7 +1,7 @@
 import logging
 
 from tinkoff.invest import Client
-from tinkoff.invest.token import TOKEN
+from tinkoff.invest.env_tools.token import TOKEN
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO)

@@ -2,7 +2,7 @@ import asyncio
 from datetime import datetime, timedelta
 
 from tinkoff.invest import AsyncClient, CandleInterval
-from tinkoff.invest.token import TOKEN
+from tinkoff.invest.env_tools.token import TOKEN
 
 
 async def main():
