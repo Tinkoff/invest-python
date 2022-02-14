@@ -1,7 +1,9 @@
+import os
 from datetime import datetime, timedelta
 
 from tinkoff.invest import CandleInterval, Client
-from tinkoff.invest.env_tools.token import TOKEN
+
+TOKEN = os.environ["INVEST_TOKEN"]
 
 
 def main():

@@ -1,8 +1,10 @@
 import asyncio
+import os
 from datetime import datetime, timedelta
 
 from tinkoff.invest import AsyncClient, CandleInterval
-from tinkoff.invest.env_tools.token import TOKEN
+
+TOKEN = os.environ["INVEST_TOKEN"]
 
 
 async def main():

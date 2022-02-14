@@ -1,11 +1,9 @@
 import logging
+import os
 from datetime import timedelta
 from decimal import Decimal
 
 from tinkoff.invest import CandleInterval, Client
-from tinkoff.invest.env_tools.account_id import ACCOUNT_ID
-from tinkoff.invest.env_tools.figi import FIGI
-from tinkoff.invest.env_tools.token import TOKEN
 from tinkoff.invest.strategies.base.account_manager import AccountManager
 from tinkoff.invest.strategies.moving_average.signal_executor import (
     MovingAverageSignalExecutor,
@@ -21,6 +19,11 @@ from tinkoff.invest.strategies.moving_average.trader import MovingAverageStrateg
 
 logging.basicConfig(format="%(asctime)s %(levelname)s:%(message)s", level=logging.INFO)
 logger = logging.getLogger(__name__)
+
+
+TOKEN = os.environ["INVEST_TOKEN"]
+FIGI = os.environ["INVEST_FIGI"]
+ACCOUNT_ID = os.environ["INVEST_ACCOUNT_ID"]
 
 
 def main():
