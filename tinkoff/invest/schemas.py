@@ -903,6 +903,8 @@ class PortfolioPosition(_grpc_helpers.Message):
     current_nkd: "MoneyValue" = _grpc_helpers.message_field(6)
     average_position_price_pt: "Quotation" = _grpc_helpers.message_field(7)
     current_price: "MoneyValue" = _grpc_helpers.message_field(8)
+    average_position_price_fifo: "MoneyValue" = _grpc_helpers.message_field(9)
+    quantity_lots: "Quotation" = _grpc_helpers.message_field(10)
 
 
 @dataclass(eq=False, repr=True)
