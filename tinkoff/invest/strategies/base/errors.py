@@ -24,3 +24,11 @@ class UnknownSignal(StrategyError):
 
 class OldCandleObservingError(StrategyError):
     pass
+
+
+class StrategySupervisorError(Exception):
+    pass
+
+
+class EventsWereNotSupervised(StrategySupervisorError):
+    pass

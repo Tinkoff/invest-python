@@ -26,6 +26,8 @@ from tinkoff.invest import (
 )
 from tinkoff.invest.services import Services
 from tinkoff.invest.strategies.base.account_manager import AccountManager
+from tinkoff.invest.strategies.moving_average.plotter import \
+    MovingAverageStrategyPlotter
 from tinkoff.invest.strategies.moving_average.signal_executor import (
     MovingAverageSignalExecutor,
 )
@@ -36,7 +38,10 @@ from tinkoff.invest.strategies.moving_average.strategy_settings import (
 from tinkoff.invest.strategies.moving_average.strategy_state import (
     MovingAverageStrategyState,
 )
+from tinkoff.invest.strategies.moving_average.supervisor import \
+    MovingAverageStrategySupervisor
 from tinkoff.invest.strategies.moving_average.trader import MovingAverageStrategyTrader
+from tinkoff.invest.strategies.plotting.plotter import StrategyPlotter
 from tinkoff.invest.typedefs import AccountId, ShareId
 from tinkoff.invest.utils import (
     candle_interval_to_subscription_interval,
@@ -427,6 +432,13 @@ def signal_executor(
 
 
 @pytest.fixture()
+def supervisor(
+) -> MovingAverageStrategySupervisor:
+    return MovingAverageStrategySupervisor(
+    )
+
+
+@pytest.fixture()
 def moving_average_strategy_trader(
     strategy: MovingAverageStrategy,
     settings: MovingAverageStrategySettings,
@@ -434,6 +446,7 @@ def moving_average_strategy_trader(
     state: MovingAverageStrategyState,
     signal_executor: MovingAverageSignalExecutor,
     account_manager: AccountManager,
+    supervisor: MovingAverageStrategySupervisor,
 ) -> MovingAverageStrategyTrader:
     return MovingAverageStrategyTrader(
         strategy=strategy,
@@ -442,7 +455,15 @@ def moving_average_strategy_trader(
         state=state,
         signal_executor=signal_executor,
         account_manager=account_manager,
+        supervisor=supervisor,
     )
+
+
+@pytest.fixture()
+def plotter(
+    settings: MovingAverageStrategySettings,
+) -> MovingAverageStrategyPlotter:
+    return MovingAverageStrategyPlotter(settings=settings    )
 
 
 class TestMovingAverageStrategyTrader:
@@ -453,6 +474,8 @@ class TestMovingAverageStrategyTrader:
         strategy: MovingAverageStrategy,
         account_manager: AccountManager,
         signal_executor: MovingAverageSignalExecutor,
+        plotter: MovingAverageStrategyPlotter,
+        supervisor: MovingAverageStrategySupervisor,
         caplog,
         freezer,
     ):
@@ -469,4 +492,6 @@ class TestMovingAverageStrategyTrader:
         assert initial_balance != current_balance
         logger.info("Initial balance %s", initial_balance)
         logger.info("Current balance %s", current_balance)
-        strategy.plot()
+
+        events = supervisor.get_events()
+        plotter.plot(events)

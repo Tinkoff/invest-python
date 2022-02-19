@@ -28,6 +28,8 @@ from tinkoff.invest.strategies.moving_average.strategy_settings import (
 from tinkoff.invest.strategies.moving_average.strategy_state import (
     MovingAverageStrategyState,
 )
+from tinkoff.invest.strategies.moving_average.supervisor import \
+    MovingAverageStrategySupervisor
 from tinkoff.invest.utils import (
     candle_interval_to_timedelta,
     ceil_datetime,
@@ -55,41 +57,6 @@ class MovingAverageStrategy(InvestStrategy):
         self._candle_interval_timedelta = candle_interval_to_timedelta(
             self._settings.candle_interval
         )
-
-    def plot(self):
-        quotes = {
-            "open": [float(e.candle.open) for e in self._data],
-            "close": [float(e.candle.close) for e in self._data],
-            "high": [float(e.candle.high) for e in self._data],
-            "low": [float(e.candle.low) for e in self._data],
-            "volume": [float(e.volume) for e in self._data],
-            "time": [e.time for e in self._data],
-        }
-
-        df = pd.DataFrame(quotes, index=quotes["time"])
-
-        mav = {
-            "ma_short": int(
-                self._settings.short_period / self._candle_interval_timedelta
-            ),
-            "ma_long": int(
-                self._settings.long_period / self._candle_interval_timedelta
-            ),
-        }
-        _, axes = mpf.plot(
-            df,
-            type="candle",
-            volume=True,
-            figsize=(11, 8),
-            panel_ratios=(2, 1),
-            mav=tuple(mav.values()),
-            title=self._settings.share_id,
-            style="charles",
-            returnfig=True,
-        )
-        axes[0].legend(mav)
-
-        mpf.show()
 
     def _ensure_enough_candles(self) -> None:
         date = now() - (self._settings.short_period + self._settings.long_period)
