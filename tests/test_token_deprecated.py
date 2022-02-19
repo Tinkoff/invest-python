@@ -8,7 +8,7 @@ def test_warns_when_token_imported():
         warnings.simplefilter("always")
         os.environ["INVEST_TOKEN"] = uuid.uuid4().hex
 
-        import tinkoff.invest.token as token
+        import tinkoff.invest.token as token  # pylint: disable=R0402,C0415
 
         assert token
 
