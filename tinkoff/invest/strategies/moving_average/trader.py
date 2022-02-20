@@ -59,6 +59,8 @@ class MovingAverageStrategyTrader(Trader):
         self._data = list(
             self._load_candles(self._settings.short_period + self._settings.long_period)
         )
+        for candle_event in self._data:
+            self._supervisor.notify(self._convert_to_data_event(candle_event))
         self._ensure_marginal_trade_active()
 
         self._subscribe()
