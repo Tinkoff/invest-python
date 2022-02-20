@@ -5,7 +5,6 @@ from decimal import Decimal
 from typing import Dict, Iterable, List
 
 import pytest
-from dateutil import tz
 
 from tinkoff.invest import (
     Candle,
@@ -38,8 +37,6 @@ from tinkoff.invest.utils import candle_interval_to_subscription_interval, now
 
 logging.basicConfig(format="%(asctime)s %(levelname)s:%(message)s", level=logging.INFO)
 logger = logging.getLogger(__name__)
-
-MSK = tz.gettz("Europe/Moscow")
 
 
 @pytest.fixture()
@@ -215,7 +212,7 @@ def settings(figi: str, account_id: AccountId) -> MovingAverageStrategySettings:
 
 
 def start_datetime() -> datetime:
-    return datetime(year=2022, month=2, day=16, hour=17, tzinfo=MSK)
+    return datetime(year=2022, month=2, day=16, hour=17)
 
 
 class TestMovingAverageStrategyTraderRealMarketData:
