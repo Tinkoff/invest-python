@@ -1,29 +1,21 @@
 import logging
 import os
-from datetime import timedelta, datetime
+from datetime import datetime, timedelta
 from decimal import Decimal
-from math import exp, sqrt
-from random import gauss, seed
-from typing import Callable, Dict, Iterable, Iterator, List, Optional
+from typing import Dict, Iterable, List
 
 import pytest
-from grpc import StatusCode
+from dateutil import tz
 
 from tinkoff.invest import (
     Candle,
     CandleInterval,
-    Client,
-    GetCandlesResponse,
-    GetMarginAttributesResponse,
     HistoricCandle,
     MarketDataResponse,
     MoneyValue,
-    OrderDirection,
-    OrderType,
     PortfolioPosition,
     PortfolioResponse,
     Quotation,
-    RequestError,
 )
 from tinkoff.invest.services import Services
 from tinkoff.invest.strategies.base.account_manager import AccountManager
@@ -37,32 +29,22 @@ from tinkoff.invest.strategies.moving_average.strategy import MovingAverageStrat
 from tinkoff.invest.strategies.moving_average.strategy_settings import (
     MovingAverageStrategySettings,
 )
-from tinkoff.invest.strategies.moving_average.strategy_state import (
-    MovingAverageStrategyState,
-)
 from tinkoff.invest.strategies.moving_average.supervisor import (
     MovingAverageStrategySupervisor,
 )
 from tinkoff.invest.strategies.moving_average.trader import MovingAverageStrategyTrader
 from tinkoff.invest.typedefs import AccountId, ShareId
-from tinkoff.invest.utils import (
-    candle_interval_to_subscription_interval,
-    candle_interval_to_timedelta,
-    decimal_to_quotation,
-    now,
-    quotation_to_decimal,
-)
-from dateutil import tz
+from tinkoff.invest.utils import candle_interval_to_subscription_interval, now
 
 logging.basicConfig(format="%(asctime)s %(levelname)s:%(message)s", level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-MSK = tz.gettz('Europe/Moscow')
+MSK = tz.gettz("Europe/Moscow")
 
 
 @pytest.fixture()
 def token() -> str:
-    return os.environ['INVEST_TOKEN']
+    return os.environ["INVEST_TOKEN"]
 
 
 @pytest.fixture()
@@ -105,7 +87,8 @@ def initial_candles(
     real_market_data: Iterable[HistoricCandle],
 ) -> Iterable[HistoricCandle]:
     return [
-        candle for candle in real_market_data
+        candle
+        for candle in real_market_data
         if candle.time < real_market_data_test_start
     ]
 
@@ -116,25 +99,10 @@ def after_start_candles(
     real_market_data: Iterable[HistoricCandle],
 ) -> Iterable[HistoricCandle]:
     return [
-        candle for candle in real_market_data
+        candle
+        for candle in real_market_data
         if candle.time >= real_market_data_test_start
     ]
-
-
-# @pytest.fixture()
-# def mock_market_data_service(
-#     real_services: Services,
-#     mocker,
-#     initial_candles: List[HistoricCandle],
-# ) -> Services:
-#     real_services.get_all_candles = mocker.Mock(wraps=real_services.get_all_candles)
-#
-#     real_services.get_all_candles = mocker.Mock()
-#
-#     real_services.get_all_candles.return_value = initial_candles
-#
-#     return real_services
-
 
 
 @pytest.fixture()
@@ -163,9 +131,7 @@ def mock_market_data_stream_service(
     def _market_data_stream(*args, **kwargs):
         yield MarketDataResponse(candle=None)  # type: ignore
 
-        interval = candle_interval_to_subscription_interval(
-            settings.candle_interval
-        )
+        interval = candle_interval_to_subscription_interval(settings.candle_interval)
         for historic_candle in after_start_candles:
             candle = Candle(
                 figi=figi,
@@ -180,7 +146,6 @@ def mock_market_data_stream_service(
             current_market_data.append(candle)
             yield MarketDataResponse(candle=candle)
             freezer.move_to(now() + timedelta(minutes=1))
-            # freezer.move_to(historic_candle.time)
 
     real_services.market_data_stream.market_data_stream = _market_data_stream
 
@@ -257,11 +222,11 @@ class TestMovingAverageStrategyTraderRealMarketData:
     @pytest.mark.freeze_time()
     @pytest.mark.parametrize(
         (
-        'real_market_data_test_from',
-        'real_market_data_test_start',
-        'real_market_data_test_end',
-        )
-    , [
+            "real_market_data_test_from",
+            "real_market_data_test_start",
+            "real_market_data_test_end",
+        ),
+        [
             (
                 start_datetime() - timedelta(days=1),
                 start_datetime(),
