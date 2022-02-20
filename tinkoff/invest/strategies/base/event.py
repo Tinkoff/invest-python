@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from datetime import datetime
 
 from tinkoff.invest.strategies.base.models import CandleEvent
-from tinkoff.invest.strategies.base.signal import Signal
+from tinkoff.invest.strategies.base.signal import OrderSignal
 
 
 @dataclass
@@ -17,5 +17,5 @@ class DataEvent(StrategyEvent):
 
 @dataclass
 class SignalEvent(StrategyEvent):
-    signal: Signal
+    signal: OrderSignal
     was_executed: bool

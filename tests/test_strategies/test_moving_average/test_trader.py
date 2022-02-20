@@ -484,4 +484,3 @@ class TestMovingAverageStrategyTrader:
 
         events = supervisor.get_events()
         plotter.plot(events)
-        assert 0
