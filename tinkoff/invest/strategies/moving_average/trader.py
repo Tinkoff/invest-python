@@ -143,7 +143,7 @@ class MovingAverageStrategyTrader(Trader):
         )
 
     def _get_signals(self) -> List[Signal]:
-        signals = list(self._strategy.predict())  # todo pass state to predict
+        signals = list(self._strategy.predict())
         return [
             *self._filter_closing_signals(signals),
             *self._filter_opening_signals(signals),

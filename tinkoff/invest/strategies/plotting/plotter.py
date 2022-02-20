@@ -12,7 +12,7 @@ logger = logging.getLogger(__name__)
 
 
 class IPlotter(Protocol):
-    def plot(self, plot_events: Iterable[StrategyEvent]) -> None:
+    def plot(self, strategy_events: Iterable[StrategyEvent]) -> None:
         pass
 
 

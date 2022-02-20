@@ -152,13 +152,13 @@ class MovingAverageStrategyPlotter(StrategyPlotter):
 
         plots = []
         for was_executed_flag in [False, True]:
-            for signal_type in signal_event_types_to_event_index.keys():
-                if kwargs := self._get_plot_for_signal_type(
+            for signal_type in signal_event_types_to_event_index:
+                kwargs = self._get_plot_for_signal_type(
                     signal_type=signal_type,
                     signal_event_types_to_event_index=signal_event_types_to_event_index,
                     data_events=data_events,
                     was_executed_flag=was_executed_flag,
-                ):
-                    plots.append(kwargs)
+                )
+                plots.append(kwargs)
 
-        return plots
+        return filter(lambda p: p is not None, plots)
