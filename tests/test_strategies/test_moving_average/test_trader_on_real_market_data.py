@@ -1,6 +1,6 @@
 import logging
 import os
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from decimal import Decimal
 from typing import Dict, Iterable, List
 
@@ -206,16 +206,20 @@ def settings(figi: str, account_id: AccountId) -> MovingAverageStrategySettings:
         max_transaction_price=Decimal(10000),
         candle_interval=CandleInterval.CANDLE_INTERVAL_1_MIN,
         long_period=timedelta(minutes=100),
-        short_period=timedelta(minutes=20),
+        short_period=timedelta(minutes=50),
         std_period=timedelta(minutes=30),
     )
 
 
 def start_datetime() -> datetime:
-    return datetime(year=2022, month=2, day=16, hour=17)
+    return datetime(year=2022, month=2, day=16, hour=17, tzinfo=timezone.utc)
 
 
 class TestMovingAverageStrategyTraderRealMarketData:
+    @pytest.mark.skipif(
+        os.environ.get("INVEST_TOKEN") is None,
+        reason="Run locally with token specified",
+    )
     @pytest.mark.freeze_time()
     @pytest.mark.parametrize(
         (
@@ -248,10 +252,7 @@ class TestMovingAverageStrategyTraderRealMarketData:
 
         initial_balance = account_manager.get_current_balance()
 
-        events = supervisor.get_events()
-        plotter.plot(events)
-
-        for i in range(5):
+        for i in range(50):
             logger.info("Trade %s", i)
             moving_average_strategy_trader.trade()
 
