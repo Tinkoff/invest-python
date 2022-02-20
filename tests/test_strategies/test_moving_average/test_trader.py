@@ -26,8 +26,9 @@ from tinkoff.invest import (
 )
 from tinkoff.invest.services import Services
 from tinkoff.invest.strategies.base.account_manager import AccountManager
-from tinkoff.invest.strategies.moving_average.plotter import \
-    MovingAverageStrategyPlotter
+from tinkoff.invest.strategies.moving_average.plotter import (
+    MovingAverageStrategyPlotter,
+)
 from tinkoff.invest.strategies.moving_average.signal_executor import (
     MovingAverageSignalExecutor,
 )
@@ -38,10 +39,10 @@ from tinkoff.invest.strategies.moving_average.strategy_settings import (
 from tinkoff.invest.strategies.moving_average.strategy_state import (
     MovingAverageStrategyState,
 )
-from tinkoff.invest.strategies.moving_average.supervisor import \
-    MovingAverageStrategySupervisor
+from tinkoff.invest.strategies.moving_average.supervisor import (
+    MovingAverageStrategySupervisor,
+)
 from tinkoff.invest.strategies.moving_average.trader import MovingAverageStrategyTrader
-from tinkoff.invest.strategies.plotting.plotter import StrategyPlotter
 from tinkoff.invest.typedefs import AccountId, ShareId
 from tinkoff.invest.utils import (
     candle_interval_to_subscription_interval,
@@ -338,16 +339,6 @@ def mock_orders_service(
         )
         new_balance = decimal_to_quotation(old_balance + balance_delta)
 
-        if quotation_to_decimal(new_balance) < 0:
-            logger.warning(
-                "You have debt!, Balance: %s", quotation_to_decimal(new_balance)
-            )
-            raise RequestError(
-                code=StatusCode.ABORTED,
-                details=f"Not enough money: {old_balance}",
-                metadata=None,
-            )
-
         balance.units = new_balance.units
         balance.nano = new_balance.nano
 
@@ -432,10 +423,8 @@ def signal_executor(
 
 
 @pytest.fixture()
-def supervisor(
-) -> MovingAverageStrategySupervisor:
-    return MovingAverageStrategySupervisor(
-    )
+def supervisor() -> MovingAverageStrategySupervisor:
+    return MovingAverageStrategySupervisor()
 
 
 @pytest.fixture()
@@ -463,7 +452,7 @@ def moving_average_strategy_trader(
 def plotter(
     settings: MovingAverageStrategySettings,
 ) -> MovingAverageStrategyPlotter:
-    return MovingAverageStrategyPlotter(settings=settings    )
+    return MovingAverageStrategyPlotter(settings=settings)
 
 
 class TestMovingAverageStrategyTrader:
@@ -495,3 +484,4 @@ class TestMovingAverageStrategyTrader:
 
         events = supervisor.get_events()
         plotter.plot(events)
+        assert 0

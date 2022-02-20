@@ -16,6 +16,4 @@ class StrategySettings:
 
     @property
     def candle_interval_timedelta(self) -> timedelta:
-        return candle_interval_to_timedelta(
-            self.candle_interval
-        )
+        return candle_interval_to_timedelta(self.candle_interval)

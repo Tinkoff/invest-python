@@ -1,5 +1,5 @@
 import abc
-from typing import Protocol, Iterable, Type, TypeVar
+from typing import Iterable, Protocol, Type, TypeVar
 
 from tinkoff.invest.strategies.base.event import StrategyEvent
 

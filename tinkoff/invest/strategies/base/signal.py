@@ -1,4 +1,10 @@
-from dataclasses import dataclass
+import enum
+from dataclasses import dataclass, field
+
+
+class SignalDirection(enum.Enum):
+    LONG = "LONG"
+    SHORT = "SHORT"
 
 
 @dataclass
@@ -9,6 +15,7 @@ class Signal:
 @dataclass
 class OrderSignal(Signal):
     lots: int
+    direction: SignalDirection
 
 
 @dataclass
@@ -23,19 +30,19 @@ class OpenSignal(OrderSignal):
 
 @dataclass
 class OpenLongMarketOrder(OpenSignal):
-    pass
+    direction: SignalDirection = field(default=SignalDirection.LONG)
 
 
 @dataclass
 class CloseLongMarketOrder(CloseSignal):
-    pass
+    direction: SignalDirection = field(default=SignalDirection.LONG)
 
 
 @dataclass
 class OpenShortMarketOrder(OpenSignal):
-    pass
+    direction: SignalDirection = field(default=SignalDirection.SHORT)
 
 
 @dataclass
 class CloseShortMarketOrder(CloseSignal):
-    pass
+    direction: SignalDirection = field(default=SignalDirection.SHORT)

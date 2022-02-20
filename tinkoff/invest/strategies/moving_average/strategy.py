@@ -3,9 +3,7 @@ from datetime import datetime, timedelta
 from decimal import Decimal
 from typing import Callable, Iterable, List
 
-import mplfinance as mpf
 import numpy as np
-import pandas as pd
 
 from tinkoff.invest.strategies.base.account_manager import AccountManager
 from tinkoff.invest.strategies.base.errors import (
@@ -28,8 +26,6 @@ from tinkoff.invest.strategies.moving_average.strategy_settings import (
 from tinkoff.invest.strategies.moving_average.strategy_state import (
     MovingAverageStrategyState,
 )
-from tinkoff.invest.strategies.moving_average.supervisor import \
-    MovingAverageStrategySupervisor
 from tinkoff.invest.utils import (
     candle_interval_to_timedelta,
     ceil_datetime,

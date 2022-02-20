@@ -6,10 +6,11 @@ from typing import Iterator, List
 import tinkoff
 from tinkoff.invest import (
     CandleInstrument,
+    InvestError,
     MarketDataRequest,
     MarketDataResponse,
     SubscribeCandlesRequest,
-    SubscriptionAction, InvestError,
+    SubscriptionAction,
 )
 from tinkoff.invest.services import Services
 from tinkoff.invest.strategies.base.account_manager import AccountManager
@@ -25,8 +26,9 @@ from tinkoff.invest.strategies.moving_average.strategy_settings import (
 from tinkoff.invest.strategies.moving_average.strategy_state import (
     MovingAverageStrategyState,
 )
-from tinkoff.invest.strategies.moving_average.supervisor import \
-    MovingAverageStrategySupervisor
+from tinkoff.invest.strategies.moving_average.supervisor import (
+    MovingAverageStrategySupervisor,
+)
 from tinkoff.invest.utils import candle_interval_to_subscription_interval, now
 
 logger = logging.getLogger(__name__)
@@ -136,7 +138,9 @@ class MovingAverageStrategyTrader(Trader):
             was_executed = False
         else:
             was_executed = True
-        self._supervisor.notify(SignalEvent(signal=signal, was_executed=was_executed, time=now()))
+        self._supervisor.notify(
+            SignalEvent(signal=signal, was_executed=was_executed, time=now())
+        )
 
     def _get_signals(self) -> List[Signal]:
         signals = list(self._strategy.predict())  # todo pass state to predict

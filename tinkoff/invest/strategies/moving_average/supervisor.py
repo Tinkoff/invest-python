@@ -1,10 +1,12 @@
 from itertools import chain
-from typing import Iterable, List, Type, Dict, cast
+from typing import Dict, Iterable, List, Type, cast
 
 from tinkoff.invest.strategies.base.errors import EventsWereNotSupervised
 from tinkoff.invest.strategies.base.event import StrategyEvent
-from tinkoff.invest.strategies.base.strategy_supervisor import StrategySupervisor, \
-    TEvent
+from tinkoff.invest.strategies.base.strategy_supervisor import (
+    StrategySupervisor,
+    TEvent,
+)
 
 
 class MovingAverageStrategySupervisor(StrategySupervisor):
