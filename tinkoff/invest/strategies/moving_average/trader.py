@@ -157,7 +157,8 @@ class MovingAverageStrategyTrader(Trader):
             self._refresh_data()
 
             signals = self._get_signals()
-            logger.info("Got signals %s", signals)
+            if signals:
+                logger.info("Got signals %s", signals)
             for signal in signals:
                 self._execute(signal)
             if self._state.position == 0:
