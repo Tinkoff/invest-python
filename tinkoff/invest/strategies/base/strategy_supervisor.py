@@ -1,9 +1,7 @@
 import abc
-from typing import Iterable, Protocol, Type, TypeVar
+from typing import Iterable, Protocol, Type
 
 from tinkoff.invest.strategies.base.event import StrategyEvent
-
-TEvent = TypeVar("TEvent", bound=StrategyEvent)
 
 
 class IStrategySupervisor(Protocol):
@@ -13,7 +11,7 @@ class IStrategySupervisor(Protocol):
     def get_events(self) -> Iterable[StrategyEvent]:
         pass
 
-    def get_events_of_type(self, cls: Type[TEvent]) -> Iterable[TEvent]:
+    def get_events_of_type(self, cls: Type[StrategyEvent]) -> Iterable[StrategyEvent]:
         pass
 
 
@@ -27,5 +25,5 @@ class StrategySupervisor(abc.ABC, IStrategySupervisor):
         pass
 
     @abc.abstractmethod
-    def get_events_of_type(self, cls: Type[TEvent]) -> Iterable[TEvent]:
+    def get_events_of_type(self, cls: Type[StrategyEvent]) -> Iterable[StrategyEvent]:
         pass

@@ -3,10 +3,7 @@ from typing import Dict, Iterable, List, Type, cast
 
 from tinkoff.invest.strategies.base.errors import EventsWereNotSupervised
 from tinkoff.invest.strategies.base.event import StrategyEvent
-from tinkoff.invest.strategies.base.strategy_supervisor import (
-    StrategySupervisor,
-    TEvent,
-)
+from tinkoff.invest.strategies.base.strategy_supervisor import StrategySupervisor
 
 
 class MovingAverageStrategySupervisor(StrategySupervisor):
@@ -21,7 +18,7 @@ class MovingAverageStrategySupervisor(StrategySupervisor):
     def get_events(self) -> Iterable[StrategyEvent]:
         return cast(Iterable[StrategyEvent], chain(*self._events.values()))
 
-    def get_events_of_type(self, cls: Type[TEvent]) -> Iterable[TEvent]:
+    def get_events_of_type(self, cls: Type[StrategyEvent]) -> List[StrategyEvent]:
         if cls in self._events:
             return self._events[cls]
         raise EventsWereNotSupervised()

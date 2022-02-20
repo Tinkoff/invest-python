@@ -1,5 +1,5 @@
 import logging
-from typing import Dict, List, Optional, Type, cast
+from typing import Any, Dict, List, Optional, Type, cast
 
 import numpy as np
 import pandas as pd
@@ -10,6 +10,7 @@ from tinkoff.invest.strategies.base.signal import (
     CloseShortMarketOrder,
     OpenLongMarketOrder,
     OpenShortMarketOrder,
+    OrderSignal,
     Signal,
     SignalDirection,
 )
@@ -25,7 +26,7 @@ class MovingAverageStrategyPlotter(StrategyPlotter):
     def __init__(self, settings: MovingAverageStrategySettings):
         self._was_not_executed_color = "grey"
         self._settings = settings
-        self._signal_type_to_style_map = {
+        self._signal_type_to_style_map: Dict[Type[Signal], Dict[str, Any]] = {
             OpenLongMarketOrder: dict(
                 type="scatter", markersize=50, marker="^", color="green"
             ),
@@ -114,9 +115,10 @@ class MovingAverageStrategyPlotter(StrategyPlotter):
             if was_executed_flag == signal_event.was_executed:
                 has_signal = True
                 candle = data_events[index].candle_event.candle
-                price[index] = self._signal_type_to_candle_point_map[
-                    signal_event.signal.direction
-                ](candle)
+                signal = cast(OrderSignal, signal_event.signal)
+                price[index] = self._signal_type_to_candle_point_map[signal.direction](
+                    candle
+                )
             if not signal_event.was_executed:
                 color = self._was_not_executed_color
         if not has_signal:
@@ -138,7 +140,9 @@ class MovingAverageStrategyPlotter(StrategyPlotter):
         first_data_event, last_data_event = data_events[0], data_events[-1]
         data_events_timedelta = last_data_event.time - first_data_event.time
 
-        signal_event_types_to_event_index = {}
+        signal_event_types_to_event_index: Dict[
+            Type[Signal], Dict[int, SignalEvent]
+        ] = {}
         for signal_event in signal_events:
             signal_type = type(signal_event.signal)
             event_index = int(
@@ -161,4 +165,4 @@ class MovingAverageStrategyPlotter(StrategyPlotter):
                 )
                 plots.append(kwargs)
 
-        return filter(lambda p: p is not None, plots)
+        return cast(List[PlotKwargs], list(filter(lambda p: p is not None, plots)))
