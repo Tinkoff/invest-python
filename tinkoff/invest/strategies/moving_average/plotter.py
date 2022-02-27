@@ -1,6 +1,7 @@
 import logging
 from typing import Any, Dict, List, Optional, Type, cast
 
+import mplfinance as mpf
 import numpy as np
 import pandas as pd
 
@@ -83,6 +84,9 @@ class MovingAverageStrategyPlotter(StrategyPlotter):
                 self._settings.long_period / self._settings.candle_interval_timedelta
             ),
         }
+        style = mpf.make_mpf_style(
+            base_mpf_style="charles", mavcolors=["#1f77b4", "#ff7f0e", "#2ca02c"]
+        )
         return cast(
             PlotKwargs,
             dict(
@@ -93,7 +97,7 @@ class MovingAverageStrategyPlotter(StrategyPlotter):
                 panel_ratios=(2, 1),
                 mav=tuple(mav.values()),
                 title=self._settings.share_id,
-                style="charles",
+                style=style,
                 returnfig=True,
             ),
         )

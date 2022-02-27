@@ -1,4 +1,3 @@
-import asyncio
 import logging
 from datetime import timedelta
 from typing import Iterator, List
@@ -14,6 +13,7 @@ from tinkoff.invest import (
 )
 from tinkoff.invest.services import Services
 from tinkoff.invest.strategies.base.account_manager import AccountManager
+from tinkoff.invest.strategies.base.errors import MarketDataNotAvailableError
 from tinkoff.invest.strategies.base.event import DataEvent, SignalEvent
 from tinkoff.invest.strategies.base.models import CandleEvent
 from tinkoff.invest.strategies.base.signal import CloseSignal, OpenSignal, Signal
@@ -122,9 +122,9 @@ class MovingAverageStrategyTrader(Trader):
         logger.info("Refreshing data")
         try:
             self._make_observations()
-        except asyncio.TimeoutError:
-            logger.info("Fresh quotations loaded")
-            return
+        except StopIteration:
+            logger.info("Fresh quotations not available")
+            raise MarketDataNotAvailableError()
 
     def _filter_closing_signals(self, signals: List[Signal]) -> List[Signal]:
         return list(filter(lambda signal: isinstance(signal, CloseSignal), signals))

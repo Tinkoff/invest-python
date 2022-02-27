@@ -26,6 +26,10 @@ class OldCandleObservingError(StrategyError):
     pass
 
 
+class MarketDataNotAvailableError(StrategyError):
+    pass
+
+
 class StrategySupervisorError(Exception):
     pass
 
