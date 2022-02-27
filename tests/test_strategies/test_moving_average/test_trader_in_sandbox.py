@@ -2,6 +2,7 @@ import logging
 import os
 from datetime import timedelta
 from decimal import Decimal
+from typing import Iterator
 
 import pytest
 
@@ -43,7 +44,7 @@ def token() -> str:
 @pytest.fixture()
 def account(
     token: str, real_services: Services, balance: MoneyValue
-) -> OpenSandboxAccountResponse:
+) -> Iterator[OpenSandboxAccountResponse]:
     sandbox: SandboxService = real_services.sandbox
     account_response = sandbox.open_sandbox_account()
     account_id = account_response.account_id
@@ -143,7 +144,7 @@ def settings(figi: str, account_id: AccountId) -> MovingAverageStrategySettings:
 class TestMovingAverageStrategyTraderInSandbox:
     @pytest.mark.skipif(
         os.environ.get("INVEST_SANDBOX_TOKEN") is None,
-        reason="Run locally with token specified",
+        reason="Run locally with INVEST_SANDBOX_TOKEN specified",
     )
     def test_trade(
         self,

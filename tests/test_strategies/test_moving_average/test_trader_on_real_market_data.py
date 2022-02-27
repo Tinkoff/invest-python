@@ -41,7 +41,7 @@ logger = logging.getLogger(__name__)
 
 @pytest.fixture()
 def token() -> str:
-    return os.environ["INVEST_TOKEN"]
+    return os.environ["INVEST_SANDBOX_TOKEN"]
 
 
 @pytest.fixture()
@@ -217,8 +217,8 @@ def start_datetime() -> datetime:
 
 class TestMovingAverageStrategyTraderRealMarketData:
     @pytest.mark.skipif(
-        os.environ.get("INVEST_TOKEN") is None,
-        reason="Run locally with token specified",
+        os.environ.get("INVEST_SANDBOX_TOKEN") is None,
+        reason="Run locally with INVEST_SANDBOX_TOKEN specified",
     )
     @pytest.mark.freeze_time()
     @pytest.mark.parametrize(
