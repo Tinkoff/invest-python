@@ -122,9 +122,9 @@ class MovingAverageStrategyTrader(Trader):
         logger.info("Refreshing data")
         try:
             self._make_observations()
-        except StopIteration:
+        except StopIteration as e:
             logger.info("Fresh quotations not available")
-            raise MarketDataNotAvailableError()
+            raise MarketDataNotAvailableError() from e
 
     def _filter_closing_signals(self, signals: List[Signal]) -> List[Signal]:
         return list(filter(lambda signal: isinstance(signal, CloseSignal), signals))
