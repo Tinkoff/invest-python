@@ -1,4 +1,5 @@
 import logging
+from datetime import datetime, timedelta
 from typing import Any, Dict, List, Optional, Type, cast
 
 import mplfinance as mpf
@@ -63,6 +64,11 @@ class MovingAverageStrategyPlotter(StrategyPlotter):
             list(filter(lambda e: isinstance(e, SignalEvent), strategy_events)),
         )
 
+    def _get_interval_count_between_dates(
+        self, start: datetime, end: datetime, interval_delta: timedelta
+    ) -> float:
+        return (end - start) / interval_delta
+
     def get_candle_plot_kwargs(
         self, strategy_events: List[StrategyEvent]
     ) -> PlotKwargs:
@@ -76,12 +82,22 @@ class MovingAverageStrategyPlotter(StrategyPlotter):
             "time": [e.candle_event.time for e in data_events],
         }
         df = pd.DataFrame(quotes, index=quotes["time"])
+        interval_count = self._get_interval_count_between_dates(
+            start=df["time"].idxmin(),
+            end=df["time"].idxmax(),
+            interval_delta=self._settings.candle_interval_timedelta,
+        )
+        non_trading_coefficient = len(data_events) / interval_count
         mav = {
             "ma_short": int(
-                self._settings.short_period / self._settings.candle_interval_timedelta
+                self._settings.short_period
+                / self._settings.candle_interval_timedelta
+                * non_trading_coefficient
             ),
             "ma_long": int(
-                self._settings.long_period / self._settings.candle_interval_timedelta
+                self._settings.long_period
+                / self._settings.candle_interval_timedelta
+                * non_trading_coefficient
             ),
         }
         style = mpf.make_mpf_style(
