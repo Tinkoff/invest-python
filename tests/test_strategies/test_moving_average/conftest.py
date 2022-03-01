@@ -56,7 +56,7 @@ logger = logging.getLogger(__name__)
 seed(1338)
 
 
-def create_GBM(s0, mu, sigma) -> Callable[[int], Iterable[float]]:
+def create_noise(s0, mu, sigma) -> Callable[[int], Iterable[float]]:
     """
     Generates a price following a geometric brownian motion process based on the input.
     - s0: Asset initial price.
@@ -80,12 +80,12 @@ def create_GBM(s0, mu, sigma) -> Callable[[int], Iterable[float]]:
 
 @pytest.fixture()
 def stock_prices_generator() -> Callable[[int], Iterable[float]]:
-    return create_GBM(100, 0.01, 0.1)
+    return create_noise(100, 0.01, 0.1)
 
 
 @pytest.fixture()
 def stock_volume_generator() -> Callable[[int], Iterable[float]]:
-    return create_GBM(1000, 0.9, 1.1)
+    return create_noise(1000, 0.9, 1.1)
 
 
 @pytest.fixture()
