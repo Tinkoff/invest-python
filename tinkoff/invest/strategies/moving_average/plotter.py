@@ -29,18 +29,30 @@ class MovingAverageStrategyPlotter(StrategyPlotter):
         self._was_not_executed_color = "grey"
         self._settings = settings
         self._signal_type_to_style_map: Dict[Type[Signal], Dict[str, Any]] = {
-            OpenLongMarketOrder: dict(
-                type="scatter", markersize=50, marker="^", color="green"
-            ),
-            CloseLongMarketOrder: dict(
-                type="scatter", markersize=50, marker="^", color="black"
-            ),
-            OpenShortMarketOrder: dict(
-                type="scatter", markersize=50, marker="v", color="red"
-            ),
-            CloseShortMarketOrder: dict(
-                type="scatter", markersize=50, marker="v", color="black"
-            ),
+            OpenLongMarketOrder: {
+                "type": "scatter",
+                "markersize": 50,
+                "marker": "^",
+                "color": "green",
+            },
+            CloseLongMarketOrder: {
+                "type": "scatter",
+                "markersize": 50,
+                "marker": "^",
+                "color": "black",
+            },
+            OpenShortMarketOrder: {
+                "type": "scatter",
+                "markersize": 50,
+                "marker": "v",
+                "color": "red",
+            },
+            CloseShortMarketOrder: {
+                "type": "scatter",
+                "markersize": 50,
+                "marker": "v",
+                "color": "black",
+            },
         }
 
         self._signal_type_to_candle_point_map = {
@@ -105,17 +117,17 @@ class MovingAverageStrategyPlotter(StrategyPlotter):
         )
         return cast(
             PlotKwargs,
-            dict(
-                data=df,
-                type="candle",
-                volume=True,
-                figsize=(11, 8),
-                panel_ratios=(2, 1),
-                mav=tuple(mav.values()),
-                title=self._settings.share_id,
-                style=style,
-                returnfig=True,
-            ),
+            {
+                "data": df,
+                "type": "candle",
+                "volume": True,
+                "figsize": (11, 8),
+                "panel_ratios": (2, 1),
+                "mav": tuple(mav.values()),
+                "title": self._settings.share_id,
+                "style": style,
+                "returnfig": True,
+            },
         )
 
     def _get_plot_for_signal_type(
@@ -143,7 +155,7 @@ class MovingAverageStrategyPlotter(StrategyPlotter):
                 color = self._was_not_executed_color
         if not has_signal:
             return None
-        style |= dict(color=color)
+        style |= {"color": color}
         params = {
             "price": price,
             "time": [e.candle_event.time for e in data_events],
