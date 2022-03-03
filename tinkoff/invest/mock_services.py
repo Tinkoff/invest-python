@@ -5,8 +5,8 @@ from decimal import Decimal
 from functools import cached_property
 from typing import Any, Callable, Generator, List, Optional
 
-from freezegun import freeze_time
 from grpc import Channel
+from pytest_freezegun import freeze_time
 
 from tinkoff.invest import (
     Candle,
