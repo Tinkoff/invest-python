@@ -92,15 +92,15 @@ class MockedServices(Services):
         self.users.get_margin_attributes = self._mocked_users_get_margin_attributes()
 
     def _mocked_orders_post_order(self) -> Callable[[Any], Any]:
-        def _post_order(
+        def _post_order(  # pylint: disable=too-many-locals
             *,
             figi: str = "",
             quantity: int = 0,
-            price: Optional[Quotation] = None,
+            price: Optional[Quotation] = None,  # pylint: disable=unused-argument
             direction: OrderDirection = OrderDirection(0),
             account_id: str = "",
             order_type: OrderType = OrderType(0),
-            order_id: str = "",
+            order_id: str = "",  # pylint: disable=unused-argument
         ):
             assert figi == self._settings.share_id
             assert quantity > 0
@@ -160,7 +160,7 @@ class MockedServices(Services):
         )
 
     def _mocked_operations_get_portfolio(self) -> Callable[[Any], Any]:
-        def _get_portfolio(*args, **kwars):
+        def _get_portfolio(*args, **kwars):  # pylint: disable=unused-argument
             return self._portfolio_response
 
         return _get_portfolio
@@ -168,7 +168,7 @@ class MockedServices(Services):
     def _mocked_market_data_stream(self) -> Callable[[Any], Any]:
         self._frozen_datetime.move_to(self._real_market_data_test_start)
 
-        def _market_data_stream(*args, **kwargs):
+        def _market_data_stream(*args, **kwargs):  # pylint: disable=unused-argument
             yield MarketDataResponse(candle=None)  # type: ignore
 
             interval = candle_interval_to_subscription_interval(
@@ -220,13 +220,13 @@ class MockedServices(Services):
         ]
 
     def _mocked_market_data_get_candles(self):
-        def _get_candles(*args, **kwargs):
+        def _get_candles(*args, **kwargs):  # pylint: disable=unused-argument
             return GetCandlesResponse(candles=self._initial_candles)
 
         return _get_candles
 
     def _mocked_users_get_margin_attributes(self):
-        def _get_margin_attributes(*agrs, **kwargs):
+        def _get_margin_attributes(*agrs, **kwargs):  # pylint: disable=unused-argument
             return GetMarginAttributesResponse(
                 liquid_portfolio=MoneyValue(currency="", units=0, nano=0),
                 starting_margin=MoneyValue(currency="", units=0, nano=0),
