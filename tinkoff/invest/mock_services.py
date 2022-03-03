@@ -3,7 +3,7 @@ from contextlib import contextmanager
 from datetime import datetime, timedelta
 from decimal import Decimal
 from functools import cached_property
-from typing import Any, Callable, Generator, List, Optional
+from typing import Any, Callable, Dict, Generator, List, Optional
 
 from grpc import Channel
 from pytest_freezegun import freeze_time
@@ -75,8 +75,8 @@ class MockedServices(Services):
         super().__init__(channel, token)
         self._settings = settings
         self._figi = settings.share_id
-        self._current_market_data = []
-        self._portfolio_positions = {}
+        self._current_market_data: List[Candle] = []
+        self._portfolio_positions: Dict[str, PortfolioPosition] = {}
         self._real_market_data_test_from = real_market_data_test_from
         self._real_market_data_test_start = real_market_data_test_start
         self._real_market_data_test_end = real_market_data_test_end
@@ -145,7 +145,7 @@ class MockedServices(Services):
 
             self._portfolio_positions[figi] = position
 
-        return _post_order
+        return _post_order  # type: ignore
 
     @cached_property
     def _portfolio_response(self) -> PortfolioResponse:
