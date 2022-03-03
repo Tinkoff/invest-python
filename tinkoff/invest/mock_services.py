@@ -1,22 +1,36 @@
 import logging
 from contextlib import contextmanager
-from datetime import timedelta, datetime
+from datetime import datetime, timedelta
 from decimal import Decimal
 from functools import cached_property
-from typing import Optional, Callable, Any, List, Dict, Generator
+from typing import Any, Callable, Generator, List, Optional
 
 from freezegun import freeze_time
 from grpc import Channel
 
-from tinkoff.invest import OrderDirection, PortfolioPosition, OrderType, Quotation, \
-    PortfolioResponse, MoneyValue, Candle, MarketDataResponse, GetCandlesResponse, \
-    HistoricCandle, GetMarginAttributesResponse
+from tinkoff.invest import (
+    Candle,
+    GetCandlesResponse,
+    GetMarginAttributesResponse,
+    HistoricCandle,
+    MarketDataResponse,
+    MoneyValue,
+    OrderDirection,
+    OrderType,
+    PortfolioPosition,
+    PortfolioResponse,
+    Quotation,
+)
 from tinkoff.invest.channels import create_channel
 from tinkoff.invest.services import Services
 from tinkoff.invest.strategies.base.strategy_settings_base import StrategySettings
 from tinkoff.invest.typedefs import ChannelArgumentType
-from tinkoff.invest.utils import quotation_to_decimal, decimal_to_quotation, \
-    candle_interval_to_subscription_interval, now
+from tinkoff.invest.utils import (
+    candle_interval_to_subscription_interval,
+    decimal_to_quotation,
+    now,
+    quotation_to_decimal,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -30,7 +44,7 @@ def MockedClient(
     real_market_data_test_start: datetime,
     real_market_data_test_end: datetime,
     balance: MoneyValue,
-    options: Optional[ChannelArgumentType] = None
+    options: Optional[ChannelArgumentType] = None,
 ) -> Generator[Services, None, None]:
     with create_channel(options=options) as channel:
         with freeze_time(real_market_data_test_start) as frozen_datetime:
@@ -42,7 +56,7 @@ def MockedClient(
                 real_market_data_test_from=real_market_data_test_from,
                 real_market_data_test_start=real_market_data_test_start,
                 real_market_data_test_end=real_market_data_test_end,
-                balance=balance
+                balance=balance,
             )
 
 
@@ -79,14 +93,14 @@ class MockedServices(Services):
 
     def _mocked_orders_post_order(self) -> Callable[[Any], Any]:
         def _post_order(
-                *,
-                figi: str = "",
-                quantity: int = 0,
-                price: Optional[Quotation] = None,
-                direction: OrderDirection = OrderDirection(0),
-                account_id: str = "",
-                order_type: OrderType = OrderType(0),
-                order_id: str = "",
+            *,
+            figi: str = "",
+            quantity: int = 0,
+            price: Optional[Quotation] = None,
+            direction: OrderDirection = OrderDirection(0),
+            account_id: str = "",
+            order_type: OrderType = OrderType(0),
+            order_id: str = "",
         ):
             assert figi == self._settings.share_id
             assert quantity > 0
@@ -158,7 +172,8 @@ class MockedServices(Services):
             yield MarketDataResponse(candle=None)  # type: ignore
 
             interval = candle_interval_to_subscription_interval(
-                self._settings.candle_interval)
+                self._settings.candle_interval
+            )
             for historic_candle in self._after_start_candles:
                 candle = Candle(
                     figi=self._figi,
@@ -180,10 +195,10 @@ class MockedServices(Services):
     def _real_market_data(self) -> List[HistoricCandle]:
         real_market_data = []
         for candle in self.get_all_candles(
-                figi=self._figi,
-                from_=self._real_market_data_test_from,
-                to=self._real_market_data_test_end,
-                interval=self._settings.candle_interval,
+            figi=self._figi,
+            from_=self._real_market_data_test_from,
+            to=self._real_market_data_test_end,
+            interval=self._settings.candle_interval,
         ):
             real_market_data.append(candle)
         return real_market_data
@@ -206,9 +221,7 @@ class MockedServices(Services):
 
     def _mocked_market_data_get_candles(self):
         def _get_candles(*args, **kwargs):
-            return GetCandlesResponse(
-                candles=self._initial_candles
-            )
+            return GetCandlesResponse(candles=self._initial_candles)
 
         return _get_candles
 
@@ -221,4 +234,5 @@ class MockedServices(Services):
                 funds_sufficiency_level=Quotation(units=322, nano=0),
                 amount_of_missing_funds=MoneyValue(currency="", units=0, nano=0),
             )
+
         return _get_margin_attributes
