@@ -45,7 +45,7 @@ class Trader(ITrader, abc.ABC):
             )
 
     def _load_candles(self, period: timedelta) -> Iterable[CandleEvent]:
-        logger.info("Loading candles for period %s", period)
+        logger.info("Loading candles for period %s from %s", period, datetime.utcnow())
 
         yield from self._convert_historic_candles_into_candle_events(
             self._services.get_all_candles(
