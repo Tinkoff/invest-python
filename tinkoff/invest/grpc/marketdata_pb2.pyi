@@ -92,7 +92,7 @@ class _SubscriptionStatusEnumTypeWrapper(google.protobuf.internal.enum_type_wrap
     """Некорректный статус подписки, список возможных значений: [SubscriptionAction](https://tinkoff.github.io/investAPI/marketdata#subscriptionaction)"""
 
     SUBSCRIPTION_STATUS_DEPTH_IS_INVALID: _SubscriptionStatus.ValueType  # 4
-    """Некорректная глубина стакана, доступные значения: 10, 20, 30, 40, 50."""
+    """Некорректная глубина стакана, доступные значения: 1, 10, 20, 30, 40, 50."""
 
     SUBSCRIPTION_STATUS_INTERVAL_IS_INVALID: _SubscriptionStatus.ValueType  # 5
     """Некорректный интервал свечей, список возможных значений: [SubscriptionInterval](https://tinkoff.github.io/investAPI/marketdata#subscriptioninterval)"""
@@ -120,7 +120,7 @@ SUBSCRIPTION_STATUS_SUBSCRIPTION_ACTION_IS_INVALID: SubscriptionStatus.ValueType
 """Некорректный статус подписки, список возможных значений: [SubscriptionAction](https://tinkoff.github.io/investAPI/marketdata#subscriptionaction)"""
 
 SUBSCRIPTION_STATUS_DEPTH_IS_INVALID: SubscriptionStatus.ValueType  # 4
-"""Некорректная глубина стакана, доступные значения: 10, 20, 30, 40, 50."""
+"""Некорректная глубина стакана, доступные значения: 1, 10, 20, 30, 40, 50."""
 
 SUBSCRIPTION_STATUS_INTERVAL_IS_INVALID: SubscriptionStatus.ValueType  # 5
 """Некорректный интервал свечей, список возможных значений: [SubscriptionInterval](https://tinkoff.github.io/investAPI/marketdata#subscriptioninterval)"""
@@ -688,6 +688,8 @@ class OrderBook(google.protobuf.message.Message):
     BIDS_FIELD_NUMBER: builtins.int
     ASKS_FIELD_NUMBER: builtins.int
     TIME_FIELD_NUMBER: builtins.int
+    LIMIT_UP_FIELD_NUMBER: builtins.int
+    LIMIT_DOWN_FIELD_NUMBER: builtins.int
     figi: typing.Text
     """Figi-идентификатор инструмента."""
 
@@ -709,6 +711,14 @@ class OrderBook(google.protobuf.message.Message):
     def time(self) -> google.protobuf.timestamp_pb2.Timestamp:
         """Время стакана в часовом поясе UTC."""
         pass
+    @property
+    def limit_up(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Верхний лимит цены инструмента."""
+        pass
+    @property
+    def limit_down(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Нижний лимит цены инструмента."""
+        pass
     def __init__(self,
         *,
         figi: typing.Text = ...,
@@ -717,9 +727,11 @@ class OrderBook(google.protobuf.message.Message):
         bids: typing.Optional[typing.Iterable[global___Order]] = ...,
         asks: typing.Optional[typing.Iterable[global___Order]] = ...,
         time: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        limit_up: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        limit_down: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
         ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["time",b"time"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["asks",b"asks","bids",b"bids","depth",b"depth","figi",b"figi","is_consistent",b"is_consistent","time",b"time"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["limit_down",b"limit_down","limit_up",b"limit_up","time",b"time"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["asks",b"asks","bids",b"bids","depth",b"depth","figi",b"figi","is_consistent",b"is_consistent","limit_down",b"limit_down","limit_up",b"limit_up","time",b"time"]) -> None: ...
 global___OrderBook = OrderBook
 
 class Order(google.protobuf.message.Message):
@@ -983,6 +995,8 @@ class GetOrderBookResponse(google.protobuf.message.Message):
     ASKS_FIELD_NUMBER: builtins.int
     LAST_PRICE_FIELD_NUMBER: builtins.int
     CLOSE_PRICE_FIELD_NUMBER: builtins.int
+    LIMIT_UP_FIELD_NUMBER: builtins.int
+    LIMIT_DOWN_FIELD_NUMBER: builtins.int
     figi: typing.Text
     """Figi-идентификатор инструмента."""
 
@@ -1005,6 +1019,14 @@ class GetOrderBookResponse(google.protobuf.message.Message):
     def close_price(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
         """Цена закрытия."""
         pass
+    @property
+    def limit_up(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Верхний лимит цены."""
+        pass
+    @property
+    def limit_down(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Нижний лимит цены."""
+        pass
     def __init__(self,
         *,
         figi: typing.Text = ...,
@@ -1013,9 +1035,11 @@ class GetOrderBookResponse(google.protobuf.message.Message):
         asks: typing.Optional[typing.Iterable[global___Order]] = ...,
         last_price: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
         close_price: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        limit_up: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        limit_down: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
         ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["close_price",b"close_price","last_price",b"last_price"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["asks",b"asks","bids",b"bids","close_price",b"close_price","depth",b"depth","figi",b"figi","last_price",b"last_price"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["close_price",b"close_price","last_price",b"last_price","limit_down",b"limit_down","limit_up",b"limit_up"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["asks",b"asks","bids",b"bids","close_price",b"close_price","depth",b"depth","figi",b"figi","last_price",b"last_price","limit_down",b"limit_down","limit_up",b"limit_up"]) -> None: ...
 global___GetOrderBookResponse = GetOrderBookResponse
 
 class GetTradingStatusRequest(google.protobuf.message.Message):

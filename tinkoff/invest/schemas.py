@@ -728,6 +728,8 @@ class OrderBook(_grpc_helpers.Message):
     bids: List["Order"] = _grpc_helpers.message_field(4)
     asks: List["Order"] = _grpc_helpers.message_field(5)
     time: datetime = _grpc_helpers.message_field(6)
+    limit_up: "Quotation" = _grpc_helpers.message_field(7)
+    limit_down: "Quotation" = _grpc_helpers.message_field(8)
 
 
 @dataclass(eq=False, repr=True)
@@ -807,6 +809,8 @@ class GetOrderBookResponse(_grpc_helpers.Message):
     asks: List["Order"] = _grpc_helpers.message_field(4)
     last_price: "Quotation" = _grpc_helpers.message_field(5)
     close_price: "Quotation" = _grpc_helpers.message_field(6)
+    limit_up: "Quotation" = _grpc_helpers.message_field(7)
+    limit_down: "Quotation" = _grpc_helpers.message_field(8)
 
 
 @dataclass(eq=False, repr=True)
@@ -835,6 +839,14 @@ class OperationsResponse(_grpc_helpers.Message):
 
 
 @dataclass(eq=False, repr=True)
+class OperationTrade(_grpc_helpers.Message):
+    trade_id: str = _grpc_helpers.string_field(1)
+    date_time: datetime = _grpc_helpers.message_field(2)
+    quantity: int = _grpc_helpers.int64_field(3)
+    price: "MoneyValue" = _grpc_helpers.message_field(4)
+
+
+@dataclass(eq=False, repr=True)
 class Operation(_grpc_helpers.Message):  # pylint:disable=too-many-instance-attributes
     id: str = _grpc_helpers.string_field(1)
     parent_operation_id: str = _grpc_helpers.string_field(2)
@@ -849,6 +861,7 @@ class Operation(_grpc_helpers.Message):  # pylint:disable=too-many-instance-attr
     date: datetime = _grpc_helpers.message_field(11)
     type: str = _grpc_helpers.string_field(12)
     operation_type: "OperationType" = _grpc_helpers.string_field(13)
+    trades: List["OperationTrade"] = _grpc_helpers.message_field(14)
 
 
 @dataclass(eq=False, repr=True)
@@ -1109,6 +1122,7 @@ class GetInfoResponse(_grpc_helpers.Message):
     prem_status: bool = _grpc_helpers.bool_field(1)
     qual_status: bool = _grpc_helpers.bool_field(2)
     qualified_for_work_with: List[str] = _grpc_helpers.string_field(3)
+    tariff: str = _grpc_helpers.string_field(4)
 
 
 @dataclass(eq=False, repr=True)

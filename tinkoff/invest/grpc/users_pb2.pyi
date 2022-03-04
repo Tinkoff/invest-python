@@ -326,6 +326,7 @@ class GetInfoResponse(google.protobuf.message.Message):
     PREM_STATUS_FIELD_NUMBER: builtins.int
     QUAL_STATUS_FIELD_NUMBER: builtins.int
     QUALIFIED_FOR_WORK_WITH_FIELD_NUMBER: builtins.int
+    TARIFF_FIELD_NUMBER: builtins.int
     prem_status: builtins.bool
     """Признак премиум клиента."""
 
@@ -336,11 +337,15 @@ class GetInfoResponse(google.protobuf.message.Message):
     def qualified_for_work_with(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
         """Набор требующих тестирования инструментов и возможностей, с которыми может работать пользователь."""
         pass
+    tariff: typing.Text
+    """Наименование тарифа пользователя."""
+
     def __init__(self,
         *,
         prem_status: builtins.bool = ...,
         qual_status: builtins.bool = ...,
         qualified_for_work_with: typing.Optional[typing.Iterable[typing.Text]] = ...,
+        tariff: typing.Text = ...,
         ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["prem_status",b"prem_status","qual_status",b"qual_status","qualified_for_work_with",b"qualified_for_work_with"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["prem_status",b"prem_status","qual_status",b"qual_status","qualified_for_work_with",b"qualified_for_work_with","tariff",b"tariff"]) -> None: ...
 global___GetInfoResponse = GetInfoResponse

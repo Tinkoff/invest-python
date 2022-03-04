@@ -383,6 +383,7 @@ class Operation(google.protobuf.message.Message):
     DATE_FIELD_NUMBER: builtins.int
     TYPE_FIELD_NUMBER: builtins.int
     OPERATION_TYPE_FIELD_NUMBER: builtins.int
+    TRADES_FIELD_NUMBER: builtins.int
     id: typing.Text
     """Идентификатор операции"""
 
@@ -425,6 +426,10 @@ class Operation(google.protobuf.message.Message):
     operation_type: global___OperationType.ValueType
     """Тип операции"""
 
+    @property
+    def trades(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___OperationTrade]:
+        """Массив сделок"""
+        pass
     def __init__(self,
         *,
         id: typing.Text = ...,
@@ -440,10 +445,43 @@ class Operation(google.protobuf.message.Message):
         date: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
         type: typing.Text = ...,
         operation_type: global___OperationType.ValueType = ...,
+        trades: typing.Optional[typing.Iterable[global___OperationTrade]] = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["date",b"date","payment",b"payment","price",b"price"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["currency",b"currency","date",b"date","figi",b"figi","id",b"id","instrument_type",b"instrument_type","operation_type",b"operation_type","parent_operation_id",b"parent_operation_id","payment",b"payment","price",b"price","quantity",b"quantity","quantity_rest",b"quantity_rest","state",b"state","type",b"type"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["currency",b"currency","date",b"date","figi",b"figi","id",b"id","instrument_type",b"instrument_type","operation_type",b"operation_type","parent_operation_id",b"parent_operation_id","payment",b"payment","price",b"price","quantity",b"quantity","quantity_rest",b"quantity_rest","state",b"state","trades",b"trades","type",b"type"]) -> None: ...
 global___Operation = Operation
+
+class OperationTrade(google.protobuf.message.Message):
+    """Сделка по операции."""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    TRADE_ID_FIELD_NUMBER: builtins.int
+    DATE_TIME_FIELD_NUMBER: builtins.int
+    QUANTITY_FIELD_NUMBER: builtins.int
+    PRICE_FIELD_NUMBER: builtins.int
+    trade_id: typing.Text
+    """Идентификатор сделки"""
+
+    @property
+    def date_time(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Дата и время сделки в часовом поясе UTC"""
+        pass
+    quantity: builtins.int
+    """Количество инструментов"""
+
+    @property
+    def price(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
+        """Цена"""
+        pass
+    def __init__(self,
+        *,
+        trade_id: typing.Text = ...,
+        date_time: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        quantity: builtins.int = ...,
+        price: typing.Optional[tinkoff.invest.grpc.common_pb2.MoneyValue] = ...,
+        ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["date_time",b"date_time","price",b"price"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["date_time",b"date_time","price",b"price","quantity",b"quantity","trade_id",b"trade_id"]) -> None: ...
+global___OperationTrade = OperationTrade
 
 class PortfolioRequest(google.protobuf.message.Message):
     """Запрос получения текущего портфеля по счёту."""
@@ -629,7 +667,7 @@ class PortfolioPosition(google.protobuf.message.Message):
         pass
     @property
     def average_position_price(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
-        """Средневзвешенная цена позиции"""
+        """Средневзвешенная цена позиции. **Возможна задержка до секунды для пересчёта**."""
         pass
     @property
     def expected_yield(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
@@ -641,7 +679,7 @@ class PortfolioPosition(google.protobuf.message.Message):
         pass
     @property
     def average_position_price_pt(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Средняя цена лота в позиции в пунктах (для фьючерсов)"""
+        """Средняя цена лота в позиции в пунктах (для фьючерсов). **Возможна задержка до секунды для пересчёта**."""
         pass
     @property
     def current_price(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
@@ -649,7 +687,7 @@ class PortfolioPosition(google.protobuf.message.Message):
         pass
     @property
     def average_position_price_fifo(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
-        """Средняя цена лота в позиции по методу FIFO"""
+        """Средняя цена лота в позиции по методу FIFO. **Возможна задержка до секунды для пересчёта**."""
         pass
     @property
     def quantity_lots(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
