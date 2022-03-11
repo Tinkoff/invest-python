@@ -55,7 +55,7 @@ class MovingAverageStrategy(InvestStrategy):
         )
 
     def _ensure_enough_candles(self) -> None:
-        date = now() - (self._settings.short_period + self._settings.long_period)
+        date = now() - (self._settings.short_period + self._settings.long_period) #фикс на использование периодов
         try:
             self._get_first_candle_before(date)
         except CandleEventForDateNotFound as e:
@@ -153,17 +153,17 @@ class MovingAverageStrategy(InvestStrategy):
             "\tand abs((PRICE - MA_LONG) / MA_LONG) < STD, %s",
             abs((PRICE - MA_LONG) / MA_LONG) < STD,
         )
-        logger.debug("\tand MA_LONG < MA_LONG_START, %s", MA_LONG < MA_LONG_START)
+        logger.debug("\tand MA_LONG < MA_LONG_START, %s", MA_LONG > MA_LONG_START)
         logger.debug(
             "== %s",
             MA_SHORT > MA_LONG
             and abs((PRICE - MA_LONG) / MA_LONG) < STD
-            and MA_LONG < MA_LONG_START,
+            and MA_LONG > MA_LONG_START, #сравниваем MA_LONG с MA_LONG self._settings.short_period/2 назад
         )
         return (
             MA_SHORT > MA_LONG
             and abs((PRICE - MA_LONG) / MA_LONG) < STD
-            and MA_LONG < MA_LONG_START
+            and MA_LONG > MA_LONG_START
         )
 
     @staticmethod
@@ -180,17 +180,17 @@ class MovingAverageStrategy(InvestStrategy):
             "\tand abs((PRICE - MA_LONG) / MA_LONG) < STD, %s",
             abs((PRICE - MA_LONG) / MA_LONG) < STD,
         )
-        logger.debug("\tand MA_LONG > MA_LONG_START, %s", MA_LONG > MA_LONG_START)
+        logger.debug("\tand MA_LONG > MA_LONG_START, %s", MA_LONG < MA_LONG_START)
         logger.debug(
             "== %s",
             MA_SHORT < MA_LONG
             and abs((PRICE - MA_LONG) / MA_LONG) < STD
-            and MA_LONG > MA_LONG_START,
+            and MA_LONG < MA_LONG_START,
         )
         return (
             MA_SHORT < MA_LONG
             and abs((PRICE - MA_LONG) / MA_LONG) < STD
-            and MA_LONG > MA_LONG_START
+            and MA_LONG < MA_LONG_START
         )
 
     @staticmethod
@@ -229,7 +229,7 @@ class MovingAverageStrategy(InvestStrategy):
         logger.debug("\tor PRICE > MA_LONG + 3 * STD, %s", PRICE > MA_LONG + 3 * STD)
         logger.debug(
             "== %s",
-            PRICE < MA_LONG - 10 * STD
+            PRICE < MA_LONG - 10 * STD #кажется, что не работает закрытие
             or has_long_open_signal
             or PRICE > MA_LONG + 3 * STD,
         )

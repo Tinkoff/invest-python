@@ -36,7 +36,8 @@ class StrategyPlotter(abc.ABC, IPlotter):
             add_plots = [
                 mpf.make_addplot(**signal_plot) for signal_plot in signal_plots
             ]
-            candle_plot |= {"addplot": add_plots}  # type: ignore
+            #candle_plot |= {"addplot": add_plots}  # type: ignore 3.9 version
+            candle_plot.update({"addplot": add_plots}) #<3.9 version
         mpf.plot(**candle_plot)
 
         mpf.show()

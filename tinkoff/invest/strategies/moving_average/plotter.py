@@ -155,7 +155,8 @@ class MovingAverageStrategyPlotter(StrategyPlotter):
                 color = self._was_not_executed_color
         if not has_signal:
             return None
-        style |= {"color": color}
+        #style |= {"color": color}   3.9 version
+        style.update({'color': color})  #<3.9 version
         params = {
             "price": price,
             "time": [e.candle_event.time for e in data_events],
