@@ -26,6 +26,7 @@ logger = logging.getLogger(__name__)
 
 class MovingAverageStrategyPlotter(StrategyPlotter):
     def __init__(self, settings: MovingAverageStrategySettings):
+        super().__init__()
         self._was_not_executed_color = "grey"
         self._settings = settings
         self._signal_type_to_style_map: Dict[Type[Signal], Dict[str, Any]] = {
@@ -121,10 +122,7 @@ class MovingAverageStrategyPlotter(StrategyPlotter):
                 "data": df,
                 "type": "candle",
                 "volume": True,
-                "figsize": (11, 8),
-                "panel_ratios": (2, 1),
                 "mav": tuple(mav.values()),
-                "title": self._settings.share_id,
                 "style": style,
                 "returnfig": True,
             },
@@ -155,8 +153,7 @@ class MovingAverageStrategyPlotter(StrategyPlotter):
                 color = self._was_not_executed_color
         if not has_signal:
             return None
-        #style |= {"color": color}   3.9 version
-        style.update({'color': color})  #<3.9 version
+        style.update({"color": color})
         params = {
             "price": price,
             "time": [e.candle_event.time for e in data_events],

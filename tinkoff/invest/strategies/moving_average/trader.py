@@ -152,17 +152,15 @@ class MovingAverageStrategyTrader(Trader):
         ]
 
     def trade(self) -> None:
-        """Следует стратегии пока не останется вне позиции."""
+        """Делает попытку следовать стратегии."""
 
-        while True:
-            logger.info("Balance: %s", self._account_manager.get_current_balance())
-            self._refresh_data()
+        logger.info("Balance: %s", self._account_manager.get_current_balance())
+        self._refresh_data()
 
-            signals = self._get_signals()
-            if signals:
-                logger.info("Got signals %s", signals)
-            for signal in signals:
-                self._execute(signal)
-            if self._state.position == 0:
-                logger.info("Strategy run complete")
-                return
+        signals = self._get_signals()
+        if signals:
+            logger.info("Got signals %s", signals)
+        for signal in signals:
+            self._execute(signal)
+        if self._state.position == 0:
+            logger.info("Trade try complete")

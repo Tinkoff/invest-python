@@ -19,12 +19,13 @@ from tinkoff.invest import (
     OrderType,
     PortfolioPosition,
     PortfolioResponse,
+    PostOrderResponse,
     Quotation,
 )
 from tinkoff.invest.channels import create_channel
 from tinkoff.invest.services import Services
 from tinkoff.invest.strategies.base.strategy_settings_base import StrategySettings
-from tinkoff.invest.typedefs import ChannelArgumentType
+from tinkoff.invest.typedefs import AccountId, ChannelArgumentType
 from tinkoff.invest.utils import (
     candle_interval_to_subscription_interval,
     decimal_to_quotation,
@@ -58,6 +59,26 @@ def MockedClient(
                 real_market_data_test_end=real_market_data_test_end,
                 balance=balance,
             )
+
+
+@contextmanager
+def MockedSandboxClient(
+    token: str,
+    *,
+    balance: MoneyValue,
+    options: Optional[ChannelArgumentType] = None,
+) -> Generator[Services, None, None]:
+    with create_channel(options=options) as channel:
+        services = MockedSandboxServices(
+            channel=channel,
+            token=token,
+            balance=balance,
+        )
+        try:
+            yield services
+        except Exception:
+            del services
+            raise
 
 
 class MockedServices(Services):
@@ -224,6 +245,80 @@ class MockedServices(Services):
             return GetCandlesResponse(candles=self._initial_candles)
 
         return _get_candles
+
+    def _mocked_users_get_margin_attributes(self):
+        def _get_margin_attributes(*agrs, **kwargs):  # pylint: disable=unused-argument
+            return GetMarginAttributesResponse(
+                liquid_portfolio=MoneyValue(currency="", units=0, nano=0),
+                starting_margin=MoneyValue(currency="", units=0, nano=0),
+                minimal_margin=MoneyValue(currency="", units=0, nano=0),
+                funds_sufficiency_level=Quotation(units=322, nano=0),
+                amount_of_missing_funds=MoneyValue(currency="", units=0, nano=0),
+            )
+
+        return _get_margin_attributes
+
+
+class MockedSandboxServices(Services):
+    def __init__(
+        self,
+        channel: Channel,
+        token: str,
+        balance: MoneyValue,
+    ):
+        super().__init__(channel, token)
+        self.orders.post_order = self._mocked_orders_post_order()
+        self.operations.get_portfolio = self._mocked_operations_get_portfolio()
+        self.users.get_margin_attributes = self._mocked_users_get_margin_attributes()
+
+        self._account_id = self._open_account()
+        self._pay_in(balance)
+
+    def _pay_in(self, amount: MoneyValue):
+        logger.info("Pay in %s for %s", amount, self._account_id)
+        self.sandbox.sandbox_pay_in(account_id=self._account_id, amount=amount)
+
+    def _open_account(self) -> AccountId:
+        response = self.sandbox.open_sandbox_account()
+        self._account_id = response.account_id
+        logger.info("Opened sandbox account %s", self._account_id)
+        return self._account_id
+
+    def __del__(self):
+        self._close_account()
+
+    def _close_account(self) -> None:
+        logger.info("Closing sandbox account %s", self._account_id)
+        self.sandbox.close_sandbox_account(account_id=self._account_id)
+
+    def _mocked_orders_post_order(self) -> Callable[[Any], Any]:
+        def _post_order(
+            *,
+            figi: str = "",
+            quantity: int = 0,
+            price: Optional[Quotation] = None,
+            direction: OrderDirection = OrderDirection(0),
+            _: str = "",
+            order_type: OrderType = OrderType(0),
+            order_id: str = "",
+        ) -> PostOrderResponse:
+            return self.sandbox.post_sandbox_order(
+                figi=figi,
+                quantity=quantity,
+                price=price,
+                direction=direction,
+                account_id=self._account_id,
+                order_type=order_type,
+                order_id=order_id,
+            )
+
+        return _post_order
+
+    def _mocked_operations_get_portfolio(self) -> Callable[[Any], Any]:
+        def _get_sandbox_portfolio(*, account_id: str = "") -> PortfolioResponse:
+            return self.sandbox.get_sandbox_portfolio(account_id=self._account_id)
+
+        return _get_sandbox_portfolio
 
     def _mocked_users_get_margin_attributes(self):
         def _get_margin_attributes(*agrs, **kwargs):  # pylint: disable=unused-argument
