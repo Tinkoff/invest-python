@@ -1,6 +1,8 @@
 # pylint:disable=redefined-builtin,too-many-lines
+import threading
+import time
 from datetime import datetime
-from typing import Generator, Iterable, List, Optional
+from typing import Generator, Iterable, Iterator, List, Optional
 
 import grpc
 
@@ -134,6 +136,41 @@ __all__ = (
 )
 
 
+class MarketDataStreamManager:
+    def __init__(self, market_data_stream: "MarketDataStreamService"):
+        self._market_data_stream_service = market_data_stream
+        self._market_data_stream: Iterator[MarketDataResponse]
+        self._requests: List[MarketDataRequest] = []
+        self._unsubscribe_event = threading.Event()
+
+    def _get_request_generator(self) -> Iterable[MarketDataRequest]:
+        while not self._unsubscribe_event.is_set():
+            if not self._requests:
+                time.sleep(1)
+            else:
+                requests = iter(self._requests)
+                self._requests = []
+                yield from requests
+
+    def subscribe(self, market_data_request: MarketDataRequest) -> None:
+        self._requests.append(market_data_request)
+
+    def unsubscribe(self) -> None:
+        self._unsubscribe_event.set()
+
+    def __iter__(self) -> "MarketDataStreamManager":
+        self._unsubscribe_event.clear()
+        self._market_data_stream = iter(
+            self._market_data_stream_service.market_data_stream(
+                self._get_request_generator()
+            )
+        )
+        return self
+
+    def __next__(self) -> MarketDataResponse:
+        return next(self._market_data_stream)
+
+
 class Services:
     def __init__(
         self, channel: grpc.Channel, token: str, sandbox_token: Optional[str] = None
@@ -149,6 +186,9 @@ class Services:
         self.users = UsersService(channel, metadata)
         self.sandbox = SandboxService(channel, sandbox_metadata)
         self.stop_orders = StopOrdersService(channel, metadata)
+
+    def create_market_data_stream(self) -> MarketDataStreamManager:
+        return MarketDataStreamManager(market_data_stream=self.market_data_stream)
 
     def cancel_all_orders(self, account_id: AccountId) -> None:
         orders_service: OrdersService = self.orders
