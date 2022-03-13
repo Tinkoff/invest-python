@@ -22,7 +22,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=b'\n\034ru.tinkoff.piapi.contract.v1P\001Z\014./;investapi\242\002\005TIAPI\252\002\024Tinkoff.InvestApi.V1\312\002\021Tinkoff\\Invest\\V1',
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n$tinkoff/invest/grpc/operations.proto\x12%tinkoff.public.invest.api.contract.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a tinkoff/invest/grpc/common.proto\"\xcd\x01\n\x11OperationsRequest\x12\x12\n\naccount_id\x18\x01 \x01(\t\x12(\n\x04\x66rom\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12&\n\x02to\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x44\n\x05state\x18\x04 \x01(\x0e\x32\x35.tinkoff.public.invest.api.contract.v1.OperationState\x12\x0c\n\x04\x66igi\x18\x05 \x01(\t\"Z\n\x12OperationsResponse\x12\x44\n\noperations\x18\x01 \x03(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Operation\"\xaf\x04\n\tOperation\x12\n\n\x02id\x18\x01 \x01(\t\x12\x1b\n\x13parent_operation_id\x18\x02 \x01(\t\x12\x10\n\x08\x63urrency\x18\x03 \x01(\t\x12\x42\n\x07payment\x18\x04 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12@\n\x05price\x18\x05 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12\x44\n\x05state\x18\x06 \x01(\x0e\x32\x35.tinkoff.public.invest.api.contract.v1.OperationState\x12\x10\n\x08quantity\x18\x07 \x01(\x03\x12\x15\n\rquantity_rest\x18\x08 \x01(\x03\x12\x0c\n\x04\x66igi\x18\t \x01(\t\x12\x17\n\x0finstrument_type\x18\n \x01(\t\x12(\n\x04\x64\x61te\x18\x0b \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x0c\n\x04type\x18\x0c \x01(\t\x12L\n\x0eoperation_type\x18\r \x01(\x0e\x32\x34.tinkoff.public.invest.api.contract.v1.OperationType\x12\x45\n\x06trades\x18\x0e \x03(\x0b\x32\x35.tinkoff.public.invest.api.contract.v1.OperationTrade\"\xa5\x01\n\x0eOperationTrade\x12\x10\n\x08trade_id\x18\x01 \x01(\t\x12-\n\tdate_time\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x10\n\x08quantity\x18\x03 \x01(\x03\x12@\n\x05price\x18\x04 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\"&\n\x10PortfolioRequest\x12\x12\n\naccount_id\x18\x01 \x01(\t\"\xbb\x04\n\x11PortfolioResponse\x12N\n\x13total_amount_shares\x18\x01 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12M\n\x12total_amount_bonds\x18\x02 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12K\n\x10total_amount_etf\x18\x03 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12R\n\x17total_amount_currencies\x18\x04 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12O\n\x14total_amount_futures\x18\x05 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12H\n\x0e\x65xpected_yield\x18\x06 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12K\n\tpositions\x18\x07 \x03(\x0b\x32\x38.tinkoff.public.invest.api.contract.v1.PortfolioPosition\"&\n\x10PositionsRequest\x12\x12\n\naccount_id\x18\x01 \x01(\t\"\xd7\x02\n\x11PositionsResponse\x12@\n\x05money\x18\x01 \x03(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12\x42\n\x07\x62locked\x18\x02 \x03(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12N\n\nsecurities\x18\x03 \x03(\x0b\x32:.tinkoff.public.invest.api.contract.v1.PositionsSecurities\x12\"\n\x1alimits_loading_in_progress\x18\x04 \x01(\x08\x12H\n\x07\x66utures\x18\x05 \x03(\x0b\x32\x37.tinkoff.public.invest.api.contract.v1.PositionsFutures\"+\n\x15WithdrawLimitsRequest\x12\x12\n\naccount_id\x18\x01 \x01(\t\"\xec\x01\n\x16WithdrawLimitsResponse\x12@\n\x05money\x18\x01 \x03(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12\x42\n\x07\x62locked\x18\x02 \x03(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12L\n\x11\x62locked_guarantee\x18\x03 \x03(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\"\xa3\x05\n\x11PortfolioPosition\x12\x0c\n\x04\x66igi\x18\x01 \x01(\t\x12\x17\n\x0finstrument_type\x18\x02 \x01(\t\x12\x42\n\x08quantity\x18\x03 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12Q\n\x16\x61verage_position_price\x18\x04 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12H\n\x0e\x65xpected_yield\x18\x05 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x46\n\x0b\x63urrent_nkd\x18\x06 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12S\n\x19\x61verage_position_price_pt\x18\x07 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12H\n\rcurrent_price\x18\x08 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12V\n\x1b\x61verage_position_price_fifo\x18\t \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12G\n\rquantity_lots\x18\n \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\"E\n\x13PositionsSecurities\x12\x0c\n\x04\x66igi\x18\x01 \x01(\t\x12\x0f\n\x07\x62locked\x18\x02 \x01(\x03\x12\x0f\n\x07\x62\x61lance\x18\x03 \x01(\x03\"B\n\x10PositionsFutures\x12\x0c\n\x04\x66igi\x18\x01 \x01(\t\x12\x0f\n\x07\x62locked\x18\x02 \x01(\x03\x12\x0f\n\x07\x62\x61lance\x18\x03 \x01(\x03\"\xf2\x01\n\x13\x42rokerReportRequest\x12l\n\x1egenerate_broker_report_request\x18\x01 \x01(\x0b\x32\x42.tinkoff.public.invest.api.contract.v1.GenerateBrokerReportRequestH\x00\x12\x62\n\x19get_broker_report_request\x18\x02 \x01(\x0b\x32=.tinkoff.public.invest.api.contract.v1.GetBrokerReportRequestH\x00\x42\t\n\x07payload\"\xf7\x01\n\x14\x42rokerReportResponse\x12n\n\x1fgenerate_broker_report_response\x18\x01 \x01(\x0b\x32\x43.tinkoff.public.invest.api.contract.v1.GenerateBrokerReportResponseH\x00\x12\x64\n\x1aget_broker_report_response\x18\x02 \x01(\x0b\x32>.tinkoff.public.invest.api.contract.v1.GetBrokerReportResponseH\x00\x42\t\n\x07payload\"\x83\x01\n\x1bGenerateBrokerReportRequest\x12\x12\n\naccount_id\x18\x01 \x01(\t\x12(\n\x04\x66rom\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12&\n\x02to\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"/\n\x1cGenerateBrokerReportResponse\x12\x0f\n\x07task_id\x18\x01 \x01(\t\"7\n\x16GetBrokerReportRequest\x12\x0f\n\x07task_id\x18\x01 \x01(\t\x12\x0c\n\x04page\x18\x02 \x01(\x05\"\x9b\x01\n\x17GetBrokerReportResponse\x12J\n\rbroker_report\x18\x01 \x03(\x0b\x32\x33.tinkoff.public.invest.api.contract.v1.BrokerReport\x12\x12\n\nitemsCount\x18\x02 \x01(\x05\x12\x12\n\npagesCount\x18\x03 \x01(\x05\x12\x0c\n\x04page\x18\x04 \x01(\x05\"\xda\x08\n\x0c\x42rokerReport\x12\x10\n\x08trade_id\x18\x01 \x01(\t\x12\x10\n\x08order_id\x18\x02 \x01(\t\x12\x0c\n\x04\x66igi\x18\x03 \x01(\t\x12\x14\n\x0c\x65xecute_sign\x18\x04 \x01(\t\x12\x32\n\x0etrade_datetime\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x10\n\x08\x65xchange\x18\x06 \x01(\t\x12\x12\n\nclass_code\x18\x07 \x01(\t\x12\x11\n\tdirection\x18\x08 \x01(\t\x12\x0c\n\x04name\x18\t \x01(\t\x12\x0e\n\x06ticker\x18\n \x01(\t\x12@\n\x05price\x18\x0b \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12\x10\n\x08quantity\x18\x0c \x01(\x03\x12G\n\x0corder_amount\x18\r \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12\x43\n\taci_value\x18\x0e \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12M\n\x12total_order_amount\x18\x0f \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12L\n\x11\x62roker_commission\x18\x10 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12N\n\x13\x65xchange_commission\x18\x11 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12W\n\x1c\x65xchange_clearing_commission\x18\x12 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12\x43\n\trepo_rate\x18\x13 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\r\n\x05party\x18\x14 \x01(\t\x12\x34\n\x10\x63lear_value_date\x18\x15 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x32\n\x0esec_value_date\x18\x16 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x15\n\rbroker_status\x18\x17 \x01(\t\x12\x1f\n\x17separate_agreement_type\x18\x18 \x01(\t\x12!\n\x19separate_agreement_number\x18\x19 \x01(\t\x12\x1f\n\x17separate_agreement_date\x18\x1a \x01(\t\x12\x15\n\rdelivery_type\x18\x1b \x01(\t*m\n\x0eOperationState\x12\x1f\n\x1bOPERATION_STATE_UNSPECIFIED\x10\x00\x12\x1c\n\x18OPERATION_STATE_EXECUTED\x10\x01\x12\x1c\n\x18OPERATION_STATE_CANCELED\x10\x02*\xe5\x0b\n\rOperationType\x12\x1e\n\x1aOPERATION_TYPE_UNSPECIFIED\x10\x00\x12\x18\n\x14OPERATION_TYPE_INPUT\x10\x01\x12\x1b\n\x17OPERATION_TYPE_BOND_TAX\x10\x02\x12$\n OPERATION_TYPE_OUTPUT_SECURITIES\x10\x03\x12\x1c\n\x18OPERATION_TYPE_OVERNIGHT\x10\x04\x12\x16\n\x12OPERATION_TYPE_TAX\x10\x05\x12&\n\"OPERATION_TYPE_BOND_REPAYMENT_FULL\x10\x06\x12\x1c\n\x18OPERATION_TYPE_SELL_CARD\x10\x07\x12\x1f\n\x1bOPERATION_TYPE_DIVIDEND_TAX\x10\x08\x12\x19\n\x15OPERATION_TYPE_OUTPUT\x10\t\x12!\n\x1dOPERATION_TYPE_BOND_REPAYMENT\x10\n\x12!\n\x1dOPERATION_TYPE_TAX_CORRECTION\x10\x0b\x12\x1e\n\x1aOPERATION_TYPE_SERVICE_FEE\x10\x0c\x12\x1e\n\x1aOPERATION_TYPE_BENEFIT_TAX\x10\r\x12\x1d\n\x19OPERATION_TYPE_MARGIN_FEE\x10\x0e\x12\x16\n\x12OPERATION_TYPE_BUY\x10\x0f\x12\x1b\n\x17OPERATION_TYPE_BUY_CARD\x10\x10\x12#\n\x1fOPERATION_TYPE_INPUT_SECURITIES\x10\x11\x12\x1e\n\x1aOPERATION_TYPE_SELL_MARGIN\x10\x12\x12\x1d\n\x19OPERATION_TYPE_BROKER_FEE\x10\x13\x12\x1d\n\x19OPERATION_TYPE_BUY_MARGIN\x10\x14\x12\x1b\n\x17OPERATION_TYPE_DIVIDEND\x10\x15\x12\x17\n\x13OPERATION_TYPE_SELL\x10\x16\x12\x19\n\x15OPERATION_TYPE_COUPON\x10\x17\x12\x1e\n\x1aOPERATION_TYPE_SUCCESS_FEE\x10\x18\x12$\n OPERATION_TYPE_DIVIDEND_TRANSFER\x10\x19\x12%\n!OPERATION_TYPE_ACCRUING_VARMARGIN\x10\x1a\x12(\n$OPERATION_TYPE_WRITING_OFF_VARMARGIN\x10\x1b\x12\x1f\n\x1bOPERATION_TYPE_DELIVERY_BUY\x10\x1c\x12 \n\x1cOPERATION_TYPE_DELIVERY_SELL\x10\x1d\x12\x1d\n\x19OPERATION_TYPE_TRACK_MFEE\x10\x1e\x12\x1d\n\x19OPERATION_TYPE_TRACK_PFEE\x10\x1f\x12\"\n\x1eOPERATION_TYPE_TAX_PROGRESSIVE\x10 \x12\'\n#OPERATION_TYPE_BOND_TAX_PROGRESSIVE\x10!\x12+\n\'OPERATION_TYPE_DIVIDEND_TAX_PROGRESSIVE\x10\"\x12*\n&OPERATION_TYPE_BENEFIT_TAX_PROGRESSIVE\x10#\x12-\n)OPERATION_TYPE_TAX_CORRECTION_PROGRESSIVE\x10$\x12\'\n#OPERATION_TYPE_TAX_REPO_PROGRESSIVE\x10%\x12\x1b\n\x17OPERATION_TYPE_TAX_REPO\x10&\x12 \n\x1cOPERATION_TYPE_TAX_REPO_HOLD\x10\'\x12\"\n\x1eOPERATION_TYPE_TAX_REPO_REFUND\x10(\x12,\n(OPERATION_TYPE_TAX_REPO_HOLD_PROGRESSIVE\x10)\x12.\n*OPERATION_TYPE_TAX_REPO_REFUND_PROGRESSIVE\x10*\x12\x1a\n\x16OPERATION_TYPE_DIV_EXT\x10+2\xc2\x05\n\x11OperationsService\x12\x84\x01\n\rGetOperations\x12\x38.tinkoff.public.invest.api.contract.v1.OperationsRequest\x1a\x39.tinkoff.public.invest.api.contract.v1.OperationsResponse\x12\x81\x01\n\x0cGetPortfolio\x12\x37.tinkoff.public.invest.api.contract.v1.PortfolioRequest\x1a\x38.tinkoff.public.invest.api.contract.v1.PortfolioResponse\x12\x81\x01\n\x0cGetPositions\x12\x37.tinkoff.public.invest.api.contract.v1.PositionsRequest\x1a\x38.tinkoff.public.invest.api.contract.v1.PositionsResponse\x12\x90\x01\n\x11GetWithdrawLimits\x12<.tinkoff.public.invest.api.contract.v1.WithdrawLimitsRequest\x1a=.tinkoff.public.invest.api.contract.v1.WithdrawLimitsResponse\x12\x8a\x01\n\x0fGetBrokerReport\x12:.tinkoff.public.invest.api.contract.v1.BrokerReportRequest\x1a;.tinkoff.public.invest.api.contract.v1.BrokerReportResponseBa\n\x1cru.tinkoff.piapi.contract.v1P\x01Z\x0c./;investapi\xa2\x02\x05TIAPI\xaa\x02\x14Tinkoff.InvestApi.V1\xca\x02\x11Tinkoff\\Invest\\V1b\x06proto3'
+  serialized_pb=b'\n$tinkoff/invest/grpc/operations.proto\x12%tinkoff.public.invest.api.contract.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a tinkoff/invest/grpc/common.proto\"\xcd\x01\n\x11OperationsRequest\x12\x12\n\naccount_id\x18\x01 \x01(\t\x12(\n\x04\x66rom\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12&\n\x02to\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x44\n\x05state\x18\x04 \x01(\x0e\x32\x35.tinkoff.public.invest.api.contract.v1.OperationState\x12\x0c\n\x04\x66igi\x18\x05 \x01(\t\"Z\n\x12OperationsResponse\x12\x44\n\noperations\x18\x01 \x03(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Operation\"\xaf\x04\n\tOperation\x12\n\n\x02id\x18\x01 \x01(\t\x12\x1b\n\x13parent_operation_id\x18\x02 \x01(\t\x12\x10\n\x08\x63urrency\x18\x03 \x01(\t\x12\x42\n\x07payment\x18\x04 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12@\n\x05price\x18\x05 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12\x44\n\x05state\x18\x06 \x01(\x0e\x32\x35.tinkoff.public.invest.api.contract.v1.OperationState\x12\x10\n\x08quantity\x18\x07 \x01(\x03\x12\x15\n\rquantity_rest\x18\x08 \x01(\x03\x12\x0c\n\x04\x66igi\x18\t \x01(\t\x12\x17\n\x0finstrument_type\x18\n \x01(\t\x12(\n\x04\x64\x61te\x18\x0b \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x0c\n\x04type\x18\x0c \x01(\t\x12L\n\x0eoperation_type\x18\r \x01(\x0e\x32\x34.tinkoff.public.invest.api.contract.v1.OperationType\x12\x45\n\x06trades\x18\x0e \x03(\x0b\x32\x35.tinkoff.public.invest.api.contract.v1.OperationTrade\"\xa5\x01\n\x0eOperationTrade\x12\x10\n\x08trade_id\x18\x01 \x01(\t\x12-\n\tdate_time\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x10\n\x08quantity\x18\x03 \x01(\x03\x12@\n\x05price\x18\x04 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\"&\n\x10PortfolioRequest\x12\x12\n\naccount_id\x18\x01 \x01(\t\"\xbb\x04\n\x11PortfolioResponse\x12N\n\x13total_amount_shares\x18\x01 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12M\n\x12total_amount_bonds\x18\x02 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12K\n\x10total_amount_etf\x18\x03 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12R\n\x17total_amount_currencies\x18\x04 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12O\n\x14total_amount_futures\x18\x05 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12H\n\x0e\x65xpected_yield\x18\x06 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12K\n\tpositions\x18\x07 \x03(\x0b\x32\x38.tinkoff.public.invest.api.contract.v1.PortfolioPosition\"&\n\x10PositionsRequest\x12\x12\n\naccount_id\x18\x01 \x01(\t\"\xd7\x02\n\x11PositionsResponse\x12@\n\x05money\x18\x01 \x03(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12\x42\n\x07\x62locked\x18\x02 \x03(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12N\n\nsecurities\x18\x03 \x03(\x0b\x32:.tinkoff.public.invest.api.contract.v1.PositionsSecurities\x12\"\n\x1alimits_loading_in_progress\x18\x04 \x01(\x08\x12H\n\x07\x66utures\x18\x05 \x03(\x0b\x32\x37.tinkoff.public.invest.api.contract.v1.PositionsFutures\"+\n\x15WithdrawLimitsRequest\x12\x12\n\naccount_id\x18\x01 \x01(\t\"\xec\x01\n\x16WithdrawLimitsResponse\x12@\n\x05money\x18\x01 \x03(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12\x42\n\x07\x62locked\x18\x02 \x03(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12L\n\x11\x62locked_guarantee\x18\x03 \x03(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\"\xa3\x05\n\x11PortfolioPosition\x12\x0c\n\x04\x66igi\x18\x01 \x01(\t\x12\x17\n\x0finstrument_type\x18\x02 \x01(\t\x12\x42\n\x08quantity\x18\x03 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12Q\n\x16\x61verage_position_price\x18\x04 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12H\n\x0e\x65xpected_yield\x18\x05 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x46\n\x0b\x63urrent_nkd\x18\x06 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12S\n\x19\x61verage_position_price_pt\x18\x07 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12H\n\rcurrent_price\x18\x08 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12V\n\x1b\x61verage_position_price_fifo\x18\t \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12G\n\rquantity_lots\x18\n \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\"E\n\x13PositionsSecurities\x12\x0c\n\x04\x66igi\x18\x01 \x01(\t\x12\x0f\n\x07\x62locked\x18\x02 \x01(\x03\x12\x0f\n\x07\x62\x61lance\x18\x03 \x01(\x03\"B\n\x10PositionsFutures\x12\x0c\n\x04\x66igi\x18\x01 \x01(\t\x12\x0f\n\x07\x62locked\x18\x02 \x01(\x03\x12\x0f\n\x07\x62\x61lance\x18\x03 \x01(\x03\"\xf2\x01\n\x13\x42rokerReportRequest\x12l\n\x1egenerate_broker_report_request\x18\x01 \x01(\x0b\x32\x42.tinkoff.public.invest.api.contract.v1.GenerateBrokerReportRequestH\x00\x12\x62\n\x19get_broker_report_request\x18\x02 \x01(\x0b\x32=.tinkoff.public.invest.api.contract.v1.GetBrokerReportRequestH\x00\x42\t\n\x07payload\"\xf7\x01\n\x14\x42rokerReportResponse\x12n\n\x1fgenerate_broker_report_response\x18\x01 \x01(\x0b\x32\x43.tinkoff.public.invest.api.contract.v1.GenerateBrokerReportResponseH\x00\x12\x64\n\x1aget_broker_report_response\x18\x02 \x01(\x0b\x32>.tinkoff.public.invest.api.contract.v1.GetBrokerReportResponseH\x00\x42\t\n\x07payload\"\x83\x01\n\x1bGenerateBrokerReportRequest\x12\x12\n\naccount_id\x18\x01 \x01(\t\x12(\n\x04\x66rom\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12&\n\x02to\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"/\n\x1cGenerateBrokerReportResponse\x12\x0f\n\x07task_id\x18\x01 \x01(\t\"7\n\x16GetBrokerReportRequest\x12\x0f\n\x07task_id\x18\x01 \x01(\t\x12\x0c\n\x04page\x18\x02 \x01(\x05\"\x9b\x01\n\x17GetBrokerReportResponse\x12J\n\rbroker_report\x18\x01 \x03(\x0b\x32\x33.tinkoff.public.invest.api.contract.v1.BrokerReport\x12\x12\n\nitemsCount\x18\x02 \x01(\x05\x12\x12\n\npagesCount\x18\x03 \x01(\x05\x12\x0c\n\x04page\x18\x04 \x01(\x05\"\xda\x08\n\x0c\x42rokerReport\x12\x10\n\x08trade_id\x18\x01 \x01(\t\x12\x10\n\x08order_id\x18\x02 \x01(\t\x12\x0c\n\x04\x66igi\x18\x03 \x01(\t\x12\x14\n\x0c\x65xecute_sign\x18\x04 \x01(\t\x12\x32\n\x0etrade_datetime\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x10\n\x08\x65xchange\x18\x06 \x01(\t\x12\x12\n\nclass_code\x18\x07 \x01(\t\x12\x11\n\tdirection\x18\x08 \x01(\t\x12\x0c\n\x04name\x18\t \x01(\t\x12\x0e\n\x06ticker\x18\n \x01(\t\x12@\n\x05price\x18\x0b \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12\x10\n\x08quantity\x18\x0c \x01(\x03\x12G\n\x0corder_amount\x18\r \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12\x43\n\taci_value\x18\x0e \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12M\n\x12total_order_amount\x18\x0f \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12L\n\x11\x62roker_commission\x18\x10 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12N\n\x13\x65xchange_commission\x18\x11 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12W\n\x1c\x65xchange_clearing_commission\x18\x12 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12\x43\n\trepo_rate\x18\x13 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\r\n\x05party\x18\x14 \x01(\t\x12\x34\n\x10\x63lear_value_date\x18\x15 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x32\n\x0esec_value_date\x18\x16 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x15\n\rbroker_status\x18\x17 \x01(\t\x12\x1f\n\x17separate_agreement_type\x18\x18 \x01(\t\x12!\n\x19separate_agreement_number\x18\x19 \x01(\t\x12\x1f\n\x17separate_agreement_date\x18\x1a \x01(\t\x12\x15\n\rdelivery_type\x18\x1b \x01(\t\"\xa8\x02\n GetDividendsForeignIssuerRequest\x12\x80\x01\n\"generate_div_foreign_issuer_report\x18\x01 \x01(\x0b\x32R.tinkoff.public.invest.api.contract.v1.GenerateDividendsForeignIssuerReportRequestH\x00\x12v\n\x1dget_div_foreign_issuer_report\x18\x02 \x01(\x0b\x32M.tinkoff.public.invest.api.contract.v1.GetDividendsForeignIssuerReportRequestH\x00\x42\t\n\x07payload\"\xb0\x02\n!GetDividendsForeignIssuerResponse\x12\x8a\x01\n+generate_div_foreign_issuer_report_response\x18\x01 \x01(\x0b\x32S.tinkoff.public.invest.api.contract.v1.GenerateDividendsForeignIssuerReportResponseH\x00\x12s\n\x19\x64iv_foreign_issuer_report\x18\x02 \x01(\x0b\x32N.tinkoff.public.invest.api.contract.v1.GetDividendsForeignIssuerReportResponseH\x00\x42\t\n\x07payload\"\x93\x01\n+GenerateDividendsForeignIssuerReportRequest\x12\x12\n\naccount_id\x18\x01 \x01(\t\x12(\n\x04\x66rom\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12&\n\x02to\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"G\n&GetDividendsForeignIssuerReportRequest\x12\x0f\n\x07task_id\x18\x01 \x01(\t\x12\x0c\n\x04page\x18\x02 \x01(\x05\"?\n,GenerateDividendsForeignIssuerReportResponse\x12\x0f\n\x07task_id\x18\x01 \x01(\t\"\xcd\x01\n\'GetDividendsForeignIssuerReportResponse\x12l\n\x1f\x64ividends_foreign_issuer_report\x18\x01 \x03(\x0b\x32\x43.tinkoff.public.invest.api.contract.v1.DividendsForeignIssuerReport\x12\x12\n\nitemsCount\x18\x02 \x01(\x05\x12\x12\n\npagesCount\x18\x03 \x01(\x05\x12\x0c\n\x04page\x18\x04 \x01(\x05\"\xc9\x04\n\x1c\x44ividendsForeignIssuerReport\x12/\n\x0brecord_date\x18\x01 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x30\n\x0cpayment_date\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x15\n\rsecurity_name\x18\x03 \x01(\t\x12\x0c\n\x04isin\x18\x04 \x01(\t\x12\x16\n\x0eissuer_country\x18\x05 \x01(\t\x12\x10\n\x08quantity\x18\x06 \x01(\x03\x12\x42\n\x08\x64ividend\x18\x07 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12M\n\x13\x65xternal_commission\x18\x08 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12H\n\x0e\x64ividend_gross\x18\t \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12=\n\x03tax\x18\n \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12I\n\x0f\x64ividend_amount\x18\x0b \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x10\n\x08\x63urrency\x18\x0c \x01(\t*m\n\x0eOperationState\x12\x1f\n\x1bOPERATION_STATE_UNSPECIFIED\x10\x00\x12\x1c\n\x18OPERATION_STATE_EXECUTED\x10\x01\x12\x1c\n\x18OPERATION_STATE_CANCELED\x10\x02*\x8f\x0c\n\rOperationType\x12\x1e\n\x1aOPERATION_TYPE_UNSPECIFIED\x10\x00\x12\x18\n\x14OPERATION_TYPE_INPUT\x10\x01\x12\x1b\n\x17OPERATION_TYPE_BOND_TAX\x10\x02\x12$\n OPERATION_TYPE_OUTPUT_SECURITIES\x10\x03\x12\x1c\n\x18OPERATION_TYPE_OVERNIGHT\x10\x04\x12\x16\n\x12OPERATION_TYPE_TAX\x10\x05\x12&\n\"OPERATION_TYPE_BOND_REPAYMENT_FULL\x10\x06\x12\x1c\n\x18OPERATION_TYPE_SELL_CARD\x10\x07\x12\x1f\n\x1bOPERATION_TYPE_DIVIDEND_TAX\x10\x08\x12\x19\n\x15OPERATION_TYPE_OUTPUT\x10\t\x12!\n\x1dOPERATION_TYPE_BOND_REPAYMENT\x10\n\x12!\n\x1dOPERATION_TYPE_TAX_CORRECTION\x10\x0b\x12\x1e\n\x1aOPERATION_TYPE_SERVICE_FEE\x10\x0c\x12\x1e\n\x1aOPERATION_TYPE_BENEFIT_TAX\x10\r\x12\x1d\n\x19OPERATION_TYPE_MARGIN_FEE\x10\x0e\x12\x16\n\x12OPERATION_TYPE_BUY\x10\x0f\x12\x1b\n\x17OPERATION_TYPE_BUY_CARD\x10\x10\x12#\n\x1fOPERATION_TYPE_INPUT_SECURITIES\x10\x11\x12\x1e\n\x1aOPERATION_TYPE_SELL_MARGIN\x10\x12\x12\x1d\n\x19OPERATION_TYPE_BROKER_FEE\x10\x13\x12\x1d\n\x19OPERATION_TYPE_BUY_MARGIN\x10\x14\x12\x1b\n\x17OPERATION_TYPE_DIVIDEND\x10\x15\x12\x17\n\x13OPERATION_TYPE_SELL\x10\x16\x12\x19\n\x15OPERATION_TYPE_COUPON\x10\x17\x12\x1e\n\x1aOPERATION_TYPE_SUCCESS_FEE\x10\x18\x12$\n OPERATION_TYPE_DIVIDEND_TRANSFER\x10\x19\x12%\n!OPERATION_TYPE_ACCRUING_VARMARGIN\x10\x1a\x12(\n$OPERATION_TYPE_WRITING_OFF_VARMARGIN\x10\x1b\x12\x1f\n\x1bOPERATION_TYPE_DELIVERY_BUY\x10\x1c\x12 \n\x1cOPERATION_TYPE_DELIVERY_SELL\x10\x1d\x12\x1d\n\x19OPERATION_TYPE_TRACK_MFEE\x10\x1e\x12\x1d\n\x19OPERATION_TYPE_TRACK_PFEE\x10\x1f\x12\"\n\x1eOPERATION_TYPE_TAX_PROGRESSIVE\x10 \x12\'\n#OPERATION_TYPE_BOND_TAX_PROGRESSIVE\x10!\x12+\n\'OPERATION_TYPE_DIVIDEND_TAX_PROGRESSIVE\x10\"\x12*\n&OPERATION_TYPE_BENEFIT_TAX_PROGRESSIVE\x10#\x12-\n)OPERATION_TYPE_TAX_CORRECTION_PROGRESSIVE\x10$\x12\'\n#OPERATION_TYPE_TAX_REPO_PROGRESSIVE\x10%\x12\x1b\n\x17OPERATION_TYPE_TAX_REPO\x10&\x12 \n\x1cOPERATION_TYPE_TAX_REPO_HOLD\x10\'\x12\"\n\x1eOPERATION_TYPE_TAX_REPO_REFUND\x10(\x12,\n(OPERATION_TYPE_TAX_REPO_HOLD_PROGRESSIVE\x10)\x12.\n*OPERATION_TYPE_TAX_REPO_REFUND_PROGRESSIVE\x10*\x12\x1a\n\x16OPERATION_TYPE_DIV_EXT\x10+\x12(\n$OPERATION_TYPE_TAX_CORRECTION_COUPON\x10,2\xf3\x06\n\x11OperationsService\x12\x84\x01\n\rGetOperations\x12\x38.tinkoff.public.invest.api.contract.v1.OperationsRequest\x1a\x39.tinkoff.public.invest.api.contract.v1.OperationsResponse\x12\x81\x01\n\x0cGetPortfolio\x12\x37.tinkoff.public.invest.api.contract.v1.PortfolioRequest\x1a\x38.tinkoff.public.invest.api.contract.v1.PortfolioResponse\x12\x81\x01\n\x0cGetPositions\x12\x37.tinkoff.public.invest.api.contract.v1.PositionsRequest\x1a\x38.tinkoff.public.invest.api.contract.v1.PositionsResponse\x12\x90\x01\n\x11GetWithdrawLimits\x12<.tinkoff.public.invest.api.contract.v1.WithdrawLimitsRequest\x1a=.tinkoff.public.invest.api.contract.v1.WithdrawLimitsResponse\x12\x8a\x01\n\x0fGetBrokerReport\x12:.tinkoff.public.invest.api.contract.v1.BrokerReportRequest\x1a;.tinkoff.public.invest.api.contract.v1.BrokerReportResponse\x12\xae\x01\n\x19GetDividendsForeignIssuer\x12G.tinkoff.public.invest.api.contract.v1.GetDividendsForeignIssuerRequest\x1aH.tinkoff.public.invest.api.contract.v1.GetDividendsForeignIssuerResponseBa\n\x1cru.tinkoff.piapi.contract.v1P\x01Z\x0c./;investapi\xa2\x02\x05TIAPI\xaa\x02\x14Tinkoff.InvestApi.V1\xca\x02\x11Tinkoff\\Invest\\V1b\x06proto3'
   ,
   dependencies=[google_dot_protobuf_dot_timestamp__pb2.DESCRIPTOR,tinkoff_dot_invest_dot_grpc_dot_common__pb2.DESCRIPTOR,])
 
@@ -51,8 +51,8 @@ _OPERATIONSTATE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=5287,
-  serialized_end=5396,
+  serialized_start=6977,
+  serialized_end=7086,
 )
 _sym_db.RegisterEnumDescriptor(_OPERATIONSTATE)
 
@@ -284,11 +284,16 @@ _OPERATIONTYPE = _descriptor.EnumDescriptor(
       serialized_options=None,
       type=None,
       create_key=_descriptor._internal_create_key),
+    _descriptor.EnumValueDescriptor(
+      name='OPERATION_TYPE_TAX_CORRECTION_COUPON', index=44, number=44,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=5399,
-  serialized_end=6908,
+  serialized_start=7089,
+  serialized_end=8640,
 )
 _sym_db.RegisterEnumDescriptor(_OPERATIONTYPE)
 
@@ -340,6 +345,7 @@ OPERATION_TYPE_TAX_REPO_REFUND = 40
 OPERATION_TYPE_TAX_REPO_HOLD_PROGRESSIVE = 41
 OPERATION_TYPE_TAX_REPO_REFUND_PROGRESSIVE = 42
 OPERATION_TYPE_DIV_EXT = 43
+OPERATION_TYPE_TAX_CORRECTION_COUPON = 44
 
 
 
@@ -1545,6 +1551,373 @@ _BROKERREPORT = _descriptor.Descriptor(
   serialized_end=5285,
 )
 
+
+_GETDIVIDENDSFOREIGNISSUERREQUEST = _descriptor.Descriptor(
+  name='GetDividendsForeignIssuerRequest',
+  full_name='tinkoff.public.invest.api.contract.v1.GetDividendsForeignIssuerRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='generate_div_foreign_issuer_report', full_name='tinkoff.public.invest.api.contract.v1.GetDividendsForeignIssuerRequest.generate_div_foreign_issuer_report', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='get_div_foreign_issuer_report', full_name='tinkoff.public.invest.api.contract.v1.GetDividendsForeignIssuerRequest.get_div_foreign_issuer_report', index=1,
+      number=2, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+    _descriptor.OneofDescriptor(
+      name='payload', full_name='tinkoff.public.invest.api.contract.v1.GetDividendsForeignIssuerRequest.payload',
+      index=0, containing_type=None,
+      create_key=_descriptor._internal_create_key,
+    fields=[]),
+  ],
+  serialized_start=5288,
+  serialized_end=5584,
+)
+
+
+_GETDIVIDENDSFOREIGNISSUERRESPONSE = _descriptor.Descriptor(
+  name='GetDividendsForeignIssuerResponse',
+  full_name='tinkoff.public.invest.api.contract.v1.GetDividendsForeignIssuerResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='generate_div_foreign_issuer_report_response', full_name='tinkoff.public.invest.api.contract.v1.GetDividendsForeignIssuerResponse.generate_div_foreign_issuer_report_response', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='div_foreign_issuer_report', full_name='tinkoff.public.invest.api.contract.v1.GetDividendsForeignIssuerResponse.div_foreign_issuer_report', index=1,
+      number=2, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+    _descriptor.OneofDescriptor(
+      name='payload', full_name='tinkoff.public.invest.api.contract.v1.GetDividendsForeignIssuerResponse.payload',
+      index=0, containing_type=None,
+      create_key=_descriptor._internal_create_key,
+    fields=[]),
+  ],
+  serialized_start=5587,
+  serialized_end=5891,
+)
+
+
+_GENERATEDIVIDENDSFOREIGNISSUERREPORTREQUEST = _descriptor.Descriptor(
+  name='GenerateDividendsForeignIssuerReportRequest',
+  full_name='tinkoff.public.invest.api.contract.v1.GenerateDividendsForeignIssuerReportRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='account_id', full_name='tinkoff.public.invest.api.contract.v1.GenerateDividendsForeignIssuerReportRequest.account_id', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='from', full_name='tinkoff.public.invest.api.contract.v1.GenerateDividendsForeignIssuerReportRequest.from', index=1,
+      number=2, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='to', full_name='tinkoff.public.invest.api.contract.v1.GenerateDividendsForeignIssuerReportRequest.to', index=2,
+      number=3, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=5894,
+  serialized_end=6041,
+)
+
+
+_GETDIVIDENDSFOREIGNISSUERREPORTREQUEST = _descriptor.Descriptor(
+  name='GetDividendsForeignIssuerReportRequest',
+  full_name='tinkoff.public.invest.api.contract.v1.GetDividendsForeignIssuerReportRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='task_id', full_name='tinkoff.public.invest.api.contract.v1.GetDividendsForeignIssuerReportRequest.task_id', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='page', full_name='tinkoff.public.invest.api.contract.v1.GetDividendsForeignIssuerReportRequest.page', index=1,
+      number=2, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=6043,
+  serialized_end=6114,
+)
+
+
+_GENERATEDIVIDENDSFOREIGNISSUERREPORTRESPONSE = _descriptor.Descriptor(
+  name='GenerateDividendsForeignIssuerReportResponse',
+  full_name='tinkoff.public.invest.api.contract.v1.GenerateDividendsForeignIssuerReportResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='task_id', full_name='tinkoff.public.invest.api.contract.v1.GenerateDividendsForeignIssuerReportResponse.task_id', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=6116,
+  serialized_end=6179,
+)
+
+
+_GETDIVIDENDSFOREIGNISSUERREPORTRESPONSE = _descriptor.Descriptor(
+  name='GetDividendsForeignIssuerReportResponse',
+  full_name='tinkoff.public.invest.api.contract.v1.GetDividendsForeignIssuerReportResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='dividends_foreign_issuer_report', full_name='tinkoff.public.invest.api.contract.v1.GetDividendsForeignIssuerReportResponse.dividends_foreign_issuer_report', index=0,
+      number=1, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='itemsCount', full_name='tinkoff.public.invest.api.contract.v1.GetDividendsForeignIssuerReportResponse.itemsCount', index=1,
+      number=2, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='pagesCount', full_name='tinkoff.public.invest.api.contract.v1.GetDividendsForeignIssuerReportResponse.pagesCount', index=2,
+      number=3, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='page', full_name='tinkoff.public.invest.api.contract.v1.GetDividendsForeignIssuerReportResponse.page', index=3,
+      number=4, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=6182,
+  serialized_end=6387,
+)
+
+
+_DIVIDENDSFOREIGNISSUERREPORT = _descriptor.Descriptor(
+  name='DividendsForeignIssuerReport',
+  full_name='tinkoff.public.invest.api.contract.v1.DividendsForeignIssuerReport',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='record_date', full_name='tinkoff.public.invest.api.contract.v1.DividendsForeignIssuerReport.record_date', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='payment_date', full_name='tinkoff.public.invest.api.contract.v1.DividendsForeignIssuerReport.payment_date', index=1,
+      number=2, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='security_name', full_name='tinkoff.public.invest.api.contract.v1.DividendsForeignIssuerReport.security_name', index=2,
+      number=3, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='isin', full_name='tinkoff.public.invest.api.contract.v1.DividendsForeignIssuerReport.isin', index=3,
+      number=4, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='issuer_country', full_name='tinkoff.public.invest.api.contract.v1.DividendsForeignIssuerReport.issuer_country', index=4,
+      number=5, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='quantity', full_name='tinkoff.public.invest.api.contract.v1.DividendsForeignIssuerReport.quantity', index=5,
+      number=6, type=3, cpp_type=2, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='dividend', full_name='tinkoff.public.invest.api.contract.v1.DividendsForeignIssuerReport.dividend', index=6,
+      number=7, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='external_commission', full_name='tinkoff.public.invest.api.contract.v1.DividendsForeignIssuerReport.external_commission', index=7,
+      number=8, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='dividend_gross', full_name='tinkoff.public.invest.api.contract.v1.DividendsForeignIssuerReport.dividend_gross', index=8,
+      number=9, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='tax', full_name='tinkoff.public.invest.api.contract.v1.DividendsForeignIssuerReport.tax', index=9,
+      number=10, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='dividend_amount', full_name='tinkoff.public.invest.api.contract.v1.DividendsForeignIssuerReport.dividend_amount', index=10,
+      number=11, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='currency', full_name='tinkoff.public.invest.api.contract.v1.DividendsForeignIssuerReport.currency', index=11,
+      number=12, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=6390,
+  serialized_end=6975,
+)
+
 _OPERATIONSREQUEST.fields_by_name['from'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
 _OPERATIONSREQUEST.fields_by_name['to'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
 _OPERATIONSREQUEST.fields_by_name['state'].enum_type = _OPERATIONSTATE
@@ -1609,6 +1982,32 @@ _BROKERREPORT.fields_by_name['exchange_clearing_commission'].message_type = tink
 _BROKERREPORT.fields_by_name['repo_rate'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._QUOTATION
 _BROKERREPORT.fields_by_name['clear_value_date'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
 _BROKERREPORT.fields_by_name['sec_value_date'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
+_GETDIVIDENDSFOREIGNISSUERREQUEST.fields_by_name['generate_div_foreign_issuer_report'].message_type = _GENERATEDIVIDENDSFOREIGNISSUERREPORTREQUEST
+_GETDIVIDENDSFOREIGNISSUERREQUEST.fields_by_name['get_div_foreign_issuer_report'].message_type = _GETDIVIDENDSFOREIGNISSUERREPORTREQUEST
+_GETDIVIDENDSFOREIGNISSUERREQUEST.oneofs_by_name['payload'].fields.append(
+  _GETDIVIDENDSFOREIGNISSUERREQUEST.fields_by_name['generate_div_foreign_issuer_report'])
+_GETDIVIDENDSFOREIGNISSUERREQUEST.fields_by_name['generate_div_foreign_issuer_report'].containing_oneof = _GETDIVIDENDSFOREIGNISSUERREQUEST.oneofs_by_name['payload']
+_GETDIVIDENDSFOREIGNISSUERREQUEST.oneofs_by_name['payload'].fields.append(
+  _GETDIVIDENDSFOREIGNISSUERREQUEST.fields_by_name['get_div_foreign_issuer_report'])
+_GETDIVIDENDSFOREIGNISSUERREQUEST.fields_by_name['get_div_foreign_issuer_report'].containing_oneof = _GETDIVIDENDSFOREIGNISSUERREQUEST.oneofs_by_name['payload']
+_GETDIVIDENDSFOREIGNISSUERRESPONSE.fields_by_name['generate_div_foreign_issuer_report_response'].message_type = _GENERATEDIVIDENDSFOREIGNISSUERREPORTRESPONSE
+_GETDIVIDENDSFOREIGNISSUERRESPONSE.fields_by_name['div_foreign_issuer_report'].message_type = _GETDIVIDENDSFOREIGNISSUERREPORTRESPONSE
+_GETDIVIDENDSFOREIGNISSUERRESPONSE.oneofs_by_name['payload'].fields.append(
+  _GETDIVIDENDSFOREIGNISSUERRESPONSE.fields_by_name['generate_div_foreign_issuer_report_response'])
+_GETDIVIDENDSFOREIGNISSUERRESPONSE.fields_by_name['generate_div_foreign_issuer_report_response'].containing_oneof = _GETDIVIDENDSFOREIGNISSUERRESPONSE.oneofs_by_name['payload']
+_GETDIVIDENDSFOREIGNISSUERRESPONSE.oneofs_by_name['payload'].fields.append(
+  _GETDIVIDENDSFOREIGNISSUERRESPONSE.fields_by_name['div_foreign_issuer_report'])
+_GETDIVIDENDSFOREIGNISSUERRESPONSE.fields_by_name['div_foreign_issuer_report'].containing_oneof = _GETDIVIDENDSFOREIGNISSUERRESPONSE.oneofs_by_name['payload']
+_GENERATEDIVIDENDSFOREIGNISSUERREPORTREQUEST.fields_by_name['from'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
+_GENERATEDIVIDENDSFOREIGNISSUERREPORTREQUEST.fields_by_name['to'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
+_GETDIVIDENDSFOREIGNISSUERREPORTRESPONSE.fields_by_name['dividends_foreign_issuer_report'].message_type = _DIVIDENDSFOREIGNISSUERREPORT
+_DIVIDENDSFOREIGNISSUERREPORT.fields_by_name['record_date'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
+_DIVIDENDSFOREIGNISSUERREPORT.fields_by_name['payment_date'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
+_DIVIDENDSFOREIGNISSUERREPORT.fields_by_name['dividend'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._QUOTATION
+_DIVIDENDSFOREIGNISSUERREPORT.fields_by_name['external_commission'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._QUOTATION
+_DIVIDENDSFOREIGNISSUERREPORT.fields_by_name['dividend_gross'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._QUOTATION
+_DIVIDENDSFOREIGNISSUERREPORT.fields_by_name['tax'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._QUOTATION
+_DIVIDENDSFOREIGNISSUERREPORT.fields_by_name['dividend_amount'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._QUOTATION
 DESCRIPTOR.message_types_by_name['OperationsRequest'] = _OPERATIONSREQUEST
 DESCRIPTOR.message_types_by_name['OperationsResponse'] = _OPERATIONSRESPONSE
 DESCRIPTOR.message_types_by_name['Operation'] = _OPERATION
@@ -1629,6 +2028,13 @@ DESCRIPTOR.message_types_by_name['GenerateBrokerReportResponse'] = _GENERATEBROK
 DESCRIPTOR.message_types_by_name['GetBrokerReportRequest'] = _GETBROKERREPORTREQUEST
 DESCRIPTOR.message_types_by_name['GetBrokerReportResponse'] = _GETBROKERREPORTRESPONSE
 DESCRIPTOR.message_types_by_name['BrokerReport'] = _BROKERREPORT
+DESCRIPTOR.message_types_by_name['GetDividendsForeignIssuerRequest'] = _GETDIVIDENDSFOREIGNISSUERREQUEST
+DESCRIPTOR.message_types_by_name['GetDividendsForeignIssuerResponse'] = _GETDIVIDENDSFOREIGNISSUERRESPONSE
+DESCRIPTOR.message_types_by_name['GenerateDividendsForeignIssuerReportRequest'] = _GENERATEDIVIDENDSFOREIGNISSUERREPORTREQUEST
+DESCRIPTOR.message_types_by_name['GetDividendsForeignIssuerReportRequest'] = _GETDIVIDENDSFOREIGNISSUERREPORTREQUEST
+DESCRIPTOR.message_types_by_name['GenerateDividendsForeignIssuerReportResponse'] = _GENERATEDIVIDENDSFOREIGNISSUERREPORTRESPONSE
+DESCRIPTOR.message_types_by_name['GetDividendsForeignIssuerReportResponse'] = _GETDIVIDENDSFOREIGNISSUERREPORTRESPONSE
+DESCRIPTOR.message_types_by_name['DividendsForeignIssuerReport'] = _DIVIDENDSFOREIGNISSUERREPORT
 DESCRIPTOR.enum_types_by_name['OperationState'] = _OPERATIONSTATE
 DESCRIPTOR.enum_types_by_name['OperationType'] = _OPERATIONTYPE
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
@@ -1773,6 +2179,55 @@ BrokerReport = _reflection.GeneratedProtocolMessageType('BrokerReport', (_messag
   })
 _sym_db.RegisterMessage(BrokerReport)
 
+GetDividendsForeignIssuerRequest = _reflection.GeneratedProtocolMessageType('GetDividendsForeignIssuerRequest', (_message.Message,), {
+  'DESCRIPTOR' : _GETDIVIDENDSFOREIGNISSUERREQUEST,
+  '__module__' : 'tinkoff.invest.grpc.operations_pb2'
+  # @@protoc_insertion_point(class_scope:tinkoff.public.invest.api.contract.v1.GetDividendsForeignIssuerRequest)
+  })
+_sym_db.RegisterMessage(GetDividendsForeignIssuerRequest)
+
+GetDividendsForeignIssuerResponse = _reflection.GeneratedProtocolMessageType('GetDividendsForeignIssuerResponse', (_message.Message,), {
+  'DESCRIPTOR' : _GETDIVIDENDSFOREIGNISSUERRESPONSE,
+  '__module__' : 'tinkoff.invest.grpc.operations_pb2'
+  # @@protoc_insertion_point(class_scope:tinkoff.public.invest.api.contract.v1.GetDividendsForeignIssuerResponse)
+  })
+_sym_db.RegisterMessage(GetDividendsForeignIssuerResponse)
+
+GenerateDividendsForeignIssuerReportRequest = _reflection.GeneratedProtocolMessageType('GenerateDividendsForeignIssuerReportRequest', (_message.Message,), {
+  'DESCRIPTOR' : _GENERATEDIVIDENDSFOREIGNISSUERREPORTREQUEST,
+  '__module__' : 'tinkoff.invest.grpc.operations_pb2'
+  # @@protoc_insertion_point(class_scope:tinkoff.public.invest.api.contract.v1.GenerateDividendsForeignIssuerReportRequest)
+  })
+_sym_db.RegisterMessage(GenerateDividendsForeignIssuerReportRequest)
+
+GetDividendsForeignIssuerReportRequest = _reflection.GeneratedProtocolMessageType('GetDividendsForeignIssuerReportRequest', (_message.Message,), {
+  'DESCRIPTOR' : _GETDIVIDENDSFOREIGNISSUERREPORTREQUEST,
+  '__module__' : 'tinkoff.invest.grpc.operations_pb2'
+  # @@protoc_insertion_point(class_scope:tinkoff.public.invest.api.contract.v1.GetDividendsForeignIssuerReportRequest)
+  })
+_sym_db.RegisterMessage(GetDividendsForeignIssuerReportRequest)
+
+GenerateDividendsForeignIssuerReportResponse = _reflection.GeneratedProtocolMessageType('GenerateDividendsForeignIssuerReportResponse', (_message.Message,), {
+  'DESCRIPTOR' : _GENERATEDIVIDENDSFOREIGNISSUERREPORTRESPONSE,
+  '__module__' : 'tinkoff.invest.grpc.operations_pb2'
+  # @@protoc_insertion_point(class_scope:tinkoff.public.invest.api.contract.v1.GenerateDividendsForeignIssuerReportResponse)
+  })
+_sym_db.RegisterMessage(GenerateDividendsForeignIssuerReportResponse)
+
+GetDividendsForeignIssuerReportResponse = _reflection.GeneratedProtocolMessageType('GetDividendsForeignIssuerReportResponse', (_message.Message,), {
+  'DESCRIPTOR' : _GETDIVIDENDSFOREIGNISSUERREPORTRESPONSE,
+  '__module__' : 'tinkoff.invest.grpc.operations_pb2'
+  # @@protoc_insertion_point(class_scope:tinkoff.public.invest.api.contract.v1.GetDividendsForeignIssuerReportResponse)
+  })
+_sym_db.RegisterMessage(GetDividendsForeignIssuerReportResponse)
+
+DividendsForeignIssuerReport = _reflection.GeneratedProtocolMessageType('DividendsForeignIssuerReport', (_message.Message,), {
+  'DESCRIPTOR' : _DIVIDENDSFOREIGNISSUERREPORT,
+  '__module__' : 'tinkoff.invest.grpc.operations_pb2'
+  # @@protoc_insertion_point(class_scope:tinkoff.public.invest.api.contract.v1.DividendsForeignIssuerReport)
+  })
+_sym_db.RegisterMessage(DividendsForeignIssuerReport)
+
 
 DESCRIPTOR._options = None
 
@@ -1783,8 +2238,8 @@ _OPERATIONSSERVICE = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=6911,
-  serialized_end=7617,
+  serialized_start=8643,
+  serialized_end=9526,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetOperations',
@@ -1833,6 +2288,16 @@ _OPERATIONSSERVICE = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_BROKERREPORTREQUEST,
     output_type=_BROKERREPORTRESPONSE,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='GetDividendsForeignIssuer',
+    full_name='tinkoff.public.invest.api.contract.v1.OperationsService.GetDividendsForeignIssuer',
+    index=5,
+    containing_service=None,
+    input_type=_GETDIVIDENDSFOREIGNISSUERREQUEST,
+    output_type=_GETDIVIDENDSFOREIGNISSUERRESPONSE,
     serialized_options=None,
     create_key=_descriptor._internal_create_key,
   ),

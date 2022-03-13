@@ -44,13 +44,19 @@ from .schemas import (
     FutureResponse,
     FuturesResponse,
     GenerateBrokerReportRequest,
+    GenerateDividendsForeignIssuerReportRequest,
     GetAccountsRequest,
     GetAccountsResponse,
     GetAccruedInterestsRequest,
     GetAccruedInterestsResponse,
+    GetBondCouponsRequest,
+    GetBondCouponsResponse,
     GetBrokerReportRequest,
     GetCandlesRequest,
     GetCandlesResponse,
+    GetDividendsForeignIssuerReportRequest,
+    GetDividendsForeignIssuerRequest,
+    GetDividendsForeignIssuerResponse,
     GetDividendsRequest,
     GetDividendsResponse,
     GetFuturesMarginRequest,
@@ -497,6 +503,30 @@ class InstrumentsService(_grpc_helpers.Service):
         log_request(await get_tracking_id_from_coro(response_coro), "GetDividends")
         return _grpc_helpers.protobuf_to_dataclass(response, GetDividendsResponse)
 
+    @handle_aio_request_error("GetBondCoupons")
+    async def get_bond_coupons(
+        self,
+        *,
+        figi: str = "",
+        from_: Optional[datetime] = None,
+        to: Optional[datetime] = None,
+    ) -> GetBondCouponsResponse:
+        request = GetBondCouponsRequest()
+        request.figi = figi
+        if from_ is not None:
+            request.from_ = from_
+        if to is not None:
+            request.to = to
+        response_coro = self.stub.GetBondCoupons(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, instruments_pb2.GetBondCouponsRequest()
+            ),
+            metadata=self.metadata,
+        )
+        response = await response_coro
+        log_request(await get_tracking_id_from_coro(response_coro), "GetBondCoupons")
+        return _grpc_helpers.protobuf_to_dataclass(response, GetBondCouponsResponse)
+
 
 class MarketDataService(_grpc_helpers.Service):
     _stub_factory = marketdata_pb2_grpc.MarketDataServiceStub
@@ -697,6 +727,38 @@ class OperationsService(_grpc_helpers.Service):
         response = await response_coro
         log_request(await get_tracking_id_from_coro(response_coro), "GetBrokerReport")
         return _grpc_helpers.protobuf_to_dataclass(response, BrokerReportResponse)
+
+    @handle_aio_request_error("GetDividendsForeignIssuer")
+    async def get_dividends_foreign_issuer(
+        self,
+        *,
+        generate_div_foreign_issuer_report: Optional[
+            GenerateDividendsForeignIssuerReportRequest
+        ] = None,
+        get_div_foreign_issuer_report: Optional[
+            GetDividendsForeignIssuerReportRequest
+        ] = None,
+    ) -> GetDividendsForeignIssuerResponse:
+        request = GetDividendsForeignIssuerRequest()
+        if generate_div_foreign_issuer_report is not None:
+            request.generate_div_foreign_issuer_report = (
+                generate_div_foreign_issuer_report
+            )
+        if get_div_foreign_issuer_report is not None:
+            request.get_div_foreign_issuer_report = get_div_foreign_issuer_report
+        response_coro = self.stub.GetDividendsForeignIssuer(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, operations_pb2.GetDividendsForeignIssuerRequest()
+            ),
+            metadata=self.metadata,
+        )
+        response = await response_coro
+        log_request(
+            await get_tracking_id_from_coro(response_coro), "GetDividendsForeignIssuer"
+        )
+        return _grpc_helpers.protobuf_to_dataclass(
+            response, GetDividendsForeignIssuerResponse
+        )
 
 
 class OrdersStreamService(_grpc_helpers.Service):

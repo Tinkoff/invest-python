@@ -32,6 +32,11 @@ class InstrumentsServiceStub(object):
                 request_serializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.InstrumentsRequest.SerializeToString,
                 response_deserializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.BondsResponse.FromString,
                 )
+        self.GetBondCoupons = channel.unary_unary(
+                '/tinkoff.public.invest.api.contract.v1.InstrumentsService/GetBondCoupons',
+                request_serializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetBondCouponsRequest.SerializeToString,
+                response_deserializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetBondCouponsResponse.FromString,
+                )
         self.CurrencyBy = channel.unary_unary(
                 '/tinkoff.public.invest.api.contract.v1.InstrumentsService/CurrencyBy',
                 request_serializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.InstrumentRequest.SerializeToString,
@@ -116,6 +121,13 @@ class InstrumentsServiceServicer(object):
 
     def Bonds(self, request, context):
         """Метод получения списка облигаций.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetBondCoupons(self, request, context):
+        """Метод получения графика выплат купонов по облигации
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -222,6 +234,11 @@ def add_InstrumentsServiceServicer_to_server(servicer, server):
                     servicer.Bonds,
                     request_deserializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.InstrumentsRequest.FromString,
                     response_serializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.BondsResponse.SerializeToString,
+            ),
+            'GetBondCoupons': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetBondCoupons,
+                    request_deserializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetBondCouponsRequest.FromString,
+                    response_serializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetBondCouponsResponse.SerializeToString,
             ),
             'CurrencyBy': grpc.unary_unary_rpc_method_handler(
                     servicer.CurrencyBy,
@@ -344,6 +361,23 @@ class InstrumentsService(object):
         return grpc.experimental.unary_unary(request, target, '/tinkoff.public.invest.api.contract.v1.InstrumentsService/Bonds',
             tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.InstrumentsRequest.SerializeToString,
             tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.BondsResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetBondCoupons(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/tinkoff.public.invest.api.contract.v1.InstrumentsService/GetBondCoupons',
+            tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetBondCouponsRequest.SerializeToString,
+            tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetBondCouponsResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 

@@ -8,7 +8,7 @@ from tinkoff.invest.grpc import operations_pb2 as tinkoff_dot_invest_dot_grpc_do
 class OperationsServiceStub(object):
     """Сервис предназначен для получения:</br> **1**.  списка операций по счёту;</br> **2**.
     портфеля по счёту;</br> **3**. позиций ценных бумаг на счёте;</br> **4**.
-    доступного остатка для вывода средств.
+    доступного остатка для вывода средств;</br> **4**. получения различных отчётов.
     """
 
     def __init__(self, channel):
@@ -42,12 +42,17 @@ class OperationsServiceStub(object):
                 request_serializer=tinkoff_dot_invest_dot_grpc_dot_operations__pb2.BrokerReportRequest.SerializeToString,
                 response_deserializer=tinkoff_dot_invest_dot_grpc_dot_operations__pb2.BrokerReportResponse.FromString,
                 )
+        self.GetDividendsForeignIssuer = channel.unary_unary(
+                '/tinkoff.public.invest.api.contract.v1.OperationsService/GetDividendsForeignIssuer',
+                request_serializer=tinkoff_dot_invest_dot_grpc_dot_operations__pb2.GetDividendsForeignIssuerRequest.SerializeToString,
+                response_deserializer=tinkoff_dot_invest_dot_grpc_dot_operations__pb2.GetDividendsForeignIssuerResponse.FromString,
+                )
 
 
 class OperationsServiceServicer(object):
     """Сервис предназначен для получения:</br> **1**.  списка операций по счёту;</br> **2**.
     портфеля по счёту;</br> **3**. позиций ценных бумаг на счёте;</br> **4**.
-    доступного остатка для вывода средств.
+    доступного остатка для вывода средств;</br> **4**. получения различных отчётов.
     """
 
     def GetOperations(self, request, context):
@@ -79,7 +84,15 @@ class OperationsServiceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def GetBrokerReport(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Метод получения брокерского отчёта.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetDividendsForeignIssuer(self, request, context):
+        """Метод получения отчёта "Справка о доходах за пределами РФ".
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
@@ -112,6 +125,11 @@ def add_OperationsServiceServicer_to_server(servicer, server):
                     request_deserializer=tinkoff_dot_invest_dot_grpc_dot_operations__pb2.BrokerReportRequest.FromString,
                     response_serializer=tinkoff_dot_invest_dot_grpc_dot_operations__pb2.BrokerReportResponse.SerializeToString,
             ),
+            'GetDividendsForeignIssuer': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetDividendsForeignIssuer,
+                    request_deserializer=tinkoff_dot_invest_dot_grpc_dot_operations__pb2.GetDividendsForeignIssuerRequest.FromString,
+                    response_serializer=tinkoff_dot_invest_dot_grpc_dot_operations__pb2.GetDividendsForeignIssuerResponse.SerializeToString,
+            ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
             'tinkoff.public.invest.api.contract.v1.OperationsService', rpc_method_handlers)
@@ -122,7 +140,7 @@ def add_OperationsServiceServicer_to_server(servicer, server):
 class OperationsService(object):
     """Сервис предназначен для получения:</br> **1**.  списка операций по счёту;</br> **2**.
     портфеля по счёту;</br> **3**. позиций ценных бумаг на счёте;</br> **4**.
-    доступного остатка для вывода средств.
+    доступного остатка для вывода средств;</br> **4**. получения различных отчётов.
     """
 
     @staticmethod
@@ -207,5 +225,22 @@ class OperationsService(object):
         return grpc.experimental.unary_unary(request, target, '/tinkoff.public.invest.api.contract.v1.OperationsService/GetBrokerReport',
             tinkoff_dot_invest_dot_grpc_dot_operations__pb2.BrokerReportRequest.SerializeToString,
             tinkoff_dot_invest_dot_grpc_dot_operations__pb2.BrokerReportResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetDividendsForeignIssuer(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/tinkoff.public.invest.api.contract.v1.OperationsService/GetDividendsForeignIssuer',
+            tinkoff_dot_invest_dot_grpc_dot_operations__pb2.GetDividendsForeignIssuerRequest.SerializeToString,
+            tinkoff_dot_invest_dot_grpc_dot_operations__pb2.GetDividendsForeignIssuerResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
