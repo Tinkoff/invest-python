@@ -1,6 +1,6 @@
 # pylint:disable=redefined-builtin,too-many-lines
+import queue
 import threading
-import time
 from datetime import datetime
 from typing import Generator, Iterable, Iterator, List, Optional
 
@@ -140,20 +140,16 @@ class MarketDataStreamManager:
     def __init__(self, market_data_stream: "MarketDataStreamService"):
         self._market_data_stream_service = market_data_stream
         self._market_data_stream: Iterator[MarketDataResponse]
-        self._requests: List[MarketDataRequest] = []
+        self._requests: queue.Queue[MarketDataRequest] = queue.Queue()
         self._unsubscribe_event = threading.Event()
 
     def _get_request_generator(self) -> Iterable[MarketDataRequest]:
         while not self._unsubscribe_event.is_set():
-            if not self._requests:
-                time.sleep(1)
-            else:
-                requests = iter(self._requests)
-                self._requests = []
-                yield from requests
+            if request := self._requests.get(timeout=1.0):
+                yield request
 
     def subscribe(self, market_data_request: MarketDataRequest) -> None:
-        self._requests.append(market_data_request)
+        self._requests.put(market_data_request)
 
     def unsubscribe(self) -> None:
         self._unsubscribe_event.set()
