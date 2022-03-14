@@ -1,7 +1,16 @@
 # pylint:disable=redefined-builtin,too-many-lines
 import asyncio
+import threading
+from asyncio import Queue
 from datetime import datetime
-from typing import AsyncGenerator, AsyncIterable, List, Optional
+from typing import (
+    AsyncGenerator,
+    AsyncIterable,
+    AsyncIterator,
+    Awaitable,
+    List,
+    Optional,
+)
 
 import grpc
 
@@ -135,6 +144,36 @@ __all__ = (
 )
 
 
+class AsyncMarketDataStreamManager:
+    def __init__(self, market_data_stream: "MarketDataStreamService"):
+        self._market_data_stream_service = market_data_stream
+        self._market_data_stream: AsyncIterator[MarketDataResponse]
+        self._requests: Queue[MarketDataRequest] = Queue()
+        self._unsubscribe_event = threading.Event()
+
+    async def _get_request_generator(self) -> AsyncIterable[MarketDataRequest]:
+        while not self._unsubscribe_event.is_set():
+            if request := await self._requests.get():
+                yield request
+
+    async def subscribe(self, market_data_request: MarketDataRequest) -> None:
+        await self._requests.put(market_data_request)
+
+    def unsubscribe(self) -> None:
+        self._unsubscribe_event.set()
+
+    def __aiter__(self) -> "AsyncMarketDataStreamManager":
+        self._unsubscribe_event.clear()
+        self._market_data_stream = self._market_data_stream_service.market_data_stream(
+            self._get_request_generator()
+        ).__aiter__()
+
+        return self
+
+    def __anext__(self) -> Awaitable[MarketDataResponse]:
+        return self._market_data_stream.__anext__()
+
+
 class AsyncServices:
     def __init__(
         self, channel: grpc.aio.Channel, token: str, sandbox_token: Optional[str] = None
@@ -150,6 +189,9 @@ class AsyncServices:
         self.users = UsersService(channel, metadata)
         self.sandbox = SandboxService(channel, sandbox_metadata)
         self.stop_orders = StopOrdersService(channel, metadata)
+
+    def create_market_data_stream(self) -> AsyncMarketDataStreamManager:
+        return AsyncMarketDataStreamManager(market_data_stream=self.market_data_stream)
 
     async def cancel_all_orders(self, account_id: AccountId) -> None:
         orders_service: OrdersService = self.orders
