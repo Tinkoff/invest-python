@@ -291,7 +291,9 @@ class MockedSandboxServices(Services):
         logger.info("Closing sandbox account %s", self._account_id)
         self.sandbox.close_sandbox_account(account_id=self._account_id)
 
-    def _mocked_orders_post_order(self) -> Callable[[Any], Any]:
+    def _mocked_orders_post_order(
+        self,
+    ) -> Callable[[Any], PostOrderResponse]:
         def _post_order(
             *,
             figi: str = "",
@@ -312,7 +314,7 @@ class MockedSandboxServices(Services):
                 order_id=order_id,
             )
 
-        return _post_order
+        return _post_order  # type: ignore
 
     def _mocked_operations_get_portfolio(self) -> Callable[[Any], Any]:
         def _get_sandbox_portfolio(
@@ -320,9 +322,9 @@ class MockedSandboxServices(Services):
         ) -> PortfolioResponse:
             return self.sandbox.get_sandbox_portfolio(account_id=self._account_id)
 
-        return _get_sandbox_portfolio
+        return _get_sandbox_portfolio  # type: ignore
 
-    def _mocked_users_get_margin_attributes(self):
+    def _mocked_users_get_margin_attributes(self) -> Callable[[Any], PortfolioResponse]:
         def _get_margin_attributes(*agrs, **kwargs):  # pylint: disable=unused-argument
             return GetMarginAttributesResponse(
                 liquid_portfolio=MoneyValue(currency="", units=0, nano=0),
