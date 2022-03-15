@@ -315,7 +315,9 @@ class MockedSandboxServices(Services):
         return _post_order
 
     def _mocked_operations_get_portfolio(self) -> Callable[[Any], Any]:
-        def _get_sandbox_portfolio(*, account_id: str = "") -> PortfolioResponse:
+        def _get_sandbox_portfolio(
+            *, account_id: str = ""  # pylint: disable=unused-argument
+        ) -> PortfolioResponse:
             return self.sandbox.get_sandbox_portfolio(account_id=self._account_id)
 
         return _get_sandbox_portfolio
