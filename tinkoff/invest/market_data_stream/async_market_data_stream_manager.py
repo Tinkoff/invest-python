@@ -47,10 +47,10 @@ class AsyncMarketDataStreamManager(IMarketDataStreamManager):
         return LastPriceStreamManager[AsyncMarketDataStreamManager](parent_manager=self)
 
     def subscribe(self, market_data_request: MarketDataRequest) -> None:
-        asyncio.run(self._requests.put(market_data_request))
+        self._requests.put_nowait(market_data_request)
 
     def unsubscribe(self, market_data_request: MarketDataRequest) -> None:
-        asyncio.run(self._requests.put(market_data_request))
+        self._requests.put_nowait(market_data_request)
 
     def stop(self) -> None:
         self._unsubscribe_event.set()
