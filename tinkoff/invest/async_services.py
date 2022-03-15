@@ -1,16 +1,7 @@
 # pylint:disable=redefined-builtin,too-many-lines
 import asyncio
-import threading
-from asyncio import Queue
 from datetime import datetime
-from typing import (
-    AsyncGenerator,
-    AsyncIterable,
-    AsyncIterator,
-    Awaitable,
-    List,
-    Optional,
-)
+from typing import AsyncGenerator, AsyncIterable, List, Optional
 
 import grpc
 
@@ -33,8 +24,9 @@ from .grpc import (
     users_pb2_grpc,
 )
 from .logging import get_tracking_id_from_coro, log_request
-from .market_data_stream.async_market_data_stream_manager import \
-    AsyncMarketDataStreamManager
+from .market_data_stream.async_market_data_stream_manager import (
+    AsyncMarketDataStreamManager,
+)
 from .metadata import get_metadata
 from .schemas import (
     BondResponse,

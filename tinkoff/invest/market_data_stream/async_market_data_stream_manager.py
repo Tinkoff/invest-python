@@ -1,17 +1,18 @@
-import asyncio
 import threading
 from asyncio import Queue
-from typing import (
-    AsyncIterable,
-    AsyncIterator,
-    Awaitable,
-)
+from typing import AsyncIterable, AsyncIterator, Awaitable
 
-from tinkoff.invest.schemas import MarketDataResponse, MarketDataRequest
-from tinkoff.invest.market_data_stream.market_data_stream_interface import \
-    IMarketDataStreamManager
-from tinkoff.invest.market_data_stream.stream_managers import LastPriceStreamManager, \
-    InfoStreamManager, TradesStreamManager, OrderBookStreamManager, CandlesStreamManager
+from tinkoff.invest.market_data_stream.market_data_stream_interface import (
+    IMarketDataStreamManager,
+)
+from tinkoff.invest.market_data_stream.stream_managers import (
+    CandlesStreamManager,
+    InfoStreamManager,
+    LastPriceStreamManager,
+    OrderBookStreamManager,
+    TradesStreamManager,
+)
+from tinkoff.invest.schemas import MarketDataRequest, MarketDataResponse
 
 
 class AsyncMarketDataStreamManager(IMarketDataStreamManager):

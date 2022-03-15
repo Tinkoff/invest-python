@@ -14,13 +14,17 @@ TOKEN = os.environ["INVEST_TOKEN"]
 
 async def main():
     async with AsyncClient(TOKEN) as client:
-        market_data_stream: AsyncMarketDataStreamManager = client.create_market_data_stream()
-        market_data_stream.candles.subscribe([
+        market_data_stream: AsyncMarketDataStreamManager = (
+            client.create_market_data_stream()
+        )
+        market_data_stream.candles.subscribe(
+            [
                 CandleInstrument(
                     figi="BBG004730N88",
                     interval=SubscriptionInterval.SUBSCRIPTION_INTERVAL_ONE_MINUTE,
                 )
-            ])
+            ]
+        )
         async for marketdata in market_data_stream:
             print(marketdata)
             market_data_stream.info.subscribe([InfoInstrument(figi="BBG004730N88")])
