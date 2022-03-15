@@ -17,27 +17,27 @@ TInstrument = TypeVar("TInstrument")
 class IMarketDataStreamManager(abc.ABC):
     @property
     @abc.abstractmethod
-    def candles(self) -> "CandlesStreamManager[IMarketDataStreamManager]":
+    def candles(self) -> CandlesStreamManager["IMarketDataStreamManager"]:
         pass
 
     @property
     @abc.abstractmethod
-    def order_book(self) -> "OrderBookStreamManager[IMarketDataStreamManager]":
+    def order_book(self) -> OrderBookStreamManager["IMarketDataStreamManager"]:
         pass
 
     @property
     @abc.abstractmethod
-    def trades(self) -> "TradesStreamManager[IMarketDataStreamManager]":
+    def trades(self) -> TradesStreamManager["IMarketDataStreamManager"]:
         pass
 
     @property
     @abc.abstractmethod
-    def info(self) -> "InfoStreamManager[IMarketDataStreamManager]":
+    def info(self) -> InfoStreamManager["IMarketDataStreamManager"]:
         pass
 
     @property
     @abc.abstractmethod
-    def last_price(self) -> "LastPriceStreamManager[IMarketDataStreamManager]":
+    def last_price(self) -> LastPriceStreamManager["IMarketDataStreamManager"]:
         pass
 
     @abc.abstractmethod
