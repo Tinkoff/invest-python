@@ -1,4 +1,5 @@
 import logging
+import time
 from datetime import timedelta
 from typing import Iterator, List
 
@@ -29,7 +30,8 @@ from tinkoff.invest.strategies.moving_average.strategy_state import (
 from tinkoff.invest.strategies.moving_average.supervisor import (
     MovingAverageStrategySupervisor,
 )
-from tinkoff.invest.utils import candle_interval_to_subscription_interval, now
+from tinkoff.invest.utils import candle_interval_to_subscription_interval, now, \
+    floor_datetime
 
 logger = logging.getLogger(__name__)
 
@@ -83,20 +85,28 @@ class MovingAverageStrategyTrader(Trader):
                 instruments=[current_instrument],
             )
         )
+
+        def request_iterator():
+            yield candle_subscribe_request
+            while True:
+                time.sleep(1)
+
         self._market_data_stream = self._services.market_data_stream.market_data_stream(
-            [candle_subscribe_request]
+            request_iterator()
         )
 
-    @staticmethod
-    def _is_candle_fresh(candle: tinkoff.invest.Candle) -> bool:
-        is_fresh_border = now() - timedelta(seconds=5)
+    def _is_candle_fresh(self, candle: tinkoff.invest.Candle) -> bool:
+        is_fresh_border = floor_datetime(
+            now(),
+            delta=self._settings.candle_interval_timedelta
+        )
         logger.debug(
             "Checking if candle is fresh: candle.time=%s > is_fresh_border=%s  %s)",
             candle.time,
             is_fresh_border,
-            candle.time > is_fresh_border,
+            candle.time >= is_fresh_border,
         )
-        return candle.time > is_fresh_border
+        return candle.time >= is_fresh_border
 
     @staticmethod
     def _convert_to_data_event(candle_event: CandleEvent) -> DataEvent:

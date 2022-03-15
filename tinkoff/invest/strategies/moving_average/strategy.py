@@ -79,7 +79,7 @@ class MovingAverageStrategy(InvestStrategy):
 
         if candle_event.time < last_interval_floor:
             raise OldCandleObservingError()
-        if candle_event.time < last_interval_ceil:
+        if candle_event.time < last_interval_ceil or candle_event.time == last_interval_floor:
             self._data[-1] = candle_event
         else:
             self._data.append(candle_event)

@@ -10,7 +10,7 @@ from tinkoff.invest.strategies.base.models import Candle, CandleEvent
 from tinkoff.invest.strategies.base.strategy_interface import InvestStrategy
 from tinkoff.invest.strategies.base.strategy_settings_base import StrategySettings
 from tinkoff.invest.strategies.base.trader_interface import ITrader
-from tinkoff.invest.utils import quotation_to_decimal
+from tinkoff.invest.utils import quotation_to_decimal, now
 
 logger = logging.getLogger(__name__)
 
@@ -45,12 +45,12 @@ class Trader(ITrader, abc.ABC):
             )
 
     def _load_candles(self, period: timedelta) -> Iterable[CandleEvent]:
-        logger.info("Loading candles for period %s from %s", period, datetime.utcnow())
+        logger.info("Loading candles for period %s from %s", period, now())
 
         yield from self._convert_historic_candles_into_candle_events(
             self._services.get_all_candles(
                 figi=self._settings.share_id,
-                from_=datetime.utcnow() - period,
+                from_=now() - period,
                 interval=self._settings.candle_interval,
             )
         )
