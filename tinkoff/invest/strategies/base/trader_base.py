@@ -1,6 +1,6 @@
 import abc
 import logging
-from datetime import datetime, timedelta
+from datetime import timedelta
 from typing import Iterable
 
 import tinkoff
@@ -10,7 +10,7 @@ from tinkoff.invest.strategies.base.models import Candle, CandleEvent
 from tinkoff.invest.strategies.base.strategy_interface import InvestStrategy
 from tinkoff.invest.strategies.base.strategy_settings_base import StrategySettings
 from tinkoff.invest.strategies.base.trader_interface import ITrader
-from tinkoff.invest.utils import quotation_to_decimal, now
+from tinkoff.invest.utils import now, quotation_to_decimal
 
 logger = logging.getLogger(__name__)
 
