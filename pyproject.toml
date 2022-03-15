@@ -67,6 +67,7 @@ numpy = "^1.22.2"
 matplotlib = "^3.5.1"
 mplfinance = "^0.12.8-beta.9"
 pytest-freezegun = "^0.4.2"
+ipython = "^8.1.1"
 
 [tool.poetry.extras]
 dev = ["pandas", "numpy", "matplotlib", "mplfinance", "pytest-freezegun"]
