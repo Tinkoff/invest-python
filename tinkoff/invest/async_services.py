@@ -33,6 +33,8 @@ from .grpc import (
     users_pb2_grpc,
 )
 from .logging import get_tracking_id_from_coro, log_request
+from .market_data_stream.async_market_data_stream_manager import \
+    AsyncMarketDataStreamManager
 from .metadata import get_metadata
 from .schemas import (
     BondResponse,
@@ -142,36 +144,6 @@ __all__ = (
     "SandboxService",
     "StopOrdersService",
 )
-
-
-class AsyncMarketDataStreamManager:
-    def __init__(self, market_data_stream: "MarketDataStreamService"):
-        self._market_data_stream_service = market_data_stream
-        self._market_data_stream: AsyncIterator[MarketDataResponse]
-        self._requests: Queue[MarketDataRequest] = Queue()
-        self._unsubscribe_event = threading.Event()
-
-    async def _get_request_generator(self) -> AsyncIterable[MarketDataRequest]:
-        while not self._unsubscribe_event.is_set():
-            if request := await self._requests.get():
-                yield request
-
-    async def subscribe(self, market_data_request: MarketDataRequest) -> None:
-        await self._requests.put(market_data_request)
-
-    def unsubscribe(self) -> None:
-        self._unsubscribe_event.set()
-
-    def __aiter__(self) -> "AsyncMarketDataStreamManager":
-        self._unsubscribe_event.clear()
-        self._market_data_stream = self._market_data_stream_service.market_data_stream(
-            self._get_request_generator()
-        ).__aiter__()
-
-        return self
-
-    def __anext__(self) -> Awaitable[MarketDataResponse]:
-        return self._market_data_stream.__anext__()
 
 
 class AsyncServices:
