@@ -1,10 +1,12 @@
 # pylint:disable=redefined-builtin,too-many-lines
-import queue
-import threading
 from datetime import datetime
-from typing import Generator, Iterable, Iterator, List, Optional
+from typing import Generator, Iterable, List, Optional
 
 import grpc
+
+from tinkoff.invest.market_data_stream.market_data_stream_manager import (
+    MarketDataStreamManager,
+)
 
 from . import _grpc_helpers
 from ._errors import handle_request_error, handle_request_error_gen
@@ -136,37 +138,6 @@ __all__ = (
 )
 
 
-class MarketDataStreamManager:
-    def __init__(self, market_data_stream: "MarketDataStreamService"):
-        self._market_data_stream_service = market_data_stream
-        self._market_data_stream: Iterator[MarketDataResponse]
-        self._requests: queue.Queue[MarketDataRequest] = queue.Queue()
-        self._unsubscribe_event = threading.Event()
-
-    def _get_request_generator(self) -> Iterable[MarketDataRequest]:
-        while not self._unsubscribe_event.is_set():
-            if request := self._requests.get(timeout=1.0):
-                yield request
-
-    def subscribe(self, market_data_request: MarketDataRequest) -> None:
-        self._requests.put(market_data_request)
-
-    def unsubscribe(self) -> None:
-        self._unsubscribe_event.set()
-
-    def __iter__(self) -> "MarketDataStreamManager":
-        self._unsubscribe_event.clear()
-        self._market_data_stream = iter(
-            self._market_data_stream_service.market_data_stream(
-                self._get_request_generator()
-            )
-        )
-        return self
-
-    def __next__(self) -> MarketDataResponse:
-        return next(self._market_data_stream)
-
-
 class Services:
     def __init__(
         self, channel: grpc.Channel, token: str, sandbox_token: Optional[str] = None
@@ -184,7 +155,9 @@ class Services:
         self.stop_orders = StopOrdersService(channel, metadata)
 
     def create_market_data_stream(self) -> MarketDataStreamManager:
-        return MarketDataStreamManager(market_data_stream=self.market_data_stream)
+        return MarketDataStreamManager(
+            market_data_stream_service=self.market_data_stream
+        )
 
     def cancel_all_orders(self, account_id: AccountId) -> None:
         orders_service: OrdersService = self.orders
