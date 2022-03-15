@@ -19,7 +19,9 @@ TInstrument = TypeVar("TInstrument")
 
 
 class MarketDataStreamManager(IMarketDataStreamManager):
-    def __init__(self, market_data_stream_service: "MarketDataStreamService"):
+    def __init__(
+        self, market_data_stream_service: "MarketDataStreamService"  # noqa: F821
+    ):
         self._market_data_stream_service = market_data_stream_service
         self._market_data_stream: Iterator[MarketDataResponse]
         self._requests: queue.Queue[MarketDataRequest] = queue.Queue()
