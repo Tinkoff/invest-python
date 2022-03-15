@@ -18,7 +18,9 @@ from tinkoff.invest.schemas import MarketDataRequest, MarketDataResponse
 class MarketDataStreamManager(IMarketDataStreamManager):
     def __init__(
         self,
-        market_data_stream_service: "MarketDataStreamService",  # type: ignore
+        market_data_stream_service: (  # type: ignore
+            "MarketDataStreamService"  # noqa: F821
+        ),
     ):
         self._market_data_stream_service = market_data_stream_service
         self._market_data_stream: Iterator[MarketDataResponse]

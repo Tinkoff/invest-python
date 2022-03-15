@@ -16,7 +16,9 @@ from tinkoff.invest.schemas import MarketDataRequest, MarketDataResponse
 
 
 class AsyncMarketDataStreamManager(IMarketDataStreamManager):
-    def __init__(self, market_data_stream: "MarketDataStreamService"):  # noqa: F821
+    def __init__(
+        self, market_data_stream: "MarketDataStreamService"  # noqa: F821; type: ignore
+    ):
         self._market_data_stream_service = market_data_stream
         self._market_data_stream: AsyncIterator[MarketDataResponse]
         self._requests: Queue[MarketDataRequest] = Queue()
