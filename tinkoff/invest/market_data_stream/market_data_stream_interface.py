@@ -1,5 +1,5 @@
 import abc
-from typing import TypeVar
+from typing import Generic
 
 from tinkoff.invest.market_data_stream.stream_managers import (
     CandlesStreamManager,
@@ -8,36 +8,34 @@ from tinkoff.invest.market_data_stream.stream_managers import (
     OrderBookStreamManager,
     TradesStreamManager,
 )
+from tinkoff.invest.market_data_stream.typevars import TMarketDataStreamManager
 from tinkoff.invest.schemas import MarketDataRequest
 
-TMarketDataStreamManager = TypeVar("TMarketDataStreamManager")
-TInstrument = TypeVar("TInstrument")
 
-
-class IMarketDataStreamManager(abc.ABC):
+class IMarketDataStreamManager(abc.ABC, Generic[TMarketDataStreamManager]):
     @property
     @abc.abstractmethod
-    def candles(self) -> CandlesStreamManager["IMarketDataStreamManager"]:
+    def candles(self) -> CandlesStreamManager[TMarketDataStreamManager]:
         pass
 
     @property
     @abc.abstractmethod
-    def order_book(self) -> OrderBookStreamManager["IMarketDataStreamManager"]:
+    def order_book(self) -> OrderBookStreamManager[TMarketDataStreamManager]:
         pass
 
     @property
     @abc.abstractmethod
-    def trades(self) -> TradesStreamManager["IMarketDataStreamManager"]:
+    def trades(self) -> TradesStreamManager[TMarketDataStreamManager]:
         pass
 
     @property
     @abc.abstractmethod
-    def info(self) -> InfoStreamManager["IMarketDataStreamManager"]:
+    def info(self) -> InfoStreamManager[TMarketDataStreamManager]:
         pass
 
     @property
     @abc.abstractmethod
-    def last_price(self) -> LastPriceStreamManager["IMarketDataStreamManager"]:
+    def last_price(self) -> LastPriceStreamManager[TMarketDataStreamManager]:
         pass
 
     @abc.abstractmethod

@@ -1,6 +1,6 @@
 import queue
 import threading
-from typing import Iterable, Iterator, TypeVar
+from typing import Iterable, Iterator
 
 from tinkoff.invest.market_data_stream.market_data_stream_interface import (
     IMarketDataStreamManager,
@@ -14,13 +14,11 @@ from tinkoff.invest.market_data_stream.stream_managers import (
 )
 from tinkoff.invest.schemas import MarketDataRequest, MarketDataResponse
 
-TMarketDataStreamManager = TypeVar("TMarketDataStreamManager")
-TInstrument = TypeVar("TInstrument")
-
 
 class MarketDataStreamManager(IMarketDataStreamManager):
     def __init__(
-        self, market_data_stream_service: "MarketDataStreamService"  # noqa: F821
+        self,
+        market_data_stream_service: "MarketDataStreamService",  # type: ignore
     ):
         self._market_data_stream_service = market_data_stream_service
         self._market_data_stream: Iterator[MarketDataResponse]

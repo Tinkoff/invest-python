@@ -33,7 +33,7 @@ class BaseStreamManager(abc.ABC, Generic[TInstrument, TMarketDataStreamManager])
         pass
 
     def subscribe(self, instruments: List[TInstrument]) -> TMarketDataStreamManager:
-        self._parent_manager.subscribe(
+        self._parent_manager.subscribe(  # type: ignore
             self._get_request(
                 SubscriptionAction.SUBSCRIPTION_ACTION_SUBSCRIBE, instruments
             )
@@ -42,7 +42,7 @@ class BaseStreamManager(abc.ABC, Generic[TInstrument, TMarketDataStreamManager])
         return self._parent_manager
 
     def unsubscribe(self, instruments: List[TInstrument]) -> TMarketDataStreamManager:
-        self._parent_manager.unsubscribe(
+        self._parent_manager.unsubscribe(  # type: ignore
             self._get_request(
                 SubscriptionAction.SUBSCRIPTION_ACTION_UNSUBSCRIBE, instruments
             )
