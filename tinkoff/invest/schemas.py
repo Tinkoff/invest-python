@@ -256,8 +256,7 @@ class TradingDay(_grpc_helpers.Message):  # pylint:disable=too-many-instance-att
     is_trading_day: bool = _grpc_helpers.bool_field(2)
     start_time: datetime = _grpc_helpers.message_field(3)
     end_time: datetime = _grpc_helpers.message_field(4)
-    market_order_start_time: datetime = _grpc_helpers.message_field(5)
-    market_order_end_time: datetime = _grpc_helpers.message_field(6)
+    # reserved 5,6
     opening_auction_start_time: datetime = _grpc_helpers.message_field(7)
     closing_auction_end_time: datetime = _grpc_helpers.message_field(8)
     evening_opening_auction_start_time: datetime = _grpc_helpers.message_field(9)
