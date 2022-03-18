@@ -29,11 +29,12 @@ class AsyncMarketDataStreamManager(IMarketDataStreamManager):
     async def _get_request_generator(self) -> AsyncIterable[MarketDataRequest]:
         while not self._unsubscribe_event.is_set() or not self._requests.empty():
             try:
-                if request := await asyncio.wait_for(self._requests.get(), timeout=1.0):
-                    yield request
-                    self._requests.task_done()
+                request = await asyncio.wait_for(self._requests.get(), timeout=1.0)
             except asyncio.exceptions.TimeoutError:
                 pass
+            else:
+                yield request
+                self._requests.task_done()
 
     @property
     def candles(self) -> "CandlesStreamManager[AsyncMarketDataStreamManager]":

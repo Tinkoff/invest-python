@@ -30,10 +30,11 @@ class MarketDataStreamManager(IMarketDataStreamManager):
     def _get_request_generator(self) -> Iterable[MarketDataRequest]:
         while not self._unsubscribe_event.is_set() or not self._requests.empty():
             try:
-                if request := self._requests.get(timeout=1.0):
-                    yield request
+                request = self._requests.get(timeout=1.0)
             except queue.Empty:
                 pass
+            else:
+                yield request
 
     @property
     def candles(self) -> "CandlesStreamManager[MarketDataStreamManager]":
