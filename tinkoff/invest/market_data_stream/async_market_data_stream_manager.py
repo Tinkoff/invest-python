@@ -1,3 +1,4 @@
+import asyncio
 import threading
 from asyncio import Queue
 from typing import AsyncIterable, AsyncIterator, Awaitable
@@ -27,8 +28,12 @@ class AsyncMarketDataStreamManager(IMarketDataStreamManager):
 
     async def _get_request_generator(self) -> AsyncIterable[MarketDataRequest]:
         while not self._unsubscribe_event.is_set() or not self._requests.empty():
-            if request := await self._requests.get():
-                yield request
+            try:
+                if request := await asyncio.wait_for(self._requests.get(), timeout=1.0):
+                    yield request
+                    self._requests.task_done()
+            except asyncio.exceptions.TimeoutError:
+                pass
 
     @property
     def candles(self) -> "CandlesStreamManager[AsyncMarketDataStreamManager]":
