@@ -4,6 +4,10 @@ from typing import Generator, Iterable, List, Optional
 
 import grpc
 
+from tinkoff.invest.market_data_stream.market_data_stream_manager import (
+    MarketDataStreamManager,
+)
+
 from . import _grpc_helpers
 from ._errors import handle_request_error, handle_request_error_gen
 from .grpc import (
@@ -149,6 +153,11 @@ class Services:
         self.users = UsersService(channel, metadata)
         self.sandbox = SandboxService(channel, sandbox_metadata)
         self.stop_orders = StopOrdersService(channel, metadata)
+
+    def create_market_data_stream(self) -> MarketDataStreamManager:
+        return MarketDataStreamManager(
+            market_data_stream_service=self.market_data_stream
+        )
 
     def cancel_all_orders(self, account_id: AccountId) -> None:
         orders_service: OrdersService = self.orders

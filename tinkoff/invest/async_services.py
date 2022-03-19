@@ -24,6 +24,9 @@ from .grpc import (
     users_pb2_grpc,
 )
 from .logging import get_tracking_id_from_coro, log_request
+from .market_data_stream.async_market_data_stream_manager import (
+    AsyncMarketDataStreamManager,
+)
 from .metadata import get_metadata
 from .schemas import (
     BondResponse,
@@ -150,6 +153,9 @@ class AsyncServices:
         self.users = UsersService(channel, metadata)
         self.sandbox = SandboxService(channel, sandbox_metadata)
         self.stop_orders = StopOrdersService(channel, metadata)
+
+    def create_market_data_stream(self) -> AsyncMarketDataStreamManager:
+        return AsyncMarketDataStreamManager(market_data_stream=self.market_data_stream)
 
     async def cancel_all_orders(self, account_id: AccountId) -> None:
         orders_service: OrdersService = self.orders
