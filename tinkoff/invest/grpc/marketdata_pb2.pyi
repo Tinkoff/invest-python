@@ -895,6 +895,8 @@ class TradingStatus(google.protobuf.message.Message):
     FIGI_FIELD_NUMBER: builtins.int
     TRADING_STATUS_FIELD_NUMBER: builtins.int
     TIME_FIELD_NUMBER: builtins.int
+    LIMIT_ORDER_AVAILABLE_FLAG_FIELD_NUMBER: builtins.int
+    MARKET_ORDER_AVAILABLE_FLAG_FIELD_NUMBER: builtins.int
     figi: typing.Text
     """Figi-идентификатор инструмента."""
 
@@ -905,14 +907,22 @@ class TradingStatus(google.protobuf.message.Message):
     def time(self) -> google.protobuf.timestamp_pb2.Timestamp:
         """Время изменения торгового статуса в часовом поясе UTC."""
         pass
+    limit_order_available_flag: builtins.bool
+    """Признак доступности выставления лимитной заявки по инструменту"""
+
+    market_order_available_flag: builtins.bool
+    """Признак доступности выставления рыночной заявки по инструменту"""
+
     def __init__(self,
         *,
         figi: typing.Text = ...,
         trading_status: tinkoff.invest.grpc.common_pb2.SecurityTradingStatus.ValueType = ...,
         time: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        limit_order_available_flag: builtins.bool = ...,
+        market_order_available_flag: builtins.bool = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["time",b"time"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["figi",b"figi","time",b"time","trading_status",b"trading_status"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["figi",b"figi","limit_order_available_flag",b"limit_order_available_flag","market_order_available_flag",b"market_order_available_flag","time",b"time","trading_status",b"trading_status"]) -> None: ...
 global___TradingStatus = TradingStatus
 
 class GetCandlesRequest(google.protobuf.message.Message):
@@ -969,22 +979,22 @@ class HistoricCandle(google.protobuf.message.Message):
     IS_COMPLETE_FIELD_NUMBER: builtins.int
     @property
     def open(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Цена открытия за 1 инструмент."""
+        """Цена открытия за 1 лот."""
         pass
     @property
     def high(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Максимальная цена за 1 инструмент."""
+        """Максимальная цена за 1 лот."""
         pass
     @property
     def low(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Минимальная цена за 1 инструмент."""
+        """Минимальная цена за 1 лот."""
         pass
     @property
     def close(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Цена закрытия за 1 инструмент."""
+        """Цена закрытия за 1 лот."""
         pass
     volume: builtins.int
-    """Объём торгов в штуках."""
+    """Объём торгов в лотах."""
 
     @property
     def time(self) -> google.protobuf.timestamp_pb2.Timestamp:
@@ -1048,7 +1058,7 @@ class LastPrice(google.protobuf.message.Message):
 
     @property
     def price(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Последняя цена за один инструмент. Для получения стоимости лота требуется умножить на лотность инструмента."""
+        """Последняя цена за 1 лот."""
         pass
     @property
     def time(self) -> google.protobuf.timestamp_pb2.Timestamp:
@@ -1158,16 +1168,26 @@ class GetTradingStatusResponse(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     FIGI_FIELD_NUMBER: builtins.int
     TRADING_STATUS_FIELD_NUMBER: builtins.int
+    LIMIT_ORDER_AVAILABLE_FLAG_FIELD_NUMBER: builtins.int
+    MARKET_ORDER_AVAILABLE_FLAG_FIELD_NUMBER: builtins.int
     figi: typing.Text
     """Figi-идентификатор инструмента."""
 
     trading_status: tinkoff.invest.grpc.common_pb2.SecurityTradingStatus.ValueType
     """Статус торговли инструментом."""
 
+    limit_order_available_flag: builtins.bool
+    """Признак доступности выставления лимитной заявки по инструменту"""
+
+    market_order_available_flag: builtins.bool
+    """Признак доступности выставления рыночной заявки по инструменту"""
+
     def __init__(self,
         *,
         figi: typing.Text = ...,
         trading_status: tinkoff.invest.grpc.common_pb2.SecurityTradingStatus.ValueType = ...,
+        limit_order_available_flag: builtins.bool = ...,
+        market_order_available_flag: builtins.bool = ...,
         ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["figi",b"figi","trading_status",b"trading_status"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["figi",b"figi","limit_order_available_flag",b"limit_order_available_flag","market_order_available_flag",b"market_order_available_flag","trading_status",b"trading_status"]) -> None: ...
 global___GetTradingStatusResponse = GetTradingStatusResponse

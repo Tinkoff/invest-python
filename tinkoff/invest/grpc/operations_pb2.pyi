@@ -535,7 +535,7 @@ class PortfolioResponse(google.protobuf.message.Message):
         pass
     @property
     def expected_yield(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Текущая относительная доходность портфеля, в %"""
+        """Текущая доходность портфеля"""
         pass
     @property
     def positions(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___PortfolioPosition]:
@@ -677,7 +677,7 @@ class PortfolioPosition(google.protobuf.message.Message):
         pass
     @property
     def expected_yield(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Текущая рассчитанная относительная доходность позиции, в %."""
+        """Текущая рассчитанная доходность"""
         pass
     @property
     def current_nkd(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
@@ -729,7 +729,7 @@ class PositionsSecurities(google.protobuf.message.Message):
     """Заблокировано"""
 
     balance: builtins.int
-    """Текущий незаблокированный баланс"""
+    """Текущий баланс"""
 
     def __init__(self,
         *,
@@ -753,7 +753,7 @@ class PositionsFutures(google.protobuf.message.Message):
     """Заблокировано"""
 
     balance: builtins.int
-    """Текущий незаблокированный баланс"""
+    """Текущий баланс"""
 
     def __init__(self,
         *,

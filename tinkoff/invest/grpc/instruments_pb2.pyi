@@ -1771,7 +1771,7 @@ class GetDividendsRequest(google.protobuf.message.Message):
 
     @property
     def to(self) -> google.protobuf.timestamp_pb2.Timestamp:
-        """Окончание запрашиваемого периода в часовом поясе UTC. Фильтрация происходит по параметру *record_date* (дата фиксации реестра)."""
+        """Окончание запрашиваемого периода в часовом поясе UTC."""
         pass
     def __init__(self,
         *,

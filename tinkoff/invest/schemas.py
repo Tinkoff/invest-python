@@ -832,6 +832,8 @@ class TradingStatus(_grpc_helpers.Message):
     figi: str = _grpc_helpers.string_field(1)
     trading_status: "SecurityTradingStatus" = _grpc_helpers.enum_field(2)
     time: datetime = _grpc_helpers.enum_field(3)
+    limit_order_available_flag: bool = _grpc_helpers.bool_field(4)
+    market_order_available_flag: bool = _grpc_helpers.bool_field(5)
 
 
 @dataclass(eq=False, repr=True)
@@ -902,6 +904,8 @@ class GetTradingStatusRequest(_grpc_helpers.Message):
 class GetTradingStatusResponse(_grpc_helpers.Message):
     figi: str = _grpc_helpers.string_field(1)
     trading_status: "SecurityTradingStatus" = _grpc_helpers.enum_field(2)
+    limit_order_available_flag: bool = _grpc_helpers.bool_field(3)
+    market_order_available_flag: bool = _grpc_helpers.bool_field(4)
 
 
 @dataclass(eq=False, repr=True)
@@ -1025,6 +1029,7 @@ class OrderTrades(_grpc_helpers.Message):
     direction: "OrderDirection" = _grpc_helpers.enum_field(3)
     figi: str = _grpc_helpers.string_field(4)
     trades: List["OrderTrade"] = _grpc_helpers.message_field(5)
+    account_id: str = _grpc_helpers.string_field(6)
 
 
 @dataclass(eq=False, repr=True)

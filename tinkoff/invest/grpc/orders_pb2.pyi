@@ -156,6 +156,7 @@ class OrderTrades(google.protobuf.message.Message):
     DIRECTION_FIELD_NUMBER: builtins.int
     FIGI_FIELD_NUMBER: builtins.int
     TRADES_FIELD_NUMBER: builtins.int
+    ACCOUNT_ID_FIELD_NUMBER: builtins.int
     order_id: typing.Text
     """Идентификатор торгового поручения"""
 
@@ -173,6 +174,9 @@ class OrderTrades(google.protobuf.message.Message):
     def trades(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___OrderTrade]:
         """Массив сделок"""
         pass
+    account_id: typing.Text
+    """Идентификатор счёта"""
+
     def __init__(self,
         *,
         order_id: typing.Text = ...,
@@ -180,9 +184,10 @@ class OrderTrades(google.protobuf.message.Message):
         direction: global___OrderDirection.ValueType = ...,
         figi: typing.Text = ...,
         trades: typing.Optional[typing.Iterable[global___OrderTrade]] = ...,
+        account_id: typing.Text = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["created_at",b"created_at"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["created_at",b"created_at","direction",b"direction","figi",b"figi","order_id",b"order_id","trades",b"trades"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["account_id",b"account_id","created_at",b"created_at","direction",b"direction","figi",b"figi","order_id",b"order_id","trades",b"trades"]) -> None: ...
 global___OrderTrades = OrderTrades
 
 class OrderTrade(google.protobuf.message.Message):
