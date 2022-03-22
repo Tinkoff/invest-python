@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [0.2.0-beta18](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta18) - 2022-03-22
+
+<small>[Compare with 0.2.0-beta18](https://github.com/tinkoff/invest-python/compare/0.2.0-beta18...0.2.0-beta18)</small>
+
+
+## [0.2.0-beta18](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta18) - 2022-03-16
+
+<small>[Compare with 0.2.0-beta17](https://github.com/tinkoff/invest-python/compare/0.2.0-beta17...0.2.0-beta18)</small>
+
+
 ## [0.2.0-beta17](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta17) - 2022-03-13
 
 <small>[Compare with 0.2.0-beta16](https://github.com/tinkoff/invest-python/compare/0.2.0-beta16...0.2.0-beta17)</small>
