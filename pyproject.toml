@@ -21,10 +21,11 @@ python = "^3.8"
 grpcio = "^1.39.0"
 protobuf = "^3.19.3"
 tinkoff = "^0.1.1"
+black = {extras = ["jupyter"], version = "^22.1.0"}
 
 [tool.poetry.dev-dependencies]
 autoflake = "^1.4"
-black = "^21.12b0"
+black = "^22.1.0"
 codecov = "^2.1.12"
 flake8 = "^4.0.1"
 flake8-annotations-complexity = "^0.0.6"
@@ -66,6 +67,7 @@ numpy = "^1.22.2"
 matplotlib = "^3.5.1"
 mplfinance = "^0.12.8-beta.9"
 pytest-freezegun = "^0.4.2"
+ipython = "^8.1.1"
 
 [tool.poetry.extras]
 dev = ["pandas", "numpy", "matplotlib", "mplfinance", "pytest-freezegun"]

@@ -70,7 +70,7 @@ def create_noise(s0, mu, sigma) -> Callable[[int], Iterable[float]]:
 
         for _ in range(limit):
             st *= exp(
-                (mu - 0.5 * sigma ** 2) * (1.0 / 365.0)
+                (mu - 0.5 * sigma**2) * (1.0 / 365.0)
                 + sigma * sqrt(1.0 / 365.0) * gauss(mu=0, sigma=1)
             )
             yield st

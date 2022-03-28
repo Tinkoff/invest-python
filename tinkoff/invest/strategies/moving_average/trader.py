@@ -1,5 +1,5 @@
 import logging
-from datetime import timedelta
+import time
 from typing import Iterator, List
 
 import tinkoff
@@ -29,7 +29,11 @@ from tinkoff.invest.strategies.moving_average.strategy_state import (
 from tinkoff.invest.strategies.moving_average.supervisor import (
     MovingAverageStrategySupervisor,
 )
-from tinkoff.invest.utils import candle_interval_to_subscription_interval, now
+from tinkoff.invest.utils import (
+    candle_interval_to_subscription_interval,
+    floor_datetime,
+    now,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -83,20 +87,27 @@ class MovingAverageStrategyTrader(Trader):
                 instruments=[current_instrument],
             )
         )
+
+        def request_iterator():
+            yield candle_subscribe_request
+            while True:
+                time.sleep(1)
+
         self._market_data_stream = self._services.market_data_stream.market_data_stream(
-            [candle_subscribe_request]
+            request_iterator()
         )
 
-    @staticmethod
-    def _is_candle_fresh(candle: tinkoff.invest.Candle) -> bool:
-        is_fresh_border = now() - timedelta(seconds=5)
+    def _is_candle_fresh(self, candle: tinkoff.invest.Candle) -> bool:
+        is_fresh_border = floor_datetime(
+            now(), delta=self._settings.candle_interval_timedelta
+        )
         logger.debug(
             "Checking if candle is fresh: candle.time=%s > is_fresh_border=%s  %s)",
             candle.time,
             is_fresh_border,
-            candle.time > is_fresh_border,
+            candle.time >= is_fresh_border,
         )
-        return candle.time > is_fresh_border
+        return candle.time >= is_fresh_border
 
     @staticmethod
     def _convert_to_data_event(candle_event: CandleEvent) -> DataEvent:
@@ -152,17 +163,15 @@ class MovingAverageStrategyTrader(Trader):
         ]
 
     def trade(self) -> None:
-        """Следует стратегии пока не останется вне позиции."""
+        """Делает попытку следовать стратегии."""
 
-        while True:
-            logger.info("Balance: %s", self._account_manager.get_current_balance())
-            self._refresh_data()
+        logger.info("Balance: %s", self._account_manager.get_current_balance())
+        self._refresh_data()
 
-            signals = self._get_signals()
-            if signals:
-                logger.info("Got signals %s", signals)
-            for signal in signals:
-                self._execute(signal)
-            if self._state.position == 0:
-                logger.info("Strategy run complete")
-                return
+        signals = self._get_signals()
+        if signals:
+            logger.info("Got signals %s", signals)
+        for signal in signals:
+            self._execute(signal)
+        if self._state.position == 0:
+            logger.info("Trade try complete")
