@@ -1,5 +1,5 @@
 name: Bug Report
-description: File a bug report
+description: Сообщить об ошибке
 title: "[Bug] "
 labels: ["bug"]
 assignees:
@@ -13,7 +13,7 @@ body:
     id: what-happened
     attributes:
       label: Что случилось?
-      description: Краткое описание
+      description: Краткое описание.
     validations:
       required: true
   - type: textarea
@@ -41,7 +41,7 @@ body:
     id: os
     attributes:
       label: OS
-      description: Ваша операционная система
+      description: Ваша операционная система.
       options:
         - Windows
         - Linux
