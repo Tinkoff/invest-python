@@ -1,9 +1,6 @@
-name: Bug Report
-description: Сообщить об ошибке
-title: "[Bug] "
-labels: ["bug"]
-assignees:
-  - daxartio
+name: Issue
+description: Проблемы, вопросы, ...
+title: ""
 body:
   - type: markdown
     attributes:
