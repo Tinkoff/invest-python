@@ -1,11 +1,8 @@
-name: Issue
+name: Custom Issue
 description: Проблемы, вопросы, ...
 title: ""
+labels: []
 body:
-  - type: markdown
-    attributes:
-      value: |
-        Спасибо, что нашли время заполнить этот отчет об ошибке!
   - type: textarea
     id: what-happened
     attributes:
