@@ -15,20 +15,29 @@ body:
     attributes:
       label: Воспроизведение
       description: Как можно повторить кейс?
-      value: |
-        1. Шаг 1
-        1. Шаг 2
     validations:
       required: false
   - type: dropdown
-    id: version
+    id: package-version
     attributes:
-      label: Version
+      label: Tinkoff Invest Version
       description: Какая версия библиотеки используется?
       options:
         - 0.2.0-beta19
         - 0.2.0-beta18
         - 0.2.0-beta17
+        - Другая
+    validations:
+      required: true
+  - type: dropdown
+    id: python-version
+    attributes:
+      label: Python Version
+      description: Какая версия Python-а используется?
+      options:
+        - "3.10"
+        - "3.9"
+        - "3.8"
         - Другая
     validations:
       required: true

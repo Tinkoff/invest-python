@@ -14,9 +14,6 @@ body:
     attributes:
       label: Желаемое решение
       description: Что нужно сделать?
-      value: |
-        1. Шаг 1
-        1. Шаг 2
     validations:
       required: false
   - type: textarea
