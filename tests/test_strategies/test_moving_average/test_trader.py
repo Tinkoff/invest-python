@@ -118,7 +118,7 @@ class TestMovingAverageStrategyTrader:
 
         initial_balance = account_manager.get_current_balance()
 
-        for i in range(5):
+        for i in range(50):
             logger.info("Trade %s", i)
             moving_average_strategy_trader.trade()
 
