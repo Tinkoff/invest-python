@@ -22,10 +22,66 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=b'\n\034ru.tinkoff.piapi.contract.v1P\001Z\014./;investapi\242\002\005TIAPI\252\002\024Tinkoff.InvestApi.V1\312\002\021Tinkoff\\Invest\\V1',
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n%tinkoff/invest/grpc/instruments.proto\x12%tinkoff.public.invest.api.contract.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a tinkoff/invest/grpc/common.proto\"}\n\x17TradingSchedulesRequest\x12\x10\n\x08\x65xchange\x18\x01 \x01(\t\x12(\n\x04\x66rom\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12&\n\x02to\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"e\n\x18TradingSchedulesResponse\x12I\n\texchanges\x18\x01 \x03(\x0b\x32\x36.tinkoff.public.invest.api.contract.v1.TradingSchedule\"d\n\x0fTradingSchedule\x12\x10\n\x08\x65xchange\x18\x01 \x01(\t\x12?\n\x04\x64\x61ys\x18\x02 \x03(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.TradingDay\"\xa4\x02\n\nTradingDay\x12(\n\x04\x64\x61te\x18\x01 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x16\n\x0eis_trading_day\x18\x02 \x01(\x08\x12.\n\nstart_time\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12,\n\x08\x65nd_time\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12;\n\x17market_order_start_time\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x39\n\x15market_order_end_time\x18\x06 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"}\n\x11InstrumentRequest\x12H\n\x07id_type\x18\x01 \x01(\x0e\x32\x37.tinkoff.public.invest.api.contract.v1.InstrumentIdType\x12\x12\n\nclass_code\x18\x02 \x01(\t\x12\n\n\x02id\x18\x03 \x01(\t\"h\n\x12InstrumentsRequest\x12R\n\x11instrument_status\x18\x01 \x01(\x0e\x32\x37.tinkoff.public.invest.api.contract.v1.InstrumentStatus\"O\n\x0c\x42ondResponse\x12?\n\ninstrument\x18\x01 \x01(\x0b\x32+.tinkoff.public.invest.api.contract.v1.Bond\"Q\n\rBondsResponse\x12@\n\x0binstruments\x18\x01 \x03(\x0b\x32+.tinkoff.public.invest.api.contract.v1.Bond\"W\n\x10\x43urrencyResponse\x12\x43\n\ninstrument\x18\x01 \x01(\x0b\x32/.tinkoff.public.invest.api.contract.v1.Currency\"Z\n\x12\x43urrenciesResponse\x12\x44\n\x0binstruments\x18\x01 \x03(\x0b\x32/.tinkoff.public.invest.api.contract.v1.Currency\"M\n\x0b\x45tfResponse\x12>\n\ninstrument\x18\x01 \x01(\x0b\x32*.tinkoff.public.invest.api.contract.v1.Etf\"O\n\x0c\x45tfsResponse\x12?\n\x0binstruments\x18\x01 \x03(\x0b\x32*.tinkoff.public.invest.api.contract.v1.Etf\"S\n\x0e\x46utureResponse\x12\x41\n\ninstrument\x18\x01 \x01(\x0b\x32-.tinkoff.public.invest.api.contract.v1.Future\"U\n\x0f\x46uturesResponse\x12\x42\n\x0binstruments\x18\x01 \x03(\x0b\x32-.tinkoff.public.invest.api.contract.v1.Future\"Q\n\rShareResponse\x12@\n\ninstrument\x18\x01 \x01(\x0b\x32,.tinkoff.public.invest.api.contract.v1.Share\"S\n\x0eSharesResponse\x12\x41\n\x0binstruments\x18\x01 \x03(\x0b\x32,.tinkoff.public.invest.api.contract.v1.Share\"\xb0\x0b\n\x04\x42ond\x12\x0c\n\x04\x66igi\x18\x01 \x01(\t\x12\x0e\n\x06ticker\x18\x02 \x01(\t\x12\x12\n\nclass_code\x18\x03 \x01(\t\x12\x0c\n\x04isin\x18\x04 \x01(\t\x12\x0b\n\x03lot\x18\x05 \x01(\x05\x12\x10\n\x08\x63urrency\x18\x06 \x01(\t\x12?\n\x05klong\x18\x07 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12@\n\x06kshort\x18\x08 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12?\n\x05\x64long\x18\t \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12@\n\x06\x64short\x18\n \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x43\n\tdlong_min\x18\x0b \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x44\n\ndshort_min\x18\x0c \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x1a\n\x12short_enabled_flag\x18\r \x01(\x08\x12\x0c\n\x04name\x18\x0f \x01(\t\x12\x10\n\x08\x65xchange\x18\x10 \x01(\t\x12 \n\x18\x63oupon_quantity_per_year\x18\x11 \x01(\x05\x12\x31\n\rmaturity_date\x18\x12 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x42\n\x07nominal\x18\x13 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12\x32\n\x0estate_reg_date\x18\x15 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x32\n\x0eplacement_date\x18\x16 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12J\n\x0fplacement_price\x18\x17 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12\x44\n\taci_value\x18\x18 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12\x17\n\x0f\x63ountry_of_risk\x18\x19 \x01(\t\x12\x1c\n\x14\x63ountry_of_risk_name\x18\x1a \x01(\t\x12\x0e\n\x06sector\x18\x1b \x01(\t\x12\x12\n\nissue_kind\x18\x1c \x01(\t\x12\x12\n\nissue_size\x18\x1d \x01(\x03\x12\x17\n\x0fissue_size_plan\x18\x1e \x01(\x03\x12T\n\x0etrading_status\x18\x1f \x01(\x0e\x32<.tinkoff.public.invest.api.contract.v1.SecurityTradingStatus\x12\x10\n\x08otc_flag\x18  \x01(\x08\x12\x1a\n\x12\x62uy_available_flag\x18! \x01(\x08\x12\x1b\n\x13sell_available_flag\x18\" \x01(\x08\x12\x1c\n\x14\x66loating_coupon_flag\x18# \x01(\x08\x12\x16\n\x0eperpetual_flag\x18$ \x01(\x08\x12\x19\n\x11\x61mortization_flag\x18% \x01(\x08\x12M\n\x13min_price_increment\x18& \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12 \n\x18\x61pi_trade_available_flag\x18\' \x01(\x08\"\xde\x07\n\x08\x43urrency\x12\x0c\n\x04\x66igi\x18\x01 \x01(\t\x12\x0e\n\x06ticker\x18\x02 \x01(\t\x12\x12\n\nclass_code\x18\x03 \x01(\t\x12\x0c\n\x04isin\x18\x04 \x01(\t\x12\x0b\n\x03lot\x18\x05 \x01(\x05\x12\x10\n\x08\x63urrency\x18\x06 \x01(\t\x12?\n\x05klong\x18\x07 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12@\n\x06kshort\x18\x08 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12?\n\x05\x64long\x18\t \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12@\n\x06\x64short\x18\n \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x43\n\tdlong_min\x18\x0b \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x44\n\ndshort_min\x18\x0c \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x1a\n\x12short_enabled_flag\x18\r \x01(\x08\x12\x0c\n\x04name\x18\x0f \x01(\t\x12\x10\n\x08\x65xchange\x18\x10 \x01(\t\x12\x42\n\x07nominal\x18\x11 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12\x17\n\x0f\x63ountry_of_risk\x18\x12 \x01(\t\x12\x1c\n\x14\x63ountry_of_risk_name\x18\x13 \x01(\t\x12T\n\x0etrading_status\x18\x14 \x01(\x0e\x32<.tinkoff.public.invest.api.contract.v1.SecurityTradingStatus\x12\x10\n\x08otc_flag\x18\x15 \x01(\x08\x12\x1a\n\x12\x62uy_available_flag\x18\x16 \x01(\x08\x12\x1b\n\x13sell_available_flag\x18\x17 \x01(\x08\x12\x19\n\x11iso_currency_name\x18\x18 \x01(\t\x12M\n\x13min_price_increment\x18\x19 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12 \n\x18\x61pi_trade_available_flag\x18\x1a \x01(\x08\"\xfd\x08\n\x03\x45tf\x12\x0c\n\x04\x66igi\x18\x01 \x01(\t\x12\x0e\n\x06ticker\x18\x02 \x01(\t\x12\x12\n\nclass_code\x18\x03 \x01(\t\x12\x0c\n\x04isin\x18\x04 \x01(\t\x12\x0b\n\x03lot\x18\x05 \x01(\x05\x12\x10\n\x08\x63urrency\x18\x06 \x01(\t\x12?\n\x05klong\x18\x07 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12@\n\x06kshort\x18\x08 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12?\n\x05\x64long\x18\t \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12@\n\x06\x64short\x18\n \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x43\n\tdlong_min\x18\x0b \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x44\n\ndshort_min\x18\x0c \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x1a\n\x12short_enabled_flag\x18\r \x01(\x08\x12\x0c\n\x04name\x18\x0f \x01(\t\x12\x10\n\x08\x65xchange\x18\x10 \x01(\t\x12J\n\x10\x66ixed_commission\x18\x11 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x12\n\nfocus_type\x18\x12 \x01(\t\x12\x31\n\rreleased_date\x18\x13 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x44\n\nnum_shares\x18\x14 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x17\n\x0f\x63ountry_of_risk\x18\x15 \x01(\t\x12\x1c\n\x14\x63ountry_of_risk_name\x18\x16 \x01(\t\x12\x0e\n\x06sector\x18\x17 \x01(\t\x12\x18\n\x10rebalancing_freq\x18\x18 \x01(\t\x12T\n\x0etrading_status\x18\x19 \x01(\x0e\x32<.tinkoff.public.invest.api.contract.v1.SecurityTradingStatus\x12\x10\n\x08otc_flag\x18\x1a \x01(\x08\x12\x1a\n\x12\x62uy_available_flag\x18\x1b \x01(\x08\x12\x1b\n\x13sell_available_flag\x18\x1c \x01(\x08\x12M\n\x13min_price_increment\x18\x1d \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12 \n\x18\x61pi_trade_available_flag\x18\x1e \x01(\x08\"\xaa\t\n\x06\x46uture\x12\x0c\n\x04\x66igi\x18\x01 \x01(\t\x12\x0e\n\x06ticker\x18\x02 \x01(\t\x12\x12\n\nclass_code\x18\x03 \x01(\t\x12\x0b\n\x03lot\x18\x04 \x01(\x05\x12\x10\n\x08\x63urrency\x18\x05 \x01(\t\x12?\n\x05klong\x18\x06 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12@\n\x06kshort\x18\x07 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12?\n\x05\x64long\x18\x08 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12@\n\x06\x64short\x18\t \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x43\n\tdlong_min\x18\n \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x44\n\ndshort_min\x18\x0b \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x1a\n\x12short_enabled_flag\x18\x0c \x01(\x08\x12\x0c\n\x04name\x18\r \x01(\t\x12\x10\n\x08\x65xchange\x18\x0e \x01(\t\x12\x34\n\x10\x66irst_trade_date\x18\x0f \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x33\n\x0flast_trade_date\x18\x10 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x14\n\x0c\x66utures_type\x18\x11 \x01(\t\x12\x12\n\nasset_type\x18\x12 \x01(\t\x12\x13\n\x0b\x62\x61sic_asset\x18\x13 \x01(\t\x12J\n\x10\x62\x61sic_asset_size\x18\x14 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x17\n\x0f\x63ountry_of_risk\x18\x15 \x01(\t\x12\x1c\n\x14\x63ountry_of_risk_name\x18\x16 \x01(\t\x12\x0e\n\x06sector\x18\x17 \x01(\t\x12\x33\n\x0f\x65xpiration_date\x18\x18 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12T\n\x0etrading_status\x18\x19 \x01(\x0e\x32<.tinkoff.public.invest.api.contract.v1.SecurityTradingStatus\x12\x10\n\x08otc_flag\x18\x1a \x01(\x08\x12\x1a\n\x12\x62uy_available_flag\x18\x1b \x01(\x08\x12\x1b\n\x13sell_available_flag\x18\x1c \x01(\x08\x12M\n\x13min_price_increment\x18\x1d \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12 \n\x18\x61pi_trade_available_flag\x18\x1e \x01(\x08\"\x89\t\n\x05Share\x12\x0c\n\x04\x66igi\x18\x01 \x01(\t\x12\x0e\n\x06ticker\x18\x02 \x01(\t\x12\x12\n\nclass_code\x18\x03 \x01(\t\x12\x0c\n\x04isin\x18\x04 \x01(\t\x12\x0b\n\x03lot\x18\x05 \x01(\x05\x12\x10\n\x08\x63urrency\x18\x06 \x01(\t\x12?\n\x05klong\x18\x07 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12@\n\x06kshort\x18\x08 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12?\n\x05\x64long\x18\t \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12@\n\x06\x64short\x18\n \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x43\n\tdlong_min\x18\x0b \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x44\n\ndshort_min\x18\x0c \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x1a\n\x12short_enabled_flag\x18\r \x01(\x08\x12\x0c\n\x04name\x18\x0f \x01(\t\x12\x10\n\x08\x65xchange\x18\x10 \x01(\t\x12,\n\x08ipo_date\x18\x11 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x12\n\nissue_size\x18\x12 \x01(\x03\x12\x17\n\x0f\x63ountry_of_risk\x18\x13 \x01(\t\x12\x1c\n\x14\x63ountry_of_risk_name\x18\x14 \x01(\t\x12\x0e\n\x06sector\x18\x15 \x01(\t\x12\x17\n\x0fissue_size_plan\x18\x16 \x01(\x03\x12\x42\n\x07nominal\x18\x17 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12T\n\x0etrading_status\x18\x19 \x01(\x0e\x32<.tinkoff.public.invest.api.contract.v1.SecurityTradingStatus\x12\x10\n\x08otc_flag\x18\x1a \x01(\x08\x12\x1a\n\x12\x62uy_available_flag\x18\x1b \x01(\x08\x12\x1b\n\x13sell_available_flag\x18\x1c \x01(\x08\x12\x16\n\x0e\x64iv_yield_flag\x18\x1d \x01(\x08\x12\x44\n\nshare_type\x18\x1e \x01(\x0e\x32\x30.tinkoff.public.invest.api.contract.v1.ShareType\x12M\n\x13min_price_increment\x18\x1f \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12 \n\x18\x61pi_trade_available_flag\x18  \x01(\x08\"|\n\x1aGetAccruedInterestsRequest\x12\x0c\n\x04\x66igi\x18\x01 \x01(\t\x12(\n\x04\x66rom\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12&\n\x02to\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"p\n\x1bGetAccruedInterestsResponse\x12Q\n\x11\x61\x63\x63rued_interests\x18\x01 \x03(\x0b\x32\x36.tinkoff.public.invest.api.contract.v1.AccruedInterest\"\x88\x02\n\x0f\x41\x63\x63ruedInterest\x12(\n\x04\x64\x61te\x18\x01 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12?\n\x05value\x18\x02 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12G\n\rvalue_percent\x18\x03 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x41\n\x07nominal\x18\x04 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\"\'\n\x17GetFuturesMarginRequest\x12\x0c\n\x04\x66igi\x18\x01 \x01(\t\"\xe4\x02\n\x18GetFuturesMarginResponse\x12P\n\x15initial_margin_on_buy\x18\x01 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12Q\n\x16initial_margin_on_sell\x18\x02 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12M\n\x13min_price_increment\x18\x03 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12T\n\x1amin_price_increment_amount\x18\x04 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\"[\n\x12InstrumentResponse\x12\x45\n\ninstrument\x18\x01 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.Instrument\"\x9a\x07\n\nInstrument\x12\x0c\n\x04\x66igi\x18\x01 \x01(\t\x12\x0e\n\x06ticker\x18\x02 \x01(\t\x12\x12\n\nclass_code\x18\x03 \x01(\t\x12\x0c\n\x04isin\x18\x04 \x01(\t\x12\x0b\n\x03lot\x18\x05 \x01(\x05\x12\x10\n\x08\x63urrency\x18\x06 \x01(\t\x12?\n\x05klong\x18\x07 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12@\n\x06kshort\x18\x08 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12?\n\x05\x64long\x18\t \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12@\n\x06\x64short\x18\n \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x43\n\tdlong_min\x18\x0b \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x44\n\ndshort_min\x18\x0c \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x1a\n\x12short_enabled_flag\x18\r \x01(\x08\x12\x0c\n\x04name\x18\x0e \x01(\t\x12\x10\n\x08\x65xchange\x18\x0f \x01(\t\x12\x17\n\x0f\x63ountry_of_risk\x18\x10 \x01(\t\x12\x1c\n\x14\x63ountry_of_risk_name\x18\x11 \x01(\t\x12\x17\n\x0finstrument_type\x18\x12 \x01(\t\x12T\n\x0etrading_status\x18\x13 \x01(\x0e\x32<.tinkoff.public.invest.api.contract.v1.SecurityTradingStatus\x12\x10\n\x08otc_flag\x18\x14 \x01(\x08\x12\x1a\n\x12\x62uy_available_flag\x18\x15 \x01(\x08\x12\x1b\n\x13sell_available_flag\x18\x16 \x01(\x08\x12M\n\x13min_price_increment\x18\x17 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12 \n\x18\x61pi_trade_available_flag\x18\x18 \x01(\x08\"u\n\x13GetDividendsRequest\x12\x0c\n\x04\x66igi\x18\x01 \x01(\t\x12(\n\x04\x66rom\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12&\n\x02to\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"Z\n\x14GetDividendsResponse\x12\x42\n\tdividends\x18\x01 \x03(\x0b\x32/.tinkoff.public.invest.api.contract.v1.Dividend\"\x86\x04\n\x08\x44ividend\x12G\n\x0c\x64ividend_net\x18\x01 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12\x30\n\x0cpayment_date\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x31\n\rdeclared_date\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x31\n\rlast_buy_date\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x15\n\rdividend_type\x18\x05 \x01(\t\x12/\n\x0brecord_date\x18\x06 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x12\n\nregularity\x18\x07 \x01(\t\x12\x46\n\x0b\x63lose_price\x18\x08 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12\x45\n\x0byield_value\x18\t \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12.\n\ncreated_at\x18\n \x01(\x0b\x32\x1a.google.protobuf.Timestamp*m\n\x10InstrumentIdType\x12\x1d\n\x19INSTRUMENT_ID_UNSPECIFIED\x10\x00\x12\x1b\n\x17INSTRUMENT_ID_TYPE_FIGI\x10\x01\x12\x1d\n\x19INSTRUMENT_ID_TYPE_TICKER\x10\x02*l\n\x10InstrumentStatus\x12!\n\x1dINSTRUMENT_STATUS_UNSPECIFIED\x10\x00\x12\x1a\n\x16INSTRUMENT_STATUS_BASE\x10\x01\x12\x19\n\x15INSTRUMENT_STATUS_ALL\x10\x02*\xe5\x01\n\tShareType\x12\x1a\n\x16SHARE_TYPE_UNSPECIFIED\x10\x00\x12\x15\n\x11SHARE_TYPE_COMMON\x10\x01\x12\x18\n\x14SHARE_TYPE_PREFERRED\x10\x02\x12\x12\n\x0eSHARE_TYPE_ADR\x10\x03\x12\x12\n\x0eSHARE_TYPE_GDR\x10\x04\x12\x12\n\x0eSHARE_TYPE_MLP\x10\x05\x12\x1a\n\x16SHARE_TYPE_NY_REG_SHRS\x10\x06\x12\x1e\n\x1aSHARE_TYPE_CLOSED_END_FUND\x10\x07\x12\x13\n\x0fSHARE_TYPE_REIT\x10\x08\x32\xcc\x0f\n\x12InstrumentsService\x12\x93\x01\n\x10TradingSchedules\x12>.tinkoff.public.invest.api.contract.v1.TradingSchedulesRequest\x1a?.tinkoff.public.invest.api.contract.v1.TradingSchedulesResponse\x12w\n\x06\x42ondBy\x12\x38.tinkoff.public.invest.api.contract.v1.InstrumentRequest\x1a\x33.tinkoff.public.invest.api.contract.v1.BondResponse\x12x\n\x05\x42onds\x12\x39.tinkoff.public.invest.api.contract.v1.InstrumentsRequest\x1a\x34.tinkoff.public.invest.api.contract.v1.BondsResponse\x12\x7f\n\nCurrencyBy\x12\x38.tinkoff.public.invest.api.contract.v1.InstrumentRequest\x1a\x37.tinkoff.public.invest.api.contract.v1.CurrencyResponse\x12\x82\x01\n\nCurrencies\x12\x39.tinkoff.public.invest.api.contract.v1.InstrumentsRequest\x1a\x39.tinkoff.public.invest.api.contract.v1.CurrenciesResponse\x12u\n\x05\x45tfBy\x12\x38.tinkoff.public.invest.api.contract.v1.InstrumentRequest\x1a\x32.tinkoff.public.invest.api.contract.v1.EtfResponse\x12v\n\x04\x45tfs\x12\x39.tinkoff.public.invest.api.contract.v1.InstrumentsRequest\x1a\x33.tinkoff.public.invest.api.contract.v1.EtfsResponse\x12{\n\x08\x46utureBy\x12\x38.tinkoff.public.invest.api.contract.v1.InstrumentRequest\x1a\x35.tinkoff.public.invest.api.contract.v1.FutureResponse\x12|\n\x07\x46utures\x12\x39.tinkoff.public.invest.api.contract.v1.InstrumentsRequest\x1a\x36.tinkoff.public.invest.api.contract.v1.FuturesResponse\x12y\n\x07ShareBy\x12\x38.tinkoff.public.invest.api.contract.v1.InstrumentRequest\x1a\x34.tinkoff.public.invest.api.contract.v1.ShareResponse\x12z\n\x06Shares\x12\x39.tinkoff.public.invest.api.contract.v1.InstrumentsRequest\x1a\x35.tinkoff.public.invest.api.contract.v1.SharesResponse\x12\x9c\x01\n\x13GetAccruedInterests\x12\x41.tinkoff.public.invest.api.contract.v1.GetAccruedInterestsRequest\x1a\x42.tinkoff.public.invest.api.contract.v1.GetAccruedInterestsResponse\x12\x93\x01\n\x10GetFuturesMargin\x12>.tinkoff.public.invest.api.contract.v1.GetFuturesMarginRequest\x1a?.tinkoff.public.invest.api.contract.v1.GetFuturesMarginResponse\x12\x86\x01\n\x0fGetInstrumentBy\x12\x38.tinkoff.public.invest.api.contract.v1.InstrumentRequest\x1a\x39.tinkoff.public.invest.api.contract.v1.InstrumentResponse\x12\x87\x01\n\x0cGetDividends\x12:.tinkoff.public.invest.api.contract.v1.GetDividendsRequest\x1a;.tinkoff.public.invest.api.contract.v1.GetDividendsResponseBa\n\x1cru.tinkoff.piapi.contract.v1P\x01Z\x0c./;investapi\xa2\x02\x05TIAPI\xaa\x02\x14Tinkoff.InvestApi.V1\xca\x02\x11Tinkoff\\Invest\\V1b\x06proto3'
+  serialized_pb=b'\n%tinkoff/invest/grpc/instruments.proto\x12%tinkoff.public.invest.api.contract.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a tinkoff/invest/grpc/common.proto\"}\n\x17TradingSchedulesRequest\x12\x10\n\x08\x65xchange\x18\x01 \x01(\t\x12(\n\x04\x66rom\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12&\n\x02to\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"e\n\x18TradingSchedulesResponse\x12I\n\texchanges\x18\x01 \x03(\x0b\x32\x36.tinkoff.public.invest.api.contract.v1.TradingSchedule\"d\n\x0fTradingSchedule\x12\x10\n\x08\x65xchange\x18\x01 \x01(\t\x12?\n\x04\x64\x61ys\x18\x02 \x03(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.TradingDay\"\xce\x05\n\nTradingDay\x12(\n\x04\x64\x61te\x18\x01 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x16\n\x0eis_trading_day\x18\x02 \x01(\x08\x12.\n\nstart_time\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12,\n\x08\x65nd_time\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12>\n\x1aopening_auction_start_time\x18\x07 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12<\n\x18\x63losing_auction_end_time\x18\x08 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x46\n\"evening_opening_auction_start_time\x18\t \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x36\n\x12\x65vening_start_time\x18\n \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x34\n\x10\x65vening_end_time\x18\x0b \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x37\n\x13\x63learing_start_time\x18\x0c \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x35\n\x11\x63learing_end_time\x18\r \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x38\n\x14premarket_start_time\x18\x0e \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x36\n\x12premarket_end_time\x18\x0f \x01(\x0b\x32\x1a.google.protobuf.TimestampJ\x04\x08\x05\x10\x06J\x04\x08\x06\x10\x07\"}\n\x11InstrumentRequest\x12H\n\x07id_type\x18\x01 \x01(\x0e\x32\x37.tinkoff.public.invest.api.contract.v1.InstrumentIdType\x12\x12\n\nclass_code\x18\x02 \x01(\t\x12\n\n\x02id\x18\x03 \x01(\t\"h\n\x12InstrumentsRequest\x12R\n\x11instrument_status\x18\x01 \x01(\x0e\x32\x37.tinkoff.public.invest.api.contract.v1.InstrumentStatus\"O\n\x0c\x42ondResponse\x12?\n\ninstrument\x18\x01 \x01(\x0b\x32+.tinkoff.public.invest.api.contract.v1.Bond\"Q\n\rBondsResponse\x12@\n\x0binstruments\x18\x01 \x03(\x0b\x32+.tinkoff.public.invest.api.contract.v1.Bond\"w\n\x15GetBondCouponsRequest\x12\x0c\n\x04\x66igi\x18\x01 \x01(\t\x12(\n\x04\x66rom\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12&\n\x02to\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"W\n\x16GetBondCouponsResponse\x12=\n\x06\x65vents\x18\x01 \x03(\x0b\x32-.tinkoff.public.invest.api.contract.v1.Coupon\"\xa0\x03\n\x06\x43oupon\x12\x0c\n\x04\x66igi\x18\x01 \x01(\t\x12/\n\x0b\x63oupon_date\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x15\n\rcoupon_number\x18\x03 \x01(\x03\x12,\n\x08\x66ix_date\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12G\n\x0cpay_one_bond\x18\x05 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12\x46\n\x0b\x63oupon_type\x18\x06 \x01(\x0e\x32\x31.tinkoff.public.invest.api.contract.v1.CouponType\x12\x35\n\x11\x63oupon_start_date\x18\x07 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x33\n\x0f\x63oupon_end_date\x18\x08 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x15\n\rcoupon_period\x18\t \x01(\x05\"W\n\x10\x43urrencyResponse\x12\x43\n\ninstrument\x18\x01 \x01(\x0b\x32/.tinkoff.public.invest.api.contract.v1.Currency\"Z\n\x12\x43urrenciesResponse\x12\x44\n\x0binstruments\x18\x01 \x03(\x0b\x32/.tinkoff.public.invest.api.contract.v1.Currency\"M\n\x0b\x45tfResponse\x12>\n\ninstrument\x18\x01 \x01(\x0b\x32*.tinkoff.public.invest.api.contract.v1.Etf\"O\n\x0c\x45tfsResponse\x12?\n\x0binstruments\x18\x01 \x03(\x0b\x32*.tinkoff.public.invest.api.contract.v1.Etf\"S\n\x0e\x46utureResponse\x12\x41\n\ninstrument\x18\x01 \x01(\x0b\x32-.tinkoff.public.invest.api.contract.v1.Future\"U\n\x0f\x46uturesResponse\x12\x42\n\x0binstruments\x18\x01 \x03(\x0b\x32-.tinkoff.public.invest.api.contract.v1.Future\"Q\n\rShareResponse\x12@\n\ninstrument\x18\x01 \x01(\x0b\x32,.tinkoff.public.invest.api.contract.v1.Share\"S\n\x0eSharesResponse\x12\x41\n\x0binstruments\x18\x01 \x03(\x0b\x32,.tinkoff.public.invest.api.contract.v1.Share\"\xb0\x0b\n\x04\x42ond\x12\x0c\n\x04\x66igi\x18\x01 \x01(\t\x12\x0e\n\x06ticker\x18\x02 \x01(\t\x12\x12\n\nclass_code\x18\x03 \x01(\t\x12\x0c\n\x04isin\x18\x04 \x01(\t\x12\x0b\n\x03lot\x18\x05 \x01(\x05\x12\x10\n\x08\x63urrency\x18\x06 \x01(\t\x12?\n\x05klong\x18\x07 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12@\n\x06kshort\x18\x08 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12?\n\x05\x64long\x18\t \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12@\n\x06\x64short\x18\n \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x43\n\tdlong_min\x18\x0b \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x44\n\ndshort_min\x18\x0c \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x1a\n\x12short_enabled_flag\x18\r \x01(\x08\x12\x0c\n\x04name\x18\x0f \x01(\t\x12\x10\n\x08\x65xchange\x18\x10 \x01(\t\x12 \n\x18\x63oupon_quantity_per_year\x18\x11 \x01(\x05\x12\x31\n\rmaturity_date\x18\x12 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x42\n\x07nominal\x18\x13 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12\x32\n\x0estate_reg_date\x18\x15 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x32\n\x0eplacement_date\x18\x16 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12J\n\x0fplacement_price\x18\x17 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12\x44\n\taci_value\x18\x18 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12\x17\n\x0f\x63ountry_of_risk\x18\x19 \x01(\t\x12\x1c\n\x14\x63ountry_of_risk_name\x18\x1a \x01(\t\x12\x0e\n\x06sector\x18\x1b \x01(\t\x12\x12\n\nissue_kind\x18\x1c \x01(\t\x12\x12\n\nissue_size\x18\x1d \x01(\x03\x12\x17\n\x0fissue_size_plan\x18\x1e \x01(\x03\x12T\n\x0etrading_status\x18\x1f \x01(\x0e\x32<.tinkoff.public.invest.api.contract.v1.SecurityTradingStatus\x12\x10\n\x08otc_flag\x18  \x01(\x08\x12\x1a\n\x12\x62uy_available_flag\x18! \x01(\x08\x12\x1b\n\x13sell_available_flag\x18\" \x01(\x08\x12\x1c\n\x14\x66loating_coupon_flag\x18# \x01(\x08\x12\x16\n\x0eperpetual_flag\x18$ \x01(\x08\x12\x19\n\x11\x61mortization_flag\x18% \x01(\x08\x12M\n\x13min_price_increment\x18& \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12 \n\x18\x61pi_trade_available_flag\x18\' \x01(\x08\"\xde\x07\n\x08\x43urrency\x12\x0c\n\x04\x66igi\x18\x01 \x01(\t\x12\x0e\n\x06ticker\x18\x02 \x01(\t\x12\x12\n\nclass_code\x18\x03 \x01(\t\x12\x0c\n\x04isin\x18\x04 \x01(\t\x12\x0b\n\x03lot\x18\x05 \x01(\x05\x12\x10\n\x08\x63urrency\x18\x06 \x01(\t\x12?\n\x05klong\x18\x07 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12@\n\x06kshort\x18\x08 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12?\n\x05\x64long\x18\t \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12@\n\x06\x64short\x18\n \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x43\n\tdlong_min\x18\x0b \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x44\n\ndshort_min\x18\x0c \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x1a\n\x12short_enabled_flag\x18\r \x01(\x08\x12\x0c\n\x04name\x18\x0f \x01(\t\x12\x10\n\x08\x65xchange\x18\x10 \x01(\t\x12\x42\n\x07nominal\x18\x11 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12\x17\n\x0f\x63ountry_of_risk\x18\x12 \x01(\t\x12\x1c\n\x14\x63ountry_of_risk_name\x18\x13 \x01(\t\x12T\n\x0etrading_status\x18\x14 \x01(\x0e\x32<.tinkoff.public.invest.api.contract.v1.SecurityTradingStatus\x12\x10\n\x08otc_flag\x18\x15 \x01(\x08\x12\x1a\n\x12\x62uy_available_flag\x18\x16 \x01(\x08\x12\x1b\n\x13sell_available_flag\x18\x17 \x01(\x08\x12\x19\n\x11iso_currency_name\x18\x18 \x01(\t\x12M\n\x13min_price_increment\x18\x19 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12 \n\x18\x61pi_trade_available_flag\x18\x1a \x01(\x08\"\xfd\x08\n\x03\x45tf\x12\x0c\n\x04\x66igi\x18\x01 \x01(\t\x12\x0e\n\x06ticker\x18\x02 \x01(\t\x12\x12\n\nclass_code\x18\x03 \x01(\t\x12\x0c\n\x04isin\x18\x04 \x01(\t\x12\x0b\n\x03lot\x18\x05 \x01(\x05\x12\x10\n\x08\x63urrency\x18\x06 \x01(\t\x12?\n\x05klong\x18\x07 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12@\n\x06kshort\x18\x08 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12?\n\x05\x64long\x18\t \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12@\n\x06\x64short\x18\n \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x43\n\tdlong_min\x18\x0b \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x44\n\ndshort_min\x18\x0c \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x1a\n\x12short_enabled_flag\x18\r \x01(\x08\x12\x0c\n\x04name\x18\x0f \x01(\t\x12\x10\n\x08\x65xchange\x18\x10 \x01(\t\x12J\n\x10\x66ixed_commission\x18\x11 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x12\n\nfocus_type\x18\x12 \x01(\t\x12\x31\n\rreleased_date\x18\x13 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x44\n\nnum_shares\x18\x14 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x17\n\x0f\x63ountry_of_risk\x18\x15 \x01(\t\x12\x1c\n\x14\x63ountry_of_risk_name\x18\x16 \x01(\t\x12\x0e\n\x06sector\x18\x17 \x01(\t\x12\x18\n\x10rebalancing_freq\x18\x18 \x01(\t\x12T\n\x0etrading_status\x18\x19 \x01(\x0e\x32<.tinkoff.public.invest.api.contract.v1.SecurityTradingStatus\x12\x10\n\x08otc_flag\x18\x1a \x01(\x08\x12\x1a\n\x12\x62uy_available_flag\x18\x1b \x01(\x08\x12\x1b\n\x13sell_available_flag\x18\x1c \x01(\x08\x12M\n\x13min_price_increment\x18\x1d \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12 \n\x18\x61pi_trade_available_flag\x18\x1e \x01(\x08\"\xaa\t\n\x06\x46uture\x12\x0c\n\x04\x66igi\x18\x01 \x01(\t\x12\x0e\n\x06ticker\x18\x02 \x01(\t\x12\x12\n\nclass_code\x18\x03 \x01(\t\x12\x0b\n\x03lot\x18\x04 \x01(\x05\x12\x10\n\x08\x63urrency\x18\x05 \x01(\t\x12?\n\x05klong\x18\x06 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12@\n\x06kshort\x18\x07 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12?\n\x05\x64long\x18\x08 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12@\n\x06\x64short\x18\t \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x43\n\tdlong_min\x18\n \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x44\n\ndshort_min\x18\x0b \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x1a\n\x12short_enabled_flag\x18\x0c \x01(\x08\x12\x0c\n\x04name\x18\r \x01(\t\x12\x10\n\x08\x65xchange\x18\x0e \x01(\t\x12\x34\n\x10\x66irst_trade_date\x18\x0f \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x33\n\x0flast_trade_date\x18\x10 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x14\n\x0c\x66utures_type\x18\x11 \x01(\t\x12\x12\n\nasset_type\x18\x12 \x01(\t\x12\x13\n\x0b\x62\x61sic_asset\x18\x13 \x01(\t\x12J\n\x10\x62\x61sic_asset_size\x18\x14 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x17\n\x0f\x63ountry_of_risk\x18\x15 \x01(\t\x12\x1c\n\x14\x63ountry_of_risk_name\x18\x16 \x01(\t\x12\x0e\n\x06sector\x18\x17 \x01(\t\x12\x33\n\x0f\x65xpiration_date\x18\x18 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12T\n\x0etrading_status\x18\x19 \x01(\x0e\x32<.tinkoff.public.invest.api.contract.v1.SecurityTradingStatus\x12\x10\n\x08otc_flag\x18\x1a \x01(\x08\x12\x1a\n\x12\x62uy_available_flag\x18\x1b \x01(\x08\x12\x1b\n\x13sell_available_flag\x18\x1c \x01(\x08\x12M\n\x13min_price_increment\x18\x1d \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12 \n\x18\x61pi_trade_available_flag\x18\x1e \x01(\x08\"\x89\t\n\x05Share\x12\x0c\n\x04\x66igi\x18\x01 \x01(\t\x12\x0e\n\x06ticker\x18\x02 \x01(\t\x12\x12\n\nclass_code\x18\x03 \x01(\t\x12\x0c\n\x04isin\x18\x04 \x01(\t\x12\x0b\n\x03lot\x18\x05 \x01(\x05\x12\x10\n\x08\x63urrency\x18\x06 \x01(\t\x12?\n\x05klong\x18\x07 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12@\n\x06kshort\x18\x08 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12?\n\x05\x64long\x18\t \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12@\n\x06\x64short\x18\n \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x43\n\tdlong_min\x18\x0b \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x44\n\ndshort_min\x18\x0c \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x1a\n\x12short_enabled_flag\x18\r \x01(\x08\x12\x0c\n\x04name\x18\x0f \x01(\t\x12\x10\n\x08\x65xchange\x18\x10 \x01(\t\x12,\n\x08ipo_date\x18\x11 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x12\n\nissue_size\x18\x12 \x01(\x03\x12\x17\n\x0f\x63ountry_of_risk\x18\x13 \x01(\t\x12\x1c\n\x14\x63ountry_of_risk_name\x18\x14 \x01(\t\x12\x0e\n\x06sector\x18\x15 \x01(\t\x12\x17\n\x0fissue_size_plan\x18\x16 \x01(\x03\x12\x42\n\x07nominal\x18\x17 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12T\n\x0etrading_status\x18\x19 \x01(\x0e\x32<.tinkoff.public.invest.api.contract.v1.SecurityTradingStatus\x12\x10\n\x08otc_flag\x18\x1a \x01(\x08\x12\x1a\n\x12\x62uy_available_flag\x18\x1b \x01(\x08\x12\x1b\n\x13sell_available_flag\x18\x1c \x01(\x08\x12\x16\n\x0e\x64iv_yield_flag\x18\x1d \x01(\x08\x12\x44\n\nshare_type\x18\x1e \x01(\x0e\x32\x30.tinkoff.public.invest.api.contract.v1.ShareType\x12M\n\x13min_price_increment\x18\x1f \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12 \n\x18\x61pi_trade_available_flag\x18  \x01(\x08\"|\n\x1aGetAccruedInterestsRequest\x12\x0c\n\x04\x66igi\x18\x01 \x01(\t\x12(\n\x04\x66rom\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12&\n\x02to\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"p\n\x1bGetAccruedInterestsResponse\x12Q\n\x11\x61\x63\x63rued_interests\x18\x01 \x03(\x0b\x32\x36.tinkoff.public.invest.api.contract.v1.AccruedInterest\"\x88\x02\n\x0f\x41\x63\x63ruedInterest\x12(\n\x04\x64\x61te\x18\x01 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12?\n\x05value\x18\x02 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12G\n\rvalue_percent\x18\x03 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x41\n\x07nominal\x18\x04 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\"\'\n\x17GetFuturesMarginRequest\x12\x0c\n\x04\x66igi\x18\x01 \x01(\t\"\xe4\x02\n\x18GetFuturesMarginResponse\x12P\n\x15initial_margin_on_buy\x18\x01 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12Q\n\x16initial_margin_on_sell\x18\x02 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12M\n\x13min_price_increment\x18\x03 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12T\n\x1amin_price_increment_amount\x18\x04 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\"[\n\x12InstrumentResponse\x12\x45\n\ninstrument\x18\x01 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.Instrument\"\x9a\x07\n\nInstrument\x12\x0c\n\x04\x66igi\x18\x01 \x01(\t\x12\x0e\n\x06ticker\x18\x02 \x01(\t\x12\x12\n\nclass_code\x18\x03 \x01(\t\x12\x0c\n\x04isin\x18\x04 \x01(\t\x12\x0b\n\x03lot\x18\x05 \x01(\x05\x12\x10\n\x08\x63urrency\x18\x06 \x01(\t\x12?\n\x05klong\x18\x07 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12@\n\x06kshort\x18\x08 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12?\n\x05\x64long\x18\t \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12@\n\x06\x64short\x18\n \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x43\n\tdlong_min\x18\x0b \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x44\n\ndshort_min\x18\x0c \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x1a\n\x12short_enabled_flag\x18\r \x01(\x08\x12\x0c\n\x04name\x18\x0e \x01(\t\x12\x10\n\x08\x65xchange\x18\x0f \x01(\t\x12\x17\n\x0f\x63ountry_of_risk\x18\x10 \x01(\t\x12\x1c\n\x14\x63ountry_of_risk_name\x18\x11 \x01(\t\x12\x17\n\x0finstrument_type\x18\x12 \x01(\t\x12T\n\x0etrading_status\x18\x13 \x01(\x0e\x32<.tinkoff.public.invest.api.contract.v1.SecurityTradingStatus\x12\x10\n\x08otc_flag\x18\x14 \x01(\x08\x12\x1a\n\x12\x62uy_available_flag\x18\x15 \x01(\x08\x12\x1b\n\x13sell_available_flag\x18\x16 \x01(\x08\x12M\n\x13min_price_increment\x18\x17 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12 \n\x18\x61pi_trade_available_flag\x18\x18 \x01(\x08\"u\n\x13GetDividendsRequest\x12\x0c\n\x04\x66igi\x18\x01 \x01(\t\x12(\n\x04\x66rom\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12&\n\x02to\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"Z\n\x14GetDividendsResponse\x12\x42\n\tdividends\x18\x01 \x03(\x0b\x32/.tinkoff.public.invest.api.contract.v1.Dividend\"\x86\x04\n\x08\x44ividend\x12G\n\x0c\x64ividend_net\x18\x01 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12\x30\n\x0cpayment_date\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x31\n\rdeclared_date\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x31\n\rlast_buy_date\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x15\n\rdividend_type\x18\x05 \x01(\t\x12/\n\x0brecord_date\x18\x06 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x12\n\nregularity\x18\x07 \x01(\t\x12\x46\n\x0b\x63lose_price\x18\x08 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12\x45\n\x0byield_value\x18\t \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12.\n\ncreated_at\x18\n \x01(\x0b\x32\x1a.google.protobuf.Timestamp*\xd7\x01\n\nCouponType\x12\x1b\n\x17\x43OUPON_TYPE_UNSPECIFIED\x10\x00\x12\x18\n\x14\x43OUPON_TYPE_CONSTANT\x10\x01\x12\x18\n\x14\x43OUPON_TYPE_FLOATING\x10\x02\x12\x18\n\x14\x43OUPON_TYPE_DISCOUNT\x10\x03\x12\x18\n\x14\x43OUPON_TYPE_MORTGAGE\x10\x04\x12\x13\n\x0f\x43OUPON_TYPE_FIX\x10\x05\x12\x18\n\x14\x43OUPON_TYPE_VARIABLE\x10\x06\x12\x15\n\x11\x43OUPON_TYPE_OTHER\x10\x07*m\n\x10InstrumentIdType\x12\x1d\n\x19INSTRUMENT_ID_UNSPECIFIED\x10\x00\x12\x1b\n\x17INSTRUMENT_ID_TYPE_FIGI\x10\x01\x12\x1d\n\x19INSTRUMENT_ID_TYPE_TICKER\x10\x02*l\n\x10InstrumentStatus\x12!\n\x1dINSTRUMENT_STATUS_UNSPECIFIED\x10\x00\x12\x1a\n\x16INSTRUMENT_STATUS_BASE\x10\x01\x12\x19\n\x15INSTRUMENT_STATUS_ALL\x10\x02*\xe5\x01\n\tShareType\x12\x1a\n\x16SHARE_TYPE_UNSPECIFIED\x10\x00\x12\x15\n\x11SHARE_TYPE_COMMON\x10\x01\x12\x18\n\x14SHARE_TYPE_PREFERRED\x10\x02\x12\x12\n\x0eSHARE_TYPE_ADR\x10\x03\x12\x12\n\x0eSHARE_TYPE_GDR\x10\x04\x12\x12\n\x0eSHARE_TYPE_MLP\x10\x05\x12\x1a\n\x16SHARE_TYPE_NY_REG_SHRS\x10\x06\x12\x1e\n\x1aSHARE_TYPE_CLOSED_END_FUND\x10\x07\x12\x13\n\x0fSHARE_TYPE_REIT\x10\x08\x32\xdc\x10\n\x12InstrumentsService\x12\x93\x01\n\x10TradingSchedules\x12>.tinkoff.public.invest.api.contract.v1.TradingSchedulesRequest\x1a?.tinkoff.public.invest.api.contract.v1.TradingSchedulesResponse\x12w\n\x06\x42ondBy\x12\x38.tinkoff.public.invest.api.contract.v1.InstrumentRequest\x1a\x33.tinkoff.public.invest.api.contract.v1.BondResponse\x12x\n\x05\x42onds\x12\x39.tinkoff.public.invest.api.contract.v1.InstrumentsRequest\x1a\x34.tinkoff.public.invest.api.contract.v1.BondsResponse\x12\x8d\x01\n\x0eGetBondCoupons\x12<.tinkoff.public.invest.api.contract.v1.GetBondCouponsRequest\x1a=.tinkoff.public.invest.api.contract.v1.GetBondCouponsResponse\x12\x7f\n\nCurrencyBy\x12\x38.tinkoff.public.invest.api.contract.v1.InstrumentRequest\x1a\x37.tinkoff.public.invest.api.contract.v1.CurrencyResponse\x12\x82\x01\n\nCurrencies\x12\x39.tinkoff.public.invest.api.contract.v1.InstrumentsRequest\x1a\x39.tinkoff.public.invest.api.contract.v1.CurrenciesResponse\x12u\n\x05\x45tfBy\x12\x38.tinkoff.public.invest.api.contract.v1.InstrumentRequest\x1a\x32.tinkoff.public.invest.api.contract.v1.EtfResponse\x12v\n\x04\x45tfs\x12\x39.tinkoff.public.invest.api.contract.v1.InstrumentsRequest\x1a\x33.tinkoff.public.invest.api.contract.v1.EtfsResponse\x12{\n\x08\x46utureBy\x12\x38.tinkoff.public.invest.api.contract.v1.InstrumentRequest\x1a\x35.tinkoff.public.invest.api.contract.v1.FutureResponse\x12|\n\x07\x46utures\x12\x39.tinkoff.public.invest.api.contract.v1.InstrumentsRequest\x1a\x36.tinkoff.public.invest.api.contract.v1.FuturesResponse\x12y\n\x07ShareBy\x12\x38.tinkoff.public.invest.api.contract.v1.InstrumentRequest\x1a\x34.tinkoff.public.invest.api.contract.v1.ShareResponse\x12z\n\x06Shares\x12\x39.tinkoff.public.invest.api.contract.v1.InstrumentsRequest\x1a\x35.tinkoff.public.invest.api.contract.v1.SharesResponse\x12\x9c\x01\n\x13GetAccruedInterests\x12\x41.tinkoff.public.invest.api.contract.v1.GetAccruedInterestsRequest\x1a\x42.tinkoff.public.invest.api.contract.v1.GetAccruedInterestsResponse\x12\x93\x01\n\x10GetFuturesMargin\x12>.tinkoff.public.invest.api.contract.v1.GetFuturesMarginRequest\x1a?.tinkoff.public.invest.api.contract.v1.GetFuturesMarginResponse\x12\x86\x01\n\x0fGetInstrumentBy\x12\x38.tinkoff.public.invest.api.contract.v1.InstrumentRequest\x1a\x39.tinkoff.public.invest.api.contract.v1.InstrumentResponse\x12\x87\x01\n\x0cGetDividends\x12:.tinkoff.public.invest.api.contract.v1.GetDividendsRequest\x1a;.tinkoff.public.invest.api.contract.v1.GetDividendsResponseBa\n\x1cru.tinkoff.piapi.contract.v1P\x01Z\x0c./;investapi\xa2\x02\x05TIAPI\xaa\x02\x14Tinkoff.InvestApi.V1\xca\x02\x11Tinkoff\\Invest\\V1b\x06proto3'
   ,
   dependencies=[google_dot_protobuf_dot_timestamp__pb2.DESCRIPTOR,tinkoff_dot_invest_dot_grpc_dot_common__pb2.DESCRIPTOR,])
 
+_COUPONTYPE = _descriptor.EnumDescriptor(
+  name='CouponType',
+  full_name='tinkoff.public.invest.api.contract.v1.CouponType',
+  filename=None,
+  file=DESCRIPTOR,
+  create_key=_descriptor._internal_create_key,
+  values=[
+    _descriptor.EnumValueDescriptor(
+      name='COUPON_TYPE_UNSPECIFIED', index=0, number=0,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+    _descriptor.EnumValueDescriptor(
+      name='COUPON_TYPE_CONSTANT', index=1, number=1,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+    _descriptor.EnumValueDescriptor(
+      name='COUPON_TYPE_FLOATING', index=2, number=2,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+    _descriptor.EnumValueDescriptor(
+      name='COUPON_TYPE_DISCOUNT', index=3, number=3,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+    _descriptor.EnumValueDescriptor(
+      name='COUPON_TYPE_MORTGAGE', index=4, number=4,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+    _descriptor.EnumValueDescriptor(
+      name='COUPON_TYPE_FIX', index=5, number=5,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+    _descriptor.EnumValueDescriptor(
+      name='COUPON_TYPE_VARIABLE', index=6, number=6,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+    _descriptor.EnumValueDescriptor(
+      name='COUPON_TYPE_OTHER', index=7, number=7,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+  ],
+  containing_type=None,
+  serialized_options=None,
+  serialized_start=11530,
+  serialized_end=11745,
+)
+_sym_db.RegisterEnumDescriptor(_COUPONTYPE)
+
+CouponType = enum_type_wrapper.EnumTypeWrapper(_COUPONTYPE)
 _INSTRUMENTIDTYPE = _descriptor.EnumDescriptor(
   name='InstrumentIdType',
   full_name='tinkoff.public.invest.api.contract.v1.InstrumentIdType',
@@ -51,8 +107,8 @@ _INSTRUMENTIDTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=10474,
-  serialized_end=10583,
+  serialized_start=11747,
+  serialized_end=11856,
 )
 _sym_db.RegisterEnumDescriptor(_INSTRUMENTIDTYPE)
 
@@ -82,8 +138,8 @@ _INSTRUMENTSTATUS = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=10585,
-  serialized_end=10693,
+  serialized_start=11858,
+  serialized_end=11966,
 )
 _sym_db.RegisterEnumDescriptor(_INSTRUMENTSTATUS)
 
@@ -143,12 +199,20 @@ _SHARETYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=10696,
-  serialized_end=10925,
+  serialized_start=11969,
+  serialized_end=12198,
 )
 _sym_db.RegisterEnumDescriptor(_SHARETYPE)
 
 ShareType = enum_type_wrapper.EnumTypeWrapper(_SHARETYPE)
+COUPON_TYPE_UNSPECIFIED = 0
+COUPON_TYPE_CONSTANT = 1
+COUPON_TYPE_FLOATING = 2
+COUPON_TYPE_DISCOUNT = 3
+COUPON_TYPE_MORTGAGE = 4
+COUPON_TYPE_FIX = 5
+COUPON_TYPE_VARIABLE = 6
+COUPON_TYPE_OTHER = 7
 INSTRUMENT_ID_UNSPECIFIED = 0
 INSTRUMENT_ID_TYPE_FIGI = 1
 INSTRUMENT_ID_TYPE_TICKER = 2
@@ -321,15 +385,64 @@ _TRADINGDAY = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='market_order_start_time', full_name='tinkoff.public.invest.api.contract.v1.TradingDay.market_order_start_time', index=4,
-      number=5, type=11, cpp_type=10, label=1,
+      name='opening_auction_start_time', full_name='tinkoff.public.invest.api.contract.v1.TradingDay.opening_auction_start_time', index=4,
+      number=7, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='market_order_end_time', full_name='tinkoff.public.invest.api.contract.v1.TradingDay.market_order_end_time', index=5,
-      number=6, type=11, cpp_type=10, label=1,
+      name='closing_auction_end_time', full_name='tinkoff.public.invest.api.contract.v1.TradingDay.closing_auction_end_time', index=5,
+      number=8, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='evening_opening_auction_start_time', full_name='tinkoff.public.invest.api.contract.v1.TradingDay.evening_opening_auction_start_time', index=6,
+      number=9, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='evening_start_time', full_name='tinkoff.public.invest.api.contract.v1.TradingDay.evening_start_time', index=7,
+      number=10, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='evening_end_time', full_name='tinkoff.public.invest.api.contract.v1.TradingDay.evening_end_time', index=8,
+      number=11, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='clearing_start_time', full_name='tinkoff.public.invest.api.contract.v1.TradingDay.clearing_start_time', index=9,
+      number=12, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='clearing_end_time', full_name='tinkoff.public.invest.api.contract.v1.TradingDay.clearing_end_time', index=10,
+      number=13, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='premarket_start_time', full_name='tinkoff.public.invest.api.contract.v1.TradingDay.premarket_start_time', index=11,
+      number=14, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='premarket_end_time', full_name='tinkoff.public.invest.api.contract.v1.TradingDay.premarket_end_time', index=12,
+      number=15, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -347,7 +460,7 @@ _TRADINGDAY = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=480,
-  serialized_end=772,
+  serialized_end=1198,
 )
 
 
@@ -392,8 +505,8 @@ _INSTRUMENTREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=774,
-  serialized_end=899,
+  serialized_start=1200,
+  serialized_end=1325,
 )
 
 
@@ -424,8 +537,8 @@ _INSTRUMENTSREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=901,
-  serialized_end=1005,
+  serialized_start=1327,
+  serialized_end=1431,
 )
 
 
@@ -456,8 +569,8 @@ _BONDRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1007,
-  serialized_end=1086,
+  serialized_start=1433,
+  serialized_end=1512,
 )
 
 
@@ -488,8 +601,174 @@ _BONDSRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1088,
-  serialized_end=1169,
+  serialized_start=1514,
+  serialized_end=1595,
+)
+
+
+_GETBONDCOUPONSREQUEST = _descriptor.Descriptor(
+  name='GetBondCouponsRequest',
+  full_name='tinkoff.public.invest.api.contract.v1.GetBondCouponsRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='figi', full_name='tinkoff.public.invest.api.contract.v1.GetBondCouponsRequest.figi', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='from', full_name='tinkoff.public.invest.api.contract.v1.GetBondCouponsRequest.from', index=1,
+      number=2, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='to', full_name='tinkoff.public.invest.api.contract.v1.GetBondCouponsRequest.to', index=2,
+      number=3, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1597,
+  serialized_end=1716,
+)
+
+
+_GETBONDCOUPONSRESPONSE = _descriptor.Descriptor(
+  name='GetBondCouponsResponse',
+  full_name='tinkoff.public.invest.api.contract.v1.GetBondCouponsResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='events', full_name='tinkoff.public.invest.api.contract.v1.GetBondCouponsResponse.events', index=0,
+      number=1, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1718,
+  serialized_end=1805,
+)
+
+
+_COUPON = _descriptor.Descriptor(
+  name='Coupon',
+  full_name='tinkoff.public.invest.api.contract.v1.Coupon',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='figi', full_name='tinkoff.public.invest.api.contract.v1.Coupon.figi', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='coupon_date', full_name='tinkoff.public.invest.api.contract.v1.Coupon.coupon_date', index=1,
+      number=2, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='coupon_number', full_name='tinkoff.public.invest.api.contract.v1.Coupon.coupon_number', index=2,
+      number=3, type=3, cpp_type=2, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='fix_date', full_name='tinkoff.public.invest.api.contract.v1.Coupon.fix_date', index=3,
+      number=4, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='pay_one_bond', full_name='tinkoff.public.invest.api.contract.v1.Coupon.pay_one_bond', index=4,
+      number=5, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='coupon_type', full_name='tinkoff.public.invest.api.contract.v1.Coupon.coupon_type', index=5,
+      number=6, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='coupon_start_date', full_name='tinkoff.public.invest.api.contract.v1.Coupon.coupon_start_date', index=6,
+      number=7, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='coupon_end_date', full_name='tinkoff.public.invest.api.contract.v1.Coupon.coupon_end_date', index=7,
+      number=8, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='coupon_period', full_name='tinkoff.public.invest.api.contract.v1.Coupon.coupon_period', index=8,
+      number=9, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1808,
+  serialized_end=2224,
 )
 
 
@@ -520,8 +799,8 @@ _CURRENCYRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1171,
-  serialized_end=1258,
+  serialized_start=2226,
+  serialized_end=2313,
 )
 
 
@@ -552,8 +831,8 @@ _CURRENCIESRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1260,
-  serialized_end=1350,
+  serialized_start=2315,
+  serialized_end=2405,
 )
 
 
@@ -584,8 +863,8 @@ _ETFRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1352,
-  serialized_end=1429,
+  serialized_start=2407,
+  serialized_end=2484,
 )
 
 
@@ -616,8 +895,8 @@ _ETFSRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1431,
-  serialized_end=1510,
+  serialized_start=2486,
+  serialized_end=2565,
 )
 
 
@@ -648,8 +927,8 @@ _FUTURERESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1512,
-  serialized_end=1595,
+  serialized_start=2567,
+  serialized_end=2650,
 )
 
 
@@ -680,8 +959,8 @@ _FUTURESRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1597,
-  serialized_end=1682,
+  serialized_start=2652,
+  serialized_end=2737,
 )
 
 
@@ -712,8 +991,8 @@ _SHARERESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1684,
-  serialized_end=1765,
+  serialized_start=2739,
+  serialized_end=2820,
 )
 
 
@@ -744,8 +1023,8 @@ _SHARESRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1767,
-  serialized_end=1850,
+  serialized_start=2822,
+  serialized_end=2905,
 )
 
 
@@ -1028,8 +1307,8 @@ _BOND = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1853,
-  serialized_end=3309,
+  serialized_start=2908,
+  serialized_end=4364,
 )
 
 
@@ -1228,8 +1507,8 @@ _CURRENCY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3312,
-  serialized_end=4302,
+  serialized_start=4367,
+  serialized_end=5357,
 )
 
 
@@ -1456,8 +1735,8 @@ _ETF = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4305,
-  serialized_end=5454,
+  serialized_start=5360,
+  serialized_end=6509,
 )
 
 
@@ -1691,8 +1970,8 @@ _FUTURE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5457,
-  serialized_end=6651,
+  serialized_start=6512,
+  serialized_end=7706,
 )
 
 
@@ -1926,8 +2205,8 @@ _SHARE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6654,
-  serialized_end=7815,
+  serialized_start=7709,
+  serialized_end=8870,
 )
 
 
@@ -1972,8 +2251,8 @@ _GETACCRUEDINTERESTSREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=7817,
-  serialized_end=7941,
+  serialized_start=8872,
+  serialized_end=8996,
 )
 
 
@@ -2004,8 +2283,8 @@ _GETACCRUEDINTERESTSRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=7943,
-  serialized_end=8055,
+  serialized_start=8998,
+  serialized_end=9110,
 )
 
 
@@ -2057,8 +2336,8 @@ _ACCRUEDINTEREST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=8058,
-  serialized_end=8322,
+  serialized_start=9113,
+  serialized_end=9377,
 )
 
 
@@ -2089,8 +2368,8 @@ _GETFUTURESMARGINREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=8324,
-  serialized_end=8363,
+  serialized_start=9379,
+  serialized_end=9418,
 )
 
 
@@ -2142,8 +2421,8 @@ _GETFUTURESMARGINRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=8366,
-  serialized_end=8722,
+  serialized_start=9421,
+  serialized_end=9777,
 )
 
 
@@ -2174,8 +2453,8 @@ _INSTRUMENTRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=8724,
-  serialized_end=8815,
+  serialized_start=9779,
+  serialized_end=9870,
 )
 
 
@@ -2367,8 +2646,8 @@ _INSTRUMENT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=8818,
-  serialized_end=9740,
+  serialized_start=9873,
+  serialized_end=10795,
 )
 
 
@@ -2413,8 +2692,8 @@ _GETDIVIDENDSREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=9742,
-  serialized_end=9859,
+  serialized_start=10797,
+  serialized_end=10914,
 )
 
 
@@ -2445,8 +2724,8 @@ _GETDIVIDENDSRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=9861,
-  serialized_end=9951,
+  serialized_start=10916,
+  serialized_end=11006,
 )
 
 
@@ -2540,8 +2819,8 @@ _DIVIDEND = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=9954,
-  serialized_end=10472,
+  serialized_start=11009,
+  serialized_end=11527,
 )
 
 _TRADINGSCHEDULESREQUEST.fields_by_name['from'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
@@ -2551,12 +2830,28 @@ _TRADINGSCHEDULE.fields_by_name['days'].message_type = _TRADINGDAY
 _TRADINGDAY.fields_by_name['date'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
 _TRADINGDAY.fields_by_name['start_time'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
 _TRADINGDAY.fields_by_name['end_time'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
-_TRADINGDAY.fields_by_name['market_order_start_time'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
-_TRADINGDAY.fields_by_name['market_order_end_time'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
+_TRADINGDAY.fields_by_name['opening_auction_start_time'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
+_TRADINGDAY.fields_by_name['closing_auction_end_time'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
+_TRADINGDAY.fields_by_name['evening_opening_auction_start_time'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
+_TRADINGDAY.fields_by_name['evening_start_time'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
+_TRADINGDAY.fields_by_name['evening_end_time'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
+_TRADINGDAY.fields_by_name['clearing_start_time'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
+_TRADINGDAY.fields_by_name['clearing_end_time'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
+_TRADINGDAY.fields_by_name['premarket_start_time'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
+_TRADINGDAY.fields_by_name['premarket_end_time'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
 _INSTRUMENTREQUEST.fields_by_name['id_type'].enum_type = _INSTRUMENTIDTYPE
 _INSTRUMENTSREQUEST.fields_by_name['instrument_status'].enum_type = _INSTRUMENTSTATUS
 _BONDRESPONSE.fields_by_name['instrument'].message_type = _BOND
 _BONDSRESPONSE.fields_by_name['instruments'].message_type = _BOND
+_GETBONDCOUPONSREQUEST.fields_by_name['from'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
+_GETBONDCOUPONSREQUEST.fields_by_name['to'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
+_GETBONDCOUPONSRESPONSE.fields_by_name['events'].message_type = _COUPON
+_COUPON.fields_by_name['coupon_date'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
+_COUPON.fields_by_name['fix_date'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
+_COUPON.fields_by_name['pay_one_bond'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._MONEYVALUE
+_COUPON.fields_by_name['coupon_type'].enum_type = _COUPONTYPE
+_COUPON.fields_by_name['coupon_start_date'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
+_COUPON.fields_by_name['coupon_end_date'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
 _CURRENCYRESPONSE.fields_by_name['instrument'].message_type = _CURRENCY
 _CURRENCIESRESPONSE.fields_by_name['instruments'].message_type = _CURRENCY
 _ETFRESPONSE.fields_by_name['instrument'].message_type = _ETF
@@ -2661,6 +2956,9 @@ DESCRIPTOR.message_types_by_name['InstrumentRequest'] = _INSTRUMENTREQUEST
 DESCRIPTOR.message_types_by_name['InstrumentsRequest'] = _INSTRUMENTSREQUEST
 DESCRIPTOR.message_types_by_name['BondResponse'] = _BONDRESPONSE
 DESCRIPTOR.message_types_by_name['BondsResponse'] = _BONDSRESPONSE
+DESCRIPTOR.message_types_by_name['GetBondCouponsRequest'] = _GETBONDCOUPONSREQUEST
+DESCRIPTOR.message_types_by_name['GetBondCouponsResponse'] = _GETBONDCOUPONSRESPONSE
+DESCRIPTOR.message_types_by_name['Coupon'] = _COUPON
 DESCRIPTOR.message_types_by_name['CurrencyResponse'] = _CURRENCYRESPONSE
 DESCRIPTOR.message_types_by_name['CurrenciesResponse'] = _CURRENCIESRESPONSE
 DESCRIPTOR.message_types_by_name['EtfResponse'] = _ETFRESPONSE
@@ -2684,6 +2982,7 @@ DESCRIPTOR.message_types_by_name['Instrument'] = _INSTRUMENT
 DESCRIPTOR.message_types_by_name['GetDividendsRequest'] = _GETDIVIDENDSREQUEST
 DESCRIPTOR.message_types_by_name['GetDividendsResponse'] = _GETDIVIDENDSRESPONSE
 DESCRIPTOR.message_types_by_name['Dividend'] = _DIVIDEND
+DESCRIPTOR.enum_types_by_name['CouponType'] = _COUPONTYPE
 DESCRIPTOR.enum_types_by_name['InstrumentIdType'] = _INSTRUMENTIDTYPE
 DESCRIPTOR.enum_types_by_name['InstrumentStatus'] = _INSTRUMENTSTATUS
 DESCRIPTOR.enum_types_by_name['ShareType'] = _SHARETYPE
@@ -2744,6 +3043,27 @@ BondsResponse = _reflection.GeneratedProtocolMessageType('BondsResponse', (_mess
   # @@protoc_insertion_point(class_scope:tinkoff.public.invest.api.contract.v1.BondsResponse)
   })
 _sym_db.RegisterMessage(BondsResponse)
+
+GetBondCouponsRequest = _reflection.GeneratedProtocolMessageType('GetBondCouponsRequest', (_message.Message,), {
+  'DESCRIPTOR' : _GETBONDCOUPONSREQUEST,
+  '__module__' : 'tinkoff.invest.grpc.instruments_pb2'
+  # @@protoc_insertion_point(class_scope:tinkoff.public.invest.api.contract.v1.GetBondCouponsRequest)
+  })
+_sym_db.RegisterMessage(GetBondCouponsRequest)
+
+GetBondCouponsResponse = _reflection.GeneratedProtocolMessageType('GetBondCouponsResponse', (_message.Message,), {
+  'DESCRIPTOR' : _GETBONDCOUPONSRESPONSE,
+  '__module__' : 'tinkoff.invest.grpc.instruments_pb2'
+  # @@protoc_insertion_point(class_scope:tinkoff.public.invest.api.contract.v1.GetBondCouponsResponse)
+  })
+_sym_db.RegisterMessage(GetBondCouponsResponse)
+
+Coupon = _reflection.GeneratedProtocolMessageType('Coupon', (_message.Message,), {
+  'DESCRIPTOR' : _COUPON,
+  '__module__' : 'tinkoff.invest.grpc.instruments_pb2'
+  # @@protoc_insertion_point(class_scope:tinkoff.public.invest.api.contract.v1.Coupon)
+  })
+_sym_db.RegisterMessage(Coupon)
 
 CurrencyResponse = _reflection.GeneratedProtocolMessageType('CurrencyResponse', (_message.Message,), {
   'DESCRIPTOR' : _CURRENCYRESPONSE,
@@ -2916,8 +3236,8 @@ _INSTRUMENTSSERVICE = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=10928,
-  serialized_end=12924,
+  serialized_start=12201,
+  serialized_end=14341,
   methods=[
   _descriptor.MethodDescriptor(
     name='TradingSchedules',
@@ -2950,9 +3270,19 @@ _INSTRUMENTSSERVICE = _descriptor.ServiceDescriptor(
     create_key=_descriptor._internal_create_key,
   ),
   _descriptor.MethodDescriptor(
+    name='GetBondCoupons',
+    full_name='tinkoff.public.invest.api.contract.v1.InstrumentsService.GetBondCoupons',
+    index=3,
+    containing_service=None,
+    input_type=_GETBONDCOUPONSREQUEST,
+    output_type=_GETBONDCOUPONSRESPONSE,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
     name='CurrencyBy',
     full_name='tinkoff.public.invest.api.contract.v1.InstrumentsService.CurrencyBy',
-    index=3,
+    index=4,
     containing_service=None,
     input_type=_INSTRUMENTREQUEST,
     output_type=_CURRENCYRESPONSE,
@@ -2962,7 +3292,7 @@ _INSTRUMENTSSERVICE = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='Currencies',
     full_name='tinkoff.public.invest.api.contract.v1.InstrumentsService.Currencies',
-    index=4,
+    index=5,
     containing_service=None,
     input_type=_INSTRUMENTSREQUEST,
     output_type=_CURRENCIESRESPONSE,
@@ -2972,7 +3302,7 @@ _INSTRUMENTSSERVICE = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='EtfBy',
     full_name='tinkoff.public.invest.api.contract.v1.InstrumentsService.EtfBy',
-    index=5,
+    index=6,
     containing_service=None,
     input_type=_INSTRUMENTREQUEST,
     output_type=_ETFRESPONSE,
@@ -2982,7 +3312,7 @@ _INSTRUMENTSSERVICE = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='Etfs',
     full_name='tinkoff.public.invest.api.contract.v1.InstrumentsService.Etfs',
-    index=6,
+    index=7,
     containing_service=None,
     input_type=_INSTRUMENTSREQUEST,
     output_type=_ETFSRESPONSE,
@@ -2992,7 +3322,7 @@ _INSTRUMENTSSERVICE = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='FutureBy',
     full_name='tinkoff.public.invest.api.contract.v1.InstrumentsService.FutureBy',
-    index=7,
+    index=8,
     containing_service=None,
     input_type=_INSTRUMENTREQUEST,
     output_type=_FUTURERESPONSE,
@@ -3002,7 +3332,7 @@ _INSTRUMENTSSERVICE = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='Futures',
     full_name='tinkoff.public.invest.api.contract.v1.InstrumentsService.Futures',
-    index=8,
+    index=9,
     containing_service=None,
     input_type=_INSTRUMENTSREQUEST,
     output_type=_FUTURESRESPONSE,
@@ -3012,7 +3342,7 @@ _INSTRUMENTSSERVICE = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='ShareBy',
     full_name='tinkoff.public.invest.api.contract.v1.InstrumentsService.ShareBy',
-    index=9,
+    index=10,
     containing_service=None,
     input_type=_INSTRUMENTREQUEST,
     output_type=_SHARERESPONSE,
@@ -3022,7 +3352,7 @@ _INSTRUMENTSSERVICE = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='Shares',
     full_name='tinkoff.public.invest.api.contract.v1.InstrumentsService.Shares',
-    index=10,
+    index=11,
     containing_service=None,
     input_type=_INSTRUMENTSREQUEST,
     output_type=_SHARESRESPONSE,
@@ -3032,7 +3362,7 @@ _INSTRUMENTSSERVICE = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='GetAccruedInterests',
     full_name='tinkoff.public.invest.api.contract.v1.InstrumentsService.GetAccruedInterests',
-    index=11,
+    index=12,
     containing_service=None,
     input_type=_GETACCRUEDINTERESTSREQUEST,
     output_type=_GETACCRUEDINTERESTSRESPONSE,
@@ -3042,7 +3372,7 @@ _INSTRUMENTSSERVICE = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='GetFuturesMargin',
     full_name='tinkoff.public.invest.api.contract.v1.InstrumentsService.GetFuturesMargin',
-    index=12,
+    index=13,
     containing_service=None,
     input_type=_GETFUTURESMARGINREQUEST,
     output_type=_GETFUTURESMARGINRESPONSE,
@@ -3052,7 +3382,7 @@ _INSTRUMENTSSERVICE = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='GetInstrumentBy',
     full_name='tinkoff.public.invest.api.contract.v1.InstrumentsService.GetInstrumentBy',
-    index=13,
+    index=14,
     containing_service=None,
     input_type=_INSTRUMENTREQUEST,
     output_type=_INSTRUMENTRESPONSE,
@@ -3062,7 +3392,7 @@ _INSTRUMENTSSERVICE = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='GetDividends',
     full_name='tinkoff.public.invest.api.contract.v1.InstrumentsService.GetDividends',
-    index=14,
+    index=15,
     containing_service=None,
     input_type=_GETDIVIDENDSREQUEST,
     output_type=_GETDIVIDENDSRESPONSE,

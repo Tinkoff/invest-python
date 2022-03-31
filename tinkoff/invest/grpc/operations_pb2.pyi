@@ -181,6 +181,9 @@ class _OperationTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._
     OPERATION_TYPE_DIV_EXT: _OperationType.ValueType  # 43
     """Выплата дивидендов на карту"""
 
+    OPERATION_TYPE_TAX_CORRECTION_COUPON: _OperationType.ValueType  # 44
+    """Корректировка налога по купонам"""
+
 class OperationType(_OperationType, metaclass=_OperationTypeEnumTypeWrapper):
     """Тип операции"""
     pass
@@ -317,6 +320,9 @@ OPERATION_TYPE_TAX_REPO_REFUND_PROGRESSIVE: OperationType.ValueType  # 42
 OPERATION_TYPE_DIV_EXT: OperationType.ValueType  # 43
 """Выплата дивидендов на карту"""
 
+OPERATION_TYPE_TAX_CORRECTION_COUPON: OperationType.ValueType  # 44
+"""Корректировка налога по купонам"""
+
 global___OperationType = OperationType
 
 
@@ -383,6 +389,7 @@ class Operation(google.protobuf.message.Message):
     DATE_FIELD_NUMBER: builtins.int
     TYPE_FIELD_NUMBER: builtins.int
     OPERATION_TYPE_FIELD_NUMBER: builtins.int
+    TRADES_FIELD_NUMBER: builtins.int
     id: typing.Text
     """Идентификатор операции"""
 
@@ -425,6 +432,10 @@ class Operation(google.protobuf.message.Message):
     operation_type: global___OperationType.ValueType
     """Тип операции"""
 
+    @property
+    def trades(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___OperationTrade]:
+        """Массив сделок"""
+        pass
     def __init__(self,
         *,
         id: typing.Text = ...,
@@ -440,10 +451,43 @@ class Operation(google.protobuf.message.Message):
         date: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
         type: typing.Text = ...,
         operation_type: global___OperationType.ValueType = ...,
+        trades: typing.Optional[typing.Iterable[global___OperationTrade]] = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["date",b"date","payment",b"payment","price",b"price"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["currency",b"currency","date",b"date","figi",b"figi","id",b"id","instrument_type",b"instrument_type","operation_type",b"operation_type","parent_operation_id",b"parent_operation_id","payment",b"payment","price",b"price","quantity",b"quantity","quantity_rest",b"quantity_rest","state",b"state","type",b"type"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["currency",b"currency","date",b"date","figi",b"figi","id",b"id","instrument_type",b"instrument_type","operation_type",b"operation_type","parent_operation_id",b"parent_operation_id","payment",b"payment","price",b"price","quantity",b"quantity","quantity_rest",b"quantity_rest","state",b"state","trades",b"trades","type",b"type"]) -> None: ...
 global___Operation = Operation
+
+class OperationTrade(google.protobuf.message.Message):
+    """Сделка по операции."""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    TRADE_ID_FIELD_NUMBER: builtins.int
+    DATE_TIME_FIELD_NUMBER: builtins.int
+    QUANTITY_FIELD_NUMBER: builtins.int
+    PRICE_FIELD_NUMBER: builtins.int
+    trade_id: typing.Text
+    """Идентификатор сделки"""
+
+    @property
+    def date_time(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Дата и время сделки в часовом поясе UTC"""
+        pass
+    quantity: builtins.int
+    """Количество инструментов"""
+
+    @property
+    def price(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
+        """Цена"""
+        pass
+    def __init__(self,
+        *,
+        trade_id: typing.Text = ...,
+        date_time: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        quantity: builtins.int = ...,
+        price: typing.Optional[tinkoff.invest.grpc.common_pb2.MoneyValue] = ...,
+        ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["date_time",b"date_time","price",b"price"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["date_time",b"date_time","price",b"price","quantity",b"quantity","trade_id",b"trade_id"]) -> None: ...
+global___OperationTrade = OperationTrade
 
 class PortfolioRequest(google.protobuf.message.Message):
     """Запрос получения текущего портфеля по счёту."""
@@ -629,7 +673,7 @@ class PortfolioPosition(google.protobuf.message.Message):
         pass
     @property
     def average_position_price(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
-        """Средневзвешенная цена позиции"""
+        """Средневзвешенная цена позиции. **Возможна задержка до секунды для пересчёта**."""
         pass
     @property
     def expected_yield(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
@@ -641,7 +685,7 @@ class PortfolioPosition(google.protobuf.message.Message):
         pass
     @property
     def average_position_price_pt(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Средняя цена лота в позиции в пунктах (для фьючерсов)"""
+        """Средняя цена лота в позиции в пунктах (для фьючерсов). **Возможна задержка до секунды для пересчёта**."""
         pass
     @property
     def current_price(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
@@ -649,7 +693,7 @@ class PortfolioPosition(google.protobuf.message.Message):
         pass
     @property
     def average_position_price_fifo(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
-        """Средняя цена лота в позиции по методу FIFO"""
+        """Средняя цена лота в позиции по методу FIFO. **Возможна задержка до секунды для пересчёта**."""
         pass
     @property
     def quantity_lots(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
@@ -989,3 +1033,206 @@ class BrokerReport(google.protobuf.message.Message):
     def HasField(self, field_name: typing_extensions.Literal["aci_value",b"aci_value","broker_commission",b"broker_commission","clear_value_date",b"clear_value_date","exchange_clearing_commission",b"exchange_clearing_commission","exchange_commission",b"exchange_commission","order_amount",b"order_amount","price",b"price","repo_rate",b"repo_rate","sec_value_date",b"sec_value_date","total_order_amount",b"total_order_amount","trade_datetime",b"trade_datetime"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions.Literal["aci_value",b"aci_value","broker_commission",b"broker_commission","broker_status",b"broker_status","class_code",b"class_code","clear_value_date",b"clear_value_date","delivery_type",b"delivery_type","direction",b"direction","exchange",b"exchange","exchange_clearing_commission",b"exchange_clearing_commission","exchange_commission",b"exchange_commission","execute_sign",b"execute_sign","figi",b"figi","name",b"name","order_amount",b"order_amount","order_id",b"order_id","party",b"party","price",b"price","quantity",b"quantity","repo_rate",b"repo_rate","sec_value_date",b"sec_value_date","separate_agreement_date",b"separate_agreement_date","separate_agreement_number",b"separate_agreement_number","separate_agreement_type",b"separate_agreement_type","ticker",b"ticker","total_order_amount",b"total_order_amount","trade_datetime",b"trade_datetime","trade_id",b"trade_id"]) -> None: ...
 global___BrokerReport = BrokerReport
+
+class GetDividendsForeignIssuerRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    GENERATE_DIV_FOREIGN_ISSUER_REPORT_FIELD_NUMBER: builtins.int
+    GET_DIV_FOREIGN_ISSUER_REPORT_FIELD_NUMBER: builtins.int
+    @property
+    def generate_div_foreign_issuer_report(self) -> global___GenerateDividendsForeignIssuerReportRequest:
+        """Объект запроса формирования отчёта."""
+        pass
+    @property
+    def get_div_foreign_issuer_report(self) -> global___GetDividendsForeignIssuerReportRequest:
+        """Объект запроса сформированного отчёта."""
+        pass
+    def __init__(self,
+        *,
+        generate_div_foreign_issuer_report: typing.Optional[global___GenerateDividendsForeignIssuerReportRequest] = ...,
+        get_div_foreign_issuer_report: typing.Optional[global___GetDividendsForeignIssuerReportRequest] = ...,
+        ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["generate_div_foreign_issuer_report",b"generate_div_foreign_issuer_report","get_div_foreign_issuer_report",b"get_div_foreign_issuer_report","payload",b"payload"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["generate_div_foreign_issuer_report",b"generate_div_foreign_issuer_report","get_div_foreign_issuer_report",b"get_div_foreign_issuer_report","payload",b"payload"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["payload",b"payload"]) -> typing.Optional[typing_extensions.Literal["generate_div_foreign_issuer_report","get_div_foreign_issuer_report"]]: ...
+global___GetDividendsForeignIssuerRequest = GetDividendsForeignIssuerRequest
+
+class GetDividendsForeignIssuerResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    GENERATE_DIV_FOREIGN_ISSUER_REPORT_RESPONSE_FIELD_NUMBER: builtins.int
+    DIV_FOREIGN_ISSUER_REPORT_FIELD_NUMBER: builtins.int
+    @property
+    def generate_div_foreign_issuer_report_response(self) -> global___GenerateDividendsForeignIssuerReportResponse:
+        """Объект результата задачи запуска формирования отчёта."""
+        pass
+    @property
+    def div_foreign_issuer_report(self) -> global___GetDividendsForeignIssuerReportResponse:
+        """Отчёт "Справка о доходах за пределами РФ"."""
+        pass
+    def __init__(self,
+        *,
+        generate_div_foreign_issuer_report_response: typing.Optional[global___GenerateDividendsForeignIssuerReportResponse] = ...,
+        div_foreign_issuer_report: typing.Optional[global___GetDividendsForeignIssuerReportResponse] = ...,
+        ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["div_foreign_issuer_report",b"div_foreign_issuer_report","generate_div_foreign_issuer_report_response",b"generate_div_foreign_issuer_report_response","payload",b"payload"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["div_foreign_issuer_report",b"div_foreign_issuer_report","generate_div_foreign_issuer_report_response",b"generate_div_foreign_issuer_report_response","payload",b"payload"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["payload",b"payload"]) -> typing.Optional[typing_extensions.Literal["generate_div_foreign_issuer_report_response","div_foreign_issuer_report"]]: ...
+global___GetDividendsForeignIssuerResponse = GetDividendsForeignIssuerResponse
+
+class GenerateDividendsForeignIssuerReportRequest(google.protobuf.message.Message):
+    """Объект запроса формирования отчёта "Справка о доходах за пределами РФ"."""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    ACCOUNT_ID_FIELD_NUMBER: builtins.int
+    FROM_FIELD_NUMBER: builtins.int
+    TO_FIELD_NUMBER: builtins.int
+    account_id: typing.Text
+    """Идентификатор счёта клиента."""
+
+    @property
+    def to(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Окончание периода (по UTC)."""
+        pass
+    def __init__(self,
+        *,
+        account_id: typing.Text = ...,
+        to: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["from",b"from","to",b"to"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["account_id",b"account_id","from",b"from","to",b"to"]) -> None: ...
+global___GenerateDividendsForeignIssuerReportRequest = GenerateDividendsForeignIssuerReportRequest
+
+class GetDividendsForeignIssuerReportRequest(google.protobuf.message.Message):
+    """Объект запроса сформированного отчёта "Справка о доходах за пределами РФ"."""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    TASK_ID_FIELD_NUMBER: builtins.int
+    PAGE_FIELD_NUMBER: builtins.int
+    task_id: typing.Text
+    """Идентификатор задачи формирования отчёта."""
+
+    page: builtins.int
+    """Номер страницы отчета (начинается с 0), значение по умолчанию: 0"""
+
+    def __init__(self,
+        *,
+        task_id: typing.Text = ...,
+        page: builtins.int = ...,
+        ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["page",b"page","task_id",b"task_id"]) -> None: ...
+global___GetDividendsForeignIssuerReportRequest = GetDividendsForeignIssuerReportRequest
+
+class GenerateDividendsForeignIssuerReportResponse(google.protobuf.message.Message):
+    """Объект результата задачи запуска формирования отчёта "Справка о доходах за пределами РФ"."""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    TASK_ID_FIELD_NUMBER: builtins.int
+    task_id: typing.Text
+    """Идентификатор задачи формирования отчёта."""
+
+    def __init__(self,
+        *,
+        task_id: typing.Text = ...,
+        ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["task_id",b"task_id"]) -> None: ...
+global___GenerateDividendsForeignIssuerReportResponse = GenerateDividendsForeignIssuerReportResponse
+
+class GetDividendsForeignIssuerReportResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DIVIDENDS_FOREIGN_ISSUER_REPORT_FIELD_NUMBER: builtins.int
+    ITEMSCOUNT_FIELD_NUMBER: builtins.int
+    PAGESCOUNT_FIELD_NUMBER: builtins.int
+    PAGE_FIELD_NUMBER: builtins.int
+    @property
+    def dividends_foreign_issuer_report(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___DividendsForeignIssuerReport]: ...
+    itemsCount: builtins.int
+    """Количество записей в отчете"""
+
+    pagesCount: builtins.int
+    """Количество страниц с данными отчета (начинается с 0)"""
+
+    page: builtins.int
+    """Текущая страница (начинается с 0)"""
+
+    def __init__(self,
+        *,
+        dividends_foreign_issuer_report: typing.Optional[typing.Iterable[global___DividendsForeignIssuerReport]] = ...,
+        itemsCount: builtins.int = ...,
+        pagesCount: builtins.int = ...,
+        page: builtins.int = ...,
+        ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["dividends_foreign_issuer_report",b"dividends_foreign_issuer_report","itemsCount",b"itemsCount","page",b"page","pagesCount",b"pagesCount"]) -> None: ...
+global___GetDividendsForeignIssuerReportResponse = GetDividendsForeignIssuerReportResponse
+
+class DividendsForeignIssuerReport(google.protobuf.message.Message):
+    """Отчёт "Справка о доходах за пределами РФ"."""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    RECORD_DATE_FIELD_NUMBER: builtins.int
+    PAYMENT_DATE_FIELD_NUMBER: builtins.int
+    SECURITY_NAME_FIELD_NUMBER: builtins.int
+    ISIN_FIELD_NUMBER: builtins.int
+    ISSUER_COUNTRY_FIELD_NUMBER: builtins.int
+    QUANTITY_FIELD_NUMBER: builtins.int
+    DIVIDEND_FIELD_NUMBER: builtins.int
+    EXTERNAL_COMMISSION_FIELD_NUMBER: builtins.int
+    DIVIDEND_GROSS_FIELD_NUMBER: builtins.int
+    TAX_FIELD_NUMBER: builtins.int
+    DIVIDEND_AMOUNT_FIELD_NUMBER: builtins.int
+    CURRENCY_FIELD_NUMBER: builtins.int
+    @property
+    def record_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Дата фиксации реестра."""
+        pass
+    @property
+    def payment_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Дата выплаты."""
+        pass
+    security_name: typing.Text
+    """Наименование ценной бумаги."""
+
+    isin: typing.Text
+    """ISIN-идентификатор ценной бумаги."""
+
+    issuer_country: typing.Text
+    """Страна эмитента. Для депозитарных расписок указывается страна эмитента базового актива."""
+
+    quantity: builtins.int
+    """Количество ценных бумаг."""
+
+    @property
+    def dividend(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Выплаты на одну бумагу"""
+        pass
+    @property
+    def external_commission(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Комиссия внешних платёжных агентов."""
+        pass
+    @property
+    def dividend_gross(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Сумма до удержания налога."""
+        pass
+    @property
+    def tax(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Сумма налога, удержанного агентом."""
+        pass
+    @property
+    def dividend_amount(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Итоговая сумма выплаты."""
+        pass
+    currency: typing.Text
+    """Валюта."""
+
+    def __init__(self,
+        *,
+        record_date: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        payment_date: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        security_name: typing.Text = ...,
+        isin: typing.Text = ...,
+        issuer_country: typing.Text = ...,
+        quantity: builtins.int = ...,
+        dividend: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        external_commission: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        dividend_gross: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        tax: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        dividend_amount: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        currency: typing.Text = ...,
+        ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["dividend",b"dividend","dividend_amount",b"dividend_amount","dividend_gross",b"dividend_gross","external_commission",b"external_commission","payment_date",b"payment_date","record_date",b"record_date","tax",b"tax"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["currency",b"currency","dividend",b"dividend","dividend_amount",b"dividend_amount","dividend_gross",b"dividend_gross","external_commission",b"external_commission","isin",b"isin","issuer_country",b"issuer_country","payment_date",b"payment_date","quantity",b"quantity","record_date",b"record_date","security_name",b"security_name","tax",b"tax"]) -> None: ...
+global___DividendsForeignIssuerReport = DividendsForeignIssuerReport

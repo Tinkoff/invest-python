@@ -55,9 +55,9 @@ def market_data_service(mocker):
 @pytest.mark.parametrize(
     ("interval", "call_count"),
     [
-        (CandleInterval.CANDLE_INTERVAL_1_MIN, 32),
-        (CandleInterval.CANDLE_INTERVAL_5_MIN, 32),
-        (CandleInterval.CANDLE_INTERVAL_15_MIN, 32),
+        (CandleInterval.CANDLE_INTERVAL_1_MIN, 31),
+        (CandleInterval.CANDLE_INTERVAL_5_MIN, 31),
+        (CandleInterval.CANDLE_INTERVAL_15_MIN, 31),
         (CandleInterval.CANDLE_INTERVAL_HOUR, 5),
         (CandleInterval.CANDLE_INTERVAL_DAY, 1),
     ],

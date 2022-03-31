@@ -18,10 +18,6 @@ from tinkoff.invest.utils import get_intervals
                     datetime(2021, 1, 25, 0, 0),
                     datetime(2022, 1, 25, 0, 0),
                 ),
-                (
-                    datetime(2022, 1, 25, 0, 0),
-                    datetime(2022, 1, 25, 0, 1),
-                ),
             ],
         ),
         (

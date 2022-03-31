@@ -14,6 +14,66 @@ import typing_extensions
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
+class _CouponType:
+    ValueType = typing.NewType('ValueType', builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
+class _CouponTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_CouponType.ValueType], builtins.type):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    COUPON_TYPE_UNSPECIFIED: _CouponType.ValueType  # 0
+    """Неопределенное значение"""
+
+    COUPON_TYPE_CONSTANT: _CouponType.ValueType  # 1
+    """Постоянный"""
+
+    COUPON_TYPE_FLOATING: _CouponType.ValueType  # 2
+    """Плавающий"""
+
+    COUPON_TYPE_DISCOUNT: _CouponType.ValueType  # 3
+    """Дисконт"""
+
+    COUPON_TYPE_MORTGAGE: _CouponType.ValueType  # 4
+    """Ипотечный"""
+
+    COUPON_TYPE_FIX: _CouponType.ValueType  # 5
+    """Фиксированный"""
+
+    COUPON_TYPE_VARIABLE: _CouponType.ValueType  # 6
+    """Переменный"""
+
+    COUPON_TYPE_OTHER: _CouponType.ValueType  # 7
+    """Прочее"""
+
+class CouponType(_CouponType, metaclass=_CouponTypeEnumTypeWrapper):
+    """Тип купонов."""
+    pass
+
+COUPON_TYPE_UNSPECIFIED: CouponType.ValueType  # 0
+"""Неопределенное значение"""
+
+COUPON_TYPE_CONSTANT: CouponType.ValueType  # 1
+"""Постоянный"""
+
+COUPON_TYPE_FLOATING: CouponType.ValueType  # 2
+"""Плавающий"""
+
+COUPON_TYPE_DISCOUNT: CouponType.ValueType  # 3
+"""Дисконт"""
+
+COUPON_TYPE_MORTGAGE: CouponType.ValueType  # 4
+"""Ипотечный"""
+
+COUPON_TYPE_FIX: CouponType.ValueType  # 5
+"""Фиксированный"""
+
+COUPON_TYPE_VARIABLE: CouponType.ValueType  # 6
+"""Переменный"""
+
+COUPON_TYPE_OTHER: CouponType.ValueType  # 7
+"""Прочее"""
+
+global___CouponType = CouponType
+
+
 class _InstrumentIdType:
     ValueType = typing.NewType('ValueType', builtins.int)
     V: typing_extensions.TypeAlias = ValueType
@@ -204,8 +264,15 @@ class TradingDay(google.protobuf.message.Message):
     IS_TRADING_DAY_FIELD_NUMBER: builtins.int
     START_TIME_FIELD_NUMBER: builtins.int
     END_TIME_FIELD_NUMBER: builtins.int
-    MARKET_ORDER_START_TIME_FIELD_NUMBER: builtins.int
-    MARKET_ORDER_END_TIME_FIELD_NUMBER: builtins.int
+    OPENING_AUCTION_START_TIME_FIELD_NUMBER: builtins.int
+    CLOSING_AUCTION_END_TIME_FIELD_NUMBER: builtins.int
+    EVENING_OPENING_AUCTION_START_TIME_FIELD_NUMBER: builtins.int
+    EVENING_START_TIME_FIELD_NUMBER: builtins.int
+    EVENING_END_TIME_FIELD_NUMBER: builtins.int
+    CLEARING_START_TIME_FIELD_NUMBER: builtins.int
+    CLEARING_END_TIME_FIELD_NUMBER: builtins.int
+    PREMARKET_START_TIME_FIELD_NUMBER: builtins.int
+    PREMARKET_END_TIME_FIELD_NUMBER: builtins.int
     @property
     def date(self) -> google.protobuf.timestamp_pb2.Timestamp:
         """Дата."""
@@ -222,12 +289,40 @@ class TradingDay(google.protobuf.message.Message):
         """Время окончания торгов по часовому поясу UTC."""
         pass
     @property
-    def market_order_start_time(self) -> google.protobuf.timestamp_pb2.Timestamp:
-        """Время начала подачи заявки по часовому поясу UTC."""
+    def opening_auction_start_time(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Время начала аукциона открытия в часовом поясе UTC."""
         pass
     @property
-    def market_order_end_time(self) -> google.protobuf.timestamp_pb2.Timestamp:
-        """Время окончания подачи заявки по часовому поясу UTC."""
+    def closing_auction_end_time(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Время окончания аукциона закрытия в часовом поясе UTC."""
+        pass
+    @property
+    def evening_opening_auction_start_time(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Время начала аукциона открытия вечерней сессии в часовом поясе UTC."""
+        pass
+    @property
+    def evening_start_time(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Время начала вечерней сессии в часовом поясе UTC."""
+        pass
+    @property
+    def evening_end_time(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Время окончания вечерней сессии в часовом поясе UTC."""
+        pass
+    @property
+    def clearing_start_time(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Время начала основного клиринга в часовом поясе UTC."""
+        pass
+    @property
+    def clearing_end_time(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Время окончания основного клиринга в часовом поясе UTC."""
+        pass
+    @property
+    def premarket_start_time(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Время начала премаркета в часовом поясе UTC."""
+        pass
+    @property
+    def premarket_end_time(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Время окончания премаркета в часовом поясе UTC."""
         pass
     def __init__(self,
         *,
@@ -235,11 +330,18 @@ class TradingDay(google.protobuf.message.Message):
         is_trading_day: builtins.bool = ...,
         start_time: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
         end_time: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
-        market_order_start_time: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
-        market_order_end_time: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        opening_auction_start_time: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        closing_auction_end_time: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        evening_opening_auction_start_time: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        evening_start_time: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        evening_end_time: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        clearing_start_time: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        clearing_end_time: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        premarket_start_time: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        premarket_end_time: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
         ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["date",b"date","end_time",b"end_time","market_order_end_time",b"market_order_end_time","market_order_start_time",b"market_order_start_time","start_time",b"start_time"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["date",b"date","end_time",b"end_time","is_trading_day",b"is_trading_day","market_order_end_time",b"market_order_end_time","market_order_start_time",b"market_order_start_time","start_time",b"start_time"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["clearing_end_time",b"clearing_end_time","clearing_start_time",b"clearing_start_time","closing_auction_end_time",b"closing_auction_end_time","date",b"date","end_time",b"end_time","evening_end_time",b"evening_end_time","evening_opening_auction_start_time",b"evening_opening_auction_start_time","evening_start_time",b"evening_start_time","opening_auction_start_time",b"opening_auction_start_time","premarket_end_time",b"premarket_end_time","premarket_start_time",b"premarket_start_time","start_time",b"start_time"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["clearing_end_time",b"clearing_end_time","clearing_start_time",b"clearing_start_time","closing_auction_end_time",b"closing_auction_end_time","date",b"date","end_time",b"end_time","evening_end_time",b"evening_end_time","evening_opening_auction_start_time",b"evening_opening_auction_start_time","evening_start_time",b"evening_start_time","is_trading_day",b"is_trading_day","opening_auction_start_time",b"opening_auction_start_time","premarket_end_time",b"premarket_end_time","premarket_start_time",b"premarket_start_time","start_time",b"start_time"]) -> None: ...
 global___TradingDay = TradingDay
 
 class InstrumentRequest(google.protobuf.message.Message):
@@ -310,6 +412,101 @@ class BondsResponse(google.protobuf.message.Message):
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["instruments",b"instruments"]) -> None: ...
 global___BondsResponse = BondsResponse
+
+class GetBondCouponsRequest(google.protobuf.message.Message):
+    """Запрос купонов по облигации."""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    FIGI_FIELD_NUMBER: builtins.int
+    FROM_FIELD_NUMBER: builtins.int
+    TO_FIELD_NUMBER: builtins.int
+    figi: typing.Text
+    """Figi-идентификатор инструмента."""
+
+    @property
+    def to(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Окончание запрашиваемого периода в часовом поясе UTC."""
+        pass
+    def __init__(self,
+        *,
+        figi: typing.Text = ...,
+        to: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["from",b"from","to",b"to"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["figi",b"figi","from",b"from","to",b"to"]) -> None: ...
+global___GetBondCouponsRequest = GetBondCouponsRequest
+
+class GetBondCouponsResponse(google.protobuf.message.Message):
+    """Купоны по облигации."""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    EVENTS_FIELD_NUMBER: builtins.int
+    @property
+    def events(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Coupon]: ...
+    def __init__(self,
+        *,
+        events: typing.Optional[typing.Iterable[global___Coupon]] = ...,
+        ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["events",b"events"]) -> None: ...
+global___GetBondCouponsResponse = GetBondCouponsResponse
+
+class Coupon(google.protobuf.message.Message):
+    """Объект передачи информации о купоне облигации."""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    FIGI_FIELD_NUMBER: builtins.int
+    COUPON_DATE_FIELD_NUMBER: builtins.int
+    COUPON_NUMBER_FIELD_NUMBER: builtins.int
+    FIX_DATE_FIELD_NUMBER: builtins.int
+    PAY_ONE_BOND_FIELD_NUMBER: builtins.int
+    COUPON_TYPE_FIELD_NUMBER: builtins.int
+    COUPON_START_DATE_FIELD_NUMBER: builtins.int
+    COUPON_END_DATE_FIELD_NUMBER: builtins.int
+    COUPON_PERIOD_FIELD_NUMBER: builtins.int
+    figi: typing.Text
+    """Figi-идентификатор инструмента."""
+
+    @property
+    def coupon_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Дата события"""
+        pass
+    coupon_number: builtins.int
+    """Номер купона"""
+
+    @property
+    def fix_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """(Опционально) Дата фиксации реестра для выплаты купона"""
+        pass
+    @property
+    def pay_one_bond(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
+        """Выплата на одну облигацию"""
+        pass
+    coupon_type: global___CouponType.ValueType
+    """Тип купона"""
+
+    @property
+    def coupon_start_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Начало купонного периода."""
+        pass
+    @property
+    def coupon_end_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Окончание купонного периода."""
+        pass
+    coupon_period: builtins.int
+    """Купонный период в днях."""
+
+    def __init__(self,
+        *,
+        figi: typing.Text = ...,
+        coupon_date: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        coupon_number: builtins.int = ...,
+        fix_date: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        pay_one_bond: typing.Optional[tinkoff.invest.grpc.common_pb2.MoneyValue] = ...,
+        coupon_type: global___CouponType.ValueType = ...,
+        coupon_start_date: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        coupon_end_date: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        coupon_period: builtins.int = ...,
+        ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["coupon_date",b"coupon_date","coupon_end_date",b"coupon_end_date","coupon_start_date",b"coupon_start_date","fix_date",b"fix_date","pay_one_bond",b"pay_one_bond"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["coupon_date",b"coupon_date","coupon_end_date",b"coupon_end_date","coupon_number",b"coupon_number","coupon_period",b"coupon_period","coupon_start_date",b"coupon_start_date","coupon_type",b"coupon_type","figi",b"figi","fix_date",b"fix_date","pay_one_bond",b"pay_one_bond"]) -> None: ...
+global___Coupon = Coupon
 
 class CurrencyResponse(google.protobuf.message.Message):
     """Данные по валюте."""
@@ -554,10 +751,10 @@ class Bond(google.protobuf.message.Message):
         """Значение НКД (накопленного купонного дохода) на дату."""
         pass
     country_of_risk: typing.Text
-    """Код страны эмитента."""
+    """Код страны риска, т.е. страны, в которой компания ведёт основной бизнес."""
 
     country_of_risk_name: typing.Text
-    """Наименование страны эмитента."""
+    """Наименование страны риска, т.е. страны, в которой компания ведёт основной бизнес."""
 
     sector: typing.Text
     """Сектор экономики."""
@@ -727,10 +924,10 @@ class Currency(google.protobuf.message.Message):
         """Номинал."""
         pass
     country_of_risk: typing.Text
-    """Код страны эмитента."""
+    """Код страны риска, т.е. страны, в которой компания ведёт основной бизнес."""
 
     country_of_risk_name: typing.Text
-    """Наименование страны эмитента."""
+    """Наименование страны риска, т.е. страны, в которой компания ведёт основной бизнес."""
 
     trading_status: tinkoff.invest.grpc.common_pb2.SecurityTradingStatus.ValueType
     """Текущий режим торгов инструмента."""
@@ -885,10 +1082,10 @@ class Etf(google.protobuf.message.Message):
         """Количество акций фонда в обращении."""
         pass
     country_of_risk: typing.Text
-    """Код страны эмитента."""
+    """Код страны риска, т.е. страны, в которой компания ведёт основной бизнес."""
 
     country_of_risk_name: typing.Text
-    """Наименование страны эмитента."""
+    """Наименование страны риска, т.е. страны, в которой компания ведёт основной бизнес."""
 
     sector: typing.Text
     """Сектор экономики."""
@@ -1054,10 +1251,10 @@ class Future(google.protobuf.message.Message):
         """Размер основного актива."""
         pass
     country_of_risk: typing.Text
-    """Код страны эмитента."""
+    """Код страны риска, т.е. страны, в которой компания ведёт основной бизнес."""
 
     country_of_risk_name: typing.Text
-    """Наименование страны эмитента."""
+    """Наименование страны риска, т.е. страны, в которой компания ведёт основной бизнес."""
 
     sector: typing.Text
     """Сектор экономики."""
@@ -1214,10 +1411,10 @@ class Share(google.protobuf.message.Message):
     """Размер выпуска."""
 
     country_of_risk: typing.Text
-    """Код страны эмитента."""
+    """Код страны риска, т.е. страны, в которой компания ведёт основной бизнес."""
 
     country_of_risk_name: typing.Text
-    """Наименование страны эмитента."""
+    """Наименование страны риска, т.е. страны, в которой компания ведёт основной бизнес."""
 
     sector: typing.Text
     """Сектор экономики."""
@@ -1505,10 +1702,10 @@ class Instrument(google.protobuf.message.Message):
     """Торговая площадка."""
 
     country_of_risk: typing.Text
-    """Код страны эмитента."""
+    """Код страны риска, т.е. страны, в которой компания ведёт основной бизнес."""
 
     country_of_risk_name: typing.Text
-    """Наименование страны эмитента."""
+    """Наименование страны риска, т.е. страны, в которой компания ведёт основной бизнес."""
 
     instrument_type: typing.Text
     """Тип инструмента."""

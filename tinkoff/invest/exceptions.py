@@ -29,3 +29,11 @@ class AioRequestError(InvestError):
         self.code = code
         self.details = details
         self.metadata = metadata
+
+
+class MarketDataStreamError(InvestError):
+    pass
+
+
+class IsNotSubscribedError(MarketDataStreamError):
+    pass

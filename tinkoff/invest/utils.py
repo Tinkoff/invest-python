@@ -23,7 +23,8 @@ def get_intervals(
 ) -> Generator[Tuple[datetime, datetime], None, None]:
     max_interval = MAX_INTERVALS[interval]
     local_from = from_
-    while local_from < to:
+    interval_timedelta = candle_interval_to_timedelta(interval)
+    while local_from + interval_timedelta < to:
         yield local_from, min(local_from + max_interval, to)
         local_from += max_interval
 

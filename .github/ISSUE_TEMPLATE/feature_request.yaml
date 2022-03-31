@@ -1,0 +1,25 @@
+name: Feature request
+description: Предложите идею для этого проекта
+title: "[Feature] "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Описание
+    validations:
+      required: true
+  - type: textarea
+    id: to-resolve
+    attributes:
+      label: Желаемое решение
+      description: Что нужно сделать?
+    validations:
+      required: false
+  - type: textarea
+    id: additional
+    attributes:
+      label: Дополнительно
+      description: Фрагменты кода, описание апи, ...
+    validations:
+      required: false
