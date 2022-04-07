@@ -6,10 +6,13 @@ from zipfile import ZipFile
 
 import requests
 
-URL = "https://github.com/Tinkoff/investAPI/archive/refs/heads/main.zip"
+BRANCH = "main"
+
+URL = f"https://github.com/Tinkoff/investAPI/archive/refs/heads/{BRANCH}.zip"
 OUTPUT_PATH = "protos/tinkoff/invest/grpc"
 PROTOS_TMP_ZIP = "protos.zip"
-ZIP_PROTOS_ROOT_PATH = "investAPI-main"
+ZIP_PROTOS_ROOT_PATH_BRANCH = BRANCH.replace("/", "-")
+ZIP_PROTOS_ROOT_PATH = f"investAPI-{ZIP_PROTOS_ROOT_PATH_BRANCH}"
 ZIP_PROTOS_PATH = f"{ZIP_PROTOS_ROOT_PATH}/src/docs/contracts"
 FILES = [
     "common.proto",
