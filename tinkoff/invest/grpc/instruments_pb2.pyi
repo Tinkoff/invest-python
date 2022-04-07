@@ -88,6 +88,9 @@ class _InstrumentIdTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrappe
     INSTRUMENT_ID_TYPE_TICKER: _InstrumentIdType.ValueType  # 2
     """Ticker."""
 
+    INSTRUMENT_ID_TYPE_UID: _InstrumentIdType.ValueType  # 3
+    """Уникальный идентификатор."""
+
 class InstrumentIdType(_InstrumentIdType, metaclass=_InstrumentIdTypeEnumTypeWrapper):
     """Тип идентификатора инструмента. Подробнее об идентификации инструментов: [Идентификация инструментов](https://tinkoff.github.io/investAPI/faq_identification/)"""
     pass
@@ -100,6 +103,9 @@ INSTRUMENT_ID_TYPE_FIGI: InstrumentIdType.ValueType  # 1
 
 INSTRUMENT_ID_TYPE_TICKER: InstrumentIdType.ValueType  # 2
 """Ticker."""
+
+INSTRUMENT_ID_TYPE_UID: InstrumentIdType.ValueType  # 3
+"""Уникальный идентификатор."""
 
 global___InstrumentIdType = InstrumentIdType
 
@@ -198,6 +204,78 @@ SHARE_TYPE_REIT: ShareType.ValueType  # 8
 """Траст недвижимости"""
 
 global___ShareType = ShareType
+
+
+class _AssetType:
+    ValueType = typing.NewType('ValueType', builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
+class _AssetTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_AssetType.ValueType], builtins.type):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    ASSET_TYPE_UNSPECIFIED: _AssetType.ValueType  # 0
+    """Тип не определён."""
+
+    ASSET_TYPE_CURRENCY: _AssetType.ValueType  # 1
+    """Валюта."""
+
+    ASSET_TYPE_COMMODITY: _AssetType.ValueType  # 2
+    """Товар."""
+
+    ASSET_TYPE_INDEX: _AssetType.ValueType  # 3
+    """Индекс."""
+
+    ASSET_TYPE_SECURITY: _AssetType.ValueType  # 4
+    """Ценная бумага."""
+
+class AssetType(_AssetType, metaclass=_AssetTypeEnumTypeWrapper):
+    """Тип актива."""
+    pass
+
+ASSET_TYPE_UNSPECIFIED: AssetType.ValueType  # 0
+"""Тип не определён."""
+
+ASSET_TYPE_CURRENCY: AssetType.ValueType  # 1
+"""Валюта."""
+
+ASSET_TYPE_COMMODITY: AssetType.ValueType  # 2
+"""Товар."""
+
+ASSET_TYPE_INDEX: AssetType.ValueType  # 3
+"""Индекс."""
+
+ASSET_TYPE_SECURITY: AssetType.ValueType  # 4
+"""Ценная бумага."""
+
+global___AssetType = AssetType
+
+
+class _StructuredProductType:
+    ValueType = typing.NewType('ValueType', builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
+class _StructuredProductTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_StructuredProductType.ValueType], builtins.type):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    SP_TYPE_UNSPECIFIED: _StructuredProductType.ValueType  # 0
+    """Тип не определён."""
+
+    SP_TYPE_DELIVERABLE: _StructuredProductType.ValueType  # 1
+    """Поставочный."""
+
+    SP_TYPE_NON_DELIVERABLE: _StructuredProductType.ValueType  # 2
+    """Беспоставочный."""
+
+class StructuredProductType(_StructuredProductType, metaclass=_StructuredProductTypeEnumTypeWrapper):
+    """Тип структурной ноты."""
+    pass
+
+SP_TYPE_UNSPECIFIED: StructuredProductType.ValueType  # 0
+"""Тип не определён."""
+
+SP_TYPE_DELIVERABLE: StructuredProductType.ValueType  # 1
+"""Поставочный."""
+
+SP_TYPE_NON_DELIVERABLE: StructuredProductType.ValueType  # 2
+"""Беспоставочный."""
+
+global___StructuredProductType = StructuredProductType
 
 
 class TradingSchedulesRequest(google.protobuf.message.Message):
@@ -424,7 +502,7 @@ class GetBondCouponsRequest(google.protobuf.message.Message):
 
     @property
     def to(self) -> google.protobuf.timestamp_pb2.Timestamp:
-        """Окончание запрашиваемого периода в часовом поясе UTC."""
+        """Окончание запрашиваемого периода в часовом поясе UTC. Фильтрация по coupon_date (дата выплаты купона)"""
         pass
     def __init__(self,
         *,
@@ -465,7 +543,7 @@ class Coupon(google.protobuf.message.Message):
 
     @property
     def coupon_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
-        """Дата события"""
+        """Дата выплаты купона"""
         pass
     coupon_number: builtins.int
     """Номер купона"""
@@ -672,6 +750,7 @@ class Bond(google.protobuf.message.Message):
     AMORTIZATION_FLAG_FIELD_NUMBER: builtins.int
     MIN_PRICE_INCREMENT_FIELD_NUMBER: builtins.int
     API_TRADE_AVAILABLE_FLAG_FIELD_NUMBER: builtins.int
+    UID_FIELD_NUMBER: builtins.int
     figi: typing.Text
     """Figi-идентификатор инструмента."""
 
@@ -796,6 +875,9 @@ class Bond(google.protobuf.message.Message):
     api_trade_available_flag: builtins.bool
     """Признак доступности торгов через API."""
 
+    uid: typing.Text
+    """Уникальный идентификатор инструмента."""
+
     def __init__(self,
         *,
         figi: typing.Text = ...,
@@ -835,9 +917,10 @@ class Bond(google.protobuf.message.Message):
         amortization_flag: builtins.bool = ...,
         min_price_increment: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
         api_trade_available_flag: builtins.bool = ...,
+        uid: typing.Text = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["aci_value",b"aci_value","dlong",b"dlong","dlong_min",b"dlong_min","dshort",b"dshort","dshort_min",b"dshort_min","klong",b"klong","kshort",b"kshort","maturity_date",b"maturity_date","min_price_increment",b"min_price_increment","nominal",b"nominal","placement_date",b"placement_date","placement_price",b"placement_price","state_reg_date",b"state_reg_date"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["aci_value",b"aci_value","amortization_flag",b"amortization_flag","api_trade_available_flag",b"api_trade_available_flag","buy_available_flag",b"buy_available_flag","class_code",b"class_code","country_of_risk",b"country_of_risk","country_of_risk_name",b"country_of_risk_name","coupon_quantity_per_year",b"coupon_quantity_per_year","currency",b"currency","dlong",b"dlong","dlong_min",b"dlong_min","dshort",b"dshort","dshort_min",b"dshort_min","exchange",b"exchange","figi",b"figi","floating_coupon_flag",b"floating_coupon_flag","isin",b"isin","issue_kind",b"issue_kind","issue_size",b"issue_size","issue_size_plan",b"issue_size_plan","klong",b"klong","kshort",b"kshort","lot",b"lot","maturity_date",b"maturity_date","min_price_increment",b"min_price_increment","name",b"name","nominal",b"nominal","otc_flag",b"otc_flag","perpetual_flag",b"perpetual_flag","placement_date",b"placement_date","placement_price",b"placement_price","sector",b"sector","sell_available_flag",b"sell_available_flag","short_enabled_flag",b"short_enabled_flag","state_reg_date",b"state_reg_date","ticker",b"ticker","trading_status",b"trading_status"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["aci_value",b"aci_value","amortization_flag",b"amortization_flag","api_trade_available_flag",b"api_trade_available_flag","buy_available_flag",b"buy_available_flag","class_code",b"class_code","country_of_risk",b"country_of_risk","country_of_risk_name",b"country_of_risk_name","coupon_quantity_per_year",b"coupon_quantity_per_year","currency",b"currency","dlong",b"dlong","dlong_min",b"dlong_min","dshort",b"dshort","dshort_min",b"dshort_min","exchange",b"exchange","figi",b"figi","floating_coupon_flag",b"floating_coupon_flag","isin",b"isin","issue_kind",b"issue_kind","issue_size",b"issue_size","issue_size_plan",b"issue_size_plan","klong",b"klong","kshort",b"kshort","lot",b"lot","maturity_date",b"maturity_date","min_price_increment",b"min_price_increment","name",b"name","nominal",b"nominal","otc_flag",b"otc_flag","perpetual_flag",b"perpetual_flag","placement_date",b"placement_date","placement_price",b"placement_price","sector",b"sector","sell_available_flag",b"sell_available_flag","short_enabled_flag",b"short_enabled_flag","state_reg_date",b"state_reg_date","ticker",b"ticker","trading_status",b"trading_status","uid",b"uid"]) -> None: ...
 global___Bond = Bond
 
 class Currency(google.protobuf.message.Message):
@@ -868,6 +951,7 @@ class Currency(google.protobuf.message.Message):
     ISO_CURRENCY_NAME_FIELD_NUMBER: builtins.int
     MIN_PRICE_INCREMENT_FIELD_NUMBER: builtins.int
     API_TRADE_AVAILABLE_FLAG_FIELD_NUMBER: builtins.int
+    UID_FIELD_NUMBER: builtins.int
     figi: typing.Text
     """Figi-идентификатор инструмента."""
 
@@ -951,6 +1035,9 @@ class Currency(google.protobuf.message.Message):
     api_trade_available_flag: builtins.bool
     """Признак доступности торгов через API."""
 
+    uid: typing.Text
+    """Уникальный идентификатор инструмента."""
+
     def __init__(self,
         *,
         figi: typing.Text = ...,
@@ -978,9 +1065,10 @@ class Currency(google.protobuf.message.Message):
         iso_currency_name: typing.Text = ...,
         min_price_increment: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
         api_trade_available_flag: builtins.bool = ...,
+        uid: typing.Text = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["dlong",b"dlong","dlong_min",b"dlong_min","dshort",b"dshort","dshort_min",b"dshort_min","klong",b"klong","kshort",b"kshort","min_price_increment",b"min_price_increment","nominal",b"nominal"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["api_trade_available_flag",b"api_trade_available_flag","buy_available_flag",b"buy_available_flag","class_code",b"class_code","country_of_risk",b"country_of_risk","country_of_risk_name",b"country_of_risk_name","currency",b"currency","dlong",b"dlong","dlong_min",b"dlong_min","dshort",b"dshort","dshort_min",b"dshort_min","exchange",b"exchange","figi",b"figi","isin",b"isin","iso_currency_name",b"iso_currency_name","klong",b"klong","kshort",b"kshort","lot",b"lot","min_price_increment",b"min_price_increment","name",b"name","nominal",b"nominal","otc_flag",b"otc_flag","sell_available_flag",b"sell_available_flag","short_enabled_flag",b"short_enabled_flag","ticker",b"ticker","trading_status",b"trading_status"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["api_trade_available_flag",b"api_trade_available_flag","buy_available_flag",b"buy_available_flag","class_code",b"class_code","country_of_risk",b"country_of_risk","country_of_risk_name",b"country_of_risk_name","currency",b"currency","dlong",b"dlong","dlong_min",b"dlong_min","dshort",b"dshort","dshort_min",b"dshort_min","exchange",b"exchange","figi",b"figi","isin",b"isin","iso_currency_name",b"iso_currency_name","klong",b"klong","kshort",b"kshort","lot",b"lot","min_price_increment",b"min_price_increment","name",b"name","nominal",b"nominal","otc_flag",b"otc_flag","sell_available_flag",b"sell_available_flag","short_enabled_flag",b"short_enabled_flag","ticker",b"ticker","trading_status",b"trading_status","uid",b"uid"]) -> None: ...
 global___Currency = Currency
 
 class Etf(google.protobuf.message.Message):
@@ -1015,6 +1103,7 @@ class Etf(google.protobuf.message.Message):
     SELL_AVAILABLE_FLAG_FIELD_NUMBER: builtins.int
     MIN_PRICE_INCREMENT_FIELD_NUMBER: builtins.int
     API_TRADE_AVAILABLE_FLAG_FIELD_NUMBER: builtins.int
+    UID_FIELD_NUMBER: builtins.int
     figi: typing.Text
     """Figi-идентификатор инструмента."""
 
@@ -1112,6 +1201,9 @@ class Etf(google.protobuf.message.Message):
     api_trade_available_flag: builtins.bool
     """Признак доступности торгов через API."""
 
+    uid: typing.Text
+    """Уникальный идентификатор инструмента."""
+
     def __init__(self,
         *,
         figi: typing.Text = ...,
@@ -1143,9 +1235,10 @@ class Etf(google.protobuf.message.Message):
         sell_available_flag: builtins.bool = ...,
         min_price_increment: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
         api_trade_available_flag: builtins.bool = ...,
+        uid: typing.Text = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["dlong",b"dlong","dlong_min",b"dlong_min","dshort",b"dshort","dshort_min",b"dshort_min","fixed_commission",b"fixed_commission","klong",b"klong","kshort",b"kshort","min_price_increment",b"min_price_increment","num_shares",b"num_shares","released_date",b"released_date"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["api_trade_available_flag",b"api_trade_available_flag","buy_available_flag",b"buy_available_flag","class_code",b"class_code","country_of_risk",b"country_of_risk","country_of_risk_name",b"country_of_risk_name","currency",b"currency","dlong",b"dlong","dlong_min",b"dlong_min","dshort",b"dshort","dshort_min",b"dshort_min","exchange",b"exchange","figi",b"figi","fixed_commission",b"fixed_commission","focus_type",b"focus_type","isin",b"isin","klong",b"klong","kshort",b"kshort","lot",b"lot","min_price_increment",b"min_price_increment","name",b"name","num_shares",b"num_shares","otc_flag",b"otc_flag","rebalancing_freq",b"rebalancing_freq","released_date",b"released_date","sector",b"sector","sell_available_flag",b"sell_available_flag","short_enabled_flag",b"short_enabled_flag","ticker",b"ticker","trading_status",b"trading_status"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["api_trade_available_flag",b"api_trade_available_flag","buy_available_flag",b"buy_available_flag","class_code",b"class_code","country_of_risk",b"country_of_risk","country_of_risk_name",b"country_of_risk_name","currency",b"currency","dlong",b"dlong","dlong_min",b"dlong_min","dshort",b"dshort","dshort_min",b"dshort_min","exchange",b"exchange","figi",b"figi","fixed_commission",b"fixed_commission","focus_type",b"focus_type","isin",b"isin","klong",b"klong","kshort",b"kshort","lot",b"lot","min_price_increment",b"min_price_increment","name",b"name","num_shares",b"num_shares","otc_flag",b"otc_flag","rebalancing_freq",b"rebalancing_freq","released_date",b"released_date","sector",b"sector","sell_available_flag",b"sell_available_flag","short_enabled_flag",b"short_enabled_flag","ticker",b"ticker","trading_status",b"trading_status","uid",b"uid"]) -> None: ...
 global___Etf = Etf
 
 class Future(google.protobuf.message.Message):
@@ -1181,6 +1274,7 @@ class Future(google.protobuf.message.Message):
     SELL_AVAILABLE_FLAG_FIELD_NUMBER: builtins.int
     MIN_PRICE_INCREMENT_FIELD_NUMBER: builtins.int
     API_TRADE_AVAILABLE_FLAG_FIELD_NUMBER: builtins.int
+    UID_FIELD_NUMBER: builtins.int
     figi: typing.Text
     """Figi-идентификатор инструмента."""
 
@@ -1282,6 +1376,9 @@ class Future(google.protobuf.message.Message):
     api_trade_available_flag: builtins.bool
     """Признак доступности торгов через API."""
 
+    uid: typing.Text
+    """Уникальный идентификатор инструмента."""
+
     def __init__(self,
         *,
         figi: typing.Text = ...,
@@ -1314,9 +1411,10 @@ class Future(google.protobuf.message.Message):
         sell_available_flag: builtins.bool = ...,
         min_price_increment: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
         api_trade_available_flag: builtins.bool = ...,
+        uid: typing.Text = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["basic_asset_size",b"basic_asset_size","dlong",b"dlong","dlong_min",b"dlong_min","dshort",b"dshort","dshort_min",b"dshort_min","expiration_date",b"expiration_date","first_trade_date",b"first_trade_date","klong",b"klong","kshort",b"kshort","last_trade_date",b"last_trade_date","min_price_increment",b"min_price_increment"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["api_trade_available_flag",b"api_trade_available_flag","asset_type",b"asset_type","basic_asset",b"basic_asset","basic_asset_size",b"basic_asset_size","buy_available_flag",b"buy_available_flag","class_code",b"class_code","country_of_risk",b"country_of_risk","country_of_risk_name",b"country_of_risk_name","currency",b"currency","dlong",b"dlong","dlong_min",b"dlong_min","dshort",b"dshort","dshort_min",b"dshort_min","exchange",b"exchange","expiration_date",b"expiration_date","figi",b"figi","first_trade_date",b"first_trade_date","futures_type",b"futures_type","klong",b"klong","kshort",b"kshort","last_trade_date",b"last_trade_date","lot",b"lot","min_price_increment",b"min_price_increment","name",b"name","otc_flag",b"otc_flag","sector",b"sector","sell_available_flag",b"sell_available_flag","short_enabled_flag",b"short_enabled_flag","ticker",b"ticker","trading_status",b"trading_status"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["api_trade_available_flag",b"api_trade_available_flag","asset_type",b"asset_type","basic_asset",b"basic_asset","basic_asset_size",b"basic_asset_size","buy_available_flag",b"buy_available_flag","class_code",b"class_code","country_of_risk",b"country_of_risk","country_of_risk_name",b"country_of_risk_name","currency",b"currency","dlong",b"dlong","dlong_min",b"dlong_min","dshort",b"dshort","dshort_min",b"dshort_min","exchange",b"exchange","expiration_date",b"expiration_date","figi",b"figi","first_trade_date",b"first_trade_date","futures_type",b"futures_type","klong",b"klong","kshort",b"kshort","last_trade_date",b"last_trade_date","lot",b"lot","min_price_increment",b"min_price_increment","name",b"name","otc_flag",b"otc_flag","sector",b"sector","sell_available_flag",b"sell_available_flag","short_enabled_flag",b"short_enabled_flag","ticker",b"ticker","trading_status",b"trading_status","uid",b"uid"]) -> None: ...
 global___Future = Future
 
 class Share(google.protobuf.message.Message):
@@ -1352,6 +1450,7 @@ class Share(google.protobuf.message.Message):
     SHARE_TYPE_FIELD_NUMBER: builtins.int
     MIN_PRICE_INCREMENT_FIELD_NUMBER: builtins.int
     API_TRADE_AVAILABLE_FLAG_FIELD_NUMBER: builtins.int
+    UID_FIELD_NUMBER: builtins.int
     figi: typing.Text
     """Figi-идентификатор инструмента."""
 
@@ -1451,6 +1550,9 @@ class Share(google.protobuf.message.Message):
     api_trade_available_flag: builtins.bool
     """Признак доступности торгов через API."""
 
+    uid: typing.Text
+    """Уникальный идентификатор инструмента."""
+
     def __init__(self,
         *,
         figi: typing.Text = ...,
@@ -1483,9 +1585,10 @@ class Share(google.protobuf.message.Message):
         share_type: global___ShareType.ValueType = ...,
         min_price_increment: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
         api_trade_available_flag: builtins.bool = ...,
+        uid: typing.Text = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["dlong",b"dlong","dlong_min",b"dlong_min","dshort",b"dshort","dshort_min",b"dshort_min","ipo_date",b"ipo_date","klong",b"klong","kshort",b"kshort","min_price_increment",b"min_price_increment","nominal",b"nominal"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["api_trade_available_flag",b"api_trade_available_flag","buy_available_flag",b"buy_available_flag","class_code",b"class_code","country_of_risk",b"country_of_risk","country_of_risk_name",b"country_of_risk_name","currency",b"currency","div_yield_flag",b"div_yield_flag","dlong",b"dlong","dlong_min",b"dlong_min","dshort",b"dshort","dshort_min",b"dshort_min","exchange",b"exchange","figi",b"figi","ipo_date",b"ipo_date","isin",b"isin","issue_size",b"issue_size","issue_size_plan",b"issue_size_plan","klong",b"klong","kshort",b"kshort","lot",b"lot","min_price_increment",b"min_price_increment","name",b"name","nominal",b"nominal","otc_flag",b"otc_flag","sector",b"sector","sell_available_flag",b"sell_available_flag","share_type",b"share_type","short_enabled_flag",b"short_enabled_flag","ticker",b"ticker","trading_status",b"trading_status"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["api_trade_available_flag",b"api_trade_available_flag","buy_available_flag",b"buy_available_flag","class_code",b"class_code","country_of_risk",b"country_of_risk","country_of_risk_name",b"country_of_risk_name","currency",b"currency","div_yield_flag",b"div_yield_flag","dlong",b"dlong","dlong_min",b"dlong_min","dshort",b"dshort","dshort_min",b"dshort_min","exchange",b"exchange","figi",b"figi","ipo_date",b"ipo_date","isin",b"isin","issue_size",b"issue_size","issue_size_plan",b"issue_size_plan","klong",b"klong","kshort",b"kshort","lot",b"lot","min_price_increment",b"min_price_increment","name",b"name","nominal",b"nominal","otc_flag",b"otc_flag","sector",b"sector","sell_available_flag",b"sell_available_flag","share_type",b"share_type","short_enabled_flag",b"short_enabled_flag","ticker",b"ticker","trading_status",b"trading_status","uid",b"uid"]) -> None: ...
 global___Share = Share
 
 class GetAccruedInterestsRequest(google.protobuf.message.Message):
@@ -1650,6 +1753,7 @@ class Instrument(google.protobuf.message.Message):
     SELL_AVAILABLE_FLAG_FIELD_NUMBER: builtins.int
     MIN_PRICE_INCREMENT_FIELD_NUMBER: builtins.int
     API_TRADE_AVAILABLE_FLAG_FIELD_NUMBER: builtins.int
+    UID_FIELD_NUMBER: builtins.int
     figi: typing.Text
     """Figi-идентификатор инструмента."""
 
@@ -1729,6 +1833,9 @@ class Instrument(google.protobuf.message.Message):
     api_trade_available_flag: builtins.bool
     """Признак доступности торгов через API."""
 
+    uid: typing.Text
+    """Уникальный идентификатор инструмента."""
+
     def __init__(self,
         *,
         figi: typing.Text = ...,
@@ -1755,9 +1862,10 @@ class Instrument(google.protobuf.message.Message):
         sell_available_flag: builtins.bool = ...,
         min_price_increment: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
         api_trade_available_flag: builtins.bool = ...,
+        uid: typing.Text = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["dlong",b"dlong","dlong_min",b"dlong_min","dshort",b"dshort","dshort_min",b"dshort_min","klong",b"klong","kshort",b"kshort","min_price_increment",b"min_price_increment"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["api_trade_available_flag",b"api_trade_available_flag","buy_available_flag",b"buy_available_flag","class_code",b"class_code","country_of_risk",b"country_of_risk","country_of_risk_name",b"country_of_risk_name","currency",b"currency","dlong",b"dlong","dlong_min",b"dlong_min","dshort",b"dshort","dshort_min",b"dshort_min","exchange",b"exchange","figi",b"figi","instrument_type",b"instrument_type","isin",b"isin","klong",b"klong","kshort",b"kshort","lot",b"lot","min_price_increment",b"min_price_increment","name",b"name","otc_flag",b"otc_flag","sell_available_flag",b"sell_available_flag","short_enabled_flag",b"short_enabled_flag","ticker",b"ticker","trading_status",b"trading_status"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["api_trade_available_flag",b"api_trade_available_flag","buy_available_flag",b"buy_available_flag","class_code",b"class_code","country_of_risk",b"country_of_risk","country_of_risk_name",b"country_of_risk_name","currency",b"currency","dlong",b"dlong","dlong_min",b"dlong_min","dshort",b"dshort","dshort_min",b"dshort_min","exchange",b"exchange","figi",b"figi","instrument_type",b"instrument_type","isin",b"isin","klong",b"klong","kshort",b"kshort","lot",b"lot","min_price_increment",b"min_price_increment","name",b"name","otc_flag",b"otc_flag","sell_available_flag",b"sell_available_flag","short_enabled_flag",b"short_enabled_flag","ticker",b"ticker","trading_status",b"trading_status","uid",b"uid"]) -> None: ...
 global___Instrument = Instrument
 
 class GetDividendsRequest(google.protobuf.message.Message):
@@ -1771,7 +1879,7 @@ class GetDividendsRequest(google.protobuf.message.Message):
 
     @property
     def to(self) -> google.protobuf.timestamp_pb2.Timestamp:
-        """Окончание запрашиваемого периода в часовом поясе UTC."""
+        """Окончание запрашиваемого периода в часовом поясе UTC. Фильтрация происходит по параметру *record_date* (дата фиксации реестра)."""
         pass
     def __init__(self,
         *,
@@ -1862,3 +1970,861 @@ class Dividend(google.protobuf.message.Message):
     def HasField(self, field_name: typing_extensions.Literal["close_price",b"close_price","created_at",b"created_at","declared_date",b"declared_date","dividend_net",b"dividend_net","last_buy_date",b"last_buy_date","payment_date",b"payment_date","record_date",b"record_date","yield_value",b"yield_value"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions.Literal["close_price",b"close_price","created_at",b"created_at","declared_date",b"declared_date","dividend_net",b"dividend_net","dividend_type",b"dividend_type","last_buy_date",b"last_buy_date","payment_date",b"payment_date","record_date",b"record_date","regularity",b"regularity","yield_value",b"yield_value"]) -> None: ...
 global___Dividend = Dividend
+
+class AssetRequest(google.protobuf.message.Message):
+    """Запрос актива по идентификатору."""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    ID_FIELD_NUMBER: builtins.int
+    id: typing.Text
+    """uid-идентификатор актива."""
+
+    def __init__(self,
+        *,
+        id: typing.Text = ...,
+        ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["id",b"id"]) -> None: ...
+global___AssetRequest = AssetRequest
+
+class AssetResponse(google.protobuf.message.Message):
+    """Данные по активу."""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    ASSET_FIELD_NUMBER: builtins.int
+    @property
+    def asset(self) -> global___AssetFull:
+        """Актив."""
+        pass
+    def __init__(self,
+        *,
+        asset: typing.Optional[global___AssetFull] = ...,
+        ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["asset",b"asset"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["asset",b"asset"]) -> None: ...
+global___AssetResponse = AssetResponse
+
+class AssetsRequest(google.protobuf.message.Message):
+    """Запрос списка активов."""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    def __init__(self,
+        ) -> None: ...
+global___AssetsRequest = AssetsRequest
+
+class AssetsResponse(google.protobuf.message.Message):
+    """Список активов."""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    ASSETS_FIELD_NUMBER: builtins.int
+    @property
+    def assets(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Asset]:
+        """Активы."""
+        pass
+    def __init__(self,
+        *,
+        assets: typing.Optional[typing.Iterable[global___Asset]] = ...,
+        ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["assets",b"assets"]) -> None: ...
+global___AssetsResponse = AssetsResponse
+
+class AssetFull(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    UID_FIELD_NUMBER: builtins.int
+    TYPE_FIELD_NUMBER: builtins.int
+    NAME_FIELD_NUMBER: builtins.int
+    NAME_BRIEF_FIELD_NUMBER: builtins.int
+    DESCRIPTION_FIELD_NUMBER: builtins.int
+    DELETED_AT_FIELD_NUMBER: builtins.int
+    REQUIRED_TESTS_FIELD_NUMBER: builtins.int
+    CURRENCY_FIELD_NUMBER: builtins.int
+    SECURITY_FIELD_NUMBER: builtins.int
+    GOS_REG_CODE_FIELD_NUMBER: builtins.int
+    CFI_FIELD_NUMBER: builtins.int
+    CODE_NSD_FIELD_NUMBER: builtins.int
+    STATUS_FIELD_NUMBER: builtins.int
+    BRAND_FIELD_NUMBER: builtins.int
+    UPDATED_AT_FIELD_NUMBER: builtins.int
+    BR_CODE_FIELD_NUMBER: builtins.int
+    BR_CODE_NAME_FIELD_NUMBER: builtins.int
+    INSTRUMENTS_FIELD_NUMBER: builtins.int
+    uid: typing.Text
+    """Уникальный идентификатор актива."""
+
+    type: global___AssetType.ValueType
+    """Тип актива."""
+
+    name: typing.Text
+    """Наименование актива."""
+
+    name_brief: typing.Text
+    """Короткое наименование актива."""
+
+    description: typing.Text
+    """Описание актива."""
+
+    @property
+    def deleted_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Дата и время удаления актива."""
+        pass
+    @property
+    def required_tests(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+        """Тестирование клиентов."""
+        pass
+    @property
+    def currency(self) -> global___AssetCurrency:
+        """Валюта. Обязательно и заполняется только для type = "ASSET_TYPE_CURRENCY"."""
+        pass
+    @property
+    def security(self) -> global___AssetSecurity:
+        """Ценная бумага. Обязательно и заполняется только для type = "ASSET_TYPE_SECURITY"."""
+        pass
+    gos_reg_code: typing.Text
+    """Номер государственной регистрации."""
+
+    cfi: typing.Text
+    """Код CFI."""
+
+    code_nsd: typing.Text
+    """Код НРД инструмента."""
+
+    status: typing.Text
+    """Статус актива."""
+
+    @property
+    def brand(self) -> global___Brand:
+        """Бренд."""
+        pass
+    @property
+    def updated_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Дата и время последнего обновления записи."""
+        pass
+    br_code: typing.Text
+    """Код типа ц.б. по классификации Банка России."""
+
+    br_code_name: typing.Text
+    """Наименование кода типа ц.б. по классификации Банка России."""
+
+    @property
+    def instruments(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___AssetInstrument]:
+        """Массив идентификаторов инструментов."""
+        pass
+    def __init__(self,
+        *,
+        uid: typing.Text = ...,
+        type: global___AssetType.ValueType = ...,
+        name: typing.Text = ...,
+        name_brief: typing.Text = ...,
+        description: typing.Text = ...,
+        deleted_at: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        required_tests: typing.Optional[typing.Iterable[typing.Text]] = ...,
+        currency: typing.Optional[global___AssetCurrency] = ...,
+        security: typing.Optional[global___AssetSecurity] = ...,
+        gos_reg_code: typing.Text = ...,
+        cfi: typing.Text = ...,
+        code_nsd: typing.Text = ...,
+        status: typing.Text = ...,
+        brand: typing.Optional[global___Brand] = ...,
+        updated_at: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        br_code: typing.Text = ...,
+        br_code_name: typing.Text = ...,
+        instruments: typing.Optional[typing.Iterable[global___AssetInstrument]] = ...,
+        ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["brand",b"brand","currency",b"currency","deleted_at",b"deleted_at","ext",b"ext","security",b"security","updated_at",b"updated_at"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["br_code",b"br_code","br_code_name",b"br_code_name","brand",b"brand","cfi",b"cfi","code_nsd",b"code_nsd","currency",b"currency","deleted_at",b"deleted_at","description",b"description","ext",b"ext","gos_reg_code",b"gos_reg_code","instruments",b"instruments","name",b"name","name_brief",b"name_brief","required_tests",b"required_tests","security",b"security","status",b"status","type",b"type","uid",b"uid","updated_at",b"updated_at"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["ext",b"ext"]) -> typing.Optional[typing_extensions.Literal["currency","security"]]: ...
+global___AssetFull = AssetFull
+
+class Asset(google.protobuf.message.Message):
+    """Информация об активе."""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    UID_FIELD_NUMBER: builtins.int
+    TYPE_FIELD_NUMBER: builtins.int
+    NAME_FIELD_NUMBER: builtins.int
+    INSTRUMENTS_FIELD_NUMBER: builtins.int
+    uid: typing.Text
+    """Уникальный идентификатор актива."""
+
+    type: global___AssetType.ValueType
+    """Тип актива."""
+
+    name: typing.Text
+    """Наименование актива."""
+
+    @property
+    def instruments(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___AssetInstrument]:
+        """Массив идентификаторов инструментов."""
+        pass
+    def __init__(self,
+        *,
+        uid: typing.Text = ...,
+        type: global___AssetType.ValueType = ...,
+        name: typing.Text = ...,
+        instruments: typing.Optional[typing.Iterable[global___AssetInstrument]] = ...,
+        ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["instruments",b"instruments","name",b"name","type",b"type","uid",b"uid"]) -> None: ...
+global___Asset = Asset
+
+class AssetCurrency(google.protobuf.message.Message):
+    """Валюта."""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    BASE_CURRENCY_FIELD_NUMBER: builtins.int
+    base_currency: typing.Text
+    """ISO-код валюты."""
+
+    def __init__(self,
+        *,
+        base_currency: typing.Text = ...,
+        ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["base_currency",b"base_currency"]) -> None: ...
+global___AssetCurrency = AssetCurrency
+
+class AssetSecurity(google.protobuf.message.Message):
+    """Ценная бумага."""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    ISIN_FIELD_NUMBER: builtins.int
+    TYPE_FIELD_NUMBER: builtins.int
+    SHARE_FIELD_NUMBER: builtins.int
+    BOND_FIELD_NUMBER: builtins.int
+    SP_FIELD_NUMBER: builtins.int
+    ETF_FIELD_NUMBER: builtins.int
+    CLEARING_CERTIFICATE_FIELD_NUMBER: builtins.int
+    isin: typing.Text
+    """ISIN-идентификатор ценной бумаги."""
+
+    type: typing.Text
+    """Тип ценной бумаги."""
+
+    @property
+    def share(self) -> global___AssetShare:
+        """Акция. Заполняется только для акций (тип актива asset.type = "ASSET_TYPE_SECURITY" и security.type = share)."""
+        pass
+    @property
+    def bond(self) -> global___AssetBond:
+        """Облигация. Заполняется только для облигаций (тип актива asset.type = "ASSET_TYPE_SECURITY" и security.type = bond)."""
+        pass
+    @property
+    def sp(self) -> global___AssetStructuredProduct:
+        """Структурная нота. Заполняется только для структурных продуктов (тип актива asset.type = "ASSET_TYPE_SECURITY" и security.type = sp)."""
+        pass
+    @property
+    def etf(self) -> global___AssetEtf:
+        """Фонд. Заполняется только для фондов (тип актива asset.type = "ASSET_TYPE_SECURITY" и security.type = etf)."""
+        pass
+    @property
+    def clearing_certificate(self) -> global___AssetClearingCertificate:
+        """Клиринговый сертификат участия. Заполняется только для клиринговых сертификатов (тип актива asset.type = "ASSET_TYPE_SECURITY" и security.type = clearing_certificate)."""
+        pass
+    def __init__(self,
+        *,
+        isin: typing.Text = ...,
+        type: typing.Text = ...,
+        share: typing.Optional[global___AssetShare] = ...,
+        bond: typing.Optional[global___AssetBond] = ...,
+        sp: typing.Optional[global___AssetStructuredProduct] = ...,
+        etf: typing.Optional[global___AssetEtf] = ...,
+        clearing_certificate: typing.Optional[global___AssetClearingCertificate] = ...,
+        ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["bond",b"bond","clearing_certificate",b"clearing_certificate","etf",b"etf","ext",b"ext","share",b"share","sp",b"sp"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["bond",b"bond","clearing_certificate",b"clearing_certificate","etf",b"etf","ext",b"ext","isin",b"isin","share",b"share","sp",b"sp","type",b"type"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["ext",b"ext"]) -> typing.Optional[typing_extensions.Literal["share","bond","sp","etf","clearing_certificate"]]: ...
+global___AssetSecurity = AssetSecurity
+
+class AssetShare(google.protobuf.message.Message):
+    """Акция."""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    TYPE_FIELD_NUMBER: builtins.int
+    ISSUE_SIZE_FIELD_NUMBER: builtins.int
+    NOMINAL_FIELD_NUMBER: builtins.int
+    NOMINAL_CURRENCY_FIELD_NUMBER: builtins.int
+    PRIMARY_INDEX_FIELD_NUMBER: builtins.int
+    DIVIDEND_RATE_FIELD_NUMBER: builtins.int
+    PREFERRED_SHARE_TYPE_FIELD_NUMBER: builtins.int
+    IPO_DATE_FIELD_NUMBER: builtins.int
+    REGISTRY_DATE_FIELD_NUMBER: builtins.int
+    DIV_YIELD_FLAG_FIELD_NUMBER: builtins.int
+    ISSUE_KIND_FIELD_NUMBER: builtins.int
+    PLACEMENT_DATE_FIELD_NUMBER: builtins.int
+    REPRES_ISIN_FIELD_NUMBER: builtins.int
+    ISSUE_SIZE_PLAN_FIELD_NUMBER: builtins.int
+    TOTAL_FLOAT_FIELD_NUMBER: builtins.int
+    type: global___ShareType.ValueType
+    """Тип акции."""
+
+    @property
+    def issue_size(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Объем выпуска (шт.)."""
+        pass
+    @property
+    def nominal(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Номинал."""
+        pass
+    nominal_currency: typing.Text
+    """Валюта номинала."""
+
+    primary_index: typing.Text
+    """Индекс (Bloomberg)."""
+
+    @property
+    def dividend_rate(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Ставка дивиденда (для привилегированных акций)."""
+        pass
+    preferred_share_type: typing.Text
+    """Тип привилегированных акций."""
+
+    @property
+    def ipo_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Дата IPO."""
+        pass
+    @property
+    def registry_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Дата регистрации."""
+        pass
+    div_yield_flag: builtins.bool
+    """Признак наличия дивидендной доходности."""
+
+    issue_kind: typing.Text
+    """Форма выпуска ФИ."""
+
+    @property
+    def placement_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Дата размещения акции."""
+        pass
+    repres_isin: typing.Text
+    """ISIN базового актива."""
+
+    @property
+    def issue_size_plan(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Объявленное количество шт."""
+        pass
+    @property
+    def total_float(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Количество акций в свободном обращении."""
+        pass
+    def __init__(self,
+        *,
+        type: global___ShareType.ValueType = ...,
+        issue_size: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        nominal: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        nominal_currency: typing.Text = ...,
+        primary_index: typing.Text = ...,
+        dividend_rate: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        preferred_share_type: typing.Text = ...,
+        ipo_date: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        registry_date: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        div_yield_flag: builtins.bool = ...,
+        issue_kind: typing.Text = ...,
+        placement_date: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        repres_isin: typing.Text = ...,
+        issue_size_plan: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        total_float: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["dividend_rate",b"dividend_rate","ipo_date",b"ipo_date","issue_size",b"issue_size","issue_size_plan",b"issue_size_plan","nominal",b"nominal","placement_date",b"placement_date","registry_date",b"registry_date","total_float",b"total_float"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["div_yield_flag",b"div_yield_flag","dividend_rate",b"dividend_rate","ipo_date",b"ipo_date","issue_kind",b"issue_kind","issue_size",b"issue_size","issue_size_plan",b"issue_size_plan","nominal",b"nominal","nominal_currency",b"nominal_currency","placement_date",b"placement_date","preferred_share_type",b"preferred_share_type","primary_index",b"primary_index","registry_date",b"registry_date","repres_isin",b"repres_isin","total_float",b"total_float","type",b"type"]) -> None: ...
+global___AssetShare = AssetShare
+
+class AssetBond(google.protobuf.message.Message):
+    """Облигация."""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    CURRENT_NOMINAL_FIELD_NUMBER: builtins.int
+    BORROW_NAME_FIELD_NUMBER: builtins.int
+    ISSUE_SIZE_FIELD_NUMBER: builtins.int
+    NOMINAL_FIELD_NUMBER: builtins.int
+    NOMINAL_CURRENCY_FIELD_NUMBER: builtins.int
+    ISSUE_KIND_FIELD_NUMBER: builtins.int
+    INTEREST_KIND_FIELD_NUMBER: builtins.int
+    COUPON_QUANTITY_PER_YEAR_FIELD_NUMBER: builtins.int
+    INDEXED_NOMINAL_FLAG_FIELD_NUMBER: builtins.int
+    SUBORDINATED_FLAG_FIELD_NUMBER: builtins.int
+    COLLATERAL_FLAG_FIELD_NUMBER: builtins.int
+    TAX_FREE_FLAG_FIELD_NUMBER: builtins.int
+    AMORTIZATION_FLAG_FIELD_NUMBER: builtins.int
+    FLOATING_COUPON_FLAG_FIELD_NUMBER: builtins.int
+    PERPETUAL_FLAG_FIELD_NUMBER: builtins.int
+    MATURITY_DATE_FIELD_NUMBER: builtins.int
+    RETURN_CONDITION_FIELD_NUMBER: builtins.int
+    STATE_REG_DATE_FIELD_NUMBER: builtins.int
+    PLACEMENT_DATE_FIELD_NUMBER: builtins.int
+    PLACEMENT_PRICE_FIELD_NUMBER: builtins.int
+    ISSUE_SIZE_PLAN_FIELD_NUMBER: builtins.int
+    @property
+    def current_nominal(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Текущий номинал."""
+        pass
+    borrow_name: typing.Text
+    """Наименование заемщика."""
+
+    @property
+    def issue_size(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Объем эмиссии облигации (стоимость)."""
+        pass
+    @property
+    def nominal(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Номинал облигации."""
+        pass
+    nominal_currency: typing.Text
+    """Валюта номинала."""
+
+    issue_kind: typing.Text
+    """Форма выпуска облигации."""
+
+    interest_kind: typing.Text
+    """Форма дохода облигации."""
+
+    coupon_quantity_per_year: builtins.int
+    """Количество выплат в год."""
+
+    indexed_nominal_flag: builtins.bool
+    """Признак облигации с индексируемым номиналом."""
+
+    subordinated_flag: builtins.bool
+    """Признак субординированной облигации."""
+
+    collateral_flag: builtins.bool
+    """Признак обеспеченной облигации."""
+
+    tax_free_flag: builtins.bool
+    """Признак показывает, что купоны облигации не облагаются налогом (для mass market)."""
+
+    amortization_flag: builtins.bool
+    """Признак облигации с амортизацией долга."""
+
+    floating_coupon_flag: builtins.bool
+    """Признак облигации с плавающим купоном."""
+
+    perpetual_flag: builtins.bool
+    """Признак бессрочной облигации."""
+
+    @property
+    def maturity_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Дата погашения облигации."""
+        pass
+    return_condition: typing.Text
+    """Описание и условия получения дополнительного дохода."""
+
+    @property
+    def state_reg_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Дата выпуска облигации."""
+        pass
+    @property
+    def placement_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Дата размещения облигации."""
+        pass
+    @property
+    def placement_price(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Цена размещения облигации."""
+        pass
+    @property
+    def issue_size_plan(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Объявленное количество шт."""
+        pass
+    def __init__(self,
+        *,
+        current_nominal: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        borrow_name: typing.Text = ...,
+        issue_size: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        nominal: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        nominal_currency: typing.Text = ...,
+        issue_kind: typing.Text = ...,
+        interest_kind: typing.Text = ...,
+        coupon_quantity_per_year: builtins.int = ...,
+        indexed_nominal_flag: builtins.bool = ...,
+        subordinated_flag: builtins.bool = ...,
+        collateral_flag: builtins.bool = ...,
+        tax_free_flag: builtins.bool = ...,
+        amortization_flag: builtins.bool = ...,
+        floating_coupon_flag: builtins.bool = ...,
+        perpetual_flag: builtins.bool = ...,
+        maturity_date: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        return_condition: typing.Text = ...,
+        state_reg_date: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        placement_date: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        placement_price: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        issue_size_plan: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["current_nominal",b"current_nominal","issue_size",b"issue_size","issue_size_plan",b"issue_size_plan","maturity_date",b"maturity_date","nominal",b"nominal","placement_date",b"placement_date","placement_price",b"placement_price","state_reg_date",b"state_reg_date"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["amortization_flag",b"amortization_flag","borrow_name",b"borrow_name","collateral_flag",b"collateral_flag","coupon_quantity_per_year",b"coupon_quantity_per_year","current_nominal",b"current_nominal","floating_coupon_flag",b"floating_coupon_flag","indexed_nominal_flag",b"indexed_nominal_flag","interest_kind",b"interest_kind","issue_kind",b"issue_kind","issue_size",b"issue_size","issue_size_plan",b"issue_size_plan","maturity_date",b"maturity_date","nominal",b"nominal","nominal_currency",b"nominal_currency","perpetual_flag",b"perpetual_flag","placement_date",b"placement_date","placement_price",b"placement_price","return_condition",b"return_condition","state_reg_date",b"state_reg_date","subordinated_flag",b"subordinated_flag","tax_free_flag",b"tax_free_flag"]) -> None: ...
+global___AssetBond = AssetBond
+
+class AssetStructuredProduct(google.protobuf.message.Message):
+    """Структурная нота."""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    BORROW_NAME_FIELD_NUMBER: builtins.int
+    NOMINAL_FIELD_NUMBER: builtins.int
+    NOMINAL_CURRENCY_FIELD_NUMBER: builtins.int
+    TYPE_FIELD_NUMBER: builtins.int
+    LOGIC_PORTFOLIO_FIELD_NUMBER: builtins.int
+    ASSET_TYPE_FIELD_NUMBER: builtins.int
+    BASIC_ASSET_FIELD_NUMBER: builtins.int
+    SAFETY_BARRIER_FIELD_NUMBER: builtins.int
+    MATURITY_DATE_FIELD_NUMBER: builtins.int
+    ISSUE_SIZE_PLAN_FIELD_NUMBER: builtins.int
+    ISSUE_SIZE_FIELD_NUMBER: builtins.int
+    PLACEMENT_DATE_FIELD_NUMBER: builtins.int
+    ISSUE_KIND_FIELD_NUMBER: builtins.int
+    borrow_name: typing.Text
+    """Наименование заемщика."""
+
+    @property
+    def nominal(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Номинал."""
+        pass
+    nominal_currency: typing.Text
+    """Валюта номинала."""
+
+    type: global___StructuredProductType.ValueType
+    """Тип структурной ноты."""
+
+    logic_portfolio: typing.Text
+    """Стратегия портфеля."""
+
+    asset_type: global___AssetType.ValueType
+    """Тип базового актива."""
+
+    basic_asset: typing.Text
+    """Вид базового актива в зависимости от типа базового актива."""
+
+    @property
+    def safety_barrier(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Барьер сохранности (в процентах)."""
+        pass
+    @property
+    def maturity_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Дата погашения."""
+        pass
+    @property
+    def issue_size_plan(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Объявленное количество шт."""
+        pass
+    @property
+    def issue_size(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Объем размещения."""
+        pass
+    @property
+    def placement_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Дата размещения ноты."""
+        pass
+    issue_kind: typing.Text
+    """Форма выпуска."""
+
+    def __init__(self,
+        *,
+        borrow_name: typing.Text = ...,
+        nominal: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        nominal_currency: typing.Text = ...,
+        type: global___StructuredProductType.ValueType = ...,
+        logic_portfolio: typing.Text = ...,
+        asset_type: global___AssetType.ValueType = ...,
+        basic_asset: typing.Text = ...,
+        safety_barrier: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        maturity_date: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        issue_size_plan: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        issue_size: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        placement_date: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        issue_kind: typing.Text = ...,
+        ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["issue_size",b"issue_size","issue_size_plan",b"issue_size_plan","maturity_date",b"maturity_date","nominal",b"nominal","placement_date",b"placement_date","safety_barrier",b"safety_barrier"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["asset_type",b"asset_type","basic_asset",b"basic_asset","borrow_name",b"borrow_name","issue_kind",b"issue_kind","issue_size",b"issue_size","issue_size_plan",b"issue_size_plan","logic_portfolio",b"logic_portfolio","maturity_date",b"maturity_date","nominal",b"nominal","nominal_currency",b"nominal_currency","placement_date",b"placement_date","safety_barrier",b"safety_barrier","type",b"type"]) -> None: ...
+global___AssetStructuredProduct = AssetStructuredProduct
+
+class AssetEtf(google.protobuf.message.Message):
+    """Фонд."""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    TOTAL_EXPENSE_FIELD_NUMBER: builtins.int
+    HURDLE_RATE_FIELD_NUMBER: builtins.int
+    PERFORMANCE_FEE_FIELD_NUMBER: builtins.int
+    FIXED_COMMISSION_FIELD_NUMBER: builtins.int
+    PAYMENT_TYPE_FIELD_NUMBER: builtins.int
+    WATERMARK_FLAG_FIELD_NUMBER: builtins.int
+    BUY_PREMIUM_FIELD_NUMBER: builtins.int
+    SELL_DISCOUNT_FIELD_NUMBER: builtins.int
+    REBALANCING_FLAG_FIELD_NUMBER: builtins.int
+    REBALANCING_FREQ_FIELD_NUMBER: builtins.int
+    MANAGEMENT_TYPE_FIELD_NUMBER: builtins.int
+    PRIMARY_INDEX_FIELD_NUMBER: builtins.int
+    FOCUS_TYPE_FIELD_NUMBER: builtins.int
+    LEVERAGED_FLAG_FIELD_NUMBER: builtins.int
+    NUM_SHARE_FIELD_NUMBER: builtins.int
+    UCITS_FLAG_FIELD_NUMBER: builtins.int
+    RELEASED_DATE_FIELD_NUMBER: builtins.int
+    DESCRIPTION_FIELD_NUMBER: builtins.int
+    PRIMARY_INDEX_DESCRIPTION_FIELD_NUMBER: builtins.int
+    PRIMARY_INDEX_COMPANY_FIELD_NUMBER: builtins.int
+    INDEX_RECOVERY_PERIOD_FIELD_NUMBER: builtins.int
+    INAV_CODE_FIELD_NUMBER: builtins.int
+    DIV_YIELD_FLAG_FIELD_NUMBER: builtins.int
+    EXPENSE_COMMISSION_FIELD_NUMBER: builtins.int
+    PRIMARY_INDEX_TRACKING_ERROR_FIELD_NUMBER: builtins.int
+    REBALANCING_PLAN_FIELD_NUMBER: builtins.int
+    TAX_RATE_FIELD_NUMBER: builtins.int
+    REBALANCING_DATES_FIELD_NUMBER: builtins.int
+    ISSUE_KIND_FIELD_NUMBER: builtins.int
+    NOMINAL_FIELD_NUMBER: builtins.int
+    NOMINAL_CURRENCY_FIELD_NUMBER: builtins.int
+    @property
+    def total_expense(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Суммарные расходы фонда (в %)."""
+        pass
+    @property
+    def hurdle_rate(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Барьерная ставка доходности после которой фонд имеет право на perfomance fee (в процентах)."""
+        pass
+    @property
+    def performance_fee(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Комиссия за успешные результаты фонда (в процентах)."""
+        pass
+    @property
+    def fixed_commission(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Фиксированная комиссия за управление (в процентах)."""
+        pass
+    payment_type: typing.Text
+    """Тип распределения доходов от выплат по бумагам."""
+
+    watermark_flag: builtins.bool
+    """Признак необходимости выхода фонда в плюс для получения комиссии."""
+
+    @property
+    def buy_premium(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Премия (надбавка к цене) при покупке доли в фонде (в процентах)."""
+        pass
+    @property
+    def sell_discount(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Ставка дисконта (вычет из цены) при продаже доли в фонде (в процентах)."""
+        pass
+    rebalancing_flag: builtins.bool
+    """Признак ребалансируемости портфеля фонда."""
+
+    rebalancing_freq: typing.Text
+    """Периодичность ребалансировки."""
+
+    management_type: typing.Text
+    """Тип управления."""
+
+    primary_index: typing.Text
+    """Индекс, который реплицирует (старается копировать) фонд."""
+
+    focus_type: typing.Text
+    """База ETF."""
+
+    leveraged_flag: builtins.bool
+    """Признак использования заемных активов (плечо)."""
+
+    @property
+    def num_share(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Количество акций в обращении."""
+        pass
+    ucits_flag: builtins.bool
+    """Признак обязательства по отчетности перед регулятором."""
+
+    @property
+    def released_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Дата выпуска."""
+        pass
+    description: typing.Text
+    """Описание фонда."""
+
+    primary_index_description: typing.Text
+    """Описание индекса, за которым следует фонд."""
+
+    primary_index_company: typing.Text
+    """Основные компании, в которые вкладывается фонд."""
+
+    @property
+    def index_recovery_period(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Срок восстановления индекса (после просадки)."""
+        pass
+    inav_code: typing.Text
+    """IVAV-код."""
+
+    div_yield_flag: builtins.bool
+    """Признак наличия дивидендной доходности."""
+
+    @property
+    def expense_commission(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Комиссия на покрытие расходов фонда (в процентах)."""
+        pass
+    @property
+    def primary_index_tracking_error(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Ошибка следования за индексом (в процентах)."""
+        pass
+    rebalancing_plan: typing.Text
+    """Плановая ребалансировка портфеля."""
+
+    tax_rate: typing.Text
+    """Ставки налогообложения дивидендов и купонов."""
+
+    @property
+    def rebalancing_dates(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[google.protobuf.timestamp_pb2.Timestamp]:
+        """Даты ребалансировок."""
+        pass
+    issue_kind: typing.Text
+    """Форма выпуска."""
+
+    @property
+    def nominal(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Номинал."""
+        pass
+    nominal_currency: typing.Text
+    """Валюта номинала."""
+
+    def __init__(self,
+        *,
+        total_expense: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        hurdle_rate: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        performance_fee: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        fixed_commission: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        payment_type: typing.Text = ...,
+        watermark_flag: builtins.bool = ...,
+        buy_premium: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        sell_discount: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        rebalancing_flag: builtins.bool = ...,
+        rebalancing_freq: typing.Text = ...,
+        management_type: typing.Text = ...,
+        primary_index: typing.Text = ...,
+        focus_type: typing.Text = ...,
+        leveraged_flag: builtins.bool = ...,
+        num_share: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        ucits_flag: builtins.bool = ...,
+        released_date: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        description: typing.Text = ...,
+        primary_index_description: typing.Text = ...,
+        primary_index_company: typing.Text = ...,
+        index_recovery_period: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        inav_code: typing.Text = ...,
+        div_yield_flag: builtins.bool = ...,
+        expense_commission: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        primary_index_tracking_error: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        rebalancing_plan: typing.Text = ...,
+        tax_rate: typing.Text = ...,
+        rebalancing_dates: typing.Optional[typing.Iterable[google.protobuf.timestamp_pb2.Timestamp]] = ...,
+        issue_kind: typing.Text = ...,
+        nominal: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        nominal_currency: typing.Text = ...,
+        ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["buy_premium",b"buy_premium","expense_commission",b"expense_commission","fixed_commission",b"fixed_commission","hurdle_rate",b"hurdle_rate","index_recovery_period",b"index_recovery_period","nominal",b"nominal","num_share",b"num_share","performance_fee",b"performance_fee","primary_index_tracking_error",b"primary_index_tracking_error","released_date",b"released_date","sell_discount",b"sell_discount","total_expense",b"total_expense"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["buy_premium",b"buy_premium","description",b"description","div_yield_flag",b"div_yield_flag","expense_commission",b"expense_commission","fixed_commission",b"fixed_commission","focus_type",b"focus_type","hurdle_rate",b"hurdle_rate","inav_code",b"inav_code","index_recovery_period",b"index_recovery_period","issue_kind",b"issue_kind","leveraged_flag",b"leveraged_flag","management_type",b"management_type","nominal",b"nominal","nominal_currency",b"nominal_currency","num_share",b"num_share","payment_type",b"payment_type","performance_fee",b"performance_fee","primary_index",b"primary_index","primary_index_company",b"primary_index_company","primary_index_description",b"primary_index_description","primary_index_tracking_error",b"primary_index_tracking_error","rebalancing_dates",b"rebalancing_dates","rebalancing_flag",b"rebalancing_flag","rebalancing_freq",b"rebalancing_freq","rebalancing_plan",b"rebalancing_plan","released_date",b"released_date","sell_discount",b"sell_discount","tax_rate",b"tax_rate","total_expense",b"total_expense","ucits_flag",b"ucits_flag","watermark_flag",b"watermark_flag"]) -> None: ...
+global___AssetEtf = AssetEtf
+
+class AssetClearingCertificate(google.protobuf.message.Message):
+    """Клиринговый сертификат участия."""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    NOMINAL_FIELD_NUMBER: builtins.int
+    NOMINAL_CURRENCY_FIELD_NUMBER: builtins.int
+    @property
+    def nominal(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Номинал."""
+        pass
+    nominal_currency: typing.Text
+    """Валюта номинала."""
+
+    def __init__(self,
+        *,
+        nominal: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        nominal_currency: typing.Text = ...,
+        ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["nominal",b"nominal"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["nominal",b"nominal","nominal_currency",b"nominal_currency"]) -> None: ...
+global___AssetClearingCertificate = AssetClearingCertificate
+
+class Brand(google.protobuf.message.Message):
+    """Бренд."""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    UID_FIELD_NUMBER: builtins.int
+    NAME_FIELD_NUMBER: builtins.int
+    DESCRIPTION_FIELD_NUMBER: builtins.int
+    INFO_FIELD_NUMBER: builtins.int
+    COMPANY_FIELD_NUMBER: builtins.int
+    SECTOR_FIELD_NUMBER: builtins.int
+    COUNTRY_OF_RISK_FIELD_NUMBER: builtins.int
+    COUNTRY_OF_RISK_NAME_FIELD_NUMBER: builtins.int
+    uid: typing.Text
+    """uid идентификатор бренда."""
+
+    name: typing.Text
+    """Наименование бренда."""
+
+    description: typing.Text
+    """Описание."""
+
+    info: typing.Text
+    """Информация о бренде."""
+
+    company: typing.Text
+    """Компания."""
+
+    sector: typing.Text
+    """Сектор."""
+
+    country_of_risk: typing.Text
+    """Код страны риска."""
+
+    country_of_risk_name: typing.Text
+    """Наименование страны риска."""
+
+    def __init__(self,
+        *,
+        uid: typing.Text = ...,
+        name: typing.Text = ...,
+        description: typing.Text = ...,
+        info: typing.Text = ...,
+        company: typing.Text = ...,
+        sector: typing.Text = ...,
+        country_of_risk: typing.Text = ...,
+        country_of_risk_name: typing.Text = ...,
+        ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["company",b"company","country_of_risk",b"country_of_risk","country_of_risk_name",b"country_of_risk_name","description",b"description","info",b"info","name",b"name","sector",b"sector","uid",b"uid"]) -> None: ...
+global___Brand = Brand
+
+class AssetInstrument(google.protobuf.message.Message):
+    """Идентификаторы инструмента."""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    UID_FIELD_NUMBER: builtins.int
+    FIGI_FIELD_NUMBER: builtins.int
+    INSTRUMENT_TYPE_FIELD_NUMBER: builtins.int
+    TICKER_FIELD_NUMBER: builtins.int
+    CLASS_CODE_FIELD_NUMBER: builtins.int
+    LINKS_FIELD_NUMBER: builtins.int
+    uid: typing.Text
+    """uid идентификатор инструмента."""
+
+    figi: typing.Text
+    """figi идентификатор инструмента."""
+
+    instrument_type: typing.Text
+    """Тип инструмента."""
+
+    ticker: typing.Text
+    """Тикер инструмента."""
+
+    class_code: typing.Text
+    """Класс-код (секция торгов)."""
+
+    @property
+    def links(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___InstrumentLink]:
+        """Массив связанных инструментов."""
+        pass
+    def __init__(self,
+        *,
+        uid: typing.Text = ...,
+        figi: typing.Text = ...,
+        instrument_type: typing.Text = ...,
+        ticker: typing.Text = ...,
+        class_code: typing.Text = ...,
+        links: typing.Optional[typing.Iterable[global___InstrumentLink]] = ...,
+        ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["class_code",b"class_code","figi",b"figi","instrument_type",b"instrument_type","links",b"links","ticker",b"ticker","uid",b"uid"]) -> None: ...
+global___AssetInstrument = AssetInstrument
+
+class InstrumentLink(google.protobuf.message.Message):
+    """Связь с другим инструментом."""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    TYPE_FIELD_NUMBER: builtins.int
+    INSTRUMENT_UID_FIELD_NUMBER: builtins.int
+    type: typing.Text
+    """Тип связи."""
+
+    instrument_uid: typing.Text
+    """uid идентификатор связанного инструмента."""
+
+    def __init__(self,
+        *,
+        type: typing.Text = ...,
+        instrument_uid: typing.Text = ...,
+        ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["instrument_uid",b"instrument_uid","type",b"type"]) -> None: ...
+global___InstrumentLink = InstrumentLink

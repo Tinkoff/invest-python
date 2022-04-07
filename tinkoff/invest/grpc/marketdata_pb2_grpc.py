@@ -35,6 +35,11 @@ class MarketDataServiceStub(object):
                 request_serializer=tinkoff_dot_invest_dot_grpc_dot_marketdata__pb2.GetTradingStatusRequest.SerializeToString,
                 response_deserializer=tinkoff_dot_invest_dot_grpc_dot_marketdata__pb2.GetTradingStatusResponse.FromString,
                 )
+        self.GetLastTrades = channel.unary_unary(
+                '/tinkoff.public.invest.api.contract.v1.MarketDataService/GetLastTrades',
+                request_serializer=tinkoff_dot_invest_dot_grpc_dot_marketdata__pb2.GetLastTradesRequest.SerializeToString,
+                response_deserializer=tinkoff_dot_invest_dot_grpc_dot_marketdata__pb2.GetLastTradesResponse.FromString,
+                )
 
 
 class MarketDataServiceServicer(object):
@@ -69,6 +74,13 @@ class MarketDataServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def GetLastTrades(self, request, context):
+        """Метод запроса последних обезличенных сделок по инструменту.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_MarketDataServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -91,6 +103,11 @@ def add_MarketDataServiceServicer_to_server(servicer, server):
                     servicer.GetTradingStatus,
                     request_deserializer=tinkoff_dot_invest_dot_grpc_dot_marketdata__pb2.GetTradingStatusRequest.FromString,
                     response_serializer=tinkoff_dot_invest_dot_grpc_dot_marketdata__pb2.GetTradingStatusResponse.SerializeToString,
+            ),
+            'GetLastTrades': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetLastTrades,
+                    request_deserializer=tinkoff_dot_invest_dot_grpc_dot_marketdata__pb2.GetLastTradesRequest.FromString,
+                    response_serializer=tinkoff_dot_invest_dot_grpc_dot_marketdata__pb2.GetLastTradesResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -168,6 +185,23 @@ class MarketDataService(object):
         return grpc.experimental.unary_unary(request, target, '/tinkoff.public.invest.api.contract.v1.MarketDataService/GetTradingStatus',
             tinkoff_dot_invest_dot_grpc_dot_marketdata__pb2.GetTradingStatusRequest.SerializeToString,
             tinkoff_dot_invest_dot_grpc_dot_marketdata__pb2.GetTradingStatusResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetLastTrades(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/tinkoff.public.invest.api.contract.v1.MarketDataService/GetLastTrades',
+            tinkoff_dot_invest_dot_grpc_dot_marketdata__pb2.GetLastTradesRequest.SerializeToString,
+            tinkoff_dot_invest_dot_grpc_dot_marketdata__pb2.GetLastTradesResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 

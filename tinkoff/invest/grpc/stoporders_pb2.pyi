@@ -20,26 +20,26 @@ class _StopOrderDirection:
 class _StopOrderDirectionEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_StopOrderDirection.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     STOP_ORDER_DIRECTION_UNSPECIFIED: _StopOrderDirection.ValueType  # 0
-    """Значение не указано"""
+    """Значение не указано."""
 
     STOP_ORDER_DIRECTION_BUY: _StopOrderDirection.ValueType  # 1
-    """Покупка"""
+    """Покупка."""
 
     STOP_ORDER_DIRECTION_SELL: _StopOrderDirection.ValueType  # 2
-    """Продажа"""
+    """Продажа."""
 
 class StopOrderDirection(_StopOrderDirection, metaclass=_StopOrderDirectionEnumTypeWrapper):
     """Направление сделки стоп-заявки."""
     pass
 
 STOP_ORDER_DIRECTION_UNSPECIFIED: StopOrderDirection.ValueType  # 0
-"""Значение не указано"""
+"""Значение не указано."""
 
 STOP_ORDER_DIRECTION_BUY: StopOrderDirection.ValueType  # 1
-"""Покупка"""
+"""Покупка."""
 
 STOP_ORDER_DIRECTION_SELL: StopOrderDirection.ValueType  # 2
-"""Продажа"""
+"""Продажа."""
 
 global___StopOrderDirection = StopOrderDirection
 
@@ -80,38 +80,38 @@ class _StopOrderType:
 class _StopOrderTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_StopOrderType.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     STOP_ORDER_TYPE_UNSPECIFIED: _StopOrderType.ValueType  # 0
-    """Значение не указано"""
+    """Значение не указано."""
 
     STOP_ORDER_TYPE_TAKE_PROFIT: _StopOrderType.ValueType  # 1
-    """Take-profit заявка"""
+    """Take-profit заявка."""
 
     STOP_ORDER_TYPE_STOP_LOSS: _StopOrderType.ValueType  # 2
-    """Stop-loss заявка"""
+    """Stop-loss заявка."""
 
     STOP_ORDER_TYPE_STOP_LIMIT: _StopOrderType.ValueType  # 3
-    """Stop-limit заявка"""
+    """Stop-limit заявка."""
 
 class StopOrderType(_StopOrderType, metaclass=_StopOrderTypeEnumTypeWrapper):
     """Тип стоп-заявки."""
     pass
 
 STOP_ORDER_TYPE_UNSPECIFIED: StopOrderType.ValueType  # 0
-"""Значение не указано"""
+"""Значение не указано."""
 
 STOP_ORDER_TYPE_TAKE_PROFIT: StopOrderType.ValueType  # 1
-"""Take-profit заявка"""
+"""Take-profit заявка."""
 
 STOP_ORDER_TYPE_STOP_LOSS: StopOrderType.ValueType  # 2
-"""Stop-loss заявка"""
+"""Stop-loss заявка."""
 
 STOP_ORDER_TYPE_STOP_LIMIT: StopOrderType.ValueType  # 3
-"""Stop-limit заявка"""
+"""Stop-limit заявка."""
 
 global___StopOrderType = StopOrderType
 
 
 class PostStopOrderRequest(google.protobuf.message.Message):
-    """Запрос выставления стоп-заявки"""
+    """Запрос выставления стоп-заявки."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     FIGI_FIELD_NUMBER: builtins.int
     QUANTITY_FIELD_NUMBER: builtins.int
@@ -123,30 +123,30 @@ class PostStopOrderRequest(google.protobuf.message.Message):
     STOP_ORDER_TYPE_FIELD_NUMBER: builtins.int
     EXPIRE_DATE_FIELD_NUMBER: builtins.int
     figi: typing.Text
-    """Figi-идентификатор инструмента"""
+    """Figi-идентификатор инструмента."""
 
     quantity: builtins.int
-    """Количество лотов"""
+    """Количество лотов."""
 
     @property
     def price(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Цена лота"""
+        """Цена за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента."""
         pass
     @property
     def stop_price(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Стоп-цена заявки"""
+        """Стоп-цена заявки за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента."""
         pass
     direction: global___StopOrderDirection.ValueType
-    """Направление операции"""
+    """Направление операции."""
 
     account_id: typing.Text
-    """Номер счёта"""
+    """Номер счёта."""
 
     expiration_type: global___StopOrderExpirationType.ValueType
-    """Тип экспирации заявки"""
+    """Тип экспирации заявки."""
 
     stop_order_type: global___StopOrderType.ValueType
-    """Тип заявки"""
+    """Тип заявки."""
 
     @property
     def expire_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
@@ -187,7 +187,7 @@ class GetStopOrdersRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     ACCOUNT_ID_FIELD_NUMBER: builtins.int
     account_id: typing.Text
-    """Идентификатор счёта клиента"""
+    """Идентификатор счёта клиента."""
 
     def __init__(self,
         *,
@@ -202,7 +202,7 @@ class GetStopOrdersResponse(google.protobuf.message.Message):
     STOP_ORDERS_FIELD_NUMBER: builtins.int
     @property
     def stop_orders(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___StopOrder]:
-        """Массив стоп-заявок по счёту"""
+        """Массив стоп-заявок по счёту."""
         pass
     def __init__(self,
         *,
@@ -217,7 +217,7 @@ class CancelStopOrderRequest(google.protobuf.message.Message):
     ACCOUNT_ID_FIELD_NUMBER: builtins.int
     STOP_ORDER_ID_FIELD_NUMBER: builtins.int
     account_id: typing.Text
-    """Идентификатор счёта клиента"""
+    """Идентификатор счёта клиента."""
 
     stop_order_id: typing.Text
     """Уникальный идентификатор стоп-заявки."""
@@ -261,22 +261,22 @@ class StopOrder(google.protobuf.message.Message):
     PRICE_FIELD_NUMBER: builtins.int
     STOP_PRICE_FIELD_NUMBER: builtins.int
     stop_order_id: typing.Text
-    """Идентификатор-идентификатор стоп-заявки"""
+    """Идентификатор-идентификатор стоп-заявки."""
 
     lots_requested: builtins.int
-    """Запрошено лотов"""
+    """Запрошено лотов."""
 
     figi: typing.Text
-    """Figi-идентификатор инструмента"""
+    """Figi-идентификатор инструмента."""
 
     direction: global___StopOrderDirection.ValueType
-    """Направление операции"""
+    """Направление операции."""
 
     currency: typing.Text
-    """Валюта стоп-заявки"""
+    """Валюта стоп-заявки."""
 
     order_type: global___StopOrderType.ValueType
-    """Тип стоп-заявки"""
+    """Тип стоп-заявки."""
 
     @property
     def create_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
@@ -292,11 +292,11 @@ class StopOrder(google.protobuf.message.Message):
         pass
     @property
     def price(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
-        """Цена заявки"""
+        """Цена заявки за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента."""
         pass
     @property
     def stop_price(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
-        """Цена активации стоп-заявки"""
+        """Цена активации стоп-заявки за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента."""
         pass
     def __init__(self,
         *,

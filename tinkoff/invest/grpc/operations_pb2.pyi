@@ -23,23 +23,23 @@ class _OperationStateEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper.
     """Статус операции не определён"""
 
     OPERATION_STATE_EXECUTED: _OperationState.ValueType  # 1
-    """Исполнена"""
+    """Исполнена."""
 
     OPERATION_STATE_CANCELED: _OperationState.ValueType  # 2
-    """Отменена"""
+    """Отменена."""
 
 class OperationState(_OperationState, metaclass=_OperationStateEnumTypeWrapper):
-    """Статус запрашиваемых операций"""
+    """Статус запрашиваемых операций."""
     pass
 
 OPERATION_STATE_UNSPECIFIED: OperationState.ValueType  # 0
 """Статус операции не определён"""
 
 OPERATION_STATE_EXECUTED: OperationState.ValueType  # 1
-"""Исполнена"""
+"""Исполнена."""
 
 OPERATION_STATE_CANCELED: OperationState.ValueType  # 2
-"""Отменена"""
+"""Отменена."""
 
 global___OperationState = OperationState
 
@@ -50,278 +50,278 @@ class _OperationType:
 class _OperationTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_OperationType.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     OPERATION_TYPE_UNSPECIFIED: _OperationType.ValueType  # 0
-    """Тип операции не определён"""
+    """Тип операции не определён."""
 
     OPERATION_TYPE_INPUT: _OperationType.ValueType  # 1
-    """Завод денежных средств"""
+    """Завод денежных средств."""
 
     OPERATION_TYPE_BOND_TAX: _OperationType.ValueType  # 2
-    """Удержание налога по купонам"""
+    """Удержание налога по купонам."""
 
     OPERATION_TYPE_OUTPUT_SECURITIES: _OperationType.ValueType  # 3
-    """Вывод ЦБ"""
+    """Вывод ЦБ."""
 
     OPERATION_TYPE_OVERNIGHT: _OperationType.ValueType  # 4
-    """Доход по сделке РЕПО овернайт"""
+    """Доход по сделке РЕПО овернайт."""
 
     OPERATION_TYPE_TAX: _OperationType.ValueType  # 5
-    """Удержание налога"""
+    """Удержание налога."""
 
     OPERATION_TYPE_BOND_REPAYMENT_FULL: _OperationType.ValueType  # 6
-    """Полное погашение облигаций"""
+    """Полное погашение облигаций."""
 
     OPERATION_TYPE_SELL_CARD: _OperationType.ValueType  # 7
-    """Продажа ЦБ с карты"""
+    """Продажа ЦБ с карты."""
 
     OPERATION_TYPE_DIVIDEND_TAX: _OperationType.ValueType  # 8
-    """Удержание налога по дивидендам"""
+    """Удержание налога по дивидендам."""
 
     OPERATION_TYPE_OUTPUT: _OperationType.ValueType  # 9
-    """Вывод денежных средств"""
+    """Вывод денежных средств."""
 
     OPERATION_TYPE_BOND_REPAYMENT: _OperationType.ValueType  # 10
-    """Частичное погашение облигаций"""
+    """Частичное погашение облигаций."""
 
     OPERATION_TYPE_TAX_CORRECTION: _OperationType.ValueType  # 11
-    """Корректировка налога"""
+    """Корректировка налога."""
 
     OPERATION_TYPE_SERVICE_FEE: _OperationType.ValueType  # 12
-    """Удержание комиссии за обслуживание брокерского счёта"""
+    """Удержание комиссии за обслуживание брокерского счёта."""
 
     OPERATION_TYPE_BENEFIT_TAX: _OperationType.ValueType  # 13
-    """Удержание налога за материальную выгоду"""
+    """Удержание налога за материальную выгоду."""
 
     OPERATION_TYPE_MARGIN_FEE: _OperationType.ValueType  # 14
-    """Удержание комиссии за непокрытую позицию"""
+    """Удержание комиссии за непокрытую позицию."""
 
     OPERATION_TYPE_BUY: _OperationType.ValueType  # 15
-    """Покупка ЦБ"""
+    """Покупка ЦБ."""
 
     OPERATION_TYPE_BUY_CARD: _OperationType.ValueType  # 16
-    """Покупка ЦБ с карты"""
+    """Покупка ЦБ с карты."""
 
     OPERATION_TYPE_INPUT_SECURITIES: _OperationType.ValueType  # 17
-    """Завод ЦБ"""
+    """Завод ЦБ."""
 
     OPERATION_TYPE_SELL_MARGIN: _OperationType.ValueType  # 18
-    """Продажа в результате Margin-call"""
+    """Продажа в результате Margin-call."""
 
     OPERATION_TYPE_BROKER_FEE: _OperationType.ValueType  # 19
-    """Удержание комиссии за операцию"""
+    """Удержание комиссии за операцию."""
 
     OPERATION_TYPE_BUY_MARGIN: _OperationType.ValueType  # 20
-    """Покупка в результате Margin-call"""
+    """Покупка в результате Margin-call."""
 
     OPERATION_TYPE_DIVIDEND: _OperationType.ValueType  # 21
-    """Выплата дивидендов"""
+    """Выплата дивидендов."""
 
     OPERATION_TYPE_SELL: _OperationType.ValueType  # 22
-    """Продажа ЦБ"""
+    """Продажа ЦБ."""
 
     OPERATION_TYPE_COUPON: _OperationType.ValueType  # 23
-    """Выплата купонов"""
+    """Выплата купонов."""
 
     OPERATION_TYPE_SUCCESS_FEE: _OperationType.ValueType  # 24
-    """Удержание комиссии SuccessFee"""
+    """Удержание комиссии SuccessFee."""
 
     OPERATION_TYPE_DIVIDEND_TRANSFER: _OperationType.ValueType  # 25
-    """Передача дивидендного дохода"""
+    """Передача дивидендного дохода."""
 
     OPERATION_TYPE_ACCRUING_VARMARGIN: _OperationType.ValueType  # 26
-    """Зачисление вариационной маржи"""
+    """Зачисление вариационной маржи."""
 
     OPERATION_TYPE_WRITING_OFF_VARMARGIN: _OperationType.ValueType  # 27
-    """Списание вариационной маржи"""
+    """Списание вариационной маржи."""
 
     OPERATION_TYPE_DELIVERY_BUY: _OperationType.ValueType  # 28
-    """Покупка в рамках экспирации фьючерсного контракта"""
+    """Покупка в рамках экспирации фьючерсного контракта."""
 
     OPERATION_TYPE_DELIVERY_SELL: _OperationType.ValueType  # 29
-    """Продажа в рамках экспирации фьючерсного контракта"""
+    """Продажа в рамках экспирации фьючерсного контракта."""
 
     OPERATION_TYPE_TRACK_MFEE: _OperationType.ValueType  # 30
-    """Комиссия за управление по счёту автоследования"""
+    """Комиссия за управление по счёту автоследования."""
 
     OPERATION_TYPE_TRACK_PFEE: _OperationType.ValueType  # 31
-    """Комиссия за результат по счёту автоследования"""
+    """Комиссия за результат по счёту автоследования."""
 
     OPERATION_TYPE_TAX_PROGRESSIVE: _OperationType.ValueType  # 32
-    """Удержание налога по ставке 15%"""
+    """Удержание налога по ставке 15%."""
 
     OPERATION_TYPE_BOND_TAX_PROGRESSIVE: _OperationType.ValueType  # 33
-    """Удержание налога по купонам по ставке 15%"""
+    """Удержание налога по купонам по ставке 15%."""
 
     OPERATION_TYPE_DIVIDEND_TAX_PROGRESSIVE: _OperationType.ValueType  # 34
-    """Удержание налога по дивидендам по ставке 15%"""
+    """Удержание налога по дивидендам по ставке 15%."""
 
     OPERATION_TYPE_BENEFIT_TAX_PROGRESSIVE: _OperationType.ValueType  # 35
-    """Удержание налога за материальную выгоду по ставке 15%"""
+    """Удержание налога за материальную выгоду по ставке 15%."""
 
     OPERATION_TYPE_TAX_CORRECTION_PROGRESSIVE: _OperationType.ValueType  # 36
-    """Корректировка налога по ставке 15%"""
+    """Корректировка налога по ставке 15%."""
 
     OPERATION_TYPE_TAX_REPO_PROGRESSIVE: _OperationType.ValueType  # 37
-    """Удержание налога за возмещение по сделкам РЕПО по ставке 15%"""
+    """Удержание налога за возмещение по сделкам РЕПО по ставке 15%."""
 
     OPERATION_TYPE_TAX_REPO: _OperationType.ValueType  # 38
-    """Удержание налога за возмещение по сделкам РЕПО"""
+    """Удержание налога за возмещение по сделкам РЕПО."""
 
     OPERATION_TYPE_TAX_REPO_HOLD: _OperationType.ValueType  # 39
-    """Удержание налога по сделкам РЕПО"""
+    """Удержание налога по сделкам РЕПО."""
 
     OPERATION_TYPE_TAX_REPO_REFUND: _OperationType.ValueType  # 40
-    """Возврат налога по сделкам РЕПО"""
+    """Возврат налога по сделкам РЕПО."""
 
     OPERATION_TYPE_TAX_REPO_HOLD_PROGRESSIVE: _OperationType.ValueType  # 41
-    """Удержание налога по сделкам РЕПО по ставке 15%"""
+    """Удержание налога по сделкам РЕПО по ставке 15%."""
 
     OPERATION_TYPE_TAX_REPO_REFUND_PROGRESSIVE: _OperationType.ValueType  # 42
-    """Возврат налога по сделкам РЕПО по ставке 15%"""
+    """Возврат налога по сделкам РЕПО по ставке 15%."""
 
     OPERATION_TYPE_DIV_EXT: _OperationType.ValueType  # 43
-    """Выплата дивидендов на карту"""
+    """Выплата дивидендов на карту."""
 
     OPERATION_TYPE_TAX_CORRECTION_COUPON: _OperationType.ValueType  # 44
-    """Корректировка налога по купонам"""
+    """Корректировка налога по купонам."""
 
 class OperationType(_OperationType, metaclass=_OperationTypeEnumTypeWrapper):
-    """Тип операции"""
+    """Тип операции."""
     pass
 
 OPERATION_TYPE_UNSPECIFIED: OperationType.ValueType  # 0
-"""Тип операции не определён"""
+"""Тип операции не определён."""
 
 OPERATION_TYPE_INPUT: OperationType.ValueType  # 1
-"""Завод денежных средств"""
+"""Завод денежных средств."""
 
 OPERATION_TYPE_BOND_TAX: OperationType.ValueType  # 2
-"""Удержание налога по купонам"""
+"""Удержание налога по купонам."""
 
 OPERATION_TYPE_OUTPUT_SECURITIES: OperationType.ValueType  # 3
-"""Вывод ЦБ"""
+"""Вывод ЦБ."""
 
 OPERATION_TYPE_OVERNIGHT: OperationType.ValueType  # 4
-"""Доход по сделке РЕПО овернайт"""
+"""Доход по сделке РЕПО овернайт."""
 
 OPERATION_TYPE_TAX: OperationType.ValueType  # 5
-"""Удержание налога"""
+"""Удержание налога."""
 
 OPERATION_TYPE_BOND_REPAYMENT_FULL: OperationType.ValueType  # 6
-"""Полное погашение облигаций"""
+"""Полное погашение облигаций."""
 
 OPERATION_TYPE_SELL_CARD: OperationType.ValueType  # 7
-"""Продажа ЦБ с карты"""
+"""Продажа ЦБ с карты."""
 
 OPERATION_TYPE_DIVIDEND_TAX: OperationType.ValueType  # 8
-"""Удержание налога по дивидендам"""
+"""Удержание налога по дивидендам."""
 
 OPERATION_TYPE_OUTPUT: OperationType.ValueType  # 9
-"""Вывод денежных средств"""
+"""Вывод денежных средств."""
 
 OPERATION_TYPE_BOND_REPAYMENT: OperationType.ValueType  # 10
-"""Частичное погашение облигаций"""
+"""Частичное погашение облигаций."""
 
 OPERATION_TYPE_TAX_CORRECTION: OperationType.ValueType  # 11
-"""Корректировка налога"""
+"""Корректировка налога."""
 
 OPERATION_TYPE_SERVICE_FEE: OperationType.ValueType  # 12
-"""Удержание комиссии за обслуживание брокерского счёта"""
+"""Удержание комиссии за обслуживание брокерского счёта."""
 
 OPERATION_TYPE_BENEFIT_TAX: OperationType.ValueType  # 13
-"""Удержание налога за материальную выгоду"""
+"""Удержание налога за материальную выгоду."""
 
 OPERATION_TYPE_MARGIN_FEE: OperationType.ValueType  # 14
-"""Удержание комиссии за непокрытую позицию"""
+"""Удержание комиссии за непокрытую позицию."""
 
 OPERATION_TYPE_BUY: OperationType.ValueType  # 15
-"""Покупка ЦБ"""
+"""Покупка ЦБ."""
 
 OPERATION_TYPE_BUY_CARD: OperationType.ValueType  # 16
-"""Покупка ЦБ с карты"""
+"""Покупка ЦБ с карты."""
 
 OPERATION_TYPE_INPUT_SECURITIES: OperationType.ValueType  # 17
-"""Завод ЦБ"""
+"""Завод ЦБ."""
 
 OPERATION_TYPE_SELL_MARGIN: OperationType.ValueType  # 18
-"""Продажа в результате Margin-call"""
+"""Продажа в результате Margin-call."""
 
 OPERATION_TYPE_BROKER_FEE: OperationType.ValueType  # 19
-"""Удержание комиссии за операцию"""
+"""Удержание комиссии за операцию."""
 
 OPERATION_TYPE_BUY_MARGIN: OperationType.ValueType  # 20
-"""Покупка в результате Margin-call"""
+"""Покупка в результате Margin-call."""
 
 OPERATION_TYPE_DIVIDEND: OperationType.ValueType  # 21
-"""Выплата дивидендов"""
+"""Выплата дивидендов."""
 
 OPERATION_TYPE_SELL: OperationType.ValueType  # 22
-"""Продажа ЦБ"""
+"""Продажа ЦБ."""
 
 OPERATION_TYPE_COUPON: OperationType.ValueType  # 23
-"""Выплата купонов"""
+"""Выплата купонов."""
 
 OPERATION_TYPE_SUCCESS_FEE: OperationType.ValueType  # 24
-"""Удержание комиссии SuccessFee"""
+"""Удержание комиссии SuccessFee."""
 
 OPERATION_TYPE_DIVIDEND_TRANSFER: OperationType.ValueType  # 25
-"""Передача дивидендного дохода"""
+"""Передача дивидендного дохода."""
 
 OPERATION_TYPE_ACCRUING_VARMARGIN: OperationType.ValueType  # 26
-"""Зачисление вариационной маржи"""
+"""Зачисление вариационной маржи."""
 
 OPERATION_TYPE_WRITING_OFF_VARMARGIN: OperationType.ValueType  # 27
-"""Списание вариационной маржи"""
+"""Списание вариационной маржи."""
 
 OPERATION_TYPE_DELIVERY_BUY: OperationType.ValueType  # 28
-"""Покупка в рамках экспирации фьючерсного контракта"""
+"""Покупка в рамках экспирации фьючерсного контракта."""
 
 OPERATION_TYPE_DELIVERY_SELL: OperationType.ValueType  # 29
-"""Продажа в рамках экспирации фьючерсного контракта"""
+"""Продажа в рамках экспирации фьючерсного контракта."""
 
 OPERATION_TYPE_TRACK_MFEE: OperationType.ValueType  # 30
-"""Комиссия за управление по счёту автоследования"""
+"""Комиссия за управление по счёту автоследования."""
 
 OPERATION_TYPE_TRACK_PFEE: OperationType.ValueType  # 31
-"""Комиссия за результат по счёту автоследования"""
+"""Комиссия за результат по счёту автоследования."""
 
 OPERATION_TYPE_TAX_PROGRESSIVE: OperationType.ValueType  # 32
-"""Удержание налога по ставке 15%"""
+"""Удержание налога по ставке 15%."""
 
 OPERATION_TYPE_BOND_TAX_PROGRESSIVE: OperationType.ValueType  # 33
-"""Удержание налога по купонам по ставке 15%"""
+"""Удержание налога по купонам по ставке 15%."""
 
 OPERATION_TYPE_DIVIDEND_TAX_PROGRESSIVE: OperationType.ValueType  # 34
-"""Удержание налога по дивидендам по ставке 15%"""
+"""Удержание налога по дивидендам по ставке 15%."""
 
 OPERATION_TYPE_BENEFIT_TAX_PROGRESSIVE: OperationType.ValueType  # 35
-"""Удержание налога за материальную выгоду по ставке 15%"""
+"""Удержание налога за материальную выгоду по ставке 15%."""
 
 OPERATION_TYPE_TAX_CORRECTION_PROGRESSIVE: OperationType.ValueType  # 36
-"""Корректировка налога по ставке 15%"""
+"""Корректировка налога по ставке 15%."""
 
 OPERATION_TYPE_TAX_REPO_PROGRESSIVE: OperationType.ValueType  # 37
-"""Удержание налога за возмещение по сделкам РЕПО по ставке 15%"""
+"""Удержание налога за возмещение по сделкам РЕПО по ставке 15%."""
 
 OPERATION_TYPE_TAX_REPO: OperationType.ValueType  # 38
-"""Удержание налога за возмещение по сделкам РЕПО"""
+"""Удержание налога за возмещение по сделкам РЕПО."""
 
 OPERATION_TYPE_TAX_REPO_HOLD: OperationType.ValueType  # 39
-"""Удержание налога по сделкам РЕПО"""
+"""Удержание налога по сделкам РЕПО."""
 
 OPERATION_TYPE_TAX_REPO_REFUND: OperationType.ValueType  # 40
-"""Возврат налога по сделкам РЕПО"""
+"""Возврат налога по сделкам РЕПО."""
 
 OPERATION_TYPE_TAX_REPO_HOLD_PROGRESSIVE: OperationType.ValueType  # 41
-"""Удержание налога по сделкам РЕПО по ставке 15%"""
+"""Удержание налога по сделкам РЕПО по ставке 15%."""
 
 OPERATION_TYPE_TAX_REPO_REFUND_PROGRESSIVE: OperationType.ValueType  # 42
-"""Возврат налога по сделкам РЕПО по ставке 15%"""
+"""Возврат налога по сделкам РЕПО по ставке 15%."""
 
 OPERATION_TYPE_DIV_EXT: OperationType.ValueType  # 43
-"""Выплата дивидендов на карту"""
+"""Выплата дивидендов на карту."""
 
 OPERATION_TYPE_TAX_CORRECTION_COUPON: OperationType.ValueType  # 44
-"""Корректировка налога по купонам"""
+"""Корректировка налога по купонам."""
 
 global___OperationType = OperationType
 
@@ -335,17 +335,17 @@ class OperationsRequest(google.protobuf.message.Message):
     STATE_FIELD_NUMBER: builtins.int
     FIGI_FIELD_NUMBER: builtins.int
     account_id: typing.Text
-    """Идентификатор счёта клиента"""
+    """Идентификатор счёта клиента."""
 
     @property
     def to(self) -> google.protobuf.timestamp_pb2.Timestamp:
-        """Окончание периода (по UTC)"""
+        """Окончание периода (по UTC)."""
         pass
     state: global___OperationState.ValueType
-    """Статус запрашиваемых операций"""
+    """Статус запрашиваемых операций."""
 
     figi: typing.Text
-    """Figi-идентификатор инструмента для фильтрации"""
+    """Figi-идентификатор инструмента для фильтрации."""
 
     def __init__(self,
         *,
@@ -364,7 +364,7 @@ class OperationsResponse(google.protobuf.message.Message):
     OPERATIONS_FIELD_NUMBER: builtins.int
     @property
     def operations(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Operation]:
-        """Массив операций"""
+        """Массив операций."""
         pass
     def __init__(self,
         *,
@@ -391,50 +391,50 @@ class Operation(google.protobuf.message.Message):
     OPERATION_TYPE_FIELD_NUMBER: builtins.int
     TRADES_FIELD_NUMBER: builtins.int
     id: typing.Text
-    """Идентификатор операции"""
+    """Идентификатор операции."""
 
     parent_operation_id: typing.Text
-    """Идентификатор родительской операции"""
+    """Идентификатор родительской операции."""
 
     currency: typing.Text
-    """Валюта операции"""
+    """Валюта операции."""
 
     @property
     def payment(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
-        """Сумма операции"""
+        """Сумма операции."""
         pass
     @property
     def price(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
-        """Цена операции"""
+        """Цена операции за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента."""
         pass
     state: global___OperationState.ValueType
-    """Статус операции"""
+    """Статус операции."""
 
     quantity: builtins.int
-    """Количество лотов инструмента"""
+    """Количество лотов инструмента."""
 
     quantity_rest: builtins.int
-    """Неисполненный остаток по сделке"""
+    """Неисполненный остаток по сделке."""
 
     figi: typing.Text
-    """Figi-идентификатор инструмента, связанного с операцией"""
+    """Figi-идентификатор инструмента, связанного с операцией."""
 
     instrument_type: typing.Text
     """Тип инструмента. Возможные значения: </br>**bond** — облигация; </br>**share** — акция; </br>**currency** — валюта; </br>**etf** — фонд; </br>**futures** — фьючерс."""
 
     @property
     def date(self) -> google.protobuf.timestamp_pb2.Timestamp:
-        """Дата и время операции в формате часовом поясе UTC"""
+        """Дата и время операции в формате часовом поясе UTC."""
         pass
     type: typing.Text
-    """Текстовое описание типа операции"""
+    """Текстовое описание типа операции."""
 
     operation_type: global___OperationType.ValueType
-    """Тип операции"""
+    """Тип операции."""
 
     @property
     def trades(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___OperationTrade]:
-        """Массив сделок"""
+        """Массив сделок."""
         pass
     def __init__(self,
         *,
@@ -465,18 +465,18 @@ class OperationTrade(google.protobuf.message.Message):
     QUANTITY_FIELD_NUMBER: builtins.int
     PRICE_FIELD_NUMBER: builtins.int
     trade_id: typing.Text
-    """Идентификатор сделки"""
+    """Идентификатор сделки."""
 
     @property
     def date_time(self) -> google.protobuf.timestamp_pb2.Timestamp:
-        """Дата и время сделки в часовом поясе UTC"""
+        """Дата и время сделки в часовом поясе UTC."""
         pass
     quantity: builtins.int
-    """Количество инструментов"""
+    """Количество инструментов."""
 
     @property
     def price(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
-        """Цена"""
+        """Цена за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента."""
         pass
     def __init__(self,
         *,
@@ -494,7 +494,7 @@ class PortfolioRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     ACCOUNT_ID_FIELD_NUMBER: builtins.int
     account_id: typing.Text
-    """Идентификатор счёта пользователя"""
+    """Идентификатор счёта пользователя."""
 
     def __init__(self,
         *,
@@ -515,31 +515,31 @@ class PortfolioResponse(google.protobuf.message.Message):
     POSITIONS_FIELD_NUMBER: builtins.int
     @property
     def total_amount_shares(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
-        """Общая стоимость акций в портфеле в рублях"""
+        """Общая стоимость акций в портфеле в рублях."""
         pass
     @property
     def total_amount_bonds(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
-        """Общая стоимость облигаций в портфеле в рублях"""
+        """Общая стоимость облигаций в портфеле в рублях."""
         pass
     @property
     def total_amount_etf(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
-        """Общая стоимость фондов в портфеле в рублях"""
+        """Общая стоимость фондов в портфеле в рублях."""
         pass
     @property
     def total_amount_currencies(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
-        """Общая стоимость валют в портфеле в рублях"""
+        """Общая стоимость валют в портфеле в рублях."""
         pass
     @property
     def total_amount_futures(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
-        """Общая стоимость фьючерсов в портфеле в рублях"""
+        """Общая стоимость фьючерсов в портфеле в рублях."""
         pass
     @property
     def expected_yield(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Текущая доходность портфеля"""
+        """Текущая относительная доходность портфеля, в %."""
         pass
     @property
     def positions(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___PortfolioPosition]:
-        """Список позиций портфеля"""
+        """Список позиций портфеля."""
         pass
     def __init__(self,
         *,
@@ -560,7 +560,7 @@ class PositionsRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     ACCOUNT_ID_FIELD_NUMBER: builtins.int
     account_id: typing.Text
-    """Идентификатор счёта пользователя"""
+    """Идентификатор счёта пользователя."""
 
     def __init__(self,
         *,
@@ -579,22 +579,22 @@ class PositionsResponse(google.protobuf.message.Message):
     FUTURES_FIELD_NUMBER: builtins.int
     @property
     def money(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[tinkoff.invest.grpc.common_pb2.MoneyValue]:
-        """Массив валютных позиций портфеля"""
+        """Массив валютных позиций портфеля."""
         pass
     @property
     def blocked(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[tinkoff.invest.grpc.common_pb2.MoneyValue]:
-        """Массив заблокированных валютных позиций портфеля"""
+        """Массив заблокированных валютных позиций портфеля."""
         pass
     @property
     def securities(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___PositionsSecurities]:
-        """Список ценно-бумажных позиций портфеля"""
+        """Список ценно-бумажных позиций портфеля."""
         pass
     limits_loading_in_progress: builtins.bool
-    """Признак идущей в данный момент выгрузки лимитов"""
+    """Признак идущей в данный момент выгрузки лимитов."""
 
     @property
     def futures(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___PositionsFutures]:
-        """Список фьючерсов портфеля"""
+        """Список фьючерсов портфеля."""
         pass
     def __init__(self,
         *,
@@ -612,7 +612,7 @@ class WithdrawLimitsRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     ACCOUNT_ID_FIELD_NUMBER: builtins.int
     account_id: typing.Text
-    """Идентификатор счёта пользователя"""
+    """Идентификатор счёта пользователя."""
 
     def __init__(self,
         *,
@@ -629,15 +629,15 @@ class WithdrawLimitsResponse(google.protobuf.message.Message):
     BLOCKED_GUARANTEE_FIELD_NUMBER: builtins.int
     @property
     def money(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[tinkoff.invest.grpc.common_pb2.MoneyValue]:
-        """Массив валютных позиций портфеля"""
+        """Массив валютных позиций портфеля."""
         pass
     @property
     def blocked(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[tinkoff.invest.grpc.common_pb2.MoneyValue]:
-        """Массив заблокированных валютных позиций портфеля"""
+        """Массив заблокированных валютных позиций портфеля."""
         pass
     @property
     def blocked_guarantee(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[tinkoff.invest.grpc.common_pb2.MoneyValue]:
-        """Заблокировано под гарантийное обеспечение фьючерсов"""
+        """Заблокировано под гарантийное обеспечение фьючерсов."""
         pass
     def __init__(self,
         *,
@@ -662,14 +662,14 @@ class PortfolioPosition(google.protobuf.message.Message):
     AVERAGE_POSITION_PRICE_FIFO_FIELD_NUMBER: builtins.int
     QUANTITY_LOTS_FIELD_NUMBER: builtins.int
     figi: typing.Text
-    """Figi-идентификатора инструмента"""
+    """Figi-идентификатора инструмента."""
 
     instrument_type: typing.Text
-    """Тип инструмента"""
+    """Тип инструмента."""
 
     @property
     def quantity(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Количество инструмента в портфеле в штуках"""
+        """Количество инструмента в портфеле в штуках."""
         pass
     @property
     def average_position_price(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
@@ -677,11 +677,11 @@ class PortfolioPosition(google.protobuf.message.Message):
         pass
     @property
     def expected_yield(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Текущая рассчитанная доходность"""
+        """Текущая рассчитанная относительная доходность позиции, в %."""
         pass
     @property
     def current_nkd(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
-        """Текущий НКД"""
+        """Текущий НКД."""
         pass
     @property
     def average_position_price_pt(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
@@ -689,7 +689,7 @@ class PortfolioPosition(google.protobuf.message.Message):
         pass
     @property
     def current_price(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
-        """Текущая цена инструмента"""
+        """Текущая цена за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента.."""
         pass
     @property
     def average_position_price_fifo(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
@@ -697,7 +697,7 @@ class PortfolioPosition(google.protobuf.message.Message):
         pass
     @property
     def quantity_lots(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Количество лотов в портфеле"""
+        """Количество лотов в портфеле."""
         pass
     def __init__(self,
         *,
@@ -723,13 +723,13 @@ class PositionsSecurities(google.protobuf.message.Message):
     BLOCKED_FIELD_NUMBER: builtins.int
     BALANCE_FIELD_NUMBER: builtins.int
     figi: typing.Text
-    """Figi-идентификатор бумаги"""
+    """Figi-идентификатор бумаги."""
 
     blocked: builtins.int
-    """Заблокировано"""
+    """Заблокировано."""
 
     balance: builtins.int
-    """Текущий баланс"""
+    """Текущий незаблокированный баланс."""
 
     def __init__(self,
         *,
@@ -747,13 +747,13 @@ class PositionsFutures(google.protobuf.message.Message):
     BLOCKED_FIELD_NUMBER: builtins.int
     BALANCE_FIELD_NUMBER: builtins.int
     figi: typing.Text
-    """Figi-идентификатор фьючерса"""
+    """Figi-идентификатор фьючерса."""
 
     blocked: builtins.int
-    """Заблокировано"""
+    """Заблокировано."""
 
     balance: builtins.int
-    """Текущий баланс"""
+    """Текущий незаблокированный баланс."""
 
     def __init__(self,
         *,
@@ -806,7 +806,7 @@ class GenerateBrokerReportRequest(google.protobuf.message.Message):
     FROM_FIELD_NUMBER: builtins.int
     TO_FIELD_NUMBER: builtins.int
     account_id: typing.Text
-    """Идентификатор счёта клиента"""
+    """Идентификатор счёта клиента."""
 
     @property
     def to(self) -> google.protobuf.timestamp_pb2.Timestamp:
@@ -825,7 +825,7 @@ class GenerateBrokerReportResponse(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     TASK_ID_FIELD_NUMBER: builtins.int
     task_id: typing.Text
-    """Идентификатор задачи формирования брокерского отчёта"""
+    """Идентификатор задачи формирования брокерского отчёта."""
 
     def __init__(self,
         *,
@@ -839,10 +839,10 @@ class GetBrokerReportRequest(google.protobuf.message.Message):
     TASK_ID_FIELD_NUMBER: builtins.int
     PAGE_FIELD_NUMBER: builtins.int
     task_id: typing.Text
-    """Идентификатор задачи формирования брокерского отчёта"""
+    """Идентификатор задачи формирования брокерского отчёта."""
 
     page: builtins.int
-    """Номер страницы отчета (начинается с 1), значение по умолчанию: 0"""
+    """Номер страницы отчета (начинается с 1), значение по умолчанию: 0."""
 
     def __init__(self,
         *,
@@ -861,13 +861,13 @@ class GetBrokerReportResponse(google.protobuf.message.Message):
     @property
     def broker_report(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___BrokerReport]: ...
     itemsCount: builtins.int
-    """Количество записей в отчете"""
+    """Количество записей в отчете."""
 
     pagesCount: builtins.int
-    """Количество страниц с данными отчета (начинается с 0)"""
+    """Количество страниц с данными отчета (начинается с 0)."""
 
     page: builtins.int
-    """Текущая страница (начинается с 0)"""
+    """Текущая страница (начинается с 0)."""
 
     def __init__(self,
         *,
@@ -909,73 +909,73 @@ class BrokerReport(google.protobuf.message.Message):
     SEPARATE_AGREEMENT_DATE_FIELD_NUMBER: builtins.int
     DELIVERY_TYPE_FIELD_NUMBER: builtins.int
     trade_id: typing.Text
-    """Номер сделки"""
+    """Номер сделки."""
 
     order_id: typing.Text
-    """Номер поручения"""
+    """Номер поручения."""
 
     figi: typing.Text
-    """Figi-идентификатор инструмента"""
+    """Figi-идентификатор инструмента."""
 
     execute_sign: typing.Text
-    """Признак исполнения"""
+    """Признак исполнения."""
 
     @property
     def trade_datetime(self) -> google.protobuf.timestamp_pb2.Timestamp:
         """Дата и время заключения в часовом поясе UTC."""
         pass
     exchange: typing.Text
-    """Торговая площадка"""
+    """Торговая площадка."""
 
     class_code: typing.Text
-    """Режим торгов"""
+    """Режим торгов."""
 
     direction: typing.Text
-    """Вид сделки"""
+    """Вид сделки."""
 
     name: typing.Text
-    """Сокращённое наименование актива"""
+    """Сокращённое наименование актива."""
 
     ticker: typing.Text
-    """Код актива"""
+    """Код актива."""
 
     @property
     def price(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
-        """Цена за единицу"""
+        """Цена за единицу."""
         pass
     quantity: builtins.int
-    """Количество"""
+    """Количество."""
 
     @property
     def order_amount(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
-        """Сумма (без НКД)"""
+        """Сумма (без НКД)."""
         pass
     @property
     def aci_value(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """НКД"""
+        """НКД."""
         pass
     @property
     def total_order_amount(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
-        """Сумма сделки"""
+        """Сумма сделки."""
         pass
     @property
     def broker_commission(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
-        """Комиссия брокера"""
+        """Комиссия брокера."""
         pass
     @property
     def exchange_commission(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
-        """Комиссия биржи"""
+        """Комиссия биржи."""
         pass
     @property
     def exchange_clearing_commission(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
-        """Комиссия клир. центра"""
+        """Комиссия клир. центра."""
         pass
     @property
     def repo_rate(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Ставка РЕПО (%)"""
+        """Ставка РЕПО (%)."""
         pass
     party: typing.Text
-    """Контрагент/Брокер"""
+    """Контрагент/Брокер."""
 
     @property
     def clear_value_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
@@ -986,7 +986,7 @@ class BrokerReport(google.protobuf.message.Message):
         """Дата поставки в часовом поясе UTC."""
         pass
     broker_status: typing.Text
-    """Статус брокера"""
+    """Статус брокера."""
 
     separate_agreement_type: typing.Text
     """Тип дог."""
@@ -998,7 +998,7 @@ class BrokerReport(google.protobuf.message.Message):
     """Дата дог."""
 
     delivery_type: typing.Text
-    """Тип расчёта по сделке"""
+    """Тип расчёта по сделке."""
 
     def __init__(self,
         *,
@@ -1109,7 +1109,7 @@ class GetDividendsForeignIssuerReportRequest(google.protobuf.message.Message):
     """Идентификатор задачи формирования отчёта."""
 
     page: builtins.int
-    """Номер страницы отчета (начинается с 0), значение по умолчанию: 0"""
+    """Номер страницы отчета (начинается с 0), значение по умолчанию: 0."""
 
     def __init__(self,
         *,
@@ -1142,13 +1142,13 @@ class GetDividendsForeignIssuerReportResponse(google.protobuf.message.Message):
     @property
     def dividends_foreign_issuer_report(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___DividendsForeignIssuerReport]: ...
     itemsCount: builtins.int
-    """Количество записей в отчете"""
+    """Количество записей в отчете."""
 
     pagesCount: builtins.int
-    """Количество страниц с данными отчета (начинается с 0)"""
+    """Количество страниц с данными отчета (начинается с 0)."""
 
     page: builtins.int
-    """Текущая страница (начинается с 0)"""
+    """Текущая страница (начинается с 0)."""
 
     def __init__(self,
         *,

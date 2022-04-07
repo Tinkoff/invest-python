@@ -97,6 +97,16 @@ class InstrumentsServiceStub(object):
                 request_serializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetDividendsRequest.SerializeToString,
                 response_deserializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetDividendsResponse.FromString,
                 )
+        self.GetAssetBy = channel.unary_unary(
+                '/tinkoff.public.invest.api.contract.v1.InstrumentsService/GetAssetBy',
+                request_serializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.AssetRequest.SerializeToString,
+                response_deserializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.AssetResponse.FromString,
+                )
+        self.GetAssets = channel.unary_unary(
+                '/tinkoff.public.invest.api.contract.v1.InstrumentsService/GetAssets',
+                request_serializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.AssetsRequest.SerializeToString,
+                response_deserializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.AssetsResponse.FromString,
+                )
 
 
 class InstrumentsServiceServicer(object):
@@ -217,6 +227,20 @@ class InstrumentsServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def GetAssetBy(self, request, context):
+        """Метод получения актива по его идентификатору.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetAssets(self, request, context):
+        """Метод получения списка активов.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_InstrumentsServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -299,6 +323,16 @@ def add_InstrumentsServiceServicer_to_server(servicer, server):
                     servicer.GetDividends,
                     request_deserializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetDividendsRequest.FromString,
                     response_serializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetDividendsResponse.SerializeToString,
+            ),
+            'GetAssetBy': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetAssetBy,
+                    request_deserializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.AssetRequest.FromString,
+                    response_serializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.AssetResponse.SerializeToString,
+            ),
+            'GetAssets': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetAssets,
+                    request_deserializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.AssetsRequest.FromString,
+                    response_serializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.AssetsResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -582,5 +616,39 @@ class InstrumentsService(object):
         return grpc.experimental.unary_unary(request, target, '/tinkoff.public.invest.api.contract.v1.InstrumentsService/GetDividends',
             tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetDividendsRequest.SerializeToString,
             tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetDividendsResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetAssetBy(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/tinkoff.public.invest.api.contract.v1.InstrumentsService/GetAssetBy',
+            tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.AssetRequest.SerializeToString,
+            tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.AssetResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetAssets(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/tinkoff.public.invest.api.contract.v1.InstrumentsService/GetAssets',
+            tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.AssetsRequest.SerializeToString,
+            tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.AssetsResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

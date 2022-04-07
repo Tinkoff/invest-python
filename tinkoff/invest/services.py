@@ -29,6 +29,10 @@ from .grpc import (
 from .logging import get_tracking_id_from_call, log_request
 from .metadata import get_metadata
 from .schemas import (
+    AssetRequest,
+    AssetResponse,
+    AssetsRequest,
+    AssetsResponse,
     BondResponse,
     BondsResponse,
     BrokerReportRequest,
@@ -68,6 +72,8 @@ from .schemas import (
     GetInfoResponse,
     GetLastPricesRequest,
     GetLastPricesResponse,
+    GetLastTradesRequest,
+    GetLastTradesResponse,
     GetMarginAttributesRequest,
     GetMarginAttributesResponse,
     GetOrderBookRequest,
@@ -506,6 +512,37 @@ class InstrumentsService(_grpc_helpers.Service):
         log_request(get_tracking_id_from_call(call), "GetBondCoupons")
         return _grpc_helpers.protobuf_to_dataclass(response, GetBondCouponsResponse)
 
+    @handle_request_error("GetAssetBy")
+    def get_asset_by(
+        self,
+        *,
+        id: str = "",
+    ) -> AssetResponse:
+        request = AssetRequest()
+        request.id = id
+        response, call = self.stub.GetAssetBy.with_call(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, instruments_pb2.AssetRequest()
+            ),
+            metadata=self.metadata,
+        )
+        log_request(get_tracking_id_from_call(call), "GetAssetBy")
+        return _grpc_helpers.protobuf_to_dataclass(response, AssetResponse)
+
+    @handle_request_error("GetAssets")
+    def get_assets(
+        self,
+    ) -> AssetsResponse:
+        request = AssetsRequest()
+        response, call = self.stub.GetAssets.with_call(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, instruments_pb2.AssetsRequest()
+            ),
+            metadata=self.metadata,
+        )
+        log_request(get_tracking_id_from_call(call), "GetAssets")
+        return _grpc_helpers.protobuf_to_dataclass(response, AssetsResponse)
+
 
 class MarketDataService(_grpc_helpers.Service):
     _stub_factory = marketdata_pb2_grpc.MarketDataServiceStub
@@ -578,6 +615,29 @@ class MarketDataService(_grpc_helpers.Service):
         )
         log_request(get_tracking_id_from_call(call), "GetTradingStatus")
         return _grpc_helpers.protobuf_to_dataclass(response, GetTradingStatusResponse)
+
+    @handle_request_error("GetLastTrades")
+    def get_last_trades(
+        self,
+        *,
+        figi: str = "",
+        from_: Optional[datetime] = None,
+        to: Optional[datetime] = None,
+    ) -> GetLastTradesResponse:
+        request = GetLastTradesRequest()
+        request.figi = figi
+        if from_ is not None:
+            request.from_ = from_
+        if to is not None:
+            request.to = to
+        response, call = self.stub.GetLastTrades.with_call(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, marketdata_pb2.GetLastTradesRequest()
+            ),
+            metadata=self.metadata,
+        )
+        log_request(get_tracking_id_from_call(call), "GetLastTrades")
+        return _grpc_helpers.protobuf_to_dataclass(response, GetLastTradesResponse)
 
 
 class MarketDataStreamService(_grpc_helpers.Service):

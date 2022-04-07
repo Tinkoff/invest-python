@@ -29,6 +29,10 @@ from .market_data_stream.async_market_data_stream_manager import (
 )
 from .metadata import get_metadata
 from .schemas import (
+    AssetRequest,
+    AssetResponse,
+    AssetsRequest,
+    AssetsResponse,
     BondResponse,
     BondsResponse,
     BrokerReportRequest,
@@ -68,6 +72,8 @@ from .schemas import (
     GetInfoResponse,
     GetLastPricesRequest,
     GetLastPricesResponse,
+    GetLastTradesRequest,
+    GetLastTradesResponse,
     GetMarginAttributesRequest,
     GetMarginAttributesResponse,
     GetOrderBookRequest,
@@ -533,6 +539,39 @@ class InstrumentsService(_grpc_helpers.Service):
         log_request(await get_tracking_id_from_coro(response_coro), "GetBondCoupons")
         return _grpc_helpers.protobuf_to_dataclass(response, GetBondCouponsResponse)
 
+    @handle_aio_request_error("GetAssetBy")
+    async def get_asset_by(
+        self,
+        *,
+        id: str = "",
+    ) -> AssetResponse:
+        request = AssetRequest()
+        request.id = id
+        response_coro = self.stub.GetAssetBy(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, instruments_pb2.AssetRequest()
+            ),
+            metadata=self.metadata,
+        )
+        response = await response_coro
+        log_request(await get_tracking_id_from_coro(response_coro), "GetAssetBy")
+        return _grpc_helpers.protobuf_to_dataclass(response, AssetResponse)
+
+    @handle_aio_request_error("GetAssets")
+    async def get_assets(
+        self,
+    ) -> AssetsResponse:
+        request = AssetsRequest()
+        response_coro = self.stub.GetAssets(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, instruments_pb2.AssetsRequest()
+            ),
+            metadata=self.metadata,
+        )
+        response = await response_coro
+        log_request(await get_tracking_id_from_coro(response_coro), "GetAssets")
+        return _grpc_helpers.protobuf_to_dataclass(response, AssetsResponse)
+
 
 class MarketDataService(_grpc_helpers.Service):
     _stub_factory = marketdata_pb2_grpc.MarketDataServiceStub
@@ -611,6 +650,30 @@ class MarketDataService(_grpc_helpers.Service):
         response = await response_coro
         log_request(await get_tracking_id_from_coro(response_coro), "GetTradingStatus")
         return _grpc_helpers.protobuf_to_dataclass(response, GetTradingStatusResponse)
+
+    @handle_aio_request_error("GetLastTrades")
+    async def get_last_trades(
+        self,
+        *,
+        figi: str = "",
+        from_: Optional[datetime] = None,
+        to: Optional[datetime] = None,
+    ) -> GetLastTradesResponse:
+        request = GetLastTradesRequest()
+        request.figi = figi
+        if from_ is not None:
+            request.from_ = from_
+        if to is not None:
+            request.to = to
+        response_coro = self.stub.GetLastTrades(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, marketdata_pb2.GetLastTradesRequest()
+            ),
+            metadata=self.metadata,
+        )
+        response = await response_coro
+        log_request(await get_tracking_id_from_coro(response_coro), "GetLastTrades")
+        return _grpc_helpers.protobuf_to_dataclass(response, GetLastTradesResponse)
 
 
 class MarketDataStreamService(_grpc_helpers.Service):

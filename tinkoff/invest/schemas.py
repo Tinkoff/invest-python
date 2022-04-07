@@ -30,6 +30,7 @@ class InstrumentIdType(_grpc_helpers.Enum):
     INSTRUMENT_ID_UNSPECIFIED = 0
     INSTRUMENT_ID_TYPE_FIGI = 1
     INSTRUMENT_ID_TYPE_TICKER = 2
+    INSTRUMENT_ID_TYPE_UID = 3
 
 
 class InstrumentStatus(_grpc_helpers.Enum):
@@ -214,6 +215,20 @@ class CouponType(_grpc_helpers.Enum):
     COUPON_TYPE_OTHER = 7
 
 
+class AssetType(_grpc_helpers.Enum):
+    ASSET_TYPE_UNSPECIFIED = 0
+    ASSET_TYPE_CURRENCY = 1
+    ASSET_TYPE_COMMODITY = 2
+    ASSET_TYPE_INDEX = 3
+    ASSET_TYPE_SECURITY = 4
+
+
+class StructuredProductType(_grpc_helpers.Enum):
+    SP_TYPE_UNSPECIFIED = 0
+    SP_TYPE_DELIVERABLE = 1
+    SP_TYPE_NON_DELIVERABLE = 2
+
+
 @dataclass(eq=False, repr=True)
 class MoneyValue(_grpc_helpers.Message):
     currency: str = _grpc_helpers.string_field(1)
@@ -394,6 +409,7 @@ class Bond(_grpc_helpers.Message):  # pylint:disable=too-many-instance-attribute
     amortization_flag: bool = _grpc_helpers.bool_field(37)
     min_price_increment: "Quotation" = _grpc_helpers.message_field(38)
     api_trade_available_flag: bool = _grpc_helpers.bool_field(39)
+    uid: str = _grpc_helpers.string_field(40)
 
 
 @dataclass(eq=False, repr=True)
@@ -423,6 +439,7 @@ class Currency(_grpc_helpers.Message):  # pylint:disable=too-many-instance-attri
     iso_currency_name: str = _grpc_helpers.string_field(24)
     min_price_increment: "Quotation" = _grpc_helpers.message_field(25)
     api_trade_available_flag: bool = _grpc_helpers.bool_field(26)
+    uid: str = _grpc_helpers.string_field(27)
 
 
 @dataclass(eq=False, repr=True)
@@ -456,6 +473,7 @@ class Etf(_grpc_helpers.Message):  # pylint:disable=too-many-instance-attributes
     sell_available_flag: bool = _grpc_helpers.bool_field(28)
     min_price_increment: "Quotation" = _grpc_helpers.message_field(29)
     api_trade_available_flag: bool = _grpc_helpers.bool_field(30)
+    uid: str = _grpc_helpers.string_field(31)
 
 
 @dataclass(eq=False, repr=True)
@@ -490,6 +508,7 @@ class Future(_grpc_helpers.Message):  # pylint:disable=too-many-instance-attribu
     sell_available_flag: bool = _grpc_helpers.bool_field(28)
     min_price_increment: "Quotation" = _grpc_helpers.message_field(29)
     api_trade_available_flag: bool = _grpc_helpers.bool_field(30)
+    uid: str = _grpc_helpers.string_field(31)
 
 
 @dataclass(eq=False, repr=True)
@@ -524,6 +543,7 @@ class Share(_grpc_helpers.Message):  # pylint:disable=too-many-instance-attribut
     share_type: "ShareType" = _grpc_helpers.enum_field(30)
     min_price_increment: "Quotation" = _grpc_helpers.message_field(31)
     api_trade_available_flag: bool = _grpc_helpers.bool_field(32)
+    uid: str = _grpc_helpers.string_field(33)
 
 
 @dataclass(eq=False, repr=True)
@@ -590,6 +610,7 @@ class Instrument(_grpc_helpers.Message):  # pylint:disable=too-many-instance-att
     sell_available_flag: bool = _grpc_helpers.bool_field(22)
     min_price_increment: "Quotation" = _grpc_helpers.message_field(23)
     api_trade_available_flag: bool = _grpc_helpers.bool_field(24)
+    uid: str = _grpc_helpers.string_field(25)
 
 
 @dataclass(eq=False, repr=True)
@@ -616,6 +637,188 @@ class Dividend(_grpc_helpers.Message):
     close_price: "MoneyValue" = _grpc_helpers.message_field(8)
     yield_value: "Quotation" = _grpc_helpers.message_field(9)
     created_at: datetime = _grpc_helpers.message_field(10)
+
+
+class AssetRequest(_grpc_helpers.Message):
+    id: str = _grpc_helpers.string_field(1)
+
+
+class AssetResponse(_grpc_helpers.Message):
+    asset: "AssetFull" = _grpc_helpers.message_field(1)
+
+
+class AssetsRequest(_grpc_helpers.Message):
+    pass
+
+
+class AssetsResponse(_grpc_helpers.Message):
+    assets: List["Asset"] = _grpc_helpers.message_field(1)
+
+
+class AssetFull(_grpc_helpers.Message):
+    uid: str = _grpc_helpers.string_field(1)
+    type: "AssetType" = _grpc_helpers.message_field(2)
+    name: str = _grpc_helpers.string_field(3)
+    name_brief: str = _grpc_helpers.string_field(4)
+    description: str = _grpc_helpers.string_field(5)
+    deleted_at: datetime = _grpc_helpers.message_field(6)
+    required_tests: List[str] = _grpc_helpers.message_field(7)
+    currency: "AssetCurrency" = _grpc_helpers.message_field(8, group="ext")
+    security: "AssetSecurity" = _grpc_helpers.message_field(9, group="ext")
+    gos_reg_code: str = _grpc_helpers.string_field(10)
+    cfi: str = _grpc_helpers.string_field(11)
+    code_nsd: str = _grpc_helpers.string_field(12)
+    status: str = _grpc_helpers.string_field(13)
+    brand: "Brand" = _grpc_helpers.message_field(14)
+    updated_at: datetime = _grpc_helpers.message_field(15)
+    br_code: str = _grpc_helpers.string_field(16)
+    br_code_name: str = _grpc_helpers.string_field(17)
+    instruments: List["AssetInstrument"] = _grpc_helpers.message_field(18)
+
+
+class Asset(_grpc_helpers.Message):
+    uid: str = _grpc_helpers.string_field(1)
+    type: "AssetType" = _grpc_helpers.message_field(2)
+    name: str = _grpc_helpers.string_field(3)
+    instruments: List["AssetInstrument"] = _grpc_helpers.message_field(4)
+
+
+class AssetCurrency(_grpc_helpers.Message):
+    base_currency: str = _grpc_helpers.string_field(1)
+
+
+class AssetSecurity(_grpc_helpers.Message):
+    isin: str = _grpc_helpers.string_field(1)
+    type: str = _grpc_helpers.string_field(2)
+    share: "AssetShare" = _grpc_helpers.message_field(3, group="ext")
+    bond: "AssetBond" = _grpc_helpers.message_field(4, group="ext")
+    sp: "AssetStructuredProduct" = _grpc_helpers.message_field(5, group="ext")
+    etf: "AssetEtf" = _grpc_helpers.message_field(6, group="ext")
+    clearing_certificate: "AssetClearingCertificate" = _grpc_helpers.message_field(
+        7, group="ext"
+    )
+
+
+class AssetShare(_grpc_helpers.Message):
+    type: "ShareType" = _grpc_helpers.message_field(1)
+    issue_size: "Quotation" = _grpc_helpers.message_field(2)
+    nominal: "Quotation" = _grpc_helpers.message_field(3)
+    nominal_currency: str = _grpc_helpers.string_field(4)
+    primary_index: str = _grpc_helpers.string_field(5)
+    dividend_rate: "Quotation" = _grpc_helpers.message_field(6)
+    preferred_share_type: str = _grpc_helpers.string_field(7)
+    ipo_date: datetime = _grpc_helpers.message_field(8)
+    registry_date: datetime = _grpc_helpers.message_field(9)
+    div_yield_flag: bool = _grpc_helpers.bool_field(10)
+    issue_kind: str = _grpc_helpers.string_field(11)
+    placement_date: datetime = _grpc_helpers.message_field(12)
+    repres_isin: str = _grpc_helpers.string_field(13)
+    issue_size_plan: "Quotation" = _grpc_helpers.message_field(14)
+    total_float: "Quotation" = _grpc_helpers.message_field(15)
+
+
+class AssetBond(_grpc_helpers.Message):
+    current_nominal: "Quotation" = _grpc_helpers.message_field(1)
+    borrow_name: str = _grpc_helpers.string_field(2)
+    issue_size: "Quotation" = _grpc_helpers.message_field(3)
+    nominal: "Quotation" = _grpc_helpers.message_field(4)
+    nominal_currency: str = _grpc_helpers.string_field(5)
+    issue_kind: str = _grpc_helpers.string_field(6)
+    interest_kind: str = _grpc_helpers.string_field(7)
+    coupon_quantity_per_year: int = _grpc_helpers.int32_field(8)
+    indexed_nominal_flag: bool = _grpc_helpers.bool_field(9)
+    subordinated_flag: bool = _grpc_helpers.bool_field(10)
+    collateral_flag: bool = _grpc_helpers.bool_field(11)
+    tax_free_flag: bool = _grpc_helpers.bool_field(12)
+    amortization_flag: bool = _grpc_helpers.bool_field(13)
+    floating_coupon_flag: bool = _grpc_helpers.bool_field(14)
+    perpetual_flag: bool = _grpc_helpers.bool_field(15)
+    maturity_date: datetime = _grpc_helpers.message_field(16)
+    return_condition: str = _grpc_helpers.string_field(17)
+    state_reg_date: datetime = _grpc_helpers.message_field(18)
+    placement_date: datetime = _grpc_helpers.message_field(19)
+    placement_price: "Quotation" = _grpc_helpers.message_field(20)
+    issue_size_plan: "Quotation" = _grpc_helpers.message_field(21)
+
+
+class AssetStructuredProduct(_grpc_helpers.Message):
+    borrow_name: str = _grpc_helpers.string_field(1)
+    nominal: "Quotation" = _grpc_helpers.message_field(2)
+    nominal_currency: str = _grpc_helpers.string_field(3)
+    type: "StructuredProductType" = _grpc_helpers.message_field(4)
+    logic_portfolio: str = _grpc_helpers.string_field(5)
+    asset_type: "AssetType" = _grpc_helpers.message_field(6)
+    basic_asset: str = _grpc_helpers.string_field(7)
+    safety_barrier: "Quotation" = _grpc_helpers.message_field(8)
+    maturity_date: datetime = _grpc_helpers.message_field(9)
+    issue_size_plan: "Quotation" = _grpc_helpers.message_field(10)
+    issue_size: "Quotation" = _grpc_helpers.message_field(11)
+    placement_date: datetime = _grpc_helpers.message_field(12)
+    issue_kind: str = _grpc_helpers.string_field(13)
+
+
+class AssetEtf(_grpc_helpers.Message):
+    total_expense: "Quotation" = _grpc_helpers.message_field(1)
+    hurdle_rate: "Quotation" = _grpc_helpers.message_field(2)
+    performance_fee: "Quotation" = _grpc_helpers.message_field(3)
+    fixed_commission: "Quotation" = _grpc_helpers.message_field(4)
+    payment_type: str = _grpc_helpers.string_field(5)
+    watermark_flag: bool = _grpc_helpers.bool_field(6)
+    buy_premium: "Quotation" = _grpc_helpers.message_field(7)
+    sell_discount: "Quotation" = _grpc_helpers.message_field(8)
+    rebalancing_flag: bool = _grpc_helpers.bool_field(9)
+    rebalancing_freq: str = _grpc_helpers.string_field(10)
+    management_type: str = _grpc_helpers.string_field(11)
+    primary_index: str = _grpc_helpers.string_field(12)
+    focus_type: str = _grpc_helpers.string_field(13)
+    leveraged_flag: bool = _grpc_helpers.bool_field(14)
+    num_share: "Quotation" = _grpc_helpers.message_field(15)
+    ucits_flag: bool = _grpc_helpers.bool_field(16)
+    released_date: datetime = _grpc_helpers.message_field(17)
+    description: str = _grpc_helpers.string_field(18)
+    primary_index_description: str = _grpc_helpers.string_field(19)
+    primary_index_company: str = _grpc_helpers.string_field(20)
+    index_recovery_period: "Quotation" = _grpc_helpers.message_field(21)
+    inav_code: str = _grpc_helpers.string_field(22)
+    div_yield_flag: bool = _grpc_helpers.bool_field(23)
+    expense_commission: "Quotation" = _grpc_helpers.message_field(24)
+    primary_index_tracking_error: "Quotation" = _grpc_helpers.message_field(25)
+    rebalancing_plan: str = _grpc_helpers.string_field(26)
+    tax_rate: str = _grpc_helpers.string_field(27)
+    rebalancing_dates: List[datetime] = _grpc_helpers.message_field(28)
+    issue_kind: str = _grpc_helpers.string_field(29)
+    nominal: "Quotation" = _grpc_helpers.message_field(30)
+    nominal_currency: str = _grpc_helpers.string_field(31)
+
+
+class AssetClearingCertificate(_grpc_helpers.Message):
+    nominal: "Quotation" = _grpc_helpers.message_field(1)
+    nominal_currency: str = _grpc_helpers.string_field(2)
+
+
+class Brand(_grpc_helpers.Message):
+    uid: str = _grpc_helpers.string_field(1)
+    name: str = _grpc_helpers.string_field(2)
+    description: str = _grpc_helpers.string_field(3)
+    info: str = _grpc_helpers.string_field(4)
+    company: str = _grpc_helpers.string_field(5)
+    sector: str = _grpc_helpers.string_field(6)
+    country_of_risk: str = _grpc_helpers.string_field(7)
+    country_of_risk_name: str = _grpc_helpers.string_field(8)
+
+
+class AssetInstrument(_grpc_helpers.Message):
+    uid: str = _grpc_helpers.string_field(1)
+    figi: str = _grpc_helpers.string_field(2)
+    instrument_type: str = _grpc_helpers.string_field(3)
+    ticker: str = _grpc_helpers.string_field(4)
+    class_code: str = _grpc_helpers.string_field(5)
+    links: List["InstrumentLink"] = _grpc_helpers.message_field(6)
+
+
+class InstrumentLink(_grpc_helpers.Message):
+    type: str = _grpc_helpers.string_field(1)
+    instrument_uid: str = _grpc_helpers.string_field(2)
 
 
 @dataclass(eq=False, repr=True)
@@ -906,6 +1109,18 @@ class GetTradingStatusResponse(_grpc_helpers.Message):
     trading_status: "SecurityTradingStatus" = _grpc_helpers.enum_field(2)
     limit_order_available_flag: bool = _grpc_helpers.bool_field(3)
     market_order_available_flag: bool = _grpc_helpers.bool_field(4)
+
+
+@dataclass(eq=False, repr=True)
+class GetLastTradesRequest(_grpc_helpers.Message):
+    figi: str = _grpc_helpers.string_field(1)
+    from_: datetime = _grpc_helpers.message_field(2)
+    to: datetime = _grpc_helpers.message_field(3)
+
+
+@dataclass(eq=False, repr=True)
+class GetLastTradesResponse(_grpc_helpers.Message):
+    trades: List["Trade"] = _grpc_helpers.message_field(1)
 
 
 @dataclass(eq=False, repr=True)

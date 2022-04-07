@@ -22,7 +22,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=b'\n\034ru.tinkoff.piapi.contract.v1P\001Z\014./;investapi\242\002\005TIAPI\252\002\024Tinkoff.InvestApi.V1\312\002\021Tinkoff\\Invest\\V1',
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n%tinkoff/invest/grpc/instruments.proto\x12%tinkoff.public.invest.api.contract.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a tinkoff/invest/grpc/common.proto\"}\n\x17TradingSchedulesRequest\x12\x10\n\x08\x65xchange\x18\x01 \x01(\t\x12(\n\x04\x66rom\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12&\n\x02to\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"e\n\x18TradingSchedulesResponse\x12I\n\texchanges\x18\x01 \x03(\x0b\x32\x36.tinkoff.public.invest.api.contract.v1.TradingSchedule\"d\n\x0fTradingSchedule\x12\x10\n\x08\x65xchange\x18\x01 \x01(\t\x12?\n\x04\x64\x61ys\x18\x02 \x03(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.TradingDay\"\xce\x05\n\nTradingDay\x12(\n\x04\x64\x61te\x18\x01 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x16\n\x0eis_trading_day\x18\x02 \x01(\x08\x12.\n\nstart_time\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12,\n\x08\x65nd_time\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12>\n\x1aopening_auction_start_time\x18\x07 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12<\n\x18\x63losing_auction_end_time\x18\x08 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x46\n\"evening_opening_auction_start_time\x18\t \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x36\n\x12\x65vening_start_time\x18\n \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x34\n\x10\x65vening_end_time\x18\x0b \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x37\n\x13\x63learing_start_time\x18\x0c \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x35\n\x11\x63learing_end_time\x18\r \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x38\n\x14premarket_start_time\x18\x0e \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x36\n\x12premarket_end_time\x18\x0f \x01(\x0b\x32\x1a.google.protobuf.TimestampJ\x04\x08\x05\x10\x06J\x04\x08\x06\x10\x07\"}\n\x11InstrumentRequest\x12H\n\x07id_type\x18\x01 \x01(\x0e\x32\x37.tinkoff.public.invest.api.contract.v1.InstrumentIdType\x12\x12\n\nclass_code\x18\x02 \x01(\t\x12\n\n\x02id\x18\x03 \x01(\t\"h\n\x12InstrumentsRequest\x12R\n\x11instrument_status\x18\x01 \x01(\x0e\x32\x37.tinkoff.public.invest.api.contract.v1.InstrumentStatus\"O\n\x0c\x42ondResponse\x12?\n\ninstrument\x18\x01 \x01(\x0b\x32+.tinkoff.public.invest.api.contract.v1.Bond\"Q\n\rBondsResponse\x12@\n\x0binstruments\x18\x01 \x03(\x0b\x32+.tinkoff.public.invest.api.contract.v1.Bond\"w\n\x15GetBondCouponsRequest\x12\x0c\n\x04\x66igi\x18\x01 \x01(\t\x12(\n\x04\x66rom\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12&\n\x02to\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"W\n\x16GetBondCouponsResponse\x12=\n\x06\x65vents\x18\x01 \x03(\x0b\x32-.tinkoff.public.invest.api.contract.v1.Coupon\"\xa0\x03\n\x06\x43oupon\x12\x0c\n\x04\x66igi\x18\x01 \x01(\t\x12/\n\x0b\x63oupon_date\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x15\n\rcoupon_number\x18\x03 \x01(\x03\x12,\n\x08\x66ix_date\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12G\n\x0cpay_one_bond\x18\x05 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12\x46\n\x0b\x63oupon_type\x18\x06 \x01(\x0e\x32\x31.tinkoff.public.invest.api.contract.v1.CouponType\x12\x35\n\x11\x63oupon_start_date\x18\x07 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x33\n\x0f\x63oupon_end_date\x18\x08 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x15\n\rcoupon_period\x18\t \x01(\x05\"W\n\x10\x43urrencyResponse\x12\x43\n\ninstrument\x18\x01 \x01(\x0b\x32/.tinkoff.public.invest.api.contract.v1.Currency\"Z\n\x12\x43urrenciesResponse\x12\x44\n\x0binstruments\x18\x01 \x03(\x0b\x32/.tinkoff.public.invest.api.contract.v1.Currency\"M\n\x0b\x45tfResponse\x12>\n\ninstrument\x18\x01 \x01(\x0b\x32*.tinkoff.public.invest.api.contract.v1.Etf\"O\n\x0c\x45tfsResponse\x12?\n\x0binstruments\x18\x01 \x03(\x0b\x32*.tinkoff.public.invest.api.contract.v1.Etf\"S\n\x0e\x46utureResponse\x12\x41\n\ninstrument\x18\x01 \x01(\x0b\x32-.tinkoff.public.invest.api.contract.v1.Future\"U\n\x0f\x46uturesResponse\x12\x42\n\x0binstruments\x18\x01 \x03(\x0b\x32-.tinkoff.public.invest.api.contract.v1.Future\"Q\n\rShareResponse\x12@\n\ninstrument\x18\x01 \x01(\x0b\x32,.tinkoff.public.invest.api.contract.v1.Share\"S\n\x0eSharesResponse\x12\x41\n\x0binstruments\x18\x01 \x03(\x0b\x32,.tinkoff.public.invest.api.contract.v1.Share\"\xb0\x0b\n\x04\x42ond\x12\x0c\n\x04\x66igi\x18\x01 \x01(\t\x12\x0e\n\x06ticker\x18\x02 \x01(\t\x12\x12\n\nclass_code\x18\x03 \x01(\t\x12\x0c\n\x04isin\x18\x04 \x01(\t\x12\x0b\n\x03lot\x18\x05 \x01(\x05\x12\x10\n\x08\x63urrency\x18\x06 \x01(\t\x12?\n\x05klong\x18\x07 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12@\n\x06kshort\x18\x08 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12?\n\x05\x64long\x18\t \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12@\n\x06\x64short\x18\n \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x43\n\tdlong_min\x18\x0b \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x44\n\ndshort_min\x18\x0c \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x1a\n\x12short_enabled_flag\x18\r \x01(\x08\x12\x0c\n\x04name\x18\x0f \x01(\t\x12\x10\n\x08\x65xchange\x18\x10 \x01(\t\x12 \n\x18\x63oupon_quantity_per_year\x18\x11 \x01(\x05\x12\x31\n\rmaturity_date\x18\x12 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x42\n\x07nominal\x18\x13 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12\x32\n\x0estate_reg_date\x18\x15 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x32\n\x0eplacement_date\x18\x16 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12J\n\x0fplacement_price\x18\x17 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12\x44\n\taci_value\x18\x18 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12\x17\n\x0f\x63ountry_of_risk\x18\x19 \x01(\t\x12\x1c\n\x14\x63ountry_of_risk_name\x18\x1a \x01(\t\x12\x0e\n\x06sector\x18\x1b \x01(\t\x12\x12\n\nissue_kind\x18\x1c \x01(\t\x12\x12\n\nissue_size\x18\x1d \x01(\x03\x12\x17\n\x0fissue_size_plan\x18\x1e \x01(\x03\x12T\n\x0etrading_status\x18\x1f \x01(\x0e\x32<.tinkoff.public.invest.api.contract.v1.SecurityTradingStatus\x12\x10\n\x08otc_flag\x18  \x01(\x08\x12\x1a\n\x12\x62uy_available_flag\x18! \x01(\x08\x12\x1b\n\x13sell_available_flag\x18\" \x01(\x08\x12\x1c\n\x14\x66loating_coupon_flag\x18# \x01(\x08\x12\x16\n\x0eperpetual_flag\x18$ \x01(\x08\x12\x19\n\x11\x61mortization_flag\x18% \x01(\x08\x12M\n\x13min_price_increment\x18& \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12 \n\x18\x61pi_trade_available_flag\x18\' \x01(\x08\"\xde\x07\n\x08\x43urrency\x12\x0c\n\x04\x66igi\x18\x01 \x01(\t\x12\x0e\n\x06ticker\x18\x02 \x01(\t\x12\x12\n\nclass_code\x18\x03 \x01(\t\x12\x0c\n\x04isin\x18\x04 \x01(\t\x12\x0b\n\x03lot\x18\x05 \x01(\x05\x12\x10\n\x08\x63urrency\x18\x06 \x01(\t\x12?\n\x05klong\x18\x07 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12@\n\x06kshort\x18\x08 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12?\n\x05\x64long\x18\t \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12@\n\x06\x64short\x18\n \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x43\n\tdlong_min\x18\x0b \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x44\n\ndshort_min\x18\x0c \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x1a\n\x12short_enabled_flag\x18\r \x01(\x08\x12\x0c\n\x04name\x18\x0f \x01(\t\x12\x10\n\x08\x65xchange\x18\x10 \x01(\t\x12\x42\n\x07nominal\x18\x11 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12\x17\n\x0f\x63ountry_of_risk\x18\x12 \x01(\t\x12\x1c\n\x14\x63ountry_of_risk_name\x18\x13 \x01(\t\x12T\n\x0etrading_status\x18\x14 \x01(\x0e\x32<.tinkoff.public.invest.api.contract.v1.SecurityTradingStatus\x12\x10\n\x08otc_flag\x18\x15 \x01(\x08\x12\x1a\n\x12\x62uy_available_flag\x18\x16 \x01(\x08\x12\x1b\n\x13sell_available_flag\x18\x17 \x01(\x08\x12\x19\n\x11iso_currency_name\x18\x18 \x01(\t\x12M\n\x13min_price_increment\x18\x19 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12 \n\x18\x61pi_trade_available_flag\x18\x1a \x01(\x08\"\xfd\x08\n\x03\x45tf\x12\x0c\n\x04\x66igi\x18\x01 \x01(\t\x12\x0e\n\x06ticker\x18\x02 \x01(\t\x12\x12\n\nclass_code\x18\x03 \x01(\t\x12\x0c\n\x04isin\x18\x04 \x01(\t\x12\x0b\n\x03lot\x18\x05 \x01(\x05\x12\x10\n\x08\x63urrency\x18\x06 \x01(\t\x12?\n\x05klong\x18\x07 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12@\n\x06kshort\x18\x08 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12?\n\x05\x64long\x18\t \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12@\n\x06\x64short\x18\n \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x43\n\tdlong_min\x18\x0b \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x44\n\ndshort_min\x18\x0c \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x1a\n\x12short_enabled_flag\x18\r \x01(\x08\x12\x0c\n\x04name\x18\x0f \x01(\t\x12\x10\n\x08\x65xchange\x18\x10 \x01(\t\x12J\n\x10\x66ixed_commission\x18\x11 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x12\n\nfocus_type\x18\x12 \x01(\t\x12\x31\n\rreleased_date\x18\x13 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x44\n\nnum_shares\x18\x14 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x17\n\x0f\x63ountry_of_risk\x18\x15 \x01(\t\x12\x1c\n\x14\x63ountry_of_risk_name\x18\x16 \x01(\t\x12\x0e\n\x06sector\x18\x17 \x01(\t\x12\x18\n\x10rebalancing_freq\x18\x18 \x01(\t\x12T\n\x0etrading_status\x18\x19 \x01(\x0e\x32<.tinkoff.public.invest.api.contract.v1.SecurityTradingStatus\x12\x10\n\x08otc_flag\x18\x1a \x01(\x08\x12\x1a\n\x12\x62uy_available_flag\x18\x1b \x01(\x08\x12\x1b\n\x13sell_available_flag\x18\x1c \x01(\x08\x12M\n\x13min_price_increment\x18\x1d \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12 \n\x18\x61pi_trade_available_flag\x18\x1e \x01(\x08\"\xaa\t\n\x06\x46uture\x12\x0c\n\x04\x66igi\x18\x01 \x01(\t\x12\x0e\n\x06ticker\x18\x02 \x01(\t\x12\x12\n\nclass_code\x18\x03 \x01(\t\x12\x0b\n\x03lot\x18\x04 \x01(\x05\x12\x10\n\x08\x63urrency\x18\x05 \x01(\t\x12?\n\x05klong\x18\x06 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12@\n\x06kshort\x18\x07 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12?\n\x05\x64long\x18\x08 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12@\n\x06\x64short\x18\t \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x43\n\tdlong_min\x18\n \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x44\n\ndshort_min\x18\x0b \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x1a\n\x12short_enabled_flag\x18\x0c \x01(\x08\x12\x0c\n\x04name\x18\r \x01(\t\x12\x10\n\x08\x65xchange\x18\x0e \x01(\t\x12\x34\n\x10\x66irst_trade_date\x18\x0f \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x33\n\x0flast_trade_date\x18\x10 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x14\n\x0c\x66utures_type\x18\x11 \x01(\t\x12\x12\n\nasset_type\x18\x12 \x01(\t\x12\x13\n\x0b\x62\x61sic_asset\x18\x13 \x01(\t\x12J\n\x10\x62\x61sic_asset_size\x18\x14 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x17\n\x0f\x63ountry_of_risk\x18\x15 \x01(\t\x12\x1c\n\x14\x63ountry_of_risk_name\x18\x16 \x01(\t\x12\x0e\n\x06sector\x18\x17 \x01(\t\x12\x33\n\x0f\x65xpiration_date\x18\x18 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12T\n\x0etrading_status\x18\x19 \x01(\x0e\x32<.tinkoff.public.invest.api.contract.v1.SecurityTradingStatus\x12\x10\n\x08otc_flag\x18\x1a \x01(\x08\x12\x1a\n\x12\x62uy_available_flag\x18\x1b \x01(\x08\x12\x1b\n\x13sell_available_flag\x18\x1c \x01(\x08\x12M\n\x13min_price_increment\x18\x1d \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12 \n\x18\x61pi_trade_available_flag\x18\x1e \x01(\x08\"\x89\t\n\x05Share\x12\x0c\n\x04\x66igi\x18\x01 \x01(\t\x12\x0e\n\x06ticker\x18\x02 \x01(\t\x12\x12\n\nclass_code\x18\x03 \x01(\t\x12\x0c\n\x04isin\x18\x04 \x01(\t\x12\x0b\n\x03lot\x18\x05 \x01(\x05\x12\x10\n\x08\x63urrency\x18\x06 \x01(\t\x12?\n\x05klong\x18\x07 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12@\n\x06kshort\x18\x08 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12?\n\x05\x64long\x18\t \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12@\n\x06\x64short\x18\n \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x43\n\tdlong_min\x18\x0b \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x44\n\ndshort_min\x18\x0c \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x1a\n\x12short_enabled_flag\x18\r \x01(\x08\x12\x0c\n\x04name\x18\x0f \x01(\t\x12\x10\n\x08\x65xchange\x18\x10 \x01(\t\x12,\n\x08ipo_date\x18\x11 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x12\n\nissue_size\x18\x12 \x01(\x03\x12\x17\n\x0f\x63ountry_of_risk\x18\x13 \x01(\t\x12\x1c\n\x14\x63ountry_of_risk_name\x18\x14 \x01(\t\x12\x0e\n\x06sector\x18\x15 \x01(\t\x12\x17\n\x0fissue_size_plan\x18\x16 \x01(\x03\x12\x42\n\x07nominal\x18\x17 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12T\n\x0etrading_status\x18\x19 \x01(\x0e\x32<.tinkoff.public.invest.api.contract.v1.SecurityTradingStatus\x12\x10\n\x08otc_flag\x18\x1a \x01(\x08\x12\x1a\n\x12\x62uy_available_flag\x18\x1b \x01(\x08\x12\x1b\n\x13sell_available_flag\x18\x1c \x01(\x08\x12\x16\n\x0e\x64iv_yield_flag\x18\x1d \x01(\x08\x12\x44\n\nshare_type\x18\x1e \x01(\x0e\x32\x30.tinkoff.public.invest.api.contract.v1.ShareType\x12M\n\x13min_price_increment\x18\x1f \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12 \n\x18\x61pi_trade_available_flag\x18  \x01(\x08\"|\n\x1aGetAccruedInterestsRequest\x12\x0c\n\x04\x66igi\x18\x01 \x01(\t\x12(\n\x04\x66rom\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12&\n\x02to\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"p\n\x1bGetAccruedInterestsResponse\x12Q\n\x11\x61\x63\x63rued_interests\x18\x01 \x03(\x0b\x32\x36.tinkoff.public.invest.api.contract.v1.AccruedInterest\"\x88\x02\n\x0f\x41\x63\x63ruedInterest\x12(\n\x04\x64\x61te\x18\x01 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12?\n\x05value\x18\x02 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12G\n\rvalue_percent\x18\x03 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x41\n\x07nominal\x18\x04 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\"\'\n\x17GetFuturesMarginRequest\x12\x0c\n\x04\x66igi\x18\x01 \x01(\t\"\xe4\x02\n\x18GetFuturesMarginResponse\x12P\n\x15initial_margin_on_buy\x18\x01 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12Q\n\x16initial_margin_on_sell\x18\x02 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12M\n\x13min_price_increment\x18\x03 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12T\n\x1amin_price_increment_amount\x18\x04 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\"[\n\x12InstrumentResponse\x12\x45\n\ninstrument\x18\x01 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.Instrument\"\x9a\x07\n\nInstrument\x12\x0c\n\x04\x66igi\x18\x01 \x01(\t\x12\x0e\n\x06ticker\x18\x02 \x01(\t\x12\x12\n\nclass_code\x18\x03 \x01(\t\x12\x0c\n\x04isin\x18\x04 \x01(\t\x12\x0b\n\x03lot\x18\x05 \x01(\x05\x12\x10\n\x08\x63urrency\x18\x06 \x01(\t\x12?\n\x05klong\x18\x07 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12@\n\x06kshort\x18\x08 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12?\n\x05\x64long\x18\t \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12@\n\x06\x64short\x18\n \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x43\n\tdlong_min\x18\x0b \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x44\n\ndshort_min\x18\x0c \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x1a\n\x12short_enabled_flag\x18\r \x01(\x08\x12\x0c\n\x04name\x18\x0e \x01(\t\x12\x10\n\x08\x65xchange\x18\x0f \x01(\t\x12\x17\n\x0f\x63ountry_of_risk\x18\x10 \x01(\t\x12\x1c\n\x14\x63ountry_of_risk_name\x18\x11 \x01(\t\x12\x17\n\x0finstrument_type\x18\x12 \x01(\t\x12T\n\x0etrading_status\x18\x13 \x01(\x0e\x32<.tinkoff.public.invest.api.contract.v1.SecurityTradingStatus\x12\x10\n\x08otc_flag\x18\x14 \x01(\x08\x12\x1a\n\x12\x62uy_available_flag\x18\x15 \x01(\x08\x12\x1b\n\x13sell_available_flag\x18\x16 \x01(\x08\x12M\n\x13min_price_increment\x18\x17 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12 \n\x18\x61pi_trade_available_flag\x18\x18 \x01(\x08\"u\n\x13GetDividendsRequest\x12\x0c\n\x04\x66igi\x18\x01 \x01(\t\x12(\n\x04\x66rom\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12&\n\x02to\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"Z\n\x14GetDividendsResponse\x12\x42\n\tdividends\x18\x01 \x03(\x0b\x32/.tinkoff.public.invest.api.contract.v1.Dividend\"\x86\x04\n\x08\x44ividend\x12G\n\x0c\x64ividend_net\x18\x01 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12\x30\n\x0cpayment_date\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x31\n\rdeclared_date\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x31\n\rlast_buy_date\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x15\n\rdividend_type\x18\x05 \x01(\t\x12/\n\x0brecord_date\x18\x06 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x12\n\nregularity\x18\x07 \x01(\t\x12\x46\n\x0b\x63lose_price\x18\x08 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12\x45\n\x0byield_value\x18\t \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12.\n\ncreated_at\x18\n \x01(\x0b\x32\x1a.google.protobuf.Timestamp*\xd7\x01\n\nCouponType\x12\x1b\n\x17\x43OUPON_TYPE_UNSPECIFIED\x10\x00\x12\x18\n\x14\x43OUPON_TYPE_CONSTANT\x10\x01\x12\x18\n\x14\x43OUPON_TYPE_FLOATING\x10\x02\x12\x18\n\x14\x43OUPON_TYPE_DISCOUNT\x10\x03\x12\x18\n\x14\x43OUPON_TYPE_MORTGAGE\x10\x04\x12\x13\n\x0f\x43OUPON_TYPE_FIX\x10\x05\x12\x18\n\x14\x43OUPON_TYPE_VARIABLE\x10\x06\x12\x15\n\x11\x43OUPON_TYPE_OTHER\x10\x07*m\n\x10InstrumentIdType\x12\x1d\n\x19INSTRUMENT_ID_UNSPECIFIED\x10\x00\x12\x1b\n\x17INSTRUMENT_ID_TYPE_FIGI\x10\x01\x12\x1d\n\x19INSTRUMENT_ID_TYPE_TICKER\x10\x02*l\n\x10InstrumentStatus\x12!\n\x1dINSTRUMENT_STATUS_UNSPECIFIED\x10\x00\x12\x1a\n\x16INSTRUMENT_STATUS_BASE\x10\x01\x12\x19\n\x15INSTRUMENT_STATUS_ALL\x10\x02*\xe5\x01\n\tShareType\x12\x1a\n\x16SHARE_TYPE_UNSPECIFIED\x10\x00\x12\x15\n\x11SHARE_TYPE_COMMON\x10\x01\x12\x18\n\x14SHARE_TYPE_PREFERRED\x10\x02\x12\x12\n\x0eSHARE_TYPE_ADR\x10\x03\x12\x12\n\x0eSHARE_TYPE_GDR\x10\x04\x12\x12\n\x0eSHARE_TYPE_MLP\x10\x05\x12\x1a\n\x16SHARE_TYPE_NY_REG_SHRS\x10\x06\x12\x1e\n\x1aSHARE_TYPE_CLOSED_END_FUND\x10\x07\x12\x13\n\x0fSHARE_TYPE_REIT\x10\x08\x32\xdc\x10\n\x12InstrumentsService\x12\x93\x01\n\x10TradingSchedules\x12>.tinkoff.public.invest.api.contract.v1.TradingSchedulesRequest\x1a?.tinkoff.public.invest.api.contract.v1.TradingSchedulesResponse\x12w\n\x06\x42ondBy\x12\x38.tinkoff.public.invest.api.contract.v1.InstrumentRequest\x1a\x33.tinkoff.public.invest.api.contract.v1.BondResponse\x12x\n\x05\x42onds\x12\x39.tinkoff.public.invest.api.contract.v1.InstrumentsRequest\x1a\x34.tinkoff.public.invest.api.contract.v1.BondsResponse\x12\x8d\x01\n\x0eGetBondCoupons\x12<.tinkoff.public.invest.api.contract.v1.GetBondCouponsRequest\x1a=.tinkoff.public.invest.api.contract.v1.GetBondCouponsResponse\x12\x7f\n\nCurrencyBy\x12\x38.tinkoff.public.invest.api.contract.v1.InstrumentRequest\x1a\x37.tinkoff.public.invest.api.contract.v1.CurrencyResponse\x12\x82\x01\n\nCurrencies\x12\x39.tinkoff.public.invest.api.contract.v1.InstrumentsRequest\x1a\x39.tinkoff.public.invest.api.contract.v1.CurrenciesResponse\x12u\n\x05\x45tfBy\x12\x38.tinkoff.public.invest.api.contract.v1.InstrumentRequest\x1a\x32.tinkoff.public.invest.api.contract.v1.EtfResponse\x12v\n\x04\x45tfs\x12\x39.tinkoff.public.invest.api.contract.v1.InstrumentsRequest\x1a\x33.tinkoff.public.invest.api.contract.v1.EtfsResponse\x12{\n\x08\x46utureBy\x12\x38.tinkoff.public.invest.api.contract.v1.InstrumentRequest\x1a\x35.tinkoff.public.invest.api.contract.v1.FutureResponse\x12|\n\x07\x46utures\x12\x39.tinkoff.public.invest.api.contract.v1.InstrumentsRequest\x1a\x36.tinkoff.public.invest.api.contract.v1.FuturesResponse\x12y\n\x07ShareBy\x12\x38.tinkoff.public.invest.api.contract.v1.InstrumentRequest\x1a\x34.tinkoff.public.invest.api.contract.v1.ShareResponse\x12z\n\x06Shares\x12\x39.tinkoff.public.invest.api.contract.v1.InstrumentsRequest\x1a\x35.tinkoff.public.invest.api.contract.v1.SharesResponse\x12\x9c\x01\n\x13GetAccruedInterests\x12\x41.tinkoff.public.invest.api.contract.v1.GetAccruedInterestsRequest\x1a\x42.tinkoff.public.invest.api.contract.v1.GetAccruedInterestsResponse\x12\x93\x01\n\x10GetFuturesMargin\x12>.tinkoff.public.invest.api.contract.v1.GetFuturesMarginRequest\x1a?.tinkoff.public.invest.api.contract.v1.GetFuturesMarginResponse\x12\x86\x01\n\x0fGetInstrumentBy\x12\x38.tinkoff.public.invest.api.contract.v1.InstrumentRequest\x1a\x39.tinkoff.public.invest.api.contract.v1.InstrumentResponse\x12\x87\x01\n\x0cGetDividends\x12:.tinkoff.public.invest.api.contract.v1.GetDividendsRequest\x1a;.tinkoff.public.invest.api.contract.v1.GetDividendsResponseBa\n\x1cru.tinkoff.piapi.contract.v1P\x01Z\x0c./;investapi\xa2\x02\x05TIAPI\xaa\x02\x14Tinkoff.InvestApi.V1\xca\x02\x11Tinkoff\\Invest\\V1b\x06proto3'
+  serialized_pb=b'\n%tinkoff/invest/grpc/instruments.proto\x12%tinkoff.public.invest.api.contract.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a tinkoff/invest/grpc/common.proto\"}\n\x17TradingSchedulesRequest\x12\x10\n\x08\x65xchange\x18\x01 \x01(\t\x12(\n\x04\x66rom\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12&\n\x02to\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"e\n\x18TradingSchedulesResponse\x12I\n\texchanges\x18\x01 \x03(\x0b\x32\x36.tinkoff.public.invest.api.contract.v1.TradingSchedule\"d\n\x0fTradingSchedule\x12\x10\n\x08\x65xchange\x18\x01 \x01(\t\x12?\n\x04\x64\x61ys\x18\x02 \x03(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.TradingDay\"\xce\x05\n\nTradingDay\x12(\n\x04\x64\x61te\x18\x01 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x16\n\x0eis_trading_day\x18\x02 \x01(\x08\x12.\n\nstart_time\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12,\n\x08\x65nd_time\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12>\n\x1aopening_auction_start_time\x18\x07 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12<\n\x18\x63losing_auction_end_time\x18\x08 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x46\n\"evening_opening_auction_start_time\x18\t \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x36\n\x12\x65vening_start_time\x18\n \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x34\n\x10\x65vening_end_time\x18\x0b \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x37\n\x13\x63learing_start_time\x18\x0c \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x35\n\x11\x63learing_end_time\x18\r \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x38\n\x14premarket_start_time\x18\x0e \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x36\n\x12premarket_end_time\x18\x0f \x01(\x0b\x32\x1a.google.protobuf.TimestampJ\x04\x08\x05\x10\x06J\x04\x08\x06\x10\x07\"}\n\x11InstrumentRequest\x12H\n\x07id_type\x18\x01 \x01(\x0e\x32\x37.tinkoff.public.invest.api.contract.v1.InstrumentIdType\x12\x12\n\nclass_code\x18\x02 \x01(\t\x12\n\n\x02id\x18\x03 \x01(\t\"h\n\x12InstrumentsRequest\x12R\n\x11instrument_status\x18\x01 \x01(\x0e\x32\x37.tinkoff.public.invest.api.contract.v1.InstrumentStatus\"O\n\x0c\x42ondResponse\x12?\n\ninstrument\x18\x01 \x01(\x0b\x32+.tinkoff.public.invest.api.contract.v1.Bond\"Q\n\rBondsResponse\x12@\n\x0binstruments\x18\x01 \x03(\x0b\x32+.tinkoff.public.invest.api.contract.v1.Bond\"w\n\x15GetBondCouponsRequest\x12\x0c\n\x04\x66igi\x18\x01 \x01(\t\x12(\n\x04\x66rom\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12&\n\x02to\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"W\n\x16GetBondCouponsResponse\x12=\n\x06\x65vents\x18\x01 \x03(\x0b\x32-.tinkoff.public.invest.api.contract.v1.Coupon\"\xa0\x03\n\x06\x43oupon\x12\x0c\n\x04\x66igi\x18\x01 \x01(\t\x12/\n\x0b\x63oupon_date\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x15\n\rcoupon_number\x18\x03 \x01(\x03\x12,\n\x08\x66ix_date\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12G\n\x0cpay_one_bond\x18\x05 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12\x46\n\x0b\x63oupon_type\x18\x06 \x01(\x0e\x32\x31.tinkoff.public.invest.api.contract.v1.CouponType\x12\x35\n\x11\x63oupon_start_date\x18\x07 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x33\n\x0f\x63oupon_end_date\x18\x08 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x15\n\rcoupon_period\x18\t \x01(\x05\"W\n\x10\x43urrencyResponse\x12\x43\n\ninstrument\x18\x01 \x01(\x0b\x32/.tinkoff.public.invest.api.contract.v1.Currency\"Z\n\x12\x43urrenciesResponse\x12\x44\n\x0binstruments\x18\x01 \x03(\x0b\x32/.tinkoff.public.invest.api.contract.v1.Currency\"M\n\x0b\x45tfResponse\x12>\n\ninstrument\x18\x01 \x01(\x0b\x32*.tinkoff.public.invest.api.contract.v1.Etf\"O\n\x0c\x45tfsResponse\x12?\n\x0binstruments\x18\x01 \x03(\x0b\x32*.tinkoff.public.invest.api.contract.v1.Etf\"S\n\x0e\x46utureResponse\x12\x41\n\ninstrument\x18\x01 \x01(\x0b\x32-.tinkoff.public.invest.api.contract.v1.Future\"U\n\x0f\x46uturesResponse\x12\x42\n\x0binstruments\x18\x01 \x03(\x0b\x32-.tinkoff.public.invest.api.contract.v1.Future\"Q\n\rShareResponse\x12@\n\ninstrument\x18\x01 \x01(\x0b\x32,.tinkoff.public.invest.api.contract.v1.Share\"S\n\x0eSharesResponse\x12\x41\n\x0binstruments\x18\x01 \x03(\x0b\x32,.tinkoff.public.invest.api.contract.v1.Share\"\xbd\x0b\n\x04\x42ond\x12\x0c\n\x04\x66igi\x18\x01 \x01(\t\x12\x0e\n\x06ticker\x18\x02 \x01(\t\x12\x12\n\nclass_code\x18\x03 \x01(\t\x12\x0c\n\x04isin\x18\x04 \x01(\t\x12\x0b\n\x03lot\x18\x05 \x01(\x05\x12\x10\n\x08\x63urrency\x18\x06 \x01(\t\x12?\n\x05klong\x18\x07 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12@\n\x06kshort\x18\x08 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12?\n\x05\x64long\x18\t \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12@\n\x06\x64short\x18\n \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x43\n\tdlong_min\x18\x0b \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x44\n\ndshort_min\x18\x0c \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x1a\n\x12short_enabled_flag\x18\r \x01(\x08\x12\x0c\n\x04name\x18\x0f \x01(\t\x12\x10\n\x08\x65xchange\x18\x10 \x01(\t\x12 \n\x18\x63oupon_quantity_per_year\x18\x11 \x01(\x05\x12\x31\n\rmaturity_date\x18\x12 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x42\n\x07nominal\x18\x13 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12\x32\n\x0estate_reg_date\x18\x15 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x32\n\x0eplacement_date\x18\x16 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12J\n\x0fplacement_price\x18\x17 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12\x44\n\taci_value\x18\x18 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12\x17\n\x0f\x63ountry_of_risk\x18\x19 \x01(\t\x12\x1c\n\x14\x63ountry_of_risk_name\x18\x1a \x01(\t\x12\x0e\n\x06sector\x18\x1b \x01(\t\x12\x12\n\nissue_kind\x18\x1c \x01(\t\x12\x12\n\nissue_size\x18\x1d \x01(\x03\x12\x17\n\x0fissue_size_plan\x18\x1e \x01(\x03\x12T\n\x0etrading_status\x18\x1f \x01(\x0e\x32<.tinkoff.public.invest.api.contract.v1.SecurityTradingStatus\x12\x10\n\x08otc_flag\x18  \x01(\x08\x12\x1a\n\x12\x62uy_available_flag\x18! \x01(\x08\x12\x1b\n\x13sell_available_flag\x18\" \x01(\x08\x12\x1c\n\x14\x66loating_coupon_flag\x18# \x01(\x08\x12\x16\n\x0eperpetual_flag\x18$ \x01(\x08\x12\x19\n\x11\x61mortization_flag\x18% \x01(\x08\x12M\n\x13min_price_increment\x18& \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12 \n\x18\x61pi_trade_available_flag\x18\' \x01(\x08\x12\x0b\n\x03uid\x18( \x01(\t\"\xeb\x07\n\x08\x43urrency\x12\x0c\n\x04\x66igi\x18\x01 \x01(\t\x12\x0e\n\x06ticker\x18\x02 \x01(\t\x12\x12\n\nclass_code\x18\x03 \x01(\t\x12\x0c\n\x04isin\x18\x04 \x01(\t\x12\x0b\n\x03lot\x18\x05 \x01(\x05\x12\x10\n\x08\x63urrency\x18\x06 \x01(\t\x12?\n\x05klong\x18\x07 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12@\n\x06kshort\x18\x08 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12?\n\x05\x64long\x18\t \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12@\n\x06\x64short\x18\n \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x43\n\tdlong_min\x18\x0b \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x44\n\ndshort_min\x18\x0c \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x1a\n\x12short_enabled_flag\x18\r \x01(\x08\x12\x0c\n\x04name\x18\x0f \x01(\t\x12\x10\n\x08\x65xchange\x18\x10 \x01(\t\x12\x42\n\x07nominal\x18\x11 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12\x17\n\x0f\x63ountry_of_risk\x18\x12 \x01(\t\x12\x1c\n\x14\x63ountry_of_risk_name\x18\x13 \x01(\t\x12T\n\x0etrading_status\x18\x14 \x01(\x0e\x32<.tinkoff.public.invest.api.contract.v1.SecurityTradingStatus\x12\x10\n\x08otc_flag\x18\x15 \x01(\x08\x12\x1a\n\x12\x62uy_available_flag\x18\x16 \x01(\x08\x12\x1b\n\x13sell_available_flag\x18\x17 \x01(\x08\x12\x19\n\x11iso_currency_name\x18\x18 \x01(\t\x12M\n\x13min_price_increment\x18\x19 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12 \n\x18\x61pi_trade_available_flag\x18\x1a \x01(\x08\x12\x0b\n\x03uid\x18\x1b \x01(\t\"\x8a\t\n\x03\x45tf\x12\x0c\n\x04\x66igi\x18\x01 \x01(\t\x12\x0e\n\x06ticker\x18\x02 \x01(\t\x12\x12\n\nclass_code\x18\x03 \x01(\t\x12\x0c\n\x04isin\x18\x04 \x01(\t\x12\x0b\n\x03lot\x18\x05 \x01(\x05\x12\x10\n\x08\x63urrency\x18\x06 \x01(\t\x12?\n\x05klong\x18\x07 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12@\n\x06kshort\x18\x08 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12?\n\x05\x64long\x18\t \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12@\n\x06\x64short\x18\n \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x43\n\tdlong_min\x18\x0b \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x44\n\ndshort_min\x18\x0c \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x1a\n\x12short_enabled_flag\x18\r \x01(\x08\x12\x0c\n\x04name\x18\x0f \x01(\t\x12\x10\n\x08\x65xchange\x18\x10 \x01(\t\x12J\n\x10\x66ixed_commission\x18\x11 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x12\n\nfocus_type\x18\x12 \x01(\t\x12\x31\n\rreleased_date\x18\x13 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x44\n\nnum_shares\x18\x14 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x17\n\x0f\x63ountry_of_risk\x18\x15 \x01(\t\x12\x1c\n\x14\x63ountry_of_risk_name\x18\x16 \x01(\t\x12\x0e\n\x06sector\x18\x17 \x01(\t\x12\x18\n\x10rebalancing_freq\x18\x18 \x01(\t\x12T\n\x0etrading_status\x18\x19 \x01(\x0e\x32<.tinkoff.public.invest.api.contract.v1.SecurityTradingStatus\x12\x10\n\x08otc_flag\x18\x1a \x01(\x08\x12\x1a\n\x12\x62uy_available_flag\x18\x1b \x01(\x08\x12\x1b\n\x13sell_available_flag\x18\x1c \x01(\x08\x12M\n\x13min_price_increment\x18\x1d \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12 \n\x18\x61pi_trade_available_flag\x18\x1e \x01(\x08\x12\x0b\n\x03uid\x18\x1f \x01(\t\"\xb7\t\n\x06\x46uture\x12\x0c\n\x04\x66igi\x18\x01 \x01(\t\x12\x0e\n\x06ticker\x18\x02 \x01(\t\x12\x12\n\nclass_code\x18\x03 \x01(\t\x12\x0b\n\x03lot\x18\x04 \x01(\x05\x12\x10\n\x08\x63urrency\x18\x05 \x01(\t\x12?\n\x05klong\x18\x06 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12@\n\x06kshort\x18\x07 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12?\n\x05\x64long\x18\x08 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12@\n\x06\x64short\x18\t \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x43\n\tdlong_min\x18\n \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x44\n\ndshort_min\x18\x0b \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x1a\n\x12short_enabled_flag\x18\x0c \x01(\x08\x12\x0c\n\x04name\x18\r \x01(\t\x12\x10\n\x08\x65xchange\x18\x0e \x01(\t\x12\x34\n\x10\x66irst_trade_date\x18\x0f \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x33\n\x0flast_trade_date\x18\x10 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x14\n\x0c\x66utures_type\x18\x11 \x01(\t\x12\x12\n\nasset_type\x18\x12 \x01(\t\x12\x13\n\x0b\x62\x61sic_asset\x18\x13 \x01(\t\x12J\n\x10\x62\x61sic_asset_size\x18\x14 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x17\n\x0f\x63ountry_of_risk\x18\x15 \x01(\t\x12\x1c\n\x14\x63ountry_of_risk_name\x18\x16 \x01(\t\x12\x0e\n\x06sector\x18\x17 \x01(\t\x12\x33\n\x0f\x65xpiration_date\x18\x18 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12T\n\x0etrading_status\x18\x19 \x01(\x0e\x32<.tinkoff.public.invest.api.contract.v1.SecurityTradingStatus\x12\x10\n\x08otc_flag\x18\x1a \x01(\x08\x12\x1a\n\x12\x62uy_available_flag\x18\x1b \x01(\x08\x12\x1b\n\x13sell_available_flag\x18\x1c \x01(\x08\x12M\n\x13min_price_increment\x18\x1d \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12 \n\x18\x61pi_trade_available_flag\x18\x1e \x01(\x08\x12\x0b\n\x03uid\x18\x1f \x01(\t\"\x96\t\n\x05Share\x12\x0c\n\x04\x66igi\x18\x01 \x01(\t\x12\x0e\n\x06ticker\x18\x02 \x01(\t\x12\x12\n\nclass_code\x18\x03 \x01(\t\x12\x0c\n\x04isin\x18\x04 \x01(\t\x12\x0b\n\x03lot\x18\x05 \x01(\x05\x12\x10\n\x08\x63urrency\x18\x06 \x01(\t\x12?\n\x05klong\x18\x07 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12@\n\x06kshort\x18\x08 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12?\n\x05\x64long\x18\t \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12@\n\x06\x64short\x18\n \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x43\n\tdlong_min\x18\x0b \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x44\n\ndshort_min\x18\x0c \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x1a\n\x12short_enabled_flag\x18\r \x01(\x08\x12\x0c\n\x04name\x18\x0f \x01(\t\x12\x10\n\x08\x65xchange\x18\x10 \x01(\t\x12,\n\x08ipo_date\x18\x11 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x12\n\nissue_size\x18\x12 \x01(\x03\x12\x17\n\x0f\x63ountry_of_risk\x18\x13 \x01(\t\x12\x1c\n\x14\x63ountry_of_risk_name\x18\x14 \x01(\t\x12\x0e\n\x06sector\x18\x15 \x01(\t\x12\x17\n\x0fissue_size_plan\x18\x16 \x01(\x03\x12\x42\n\x07nominal\x18\x17 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12T\n\x0etrading_status\x18\x19 \x01(\x0e\x32<.tinkoff.public.invest.api.contract.v1.SecurityTradingStatus\x12\x10\n\x08otc_flag\x18\x1a \x01(\x08\x12\x1a\n\x12\x62uy_available_flag\x18\x1b \x01(\x08\x12\x1b\n\x13sell_available_flag\x18\x1c \x01(\x08\x12\x16\n\x0e\x64iv_yield_flag\x18\x1d \x01(\x08\x12\x44\n\nshare_type\x18\x1e \x01(\x0e\x32\x30.tinkoff.public.invest.api.contract.v1.ShareType\x12M\n\x13min_price_increment\x18\x1f \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12 \n\x18\x61pi_trade_available_flag\x18  \x01(\x08\x12\x0b\n\x03uid\x18! \x01(\t\"|\n\x1aGetAccruedInterestsRequest\x12\x0c\n\x04\x66igi\x18\x01 \x01(\t\x12(\n\x04\x66rom\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12&\n\x02to\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"p\n\x1bGetAccruedInterestsResponse\x12Q\n\x11\x61\x63\x63rued_interests\x18\x01 \x03(\x0b\x32\x36.tinkoff.public.invest.api.contract.v1.AccruedInterest\"\x88\x02\n\x0f\x41\x63\x63ruedInterest\x12(\n\x04\x64\x61te\x18\x01 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12?\n\x05value\x18\x02 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12G\n\rvalue_percent\x18\x03 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x41\n\x07nominal\x18\x04 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\"\'\n\x17GetFuturesMarginRequest\x12\x0c\n\x04\x66igi\x18\x01 \x01(\t\"\xe4\x02\n\x18GetFuturesMarginResponse\x12P\n\x15initial_margin_on_buy\x18\x01 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12Q\n\x16initial_margin_on_sell\x18\x02 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12M\n\x13min_price_increment\x18\x03 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12T\n\x1amin_price_increment_amount\x18\x04 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\"[\n\x12InstrumentResponse\x12\x45\n\ninstrument\x18\x01 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.Instrument\"\xa7\x07\n\nInstrument\x12\x0c\n\x04\x66igi\x18\x01 \x01(\t\x12\x0e\n\x06ticker\x18\x02 \x01(\t\x12\x12\n\nclass_code\x18\x03 \x01(\t\x12\x0c\n\x04isin\x18\x04 \x01(\t\x12\x0b\n\x03lot\x18\x05 \x01(\x05\x12\x10\n\x08\x63urrency\x18\x06 \x01(\t\x12?\n\x05klong\x18\x07 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12@\n\x06kshort\x18\x08 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12?\n\x05\x64long\x18\t \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12@\n\x06\x64short\x18\n \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x43\n\tdlong_min\x18\x0b \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x44\n\ndshort_min\x18\x0c \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x1a\n\x12short_enabled_flag\x18\r \x01(\x08\x12\x0c\n\x04name\x18\x0e \x01(\t\x12\x10\n\x08\x65xchange\x18\x0f \x01(\t\x12\x17\n\x0f\x63ountry_of_risk\x18\x10 \x01(\t\x12\x1c\n\x14\x63ountry_of_risk_name\x18\x11 \x01(\t\x12\x17\n\x0finstrument_type\x18\x12 \x01(\t\x12T\n\x0etrading_status\x18\x13 \x01(\x0e\x32<.tinkoff.public.invest.api.contract.v1.SecurityTradingStatus\x12\x10\n\x08otc_flag\x18\x14 \x01(\x08\x12\x1a\n\x12\x62uy_available_flag\x18\x15 \x01(\x08\x12\x1b\n\x13sell_available_flag\x18\x16 \x01(\x08\x12M\n\x13min_price_increment\x18\x17 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12 \n\x18\x61pi_trade_available_flag\x18\x18 \x01(\x08\x12\x0b\n\x03uid\x18\x19 \x01(\t\"u\n\x13GetDividendsRequest\x12\x0c\n\x04\x66igi\x18\x01 \x01(\t\x12(\n\x04\x66rom\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12&\n\x02to\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"Z\n\x14GetDividendsResponse\x12\x42\n\tdividends\x18\x01 \x03(\x0b\x32/.tinkoff.public.invest.api.contract.v1.Dividend\"\x86\x04\n\x08\x44ividend\x12G\n\x0c\x64ividend_net\x18\x01 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12\x30\n\x0cpayment_date\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x31\n\rdeclared_date\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x31\n\rlast_buy_date\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x15\n\rdividend_type\x18\x05 \x01(\t\x12/\n\x0brecord_date\x18\x06 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x12\n\nregularity\x18\x07 \x01(\t\x12\x46\n\x0b\x63lose_price\x18\x08 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.MoneyValue\x12\x45\n\x0byield_value\x18\t \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12.\n\ncreated_at\x18\n \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"\x1a\n\x0c\x41ssetRequest\x12\n\n\x02id\x18\x01 \x01(\t\"P\n\rAssetResponse\x12?\n\x05\x61sset\x18\x01 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.AssetFull\"\x0f\n\rAssetsRequest\"N\n\x0e\x41ssetsResponse\x12<\n\x06\x61ssets\x18\x01 \x03(\x0b\x32,.tinkoff.public.invest.api.contract.v1.Asset\"\x98\x05\n\tAssetFull\x12\x0b\n\x03uid\x18\x01 \x01(\t\x12>\n\x04type\x18\x02 \x01(\x0e\x32\x30.tinkoff.public.invest.api.contract.v1.AssetType\x12\x0c\n\x04name\x18\x03 \x01(\t\x12\x12\n\nname_brief\x18\x04 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x05 \x01(\t\x12.\n\ndeleted_at\x18\x06 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x16\n\x0erequired_tests\x18\x07 \x03(\t\x12H\n\x08\x63urrency\x18\x08 \x01(\x0b\x32\x34.tinkoff.public.invest.api.contract.v1.AssetCurrencyH\x00\x12H\n\x08security\x18\t \x01(\x0b\x32\x34.tinkoff.public.invest.api.contract.v1.AssetSecurityH\x00\x12\x14\n\x0cgos_reg_code\x18\n \x01(\t\x12\x0b\n\x03\x63\x66i\x18\x0b \x01(\t\x12\x10\n\x08\x63ode_nsd\x18\x0c \x01(\t\x12\x0e\n\x06status\x18\r \x01(\t\x12;\n\x05\x62rand\x18\x0e \x01(\x0b\x32,.tinkoff.public.invest.api.contract.v1.Brand\x12.\n\nupdated_at\x18\x0f \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x0f\n\x07\x62r_code\x18\x10 \x01(\t\x12\x14\n\x0c\x62r_code_name\x18\x11 \x01(\t\x12K\n\x0binstruments\x18\x12 \x03(\x0b\x32\x36.tinkoff.public.invest.api.contract.v1.AssetInstrumentB\x05\n\x03\x65xt\"\xaf\x01\n\x05\x41sset\x12\x0b\n\x03uid\x18\x01 \x01(\t\x12>\n\x04type\x18\x02 \x01(\x0e\x32\x30.tinkoff.public.invest.api.contract.v1.AssetType\x12\x0c\n\x04name\x18\x03 \x01(\t\x12K\n\x0binstruments\x18\x04 \x03(\x0b\x32\x36.tinkoff.public.invest.api.contract.v1.AssetInstrument\"&\n\rAssetCurrency\x12\x15\n\rbase_currency\x18\x01 \x01(\t\"\xa6\x03\n\rAssetSecurity\x12\x0c\n\x04isin\x18\x01 \x01(\t\x12\x0c\n\x04type\x18\x02 \x01(\t\x12\x42\n\x05share\x18\x03 \x01(\x0b\x32\x31.tinkoff.public.invest.api.contract.v1.AssetShareH\x00\x12@\n\x04\x62ond\x18\x04 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.AssetBondH\x00\x12K\n\x02sp\x18\x05 \x01(\x0b\x32=.tinkoff.public.invest.api.contract.v1.AssetStructuredProductH\x00\x12>\n\x03\x65tf\x18\x06 \x01(\x0b\x32/.tinkoff.public.invest.api.contract.v1.AssetEtfH\x00\x12_\n\x14\x63learing_certificate\x18\x07 \x01(\x0b\x32?.tinkoff.public.invest.api.contract.v1.AssetClearingCertificateH\x00\x42\x05\n\x03\x65xt\"\xd5\x05\n\nAssetShare\x12>\n\x04type\x18\x01 \x01(\x0e\x32\x30.tinkoff.public.invest.api.contract.v1.ShareType\x12\x44\n\nissue_size\x18\x02 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x41\n\x07nominal\x18\x03 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x18\n\x10nominal_currency\x18\x04 \x01(\t\x12\x15\n\rprimary_index\x18\x05 \x01(\t\x12G\n\rdividend_rate\x18\x06 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x1c\n\x14preferred_share_type\x18\x07 \x01(\t\x12,\n\x08ipo_date\x18\x08 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x31\n\rregistry_date\x18\t \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x16\n\x0e\x64iv_yield_flag\x18\n \x01(\x08\x12\x12\n\nissue_kind\x18\x0b \x01(\t\x12\x32\n\x0eplacement_date\x18\x0c \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x13\n\x0brepres_isin\x18\r \x01(\t\x12I\n\x0fissue_size_plan\x18\x0e \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x45\n\x0btotal_float\x18\x0f \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\"\xe0\x06\n\tAssetBond\x12I\n\x0f\x63urrent_nominal\x18\x01 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x13\n\x0b\x62orrow_name\x18\x02 \x01(\t\x12\x44\n\nissue_size\x18\x03 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x41\n\x07nominal\x18\x04 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x18\n\x10nominal_currency\x18\x05 \x01(\t\x12\x12\n\nissue_kind\x18\x06 \x01(\t\x12\x15\n\rinterest_kind\x18\x07 \x01(\t\x12 \n\x18\x63oupon_quantity_per_year\x18\x08 \x01(\x05\x12\x1c\n\x14indexed_nominal_flag\x18\t \x01(\x08\x12\x19\n\x11subordinated_flag\x18\n \x01(\x08\x12\x17\n\x0f\x63ollateral_flag\x18\x0b \x01(\x08\x12\x15\n\rtax_free_flag\x18\x0c \x01(\x08\x12\x19\n\x11\x61mortization_flag\x18\r \x01(\x08\x12\x1c\n\x14\x66loating_coupon_flag\x18\x0e \x01(\x08\x12\x16\n\x0eperpetual_flag\x18\x0f \x01(\x08\x12\x31\n\rmaturity_date\x18\x10 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x18\n\x10return_condition\x18\x11 \x01(\t\x12\x32\n\x0estate_reg_date\x18\x12 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x32\n\x0eplacement_date\x18\x13 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12I\n\x0fplacement_price\x18\x14 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12I\n\x0fissue_size_plan\x18\x15 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\"\xa0\x05\n\x16\x41ssetStructuredProduct\x12\x13\n\x0b\x62orrow_name\x18\x01 \x01(\t\x12\x41\n\x07nominal\x18\x02 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x18\n\x10nominal_currency\x18\x03 \x01(\t\x12J\n\x04type\x18\x04 \x01(\x0e\x32<.tinkoff.public.invest.api.contract.v1.StructuredProductType\x12\x17\n\x0flogic_portfolio\x18\x05 \x01(\t\x12\x44\n\nasset_type\x18\x06 \x01(\x0e\x32\x30.tinkoff.public.invest.api.contract.v1.AssetType\x12\x13\n\x0b\x62\x61sic_asset\x18\x07 \x01(\t\x12H\n\x0esafety_barrier\x18\x08 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x31\n\rmaturity_date\x18\t \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12I\n\x0fissue_size_plan\x18\n \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x44\n\nissue_size\x18\x0b \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x32\n\x0eplacement_date\x18\x0c \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x12\n\nissue_kind\x18\r \x01(\t\"\xd8\n\n\x08\x41ssetEtf\x12G\n\rtotal_expense\x18\x01 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x45\n\x0bhurdle_rate\x18\x02 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12I\n\x0fperformance_fee\x18\x03 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12J\n\x10\x66ixed_commission\x18\x04 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x14\n\x0cpayment_type\x18\x05 \x01(\t\x12\x16\n\x0ewatermark_flag\x18\x06 \x01(\x08\x12\x45\n\x0b\x62uy_premium\x18\x07 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12G\n\rsell_discount\x18\x08 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x18\n\x10rebalancing_flag\x18\t \x01(\x08\x12\x18\n\x10rebalancing_freq\x18\n \x01(\t\x12\x17\n\x0fmanagement_type\x18\x0b \x01(\t\x12\x15\n\rprimary_index\x18\x0c \x01(\t\x12\x12\n\nfocus_type\x18\r \x01(\t\x12\x16\n\x0eleveraged_flag\x18\x0e \x01(\x08\x12\x43\n\tnum_share\x18\x0f \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x12\n\nucits_flag\x18\x10 \x01(\x08\x12\x31\n\rreleased_date\x18\x11 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x13\n\x0b\x64\x65scription\x18\x12 \x01(\t\x12!\n\x19primary_index_description\x18\x13 \x01(\t\x12\x1d\n\x15primary_index_company\x18\x14 \x01(\t\x12O\n\x15index_recovery_period\x18\x15 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x11\n\tinav_code\x18\x16 \x01(\t\x12\x16\n\x0e\x64iv_yield_flag\x18\x17 \x01(\x08\x12L\n\x12\x65xpense_commission\x18\x18 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12V\n\x1cprimary_index_tracking_error\x18\x19 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x18\n\x10rebalancing_plan\x18\x1a \x01(\t\x12\x10\n\x08tax_rate\x18\x1b \x01(\t\x12\x35\n\x11rebalancing_dates\x18\x1c \x03(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x12\n\nissue_kind\x18\x1d \x01(\t\x12\x41\n\x07nominal\x18\x1e \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x18\n\x10nominal_currency\x18\x1f \x01(\t\"w\n\x18\x41ssetClearingCertificate\x12\x41\n\x07nominal\x18\x01 \x01(\x0b\x32\x30.tinkoff.public.invest.api.contract.v1.Quotation\x12\x18\n\x10nominal_currency\x18\x02 \x01(\t\"\x9d\x01\n\x05\x42rand\x12\x0b\n\x03uid\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x03 \x01(\t\x12\x0c\n\x04info\x18\x04 \x01(\t\x12\x0f\n\x07\x63ompany\x18\x05 \x01(\t\x12\x0e\n\x06sector\x18\x06 \x01(\t\x12\x17\n\x0f\x63ountry_of_risk\x18\x07 \x01(\t\x12\x1c\n\x14\x63ountry_of_risk_name\x18\x08 \x01(\t\"\xaf\x01\n\x0f\x41ssetInstrument\x12\x0b\n\x03uid\x18\x01 \x01(\t\x12\x0c\n\x04\x66igi\x18\x02 \x01(\t\x12\x17\n\x0finstrument_type\x18\x03 \x01(\t\x12\x0e\n\x06ticker\x18\x04 \x01(\t\x12\x12\n\nclass_code\x18\x05 \x01(\t\x12\x44\n\x05links\x18\x06 \x03(\x0b\x32\x35.tinkoff.public.invest.api.contract.v1.InstrumentLink\"6\n\x0eInstrumentLink\x12\x0c\n\x04type\x18\x01 \x01(\t\x12\x16\n\x0einstrument_uid\x18\x02 \x01(\t*\xd7\x01\n\nCouponType\x12\x1b\n\x17\x43OUPON_TYPE_UNSPECIFIED\x10\x00\x12\x18\n\x14\x43OUPON_TYPE_CONSTANT\x10\x01\x12\x18\n\x14\x43OUPON_TYPE_FLOATING\x10\x02\x12\x18\n\x14\x43OUPON_TYPE_DISCOUNT\x10\x03\x12\x18\n\x14\x43OUPON_TYPE_MORTGAGE\x10\x04\x12\x13\n\x0f\x43OUPON_TYPE_FIX\x10\x05\x12\x18\n\x14\x43OUPON_TYPE_VARIABLE\x10\x06\x12\x15\n\x11\x43OUPON_TYPE_OTHER\x10\x07*\x89\x01\n\x10InstrumentIdType\x12\x1d\n\x19INSTRUMENT_ID_UNSPECIFIED\x10\x00\x12\x1b\n\x17INSTRUMENT_ID_TYPE_FIGI\x10\x01\x12\x1d\n\x19INSTRUMENT_ID_TYPE_TICKER\x10\x02\x12\x1a\n\x16INSTRUMENT_ID_TYPE_UID\x10\x03*l\n\x10InstrumentStatus\x12!\n\x1dINSTRUMENT_STATUS_UNSPECIFIED\x10\x00\x12\x1a\n\x16INSTRUMENT_STATUS_BASE\x10\x01\x12\x19\n\x15INSTRUMENT_STATUS_ALL\x10\x02*\xe5\x01\n\tShareType\x12\x1a\n\x16SHARE_TYPE_UNSPECIFIED\x10\x00\x12\x15\n\x11SHARE_TYPE_COMMON\x10\x01\x12\x18\n\x14SHARE_TYPE_PREFERRED\x10\x02\x12\x12\n\x0eSHARE_TYPE_ADR\x10\x03\x12\x12\n\x0eSHARE_TYPE_GDR\x10\x04\x12\x12\n\x0eSHARE_TYPE_MLP\x10\x05\x12\x1a\n\x16SHARE_TYPE_NY_REG_SHRS\x10\x06\x12\x1e\n\x1aSHARE_TYPE_CLOSED_END_FUND\x10\x07\x12\x13\n\x0fSHARE_TYPE_REIT\x10\x08*\x89\x01\n\tAssetType\x12\x1a\n\x16\x41SSET_TYPE_UNSPECIFIED\x10\x00\x12\x17\n\x13\x41SSET_TYPE_CURRENCY\x10\x01\x12\x18\n\x14\x41SSET_TYPE_COMMODITY\x10\x02\x12\x14\n\x10\x41SSET_TYPE_INDEX\x10\x03\x12\x17\n\x13\x41SSET_TYPE_SECURITY\x10\x04*f\n\x15StructuredProductType\x12\x17\n\x13SP_TYPE_UNSPECIFIED\x10\x00\x12\x17\n\x13SP_TYPE_DELIVERABLE\x10\x01\x12\x1b\n\x17SP_TYPE_NON_DELIVERABLE\x10\x02\x32\xcf\x12\n\x12InstrumentsService\x12\x93\x01\n\x10TradingSchedules\x12>.tinkoff.public.invest.api.contract.v1.TradingSchedulesRequest\x1a?.tinkoff.public.invest.api.contract.v1.TradingSchedulesResponse\x12w\n\x06\x42ondBy\x12\x38.tinkoff.public.invest.api.contract.v1.InstrumentRequest\x1a\x33.tinkoff.public.invest.api.contract.v1.BondResponse\x12x\n\x05\x42onds\x12\x39.tinkoff.public.invest.api.contract.v1.InstrumentsRequest\x1a\x34.tinkoff.public.invest.api.contract.v1.BondsResponse\x12\x8d\x01\n\x0eGetBondCoupons\x12<.tinkoff.public.invest.api.contract.v1.GetBondCouponsRequest\x1a=.tinkoff.public.invest.api.contract.v1.GetBondCouponsResponse\x12\x7f\n\nCurrencyBy\x12\x38.tinkoff.public.invest.api.contract.v1.InstrumentRequest\x1a\x37.tinkoff.public.invest.api.contract.v1.CurrencyResponse\x12\x82\x01\n\nCurrencies\x12\x39.tinkoff.public.invest.api.contract.v1.InstrumentsRequest\x1a\x39.tinkoff.public.invest.api.contract.v1.CurrenciesResponse\x12u\n\x05\x45tfBy\x12\x38.tinkoff.public.invest.api.contract.v1.InstrumentRequest\x1a\x32.tinkoff.public.invest.api.contract.v1.EtfResponse\x12v\n\x04\x45tfs\x12\x39.tinkoff.public.invest.api.contract.v1.InstrumentsRequest\x1a\x33.tinkoff.public.invest.api.contract.v1.EtfsResponse\x12{\n\x08\x46utureBy\x12\x38.tinkoff.public.invest.api.contract.v1.InstrumentRequest\x1a\x35.tinkoff.public.invest.api.contract.v1.FutureResponse\x12|\n\x07\x46utures\x12\x39.tinkoff.public.invest.api.contract.v1.InstrumentsRequest\x1a\x36.tinkoff.public.invest.api.contract.v1.FuturesResponse\x12y\n\x07ShareBy\x12\x38.tinkoff.public.invest.api.contract.v1.InstrumentRequest\x1a\x34.tinkoff.public.invest.api.contract.v1.ShareResponse\x12z\n\x06Shares\x12\x39.tinkoff.public.invest.api.contract.v1.InstrumentsRequest\x1a\x35.tinkoff.public.invest.api.contract.v1.SharesResponse\x12\x9c\x01\n\x13GetAccruedInterests\x12\x41.tinkoff.public.invest.api.contract.v1.GetAccruedInterestsRequest\x1a\x42.tinkoff.public.invest.api.contract.v1.GetAccruedInterestsResponse\x12\x93\x01\n\x10GetFuturesMargin\x12>.tinkoff.public.invest.api.contract.v1.GetFuturesMarginRequest\x1a?.tinkoff.public.invest.api.contract.v1.GetFuturesMarginResponse\x12\x86\x01\n\x0fGetInstrumentBy\x12\x38.tinkoff.public.invest.api.contract.v1.InstrumentRequest\x1a\x39.tinkoff.public.invest.api.contract.v1.InstrumentResponse\x12\x87\x01\n\x0cGetDividends\x12:.tinkoff.public.invest.api.contract.v1.GetDividendsRequest\x1a;.tinkoff.public.invest.api.contract.v1.GetDividendsResponse\x12w\n\nGetAssetBy\x12\x33.tinkoff.public.invest.api.contract.v1.AssetRequest\x1a\x34.tinkoff.public.invest.api.contract.v1.AssetResponse\x12x\n\tGetAssets\x12\x34.tinkoff.public.invest.api.contract.v1.AssetsRequest\x1a\x35.tinkoff.public.invest.api.contract.v1.AssetsResponseBa\n\x1cru.tinkoff.piapi.contract.v1P\x01Z\x0c./;investapi\xa2\x02\x05TIAPI\xaa\x02\x14Tinkoff.InvestApi.V1\xca\x02\x11Tinkoff\\Invest\\V1b\x06proto3'
   ,
   dependencies=[google_dot_protobuf_dot_timestamp__pb2.DESCRIPTOR,tinkoff_dot_invest_dot_grpc_dot_common__pb2.DESCRIPTOR,])
 
@@ -76,8 +76,8 @@ _COUPONTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=11530,
-  serialized_end=11745,
+  serialized_start=17281,
+  serialized_end=17496,
 )
 _sym_db.RegisterEnumDescriptor(_COUPONTYPE)
 
@@ -104,11 +104,16 @@ _INSTRUMENTIDTYPE = _descriptor.EnumDescriptor(
       serialized_options=None,
       type=None,
       create_key=_descriptor._internal_create_key),
+    _descriptor.EnumValueDescriptor(
+      name='INSTRUMENT_ID_TYPE_UID', index=3, number=3,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=11747,
-  serialized_end=11856,
+  serialized_start=17499,
+  serialized_end=17636,
 )
 _sym_db.RegisterEnumDescriptor(_INSTRUMENTIDTYPE)
 
@@ -138,8 +143,8 @@ _INSTRUMENTSTATUS = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=11858,
-  serialized_end=11966,
+  serialized_start=17638,
+  serialized_end=17746,
 )
 _sym_db.RegisterEnumDescriptor(_INSTRUMENTSTATUS)
 
@@ -199,12 +204,84 @@ _SHARETYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=11969,
-  serialized_end=12198,
+  serialized_start=17749,
+  serialized_end=17978,
 )
 _sym_db.RegisterEnumDescriptor(_SHARETYPE)
 
 ShareType = enum_type_wrapper.EnumTypeWrapper(_SHARETYPE)
+_ASSETTYPE = _descriptor.EnumDescriptor(
+  name='AssetType',
+  full_name='tinkoff.public.invest.api.contract.v1.AssetType',
+  filename=None,
+  file=DESCRIPTOR,
+  create_key=_descriptor._internal_create_key,
+  values=[
+    _descriptor.EnumValueDescriptor(
+      name='ASSET_TYPE_UNSPECIFIED', index=0, number=0,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+    _descriptor.EnumValueDescriptor(
+      name='ASSET_TYPE_CURRENCY', index=1, number=1,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+    _descriptor.EnumValueDescriptor(
+      name='ASSET_TYPE_COMMODITY', index=2, number=2,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+    _descriptor.EnumValueDescriptor(
+      name='ASSET_TYPE_INDEX', index=3, number=3,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+    _descriptor.EnumValueDescriptor(
+      name='ASSET_TYPE_SECURITY', index=4, number=4,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+  ],
+  containing_type=None,
+  serialized_options=None,
+  serialized_start=17981,
+  serialized_end=18118,
+)
+_sym_db.RegisterEnumDescriptor(_ASSETTYPE)
+
+AssetType = enum_type_wrapper.EnumTypeWrapper(_ASSETTYPE)
+_STRUCTUREDPRODUCTTYPE = _descriptor.EnumDescriptor(
+  name='StructuredProductType',
+  full_name='tinkoff.public.invest.api.contract.v1.StructuredProductType',
+  filename=None,
+  file=DESCRIPTOR,
+  create_key=_descriptor._internal_create_key,
+  values=[
+    _descriptor.EnumValueDescriptor(
+      name='SP_TYPE_UNSPECIFIED', index=0, number=0,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+    _descriptor.EnumValueDescriptor(
+      name='SP_TYPE_DELIVERABLE', index=1, number=1,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+    _descriptor.EnumValueDescriptor(
+      name='SP_TYPE_NON_DELIVERABLE', index=2, number=2,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+  ],
+  containing_type=None,
+  serialized_options=None,
+  serialized_start=18120,
+  serialized_end=18222,
+)
+_sym_db.RegisterEnumDescriptor(_STRUCTUREDPRODUCTTYPE)
+
+StructuredProductType = enum_type_wrapper.EnumTypeWrapper(_STRUCTUREDPRODUCTTYPE)
 COUPON_TYPE_UNSPECIFIED = 0
 COUPON_TYPE_CONSTANT = 1
 COUPON_TYPE_FLOATING = 2
@@ -216,6 +293,7 @@ COUPON_TYPE_OTHER = 7
 INSTRUMENT_ID_UNSPECIFIED = 0
 INSTRUMENT_ID_TYPE_FIGI = 1
 INSTRUMENT_ID_TYPE_TICKER = 2
+INSTRUMENT_ID_TYPE_UID = 3
 INSTRUMENT_STATUS_UNSPECIFIED = 0
 INSTRUMENT_STATUS_BASE = 1
 INSTRUMENT_STATUS_ALL = 2
@@ -228,6 +306,14 @@ SHARE_TYPE_MLP = 5
 SHARE_TYPE_NY_REG_SHRS = 6
 SHARE_TYPE_CLOSED_END_FUND = 7
 SHARE_TYPE_REIT = 8
+ASSET_TYPE_UNSPECIFIED = 0
+ASSET_TYPE_CURRENCY = 1
+ASSET_TYPE_COMMODITY = 2
+ASSET_TYPE_INDEX = 3
+ASSET_TYPE_SECURITY = 4
+SP_TYPE_UNSPECIFIED = 0
+SP_TYPE_DELIVERABLE = 1
+SP_TYPE_NON_DELIVERABLE = 2
 
 
 
@@ -1295,6 +1381,13 @@ _BOND = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='uid', full_name='tinkoff.public.invest.api.contract.v1.Bond.uid', index=37,
+      number=40, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
@@ -1308,7 +1401,7 @@ _BOND = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=2908,
-  serialized_end=4364,
+  serialized_end=4377,
 )
 
 
@@ -1495,6 +1588,13 @@ _CURRENCY = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='uid', full_name='tinkoff.public.invest.api.contract.v1.Currency.uid', index=25,
+      number=27, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
@@ -1507,8 +1607,8 @@ _CURRENCY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4367,
-  serialized_end=5357,
+  serialized_start=4380,
+  serialized_end=5383,
 )
 
 
@@ -1723,6 +1823,13 @@ _ETF = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='uid', full_name='tinkoff.public.invest.api.contract.v1.Etf.uid', index=29,
+      number=31, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
@@ -1735,8 +1842,8 @@ _ETF = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5360,
-  serialized_end=6509,
+  serialized_start=5386,
+  serialized_end=6548,
 )
 
 
@@ -1958,6 +2065,13 @@ _FUTURE = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='uid', full_name='tinkoff.public.invest.api.contract.v1.Future.uid', index=30,
+      number=31, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
@@ -1970,8 +2084,8 @@ _FUTURE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6512,
-  serialized_end=7706,
+  serialized_start=6551,
+  serialized_end=7758,
 )
 
 
@@ -2193,6 +2307,13 @@ _SHARE = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='uid', full_name='tinkoff.public.invest.api.contract.v1.Share.uid', index=30,
+      number=33, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
@@ -2205,8 +2326,8 @@ _SHARE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=7709,
-  serialized_end=8870,
+  serialized_start=7761,
+  serialized_end=8935,
 )
 
 
@@ -2251,8 +2372,8 @@ _GETACCRUEDINTERESTSREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=8872,
-  serialized_end=8996,
+  serialized_start=8937,
+  serialized_end=9061,
 )
 
 
@@ -2283,8 +2404,8 @@ _GETACCRUEDINTERESTSRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=8998,
-  serialized_end=9110,
+  serialized_start=9063,
+  serialized_end=9175,
 )
 
 
@@ -2336,8 +2457,8 @@ _ACCRUEDINTEREST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=9113,
-  serialized_end=9377,
+  serialized_start=9178,
+  serialized_end=9442,
 )
 
 
@@ -2368,8 +2489,8 @@ _GETFUTURESMARGINREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=9379,
-  serialized_end=9418,
+  serialized_start=9444,
+  serialized_end=9483,
 )
 
 
@@ -2421,8 +2542,8 @@ _GETFUTURESMARGINRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=9421,
-  serialized_end=9777,
+  serialized_start=9486,
+  serialized_end=9842,
 )
 
 
@@ -2453,8 +2574,8 @@ _INSTRUMENTRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=9779,
-  serialized_end=9870,
+  serialized_start=9844,
+  serialized_end=9935,
 )
 
 
@@ -2634,6 +2755,13 @@ _INSTRUMENT = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='uid', full_name='tinkoff.public.invest.api.contract.v1.Instrument.uid', index=24,
+      number=25, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
@@ -2646,8 +2774,8 @@ _INSTRUMENT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=9873,
-  serialized_end=10795,
+  serialized_start=9938,
+  serialized_end=10873,
 )
 
 
@@ -2692,8 +2820,8 @@ _GETDIVIDENDSREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=10797,
-  serialized_end=10914,
+  serialized_start=10875,
+  serialized_end=10992,
 )
 
 
@@ -2724,8 +2852,8 @@ _GETDIVIDENDSRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=10916,
-  serialized_end=11006,
+  serialized_start=10994,
+  serialized_end=11084,
 )
 
 
@@ -2819,8 +2947,1335 @@ _DIVIDEND = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=11009,
-  serialized_end=11527,
+  serialized_start=11087,
+  serialized_end=11605,
+)
+
+
+_ASSETREQUEST = _descriptor.Descriptor(
+  name='AssetRequest',
+  full_name='tinkoff.public.invest.api.contract.v1.AssetRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='id', full_name='tinkoff.public.invest.api.contract.v1.AssetRequest.id', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=11607,
+  serialized_end=11633,
+)
+
+
+_ASSETRESPONSE = _descriptor.Descriptor(
+  name='AssetResponse',
+  full_name='tinkoff.public.invest.api.contract.v1.AssetResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='asset', full_name='tinkoff.public.invest.api.contract.v1.AssetResponse.asset', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=11635,
+  serialized_end=11715,
+)
+
+
+_ASSETSREQUEST = _descriptor.Descriptor(
+  name='AssetsRequest',
+  full_name='tinkoff.public.invest.api.contract.v1.AssetsRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=11717,
+  serialized_end=11732,
+)
+
+
+_ASSETSRESPONSE = _descriptor.Descriptor(
+  name='AssetsResponse',
+  full_name='tinkoff.public.invest.api.contract.v1.AssetsResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='assets', full_name='tinkoff.public.invest.api.contract.v1.AssetsResponse.assets', index=0,
+      number=1, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=11734,
+  serialized_end=11812,
+)
+
+
+_ASSETFULL = _descriptor.Descriptor(
+  name='AssetFull',
+  full_name='tinkoff.public.invest.api.contract.v1.AssetFull',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='uid', full_name='tinkoff.public.invest.api.contract.v1.AssetFull.uid', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='type', full_name='tinkoff.public.invest.api.contract.v1.AssetFull.type', index=1,
+      number=2, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='name', full_name='tinkoff.public.invest.api.contract.v1.AssetFull.name', index=2,
+      number=3, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='name_brief', full_name='tinkoff.public.invest.api.contract.v1.AssetFull.name_brief', index=3,
+      number=4, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='description', full_name='tinkoff.public.invest.api.contract.v1.AssetFull.description', index=4,
+      number=5, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='deleted_at', full_name='tinkoff.public.invest.api.contract.v1.AssetFull.deleted_at', index=5,
+      number=6, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='required_tests', full_name='tinkoff.public.invest.api.contract.v1.AssetFull.required_tests', index=6,
+      number=7, type=9, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='currency', full_name='tinkoff.public.invest.api.contract.v1.AssetFull.currency', index=7,
+      number=8, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='security', full_name='tinkoff.public.invest.api.contract.v1.AssetFull.security', index=8,
+      number=9, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='gos_reg_code', full_name='tinkoff.public.invest.api.contract.v1.AssetFull.gos_reg_code', index=9,
+      number=10, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='cfi', full_name='tinkoff.public.invest.api.contract.v1.AssetFull.cfi', index=10,
+      number=11, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='code_nsd', full_name='tinkoff.public.invest.api.contract.v1.AssetFull.code_nsd', index=11,
+      number=12, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='status', full_name='tinkoff.public.invest.api.contract.v1.AssetFull.status', index=12,
+      number=13, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='brand', full_name='tinkoff.public.invest.api.contract.v1.AssetFull.brand', index=13,
+      number=14, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='updated_at', full_name='tinkoff.public.invest.api.contract.v1.AssetFull.updated_at', index=14,
+      number=15, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='br_code', full_name='tinkoff.public.invest.api.contract.v1.AssetFull.br_code', index=15,
+      number=16, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='br_code_name', full_name='tinkoff.public.invest.api.contract.v1.AssetFull.br_code_name', index=16,
+      number=17, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='instruments', full_name='tinkoff.public.invest.api.contract.v1.AssetFull.instruments', index=17,
+      number=18, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+    _descriptor.OneofDescriptor(
+      name='ext', full_name='tinkoff.public.invest.api.contract.v1.AssetFull.ext',
+      index=0, containing_type=None,
+      create_key=_descriptor._internal_create_key,
+    fields=[]),
+  ],
+  serialized_start=11815,
+  serialized_end=12479,
+)
+
+
+_ASSET = _descriptor.Descriptor(
+  name='Asset',
+  full_name='tinkoff.public.invest.api.contract.v1.Asset',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='uid', full_name='tinkoff.public.invest.api.contract.v1.Asset.uid', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='type', full_name='tinkoff.public.invest.api.contract.v1.Asset.type', index=1,
+      number=2, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='name', full_name='tinkoff.public.invest.api.contract.v1.Asset.name', index=2,
+      number=3, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='instruments', full_name='tinkoff.public.invest.api.contract.v1.Asset.instruments', index=3,
+      number=4, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=12482,
+  serialized_end=12657,
+)
+
+
+_ASSETCURRENCY = _descriptor.Descriptor(
+  name='AssetCurrency',
+  full_name='tinkoff.public.invest.api.contract.v1.AssetCurrency',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='base_currency', full_name='tinkoff.public.invest.api.contract.v1.AssetCurrency.base_currency', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=12659,
+  serialized_end=12697,
+)
+
+
+_ASSETSECURITY = _descriptor.Descriptor(
+  name='AssetSecurity',
+  full_name='tinkoff.public.invest.api.contract.v1.AssetSecurity',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='isin', full_name='tinkoff.public.invest.api.contract.v1.AssetSecurity.isin', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='type', full_name='tinkoff.public.invest.api.contract.v1.AssetSecurity.type', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='share', full_name='tinkoff.public.invest.api.contract.v1.AssetSecurity.share', index=2,
+      number=3, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='bond', full_name='tinkoff.public.invest.api.contract.v1.AssetSecurity.bond', index=3,
+      number=4, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='sp', full_name='tinkoff.public.invest.api.contract.v1.AssetSecurity.sp', index=4,
+      number=5, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='etf', full_name='tinkoff.public.invest.api.contract.v1.AssetSecurity.etf', index=5,
+      number=6, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='clearing_certificate', full_name='tinkoff.public.invest.api.contract.v1.AssetSecurity.clearing_certificate', index=6,
+      number=7, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+    _descriptor.OneofDescriptor(
+      name='ext', full_name='tinkoff.public.invest.api.contract.v1.AssetSecurity.ext',
+      index=0, containing_type=None,
+      create_key=_descriptor._internal_create_key,
+    fields=[]),
+  ],
+  serialized_start=12700,
+  serialized_end=13122,
+)
+
+
+_ASSETSHARE = _descriptor.Descriptor(
+  name='AssetShare',
+  full_name='tinkoff.public.invest.api.contract.v1.AssetShare',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='type', full_name='tinkoff.public.invest.api.contract.v1.AssetShare.type', index=0,
+      number=1, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='issue_size', full_name='tinkoff.public.invest.api.contract.v1.AssetShare.issue_size', index=1,
+      number=2, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='nominal', full_name='tinkoff.public.invest.api.contract.v1.AssetShare.nominal', index=2,
+      number=3, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='nominal_currency', full_name='tinkoff.public.invest.api.contract.v1.AssetShare.nominal_currency', index=3,
+      number=4, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='primary_index', full_name='tinkoff.public.invest.api.contract.v1.AssetShare.primary_index', index=4,
+      number=5, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='dividend_rate', full_name='tinkoff.public.invest.api.contract.v1.AssetShare.dividend_rate', index=5,
+      number=6, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='preferred_share_type', full_name='tinkoff.public.invest.api.contract.v1.AssetShare.preferred_share_type', index=6,
+      number=7, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='ipo_date', full_name='tinkoff.public.invest.api.contract.v1.AssetShare.ipo_date', index=7,
+      number=8, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='registry_date', full_name='tinkoff.public.invest.api.contract.v1.AssetShare.registry_date', index=8,
+      number=9, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='div_yield_flag', full_name='tinkoff.public.invest.api.contract.v1.AssetShare.div_yield_flag', index=9,
+      number=10, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='issue_kind', full_name='tinkoff.public.invest.api.contract.v1.AssetShare.issue_kind', index=10,
+      number=11, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='placement_date', full_name='tinkoff.public.invest.api.contract.v1.AssetShare.placement_date', index=11,
+      number=12, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='repres_isin', full_name='tinkoff.public.invest.api.contract.v1.AssetShare.repres_isin', index=12,
+      number=13, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='issue_size_plan', full_name='tinkoff.public.invest.api.contract.v1.AssetShare.issue_size_plan', index=13,
+      number=14, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='total_float', full_name='tinkoff.public.invest.api.contract.v1.AssetShare.total_float', index=14,
+      number=15, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=13125,
+  serialized_end=13850,
+)
+
+
+_ASSETBOND = _descriptor.Descriptor(
+  name='AssetBond',
+  full_name='tinkoff.public.invest.api.contract.v1.AssetBond',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='current_nominal', full_name='tinkoff.public.invest.api.contract.v1.AssetBond.current_nominal', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='borrow_name', full_name='tinkoff.public.invest.api.contract.v1.AssetBond.borrow_name', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='issue_size', full_name='tinkoff.public.invest.api.contract.v1.AssetBond.issue_size', index=2,
+      number=3, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='nominal', full_name='tinkoff.public.invest.api.contract.v1.AssetBond.nominal', index=3,
+      number=4, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='nominal_currency', full_name='tinkoff.public.invest.api.contract.v1.AssetBond.nominal_currency', index=4,
+      number=5, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='issue_kind', full_name='tinkoff.public.invest.api.contract.v1.AssetBond.issue_kind', index=5,
+      number=6, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='interest_kind', full_name='tinkoff.public.invest.api.contract.v1.AssetBond.interest_kind', index=6,
+      number=7, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='coupon_quantity_per_year', full_name='tinkoff.public.invest.api.contract.v1.AssetBond.coupon_quantity_per_year', index=7,
+      number=8, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='indexed_nominal_flag', full_name='tinkoff.public.invest.api.contract.v1.AssetBond.indexed_nominal_flag', index=8,
+      number=9, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='subordinated_flag', full_name='tinkoff.public.invest.api.contract.v1.AssetBond.subordinated_flag', index=9,
+      number=10, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='collateral_flag', full_name='tinkoff.public.invest.api.contract.v1.AssetBond.collateral_flag', index=10,
+      number=11, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='tax_free_flag', full_name='tinkoff.public.invest.api.contract.v1.AssetBond.tax_free_flag', index=11,
+      number=12, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='amortization_flag', full_name='tinkoff.public.invest.api.contract.v1.AssetBond.amortization_flag', index=12,
+      number=13, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='floating_coupon_flag', full_name='tinkoff.public.invest.api.contract.v1.AssetBond.floating_coupon_flag', index=13,
+      number=14, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='perpetual_flag', full_name='tinkoff.public.invest.api.contract.v1.AssetBond.perpetual_flag', index=14,
+      number=15, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='maturity_date', full_name='tinkoff.public.invest.api.contract.v1.AssetBond.maturity_date', index=15,
+      number=16, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='return_condition', full_name='tinkoff.public.invest.api.contract.v1.AssetBond.return_condition', index=16,
+      number=17, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='state_reg_date', full_name='tinkoff.public.invest.api.contract.v1.AssetBond.state_reg_date', index=17,
+      number=18, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='placement_date', full_name='tinkoff.public.invest.api.contract.v1.AssetBond.placement_date', index=18,
+      number=19, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='placement_price', full_name='tinkoff.public.invest.api.contract.v1.AssetBond.placement_price', index=19,
+      number=20, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='issue_size_plan', full_name='tinkoff.public.invest.api.contract.v1.AssetBond.issue_size_plan', index=20,
+      number=21, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=13853,
+  serialized_end=14717,
+)
+
+
+_ASSETSTRUCTUREDPRODUCT = _descriptor.Descriptor(
+  name='AssetStructuredProduct',
+  full_name='tinkoff.public.invest.api.contract.v1.AssetStructuredProduct',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='borrow_name', full_name='tinkoff.public.invest.api.contract.v1.AssetStructuredProduct.borrow_name', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='nominal', full_name='tinkoff.public.invest.api.contract.v1.AssetStructuredProduct.nominal', index=1,
+      number=2, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='nominal_currency', full_name='tinkoff.public.invest.api.contract.v1.AssetStructuredProduct.nominal_currency', index=2,
+      number=3, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='type', full_name='tinkoff.public.invest.api.contract.v1.AssetStructuredProduct.type', index=3,
+      number=4, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='logic_portfolio', full_name='tinkoff.public.invest.api.contract.v1.AssetStructuredProduct.logic_portfolio', index=4,
+      number=5, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='asset_type', full_name='tinkoff.public.invest.api.contract.v1.AssetStructuredProduct.asset_type', index=5,
+      number=6, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='basic_asset', full_name='tinkoff.public.invest.api.contract.v1.AssetStructuredProduct.basic_asset', index=6,
+      number=7, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='safety_barrier', full_name='tinkoff.public.invest.api.contract.v1.AssetStructuredProduct.safety_barrier', index=7,
+      number=8, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='maturity_date', full_name='tinkoff.public.invest.api.contract.v1.AssetStructuredProduct.maturity_date', index=8,
+      number=9, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='issue_size_plan', full_name='tinkoff.public.invest.api.contract.v1.AssetStructuredProduct.issue_size_plan', index=9,
+      number=10, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='issue_size', full_name='tinkoff.public.invest.api.contract.v1.AssetStructuredProduct.issue_size', index=10,
+      number=11, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='placement_date', full_name='tinkoff.public.invest.api.contract.v1.AssetStructuredProduct.placement_date', index=11,
+      number=12, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='issue_kind', full_name='tinkoff.public.invest.api.contract.v1.AssetStructuredProduct.issue_kind', index=12,
+      number=13, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=14720,
+  serialized_end=15392,
+)
+
+
+_ASSETETF = _descriptor.Descriptor(
+  name='AssetEtf',
+  full_name='tinkoff.public.invest.api.contract.v1.AssetEtf',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='total_expense', full_name='tinkoff.public.invest.api.contract.v1.AssetEtf.total_expense', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='hurdle_rate', full_name='tinkoff.public.invest.api.contract.v1.AssetEtf.hurdle_rate', index=1,
+      number=2, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='performance_fee', full_name='tinkoff.public.invest.api.contract.v1.AssetEtf.performance_fee', index=2,
+      number=3, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='fixed_commission', full_name='tinkoff.public.invest.api.contract.v1.AssetEtf.fixed_commission', index=3,
+      number=4, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='payment_type', full_name='tinkoff.public.invest.api.contract.v1.AssetEtf.payment_type', index=4,
+      number=5, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='watermark_flag', full_name='tinkoff.public.invest.api.contract.v1.AssetEtf.watermark_flag', index=5,
+      number=6, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='buy_premium', full_name='tinkoff.public.invest.api.contract.v1.AssetEtf.buy_premium', index=6,
+      number=7, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='sell_discount', full_name='tinkoff.public.invest.api.contract.v1.AssetEtf.sell_discount', index=7,
+      number=8, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='rebalancing_flag', full_name='tinkoff.public.invest.api.contract.v1.AssetEtf.rebalancing_flag', index=8,
+      number=9, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='rebalancing_freq', full_name='tinkoff.public.invest.api.contract.v1.AssetEtf.rebalancing_freq', index=9,
+      number=10, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='management_type', full_name='tinkoff.public.invest.api.contract.v1.AssetEtf.management_type', index=10,
+      number=11, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='primary_index', full_name='tinkoff.public.invest.api.contract.v1.AssetEtf.primary_index', index=11,
+      number=12, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='focus_type', full_name='tinkoff.public.invest.api.contract.v1.AssetEtf.focus_type', index=12,
+      number=13, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='leveraged_flag', full_name='tinkoff.public.invest.api.contract.v1.AssetEtf.leveraged_flag', index=13,
+      number=14, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='num_share', full_name='tinkoff.public.invest.api.contract.v1.AssetEtf.num_share', index=14,
+      number=15, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='ucits_flag', full_name='tinkoff.public.invest.api.contract.v1.AssetEtf.ucits_flag', index=15,
+      number=16, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='released_date', full_name='tinkoff.public.invest.api.contract.v1.AssetEtf.released_date', index=16,
+      number=17, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='description', full_name='tinkoff.public.invest.api.contract.v1.AssetEtf.description', index=17,
+      number=18, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='primary_index_description', full_name='tinkoff.public.invest.api.contract.v1.AssetEtf.primary_index_description', index=18,
+      number=19, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='primary_index_company', full_name='tinkoff.public.invest.api.contract.v1.AssetEtf.primary_index_company', index=19,
+      number=20, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='index_recovery_period', full_name='tinkoff.public.invest.api.contract.v1.AssetEtf.index_recovery_period', index=20,
+      number=21, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='inav_code', full_name='tinkoff.public.invest.api.contract.v1.AssetEtf.inav_code', index=21,
+      number=22, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='div_yield_flag', full_name='tinkoff.public.invest.api.contract.v1.AssetEtf.div_yield_flag', index=22,
+      number=23, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='expense_commission', full_name='tinkoff.public.invest.api.contract.v1.AssetEtf.expense_commission', index=23,
+      number=24, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='primary_index_tracking_error', full_name='tinkoff.public.invest.api.contract.v1.AssetEtf.primary_index_tracking_error', index=24,
+      number=25, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='rebalancing_plan', full_name='tinkoff.public.invest.api.contract.v1.AssetEtf.rebalancing_plan', index=25,
+      number=26, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='tax_rate', full_name='tinkoff.public.invest.api.contract.v1.AssetEtf.tax_rate', index=26,
+      number=27, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='rebalancing_dates', full_name='tinkoff.public.invest.api.contract.v1.AssetEtf.rebalancing_dates', index=27,
+      number=28, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='issue_kind', full_name='tinkoff.public.invest.api.contract.v1.AssetEtf.issue_kind', index=28,
+      number=29, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='nominal', full_name='tinkoff.public.invest.api.contract.v1.AssetEtf.nominal', index=29,
+      number=30, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='nominal_currency', full_name='tinkoff.public.invest.api.contract.v1.AssetEtf.nominal_currency', index=30,
+      number=31, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=15395,
+  serialized_end=16763,
+)
+
+
+_ASSETCLEARINGCERTIFICATE = _descriptor.Descriptor(
+  name='AssetClearingCertificate',
+  full_name='tinkoff.public.invest.api.contract.v1.AssetClearingCertificate',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='nominal', full_name='tinkoff.public.invest.api.contract.v1.AssetClearingCertificate.nominal', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='nominal_currency', full_name='tinkoff.public.invest.api.contract.v1.AssetClearingCertificate.nominal_currency', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=16765,
+  serialized_end=16884,
+)
+
+
+_BRAND = _descriptor.Descriptor(
+  name='Brand',
+  full_name='tinkoff.public.invest.api.contract.v1.Brand',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='uid', full_name='tinkoff.public.invest.api.contract.v1.Brand.uid', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='name', full_name='tinkoff.public.invest.api.contract.v1.Brand.name', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='description', full_name='tinkoff.public.invest.api.contract.v1.Brand.description', index=2,
+      number=3, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='info', full_name='tinkoff.public.invest.api.contract.v1.Brand.info', index=3,
+      number=4, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='company', full_name='tinkoff.public.invest.api.contract.v1.Brand.company', index=4,
+      number=5, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='sector', full_name='tinkoff.public.invest.api.contract.v1.Brand.sector', index=5,
+      number=6, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='country_of_risk', full_name='tinkoff.public.invest.api.contract.v1.Brand.country_of_risk', index=6,
+      number=7, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='country_of_risk_name', full_name='tinkoff.public.invest.api.contract.v1.Brand.country_of_risk_name', index=7,
+      number=8, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=16887,
+  serialized_end=17044,
+)
+
+
+_ASSETINSTRUMENT = _descriptor.Descriptor(
+  name='AssetInstrument',
+  full_name='tinkoff.public.invest.api.contract.v1.AssetInstrument',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='uid', full_name='tinkoff.public.invest.api.contract.v1.AssetInstrument.uid', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='figi', full_name='tinkoff.public.invest.api.contract.v1.AssetInstrument.figi', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='instrument_type', full_name='tinkoff.public.invest.api.contract.v1.AssetInstrument.instrument_type', index=2,
+      number=3, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='ticker', full_name='tinkoff.public.invest.api.contract.v1.AssetInstrument.ticker', index=3,
+      number=4, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='class_code', full_name='tinkoff.public.invest.api.contract.v1.AssetInstrument.class_code', index=4,
+      number=5, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='links', full_name='tinkoff.public.invest.api.contract.v1.AssetInstrument.links', index=5,
+      number=6, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=17047,
+  serialized_end=17222,
+)
+
+
+_INSTRUMENTLINK = _descriptor.Descriptor(
+  name='InstrumentLink',
+  full_name='tinkoff.public.invest.api.contract.v1.InstrumentLink',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='type', full_name='tinkoff.public.invest.api.contract.v1.InstrumentLink.type', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='instrument_uid', full_name='tinkoff.public.invest.api.contract.v1.InstrumentLink.instrument_uid', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=17224,
+  serialized_end=17278,
 )
 
 _TRADINGSCHEDULESREQUEST.fields_by_name['from'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
@@ -2948,6 +4403,83 @@ _DIVIDEND.fields_by_name['record_date'].message_type = google_dot_protobuf_dot_t
 _DIVIDEND.fields_by_name['close_price'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._MONEYVALUE
 _DIVIDEND.fields_by_name['yield_value'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._QUOTATION
 _DIVIDEND.fields_by_name['created_at'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
+_ASSETRESPONSE.fields_by_name['asset'].message_type = _ASSETFULL
+_ASSETSRESPONSE.fields_by_name['assets'].message_type = _ASSET
+_ASSETFULL.fields_by_name['type'].enum_type = _ASSETTYPE
+_ASSETFULL.fields_by_name['deleted_at'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
+_ASSETFULL.fields_by_name['currency'].message_type = _ASSETCURRENCY
+_ASSETFULL.fields_by_name['security'].message_type = _ASSETSECURITY
+_ASSETFULL.fields_by_name['brand'].message_type = _BRAND
+_ASSETFULL.fields_by_name['updated_at'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
+_ASSETFULL.fields_by_name['instruments'].message_type = _ASSETINSTRUMENT
+_ASSETFULL.oneofs_by_name['ext'].fields.append(
+  _ASSETFULL.fields_by_name['currency'])
+_ASSETFULL.fields_by_name['currency'].containing_oneof = _ASSETFULL.oneofs_by_name['ext']
+_ASSETFULL.oneofs_by_name['ext'].fields.append(
+  _ASSETFULL.fields_by_name['security'])
+_ASSETFULL.fields_by_name['security'].containing_oneof = _ASSETFULL.oneofs_by_name['ext']
+_ASSET.fields_by_name['type'].enum_type = _ASSETTYPE
+_ASSET.fields_by_name['instruments'].message_type = _ASSETINSTRUMENT
+_ASSETSECURITY.fields_by_name['share'].message_type = _ASSETSHARE
+_ASSETSECURITY.fields_by_name['bond'].message_type = _ASSETBOND
+_ASSETSECURITY.fields_by_name['sp'].message_type = _ASSETSTRUCTUREDPRODUCT
+_ASSETSECURITY.fields_by_name['etf'].message_type = _ASSETETF
+_ASSETSECURITY.fields_by_name['clearing_certificate'].message_type = _ASSETCLEARINGCERTIFICATE
+_ASSETSECURITY.oneofs_by_name['ext'].fields.append(
+  _ASSETSECURITY.fields_by_name['share'])
+_ASSETSECURITY.fields_by_name['share'].containing_oneof = _ASSETSECURITY.oneofs_by_name['ext']
+_ASSETSECURITY.oneofs_by_name['ext'].fields.append(
+  _ASSETSECURITY.fields_by_name['bond'])
+_ASSETSECURITY.fields_by_name['bond'].containing_oneof = _ASSETSECURITY.oneofs_by_name['ext']
+_ASSETSECURITY.oneofs_by_name['ext'].fields.append(
+  _ASSETSECURITY.fields_by_name['sp'])
+_ASSETSECURITY.fields_by_name['sp'].containing_oneof = _ASSETSECURITY.oneofs_by_name['ext']
+_ASSETSECURITY.oneofs_by_name['ext'].fields.append(
+  _ASSETSECURITY.fields_by_name['etf'])
+_ASSETSECURITY.fields_by_name['etf'].containing_oneof = _ASSETSECURITY.oneofs_by_name['ext']
+_ASSETSECURITY.oneofs_by_name['ext'].fields.append(
+  _ASSETSECURITY.fields_by_name['clearing_certificate'])
+_ASSETSECURITY.fields_by_name['clearing_certificate'].containing_oneof = _ASSETSECURITY.oneofs_by_name['ext']
+_ASSETSHARE.fields_by_name['type'].enum_type = _SHARETYPE
+_ASSETSHARE.fields_by_name['issue_size'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._QUOTATION
+_ASSETSHARE.fields_by_name['nominal'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._QUOTATION
+_ASSETSHARE.fields_by_name['dividend_rate'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._QUOTATION
+_ASSETSHARE.fields_by_name['ipo_date'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
+_ASSETSHARE.fields_by_name['registry_date'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
+_ASSETSHARE.fields_by_name['placement_date'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
+_ASSETSHARE.fields_by_name['issue_size_plan'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._QUOTATION
+_ASSETSHARE.fields_by_name['total_float'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._QUOTATION
+_ASSETBOND.fields_by_name['current_nominal'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._QUOTATION
+_ASSETBOND.fields_by_name['issue_size'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._QUOTATION
+_ASSETBOND.fields_by_name['nominal'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._QUOTATION
+_ASSETBOND.fields_by_name['maturity_date'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
+_ASSETBOND.fields_by_name['state_reg_date'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
+_ASSETBOND.fields_by_name['placement_date'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
+_ASSETBOND.fields_by_name['placement_price'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._QUOTATION
+_ASSETBOND.fields_by_name['issue_size_plan'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._QUOTATION
+_ASSETSTRUCTUREDPRODUCT.fields_by_name['nominal'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._QUOTATION
+_ASSETSTRUCTUREDPRODUCT.fields_by_name['type'].enum_type = _STRUCTUREDPRODUCTTYPE
+_ASSETSTRUCTUREDPRODUCT.fields_by_name['asset_type'].enum_type = _ASSETTYPE
+_ASSETSTRUCTUREDPRODUCT.fields_by_name['safety_barrier'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._QUOTATION
+_ASSETSTRUCTUREDPRODUCT.fields_by_name['maturity_date'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
+_ASSETSTRUCTUREDPRODUCT.fields_by_name['issue_size_plan'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._QUOTATION
+_ASSETSTRUCTUREDPRODUCT.fields_by_name['issue_size'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._QUOTATION
+_ASSETSTRUCTUREDPRODUCT.fields_by_name['placement_date'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
+_ASSETETF.fields_by_name['total_expense'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._QUOTATION
+_ASSETETF.fields_by_name['hurdle_rate'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._QUOTATION
+_ASSETETF.fields_by_name['performance_fee'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._QUOTATION
+_ASSETETF.fields_by_name['fixed_commission'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._QUOTATION
+_ASSETETF.fields_by_name['buy_premium'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._QUOTATION
+_ASSETETF.fields_by_name['sell_discount'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._QUOTATION
+_ASSETETF.fields_by_name['num_share'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._QUOTATION
+_ASSETETF.fields_by_name['released_date'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
+_ASSETETF.fields_by_name['index_recovery_period'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._QUOTATION
+_ASSETETF.fields_by_name['expense_commission'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._QUOTATION
+_ASSETETF.fields_by_name['primary_index_tracking_error'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._QUOTATION
+_ASSETETF.fields_by_name['rebalancing_dates'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
+_ASSETETF.fields_by_name['nominal'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._QUOTATION
+_ASSETCLEARINGCERTIFICATE.fields_by_name['nominal'].message_type = tinkoff_dot_invest_dot_grpc_dot_common__pb2._QUOTATION
+_ASSETINSTRUMENT.fields_by_name['links'].message_type = _INSTRUMENTLINK
 DESCRIPTOR.message_types_by_name['TradingSchedulesRequest'] = _TRADINGSCHEDULESREQUEST
 DESCRIPTOR.message_types_by_name['TradingSchedulesResponse'] = _TRADINGSCHEDULESRESPONSE
 DESCRIPTOR.message_types_by_name['TradingSchedule'] = _TRADINGSCHEDULE
@@ -2982,10 +4514,28 @@ DESCRIPTOR.message_types_by_name['Instrument'] = _INSTRUMENT
 DESCRIPTOR.message_types_by_name['GetDividendsRequest'] = _GETDIVIDENDSREQUEST
 DESCRIPTOR.message_types_by_name['GetDividendsResponse'] = _GETDIVIDENDSRESPONSE
 DESCRIPTOR.message_types_by_name['Dividend'] = _DIVIDEND
+DESCRIPTOR.message_types_by_name['AssetRequest'] = _ASSETREQUEST
+DESCRIPTOR.message_types_by_name['AssetResponse'] = _ASSETRESPONSE
+DESCRIPTOR.message_types_by_name['AssetsRequest'] = _ASSETSREQUEST
+DESCRIPTOR.message_types_by_name['AssetsResponse'] = _ASSETSRESPONSE
+DESCRIPTOR.message_types_by_name['AssetFull'] = _ASSETFULL
+DESCRIPTOR.message_types_by_name['Asset'] = _ASSET
+DESCRIPTOR.message_types_by_name['AssetCurrency'] = _ASSETCURRENCY
+DESCRIPTOR.message_types_by_name['AssetSecurity'] = _ASSETSECURITY
+DESCRIPTOR.message_types_by_name['AssetShare'] = _ASSETSHARE
+DESCRIPTOR.message_types_by_name['AssetBond'] = _ASSETBOND
+DESCRIPTOR.message_types_by_name['AssetStructuredProduct'] = _ASSETSTRUCTUREDPRODUCT
+DESCRIPTOR.message_types_by_name['AssetEtf'] = _ASSETETF
+DESCRIPTOR.message_types_by_name['AssetClearingCertificate'] = _ASSETCLEARINGCERTIFICATE
+DESCRIPTOR.message_types_by_name['Brand'] = _BRAND
+DESCRIPTOR.message_types_by_name['AssetInstrument'] = _ASSETINSTRUMENT
+DESCRIPTOR.message_types_by_name['InstrumentLink'] = _INSTRUMENTLINK
 DESCRIPTOR.enum_types_by_name['CouponType'] = _COUPONTYPE
 DESCRIPTOR.enum_types_by_name['InstrumentIdType'] = _INSTRUMENTIDTYPE
 DESCRIPTOR.enum_types_by_name['InstrumentStatus'] = _INSTRUMENTSTATUS
 DESCRIPTOR.enum_types_by_name['ShareType'] = _SHARETYPE
+DESCRIPTOR.enum_types_by_name['AssetType'] = _ASSETTYPE
+DESCRIPTOR.enum_types_by_name['StructuredProductType'] = _STRUCTUREDPRODUCTTYPE
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 TradingSchedulesRequest = _reflection.GeneratedProtocolMessageType('TradingSchedulesRequest', (_message.Message,), {
@@ -3226,6 +4776,118 @@ Dividend = _reflection.GeneratedProtocolMessageType('Dividend', (_message.Messag
   })
 _sym_db.RegisterMessage(Dividend)
 
+AssetRequest = _reflection.GeneratedProtocolMessageType('AssetRequest', (_message.Message,), {
+  'DESCRIPTOR' : _ASSETREQUEST,
+  '__module__' : 'tinkoff.invest.grpc.instruments_pb2'
+  # @@protoc_insertion_point(class_scope:tinkoff.public.invest.api.contract.v1.AssetRequest)
+  })
+_sym_db.RegisterMessage(AssetRequest)
+
+AssetResponse = _reflection.GeneratedProtocolMessageType('AssetResponse', (_message.Message,), {
+  'DESCRIPTOR' : _ASSETRESPONSE,
+  '__module__' : 'tinkoff.invest.grpc.instruments_pb2'
+  # @@protoc_insertion_point(class_scope:tinkoff.public.invest.api.contract.v1.AssetResponse)
+  })
+_sym_db.RegisterMessage(AssetResponse)
+
+AssetsRequest = _reflection.GeneratedProtocolMessageType('AssetsRequest', (_message.Message,), {
+  'DESCRIPTOR' : _ASSETSREQUEST,
+  '__module__' : 'tinkoff.invest.grpc.instruments_pb2'
+  # @@protoc_insertion_point(class_scope:tinkoff.public.invest.api.contract.v1.AssetsRequest)
+  })
+_sym_db.RegisterMessage(AssetsRequest)
+
+AssetsResponse = _reflection.GeneratedProtocolMessageType('AssetsResponse', (_message.Message,), {
+  'DESCRIPTOR' : _ASSETSRESPONSE,
+  '__module__' : 'tinkoff.invest.grpc.instruments_pb2'
+  # @@protoc_insertion_point(class_scope:tinkoff.public.invest.api.contract.v1.AssetsResponse)
+  })
+_sym_db.RegisterMessage(AssetsResponse)
+
+AssetFull = _reflection.GeneratedProtocolMessageType('AssetFull', (_message.Message,), {
+  'DESCRIPTOR' : _ASSETFULL,
+  '__module__' : 'tinkoff.invest.grpc.instruments_pb2'
+  # @@protoc_insertion_point(class_scope:tinkoff.public.invest.api.contract.v1.AssetFull)
+  })
+_sym_db.RegisterMessage(AssetFull)
+
+Asset = _reflection.GeneratedProtocolMessageType('Asset', (_message.Message,), {
+  'DESCRIPTOR' : _ASSET,
+  '__module__' : 'tinkoff.invest.grpc.instruments_pb2'
+  # @@protoc_insertion_point(class_scope:tinkoff.public.invest.api.contract.v1.Asset)
+  })
+_sym_db.RegisterMessage(Asset)
+
+AssetCurrency = _reflection.GeneratedProtocolMessageType('AssetCurrency', (_message.Message,), {
+  'DESCRIPTOR' : _ASSETCURRENCY,
+  '__module__' : 'tinkoff.invest.grpc.instruments_pb2'
+  # @@protoc_insertion_point(class_scope:tinkoff.public.invest.api.contract.v1.AssetCurrency)
+  })
+_sym_db.RegisterMessage(AssetCurrency)
+
+AssetSecurity = _reflection.GeneratedProtocolMessageType('AssetSecurity', (_message.Message,), {
+  'DESCRIPTOR' : _ASSETSECURITY,
+  '__module__' : 'tinkoff.invest.grpc.instruments_pb2'
+  # @@protoc_insertion_point(class_scope:tinkoff.public.invest.api.contract.v1.AssetSecurity)
+  })
+_sym_db.RegisterMessage(AssetSecurity)
+
+AssetShare = _reflection.GeneratedProtocolMessageType('AssetShare', (_message.Message,), {
+  'DESCRIPTOR' : _ASSETSHARE,
+  '__module__' : 'tinkoff.invest.grpc.instruments_pb2'
+  # @@protoc_insertion_point(class_scope:tinkoff.public.invest.api.contract.v1.AssetShare)
+  })
+_sym_db.RegisterMessage(AssetShare)
+
+AssetBond = _reflection.GeneratedProtocolMessageType('AssetBond', (_message.Message,), {
+  'DESCRIPTOR' : _ASSETBOND,
+  '__module__' : 'tinkoff.invest.grpc.instruments_pb2'
+  # @@protoc_insertion_point(class_scope:tinkoff.public.invest.api.contract.v1.AssetBond)
+  })
+_sym_db.RegisterMessage(AssetBond)
+
+AssetStructuredProduct = _reflection.GeneratedProtocolMessageType('AssetStructuredProduct', (_message.Message,), {
+  'DESCRIPTOR' : _ASSETSTRUCTUREDPRODUCT,
+  '__module__' : 'tinkoff.invest.grpc.instruments_pb2'
+  # @@protoc_insertion_point(class_scope:tinkoff.public.invest.api.contract.v1.AssetStructuredProduct)
+  })
+_sym_db.RegisterMessage(AssetStructuredProduct)
+
+AssetEtf = _reflection.GeneratedProtocolMessageType('AssetEtf', (_message.Message,), {
+  'DESCRIPTOR' : _ASSETETF,
+  '__module__' : 'tinkoff.invest.grpc.instruments_pb2'
+  # @@protoc_insertion_point(class_scope:tinkoff.public.invest.api.contract.v1.AssetEtf)
+  })
+_sym_db.RegisterMessage(AssetEtf)
+
+AssetClearingCertificate = _reflection.GeneratedProtocolMessageType('AssetClearingCertificate', (_message.Message,), {
+  'DESCRIPTOR' : _ASSETCLEARINGCERTIFICATE,
+  '__module__' : 'tinkoff.invest.grpc.instruments_pb2'
+  # @@protoc_insertion_point(class_scope:tinkoff.public.invest.api.contract.v1.AssetClearingCertificate)
+  })
+_sym_db.RegisterMessage(AssetClearingCertificate)
+
+Brand = _reflection.GeneratedProtocolMessageType('Brand', (_message.Message,), {
+  'DESCRIPTOR' : _BRAND,
+  '__module__' : 'tinkoff.invest.grpc.instruments_pb2'
+  # @@protoc_insertion_point(class_scope:tinkoff.public.invest.api.contract.v1.Brand)
+  })
+_sym_db.RegisterMessage(Brand)
+
+AssetInstrument = _reflection.GeneratedProtocolMessageType('AssetInstrument', (_message.Message,), {
+  'DESCRIPTOR' : _ASSETINSTRUMENT,
+  '__module__' : 'tinkoff.invest.grpc.instruments_pb2'
+  # @@protoc_insertion_point(class_scope:tinkoff.public.invest.api.contract.v1.AssetInstrument)
+  })
+_sym_db.RegisterMessage(AssetInstrument)
+
+InstrumentLink = _reflection.GeneratedProtocolMessageType('InstrumentLink', (_message.Message,), {
+  'DESCRIPTOR' : _INSTRUMENTLINK,
+  '__module__' : 'tinkoff.invest.grpc.instruments_pb2'
+  # @@protoc_insertion_point(class_scope:tinkoff.public.invest.api.contract.v1.InstrumentLink)
+  })
+_sym_db.RegisterMessage(InstrumentLink)
+
 
 DESCRIPTOR._options = None
 
@@ -3236,8 +4898,8 @@ _INSTRUMENTSSERVICE = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=12201,
-  serialized_end=14341,
+  serialized_start=18225,
+  serialized_end=20608,
   methods=[
   _descriptor.MethodDescriptor(
     name='TradingSchedules',
@@ -3396,6 +5058,26 @@ _INSTRUMENTSSERVICE = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_GETDIVIDENDSREQUEST,
     output_type=_GETDIVIDENDSRESPONSE,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='GetAssetBy',
+    full_name='tinkoff.public.invest.api.contract.v1.InstrumentsService.GetAssetBy',
+    index=16,
+    containing_service=None,
+    input_type=_ASSETREQUEST,
+    output_type=_ASSETRESPONSE,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='GetAssets',
+    full_name='tinkoff.public.invest.api.contract.v1.InstrumentsService.GetAssets',
+    index=17,
+    containing_service=None,
+    input_type=_ASSETSREQUEST,
+    output_type=_ASSETSRESPONSE,
     serialized_options=None,
     create_key=_descriptor._internal_create_key,
   ),

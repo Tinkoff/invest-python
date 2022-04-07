@@ -89,16 +89,16 @@ class _SubscriptionStatusEnumTypeWrapper(google.protobuf.internal.enum_type_wrap
     """Инструмент не найден."""
 
     SUBSCRIPTION_STATUS_SUBSCRIPTION_ACTION_IS_INVALID: _SubscriptionStatus.ValueType  # 3
-    """Некорректный статус подписки, список возможных значений: [SubscriptionAction](https://tinkoff.github.io/investAPI/marketdata#subscriptionaction)"""
+    """Некорректный статус подписки, список возможных значений: [SubscriptionAction](https://tinkoff.github.io/investAPI/marketdata#subscriptionaction)."""
 
     SUBSCRIPTION_STATUS_DEPTH_IS_INVALID: _SubscriptionStatus.ValueType  # 4
     """Некорректная глубина стакана, доступные значения: 1, 10, 20, 30, 40, 50."""
 
     SUBSCRIPTION_STATUS_INTERVAL_IS_INVALID: _SubscriptionStatus.ValueType  # 5
-    """Некорректный интервал свечей, список возможных значений: [SubscriptionInterval](https://tinkoff.github.io/investAPI/marketdata#subscriptioninterval)"""
+    """Некорректный интервал свечей, список возможных значений: [SubscriptionInterval](https://tinkoff.github.io/investAPI/marketdata#subscriptioninterval)."""
 
     SUBSCRIPTION_STATUS_LIMIT_IS_EXCEEDED: _SubscriptionStatus.ValueType  # 6
-    """Превышен лимит подписок в рамках стрима, подробнее: [Лимитная политика](https://tinkoff.github.io/investAPI/limits/)"""
+    """Превышен лимит подписок в рамках стрима, подробнее: [Лимитная политика](https://tinkoff.github.io/investAPI/limits/)."""
 
     SUBSCRIPTION_STATUS_INTERNAL_ERROR: _SubscriptionStatus.ValueType  # 7
     """Внутренняя ошибка сервиса."""
@@ -117,16 +117,16 @@ SUBSCRIPTION_STATUS_INSTRUMENT_NOT_FOUND: SubscriptionStatus.ValueType  # 2
 """Инструмент не найден."""
 
 SUBSCRIPTION_STATUS_SUBSCRIPTION_ACTION_IS_INVALID: SubscriptionStatus.ValueType  # 3
-"""Некорректный статус подписки, список возможных значений: [SubscriptionAction](https://tinkoff.github.io/investAPI/marketdata#subscriptionaction)"""
+"""Некорректный статус подписки, список возможных значений: [SubscriptionAction](https://tinkoff.github.io/investAPI/marketdata#subscriptionaction)."""
 
 SUBSCRIPTION_STATUS_DEPTH_IS_INVALID: SubscriptionStatus.ValueType  # 4
 """Некорректная глубина стакана, доступные значения: 1, 10, 20, 30, 40, 50."""
 
 SUBSCRIPTION_STATUS_INTERVAL_IS_INVALID: SubscriptionStatus.ValueType  # 5
-"""Некорректный интервал свечей, список возможных значений: [SubscriptionInterval](https://tinkoff.github.io/investAPI/marketdata#subscriptioninterval)"""
+"""Некорректный интервал свечей, список возможных значений: [SubscriptionInterval](https://tinkoff.github.io/investAPI/marketdata#subscriptioninterval)."""
 
 SUBSCRIPTION_STATUS_LIMIT_IS_EXCEEDED: SubscriptionStatus.ValueType  # 6
-"""Превышен лимит подписок в рамках стрима, подробнее: [Лимитная политика](https://tinkoff.github.io/investAPI/limits/)"""
+"""Превышен лимит подписок в рамках стрима, подробнее: [Лимитная политика](https://tinkoff.github.io/investAPI/limits/)."""
 
 SUBSCRIPTION_STATUS_INTERNAL_ERROR: SubscriptionStatus.ValueType  # 7
 """Внутренняя ошибка сервиса."""
@@ -375,7 +375,7 @@ class SubscribeCandlesResponse(google.protobuf.message.Message):
     TRACKING_ID_FIELD_NUMBER: builtins.int
     CANDLES_SUBSCRIPTIONS_FIELD_NUMBER: builtins.int
     tracking_id: typing.Text
-    """Уникальный идентификатор запроса, подробнее: [tracking_id](https://tinkoff.github.io/investAPI/grpc#tracking-id)"""
+    """Уникальный идентификатор запроса, подробнее: [tracking_id](https://tinkoff.github.io/investAPI/grpc#tracking-id)."""
 
     @property
     def candles_subscriptions(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___CandleSubscription]:
@@ -458,7 +458,7 @@ class SubscribeOrderBookResponse(google.protobuf.message.Message):
     TRACKING_ID_FIELD_NUMBER: builtins.int
     ORDER_BOOK_SUBSCRIPTIONS_FIELD_NUMBER: builtins.int
     tracking_id: typing.Text
-    """Уникальный идентификатор запроса, подробнее: [tracking_id](https://tinkoff.github.io/investAPI/grpc#tracking-id)"""
+    """Уникальный идентификатор запроса, подробнее: [tracking_id](https://tinkoff.github.io/investAPI/grpc#tracking-id)."""
 
     @property
     def order_book_subscriptions(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___OrderBookSubscription]:
@@ -536,7 +536,7 @@ class SubscribeTradesResponse(google.protobuf.message.Message):
     TRACKING_ID_FIELD_NUMBER: builtins.int
     TRADE_SUBSCRIPTIONS_FIELD_NUMBER: builtins.int
     tracking_id: typing.Text
-    """Уникальный идентификатор запроса, подробнее: [tracking_id](https://tinkoff.github.io/investAPI/grpc#tracking-id)"""
+    """Уникальный идентификатор запроса, подробнее: [tracking_id](https://tinkoff.github.io/investAPI/grpc#tracking-id)."""
 
     @property
     def trade_subscriptions(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___TradeSubscription]:
@@ -609,7 +609,7 @@ class SubscribeInfoResponse(google.protobuf.message.Message):
     TRACKING_ID_FIELD_NUMBER: builtins.int
     INFO_SUBSCRIPTIONS_FIELD_NUMBER: builtins.int
     tracking_id: typing.Text
-    """Уникальный идентификатор запроса, подробнее: [tracking_id](https://tinkoff.github.io/investAPI/grpc#tracking-id)"""
+    """Уникальный идентификатор запроса, подробнее: [tracking_id](https://tinkoff.github.io/investAPI/grpc#tracking-id)."""
 
     @property
     def info_subscriptions(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___InfoSubscription]:
@@ -682,7 +682,7 @@ class SubscribeLastPriceResponse(google.protobuf.message.Message):
     TRACKING_ID_FIELD_NUMBER: builtins.int
     LAST_PRICE_SUBSCRIPTIONS_FIELD_NUMBER: builtins.int
     tracking_id: typing.Text
-    """Уникальный идентификатор запроса, подробнее: [tracking_id](https://tinkoff.github.io/investAPI/grpc#tracking-id)"""
+    """Уникальный идентификатор запроса, подробнее: [tracking_id](https://tinkoff.github.io/investAPI/grpc#tracking-id)."""
 
     @property
     def last_price_subscriptions(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___LastPriceSubscription]:
@@ -735,26 +735,26 @@ class Candle(google.protobuf.message.Message):
 
     @property
     def open(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Цена открытия за 1 лот."""
+        """Цена открытия за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента."""
         pass
     @property
     def high(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Максимальная цена за 1 лот."""
+        """Максимальная цена за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента."""
         pass
     @property
     def low(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Минимальная цена за 1 лот."""
+        """Минимальная цена за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента."""
         pass
     @property
     def close(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Цена закрытия за 1 лот."""
+        """Цена закрытия за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента."""
         pass
     volume: builtins.int
     """Объём сделок в лотах."""
 
     @property
     def time(self) -> google.protobuf.timestamp_pb2.Timestamp:
-        """Время свечи в часовом поясе UTC."""
+        """Время начала интервала свечи в часовом поясе UTC."""
         pass
     @property
     def last_trade_ts(self) -> google.protobuf.timestamp_pb2.Timestamp:
@@ -806,15 +806,15 @@ class OrderBook(google.protobuf.message.Message):
         pass
     @property
     def time(self) -> google.protobuf.timestamp_pb2.Timestamp:
-        """Время стакана в часовом поясе UTC."""
+        """Время формирования стакана в часовом поясе UTC по времени биржи."""
         pass
     @property
     def limit_up(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Верхний лимит цены инструмента."""
+        """Верхний лимит цены за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента."""
         pass
     @property
     def limit_down(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Нижний лимит цены инструмента."""
+        """Нижний лимит цены за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента."""
         pass
     def __init__(self,
         *,
@@ -838,7 +838,7 @@ class Order(google.protobuf.message.Message):
     QUANTITY_FIELD_NUMBER: builtins.int
     @property
     def price(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Цена за 1 лот."""
+        """Цена за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента."""
         pass
     quantity: builtins.int
     """Количество в лотах."""
@@ -868,7 +868,7 @@ class Trade(google.protobuf.message.Message):
 
     @property
     def price(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Цена за 1 лот."""
+        """Цена за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента."""
         pass
     quantity: builtins.int
     """Количество лотов."""
@@ -908,10 +908,10 @@ class TradingStatus(google.protobuf.message.Message):
         """Время изменения торгового статуса в часовом поясе UTC."""
         pass
     limit_order_available_flag: builtins.bool
-    """Признак доступности выставления лимитной заявки по инструменту"""
+    """Признак доступности выставления лимитной заявки по инструменту."""
 
     market_order_available_flag: builtins.bool
-    """Признак доступности выставления рыночной заявки по инструменту"""
+    """Признак доступности выставления рыночной заявки по инструменту."""
 
     def __init__(self,
         *,
@@ -933,7 +933,7 @@ class GetCandlesRequest(google.protobuf.message.Message):
     TO_FIELD_NUMBER: builtins.int
     INTERVAL_FIELD_NUMBER: builtins.int
     figi: typing.Text
-    """Figi-идентификатор инструмента"""
+    """Figi-идентификатор инструмента."""
 
     @property
     def to(self) -> google.protobuf.timestamp_pb2.Timestamp:
@@ -979,19 +979,19 @@ class HistoricCandle(google.protobuf.message.Message):
     IS_COMPLETE_FIELD_NUMBER: builtins.int
     @property
     def open(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Цена открытия за 1 лот."""
+        """Цена открытия за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента."""
         pass
     @property
     def high(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Максимальная цена за 1 лот."""
+        """Максимальная цена за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента."""
         pass
     @property
     def low(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Минимальная цена за 1 лот."""
+        """Минимальная цена за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента."""
         pass
     @property
     def close(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Цена закрытия за 1 лот."""
+        """Цена закрытия за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента."""
         pass
     volume: builtins.int
     """Объём торгов в лотах."""
@@ -1058,7 +1058,7 @@ class LastPrice(google.protobuf.message.Message):
 
     @property
     def price(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Последняя цена за 1 лот."""
+        """Последняя цена за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента."""
         pass
     @property
     def time(self) -> google.protobuf.timestamp_pb2.Timestamp:
@@ -1120,19 +1120,19 @@ class GetOrderBookResponse(google.protobuf.message.Message):
         pass
     @property
     def last_price(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Цена последней сделки."""
+        """Цена последней сделки за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента."""
         pass
     @property
     def close_price(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Цена закрытия."""
+        """Цена закрытия за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента."""
         pass
     @property
     def limit_up(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Верхний лимит цены."""
+        """Верхний лимит цены за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента."""
         pass
     @property
     def limit_down(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Нижний лимит цены."""
+        """Нижний лимит цены за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента."""
         pass
     def __init__(self,
         *,
@@ -1177,10 +1177,10 @@ class GetTradingStatusResponse(google.protobuf.message.Message):
     """Статус торговли инструментом."""
 
     limit_order_available_flag: builtins.bool
-    """Признак доступности выставления лимитной заявки по инструменту"""
+    """Признак доступности выставления лимитной заявки по инструменту."""
 
     market_order_available_flag: builtins.bool
-    """Признак доступности выставления рыночной заявки по инструменту"""
+    """Признак доступности выставления рыночной заявки по инструменту."""
 
     def __init__(self,
         *,
@@ -1191,3 +1191,40 @@ class GetTradingStatusResponse(google.protobuf.message.Message):
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["figi",b"figi","limit_order_available_flag",b"limit_order_available_flag","market_order_available_flag",b"market_order_available_flag","trading_status",b"trading_status"]) -> None: ...
 global___GetTradingStatusResponse = GetTradingStatusResponse
+
+class GetLastTradesRequest(google.protobuf.message.Message):
+    """Запрос последних обезличенных сделок по инструменту."""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    FIGI_FIELD_NUMBER: builtins.int
+    FROM_FIELD_NUMBER: builtins.int
+    TO_FIELD_NUMBER: builtins.int
+    figi: typing.Text
+    """Figi-идентификатор инструмента"""
+
+    @property
+    def to(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Окончание запрашиваемого периода в часовом поясе UTC."""
+        pass
+    def __init__(self,
+        *,
+        figi: typing.Text = ...,
+        to: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["from",b"from","to",b"to"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["figi",b"figi","from",b"from","to",b"to"]) -> None: ...
+global___GetLastTradesRequest = GetLastTradesRequest
+
+class GetLastTradesResponse(google.protobuf.message.Message):
+    """Последние обезличенные сделки по инструменту."""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    TRADES_FIELD_NUMBER: builtins.int
+    @property
+    def trades(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Trade]:
+        """Массив сделок"""
+        pass
+    def __init__(self,
+        *,
+        trades: typing.Optional[typing.Iterable[global___Trade]] = ...,
+        ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["trades",b"trades"]) -> None: ...
+global___GetLastTradesResponse = GetLastTradesResponse

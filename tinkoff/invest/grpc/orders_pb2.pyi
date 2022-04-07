@@ -158,24 +158,24 @@ class OrderTrades(google.protobuf.message.Message):
     TRADES_FIELD_NUMBER: builtins.int
     ACCOUNT_ID_FIELD_NUMBER: builtins.int
     order_id: typing.Text
-    """Идентификатор торгового поручения"""
+    """Идентификатор торгового поручения."""
 
     @property
     def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
         """Дата и время создания сообщения в часовом поясе UTC."""
         pass
     direction: global___OrderDirection.ValueType
-    """Направление сделки (возможные значения)"""
+    """Направление сделки."""
 
     figi: typing.Text
-    """Figi-идентификатор инструмента"""
+    """Figi-идентификатор инструмента."""
 
     @property
     def trades(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___OrderTrade]:
-        """Массив сделок"""
+        """Массив сделок."""
         pass
     account_id: typing.Text
-    """Идентификатор счёта"""
+    """Идентификатор счёта."""
 
     def __init__(self,
         *,
@@ -202,10 +202,10 @@ class OrderTrade(google.protobuf.message.Message):
         pass
     @property
     def price(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Цена, по которой совершена сделка"""
+        """Цена одного инструмента, по которой совершена сделка."""
         pass
     quantity: builtins.int
-    """Количество лотов в сделке"""
+    """Количество лотов в сделке."""
 
     def __init__(self,
         *,
@@ -235,7 +235,7 @@ class PostOrderRequest(google.protobuf.message.Message):
 
     @property
     def price(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Цена лота."""
+        """Цена одного инструмента. Для получения стоимости лота требуется умножить на лотность инструмента."""
         pass
     direction: global___OrderDirection.ValueType
     """Направление операции."""
@@ -326,7 +326,7 @@ class PostOrderResponse(google.protobuf.message.Message):
 
     @property
     def initial_security_price(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
-        """Начальная цена инструмента заявки."""
+        """Начальная цена за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента."""
         pass
     order_type: global___OrderType.ValueType
     """Тип заявки."""
@@ -509,7 +509,7 @@ class OrderState(google.protobuf.message.Message):
 
     @property
     def initial_security_price(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
-        """Начальная цена инструмента. Цена инструмента на момент выставления заявки."""
+        """Начальная цена за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента."""
         pass
     @property
     def stages(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___OrderStage]:
@@ -562,7 +562,7 @@ class OrderStage(google.protobuf.message.Message):
     TRADE_ID_FIELD_NUMBER: builtins.int
     @property
     def price(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
-        """Цена."""
+        """Цена за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента.."""
         pass
     quantity: builtins.int
     """Количество лотов."""
