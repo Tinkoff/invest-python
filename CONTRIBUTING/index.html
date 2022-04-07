@@ -307,6 +307,20 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#proto" class="md-nav__link">
+    Загрузка proto файлов
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    Генерация клиента
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -375,6 +389,20 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#proto" class="md-nav__link">
+    Загрузка proto файлов
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    Генерация клиента
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -413,6 +441,18 @@ make install
 <h3 id="_4">Запуск автоформатирования</h3>
 <div class="highlight"><pre><span></span><code>make format
 </code></pre></div>
+<h3 id="proto">Загрузка proto файлов</h3>
+<div class="highlight"><pre><span></span><code>make download-protos
+</code></pre></div>
+<p>По дефолту загружает из ветки <code>main</code></p>
+<h3 id="_5">Генерация клиента</h3>
+<div class="highlight"><pre><span></span><code>make gen-grpc
+</code></pre></div>
+<p>Затем, добавить изменения в модули:
+- tinkoff/invest/__init__.py
+- tinkoff/invest/async_services.py
+- tinkoff/invest/schemas.py
+- tinkoff/invest/services.py</p>
 
               
             </article>
