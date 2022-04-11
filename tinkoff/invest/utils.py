@@ -1,3 +1,4 @@
+import dataclasses
 from datetime import datetime, timedelta
 from typing import Generator, Tuple
 
@@ -42,3 +43,8 @@ def candle_interval_to_timedelta(candle_interval: CandleInterval) -> timedelta:
     if delta := _CANDLE_INTERVAL_TO_TIMEDELTA_MAPPING.get(candle_interval):
         return delta
     raise ValueError(f"Cannot convert {candle_interval} to timedelta")
+
+
+def dataclass_from_dict(klass, d):
+    fieldtypes = {f.name: f.type for f in dataclasses.fields(klass)}
+    return klass(**{f: dataclass_from_dict(fieldtypes[f], d[f]) for f in d})

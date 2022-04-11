@@ -1,9 +1,17 @@
 # pylint:disable=redefined-builtin,too-many-lines
-from datetime import datetime
-from typing import Generator, Iterable, List, Optional
+import abc
+import csv
+import dataclasses
+import enum
+import itertools
+import os
+from datetime import datetime, timezone
+from pathlib import Path
+from typing import Generator, Iterable, List, Optional, Set, Sequence, Dict, Tuple
 
 import grpc
-
+import dateutil.parser
+from definitions import PACKAGE_DIR
 from tinkoff.invest.market_data_stream.market_data_stream_manager import (
     MarketDataStreamManager,
 )
@@ -128,7 +136,7 @@ from .schemas import (
     WithdrawLimitsResponse,
 )
 from .typedefs import AccountId
-from .utils import get_intervals
+from .utils import get_intervals, dataclass_from_dict
 
 __all__ = (
     "Services",
@@ -144,7 +152,184 @@ __all__ = (
 )
 
 
-class Services:
+class ICandleGetter(abc.ABC):
+    @abc.abstractmethod
+    def get_all_candles(
+        self,
+        *,
+        from_: datetime,
+        to: Optional[datetime],
+        interval: CandleInterval,
+        figi: str,
+    ) -> Generator[HistoricCandle, None, None]:
+        pass
+
+
+class MarketDataCacheFormat(str, enum.Enum):
+    CSV = '.csv'
+
+
+@dataclasses.dataclass()
+class MarketDataCacheSettings:
+    base_cache_dir: Path = PACKAGE_DIR / ".market_data_cache"
+    use_cache: bool = True
+    format: MarketDataCacheFormat = MarketDataCacheFormat.CSV
+    field_names: Sequence[str] = ('time', 'open', 'high', 'low', 'close', 'volume', 'is_complete')
+    meta_suffix: str = '_meta'
+
+
+@dataclasses.dataclass()
+class FileMetaData:
+    file: Path
+    cached_ranges_to_idx: Dict[Tuple[datetime, datetime], Tuple[int, int]]
+    hash: int
+
+class MarketDataCache(ICandleGetter):
+    def __init__(self, settings: MarketDataCacheSettings, market_data: "MarketDataService"):
+        self._settings = settings
+        self._settings.base_cache_dir.mkdir(parents=True, exist_ok=True)
+        self._market_data = market_data
+
+    def _get_file(self, figi: str, interval: CandleInterval) -> Path:
+        instrument_dir = self._get_cache_dir_for_instrument(figi=figi)
+        instrument_dir.mkdir(parents=True, exist_ok=True)
+        filepath = self._get_cache_file_for_instrument(instrument_dir=instrument_dir, interval=interval)
+        return filepath.with_suffix(self._settings.format)
+
+    def _get_metafile(self, file: Path) -> Path:
+        return file.with_suffix(self._settings.meta_suffix)
+
+    def _get_cache_file_for_instrument(self, instrument_dir: Path, interval: CandleInterval) -> Path:
+        return instrument_dir / interval.name
+
+    def _get_cache_dir_for_instrument(self, figi: str) -> Path:
+        return self._settings.base_cache_dir / figi
+
+    def _order_candles(self, tmp_dict_reader: Iterable[Dict], historic_candles: Iterable[HistoricCandle]) -> Iterable[Dict]:
+        tmp_iter = iter(tmp_dict_reader)
+        candle_iter = iter(historic_candles)
+
+        while True:
+            try:
+                tmp_candle_dict = next(tmp_iter)
+            except StopIteration:
+                yield from [dataclasses.asdict(candle) for candle in candle_iter]
+                break
+            try:
+                candle = next(candle_iter)
+            except StopIteration:
+                yield from tmp_iter
+                break
+
+            tmp_candle_time = dateutil.parser.parse(tmp_candle_dict['time'])
+            if tmp_candle_time > candle.time:
+                tmp_iter = itertools.chain([tmp_candle_dict], tmp_iter)
+                yield dataclasses.asdict(candle)
+            elif tmp_candle_time < candle.time:
+                candle_iter = itertools.chain([candle], candle_iter)
+                yield tmp_candle_dict
+            else:
+                yield tmp_candle_dict
+
+    def _write_candles(self, historic_candles: Iterable[HistoricCandle], file: Path):
+
+        tmp_file = file.with_suffix('_tmp')
+        with open(file, "r") as infile:
+            reader = csv.reader(infile)
+            with open(tmp_file, "w") as outfile:
+                if file.exists():
+                    writer = csv.writer(outfile)
+                    for line in reader:
+                        writer.writerow(line)
+                else:
+                    writer = csv.DictWriter(tmp_file, fieldnames=self._settings.field_names)
+                    writer.writeheader()
+
+        with open(tmp_file, "r") as infile:
+            reader = csv.DictReader(infile, fieldnames=self._settings.field_names)
+            reader_iter = iter(reader)
+            next(reader_iter)  # skip header
+
+            with open(file, mode='w') as csv_file:
+                writer = csv.DictWriter(csv_file, fieldnames=self._settings.field_names)
+                writer.writeheader()
+
+                for candle_dict in self._order_candles(tmp_dict_reader=reader_iter, historic_candles=historic_candles):
+                    writer.writerow(candle_dict)
+
+            tmp_file.unlink()
+
+    def _candle_from_row(self, row: Dict[str, str]) -> HistoricCandle:
+        return dataclass_from_dict(HistoricCandle, row)
+
+    def _get_range(self, reader: csv.DictReader, from_: datetime, to: datetime) -> Iterable[Dict[str, str]]:
+        started = False
+        for row in reader:
+            current_time = dateutil.parser.parse(row['time'])
+            if current_time >= from_:
+                started = True
+                yield row
+            if started and current_time > to:
+                break
+
+    def _get_candles_from_cache(
+        self,
+        *,
+        file: Path,
+        from_: datetime,
+        to: datetime,
+    ) -> Generator[HistoricCandle, None, None]:
+        with open(file, "r") as infile:
+            reader = csv.DictReader(infile, fieldnames=self._settings.field_names)
+            for row in self._get_range(reader, from_, to):
+                yield from self._candle_from_row(row)
+
+    def _get_candles_from_net(
+        self,
+        *,
+        local_from: datetime,
+        local_to: Optional[datetime],
+        interval: CandleInterval,
+        figi: str,
+    ) -> Generator[HistoricCandle, None, None]:
+        candles_response = self._market_data.get_candles(
+            figi=figi,
+            interval=interval,
+            from_=local_from,
+            to=local_to,
+        )
+        yield from candles_response.candles
+
+    def _load_file_meta_data(self, file: Path) -> FileMetaData:
+        file.with_suffix(self._settings.meta_suffix)
+
+    def get_all_candles(
+        self,
+        *,
+        from_: datetime,
+        to: Optional[datetime] = None,
+        interval: CandleInterval = CandleInterval(0),
+        figi: str = "",
+    ) -> Generator[HistoricCandle, None, None]:
+        to = to or datetime.utcnow()
+        file = self._get_file(figi=figi, interval=interval)
+        self._get_metafile(file=file)
+        begin_time = None
+        end_time = None
+        for candle in self._get_candles_from_cache(file=file, from_=from_, to=to):
+            begin_time = begin_time or candle.time
+            end_time = candle.time
+            yield candle
+
+        if begin_time > from_:
+            raise Exception('Cache missed values')
+
+        from_ = begin_time
+        for local_from, local_to in get_intervals(interval, from_, to):
+            yield from self._get_candles_from_net(local_from=local_from, local_to=local_to, interval=interval, figi=figi)
+
+
+class Services(ICandleGetter):
     def __init__(
         self, channel: grpc.Channel, token: str, sandbox_token: Optional[str] = None
     ) -> None:
@@ -159,6 +344,9 @@ class Services:
         self.users = UsersService(channel, metadata)
         self.sandbox = SandboxService(channel, sandbox_metadata)
         self.stop_orders = StopOrdersService(channel, metadata)
+
+        settings = MarketDataCacheSettings()
+        self.market_data_cache = MarketDataCache(settings=settings, market_data=self.market_data)
 
     def create_market_data_stream(self) -> MarketDataStreamManager:
         return MarketDataStreamManager(
@@ -189,16 +377,7 @@ class Services:
         interval: CandleInterval = CandleInterval(0),
         figi: str = "",
     ) -> Generator[HistoricCandle, None, None]:
-        to = to or datetime.utcnow()
-
-        for local_from_, local_to in get_intervals(interval, from_, to):
-            candles_response = self.market_data.get_candles(
-                figi=figi,
-                interval=interval,
-                from_=local_from_,
-                to=local_to,
-            )
-            yield from candles_response.candles
+        yield from self.market_data_cache.get_all_candles(from_=from_, to=to, interval=interval, figi=figi)
 
 
 class InstrumentsService(_grpc_helpers.Service):

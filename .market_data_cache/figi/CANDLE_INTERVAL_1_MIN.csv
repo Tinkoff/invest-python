@@ -1,0 +1,2 @@
+time,open,high,low,close,volume,is_complete
+2022-04-08 15:00:00+00:00,"{'units': 144, 'nano': 450000000}","{'units': 145, 'nano': 190000000}","{'units': 143, 'nano': 720000000}","{'units': 143, 'nano': 720000000}",239786,True
