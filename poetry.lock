@@ -1506,7 +1506,7 @@ dev = []
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "ae0e2146439df437bb9625d3a9599a3ff70588b335b4b1c609fa8023fd9e2697"
+content-hash = "6ad0146dc721b1364a68ccb22fb88be7e39a73c7a94f0a9c790287d7777ebf14"
 
 [metadata.files]
 appnope = [
