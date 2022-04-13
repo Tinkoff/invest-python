@@ -1,5 +1,8 @@
+import os
+
 from tinkoff.invest import Client
-from tinkoff.invest.token import TOKEN
+
+TOKEN = os.environ["INVEST_TOKEN"]
 
 
 def main():

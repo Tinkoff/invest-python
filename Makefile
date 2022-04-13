@@ -62,6 +62,10 @@ update-changelog: docs-changelog
 install:
 	poetry install
 
+.PHONY: install-dev
+install-dev:
+	poetry install -E dev
+
 .PHONY: publish
 publish:
 	poetry publish --build --no-interaction --username=$(pypi_username) --password=$(pypi_password)
