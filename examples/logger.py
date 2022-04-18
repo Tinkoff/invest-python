@@ -1,7 +1,9 @@
 import logging
+import os
 
 from tinkoff.invest import Client, RequestError
-from tinkoff.invest.token import TOKEN
+
+TOKEN = os.environ["INVEST_TOKEN"]
 
 logging.basicConfig(format="%(asctime)s %(levelname)s:%(message)s", level=logging.INFO)
 logger = logging.getLogger(__name__)

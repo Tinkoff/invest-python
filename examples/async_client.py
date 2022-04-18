@@ -1,7 +1,9 @@
 import asyncio
+import os
 
 from tinkoff.invest import AsyncClient
-from tinkoff.invest.token import TOKEN
+
+TOKEN = os.environ["INVEST_TOKEN"]
 
 
 async def main():

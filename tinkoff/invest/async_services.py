@@ -128,7 +128,7 @@ from .schemas import (
     WithdrawLimitsResponse,
 )
 from .typedefs import AccountId
-from .utils import get_intervals
+from .utils import get_intervals, now
 
 __all__ = (
     "AsyncServices",
@@ -197,7 +197,7 @@ class AsyncServices:
         interval: CandleInterval = CandleInterval(0),
         figi: str = "",
     ) -> AsyncGenerator[HistoricCandle, None]:
-        to = to or datetime.utcnow()
+        to = to or now()
 
         for local_from_, local_to in get_intervals(interval, from_, to):
             candles_response = await self.market_data.get_candles(

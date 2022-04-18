@@ -1,7 +1,11 @@
+import os
+
 from tinkoff.invest import Client
-from tinkoff.invest.token import TOKEN
 
 CONTRACT_PREFIX = "tinkoff.public.invest.api.contract.v1."
+
+
+TOKEN = os.environ["INVEST_TOKEN"]
 
 
 def main() -> None:

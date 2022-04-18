@@ -262,7 +262,7 @@ def protobuf_to_dataclass(pb_obj: Any, dataclass_type: Type[T]) -> T:  # noqa:C9
                 field_value = pb_value
             if field_type == Decimal:
                 field_value = Decimal(str(pb_value))
-            elif field_type == datetime:
+            elif issubclass(field_type, datetime):
                 field_value = ts_to_datetime(pb_value)
             elif dataclasses.is_dataclass(field_type):
                 field_value = protobuf_to_dataclass(pb_value, field_type)
@@ -300,7 +300,7 @@ def dataclass_to_protobuff(dataclass_obj: Any, protobuff_obj: T) -> T:  # noqa:C
         if origin is None:
             if field_type in PRIMITIVE_TYPES:
                 setattr(protobuff_obj, field_name, field_value)
-            elif field_type == datetime:
+            elif issubclass(field_type, datetime):
                 field_name_ = field_name
                 if field_name == "from_":
                     field_name_ = "from"
