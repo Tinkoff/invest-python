@@ -166,39 +166,24 @@ class ICandleGetter(abc.ABC):
 
 class MarketDataCache(ICandleGetter):
     def __init__(
-        self, settings: MarketDataCacheSettings, market_data: "MarketDataService"
+        self, settings: MarketDataCacheSettings, services: "Services"
     ):
         self._settings = settings
         self._settings.base_cache_dir.mkdir(parents=True, exist_ok=True)
-        self._market_data = market_data
+        self._services = services
         self._figi_cache_storages: Dict[
             Tuple[str, CandleInterval], InstrumentMarketDataStorage
         ] = {}
 
     def _get_candles_from_net(
-        self,
-        *,
-        local_from: datetime,
-        local_to: Optional[datetime],
-        interval: CandleInterval,
-        figi: str,
-    ) -> Generator[HistoricCandle, None, None]:
-        candles_response = self._market_data.get_candles(
-            figi=figi,
-            interval=interval,
-            from_=local_from,
-            to=local_to,
-        )
-        yield from candles_response.candles
-
-    def _get_candles_from_net_with_intervals(
         self, figi: str, interval: CandleInterval, from_: datetime, to: datetime
     ) -> Iterable[HistoricCandle]:
-
-        for local_from, local_to in get_intervals(interval, from_, to):
-            yield from self._get_candles_from_net(
-                local_from=local_from, local_to=local_to, interval=interval, figi=figi
-            )
+        yield from self._services.get_all_candles(
+            figi=figi,
+            interval=interval,
+            from_=from_,
+            to=to,
+        )
 
     def _with_saving_into_cache(
         self,
@@ -210,7 +195,7 @@ class MarketDataCache(ICandleGetter):
         storage.update(
             [InstrumentDateRangeData(date_range=net_range, historic_candles=candles)]
         )
-        yield from from_net
+        yield from candles
 
     def get_all_candles(
         self,
@@ -229,18 +214,14 @@ class MarketDataCache(ICandleGetter):
             if cached_start > processed_time:
                 yield from self._with_saving_into_cache(
                     storage=figi_cache_storage,
-                    from_net=self._get_candles_from_net_with_intervals(
-                        figi, interval, processed_time, cached_start
-                    ),
+                    from_net=self._get_candles_from_net(figi, interval, processed_time, cached_start),
                     net_range=(processed_time, cached_start)
                 )
             yield from cached.historic_candles
             processed_time = cached_end
         yield from self._with_saving_into_cache(
             storage=figi_cache_storage,
-            from_net=self._get_candles_from_net_with_intervals(
-                figi, interval, processed_time, to
-            ),
+            from_net=self._get_candles_from_net(figi, interval, processed_time, to),
             net_range=(processed_time, to)
         )
 
@@ -273,11 +254,6 @@ class Services(ICandleGetter):
         self.sandbox = SandboxService(channel, sandbox_metadata)
         self.stop_orders = StopOrdersService(channel, metadata)
 
-        settings = MarketDataCacheSettings()
-        self.market_data_cache = MarketDataCache(
-            settings=settings, market_data=self.market_data
-        )
-
     def create_market_data_stream(self) -> MarketDataStreamManager:
         return MarketDataStreamManager(
             market_data_stream_service=self.market_data_stream
@@ -307,9 +283,16 @@ class Services(ICandleGetter):
         interval: CandleInterval = CandleInterval(0),
         figi: str = "",
     ) -> Generator[HistoricCandle, None, None]:
-        yield from self.market_data_cache.get_all_candles(
-            from_=from_, to=to, interval=interval, figi=figi
-        )
+        to = to or now()
+
+        for local_from_, local_to in get_intervals(interval, from_, to):
+            candles_response = self.market_data.get_candles(
+                figi=figi,
+                interval=interval,
+                from_=local_from_,
+                to=local_to,
+            )
+            yield from candles_response.candles
 
 
 class InstrumentsService(_grpc_helpers.Service):

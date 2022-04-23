@@ -211,7 +211,7 @@ class InstrumentMarketDataStorage(
     def _get_distinct_product(self, cached_range_in_file) -> Iterable[Tuple]:
         for i, items1 in enumerate(cached_range_in_file.items()):
             for j, items2 in enumerate(cached_range_in_file.items()):
-                if i > j:
+                if i < j:
                     yield items1, items2
 
     def _try_merge_files(
@@ -219,7 +219,6 @@ class InstrumentMarketDataStorage(
     ) -> Dict[Tuple[datetime, datetime], Path]:
         new_cached_range_in_file = cached_range_in_file.copy()
         file_pairs = self._get_distinct_product(new_cached_range_in_file)
-
         for (cached_range, cached_file), (cached_range2, cached_file2) in file_pairs:
             intersection_range = self._get_intersection(
                 request_range=cached_range2, cached_range=cached_range

@@ -101,7 +101,7 @@ def dataclass_from_dict(klass, d):
     if issubclass(bool, klass):
         return bool(d)
     if issubclass(klass, datetime):
-        return dateutil.parser.parse(d)
+        return dateutil.parser.parse(d).replace(tzinfo=timezone.utc)
     if issubclass(klass, Quotation):
         d = ast.literal_eval(d)
     fieldtypes = {f.name: f.type for f in dataclasses.fields(klass)}
