@@ -121,8 +121,16 @@ global___OrderExecutionReportStatus = OrderExecutionReportStatus
 class TradesStreamRequest(google.protobuf.message.Message):
     """Запрос установки соединения."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    ACCOUNTS_FIELD_NUMBER: builtins.int
+    @property
+    def accounts(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+        """Идентификаторы счетов."""
+        pass
     def __init__(self,
+        *,
+        accounts: typing.Optional[typing.Iterable[typing.Text]] = ...,
         ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["accounts",b"accounts"]) -> None: ...
 global___TradesStreamRequest = TradesStreamRequest
 
 class TradesStreamResponse(google.protobuf.message.Message):

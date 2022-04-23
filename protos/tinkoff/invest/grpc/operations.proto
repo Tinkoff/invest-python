@@ -220,8 +220,8 @@ enum OperationState {
 //Тип операции.
 enum OperationType {
   OPERATION_TYPE_UNSPECIFIED = 0; //Тип операции не определён.
-  OPERATION_TYPE_INPUT = 1; //Завод денежных средств.
-  OPERATION_TYPE_BOND_TAX = 2; //Удержание налога по купонам.
+  OPERATION_TYPE_INPUT = 1; //Пополнение брокерского счёта.
+  OPERATION_TYPE_BOND_TAX = 2; //Удержание НДФЛ по купонам.
   OPERATION_TYPE_OUTPUT_SECURITIES = 3; //Вывод ЦБ.
   OPERATION_TYPE_OVERNIGHT = 4; //Доход по сделке РЕПО овернайт.
   OPERATION_TYPE_TAX = 5; //Удержание налога.
@@ -236,7 +236,7 @@ enum OperationType {
   OPERATION_TYPE_MARGIN_FEE = 14; //Удержание комиссии за непокрытую позицию.
   OPERATION_TYPE_BUY = 15; //Покупка ЦБ.
   OPERATION_TYPE_BUY_CARD = 16; //Покупка ЦБ с карты.
-  OPERATION_TYPE_INPUT_SECURITIES = 17; //Завод ЦБ.
+  OPERATION_TYPE_INPUT_SECURITIES = 17; //Завод ценных бумаг из другого депозитария.
   OPERATION_TYPE_SELL_MARGIN = 18; //Продажа в результате Margin-call.
   OPERATION_TYPE_BROKER_FEE = 19; //Удержание комиссии за операцию.
   OPERATION_TYPE_BUY_MARGIN = 20; //Покупка в результате Margin-call.

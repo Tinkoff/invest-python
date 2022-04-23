@@ -53,10 +53,10 @@ class _OperationTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._
     """Тип операции не определён."""
 
     OPERATION_TYPE_INPUT: _OperationType.ValueType  # 1
-    """Завод денежных средств."""
+    """Пополнение брокерского счёта."""
 
     OPERATION_TYPE_BOND_TAX: _OperationType.ValueType  # 2
-    """Удержание налога по купонам."""
+    """Удержание НДФЛ по купонам."""
 
     OPERATION_TYPE_OUTPUT_SECURITIES: _OperationType.ValueType  # 3
     """Вывод ЦБ."""
@@ -101,7 +101,7 @@ class _OperationTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._
     """Покупка ЦБ с карты."""
 
     OPERATION_TYPE_INPUT_SECURITIES: _OperationType.ValueType  # 17
-    """Завод ЦБ."""
+    """Завод ценных бумаг из другого депозитария."""
 
     OPERATION_TYPE_SELL_MARGIN: _OperationType.ValueType  # 18
     """Продажа в результате Margin-call."""
@@ -192,10 +192,10 @@ OPERATION_TYPE_UNSPECIFIED: OperationType.ValueType  # 0
 """Тип операции не определён."""
 
 OPERATION_TYPE_INPUT: OperationType.ValueType  # 1
-"""Завод денежных средств."""
+"""Пополнение брокерского счёта."""
 
 OPERATION_TYPE_BOND_TAX: OperationType.ValueType  # 2
-"""Удержание налога по купонам."""
+"""Удержание НДФЛ по купонам."""
 
 OPERATION_TYPE_OUTPUT_SECURITIES: OperationType.ValueType  # 3
 """Вывод ЦБ."""
@@ -240,7 +240,7 @@ OPERATION_TYPE_BUY_CARD: OperationType.ValueType  # 16
 """Покупка ЦБ с карты."""
 
 OPERATION_TYPE_INPUT_SECURITIES: OperationType.ValueType  # 17
-"""Завод ЦБ."""
+"""Завод ценных бумаг из другого депозитария."""
 
 OPERATION_TYPE_SELL_MARGIN: OperationType.ValueType  # 18
 """Продажа в результате Margin-call."""
