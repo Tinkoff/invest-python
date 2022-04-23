@@ -4,7 +4,7 @@ import enum
 import pickle
 from datetime import datetime
 from pathlib import Path
-from typing import Sequence, Dict, Tuple, Generator, Optional
+from typing import Sequence, Dict, Tuple, Generator
 
 from definitions import PACKAGE_DIR
 

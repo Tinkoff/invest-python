@@ -5,7 +5,7 @@ import dataclasses
 import itertools
 from datetime import datetime
 from pathlib import Path
-from typing import Generator, Iterable, List, Optional, Dict
+from typing import Generator, Iterable, List, Optional, Dict, Tuple
 
 import grpc
 import dateutil.parser
@@ -16,6 +16,8 @@ from tinkoff.invest.market_data_stream.market_data_stream_manager import (
 from . import _grpc_helpers
 from ._errors import handle_request_error, handle_request_error_gen
 from .caching.cache_settings import MarketDataCacheSettings, FileMetaData
+from .caching.instrument_market_data_storage import InstrumentMarketDataStorage, \
+    InstrumentDateRangeData
 from .grpc import (
     instruments_pb2,
     instruments_pb2_grpc,
@@ -168,6 +170,7 @@ class MarketDataCache(ICandleGetter):
         self._settings = settings
         self._settings.base_cache_dir.mkdir(parents=True, exist_ok=True)
         self._market_data = market_data
+        self._figi_cache_storages: Dict[Tuple[str, CandleInterval], InstrumentMarketDataStorage] = {}
 
     def _get_candles_from_net(
         self,
@@ -185,8 +188,16 @@ class MarketDataCache(ICandleGetter):
         )
         yield from candles_response.candles
 
-    def _load_file_meta_data(self, file: Path) -> FileMetaData:
-        file.with_suffix(self._settings.meta_suffix)
+    def _get_candles_from_net_with_intervals(self, figi: str, interval: CandleInterval, from_: datetime, to: datetime) -> Iterable[HistoricCandle]:
+
+        for local_from, local_to in get_intervals(interval, from_, to):
+            yield from self._get_candles_from_net(local_from=local_from,
+                                                  local_to=local_to, interval=interval,
+                                                  figi=figi)
+
+    def _with_saving_into_cache(self, storage: InstrumentMarketDataStorage, from_net: Iterable[HistoricCandle], net_range: Tuple[datetime, datetime]) -> Iterable[HistoricCandle]:
+        candles = list(from_net)
+        storage.update([InstrumentDateRangeData(date_range=net_range, historic_candles=candles)])
 
     def get_all_candles(
         self,
@@ -197,21 +208,24 @@ class MarketDataCache(ICandleGetter):
         figi: str = "",
     ) -> Generator[HistoricCandle, None, None]:
         to = to or now()
-        file = self._get_file(figi=figi, interval=interval)
-        self._get_metafile(file=file)
-        begin_time = None
-        end_time = None
-        for candle in self._get_candles_from_cache(file=file, from_=from_, to=to):
-            begin_time = begin_time or candle.time
-            end_time = candle.time
-            yield candle
+        processed_time = from_
+        figi_cache_storage = self._get_figi_cache_storage(figi=figi, interval=interval)
+        for cached in figi_cache_storage.get(request_range=(from_, to)):
+            cached_start, cached_end = cached.date_range
+            assert cached_start >= processed_time
+            if cached_start > processed_time:
+                yield from self._get_candles_from_net_with_intervals(figi, interval, processed_time, cached_start)
+            yield from cached.historic_candles
+            processed_time = cached_end
+        yield from self._get_candles_from_net_with_intervals(figi, interval, from_, to)
 
-        if begin_time > from_:
-            raise Exception('Cache missed values')
-
-        from_ = begin_time
-        for local_from, local_to in get_intervals(interval, from_, to):
-            yield from self._get_candles_from_net(local_from=local_from, local_to=local_to, interval=interval, figi=figi)
+    def _get_figi_cache_storage(self, figi: str, interval: CandleInterval) -> InstrumentMarketDataStorage:
+        figi_tuple = (figi, interval)
+        storage = self._figi_cache_storages.get(figi_tuple)
+        if storage is None:
+            storage = InstrumentMarketDataStorage(figi=figi, interval=interval, settings=self._settings)
+            self._figi_cache_storages[figi_tuple] = storage
+        return storage
 
 
 class Services(ICandleGetter):

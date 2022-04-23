@@ -1,11 +1,11 @@
-import contextlib
+import csv
 import csv
 import dataclasses
 import itertools
-import pickle
 from datetime import datetime
 from pathlib import Path
-from typing import Tuple, List, Dict, Iterable, Generator, Sequence, Any, Optional
+from typing import Tuple, Dict, Iterable, Generator, Optional, \
+    Iterator
 
 import dateutil.parser
 
@@ -19,16 +19,7 @@ from tinkoff.invest.utils import dataclass_from_dict
 @dataclasses.dataclass()
 class InstrumentDateRangeData:
     date_range: Tuple[datetime, datetime]
-    historic_candles: Sequence[HistoricCandle]
-
-
-class CacheMissError(Exception):
-    def __init__(self, cached_range: Tuple[datetime, datetime], request_range: Tuple[datetime, datetime]):
-        self._cached_range = cached_range
-        self._request_range = request_range
-
-    def __str__(self):
-        return f'Request range was [{self._request_range}], but cache range is [{self._cached_range}]'
+    historic_candles: Iterable[HistoricCandle]
 
 
 class InstrumentMarketDataStorage(IInstrumentMarketDataStorage[Iterable[InstrumentDateRangeData]]):
@@ -61,18 +52,51 @@ class InstrumentMarketDataStorage(IInstrumentMarketDataStorage[Iterable[Instrume
     def _get_cache_dir_for_instrument(self, figi: str) -> Path:
         return self._settings.base_cache_dir / figi
 
+    def _get_range_from_file(self, reader: Iterable[Dict], request_range: Tuple[datetime, datetime]) -> Iterable[Dict]:
+        start, end = request_range
+        for row in reader:
+            row_time = dateutil.parser.parse(row['time'])
+            if start <= row_time <= end:
+                yield row
+            if end < row_time:
+                return
+
     def _get_candles_from_cache(
-        self,
-        *,
-        from_: datetime,
-        to: datetime,
+        self, file: Path, request_range: Tuple[datetime, datetime],
     ) -> Generator[HistoricCandle, None, None]:
-        with open(self._file, "r") as infile:
+        with open(file, "r") as infile:
             reader = csv.DictReader(infile, fieldnames=self._settings.field_names)
-            for row in self._get_range(reader, from_, to):
+            for row in self._get_range_from_file(reader, request_range=request_range):
                 yield from self._candle_from_row(row)
 
-    def _order_candles(self, tmp_dict_reader: Iterable[Dict], historic_candles: Iterable[HistoricCandle]) -> Iterable[Dict]:
+    def _order_rows(self, dict_reader1: Iterator[Dict], dict_reader2: Iterator[Dict]) -> Iterable[Dict]:
+        dict_reader_iter1 = iter(dict_reader1)
+        dict_reader_iter2 = iter(dict_reader2)
+
+        while True:
+            try:
+                candle_dict1 = next(dict_reader_iter1)
+            except StopIteration:
+                yield from dict_reader_iter2
+                break
+            try:
+                candle_dict2 = next(dict_reader_iter2)
+            except StopIteration:
+                yield from dict_reader_iter1
+                break
+
+            candle_dict_time1 = dateutil.parser.parse(candle_dict1['time'])
+            candle_dict_time2 = dateutil.parser.parse(candle_dict2['time'])
+            if candle_dict_time1 > candle_dict_time2:
+                dict_reader_iter1 = itertools.chain([candle_dict1], dict_reader_iter1)
+                yield candle_dict2
+            elif candle_dict_time1 < candle_dict_time2:
+                dict_reader_iter2 = itertools.chain([candle_dict2], dict_reader_iter2)
+                yield candle_dict1
+            else:
+                yield candle_dict1
+
+    def _order_candles(self, tmp_dict_reader: Iterator[Dict], historic_candles: Iterable[HistoricCandle]) -> Iterable[Dict]:
         tmp_iter = iter(tmp_dict_reader)
         candle_iter = iter(historic_candles)
 
@@ -98,71 +122,17 @@ class InstrumentMarketDataStorage(IInstrumentMarketDataStorage[Iterable[Instrume
             else:
                 yield tmp_candle_dict
 
-    def _write_candles(self, historic_candles: Iterable[HistoricCandle]):
-
-        with open(self._file, mode='w') as csv_file:
+    def _write_candles_file(self, data: InstrumentDateRangeData) -> Path:
+        file = self._get_file_path(data.date_range)
+        with open(file, mode='w') as csv_file:
             writer = csv.DictWriter(csv_file, fieldnames=self._settings.field_names)
             writer.writeheader()
-
-            for candle_dict in self._order_candles(tmp_dict_reader=reader_iter, historic_candles=historic_candles):
-                writer.writerow(candle_dict)
-
-
-    def _write_candles(self, historic_candles: Iterable[HistoricCandle], file: Path):
-
-        tmp_file = file.with_suffix('_tmp')
-        with open(file, "r") as infile:
-            reader = csv.reader(infile)
-            with open(tmp_file, "w") as outfile:
-                if file.exists():
-                    writer = csv.writer(outfile)
-                    for line in reader:
-                        writer.writerow(line)
-                else:
-                    writer = csv.DictWriter(tmp_file, fieldnames=self._settings.field_names)
-                    writer.writeheader()
-
-        with open(tmp_file, "r") as infile:
-            reader = csv.DictReader(infile, fieldnames=self._settings.field_names)
-            reader_iter = iter(reader)
-            next(reader_iter)  # skip header
-
-            with open(file, mode='w') as csv_file:
-                writer = csv.DictWriter(csv_file, fieldnames=self._settings.field_names)
-                writer.writeheader()
-
-                for candle_dict in self._order_candles(tmp_dict_reader=reader_iter, historic_candles=historic_candles):
-                    writer.writerow(candle_dict)
-
-            tmp_file.unlink()
-
+            for candle in data.historic_candles:
+                writer.writerow(dataclasses.asdict(candle))
+        return file
 
     def _candle_from_row(self, row: Dict[str, str]) -> HistoricCandle:
         return dataclass_from_dict(HistoricCandle, row)
-
-    def _get_rows_by_index(self, reader: csv.DictReader, cached_index: Tuple[int, int]) -> Iterable[Dict[str, str]]:
-        start_index, end_index = cached_index
-        current_index = 0
-        for row in reader:
-            if start_index <= current_index <= end_index:
-                yield row
-            if current_index > end_index:
-                return
-            current_index += 1
-        raise RuntimeError('Unreachable')
-
-    def _filter_by_range(
-        self, candles: Iterable[HistoricCandle], request_range: Tuple[datetime, datetime]
-    ):
-        request_start, request_end = request_range
-        for candle in candles:
-            if request_start <= candle.time <= request_end:
-                yield candle
-
-    def _is_request_in_cache(self, request_range: Tuple[datetime, datetime], cached_range: Tuple[datetime, datetime]):
-        request_start, request_end = request_range
-        cached_start, cached_end = cached_range
-        return cached_start <= request_start and request_end <= cached_end
 
     def _get_intersection(self, request_range: Tuple[datetime, datetime], cached_range: Tuple[datetime, datetime]) -> Optional[Tuple[datetime, datetime]]:
         request_start, request_end = request_range
@@ -174,82 +144,82 @@ class InstrumentMarketDataStorage(IInstrumentMarketDataStorage[Iterable[Instrume
         else:
             return None
 
-    def _load_by_index(self, cached_index: Tuple[int, int]) -> Iterable[HistoricCandle]:
-        with open(self._file, "r") as infile:
-            reader = csv.DictReader(infile, fieldnames=self._settings.field_names)
-            for row in self._get_rows_by_index(reader, cached_index):
-                yield self._candle_from_row(row)
+    def _merge_intersecting_files(self, file1: Path, range1: Tuple[datetime, datetime], file2: Path, range2: Tuple[datetime, datetime]) -> Tuple[Tuple[datetime, datetime], Path]:
+        new_range = (
+            min(min(range1), min(range2)),
+            max(max(range1), max(range2))
+        )
+        new_file = self._get_file_path(range=new_range)
+        assert file1 != file2 != new_file
 
-    def _ensure_one_item(self, data: Iterable[Any]) -> Any:
-        data = list(data)
-        if len(data) > 1:
-            raise NotImplementedError(
-                'Multiple ranges caching is not currently supported'
+        with open(file1, "r") as infile1:
+            reader1 = csv.DictReader(
+                infile1, fieldnames=self._settings.field_names
             )
-        item, = data
-        return item
+            reader_iter1 = iter(reader1)
+            next(reader_iter1)  # skip header
+
+            with open(file2, "r") as infile2:
+                reader2 = csv.DictReader(
+                    infile2, fieldnames=self._settings.field_names
+                )
+                reader_iter2 = iter(reader2)
+                next(reader_iter2)  # skip header
+
+                with open(new_file, mode='w') as csv_file:
+                    writer = csv.DictWriter(csv_file, fieldnames=self._settings.field_names)
+                    writer.writeheader()
+
+                    for candle_dict in self._order_rows(
+                            dict_reader1=reader_iter1,
+                            dict_reader2=reader_iter2
+                    ):
+                        writer.writerow(candle_dict)
+
+                    file1.unlink()
+                    file2.unlink()
+        return new_range, new_file
+
+    def _try_merge_files(self, cached_range_in_file: Dict[Tuple[datetime, datetime], Path]) -> Dict[Tuple[datetime, datetime], Path]:
+        new_cached_range_in_file = cached_range_in_file.copy()
+        for cached_range, cached_file, cached_range2, cached_file2 in list(
+            set(itertools.product(
+                new_cached_range_in_file.items(),
+                new_cached_range_in_file.items()
+            ))
+        ):
+            intersection_range = self._get_intersection(
+                request_range=cached_range2,
+                cached_range=cached_range
+            )
+            if intersection_range is not None:
+                merged_range, merged_file = self._merge_intersecting_files(
+                    file1=cached_file,
+                    range1=cached_range,
+                    file2=cached_file2,
+                    range2=cached_range2)
+                new_cached_range_in_file[merged_range] = merged_file
+                del new_cached_range_in_file[cached_range]
+                del new_cached_range_in_file[cached_range2]
+                return self._try_merge_files(new_cached_range_in_file)
+        return new_cached_range_in_file
 
     def get(self, request_range: Tuple[datetime, datetime]) -> Iterable[InstrumentDateRangeData]:
         with meta_file_context(meta_file_path=self._meta_path) as meta_file:
             meta_file: FileMetaData = meta_file
-            cached_ranges = meta_file.cached_ranges_to_idx.keys()
-            cached_indexes = meta_file.cached_ranges_to_idx.values()
-            cached_range = self._ensure_one_item(cached_ranges)
-            cached_index, = cached_indexes
-            if self._is_request_in_cache(request_range, cached_range):
-                yield from self._filter_by_range(self._load_by_index(cached_index), request_range)
-            else:
-                raise CacheMissError(cached_range=cached_range, request_range=request_range)
 
-    def _merge_into_file(self, cached_file: Path, cached_range: Tuple[datetime, datetime], data: InstrumentDateRangeData) -> Tuple[Tuple[datetime], Path]:
-        start = min(min(data.date_range), min(cached_range))
-        end = max(max(data.date_range), max(cached_range))
-        new_file = self._get_file_path(range=(start, end))
-        with open(cached_file, 'r') as cached:
-            reader = csv.DictReader(cached, fieldnames=self._settings.field_names)
-            for row in reader:
-        with open(file, "r") as infile:
-            reader = csv.reader(infile)
-            with open(tmp_file, "w") as outfile:
-                if file.exists():
-                    writer = csv.writer(outfile)
-                    for line in reader:
-                        writer.writerow(line)
-                else:
-                    writer = csv.DictWriter(tmp_file,
-                                            fieldnames=self._settings.field_names)
-                    writer.writeheader()
-
-        with open(tmp_file, "r") as infile:
-            reader = csv.DictReader(infile,
-                                    fieldnames=self._settings.field_names)
-            reader_iter = iter(reader)
-            next(reader_iter)  # skip header
-
-            with open(file, mode='w') as csv_file:
-                writer = csv.DictWriter(csv_file,
-                                        fieldnames=self._settings.field_names)
-                writer.writeheader()
-
-                for candle_dict in self._order_candles(
-                        tmp_dict_reader=reader_iter,
-                        historic_candles=historic_candles):
-                    writer.writerow(candle_dict)
-
-            tmp_file.unlink()
+            for cached_range, cached_file in meta_file.cached_range_in_file.items():
+                intersection = self._get_intersection(request_range=request_range, cached_range=cached_range)
+                if intersection is not None:
+                    candles = self._get_candles_from_cache(cached_file, request_range=request_range)
+                    yield InstrumentDateRangeData(date_range=intersection, historic_candles=candles)
 
     def update(self, data_list: Iterable[InstrumentDateRangeData]):
-
         with meta_file_context(meta_file_path=self._meta_path) as meta_file:
             meta_file: FileMetaData = meta_file
             for data in data_list:
-                new_cached_range_in_file = {}
-                for cached_range, file in meta_file.cached_range_in_file.items():
-                    intersection_range = self._get_intersection(request_range=data.date_range, cached_range=cached_range)
-                    if intersection_range is not None:
-                        merged_range, merged_file = self._merge_into_file(file, data)
-                        new_cached_range_in_file[merged_range] = merged_file
-
-
-            start = min(min(data.date_range), min(cached_range))
-            end = max(max(data.date_range), max(cached_range))
+                new_file = self._write_candles_file(data)
+                assert data.date_range not in meta_file.cached_range_in_file
+                meta_file.cached_range_in_file[data.date_range] = new_file
+            new_cached_range_in_file = self._try_merge_files(meta_file.cached_range_in_file)
+            meta_file.cached_range_in_file = new_cached_range_in_file
