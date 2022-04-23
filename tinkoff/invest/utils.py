@@ -1,7 +1,11 @@
 import dataclasses
+import ast
+
 from datetime import datetime, timedelta, timezone
 from decimal import Decimal
 from typing import Generator, Tuple
+
+import dateutil.parser
 
 from .schemas import CandleInterval, Quotation, SubscriptionInterval
 
@@ -92,5 +96,13 @@ def floor_datetime(datetime_: datetime, delta: timedelta):
 
 
 def dataclass_from_dict(klass, d):
+    if issubclass(int, klass):
+        return int(d)
+    if issubclass(bool, klass):
+        return bool(d)
+    if issubclass(klass, datetime):
+        return dateutil.parser.parse(d)
+    if issubclass(klass, Quotation):
+        d = ast.literal_eval(d)
     fieldtypes = {f.name: f.type for f in dataclasses.fields(klass)}
     return klass(**{f: dataclass_from_dict(fieldtypes[f], d[f]) for f in d})

@@ -1,6 +1,7 @@
 import csv
 import dataclasses
 import itertools
+import logging
 from datetime import datetime
 from pathlib import Path
 from typing import Dict, Generator, Iterable, Iterator, Optional, Tuple
@@ -18,6 +19,7 @@ from tinkoff.invest.caching.cache_settings import (
 from tinkoff.invest.caching.interface import IInstrumentMarketDataStorage
 from tinkoff.invest.utils import dataclass_from_dict
 
+logger = logging.getLogger(__name__)
 
 class InstrumentMarketDataStorage(
     IInstrumentMarketDataStorage[Iterable[InstrumentDateRangeData]]
@@ -36,17 +38,16 @@ class InstrumentMarketDataStorage(
     def _get_base_file_path(self, figi: str, interval: CandleInterval) -> Path:
         instrument_dir = self._get_cache_dir_for_instrument(figi=figi)
         instrument_dir.mkdir(parents=True, exist_ok=True)
-        filepath = self._get_cache_file_for_instrument(
+        return self._get_cache_file_for_instrument(
             instrument_dir=instrument_dir, interval=interval
         )
-        return filepath.with_suffix(self._settings.format)
 
     def _get_file_path(self, range: Tuple[datetime, datetime]) -> Path:
         start, end = range
         start.strftime("%s")
         filepath = self._get_base_file_path(figi=self._figi, interval=self._interval)
-        filepath = filepath.with_suffix(
-            f'.{start.strftime("%s")}.{end.strftime("%s")}'
+        filepath = filepath.parent / (
+                filepath.name + f'-{start.strftime("%s")}-{end.strftime("%s")}'
         )
         return filepath.with_suffix(self._settings.format)
 
@@ -66,6 +67,7 @@ class InstrumentMarketDataStorage(
     ) -> Iterable[Dict]:
         start, end = request_range
         for row in reader:
+
             row_time = dateutil.parser.parse(row["time"])
             if start <= row_time <= end:
                 yield row
@@ -79,8 +81,10 @@ class InstrumentMarketDataStorage(
     ) -> Generator[HistoricCandle, None, None]:
         with open(file, "r") as infile:
             reader = csv.DictReader(infile, fieldnames=self._settings.field_names)
-            for row in self._get_range_from_file(reader, request_range=request_range):
-                yield from self._candle_from_row(row)
+            reader_iter = iter(reader)
+            next(reader_iter)
+            for row in self._get_range_from_file(reader_iter, request_range=request_range):
+                yield self._candle_from_row(row)
 
     def _order_rows(
         self, dict_reader1: Iterator[Dict], dict_reader2: Iterator[Dict]
@@ -176,6 +180,7 @@ class InstrumentMarketDataStorage(
     ) -> Tuple[Tuple[datetime, datetime], Path]:
         new_range = (min(min(range1), min(range2)), max(max(range1), max(range2)))
         new_file = self._get_file_path(range=new_range)
+
         assert file1 != file2 != new_file
 
         with open(file1, "r") as infile1:
@@ -203,17 +208,19 @@ class InstrumentMarketDataStorage(
                     file2.unlink()
         return new_range, new_file
 
+    def _get_distinct_product(self, cached_range_in_file) -> Iterable[Tuple]:
+        for i, items1 in enumerate(cached_range_in_file.items()):
+            for j, items2 in enumerate(cached_range_in_file.items()):
+                if i > j:
+                    yield items1, items2
+
     def _try_merge_files(
         self, cached_range_in_file: Dict[Tuple[datetime, datetime], Path]
     ) -> Dict[Tuple[datetime, datetime], Path]:
         new_cached_range_in_file = cached_range_in_file.copy()
-        for (cached_range, cached_file), (cached_range2, cached_file2) in list(
-            set(
-                itertools.product(
-                    new_cached_range_in_file.items(), new_cached_range_in_file.items()
-                )
-            )
-        ):
+        file_pairs = self._get_distinct_product(new_cached_range_in_file)
+
+        for (cached_range, cached_file), (cached_range2, cached_file2) in file_pairs:
             intersection_range = self._get_intersection(
                 request_range=cached_range2, cached_range=cached_range
             )

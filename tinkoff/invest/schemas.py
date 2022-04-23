@@ -1054,10 +1054,10 @@ class GetCandlesResponse(_grpc_helpers.Message):
 
 @dataclass(eq=False, repr=True)
 class HistoricCandle(_grpc_helpers.Message):
-    open: "Quotation" = _grpc_helpers.message_field(1)
-    high: "Quotation" = _grpc_helpers.message_field(2)
-    low: "Quotation" = _grpc_helpers.message_field(3)
-    close: "Quotation" = _grpc_helpers.message_field(4)
+    open: Quotation = _grpc_helpers.message_field(1)
+    high: Quotation = _grpc_helpers.message_field(2)
+    low: Quotation = _grpc_helpers.message_field(3)
+    close: Quotation = _grpc_helpers.message_field(4)
     volume: int = _grpc_helpers.int64_field(5)
     time: datetime = _grpc_helpers.message_field(6)
     is_complete: bool = _grpc_helpers.bool_field(7)

@@ -1,5 +1,6 @@
 # pylint:disable=redefined-builtin,too-many-lines
 import abc
+import logging
 from datetime import datetime
 from typing import Dict, Generator, Iterable, List, Optional, Tuple
 
@@ -209,6 +210,7 @@ class MarketDataCache(ICandleGetter):
         storage.update(
             [InstrumentDateRangeData(date_range=net_range, historic_candles=candles)]
         )
+        yield from from_net
 
     def get_all_candles(
         self,
