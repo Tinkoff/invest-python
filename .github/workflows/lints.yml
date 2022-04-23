@@ -30,8 +30,8 @@ jobs:
       - name: Install poetry dependencies
         run: make install
 
-      - name: Install poetry dev dependencies
-        run: make install-dev
+      - name: Install poetry all dependencies
+        run: make install-all
 
       - name: Run linters
         run: make lint
