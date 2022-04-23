@@ -8,18 +8,20 @@ from typing import Dict, Generator, Iterable, Iterator, Optional, Tuple
 
 import dateutil.parser
 
-from tinkoff.invest.caching.instrument_date_range_market_data import \
-    InstrumentDateRangeData
-from tinkoff.invest.schemas import CandleInterval, HistoricCandle
 from tinkoff.invest.caching.cache_settings import (
     FileMetaData,
     MarketDataCacheSettings,
     meta_file_context,
 )
+from tinkoff.invest.caching.instrument_date_range_market_data import (
+    InstrumentDateRangeData,
+)
 from tinkoff.invest.caching.interface import IInstrumentMarketDataStorage
+from tinkoff.invest.schemas import CandleInterval, HistoricCandle
 from tinkoff.invest.utils import dataclass_from_dict
 
 logger = logging.getLogger(__name__)
+
 
 class InstrumentMarketDataStorage(
     IInstrumentMarketDataStorage[Iterable[InstrumentDateRangeData]]
@@ -47,7 +49,7 @@ class InstrumentMarketDataStorage(
         start.strftime("%s")
         filepath = self._get_base_file_path(figi=self._figi, interval=self._interval)
         filepath = filepath.parent / (
-                filepath.name + f'-{start.strftime("%s")}-{end.strftime("%s")}'
+            filepath.name + f'-{start.strftime("%s")}-{end.strftime("%s")}'
         )
         return filepath.with_suffix(self._settings.format)
 
@@ -83,7 +85,9 @@ class InstrumentMarketDataStorage(
             reader = csv.DictReader(infile, fieldnames=self._settings.field_names)
             reader_iter = iter(reader)
             next(reader_iter)
-            for row in self._get_range_from_file(reader_iter, request_range=request_range):
+            for row in self._get_range_from_file(
+                reader_iter, request_range=request_range
+            ):
                 yield self._candle_from_row(row)
 
     def _order_rows(

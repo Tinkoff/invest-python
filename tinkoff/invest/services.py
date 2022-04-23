@@ -1,6 +1,5 @@
 # pylint:disable=redefined-builtin,too-many-lines
 import abc
-import logging
 from datetime import datetime
 from typing import Dict, Generator, Iterable, List, Optional, Tuple
 
@@ -13,10 +12,8 @@ from tinkoff.invest.market_data_stream.market_data_stream_manager import (
 from . import _grpc_helpers
 from ._errors import handle_request_error, handle_request_error_gen
 from .caching.cache_settings import MarketDataCacheSettings
-from .caching.instrument_market_data_storage import (
-    InstrumentMarketDataStorage,
-)
 from .caching.instrument_date_range_market_data import InstrumentDateRangeData
+from .caching.instrument_market_data_storage import InstrumentMarketDataStorage
 from .grpc import (
     instruments_pb2,
     instruments_pb2_grpc,
@@ -165,9 +162,7 @@ class ICandleGetter(abc.ABC):
 
 
 class MarketDataCache(ICandleGetter):
-    def __init__(
-        self, settings: MarketDataCacheSettings, services: "Services"
-    ):
+    def __init__(self, settings: MarketDataCacheSettings, services: "Services"):
         self._settings = settings
         self._settings.base_cache_dir.mkdir(parents=True, exist_ok=True)
         self._services = services
@@ -214,15 +209,17 @@ class MarketDataCache(ICandleGetter):
             if cached_start > processed_time:
                 yield from self._with_saving_into_cache(
                     storage=figi_cache_storage,
-                    from_net=self._get_candles_from_net(figi, interval, processed_time, cached_start),
-                    net_range=(processed_time, cached_start)
+                    from_net=self._get_candles_from_net(
+                        figi, interval, processed_time, cached_start
+                    ),
+                    net_range=(processed_time, cached_start),
                 )
             yield from cached.historic_candles
             processed_time = cached_end
         yield from self._with_saving_into_cache(
             storage=figi_cache_storage,
             from_net=self._get_candles_from_net(figi, interval, processed_time, to),
-            net_range=(processed_time, to)
+            net_range=(processed_time, to),
         )
 
     def _get_figi_cache_storage(

@@ -1,6 +1,6 @@
 import logging
 import os
-from datetime import datetime, timedelta
+from datetime import timedelta
 
 from tinkoff.invest import CandleInterval, Client
 from tinkoff.invest.caching.cache_settings import MarketDataCacheSettings
@@ -21,7 +21,6 @@ def main():
             interval=CandleInterval.CANDLE_INTERVAL_HOUR,
         ):
             print(candle)
-            pass
 
     return 0
 

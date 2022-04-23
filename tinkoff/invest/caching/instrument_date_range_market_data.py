@@ -1,6 +1,6 @@
 import dataclasses
 from datetime import datetime
-from typing import Tuple, Iterable
+from typing import Iterable, Tuple
 
 from tinkoff.invest.schemas import HistoricCandle
 

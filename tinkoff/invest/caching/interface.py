@@ -2,8 +2,9 @@ import abc
 from datetime import datetime
 from typing import Generic, Iterable, Tuple, TypeVar
 
-from tinkoff.invest.caching.instrument_date_range_market_data import \
-    InstrumentDateRangeData
+from tinkoff.invest.caching.instrument_date_range_market_data import (
+    InstrumentDateRangeData,
+)
 
 TInstrumentData = TypeVar("TInstrumentData")
 
