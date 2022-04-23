@@ -31,7 +31,8 @@ $ pip install tinkoff-investments
 
 ```python
 from tinkoff.invest import Client
-from tinkoff.invest.token import TOKEN
+
+TOKEN = 'token'
 
 with Client(TOKEN) as client:
     print(client.users.get_accounts())

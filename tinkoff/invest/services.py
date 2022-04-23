@@ -136,7 +136,7 @@ from .schemas import (
     WithdrawLimitsResponse,
 )
 from .typedefs import AccountId
-from .utils import get_intervals, dataclass_from_dict
+from .utils import get_intervals, dataclass_from_dict, now
 
 __all__ = (
     "Services",

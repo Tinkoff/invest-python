@@ -1,4 +1,10 @@
 import os
+import warnings
+
+warnings.warn(
+    'Token module is deprecated. Use `TOKEN = os.environ["INVEST_TOKEN"]` instead',
+    DeprecationWarning,
+)
 
 
 class InvestTokenNotFound(Exception):
