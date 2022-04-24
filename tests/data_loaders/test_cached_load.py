@@ -90,7 +90,7 @@ def market_data_cache(
 
 
 @pytest.fixture()
-def log(caplog):
+def log(caplog) -> None:
     caplog.set_level(logging.DEBUG)
 
 
@@ -316,8 +316,8 @@ class TestCachedLoad:
         x0 = now().replace(second=0, microsecond=0)
 
         result = []
-        for id in idx:
-            result.append(x0 + id * delta)
+        for id_ in idx:
+            result.append(x0 + id_ * delta)
         return result
 
     def test_loads_cache_merge_out(

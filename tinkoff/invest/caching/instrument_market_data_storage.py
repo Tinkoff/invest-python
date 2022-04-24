@@ -6,7 +6,7 @@ from datetime import datetime
 from pathlib import Path
 from typing import Dict, Generator, Iterable, Iterator, Optional, Tuple
 
-import dateutil.parser
+import dateutil.parser  # noqa: I900  'dateutil' not listed as a requirement
 
 from tinkoff.invest.caching.cache_settings import (
     FileMetaData,

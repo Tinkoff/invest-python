@@ -4,7 +4,7 @@ from datetime import datetime, timedelta, timezone
 from decimal import Decimal
 from typing import Generator, Tuple
 
-import dateutil.parser
+import dateutil.parser  # noqa:  I900 'dateutil' not listed as a requirement
 
 from .schemas import CandleInterval, Quotation, SubscriptionInterval
 

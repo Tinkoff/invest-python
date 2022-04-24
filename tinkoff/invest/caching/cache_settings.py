@@ -6,7 +6,7 @@ from datetime import datetime
 from pathlib import Path
 from typing import Dict, Generator, Sequence, Tuple
 
-from definitions import PACKAGE_DIR
+from definitions import PACKAGE_DIR  # noqa: I900
 
 
 class MarketDataCacheFormat(str, enum.Enum):
@@ -39,7 +39,7 @@ class FileMetaData:
 def meta_file_context(meta_file_path: Path) -> Generator[FileMetaData, None, None]:
     try:
         with open(meta_file_path, "rb") as f:
-            meta = pickle.load(f)
+            meta = pickle.load(f)  # noqa: S301
     except FileNotFoundError:
         meta = FileMetaData(cached_range_in_file={})
     try:

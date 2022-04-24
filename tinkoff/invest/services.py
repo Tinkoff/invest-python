@@ -261,7 +261,7 @@ class MarketDataCache(ICandleGetter):
                 figi=figi, interval=interval, settings=self._settings
             )
             self._figi_cache_storages[figi_tuple] = storage
-        return storage
+        return storage  # noqa: R504
 
 
 class Services(ICandleGetter):
