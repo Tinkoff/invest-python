@@ -36,11 +36,12 @@ def get_historical_candle(time: datetime):
 
 def get_candles_response(start: datetime, end: datetime, interval: CandleInterval):
     delta = candle_interval_to_timedelta(interval)
-    current_time = start
+    current_time = start.replace(second=0, microsecond=0)
     times = []
     while current_time <= end:
         times.append(current_time)
         current_time += delta
+        current_time.replace(second=0, microsecond=0)
 
     return GetCandlesResponse(candles=[get_historical_candle(time) for time in times])
 
@@ -119,11 +120,13 @@ class TestCachedLoad:
         settings = MarketDataCacheSettings(base_cache_dir=Path(tempfile.gettempdir()))
         market_data_cache = MarketDataCache(settings=settings, services=client)
         figi = uuid.uuid4().hex
-        from_ = now() - timedelta(days=30)
+        to = now().replace(second=0, microsecond=0)
+        from_ = to - timedelta(days=30)
         from_net = list(
             market_data_cache.get_all_candles(
                 figi=figi,
                 from_=from_,
+                to=to,
                 interval=CandleInterval.CANDLE_INTERVAL_DAY,
             )
         )
@@ -131,6 +134,7 @@ class TestCachedLoad:
             market_data_cache.get_all_candles(
                 figi=figi,
                 from_=from_,
+                to=to,
                 interval=CandleInterval.CANDLE_INTERVAL_DAY,
             )
         )
@@ -141,8 +145,19 @@ class TestCachedLoad:
             market_data_cache.get_all_candles(
                 figi=figi,
                 from_=from_early_uncached,
+                to=to,
                 interval=CandleInterval.CANDLE_INTERVAL_DAY,
             )
         )
 
         assert len(market_data_service.get_candles.mock_calls) > 0
+        self.assert_in_range(cache_and_net, start=from_early_uncached, end=to)
+
+    def assert_datetime_equal(self, t1, t2):
+        assert t1 == t2
+
+    def assert_in_range(self, result_candles, start, end):
+        self.assert_datetime_equal(result_candles[0].time, start)
+        self.assert_datetime_equal(result_candles[-1].time, end)
+        for candle in result_candles:
+            assert start <= candle.time <= end
