@@ -63,11 +63,17 @@ def market_data_service(mocker):
         (CandleInterval.CANDLE_INTERVAL_DAY, 1),
     ],
 )
-@pytest.mark.parametrize('use_to', [
-    True, False
-])
+@pytest.mark.parametrize("use_to", [True, False])
 def test_get_all_candles(
-    figi, mocker, market_data_service, from_, to, candles_response, interval, call_count, use_to
+    figi,
+    mocker,
+    market_data_service,
+    from_,
+    to,
+    candles_response,
+    interval,
+    call_count,
+    use_to,
 ):
     services = mocker.Mock()
     services.market_data = market_data_service
