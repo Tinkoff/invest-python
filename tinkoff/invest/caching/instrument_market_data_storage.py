@@ -9,7 +9,6 @@ from typing import Dict, Generator, Iterable, Iterator, Optional, Tuple
 import dateutil.parser  # noqa: I900  'dateutil' not listed as a requirement
 
 from tinkoff.invest.caching.cache_settings import (
-    FileMetaData,
     MarketDataCacheSettings,
     meta_file_context,
 )
@@ -247,9 +246,9 @@ class InstrumentMarketDataStorage(
     ) -> Iterable[InstrumentDateRangeData]:
         request_range = datetime_range_floor(request_range)
         with meta_file_context(meta_file_path=self._meta_path) as meta_file:
-            meta_file: FileMetaData = meta_file
+            cached_range_in_file = meta_file.cached_range_in_file
 
-        for cached_range, cached_file in meta_file.cached_range_in_file.items():
+        for cached_range, cached_file in cached_range_in_file.items():
             intersection = self._get_intersection(
                 request_range=request_range, cached_range=cached_range
             )
@@ -263,7 +262,6 @@ class InstrumentMarketDataStorage(
 
     def update(self, data_list: Iterable[InstrumentDateRangeData]):
         with meta_file_context(meta_file_path=self._meta_path) as meta_file:
-            meta_file: FileMetaData = meta_file
             for data in data_list:
                 data.date_range = datetime_range_floor(data.date_range)
                 new_file = self._write_candles_file(data)

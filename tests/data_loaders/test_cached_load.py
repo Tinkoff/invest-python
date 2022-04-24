@@ -3,7 +3,7 @@ import tempfile
 import uuid
 from datetime import datetime, timedelta
 from pathlib import Path
-from typing import Optional, Tuple
+from typing import Tuple
 
 import pytest
 
@@ -58,9 +58,9 @@ def market_data_service(mocker) -> MarketDataService:
     service = mocker.Mock(spec=MarketDataService)
 
     def _get_candles(
-        figi: str = "",
-        from_: Optional[datetime] = None,
-        to: Optional[datetime] = None,
+        figi: str,
+        from_: datetime,
+        to: datetime,
         interval: CandleInterval = CandleInterval(0),
     ) -> GetCandlesResponse:
         return get_candles_response(start=from_, end=to, interval=interval)
@@ -83,9 +83,7 @@ def settings() -> MarketDataCacheSettings:
 
 
 @pytest.fixture()
-def market_data_cache(
-    settings: MarketDataCacheSettings, client: Client
-) -> MarketDataCache:
+def market_data_cache(settings: MarketDataCacheSettings, client) -> MarketDataCache:
     return MarketDataCache(settings=settings, services=client)
 
 
