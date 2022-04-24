@@ -44,8 +44,8 @@ class InstrumentMarketDataStorage(
             instrument_dir=instrument_dir, interval=interval
         )
 
-    def _get_file_path(self, range: Tuple[datetime, datetime]) -> Path:
-        start, end = range
+    def _get_file_path(self, date_range: Tuple[datetime, datetime]) -> Path:
+        start, end = date_range
         start.strftime("%s")
         filepath = self._get_base_file_path(figi=self._figi, interval=self._interval)
         filepath = filepath.parent / (
@@ -81,10 +81,10 @@ class InstrumentMarketDataStorage(
         file: Path,
         request_range: Tuple[datetime, datetime],
     ) -> Generator[HistoricCandle, None, None]:
-        with open(file, "r") as infile:
+        with open(file, "r") as infile:  # pylint: disable=W1514
             reader = csv.DictReader(infile, fieldnames=self._settings.field_names)
             reader_iter = iter(reader)
-            next(reader_iter)
+            next(reader_iter)  # pylint: disable=R1708
             for row in self._get_range_from_file(
                 reader_iter, request_range=request_range
             ):
@@ -150,8 +150,8 @@ class InstrumentMarketDataStorage(
                 yield tmp_candle_dict
 
     def _write_candles_file(self, data: InstrumentDateRangeData) -> Path:
-        file = self._get_file_path(data.date_range)
-        with open(file, mode="w") as csv_file:
+        file = self._get_file_path(date_range=data.date_range)
+        with open(file, mode="w") as csv_file:  # pylint: disable=W1514
             writer = csv.DictWriter(csv_file, fieldnames=self._settings.field_names)
             writer.writeheader()
             for candle in data.historic_candles:
@@ -172,10 +172,9 @@ class InstrumentMarketDataStorage(
         min_end = min(request_end, cached_end)
         if max_start <= min_end:
             return max_start, min_end
-        else:
-            return None
+        return None
 
-    def _merge_intersecting_files(
+    def _merge_intersecting_files(  # pylint: disable=R0914
         self,
         file1: Path,
         range1: Tuple[datetime, datetime],
@@ -183,22 +182,22 @@ class InstrumentMarketDataStorage(
         range2: Tuple[datetime, datetime],
     ) -> Tuple[Tuple[datetime, datetime], Path]:
         new_range = (min(min(range1), min(range2)), max(max(range1), max(range2)))
-        new_file = self._get_file_path(range=new_range)
+        new_file = self._get_file_path(date_range=new_range)
         assert file1 != file2
         assert file2 != new_file
         assert file1 != new_file
 
-        with open(file1, "r") as infile1:
+        with open(file1, "r") as infile1:  # pylint: disable=W1514
             reader1 = csv.DictReader(infile1, fieldnames=self._settings.field_names)
             reader_iter1 = iter(reader1)
             next(reader_iter1)  # skip header
 
-            with open(file2, "r") as infile2:
+            with open(file2, "r") as infile2:  # pylint: disable=W1514
                 reader2 = csv.DictReader(infile2, fieldnames=self._settings.field_names)
                 reader_iter2 = iter(reader2)
                 next(reader_iter2)  # skip header
 
-                with open(new_file, mode="w") as csv_file:
+                with open(new_file, mode="w") as csv_file:  # pylint: disable=W1514
                     writer = csv.DictWriter(
                         csv_file, fieldnames=self._settings.field_names
                     )
@@ -214,7 +213,9 @@ class InstrumentMarketDataStorage(
         return new_range, new_file
 
     def _get_distinct_product(self, cached_range_in_file) -> Iterable[Tuple]:
-        for i, items1 in enumerate(cached_range_in_file.items()):
+        for i, items1 in enumerate(  # pylint: disable=R1702
+            cached_range_in_file.items()
+        ):
             for j, items2 in enumerate(cached_range_in_file.items()):
                 if i < j:
                     yield items1, items2
