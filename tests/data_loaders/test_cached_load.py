@@ -90,7 +90,7 @@ def market_data_cache(
 
 
 @pytest.fixture()
-def log(caplog) -> None:
+def log(caplog):  # noqa: PT004
     caplog.set_level(logging.DEBUG)
 
 

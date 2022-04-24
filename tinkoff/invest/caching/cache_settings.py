@@ -1,7 +1,7 @@
 import contextlib
 import dataclasses
 import enum
-import pickle
+import pickle  # noqa: S403 Consider possible security implications.
 from datetime import datetime
 from pathlib import Path
 from typing import Dict, Generator, Sequence, Tuple
