@@ -46,6 +46,10 @@ from .schemas import (
     CloseSandboxAccountResponse,
     CurrenciesResponse,
     CurrencyResponse,
+    EditFavoritesActionType,
+    EditFavoritesRequest,
+    EditFavoritesRequestInstrument,
+    EditFavoritesResponse,
     EtfResponse,
     EtfsResponse,
     FutureResponse,
@@ -66,6 +70,8 @@ from .schemas import (
     GetDividendsForeignIssuerResponse,
     GetDividendsRequest,
     GetDividendsResponse,
+    GetFavoritesRequest,
+    GetFavoritesResponse,
     GetFuturesMarginRequest,
     GetFuturesMarginResponse,
     GetInfoRequest,
@@ -571,6 +577,43 @@ class InstrumentsService(_grpc_helpers.Service):
         response = await response_coro
         log_request(await get_tracking_id_from_coro(response_coro), "GetAssets")
         return _grpc_helpers.protobuf_to_dataclass(response, AssetsResponse)
+
+    @handle_aio_request_error("GetFavorites")
+    async def get_favorites(
+        self,
+    ) -> GetFavoritesResponse:
+        request = GetFavoritesRequest()
+        response_coro = await self.stub.GetFavorites(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, instruments_pb2.GetFavoritesRequest()
+            ),
+            metadata=self.metadata,
+        )
+        response = await response_coro
+        log_request(await get_tracking_id_from_coro(response_coro), "GetFavorites")
+        return _grpc_helpers.protobuf_to_dataclass(response, GetFavoritesResponse)
+
+    @handle_aio_request_error("EditFavorites")
+    async def edit_favorites(
+        self,
+        *,
+        instruments: Optional[List[EditFavoritesRequestInstrument]] = None,
+        action_type: Optional[EditFavoritesActionType] = None,
+    ) -> EditFavoritesResponse:
+        request = EditFavoritesRequest()
+        if action_type is not None:
+            request.action_type = action_type
+        if instruments is not None:
+            request.instruments = instruments
+        response_coro = await self.stub.EditFavorites(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, instruments_pb2.EditFavoritesRequest()
+            ),
+            metadata=self.metadata,
+        )
+        response = await response_coro
+        log_request(await get_tracking_id_from_coro(response_coro), "EditFavorites")
+        return _grpc_helpers.protobuf_to_dataclass(response, EditFavoritesResponse)
 
 
 class MarketDataService(_grpc_helpers.Service):

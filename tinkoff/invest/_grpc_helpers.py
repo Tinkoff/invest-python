@@ -1,3 +1,4 @@
+# pylint:disable=no-name-in-module
 import dataclasses
 import enum
 from abc import ABC
@@ -15,7 +16,7 @@ from typing import (
 )
 
 from google.protobuf import symbol_database  # noqa:I900
-from google.protobuf.timestamp_pb2 import Timestamp  # noqa:I900
+from google.protobuf.timestamp_pb2 import Timestamp  # noqa:I90
 
 _sym_db = symbol_database.Default()
 

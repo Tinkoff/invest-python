@@ -229,6 +229,19 @@ class StructuredProductType(_grpc_helpers.Enum):
     SP_TYPE_NON_DELIVERABLE = 2
 
 
+class EditFavoritesActionType(_grpc_helpers.Enum):
+    EDIT_FAVORITES_ACTION_TYPE_UNSPECIFIED = 0
+    EDIT_FAVORITES_ACTION_TYPE_ADD = 1
+    EDIT_FAVORITES_ACTION_TYPE_DEL = 2
+
+
+class RealExchange(_grpc_helpers.Enum):
+    REAL_EXCHANGE_UNSPECIFIED = 0
+    REAL_EXCHANGE_MOEX = 1
+    REAL_EXCHANGE_RTS = 2
+    REAL_EXCHANGE_OTC = 3
+
+
 @dataclass(eq=False, repr=True)
 class MoneyValue(_grpc_helpers.Message):
     currency: str = _grpc_helpers.string_field(1)
@@ -410,6 +423,7 @@ class Bond(_grpc_helpers.Message):  # pylint:disable=too-many-instance-attribute
     min_price_increment: "Quotation" = _grpc_helpers.message_field(38)
     api_trade_available_flag: bool = _grpc_helpers.bool_field(39)
     uid: str = _grpc_helpers.string_field(40)
+    real_exchange: "RealExchange" = _grpc_helpers.message_field(41)
 
 
 @dataclass(eq=False, repr=True)
@@ -440,6 +454,7 @@ class Currency(_grpc_helpers.Message):  # pylint:disable=too-many-instance-attri
     min_price_increment: "Quotation" = _grpc_helpers.message_field(25)
     api_trade_available_flag: bool = _grpc_helpers.bool_field(26)
     uid: str = _grpc_helpers.string_field(27)
+    real_exchange: "RealExchange" = _grpc_helpers.message_field(28)
 
 
 @dataclass(eq=False, repr=True)
@@ -474,6 +489,7 @@ class Etf(_grpc_helpers.Message):  # pylint:disable=too-many-instance-attributes
     min_price_increment: "Quotation" = _grpc_helpers.message_field(29)
     api_trade_available_flag: bool = _grpc_helpers.bool_field(30)
     uid: str = _grpc_helpers.string_field(31)
+    real_exchange: "RealExchange" = _grpc_helpers.message_field(32)
 
 
 @dataclass(eq=False, repr=True)
@@ -509,6 +525,7 @@ class Future(_grpc_helpers.Message):  # pylint:disable=too-many-instance-attribu
     min_price_increment: "Quotation" = _grpc_helpers.message_field(29)
     api_trade_available_flag: bool = _grpc_helpers.bool_field(30)
     uid: str = _grpc_helpers.string_field(31)
+    real_exchange: "RealExchange" = _grpc_helpers.message_field(32)
 
 
 @dataclass(eq=False, repr=True)
@@ -544,6 +561,7 @@ class Share(_grpc_helpers.Message):  # pylint:disable=too-many-instance-attribut
     min_price_increment: "Quotation" = _grpc_helpers.message_field(31)
     api_trade_available_flag: bool = _grpc_helpers.bool_field(32)
     uid: str = _grpc_helpers.string_field(33)
+    real_exchange: "RealExchange" = _grpc_helpers.message_field(34)
 
 
 @dataclass(eq=False, repr=True)
@@ -611,6 +629,7 @@ class Instrument(_grpc_helpers.Message):  # pylint:disable=too-many-instance-att
     min_price_increment: "Quotation" = _grpc_helpers.message_field(23)
     api_trade_available_flag: bool = _grpc_helpers.bool_field(24)
     uid: str = _grpc_helpers.string_field(25)
+    real_exchange: "RealExchange" = _grpc_helpers.message_field(26)
 
 
 @dataclass(eq=False, repr=True)
@@ -819,6 +838,43 @@ class AssetInstrument(_grpc_helpers.Message):
 class InstrumentLink(_grpc_helpers.Message):
     type: str = _grpc_helpers.string_field(1)
     instrument_uid: str = _grpc_helpers.string_field(2)
+
+
+@dataclass(eq=False, repr=True)
+class GetFavoritesRequest(_grpc_helpers.Message):
+    pass
+
+
+@dataclass(eq=False, repr=True)
+class GetFavoritesResponse(_grpc_helpers.Message):
+    favorite_instruments: List["FavoriteInstrument"] = _grpc_helpers.message_field(1)
+
+
+@dataclass(eq=False, repr=True)
+class FavoriteInstrument(_grpc_helpers.Message):
+    figi: str = _grpc_helpers.string_field(1)
+    ticker: str = _grpc_helpers.string_field(2)
+    class_code: str = _grpc_helpers.string_field(3)
+    isin: str = _grpc_helpers.string_field(4)
+    instrument_type: str = _grpc_helpers.string_field(11)
+    otc_flag: bool = _grpc_helpers.bool_field(16)
+    api_trade_available_flag: bool = _grpc_helpers.bool_field(17)
+
+
+@dataclass(eq=False, repr=True)
+class EditFavoritesRequest(_grpc_helpers.Message):
+    instruments: List["EditFavoritesRequestInstrument"] = _grpc_helpers.message_field(1)
+    action_type: "EditFavoritesActionType" = _grpc_helpers.message_field(6)
+
+
+@dataclass(eq=False, repr=True)
+class EditFavoritesRequestInstrument(_grpc_helpers.Message):
+    figi: str = _grpc_helpers.string_field(1)
+
+
+@dataclass(eq=False, repr=True)
+class EditFavoritesResponse(_grpc_helpers.Message):
+    favorite_instruments: List["FavoriteInstrument"] = _grpc_helpers.message_field(1)
 
 
 @dataclass(eq=False, repr=True)
@@ -1109,6 +1165,7 @@ class GetTradingStatusResponse(_grpc_helpers.Message):
     trading_status: "SecurityTradingStatus" = _grpc_helpers.enum_field(2)
     limit_order_available_flag: bool = _grpc_helpers.bool_field(3)
     market_order_available_flag: bool = _grpc_helpers.bool_field(4)
+    api_trade_available_flag: bool = _grpc_helpers.bool_field(5)
 
 
 @dataclass(eq=False, repr=True)
@@ -1228,7 +1285,7 @@ class PositionsSecurities(_grpc_helpers.Message):
 
 @dataclass(eq=False, repr=True)
 class TradesStreamRequest(_grpc_helpers.Message):
-    pass
+    accounts: List[str] = _grpc_helpers.string_field(1)
 
 
 @dataclass(eq=False, repr=True)

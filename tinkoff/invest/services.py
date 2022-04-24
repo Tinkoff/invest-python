@@ -51,6 +51,10 @@ from .schemas import (
     CloseSandboxAccountResponse,
     CurrenciesResponse,
     CurrencyResponse,
+    EditFavoritesActionType,
+    EditFavoritesRequest,
+    EditFavoritesRequestInstrument,
+    EditFavoritesResponse,
     EtfResponse,
     EtfsResponse,
     FutureResponse,
@@ -71,6 +75,8 @@ from .schemas import (
     GetDividendsForeignIssuerResponse,
     GetDividendsRequest,
     GetDividendsResponse,
+    GetFavoritesRequest,
+    GetFavoritesResponse,
     GetFuturesMarginRequest,
     GetFuturesMarginResponse,
     GetInfoRequest,
@@ -645,6 +651,41 @@ class InstrumentsService(_grpc_helpers.Service):
         )
         log_request(get_tracking_id_from_call(call), "GetAssets")
         return _grpc_helpers.protobuf_to_dataclass(response, AssetsResponse)
+
+    @handle_request_error("GetFavorites")
+    def get_favorites(
+        self,
+    ) -> GetFavoritesResponse:
+        request = GetFavoritesRequest()
+        response, call = self.stub.GetFavorites.with_call(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, instruments_pb2.GetFavoritesRequest()
+            ),
+            metadata=self.metadata,
+        )
+        log_request(get_tracking_id_from_call(call), "GetFavorites")
+        return _grpc_helpers.protobuf_to_dataclass(response, GetFavoritesResponse)
+
+    @handle_request_error("EditFavorites")
+    def edit_favorites(
+        self,
+        *,
+        instruments: Optional[List[EditFavoritesRequestInstrument]] = None,
+        action_type: Optional[EditFavoritesActionType] = None,
+    ) -> EditFavoritesResponse:
+        request = EditFavoritesRequest()
+        if action_type is not None:
+            request.action_type = action_type
+        if instruments is not None:
+            request.instruments = instruments
+        response, call = self.stub.EditFavorites.with_call(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, instruments_pb2.EditFavoritesRequest()
+            ),
+            metadata=self.metadata,
+        )
+        log_request(get_tracking_id_from_call(call), "EditFavorites")
+        return _grpc_helpers.protobuf_to_dataclass(response, EditFavoritesResponse)
 
 
 class MarketDataService(_grpc_helpers.Service):

@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [0.2.0-beta21](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta21) - 2022-04-23
+
+<small>[Compare with 0.2.0-beta20](https://github.com/tinkoff/invest-python/compare/0.2.0-beta20...0.2.0-beta21)</small>
+
+### Fixed
+- Fix dependencies ([5a16321](https://github.com/tinkoff/invest-python/commit/5a163211ad298b12eb1b3edce59844eac6e173a9) by Danil Akhtarov).
+- Fix (#44) ([89cf341](https://github.com/tinkoff/invest-python/commit/89cf3419d881c6aaa33377336c3fe24dfccb3f84) by Ruslan Sirazhetdinov).
+
+
 ## [0.2.0-beta20](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta20) - 2022-04-07
 
 <small>[Compare with 0.2.0-beta19](https://github.com/tinkoff/invest-python/compare/0.2.0-beta19...0.2.0-beta20)</small>

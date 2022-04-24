@@ -107,6 +107,16 @@ class InstrumentsServiceStub(object):
                 request_serializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.AssetsRequest.SerializeToString,
                 response_deserializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.AssetsResponse.FromString,
                 )
+        self.GetFavorites = channel.unary_unary(
+                '/tinkoff.public.invest.api.contract.v1.InstrumentsService/GetFavorites',
+                request_serializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetFavoritesRequest.SerializeToString,
+                response_deserializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetFavoritesResponse.FromString,
+                )
+        self.EditFavorites = channel.unary_unary(
+                '/tinkoff.public.invest.api.contract.v1.InstrumentsService/EditFavorites',
+                request_serializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.EditFavoritesRequest.SerializeToString,
+                response_deserializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.EditFavoritesResponse.FromString,
+                )
 
 
 class InstrumentsServiceServicer(object):
@@ -241,6 +251,20 @@ class InstrumentsServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def GetFavorites(self, request, context):
+        """Метод получения избранных инструментов.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def EditFavorites(self, request, context):
+        """Метод редактирования избранных инструментов.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_InstrumentsServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -333,6 +357,16 @@ def add_InstrumentsServiceServicer_to_server(servicer, server):
                     servicer.GetAssets,
                     request_deserializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.AssetsRequest.FromString,
                     response_serializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.AssetsResponse.SerializeToString,
+            ),
+            'GetFavorites': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetFavorites,
+                    request_deserializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetFavoritesRequest.FromString,
+                    response_serializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetFavoritesResponse.SerializeToString,
+            ),
+            'EditFavorites': grpc.unary_unary_rpc_method_handler(
+                    servicer.EditFavorites,
+                    request_deserializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.EditFavoritesRequest.FromString,
+                    response_serializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.EditFavoritesResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -650,5 +684,39 @@ class InstrumentsService(object):
         return grpc.experimental.unary_unary(request, target, '/tinkoff.public.invest.api.contract.v1.InstrumentsService/GetAssets',
             tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.AssetsRequest.SerializeToString,
             tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.AssetsResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetFavorites(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/tinkoff.public.invest.api.contract.v1.InstrumentsService/GetFavorites',
+            tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetFavoritesRequest.SerializeToString,
+            tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetFavoritesResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def EditFavorites(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/tinkoff.public.invest.api.contract.v1.InstrumentsService/EditFavorites',
+            tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.EditFavoritesRequest.SerializeToString,
+            tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.EditFavoritesResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

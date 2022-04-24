@@ -1170,6 +1170,7 @@ class GetTradingStatusResponse(google.protobuf.message.Message):
     TRADING_STATUS_FIELD_NUMBER: builtins.int
     LIMIT_ORDER_AVAILABLE_FLAG_FIELD_NUMBER: builtins.int
     MARKET_ORDER_AVAILABLE_FLAG_FIELD_NUMBER: builtins.int
+    API_TRADE_AVAILABLE_FLAG_FIELD_NUMBER: builtins.int
     figi: typing.Text
     """Figi-идентификатор инструмента."""
 
@@ -1182,14 +1183,18 @@ class GetTradingStatusResponse(google.protobuf.message.Message):
     market_order_available_flag: builtins.bool
     """Признак доступности выставления рыночной заявки по инструменту."""
 
+    api_trade_available_flag: builtins.bool
+    """Признак доступности торгов через API."""
+
     def __init__(self,
         *,
         figi: typing.Text = ...,
         trading_status: tinkoff.invest.grpc.common_pb2.SecurityTradingStatus.ValueType = ...,
         limit_order_available_flag: builtins.bool = ...,
         market_order_available_flag: builtins.bool = ...,
+        api_trade_available_flag: builtins.bool = ...,
         ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["figi",b"figi","limit_order_available_flag",b"limit_order_available_flag","market_order_available_flag",b"market_order_available_flag","trading_status",b"trading_status"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["api_trade_available_flag",b"api_trade_available_flag","figi",b"figi","limit_order_available_flag",b"limit_order_available_flag","market_order_available_flag",b"market_order_available_flag","trading_status",b"trading_status"]) -> None: ...
 global___GetTradingStatusResponse = GetTradingStatusResponse
 
 class GetLastTradesRequest(google.protobuf.message.Message):
