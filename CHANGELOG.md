@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [0.2.0-beta22](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta22) - 2022-04-24
+
+<small>[Compare with 0.2.0-beta21](https://github.com/tinkoff/invest-python/compare/0.2.0-beta21...0.2.0-beta22)</small>
+
+### Fixed
+- Fix date.now() in example (#47) ([2ed491d](https://github.com/tinkoff/invest-python/commit/2ed491d13fb2926754e6bfb7021732bb3394d891) by Ruslan Sirazhetdinov).
+
+
 ## [0.2.0-beta21](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta21) - 2022-04-23
 
 <small>[Compare with 0.2.0-beta20](https://github.com/tinkoff/invest-python/compare/0.2.0-beta20...0.2.0-beta21)</small>
