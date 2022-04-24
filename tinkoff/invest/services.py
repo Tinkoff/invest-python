@@ -1,5 +1,6 @@
 # pylint:disable=redefined-builtin,too-many-lines
 import abc
+import logging
 from datetime import datetime
 from typing import Dict, Generator, Iterable, List, Optional, Tuple
 
@@ -147,7 +148,7 @@ __all__ = (
     "SandboxService",
     "StopOrdersService",
 )
-
+logger=logging.getLogger(__name__)
 
 class ICandleGetter(abc.ABC):
     @abc.abstractmethod
@@ -191,6 +192,9 @@ class MarketDataCache(ICandleGetter):
         storage.update(
             [InstrumentDateRangeData(date_range=net_range, historic_candles=candles)]
         )
+        logger.debug('From net [\n%s\n%s\n]', str(net_range[0]), str(net_range[1]))
+        logger.debug('From net real [\n%s\n%s\n]', str(min(list(map(lambda x: x.time, candles)))), str(max(list(map(lambda x: x.time, candles)))))
+
         yield from candles
 
     def get_all_candles(
@@ -203,6 +207,8 @@ class MarketDataCache(ICandleGetter):
     ) -> Generator[HistoricCandle, None, None]:
         to = to or now()
         from_, to = datetime_range_floor((from_, to))
+        logger.debug('Request [\n%s\n%s\n]', str(from_), str(to))
+
         processed_time = from_
         figi_cache_storage = self._get_figi_cache_storage(figi=figi, interval=interval)
         for cached in figi_cache_storage.get(request_range=(from_, to)):
@@ -217,6 +223,8 @@ class MarketDataCache(ICandleGetter):
                     ),
                     net_range=(processed_time, cached_start),
                 )
+            logger.debug('Returning from cache [\n%s\n%s\n]', str(cached_start), str(cached_end))
+
             yield from cached_candles
             processed_time = cached_end
         if processed_time + candle_interval_to_timedelta(interval) <= to:
