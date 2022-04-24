@@ -132,7 +132,7 @@ from .schemas import (
     WithdrawLimitsResponse,
 )
 from .typedefs import AccountId
-from .utils import get_intervals, now
+from .utils import get_intervals, now, candle_interval_to_timedelta
 
 __all__ = (
     "Services",
@@ -205,6 +205,7 @@ class MarketDataCache(ICandleGetter):
         figi_cache_storage = self._get_figi_cache_storage(figi=figi, interval=interval)
         for cached in figi_cache_storage.get(request_range=(from_, to)):
             cached_start, cached_end = cached.date_range
+            cached_candles = list(cached.historic_candles)
             assert cached_start >= processed_time
             if cached_start > processed_time:
                 yield from self._with_saving_into_cache(
@@ -214,13 +215,14 @@ class MarketDataCache(ICandleGetter):
                     ),
                     net_range=(processed_time, cached_start),
                 )
-            yield from cached.historic_candles
+            yield from cached_candles
             processed_time = cached_end
-        yield from self._with_saving_into_cache(
-            storage=figi_cache_storage,
-            from_net=self._get_candles_from_net(figi, interval, processed_time, to),
-            net_range=(processed_time, to),
-        )
+        if processed_time + candle_interval_to_timedelta(interval) <= to:
+            yield from self._with_saving_into_cache(
+                storage=figi_cache_storage,
+                from_net=self._get_candles_from_net(figi, interval, processed_time, to),
+                net_range=(processed_time, to),
+            )
 
     def _get_figi_cache_storage(
         self, figi: str, interval: CandleInterval

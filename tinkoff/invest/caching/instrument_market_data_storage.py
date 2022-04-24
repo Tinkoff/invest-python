@@ -184,8 +184,9 @@ class InstrumentMarketDataStorage(
     ) -> Tuple[Tuple[datetime, datetime], Path]:
         new_range = (min(min(range1), min(range2)), max(max(range1), max(range2)))
         new_file = self._get_file_path(range=new_range)
-
-        assert file1 != file2 != new_file
+        assert file1 != file2
+        assert file2 != new_file
+        assert file1 != new_file
 
         with open(file1, "r") as infile1:
             reader1 = csv.DictReader(infile1, fieldnames=self._settings.field_names)
@@ -246,17 +247,17 @@ class InstrumentMarketDataStorage(
         with meta_file_context(meta_file_path=self._meta_path) as meta_file:
             meta_file: FileMetaData = meta_file
 
-            for cached_range, cached_file in meta_file.cached_range_in_file.items():
-                intersection = self._get_intersection(
-                    request_range=request_range, cached_range=cached_range
+        for cached_range, cached_file in meta_file.cached_range_in_file.items():
+            intersection = self._get_intersection(
+                request_range=request_range, cached_range=cached_range
+            )
+            if intersection is not None:
+                candles = self._get_candles_from_cache(
+                    cached_file, request_range=request_range
                 )
-                if intersection is not None:
-                    candles = self._get_candles_from_cache(
-                        cached_file, request_range=request_range
-                    )
-                    yield InstrumentDateRangeData(
-                        date_range=intersection, historic_candles=candles
-                    )
+                yield InstrumentDateRangeData(
+                    date_range=intersection, historic_candles=candles
+                )
 
     def update(self, data_list: Iterable[InstrumentDateRangeData]):
         with meta_file_context(meta_file_path=self._meta_path) as meta_file:

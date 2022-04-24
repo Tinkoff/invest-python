@@ -112,3 +112,37 @@ class TestCachedLoad:
         assert len(from_net) == len(from_cache)
         for cached_candle, net_candle in zip(from_cache, from_net):
             assert cached_candle.__repr__() == net_candle.__repr__()
+
+    def test_loads_from_cache_and_left_from_net(
+        self, client, market_data_service: MarketDataService
+    ):
+        settings = MarketDataCacheSettings(base_cache_dir=Path(tempfile.gettempdir()))
+        market_data_cache = MarketDataCache(settings=settings, services=client)
+        figi = uuid.uuid4().hex
+        from_ = now() - timedelta(days=30)
+        from_net = list(
+            market_data_cache.get_all_candles(
+                figi=figi,
+                from_=from_,
+                interval=CandleInterval.CANDLE_INTERVAL_DAY,
+            )
+        )
+        from_cache = list(
+            market_data_cache.get_all_candles(
+                figi=figi,
+                from_=from_,
+                interval=CandleInterval.CANDLE_INTERVAL_DAY,
+            )
+        )
+        market_data_service.get_candles.reset_mock()
+        from_early_uncached = from_ - timedelta(days=7)
+
+        cache_and_net = list(
+            market_data_cache.get_all_candles(
+                figi=figi,
+                from_=from_early_uncached,
+                interval=CandleInterval.CANDLE_INTERVAL_DAY,
+            )
+        )
+
+        assert len(market_data_service.get_candles.mock_calls) > 0
