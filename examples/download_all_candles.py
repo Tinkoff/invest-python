@@ -17,10 +17,10 @@ def main():
         market_data_cache = MarketDataCache(settings=settings, services=client)
         for candle in market_data_cache.get_all_candles(
             figi="BBG004730N88",
-            from_=now() - timedelta(days=30),
-            interval=CandleInterval.CANDLE_INTERVAL_HOUR,
+            from_=now() - timedelta(days=3),
+            interval=CandleInterval.CANDLE_INTERVAL_1_MIN,
         ):
-            print(candle)
+            print(candle.time)
 
     return 0
 

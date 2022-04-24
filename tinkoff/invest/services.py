@@ -139,8 +139,12 @@ from .schemas import (
     WithdrawLimitsResponse,
 )
 from .typedefs import AccountId
-from .utils import get_intervals, now, candle_interval_to_timedelta, \
-    datetime_range_floor
+from .utils import (
+    candle_interval_to_timedelta,
+    datetime_range_floor,
+    get_intervals,
+    now,
+)
 
 __all__ = (
     "Services",
@@ -154,7 +158,8 @@ __all__ = (
     "SandboxService",
     "StopOrdersService",
 )
-logger=logging.getLogger(__name__)
+logger = logging.getLogger(__name__)
+
 
 class ICandleGetter(abc.ABC):
     @abc.abstractmethod
@@ -198,8 +203,12 @@ class MarketDataCache(ICandleGetter):
         storage.update(
             [InstrumentDateRangeData(date_range=net_range, historic_candles=candles)]
         )
-        logger.debug('From net [\n%s\n%s\n]', str(net_range[0]), str(net_range[1]))
-        logger.debug('From net real [\n%s\n%s\n]', str(min(list(map(lambda x: x.time, candles)))), str(max(list(map(lambda x: x.time, candles)))))
+        logger.debug("From net [\n%s\n%s\n]", str(net_range[0]), str(net_range[1]))
+        logger.debug(
+            "From net real [\n%s\n%s\n]",
+            str(min(list(map(lambda x: x.time, candles)))),
+            str(max(list(map(lambda x: x.time, candles)))),
+        )
 
         yield from candles
 
@@ -213,7 +222,7 @@ class MarketDataCache(ICandleGetter):
     ) -> Generator[HistoricCandle, None, None]:
         to = to or now()
         from_, to = datetime_range_floor((from_, to))
-        logger.debug('Request [\n%s\n%s\n]', str(from_), str(to))
+        logger.debug("Request [\n%s\n%s\n]", str(from_), str(to))
 
         processed_time = from_
         figi_cache_storage = self._get_figi_cache_storage(figi=figi, interval=interval)
@@ -229,7 +238,9 @@ class MarketDataCache(ICandleGetter):
                     ),
                     net_range=(processed_time, cached_start),
                 )
-            logger.debug('Returning from cache [\n%s\n%s\n]', str(cached_start), str(cached_end))
+            logger.debug(
+                "Returning from cache [\n%s\n%s\n]", str(cached_start), str(cached_end)
+            )
 
             yield from cached_candles
             processed_time = cached_end

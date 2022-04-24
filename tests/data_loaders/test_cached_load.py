@@ -14,10 +14,14 @@ from tinkoff.invest import (
     HistoricCandle,
     Quotation,
 )
-from tinkoff.invest.caching.cache_settings import MarketDataCacheSettings, \
-    meta_file_context, FileMetaData
-from tinkoff.invest.caching.instrument_market_data_storage import \
-    InstrumentMarketDataStorage
+from tinkoff.invest.caching.cache_settings import (
+    FileMetaData,
+    MarketDataCacheSettings,
+    meta_file_context,
+)
+from tinkoff.invest.caching.instrument_market_data_storage import (
+    InstrumentMarketDataStorage,
+)
 from tinkoff.invest.services import MarketDataCache, MarketDataService
 from tinkoff.invest.utils import candle_interval_to_timedelta, now
 
@@ -79,8 +83,11 @@ def settings() -> MarketDataCacheSettings:
 
 
 @pytest.fixture()
-def market_data_cache(settings: MarketDataCacheSettings, client: Client) -> MarketDataCache:
+def market_data_cache(
+    settings: MarketDataCacheSettings, client: Client
+) -> MarketDataCache:
     return MarketDataCache(settings=settings, services=client)
+
 
 @pytest.fixture()
 def log(caplog):
@@ -170,8 +177,8 @@ class TestCachedLoad:
         self.assert_in_range(cache_and_net, start=from_early_uncached, end=to)
 
     def assert_in_range(self, result_candles, start, end):
-        assert result_candles[0].time == start, 'start time assertion error'
-        assert result_candles[-1].time == end, 'end time assertion error'
+        assert result_candles[0].time == start, "start time assertion error"
+        assert result_candles[-1].time == end, "end time assertion error"
         for candle in result_candles:
             assert start <= candle.time <= end
 
@@ -213,11 +220,14 @@ class TestCachedLoad:
             assert set(meta.cached_range_in_file.keys()) == set(ranges)
 
     def assert_file_count(self, cache_storage, count):
-        cached_ls = list(cache_storage._meta_path.parent.glob('*'))
+        cached_ls = list(cache_storage._meta_path.parent.glob("*"))
         assert len(cached_ls) == count
 
     def test_loads_cache_miss(
-        self, market_data_service: MarketDataService, market_data_cache: MarketDataCache, settings: MarketDataCacheSettings,
+        self,
+        market_data_service: MarketDataService,
+        market_data_cache: MarketDataCache,
+        settings: MarketDataCacheSettings,
     ):
         figi = uuid.uuid4().hex
         interval = CandleInterval.CANDLE_INTERVAL_DAY
@@ -229,12 +239,18 @@ class TestCachedLoad:
         A = B - timedelta(days=3)
 
         self.get_by_range_and_assert_has_cache(
-            range=(A, B), has_from_net=True, figi=figi, interval=interval,
+            range=(A, B),
+            has_from_net=True,
+            figi=figi,
+            interval=interval,
             market_data_cache=market_data_cache,
             market_data_service=market_data_service,
         )
         self.get_by_range_and_assert_has_cache(
-            range=(C, D), has_from_net=True, figi=figi, interval=interval,
+            range=(C, D),
+            has_from_net=True,
+            figi=figi,
+            interval=interval,
             market_data_cache=market_data_cache,
             market_data_service=market_data_service,
         )
@@ -246,7 +262,10 @@ class TestCachedLoad:
         self.assert_file_count(cache_storage, 3)
 
     def test_loads_cache_merge_middle(
-        self, market_data_service: MarketDataService, market_data_cache: MarketDataCache, settings: MarketDataCacheSettings,
+        self,
+        market_data_service: MarketDataService,
+        market_data_cache: MarketDataCache,
+        settings: MarketDataCacheSettings,
     ):
         figi = uuid.uuid4().hex
         interval = CandleInterval.CANDLE_INTERVAL_DAY
@@ -262,16 +281,27 @@ class TestCachedLoad:
         E = B - timedelta(days=3)
         A = E - timedelta(days=3)
         self.get_by_range_and_assert_has_cache(
-            range=(A, B), has_from_net=True, figi=figi, interval=interval, market_data_cache=market_data_cache, market_data_service=market_data_service,
+            range=(A, B),
+            has_from_net=True,
+            figi=figi,
+            interval=interval,
+            market_data_cache=market_data_cache,
+            market_data_service=market_data_service,
         )
         self.get_by_range_and_assert_has_cache(
-            range=(C, D), has_from_net=True, figi=figi, interval=interval,
+            range=(C, D),
+            has_from_net=True,
+            figi=figi,
+            interval=interval,
             market_data_cache=market_data_cache,
             market_data_service=market_data_service,
         )
 
         self.get_by_range_and_assert_has_cache(
-            range=(E, F), has_from_net=True, figi=figi, interval=interval,
+            range=(E, F),
+            has_from_net=True,
+            figi=figi,
+            interval=interval,
             market_data_cache=market_data_cache,
             market_data_service=market_data_service,
         )
@@ -287,11 +317,15 @@ class TestCachedLoad:
 
         result = []
         for id in idx:
-            result.append(x0 + id*delta)
+            result.append(x0 + id * delta)
         return result
 
     def test_loads_cache_merge_out(
-        self, market_data_service: MarketDataService, market_data_cache: MarketDataCache, settings: MarketDataCacheSettings, log
+        self,
+        market_data_service: MarketDataService,
+        market_data_cache: MarketDataCache,
+        settings: MarketDataCacheSettings,
+        log,
     ):
         figi = uuid.uuid4().hex
         interval = CandleInterval.CANDLE_INTERVAL_DAY
@@ -302,13 +336,28 @@ class TestCachedLoad:
         # [E           cached            F]
         E, A, B, C, D, F = self._get_date_point_by_index(0, 1, 3, 4, 6, 7)
         self.get_by_range_and_assert_has_cache(
-            range=(A, B), has_from_net=True, figi=figi, interval=interval, market_data_cache=market_data_cache, market_data_service=market_data_service,
+            range=(A, B),
+            has_from_net=True,
+            figi=figi,
+            interval=interval,
+            market_data_cache=market_data_cache,
+            market_data_service=market_data_service,
         )
         self.get_by_range_and_assert_has_cache(
-            range=(C, D), has_from_net=True, figi=figi, interval=interval, market_data_cache=market_data_cache, market_data_service=market_data_service,
+            range=(C, D),
+            has_from_net=True,
+            figi=figi,
+            interval=interval,
+            market_data_cache=market_data_cache,
+            market_data_service=market_data_service,
         )
         self.get_by_range_and_assert_has_cache(
-            range=(E, F), has_from_net=True, figi=figi, interval=interval, market_data_cache=market_data_cache, market_data_service=market_data_service,
+            range=(E, F),
+            has_from_net=True,
+            figi=figi,
+            interval=interval,
+            market_data_cache=market_data_cache,
+            market_data_service=market_data_service,
         )
 
         cache_storage = InstrumentMarketDataStorage(
@@ -317,7 +366,15 @@ class TestCachedLoad:
         self.assert_has_cached_ranges(cache_storage, [(E, F)])
         self.assert_file_count(cache_storage, 2)
 
-    def get_by_range_and_assert_has_cache(self, range: Tuple[datetime, datetime], has_from_net: bool, figi: str, interval: CandleInterval, market_data_cache: MarketDataCache, market_data_service: MarketDataService):
+    def get_by_range_and_assert_has_cache(
+        self,
+        range: Tuple[datetime, datetime],
+        has_from_net: bool,
+        figi: str,
+        interval: CandleInterval,
+        market_data_cache: MarketDataCache,
+        market_data_service: MarketDataService,
+    ):
         start, end = range
         result = list(
             market_data_cache.get_all_candles(
@@ -329,13 +386,19 @@ class TestCachedLoad:
         )
         self.assert_in_range(result, start=start, end=end)
         if has_from_net:
-            assert len(market_data_service.get_candles.mock_calls) > 0, 'Net was not used'
+            assert (
+                len(market_data_service.get_candles.mock_calls) > 0
+            ), "Net was not used"
         else:
-            assert len(market_data_service.get_candles.mock_calls) == 0, 'Net was used'
+            assert len(market_data_service.get_candles.mock_calls) == 0, "Net was used"
         market_data_service.get_candles.reset_mock()
 
     def test_loads_cache_merge_out_left(
-        self, market_data_service: MarketDataService, market_data_cache: MarketDataCache, settings: MarketDataCacheSettings, log
+        self,
+        market_data_service: MarketDataService,
+        market_data_cache: MarketDataCache,
+        settings: MarketDataCacheSettings,
+        log,
     ):
         figi = uuid.uuid4().hex
         interval = CandleInterval.CANDLE_INTERVAL_DAY
@@ -346,13 +409,28 @@ class TestCachedLoad:
         # [E           cached         D]
         E, A, B, C, F, D = self._get_date_point_by_index(0, 1, 3, 4, 6, 7)
         self.get_by_range_and_assert_has_cache(
-            range=(A, B), has_from_net=True, figi=figi, interval=interval, market_data_cache=market_data_cache, market_data_service=market_data_service,
+            range=(A, B),
+            has_from_net=True,
+            figi=figi,
+            interval=interval,
+            market_data_cache=market_data_cache,
+            market_data_service=market_data_service,
         )
         self.get_by_range_and_assert_has_cache(
-            range=(C, D), has_from_net=True, figi=figi, interval=interval, market_data_cache=market_data_cache, market_data_service=market_data_service,
+            range=(C, D),
+            has_from_net=True,
+            figi=figi,
+            interval=interval,
+            market_data_cache=market_data_cache,
+            market_data_service=market_data_service,
         )
         self.get_by_range_and_assert_has_cache(
-            range=(E, F), has_from_net=True, figi=figi, interval=interval, market_data_cache=market_data_cache, market_data_service=market_data_service,
+            range=(E, F),
+            has_from_net=True,
+            figi=figi,
+            interval=interval,
+            market_data_cache=market_data_cache,
+            market_data_service=market_data_service,
         )
 
         cache_storage = InstrumentMarketDataStorage(
@@ -362,7 +440,11 @@ class TestCachedLoad:
         self.assert_file_count(cache_storage, 2)
 
     def test_loads_cache_merge_out_right(
-        self, market_data_service: MarketDataService, market_data_cache: MarketDataCache, settings: MarketDataCacheSettings, log
+        self,
+        market_data_service: MarketDataService,
+        market_data_cache: MarketDataCache,
+        settings: MarketDataCacheSettings,
+        log,
     ):
         figi = uuid.uuid4().hex
         interval = CandleInterval.CANDLE_INTERVAL_DAY
@@ -373,13 +455,28 @@ class TestCachedLoad:
         #   [A         cached            F]
         A, E, B, C, D, F = self._get_date_point_by_index(0, 1, 3, 4, 6, 7)
         self.get_by_range_and_assert_has_cache(
-            range=(A, B), has_from_net=True, figi=figi, interval=interval, market_data_cache=market_data_cache, market_data_service=market_data_service,
+            range=(A, B),
+            has_from_net=True,
+            figi=figi,
+            interval=interval,
+            market_data_cache=market_data_cache,
+            market_data_service=market_data_service,
         )
         self.get_by_range_and_assert_has_cache(
-            range=(C, D), has_from_net=True, figi=figi, interval=interval, market_data_cache=market_data_cache, market_data_service=market_data_service,
+            range=(C, D),
+            has_from_net=True,
+            figi=figi,
+            interval=interval,
+            market_data_cache=market_data_cache,
+            market_data_service=market_data_service,
         )
         self.get_by_range_and_assert_has_cache(
-            range=(E, F), has_from_net=True, figi=figi, interval=interval, market_data_cache=market_data_cache, market_data_service=market_data_service,
+            range=(E, F),
+            has_from_net=True,
+            figi=figi,
+            interval=interval,
+            market_data_cache=market_data_cache,
+            market_data_service=market_data_service,
         )
 
         cache_storage = InstrumentMarketDataStorage(
@@ -389,7 +486,11 @@ class TestCachedLoad:
         self.assert_file_count(cache_storage, 2)
 
     def test_loads_cache_merge_in_right(
-        self, market_data_service: MarketDataService, market_data_cache: MarketDataCache, settings: MarketDataCacheSettings, log
+        self,
+        market_data_service: MarketDataService,
+        market_data_cache: MarketDataCache,
+        settings: MarketDataCacheSettings,
+        log,
     ):
         figi = uuid.uuid4().hex
         interval = CandleInterval.CANDLE_INTERVAL_DAY
@@ -400,13 +501,28 @@ class TestCachedLoad:
         #   [A cached  B]  [C   cached   F]
         A, B, C, E, D, F = self._get_date_point_by_index(0, 1, 3, 4, 6, 7)
         self.get_by_range_and_assert_has_cache(
-            range=(A, B), has_from_net=True, figi=figi, interval=interval, market_data_cache=market_data_cache, market_data_service=market_data_service,
+            range=(A, B),
+            has_from_net=True,
+            figi=figi,
+            interval=interval,
+            market_data_cache=market_data_cache,
+            market_data_service=market_data_service,
         )
         self.get_by_range_and_assert_has_cache(
-            range=(C, D), has_from_net=True, figi=figi, interval=interval, market_data_cache=market_data_cache, market_data_service=market_data_service,
+            range=(C, D),
+            has_from_net=True,
+            figi=figi,
+            interval=interval,
+            market_data_cache=market_data_cache,
+            market_data_service=market_data_service,
         )
         self.get_by_range_and_assert_has_cache(
-            range=(E, F), has_from_net=True, figi=figi, interval=interval, market_data_cache=market_data_cache, market_data_service=market_data_service,
+            range=(E, F),
+            has_from_net=True,
+            figi=figi,
+            interval=interval,
+            market_data_cache=market_data_cache,
+            market_data_service=market_data_service,
         )
 
         cache_storage = InstrumentMarketDataStorage(
