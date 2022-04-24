@@ -1,6 +1,6 @@
 # pylint:disable=redefined-outer-name
 # pylint:disable=too-many-arguments
-from datetime import datetime, timedelta
+from datetime import timedelta
 
 import pytest
 
@@ -11,6 +11,7 @@ from tinkoff.invest.schemas import (
     Quotation,
 )
 from tinkoff.invest.services import MarketDataService, Services
+from tinkoff.invest.utils import now
 
 
 @pytest.fixture()
@@ -20,12 +21,12 @@ def figi():
 
 @pytest.fixture()
 def from_():
-    return datetime.utcnow() - timedelta(days=31)
+    return now() - timedelta(days=31)
 
 
 @pytest.fixture()
 def to():
-    return datetime.utcnow()
+    return now()
 
 
 @pytest.fixture()
@@ -37,7 +38,7 @@ def historical_candle():
         low=quotation,
         close=quotation,
         volume=100,
-        time=datetime.utcnow(),
+        time=now(),
         is_complete=False,
     )
 
@@ -62,20 +63,26 @@ def market_data_service(mocker):
         (CandleInterval.CANDLE_INTERVAL_DAY, 1),
     ],
 )
+@pytest.mark.parametrize('use_to', [
+    True, False
+])
 def test_get_all_candles(
-    figi, mocker, market_data_service, from_, to, candles_response, interval, call_count
+    figi, mocker, market_data_service, from_, to, candles_response, interval, call_count, use_to
 ):
     services = mocker.Mock()
     services.market_data = market_data_service
     market_data_service.get_candles.return_value = candles_response
 
+    to_kwarg = {}
+    if use_to:
+        to_kwarg = {"to": to}
     result = list(
         Services.get_all_candles(
             services,
             figi=figi,
             interval=interval,
             from_=from_,
-            to=to,
+            **to_kwarg,
         )
     )
 
