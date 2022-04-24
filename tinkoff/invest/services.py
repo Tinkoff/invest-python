@@ -132,7 +132,8 @@ from .schemas import (
     WithdrawLimitsResponse,
 )
 from .typedefs import AccountId
-from .utils import get_intervals, now, candle_interval_to_timedelta
+from .utils import get_intervals, now, candle_interval_to_timedelta, \
+    datetime_range_floor
 
 __all__ = (
     "Services",
@@ -201,6 +202,7 @@ class MarketDataCache(ICandleGetter):
         figi: str = "",
     ) -> Generator[HistoricCandle, None, None]:
         to = to or now()
+        from_, to = datetime_range_floor((from_, to))
         processed_time = from_
         figi_cache_storage = self._get_figi_cache_storage(figi=figi, interval=interval)
         for cached in figi_cache_storage.get(request_range=(from_, to)):

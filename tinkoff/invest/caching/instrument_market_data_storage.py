@@ -18,7 +18,7 @@ from tinkoff.invest.caching.instrument_date_range_market_data import (
 )
 from tinkoff.invest.caching.interface import IInstrumentMarketDataStorage
 from tinkoff.invest.schemas import CandleInterval, HistoricCandle
-from tinkoff.invest.utils import dataclass_from_dict
+from tinkoff.invest.utils import dataclass_from_dict, datetime_range_floor
 
 logger = logging.getLogger(__name__)
 
@@ -244,6 +244,7 @@ class InstrumentMarketDataStorage(
     def get(
         self, request_range: Tuple[datetime, datetime]
     ) -> Iterable[InstrumentDateRangeData]:
+        request_range = datetime_range_floor(request_range)
         with meta_file_context(meta_file_path=self._meta_path) as meta_file:
             meta_file: FileMetaData = meta_file
 
@@ -263,6 +264,7 @@ class InstrumentMarketDataStorage(
         with meta_file_context(meta_file_path=self._meta_path) as meta_file:
             meta_file: FileMetaData = meta_file
             for data in data_list:
+                data.date_range = datetime_range_floor(data.date_range)
                 new_file = self._write_candles_file(data)
                 assert data.date_range not in meta_file.cached_range_in_file
                 meta_file.cached_range_in_file[data.date_range] = new_file

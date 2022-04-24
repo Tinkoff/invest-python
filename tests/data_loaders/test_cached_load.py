@@ -91,11 +91,13 @@ class TestCachedLoad:
         settings = MarketDataCacheSettings(base_cache_dir=Path(tempfile.gettempdir()))
         market_data_cache = MarketDataCache(settings=settings, services=client)
         figi = uuid.uuid4().hex
-        from_ = now() - timedelta(days=30)
+        to = now()
+        from_ = to - timedelta(days=30)
         from_net = list(
             market_data_cache.get_all_candles(
                 figi=figi,
                 from_=from_,
+                to=to,
                 interval=CandleInterval.CANDLE_INTERVAL_HOUR,
             )
         )
@@ -105,10 +107,10 @@ class TestCachedLoad:
             market_data_cache.get_all_candles(
                 figi=figi,
                 from_=from_,
+                to=to,
                 interval=CandleInterval.CANDLE_INTERVAL_HOUR,
             )
         )
-
         market_data_service.get_candles.assert_not_called()
         assert len(from_net) == len(from_cache)
         for cached_candle, net_candle in zip(from_cache, from_net):
@@ -161,3 +163,34 @@ class TestCachedLoad:
         self.assert_datetime_equal(result_candles[-1].time, end)
         for candle in result_candles:
             assert start <= candle.time <= end
+
+    def test_loads_from_cache_and_right_from_net(
+        self, client, market_data_service: MarketDataService
+    ):
+        settings = MarketDataCacheSettings(base_cache_dir=Path(tempfile.gettempdir()))
+        market_data_cache = MarketDataCache(settings=settings, services=client)
+        figi = uuid.uuid4().hex
+        to = now().replace(second=0, microsecond=0)
+        from_ = to - timedelta(days=30)
+        from_net = list(
+            market_data_cache.get_all_candles(
+                figi=figi,
+                from_=from_,
+                to=to,
+                interval=CandleInterval.CANDLE_INTERVAL_DAY,
+            )
+        )
+        market_data_service.get_candles.reset_mock()
+        to_later_uncached = to + timedelta(days=7)
+
+        cache_and_net = list(
+            market_data_cache.get_all_candles(
+                figi=figi,
+                from_=from_,
+                to=to_later_uncached,
+                interval=CandleInterval.CANDLE_INTERVAL_DAY,
+            )
+        )
+
+        assert len(market_data_service.get_candles.mock_calls) > 0
+        self.assert_in_range(cache_and_net, start=from_, end=to_later_uncached)

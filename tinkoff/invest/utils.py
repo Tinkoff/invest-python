@@ -105,3 +105,8 @@ def dataclass_from_dict(klass, d):
         d = ast.literal_eval(d)
     fieldtypes = {f.name: f.type for f in dataclasses.fields(klass)}
     return klass(**{f: dataclass_from_dict(fieldtypes[f], d[f]) for f in d})
+
+
+def datetime_range_floor(date_range: Tuple[datetime, datetime]) -> Tuple[datetime, datetime]:
+    start, end = date_range
+    return start.replace(second=0, microsecond=0), end.replace(second=0, microsecond=0)
