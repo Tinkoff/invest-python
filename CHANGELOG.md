@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [0.2.0-beta23](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta23) - 2022-04-25
+
+<small>[Compare with 0.2.0-beta22](https://github.com/tinkoff/invest-python/compare/0.2.0-beta22...0.2.0-beta23)</small>
+
+### Added
+- Add app_name to kwargs ([0975913](https://github.com/tinkoff/invest-python/commit/09759136ead205137ee38a6f98f7d77667614e57) by Danil Akhtarov).
+
+
 ## [0.2.0-beta22](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta22) - 2022-04-24
 
 <small>[Compare with 0.2.0-beta21](https://github.com/tinkoff/invest-python/compare/0.2.0-beta21...0.2.0-beta22)</small>
