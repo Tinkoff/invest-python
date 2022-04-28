@@ -60,10 +60,6 @@ update-changelog: docs-changelog
 
 .PHONY: install
 install:
-	poetry install
-
-.PHONY: install-all
-install-all:
 	poetry install -E all
 
 .PHONY: publish
