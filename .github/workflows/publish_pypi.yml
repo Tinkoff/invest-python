@@ -1,6 +1,9 @@
 name: Publish to PYPI
 
 on:
+  push:
+    tags:
+      - '*'
   release:
     types:
       - created
