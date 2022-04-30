@@ -266,10 +266,14 @@ class MarketDataCache(ICandleGetter):
 
 class Services(ICandleGetter):
     def __init__(
-        self, channel: grpc.Channel, token: str, sandbox_token: Optional[str] = None
+        self,
+        channel: grpc.Channel,
+        token: str,
+        sandbox_token: Optional[str] = None,
+        app_name: Optional[str] = None,
     ) -> None:
-        metadata = get_metadata(token)
-        sandbox_metadata = get_metadata(sandbox_token or token)
+        metadata = get_metadata(token, app_name)
+        sandbox_metadata = get_metadata(sandbox_token or token, app_name)
         self.instruments = InstrumentsService(channel, metadata)
         self.market_data = MarketDataService(channel, metadata)
         self.market_data_stream = MarketDataStreamService(channel, metadata)

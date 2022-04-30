@@ -1,7 +1,9 @@
-name: Github pages
+name: CI Tests/Lints
 
 on:
   push:
+    branches: [ main ]
+  pull_request:
     branches: [ main ]
   workflow_dispatch:
 
@@ -17,11 +19,8 @@ jobs:
       - name: Install python dependencies
         run: make install
 
-      - name: Generate docs
-        run: make docs
+      - name: Run linters
+        run: make lint
 
-      - name: Deploy pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./site
+      - name: Run test
+        run: make test
