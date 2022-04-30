@@ -528,3 +528,33 @@ class TestCachedLoad:
         )
         self.assert_has_cached_ranges(cache_storage, [(A, B), (C, F)])
         self.assert_file_count(cache_storage, 3)
+
+    def test_creates_files_with_correct_extensions(
+        self,
+        market_data_service: MarketDataService,
+        market_data_cache: MarketDataCache,
+        settings: MarketDataCacheSettings,
+        log,
+    ):
+        figi = uuid.uuid4().hex
+        interval = CandleInterval.CANDLE_INTERVAL_HOUR
+
+        list(
+            market_data_cache.get_all_candles(
+                figi=figi,
+                from_=now() - timedelta(days=30),
+                interval=interval,
+            )
+        )
+
+        cache_storage = InstrumentMarketDataStorage(
+            figi=figi, interval=interval, settings=settings
+        )
+        cached_ls = list(cache_storage._meta_path.parent.glob("*"))
+        assert len(cached_ls) == 2
+        assert any(
+            str(file).endswith(f".{settings.format_extension}") for file in cached_ls
+        )
+        assert any(
+            str(file).endswith(f".{settings.meta_extension}") for file in cached_ls
+        )

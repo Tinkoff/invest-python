@@ -50,10 +50,10 @@ class InstrumentMarketDataStorage(
         filepath = filepath.parent / (
             filepath.name + f'-{start.strftime("%s")}-{end.strftime("%s")}'
         )
-        return filepath.with_suffix(self._settings.format)
+        return filepath.with_suffix(f".{self._settings.format_extension}")
 
     def _get_metafile(self, file: Path) -> Path:
-        return file.with_suffix(self._settings.meta_suffix)
+        return file.with_suffix(f".{self._settings.meta_extension}")
 
     def _get_cache_file_for_instrument(
         self, instrument_dir: Path, interval: CandleInterval

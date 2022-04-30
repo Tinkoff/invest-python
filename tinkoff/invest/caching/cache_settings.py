@@ -10,14 +10,14 @@ from definitions import PACKAGE_DIR  # noqa: I900
 
 
 class MarketDataCacheFormat(str, enum.Enum):
-    CSV = ".csv"
+    CSV = "csv"
 
 
 @dataclasses.dataclass()
 class MarketDataCacheSettings:
     base_cache_dir: Path = PACKAGE_DIR / ".market_data_cache"
     use_cache: bool = True
-    format: MarketDataCacheFormat = MarketDataCacheFormat.CSV
+    format_extension: MarketDataCacheFormat = MarketDataCacheFormat.CSV
     field_names: Sequence[str] = (
         "time",
         "open",
@@ -27,7 +27,7 @@ class MarketDataCacheSettings:
         "volume",
         "is_complete",
     )
-    meta_suffix: str = ".meta"
+    meta_extension: str = "meta"
 
 
 @dataclasses.dataclass()
@@ -44,8 +44,6 @@ def meta_file_context(meta_file_path: Path) -> Generator[FileMetaData, None, Non
         meta = FileMetaData(cached_range_in_file={})
     try:
         yield meta
-    except Exception as e:
-        raise e
     finally:
         with open(meta_file_path, "wb") as f:
             pickle.dump(meta, f)
