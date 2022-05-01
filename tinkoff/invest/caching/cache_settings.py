@@ -1,12 +1,11 @@
 import contextlib
 import dataclasses
 import enum
+import os
 import pickle  # noqa: S403 Consider possible security implications.
 from datetime import datetime
 from pathlib import Path
 from typing import Dict, Generator, Sequence, Tuple
-
-from definitions import PACKAGE_DIR  # noqa: I900
 
 
 class MarketDataCacheFormat(str, enum.Enum):
@@ -15,8 +14,7 @@ class MarketDataCacheFormat(str, enum.Enum):
 
 @dataclasses.dataclass()
 class MarketDataCacheSettings:
-    base_cache_dir: Path = PACKAGE_DIR / ".market_data_cache"
-    use_cache: bool = True
+    base_cache_dir: Path = Path(os.getcwd()) / ".market_data_cache"
     format_extension: MarketDataCacheFormat = MarketDataCacheFormat.CSV
     field_names: Sequence[str] = (
         "time",

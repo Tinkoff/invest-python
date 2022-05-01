@@ -1,6 +1,7 @@
 import logging
 import os
 from datetime import timedelta
+from pathlib import Path
 
 from tinkoff.invest import CandleInterval, Client
 from tinkoff.invest.caching.cache_settings import MarketDataCacheSettings
@@ -13,7 +14,7 @@ logging.basicConfig(format="%(asctime)s %(levelname)s:%(message)s", level=loggin
 
 def main():
     with Client(TOKEN) as client:
-        settings = MarketDataCacheSettings()
+        settings = MarketDataCacheSettings(base_cache_dir=Path("market_data_cache"))
         market_data_cache = MarketDataCache(settings=settings, services=client)
         for candle in market_data_cache.get_all_candles(
             figi="BBG004730N88",
