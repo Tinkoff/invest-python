@@ -322,6 +322,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#release" class="md-nav__link">
+    Release новой версии
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -404,6 +411,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#release" class="md-nav__link">
+    Release новой версии
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -430,7 +444,7 @@
 <h1 id="contributing">Contributing</h1>
 <p>Спасибо за участие в проекте Tinkoff Invest!</p>
 <h2 id="_1">Быстрый старт</h2>
-<p>Рекомендуем использовать <a href="https://pypi.org/project/poetry/">poetry</a></p>
+<p>Рекомендуем использовать <a href="https://pypi.org/project/poetry/">poetry</a>.</p>
 <div class="highlight"><pre><span></span><code>pip install poetry
 make install
 </code></pre></div>
@@ -446,7 +460,7 @@ make install
 <h3 id="proto">Загрузка proto файлов</h3>
 <div class="highlight"><pre><span></span><code>make download-protos
 </code></pre></div>
-<p>По дефолту загружает из ветки <code>main</code></p>
+<p>По дефолту загружает из ветки <code>main</code>.</p>
 <h3 id="_5">Генерация клиента</h3>
 <div class="highlight"><pre><span></span><code>make gen-grpc
 </code></pre></div>
@@ -455,6 +469,12 @@ make install
 - tinkoff/invest/async_services.py
 - tinkoff/invest/schemas.py
 - tinkoff/invest/services.py</p>
+<h3 id="release">Release новой версии</h3>
+<div class="highlight"><pre><span></span><code>make bump-version v=&lt;new-version&gt;
+</code></pre></div>
+<p>Команда установит новую версию и установит tag.
+После отправки tag-а в github <code>git push --tags</code>, будет запущена джоба <code>publish_pypi</code>.</p>
+<p><em>Стоит запускать инструкцию <code>make bump-version</code>, как только все изменения были зафиксированы в гите.</em></p>
 
               
             </article>
