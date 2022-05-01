@@ -1,6 +1,10 @@
+import ast
+import dataclasses
 from datetime import datetime, timedelta, timezone
 from decimal import Decimal
 from typing import Generator, Tuple
+
+import dateutil.parser  # noqa:  I900 'dateutil' not listed as a requirement
 
 from .schemas import CandleInterval, Quotation, SubscriptionInterval
 
@@ -88,3 +92,23 @@ def ceil_datetime(datetime_: datetime, delta: timedelta):
 
 def floor_datetime(datetime_: datetime, delta: timedelta):
     return datetime_ - (datetime_ - _DATETIME_MIN) % delta
+
+
+def dataclass_from_dict(klass, d):
+    if issubclass(int, klass):
+        return int(d)
+    if issubclass(bool, klass):
+        return bool(d)
+    if issubclass(klass, datetime):
+        return dateutil.parser.parse(d).replace(tzinfo=timezone.utc)
+    if issubclass(klass, Quotation):
+        d = ast.literal_eval(d)
+    fieldtypes = {f.name: f.type for f in dataclasses.fields(klass)}
+    return klass(**{f: dataclass_from_dict(fieldtypes[f], d[f]) for f in d})
+
+
+def datetime_range_floor(
+    date_range: Tuple[datetime, datetime]
+) -> Tuple[datetime, datetime]:
+    start, end = date_range
+    return start.replace(second=0, microsecond=0), end.replace(second=0, microsecond=0)

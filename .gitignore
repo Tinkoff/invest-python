@@ -144,3 +144,4 @@ docs/CHANGELOG.md
 docs/CONTRIBUTING.md
 
 .idea
+.market_data_cache

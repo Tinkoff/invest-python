@@ -1,6 +1,8 @@
 # pylint:disable=redefined-builtin,too-many-lines
+import abc
+import logging
 from datetime import datetime
-from typing import Generator, Iterable, List, Optional
+from typing import Dict, Generator, Iterable, List, Optional, Tuple
 
 import grpc
 
@@ -10,6 +12,9 @@ from tinkoff.invest.market_data_stream.market_data_stream_manager import (
 
 from . import _grpc_helpers
 from ._errors import handle_request_error, handle_request_error_gen
+from .caching.cache_settings import MarketDataCacheSettings
+from .caching.instrument_date_range_market_data import InstrumentDateRangeData
+from .caching.instrument_market_data_storage import InstrumentMarketDataStorage
 from .grpc import (
     instruments_pb2,
     instruments_pb2_grpc,
@@ -134,7 +139,12 @@ from .schemas import (
     WithdrawLimitsResponse,
 )
 from .typedefs import AccountId
-from .utils import get_intervals, now
+from .utils import (
+    candle_interval_to_timedelta,
+    datetime_range_floor,
+    get_intervals,
+    now,
+)
 
 __all__ = (
     "Services",
@@ -148,9 +158,113 @@ __all__ = (
     "SandboxService",
     "StopOrdersService",
 )
+logger = logging.getLogger(__name__)
 
 
-class Services:
+class ICandleGetter(abc.ABC):
+    @abc.abstractmethod
+    def get_all_candles(
+        self,
+        *,
+        from_: datetime,
+        to: Optional[datetime],
+        interval: CandleInterval,
+        figi: str,
+    ) -> Generator[HistoricCandle, None, None]:
+        pass
+
+
+class MarketDataCache(ICandleGetter):
+    def __init__(self, settings: MarketDataCacheSettings, services: "Services"):
+        self._settings = settings
+        self._settings.base_cache_dir.mkdir(parents=True, exist_ok=True)
+        self._services = services
+        self._figi_cache_storages: Dict[
+            Tuple[str, CandleInterval], InstrumentMarketDataStorage
+        ] = {}
+
+    def _get_candles_from_net(
+        self, figi: str, interval: CandleInterval, from_: datetime, to: datetime
+    ) -> Iterable[HistoricCandle]:
+        yield from self._services.get_all_candles(
+            figi=figi,
+            interval=interval,
+            from_=from_,
+            to=to,
+        )
+
+    def _with_saving_into_cache(
+        self,
+        storage: InstrumentMarketDataStorage,
+        from_net: Iterable[HistoricCandle],
+        net_range: Tuple[datetime, datetime],
+    ) -> Iterable[HistoricCandle]:
+        candles = list(from_net)
+        storage.update(
+            [InstrumentDateRangeData(date_range=net_range, historic_candles=candles)]
+        )
+        logger.debug("From net [\n%s\n%s\n]", str(net_range[0]), str(net_range[1]))
+        logger.debug(
+            "From net real [\n%s\n%s\n]",
+            str(min(list(map(lambda x: x.time, candles)))),
+            str(max(list(map(lambda x: x.time, candles)))),
+        )
+
+        yield from candles
+
+    def get_all_candles(
+        self,
+        *,
+        from_: datetime,
+        to: Optional[datetime] = None,
+        interval: CandleInterval = CandleInterval(0),
+        figi: str = "",
+    ) -> Generator[HistoricCandle, None, None]:
+        to = to or now()
+        from_, to = datetime_range_floor((from_, to))
+        logger.debug("Request [\n%s\n%s\n]", str(from_), str(to))
+
+        processed_time = from_
+        figi_cache_storage = self._get_figi_cache_storage(figi=figi, interval=interval)
+        for cached in figi_cache_storage.get(request_range=(from_, to)):
+            cached_start, cached_end = cached.date_range
+            cached_candles = list(cached.historic_candles)
+            assert cached_start >= processed_time
+            if cached_start > processed_time:
+                yield from self._with_saving_into_cache(
+                    storage=figi_cache_storage,
+                    from_net=self._get_candles_from_net(
+                        figi, interval, processed_time, cached_start
+                    ),
+                    net_range=(processed_time, cached_start),
+                )
+            logger.debug(
+                "Returning from cache [\n%s\n%s\n]", str(cached_start), str(cached_end)
+            )
+
+            yield from cached_candles
+            processed_time = cached_end
+        if processed_time + candle_interval_to_timedelta(interval) <= to:
+            yield from self._with_saving_into_cache(
+                storage=figi_cache_storage,
+                from_net=self._get_candles_from_net(figi, interval, processed_time, to),
+                net_range=(processed_time, to),
+            )
+
+    def _get_figi_cache_storage(
+        self, figi: str, interval: CandleInterval
+    ) -> InstrumentMarketDataStorage:
+        figi_tuple = (figi, interval)
+        storage = self._figi_cache_storages.get(figi_tuple)
+        if storage is None:
+            storage = InstrumentMarketDataStorage(
+                figi=figi, interval=interval, settings=self._settings
+            )
+            self._figi_cache_storages[figi_tuple] = storage
+        return storage  # noqa: R504
+
+
+class Services(ICandleGetter):
     def __init__(
         self,
         channel: grpc.Channel,
