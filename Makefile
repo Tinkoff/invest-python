@@ -50,7 +50,7 @@ docs-serve:
 docs-changelog:
 	$(POETRY_RUN) git-changelog -o CHANGELOG.md  .
 
-.PHONY: docs-changelog
+.PHONY: update-changelog
 update-changelog: docs-changelog
 	git add .
 	git commit -m "Update changelog"
