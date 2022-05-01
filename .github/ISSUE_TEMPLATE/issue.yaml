@@ -1,64 +1,66 @@
 name: Custom Issue
 description: Проблемы, вопросы, ...
-title: "[Issue] "
+title: ''
 labels: []
 body:
-  - type: textarea
-    id: what-happened
-    attributes:
-      label: Что случилось?
-      description: Краткое описание.
-    validations:
-      required: true
-  - type: textarea
-    id: to-reproduce
-    attributes:
-      label: Воспроизведение
-      description: Как можно повторить кейс?
-    validations:
-      required: false
-  - type: dropdown
-    id: package-version
-    attributes:
-      label: Tinkoff Invest Version
-      description: Какая версия библиотеки используется?
-      options:
-        - 0.2.0-beta23
-        - 0.2.0-beta22
-        - 0.2.0-beta21
-        - 0.2.0-beta20
-        - 0.2.0-beta19
-        - Другая
-    validations:
-      required: true
-  - type: dropdown
-    id: python-version
-    attributes:
-      label: Python Version
-      description: Какая версия Python-а используется?
-      options:
-        - "3.10"
-        - "3.9"
-        - "3.8"
-        - Другая
-    validations:
-      required: true
-  - type: dropdown
-    id: os
-    attributes:
-      label: OS
-      description: Ваша операционная система.
-      options:
-        - Windows
-        - Linux
-        - Mac OS
-        - Mac OS (m1)
-        - Другая
-    validations:
-      required: true
-  - type: textarea
-    id: logs
-    attributes:
-      label: Логи
-      description: Скопируйте и вставьте сюда логи. Не забудьте скрыть чувствительные данные.
-      render: shell
+- type: textarea
+  id: what-happened
+  attributes:
+    label: Что случилось?
+    description: Краткое описание.
+  validations:
+    required: true
+- type: textarea
+  id: to-reproduce
+  attributes:
+    label: Воспроизведение
+    description: Как можно повторить кейс? Для кода используйте форматирование.
+  validations:
+    required: false
+- type: dropdown
+  id: package-version
+  attributes:
+    label: Tinkoff Invest Version
+    description: Какая версия библиотеки используется?
+    options:
+    - 0.2.0-beta24
+    - 0.2.0-beta23
+    - 0.2.0-beta22
+    - 0.2.0-beta21
+    - 0.2.0-beta20
+    - 0.2.0-beta19
+    - Другая
+  validations:
+    required: true
+- type: dropdown
+  id: python-version
+  attributes:
+    label: Python Version
+    description: Какая версия Python-а используется?
+    options:
+    - '3.10'
+    - '3.9'
+    - '3.8'
+    - Другая
+  validations:
+    required: true
+- type: dropdown
+  id: os
+  attributes:
+    label: OS
+    description: Ваша операционная система.
+    options:
+    - Windows
+    - Linux
+    - Mac OS
+    - Mac OS (m1)
+    - Другая
+  validations:
+    required: true
+- type: textarea
+  id: logs
+  attributes:
+    label: Логи
+    description: Скопируйте и вставьте сюда логи. Не забудьте скрыть чувствительные
+      данные.
+    render: shell
