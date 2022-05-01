@@ -31,11 +31,8 @@ format:
 	$(POETRY_RUN) black --line-length=88 --exclude=$(EXCLUDE_CODE) $(CODE)
 	$(POETRY_RUN) toml-sort --in-place pyproject.toml
 
-.PHONY: flint
-flint: format lint
-
 .PHONY: check
-check: flint test
+check: lint test
 
 .PHONY: docs
 docs:
@@ -57,6 +54,14 @@ docs-changelog:
 update-changelog: docs-changelog
 	git add .
 	git commit -m "Update changelog"
+
+.PHONY: bump-version
+bump-version:
+	poetry version $(v)
+	$(POETRY_RUN) python -m scripts.update_issue_templates $(v)
+	git add . && git commit -m "Bump version $(v)"
+	git tag -m "" -a $(v)
+	make update-changelog
 
 .PHONY: install
 install:
