@@ -1,6 +1,5 @@
 name: Custom Issue
 description: Проблемы, вопросы, ...
-title: ''
 labels: []
 body:
 - type: textarea
