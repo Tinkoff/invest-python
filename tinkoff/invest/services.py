@@ -833,11 +833,11 @@ class OrdersStreamService(_grpc_helpers.Service):
     _stub_factory = orders_pb2_grpc.OrdersStreamServiceStub
 
     @handle_request_error_gen("TradesStream")
-    def trades_stream(self) -> Iterable[TradesStreamResponse]:
-        request = TradesStreamRequest()
+    def trades_stream(self, accounts: List[str]) -> Iterable[TradesStreamResponse]:
+        request = TradesStreamRequest(accounts=accounts)
         for response in self.stub.TradesStream(
             request=_grpc_helpers.dataclass_to_protobuff(
-                request, operations_pb2.WithdrawLimitsRequest()
+                request, orders_pb2.TradesStreamRequest()
             ),
             metadata=self.metadata,
         ):
