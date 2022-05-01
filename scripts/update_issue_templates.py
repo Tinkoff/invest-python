@@ -4,7 +4,7 @@ import yaml
 
 
 def add_version(version: str, file: str) -> None:
-    with open(file, "r", encoding='utf-8') as f:
+    with open(file, "r", encoding="utf-8") as f:
         data = yaml.safe_load(f)
         for field in data["body"]:
             if field.get("id", "") == "package-version":
@@ -12,7 +12,7 @@ def add_version(version: str, file: str) -> None:
                     version,
                     *field["attributes"]["options"],
                 ]
-    with open(file, "w+", encoding='utf-8') as f:
+    with open(file, "w+", encoding="utf-8") as f:
         yaml.dump(
             data, f, default_flow_style=False, sort_keys=False, allow_unicode=True
         )
