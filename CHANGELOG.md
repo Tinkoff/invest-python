@@ -4,6 +4,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [0.2.0-beta24](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta24) - 2022-05-01
+
+<small>[Compare with 0.2.0-beta23](https://github.com/tinkoff/invest-python/compare/0.2.0-beta23...0.2.0-beta24)</small>
+
+### Added
+- Add bump-version to makefile ([4685c27](https://github.com/tinkoff/invest-python/commit/4685c274c597196a2e9d213be6374b41cb34b19a) by Danil Akhtarov).
+
+### Fixed
+- Fix trade stream (#56) ([d7e1588](https://github.com/tinkoff/invest-python/commit/d7e15885f16628a7dae469c2081577d775a82e87) by Ruslan Sirazhetdinov).
+
+### Removed
+- Remove super().__init__() (#55) ([9454149](https://github.com/tinkoff/invest-python/commit/9454149aa0900e219156a629d69f18ded22339a0) by Ruslan Sirazhetdinov).
+
+
 ## [0.2.0-beta23](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta23) - 2022-04-25
 
 <small>[Compare with 0.2.0-beta22](https://github.com/tinkoff/invest-python/compare/0.2.0-beta22...0.2.0-beta23)</small>
