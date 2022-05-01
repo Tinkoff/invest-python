@@ -881,11 +881,13 @@ class OrdersStreamService(_grpc_helpers.Service):
     _stub_factory = orders_pb2_grpc.OrdersStreamServiceStub
 
     @handle_aio_request_error_gen("TradesStream")
-    async def trades_stream(self) -> AsyncIterable[TradesStreamResponse]:
-        request = TradesStreamRequest()
+    async def trades_stream(
+        self, accounts: List[str]
+    ) -> AsyncIterable[TradesStreamResponse]:
+        request = TradesStreamRequest(accounts=accounts)
         async for response in self.stub.TradesStream(
             request=_grpc_helpers.dataclass_to_protobuff(
-                request, operations_pb2.WithdrawLimitsRequest()
+                request, orders_pb2.TradesStreamRequest()
             ),
             metadata=self.metadata,
         ):
