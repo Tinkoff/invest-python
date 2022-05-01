@@ -4,7 +4,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "tinkoff-investments"
-version = "0.2.0-beta23"
+version = "0.2.0-beta24"
 description = ""
 authors = ["Danil Akhtarov <d.akhtarov@tinkoff.ru>"]
 license = "Apache 2"
