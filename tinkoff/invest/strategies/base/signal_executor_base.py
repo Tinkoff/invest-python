@@ -16,7 +16,6 @@ class SignalExecutor(ISignalExecutor):
         services: Services,
         settings: StrategySettings,
     ):
-        super().__init__()
         self._services = services
         self._settings = settings
 

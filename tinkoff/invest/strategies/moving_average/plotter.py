@@ -26,7 +26,6 @@ logger = logging.getLogger(__name__)
 
 class MovingAverageStrategyPlotter(StrategyPlotter):
     def __init__(self, settings: MovingAverageStrategySettings):
-        super().__init__()
         self._was_not_executed_color = "grey"
         self._settings = settings
         self._signal_type_to_style_map: Dict[Type[Signal], Dict[str, Any]] = {
