@@ -25,9 +25,7 @@ $ pip install tinkoff-investments
 - &#9744; Кеширование данных
 - &#9744; Торговая стратегия
 
-## Примеры
-
-Примеры доступны [здесь](https://github.com/Tinkoff/invest-python/tree/main/examples).
+## Как пользоваться
 
 ```python
 from tinkoff.invest import Client
@@ -38,13 +36,10 @@ with Client(TOKEN) as client:
     print(client.users.get_accounts())
 ```
 
-Для запуска примеров, нужно добавить токен в переменную окружения.
+> :warning: **Не публикуйте токены в общедоступные репозитории**
+<br/>
 
-<!-- termynal -->
-
-```
-$ export INVEST_TOKEN=YOUR_TOKEN
-```
+Остальные примеры доступны в [examples](https://github.com/Tinkoff/invest-python/tree/main/examples).
 
 ## Contribution
 
