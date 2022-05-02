@@ -265,7 +265,7 @@
       
         <li class="md-nav__item">
   <a href="#_3" class="md-nav__link">
-    Примеры
+    Как пользоваться
   </a>
   
 </li>
@@ -364,7 +364,7 @@
       
         <li class="md-nav__item">
   <a href="#_3" class="md-nav__link">
-    Примеры
+    Как пользоваться
   </a>
   
 </li>
@@ -426,8 +426,7 @@
 <li>&#9744; Кеширование данных</li>
 <li>&#9744; Торговая стратегия</li>
 </ul>
-<h2 id="_3">Примеры</h2>
-<p>Примеры доступны <a href="https://github.com/Tinkoff/invest-python/tree/main/examples">здесь</a>.</p>
+<h2 id="_3">Как пользоваться</h2>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">tinkoff.invest</span> <span class="kn">import</span> <span class="n">Client</span>
 
 <span class="n">TOKEN</span> <span class="o">=</span> <span class="s1">&#39;token&#39;</span>
@@ -435,14 +434,11 @@
 <span class="k">with</span> <span class="n">Client</span><span class="p">(</span><span class="n">TOKEN</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">client</span><span class="o">.</span><span class="n">users</span><span class="o">.</span><span class="n">get_accounts</span><span class="p">())</span>
 </code></pre></div>
-<p>Для запуска примеров, нужно добавить токен в переменную окружения.</p>
-<!-- termynal -->
-
-<p>
-<div class="termy" data-termynal>
-<span data-ty="input">export INVEST_TOKEN=YOUR_TOKEN</span>
-<span data-ty></span>
-</div></p>
+<blockquote>
+<p>:warning: <strong>Не публикуйте токены в общедоступные репозитории</strong>
+<br/></p>
+</blockquote>
+<p>Остальные примеры доступны в <a href="https://github.com/Tinkoff/invest-python/tree/main/examples">examples</a>.</p>
 <h2 id="contribution">Contribution</h2>
 <ul>
 <li><a href="https://github.com/Tinkoff/invest-python/blob/main/CONTRIBUTING.md">CONTRIBUTING</a></li>
