@@ -1,4 +1,5 @@
 # pylint:disable=too-many-lines
+# pylint:disable=too-many-instance-attributes
 from dataclasses import dataclass
 from datetime import datetime
 from typing import List
@@ -658,22 +659,27 @@ class Dividend(_grpc_helpers.Message):
     created_at: datetime = _grpc_helpers.message_field(10)
 
 
+@dataclass(eq=False, repr=True)
 class AssetRequest(_grpc_helpers.Message):
     id: str = _grpc_helpers.string_field(1)
 
 
+@dataclass(eq=False, repr=True)
 class AssetResponse(_grpc_helpers.Message):
     asset: "AssetFull" = _grpc_helpers.message_field(1)
 
 
+@dataclass(eq=False, repr=True)
 class AssetsRequest(_grpc_helpers.Message):
     pass
 
 
+@dataclass(eq=False, repr=True)
 class AssetsResponse(_grpc_helpers.Message):
     assets: List["Asset"] = _grpc_helpers.message_field(1)
 
 
+@dataclass(eq=False, repr=True)
 class AssetFull(_grpc_helpers.Message):
     uid: str = _grpc_helpers.string_field(1)
     type: "AssetType" = _grpc_helpers.message_field(2)
@@ -695,6 +701,7 @@ class AssetFull(_grpc_helpers.Message):
     instruments: List["AssetInstrument"] = _grpc_helpers.message_field(18)
 
 
+@dataclass(eq=False, repr=True)
 class Asset(_grpc_helpers.Message):
     uid: str = _grpc_helpers.string_field(1)
     type: "AssetType" = _grpc_helpers.message_field(2)
@@ -702,10 +709,12 @@ class Asset(_grpc_helpers.Message):
     instruments: List["AssetInstrument"] = _grpc_helpers.message_field(4)
 
 
+@dataclass(eq=False, repr=True)
 class AssetCurrency(_grpc_helpers.Message):
     base_currency: str = _grpc_helpers.string_field(1)
 
 
+@dataclass(eq=False, repr=True)
 class AssetSecurity(_grpc_helpers.Message):
     isin: str = _grpc_helpers.string_field(1)
     type: str = _grpc_helpers.string_field(2)
@@ -718,6 +727,7 @@ class AssetSecurity(_grpc_helpers.Message):
     )
 
 
+@dataclass(eq=False, repr=True)
 class AssetShare(_grpc_helpers.Message):
     type: "ShareType" = _grpc_helpers.message_field(1)
     issue_size: "Quotation" = _grpc_helpers.message_field(2)
@@ -736,6 +746,7 @@ class AssetShare(_grpc_helpers.Message):
     total_float: "Quotation" = _grpc_helpers.message_field(15)
 
 
+@dataclass(eq=False, repr=True)
 class AssetBond(_grpc_helpers.Message):
     current_nominal: "Quotation" = _grpc_helpers.message_field(1)
     borrow_name: str = _grpc_helpers.string_field(2)
@@ -760,6 +771,7 @@ class AssetBond(_grpc_helpers.Message):
     issue_size_plan: "Quotation" = _grpc_helpers.message_field(21)
 
 
+@dataclass(eq=False, repr=True)
 class AssetStructuredProduct(_grpc_helpers.Message):
     borrow_name: str = _grpc_helpers.string_field(1)
     nominal: "Quotation" = _grpc_helpers.message_field(2)
@@ -776,6 +788,7 @@ class AssetStructuredProduct(_grpc_helpers.Message):
     issue_kind: str = _grpc_helpers.string_field(13)
 
 
+@dataclass(eq=False, repr=True)
 class AssetEtf(_grpc_helpers.Message):
     total_expense: "Quotation" = _grpc_helpers.message_field(1)
     hurdle_rate: "Quotation" = _grpc_helpers.message_field(2)
@@ -810,11 +823,13 @@ class AssetEtf(_grpc_helpers.Message):
     nominal_currency: str = _grpc_helpers.string_field(31)
 
 
+@dataclass(eq=False, repr=True)
 class AssetClearingCertificate(_grpc_helpers.Message):
     nominal: "Quotation" = _grpc_helpers.message_field(1)
     nominal_currency: str = _grpc_helpers.string_field(2)
 
 
+@dataclass(eq=False, repr=True)
 class Brand(_grpc_helpers.Message):
     uid: str = _grpc_helpers.string_field(1)
     name: str = _grpc_helpers.string_field(2)
@@ -826,6 +841,7 @@ class Brand(_grpc_helpers.Message):
     country_of_risk_name: str = _grpc_helpers.string_field(8)
 
 
+@dataclass(eq=False, repr=True)
 class AssetInstrument(_grpc_helpers.Message):
     uid: str = _grpc_helpers.string_field(1)
     figi: str = _grpc_helpers.string_field(2)
@@ -835,6 +851,7 @@ class AssetInstrument(_grpc_helpers.Message):
     links: List["InstrumentLink"] = _grpc_helpers.message_field(6)
 
 
+@dataclass(eq=False, repr=True)
 class InstrumentLink(_grpc_helpers.Message):
     type: str = _grpc_helpers.string_field(1)
     instrument_uid: str = _grpc_helpers.string_field(2)
