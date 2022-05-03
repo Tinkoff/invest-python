@@ -4,12 +4,28 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [0.2.0-beta25](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta25) - 2022-05-03
+
+<small>[Compare with 0.2.0-beta24](https://github.com/tinkoff/invest-python/compare/0.2.0-beta24...0.2.0-beta25)</small>
+
+### Fixed
+- Fix schemas.py ([b84e6be](https://github.com/tinkoff/invest-python/commit/b84e6be70167edd9206490457c1c9fb3cfaef33c) by Danil Akhtarov).
+- Fix confusing example in readme (#60) ([0db67a8](https://github.com/tinkoff/invest-python/commit/0db67a801d7e59f2a7d339d9d01a7f2714736068) by 0dminnimda).
+- Fix typing hints for pycharm (#57) ([fcd6e40](https://github.com/tinkoff/invest-python/commit/fcd6e40b74b86358364b3ae2c017c0b2ac528a19) by Ruslan Sirazhetdinov).
+- Fix issue_template ([4cfecf3](https://github.com/tinkoff/invest-python/commit/4cfecf3e597a1058844c3d3e227bc95bfa5b786a) by Danil Akhtarov).
+- Fix makefile ([866569d](https://github.com/tinkoff/invest-python/commit/866569d1f020e4ad5edf55a87650ffb4af144918) by Danil Akhtarov).
+
+### Removed
+- Remove definitions module (#58) ([8ea492b](https://github.com/tinkoff/invest-python/commit/8ea492be90045d126f49e4c780b90d257ef60c4e) by Ruslan Sirazhetdinov).
+
+
 ## [0.2.0-beta24](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta24) - 2022-05-01
 
 <small>[Compare with 0.2.0-beta23](https://github.com/tinkoff/invest-python/compare/0.2.0-beta23...0.2.0-beta24)</small>
 
 ### Added
 - Add bump-version to makefile ([4685c27](https://github.com/tinkoff/invest-python/commit/4685c274c597196a2e9d213be6374b41cb34b19a) by Danil Akhtarov).
+- Add the ability to save candles to csv (#40) ([110d3c3](https://github.com/tinkoff/invest-python/commit/110d3c3dc349ce115c309f7a7b08c75319c1314e) by Ruslan Sirazhetdinov).
 
 ### Fixed
 - Fix trade stream (#56) ([d7e1588](https://github.com/tinkoff/invest-python/commit/d7e15885f16628a7dae469c2081577d775a82e87) by Ruslan Sirazhetdinov).
