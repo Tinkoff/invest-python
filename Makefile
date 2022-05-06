@@ -53,7 +53,7 @@ docs-changelog:
 .PHONY: update-changelog
 update-changelog: docs-changelog
 	git add .
-	git commit -m "Update changelog"
+	git commit -m "docs: update changelog"
 
 .PHONY: bump-version
 bump-version:

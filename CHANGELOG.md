@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [0.2.0-beta26](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta26) - 2022-05-06
+
+<small>[Compare with 0.2.0-beta25](https://github.com/tinkoff/invest-python/compare/0.2.0-beta25...0.2.0-beta26)</small>
+
+### Fixed
+- Fix `license` in the `pyproject.toml` (#64) ([504d04e](https://github.com/tinkoff/invest-python/commit/504d04e8ffffdef044801625089e1bbc8e684c15) by 0dminnimda).
+
+### Removed
+- Remove token.py and it's test (#62) ([c95ae95](https://github.com/tinkoff/invest-python/commit/c95ae958cbb376e719e7e079e83c6f7059894f07) by 0dminnimda).
+
+
 ## [0.2.0-beta25](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta25) - 2022-05-03
 
 <small>[Compare with 0.2.0-beta24](https://github.com/tinkoff/invest-python/compare/0.2.0-beta24...0.2.0-beta25)</small>
