@@ -4,3 +4,6 @@ contrib=contrib-title-conventional-commits
 
 [contrib-title-conventional-commits]
 types = fix,ci,feat,build,chore,docs,style,refactor,perf,test,chore,revert
+
+[ignore-by-title]
+regex=^Bump version (.*)
