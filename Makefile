@@ -83,3 +83,7 @@ gen-grpc:
 
 .PHONY: gen-client
 gen-client: download-protos gen-grpc
+
+.PHONY: git-lint
+git-lint:
+	gitlint

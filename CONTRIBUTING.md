@@ -21,6 +21,15 @@ make test
 
 ```
 make lint
+make git-lint
+```
+
+#### Using gitlint as a commit-msg hook
+
+```
+gitlint install-hook
+# To remove the hook
+gitlint uninstall-hook
 ```
 
 ### Запуск автоформатирования
