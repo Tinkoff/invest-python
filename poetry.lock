@@ -1586,7 +1586,7 @@ all = ["pandas", "numpy", "matplotlib", "mplfinance"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "7f59dd5b80f91f7721a1aad0d3d61de763cd02f7aca419e8af8b4d86c64c7d30"
+content-hash = "f0156c3521a12b233603a3554e1e26d6d15174272df7c31970723c84c444c3a3"
 
 [metadata.files]
 appnope = [
