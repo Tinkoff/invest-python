@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [0.2.0-beta27](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta27) - 2022-05-11
+
+<small>[Compare with 0.2.0-beta26](https://github.com/tinkoff/invest-python/compare/0.2.0-beta26...0.2.0-beta27)</small>
+
+### Fixed
+- Fix: add dateutil (#66) ([552ef32](https://github.com/tinkoff/invest-python/commit/552ef320e102e67bfb9276f48d544c8542b38a5f) by Ruslan Sirazhetdinov).
+- Fix: add gitlint to pyproject.toml ([1a6a922](https://github.com/tinkoff/invest-python/commit/1a6a9221038f59922c7da98773a2eafa1f772f31) by Danil Akhtarov).
+
+
 ## [0.2.0-beta26](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta26) - 2022-05-06
 
 <small>[Compare with 0.2.0-beta25](https://github.com/tinkoff/invest-python/compare/0.2.0-beta25...0.2.0-beta26)</small>
