@@ -200,15 +200,16 @@ class MarketDataCache(ICandleGetter):
         net_range: Tuple[datetime, datetime],
     ) -> Iterable[HistoricCandle]:
         candles = list(from_net)
-        storage.update(
-            [InstrumentDateRangeData(date_range=net_range, historic_candles=candles)]
-        )
-        logger.debug("From net [\n%s\n%s\n]", str(net_range[0]), str(net_range[1]))
-        logger.debug(
-            "From net real [\n%s\n%s\n]",
-            str(min(list(map(lambda x: x.time, candles)))),
-            str(max(list(map(lambda x: x.time, candles)))),
-        )
+        if len(candles) > 0:
+            storage.update(
+                [InstrumentDateRangeData(date_range=net_range, historic_candles=candles)]
+            )
+            logger.debug("From net [\n%s\n%s\n]", str(net_range[0]), str(net_range[1]))
+            logger.debug(
+                "From net real [\n%s\n%s\n]",
+                str(min(list(map(lambda x: x.time, candles)))),
+                str(max(list(map(lambda x: x.time, candles)))),
+            )
 
         yield from candles
 
