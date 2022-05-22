@@ -200,7 +200,7 @@ class MarketDataCache(ICandleGetter):
         net_range: Tuple[datetime, datetime],
     ) -> Iterable[HistoricCandle]:
         candles = list(from_net)
-        if len(candles) > 0:
+        if candles:
             storage.update(
                 [InstrumentDateRangeData(date_range=net_range, historic_candles=candles)]
             )
