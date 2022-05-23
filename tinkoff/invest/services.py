@@ -202,7 +202,11 @@ class MarketDataCache(ICandleGetter):
         candles = list(from_net)
         if candles:
             storage.update(
-                [InstrumentDateRangeData(date_range=net_range, historic_candles=candles)]
+                [
+                    InstrumentDateRangeData(
+                        date_range=net_range, historic_candles=candles
+                    )
+                ]
             )
             logger.debug("From net [\n%s\n%s\n]", str(net_range[0]), str(net_range[1]))
             logger.debug(

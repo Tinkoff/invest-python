@@ -27,12 +27,26 @@ $ pip install tinkoff-investments
 
 ## Как пользоваться
 
+### Получить список аккаунтов
+
 ```python
 from tinkoff.invest import Client
 
 TOKEN = 'token'
 
 with Client(TOKEN) as client:
+    print(client.users.get_accounts())
+```
+
+### Переопределить target
+
+```python
+from tinkoff.invest import Client
+from tinkoff.invest.constants import INVEST_GRPC_API
+
+TOKEN = 'token'
+
+with Client(TOKEN, target=INVEST_GRPC_API) as client:
     print(client.users.get_accounts())
 ```
 

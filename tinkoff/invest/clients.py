@@ -13,6 +13,7 @@ class Client:
         self,
         token: str,
         *,
+        target: Optional[str] = None,
         sandbox_token: Optional[str] = None,
         options: Optional[ChannelArgumentType] = None,
         app_name: Optional[str] = None,
@@ -21,7 +22,7 @@ class Client:
         self._sandbox_token = sandbox_token
         self._options = options
         self._app_name = app_name
-        self._channel = create_channel(options=options)
+        self._channel = create_channel(target=target, options=options)
 
     def __enter__(self) -> Services:
         channel = self._channel.__enter__()
@@ -42,6 +43,7 @@ class AsyncClient:
         self,
         token: str,
         *,
+        target: Optional[str] = None,
         sandbox_token: Optional[str] = None,
         options: Optional[ChannelArgumentType] = None,
         app_name: Optional[str] = None,
@@ -50,7 +52,7 @@ class AsyncClient:
         self._sandbox_token = sandbox_token
         self._options = options
         self._app_name = app_name
-        self._channel = create_channel(force_async=True, options=options)
+        self._channel = create_channel(target=target, force_async=True, options=options)
 
     async def __aenter__(self) -> AsyncServices:
         channel = await self._channel.__aenter__()
