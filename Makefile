@@ -48,7 +48,7 @@ docs-serve:
 
 .PHONY: docs-changelog
 docs-changelog:
-	$(POETRY_RUN) git-changelog -o CHANGELOG.md  .
+	$(POETRY_RUN) git-changelog -s conventional -o CHANGELOG.md .
 
 .PHONY: update-changelog
 update-changelog: docs-changelog
