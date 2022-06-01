@@ -3039,3 +3039,163 @@ class EditFavoritesResponse(google.protobuf.message.Message):
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["favorite_instruments",b"favorite_instruments"]) -> None: ...
 global___EditFavoritesResponse = EditFavoritesResponse
+
+class GetCountriesRequest(google.protobuf.message.Message):
+    """Запрос справочника стран."""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    def __init__(self,
+        ) -> None: ...
+global___GetCountriesRequest = GetCountriesRequest
+
+class GetCountriesResponse(google.protobuf.message.Message):
+    """Справочник стран."""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    COUNTRIES_FIELD_NUMBER: builtins.int
+    @property
+    def countries(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___CountryResponse]:
+        """Массив стран."""
+        pass
+    def __init__(self,
+        *,
+        countries: typing.Optional[typing.Iterable[global___CountryResponse]] = ...,
+        ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["countries",b"countries"]) -> None: ...
+global___GetCountriesResponse = GetCountriesResponse
+
+class CountryResponse(google.protobuf.message.Message):
+    """Данные о стране."""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    ALFA_TWO_FIELD_NUMBER: builtins.int
+    ALFA_THREE_FIELD_NUMBER: builtins.int
+    NAME_FIELD_NUMBER: builtins.int
+    NAME_BRIEF_FIELD_NUMBER: builtins.int
+    alfa_two: typing.Text
+    """Двухбуквенный код страны."""
+
+    alfa_three: typing.Text
+    """Трёхбуквенный код страны."""
+
+    name: typing.Text
+    """Наименование страны."""
+
+    name_brief: typing.Text
+    """Краткое наименование страны."""
+
+    def __init__(self,
+        *,
+        alfa_two: typing.Text = ...,
+        alfa_three: typing.Text = ...,
+        name: typing.Text = ...,
+        name_brief: typing.Text = ...,
+        ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["alfa_three",b"alfa_three","alfa_two",b"alfa_two","name",b"name","name_brief",b"name_brief"]) -> None: ...
+global___CountryResponse = CountryResponse
+
+class FindInstrumentRequest(google.protobuf.message.Message):
+    """Запрос на поиск инструментов."""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    QUERY_FIELD_NUMBER: builtins.int
+    query: typing.Text
+    """Строка поиска."""
+
+    def __init__(self,
+        *,
+        query: typing.Text = ...,
+        ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["query",b"query"]) -> None: ...
+global___FindInstrumentRequest = FindInstrumentRequest
+
+class FindInstrumentResponse(google.protobuf.message.Message):
+    """Результат поиска инструментов."""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    INSTRUMENTS_FIELD_NUMBER: builtins.int
+    @property
+    def instruments(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___InstrumentShort]:
+        """Массив инструментов, удовлетворяющих условиям поиска."""
+        pass
+    def __init__(self,
+        *,
+        instruments: typing.Optional[typing.Iterable[global___InstrumentShort]] = ...,
+        ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["instruments",b"instruments"]) -> None: ...
+global___FindInstrumentResponse = FindInstrumentResponse
+
+class InstrumentShort(google.protobuf.message.Message):
+    """Краткая информация об инструменте."""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    ISIN_FIELD_NUMBER: builtins.int
+    FIGI_FIELD_NUMBER: builtins.int
+    TICKER_FIELD_NUMBER: builtins.int
+    CLASS_CODE_FIELD_NUMBER: builtins.int
+    INSTRUMENT_TYPE_FIELD_NUMBER: builtins.int
+    NAME_FIELD_NUMBER: builtins.int
+    UID_FIELD_NUMBER: builtins.int
+    isin: typing.Text
+    """Isin инструмента."""
+
+    figi: typing.Text
+    """Figi инструмента."""
+
+    ticker: typing.Text
+    """Ticker инструмента."""
+
+    class_code: typing.Text
+    """ClassCode инструмента."""
+
+    instrument_type: typing.Text
+    """Тип инструмента."""
+
+    name: typing.Text
+    """Название инструмента."""
+
+    uid: typing.Text
+    """Уникальный идентификатор инструмента."""
+
+    def __init__(self,
+        *,
+        isin: typing.Text = ...,
+        figi: typing.Text = ...,
+        ticker: typing.Text = ...,
+        class_code: typing.Text = ...,
+        instrument_type: typing.Text = ...,
+        name: typing.Text = ...,
+        uid: typing.Text = ...,
+        ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["class_code",b"class_code","figi",b"figi","instrument_type",b"instrument_type","isin",b"isin","name",b"name","ticker",b"ticker","uid",b"uid"]) -> None: ...
+global___InstrumentShort = InstrumentShort
+
+class GetBrandsRequest(google.protobuf.message.Message):
+    """Запрос списка брендов."""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    def __init__(self,
+        ) -> None: ...
+global___GetBrandsRequest = GetBrandsRequest
+
+class GetBrandRequest(google.protobuf.message.Message):
+    """Запрос бренда."""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    ID_FIELD_NUMBER: builtins.int
+    id: typing.Text
+    """Uid-идентификатор бренда."""
+
+    def __init__(self,
+        *,
+        id: typing.Text = ...,
+        ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["id",b"id"]) -> None: ...
+global___GetBrandRequest = GetBrandRequest
+
+class GetBrandsResponse(google.protobuf.message.Message):
+    """Список брендов."""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    BRANDS_FIELD_NUMBER: builtins.int
+    @property
+    def brands(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Brand]:
+        """Массив брендов."""
+        pass
+    def __init__(self,
+        *,
+        brands: typing.Optional[typing.Iterable[global___Brand]] = ...,
+        ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["brands",b"brands"]) -> None: ...
+global___GetBrandsResponse = GetBrandsResponse

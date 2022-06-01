@@ -101,7 +101,7 @@ class _OperationTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._
     """Покупка ЦБ с карты."""
 
     OPERATION_TYPE_INPUT_SECURITIES: _OperationType.ValueType  # 17
-    """Завод ценных бумаг из другого депозитария."""
+    """Перевод ценных бумаг из другого депозитария."""
 
     OPERATION_TYPE_SELL_MARGIN: _OperationType.ValueType  # 18
     """Продажа в результате Margin-call."""
@@ -240,7 +240,7 @@ OPERATION_TYPE_BUY_CARD: OperationType.ValueType  # 16
 """Покупка ЦБ с карты."""
 
 OPERATION_TYPE_INPUT_SECURITIES: OperationType.ValueType  # 17
-"""Завод ценных бумаг из другого депозитария."""
+"""Перевод ценных бумаг из другого депозитария."""
 
 OPERATION_TYPE_SELL_MARGIN: OperationType.ValueType  # 18
 """Продажа в результате Margin-call."""
@@ -411,7 +411,7 @@ class Operation(google.protobuf.message.Message):
     """Статус операции."""
 
     quantity: builtins.int
-    """Количество лотов инструмента."""
+    """Количество единиц инструмента."""
 
     quantity_rest: builtins.int
     """Неисполненный остаток по сделке."""
@@ -677,7 +677,7 @@ class PortfolioPosition(google.protobuf.message.Message):
         pass
     @property
     def expected_yield(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Текущая рассчитанная относительная доходность позиции, в %."""
+        """Текущая рассчитанная доходность позиции."""
         pass
     @property
     def current_nkd(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:

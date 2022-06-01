@@ -220,6 +220,11 @@ class MarketDataStreamServiceStub(object):
                 request_serializer=tinkoff_dot_invest_dot_grpc_dot_marketdata__pb2.MarketDataRequest.SerializeToString,
                 response_deserializer=tinkoff_dot_invest_dot_grpc_dot_marketdata__pb2.MarketDataResponse.FromString,
                 )
+        self.MarketDataServerSideStream = channel.unary_stream(
+                '/tinkoff.public.invest.api.contract.v1.MarketDataStreamService/MarketDataServerSideStream',
+                request_serializer=tinkoff_dot_invest_dot_grpc_dot_marketdata__pb2.MarketDataServerSideStreamRequest.SerializeToString,
+                response_deserializer=tinkoff_dot_invest_dot_grpc_dot_marketdata__pb2.MarketDataResponse.FromString,
+                )
 
 
 class MarketDataStreamServiceServicer(object):
@@ -232,12 +237,24 @@ class MarketDataStreamServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def MarketDataServerSideStream(self, request, context):
+        """Server-side стрим предоставления биржевой информации.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_MarketDataStreamServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'MarketDataStream': grpc.stream_stream_rpc_method_handler(
                     servicer.MarketDataStream,
                     request_deserializer=tinkoff_dot_invest_dot_grpc_dot_marketdata__pb2.MarketDataRequest.FromString,
+                    response_serializer=tinkoff_dot_invest_dot_grpc_dot_marketdata__pb2.MarketDataResponse.SerializeToString,
+            ),
+            'MarketDataServerSideStream': grpc.unary_stream_rpc_method_handler(
+                    servicer.MarketDataServerSideStream,
+                    request_deserializer=tinkoff_dot_invest_dot_grpc_dot_marketdata__pb2.MarketDataServerSideStreamRequest.FromString,
                     response_serializer=tinkoff_dot_invest_dot_grpc_dot_marketdata__pb2.MarketDataResponse.SerializeToString,
             ),
     }
@@ -263,6 +280,23 @@ class MarketDataStreamService(object):
             metadata=None):
         return grpc.experimental.stream_stream(request_iterator, target, '/tinkoff.public.invest.api.contract.v1.MarketDataStreamService/MarketDataStream',
             tinkoff_dot_invest_dot_grpc_dot_marketdata__pb2.MarketDataRequest.SerializeToString,
+            tinkoff_dot_invest_dot_grpc_dot_marketdata__pb2.MarketDataResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def MarketDataServerSideStream(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_stream(request, target, '/tinkoff.public.invest.api.contract.v1.MarketDataStreamService/MarketDataServerSideStream',
+            tinkoff_dot_invest_dot_grpc_dot_marketdata__pb2.MarketDataServerSideStreamRequest.SerializeToString,
             tinkoff_dot_invest_dot_grpc_dot_marketdata__pb2.MarketDataResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

@@ -243,7 +243,7 @@ class PostOrderRequest(google.protobuf.message.Message):
 
     @property
     def price(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Цена одного инструмента. Для получения стоимости лота требуется умножить на лотность инструмента."""
+        """Цена одного инструмента. Для получения стоимости лота требуется умножить на лотность инструмента. Игнорируется для рыночных поручений."""
         pass
     direction: global___OrderDirection.ValueType
     """Направление операции."""

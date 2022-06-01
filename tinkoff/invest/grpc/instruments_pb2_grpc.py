@@ -117,6 +117,26 @@ class InstrumentsServiceStub(object):
                 request_serializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.EditFavoritesRequest.SerializeToString,
                 response_deserializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.EditFavoritesResponse.FromString,
                 )
+        self.GetCountries = channel.unary_unary(
+                '/tinkoff.public.invest.api.contract.v1.InstrumentsService/GetCountries',
+                request_serializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetCountriesRequest.SerializeToString,
+                response_deserializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetCountriesResponse.FromString,
+                )
+        self.FindInstrument = channel.unary_unary(
+                '/tinkoff.public.invest.api.contract.v1.InstrumentsService/FindInstrument',
+                request_serializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.FindInstrumentRequest.SerializeToString,
+                response_deserializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.FindInstrumentResponse.FromString,
+                )
+        self.GetBrands = channel.unary_unary(
+                '/tinkoff.public.invest.api.contract.v1.InstrumentsService/GetBrands',
+                request_serializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetBrandsRequest.SerializeToString,
+                response_deserializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetBrandsResponse.FromString,
+                )
+        self.GetBrandBy = channel.unary_unary(
+                '/tinkoff.public.invest.api.contract.v1.InstrumentsService/GetBrandBy',
+                request_serializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetBrandRequest.SerializeToString,
+                response_deserializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.Brand.FromString,
+                )
 
 
 class InstrumentsServiceServicer(object):
@@ -265,6 +285,34 @@ class InstrumentsServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def GetCountries(self, request, context):
+        """Метод получения списка стран.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def FindInstrument(self, request, context):
+        """Метод поиска инструмента.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetBrands(self, request, context):
+        """Метод получения списка брендов.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetBrandBy(self, request, context):
+        """Метод получения бренда по его идентификатору.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_InstrumentsServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -367,6 +415,26 @@ def add_InstrumentsServiceServicer_to_server(servicer, server):
                     servicer.EditFavorites,
                     request_deserializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.EditFavoritesRequest.FromString,
                     response_serializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.EditFavoritesResponse.SerializeToString,
+            ),
+            'GetCountries': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetCountries,
+                    request_deserializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetCountriesRequest.FromString,
+                    response_serializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetCountriesResponse.SerializeToString,
+            ),
+            'FindInstrument': grpc.unary_unary_rpc_method_handler(
+                    servicer.FindInstrument,
+                    request_deserializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.FindInstrumentRequest.FromString,
+                    response_serializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.FindInstrumentResponse.SerializeToString,
+            ),
+            'GetBrands': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetBrands,
+                    request_deserializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetBrandsRequest.FromString,
+                    response_serializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetBrandsResponse.SerializeToString,
+            ),
+            'GetBrandBy': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetBrandBy,
+                    request_deserializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetBrandRequest.FromString,
+                    response_serializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.Brand.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -718,5 +786,73 @@ class InstrumentsService(object):
         return grpc.experimental.unary_unary(request, target, '/tinkoff.public.invest.api.contract.v1.InstrumentsService/EditFavorites',
             tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.EditFavoritesRequest.SerializeToString,
             tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.EditFavoritesResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetCountries(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/tinkoff.public.invest.api.contract.v1.InstrumentsService/GetCountries',
+            tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetCountriesRequest.SerializeToString,
+            tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetCountriesResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def FindInstrument(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/tinkoff.public.invest.api.contract.v1.InstrumentsService/FindInstrument',
+            tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.FindInstrumentRequest.SerializeToString,
+            tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.FindInstrumentResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetBrands(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/tinkoff.public.invest.api.contract.v1.InstrumentsService/GetBrands',
+            tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetBrandsRequest.SerializeToString,
+            tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetBrandsResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetBrandBy(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/tinkoff.public.invest.api.contract.v1.InstrumentsService/GetBrandBy',
+            tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.GetBrandRequest.SerializeToString,
+            tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.Brand.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

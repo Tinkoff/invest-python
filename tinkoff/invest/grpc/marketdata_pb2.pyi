@@ -98,10 +98,13 @@ class _SubscriptionStatusEnumTypeWrapper(google.protobuf.internal.enum_type_wrap
     """Некорректный интервал свечей, список возможных значений: [SubscriptionInterval](https://tinkoff.github.io/investAPI/marketdata#subscriptioninterval)."""
 
     SUBSCRIPTION_STATUS_LIMIT_IS_EXCEEDED: _SubscriptionStatus.ValueType  # 6
-    """Превышен лимит подписок в рамках стрима, подробнее: [Лимитная политика](https://tinkoff.github.io/investAPI/limits/)."""
+    """Превышен лимит на общее количество подписок в рамках стрима, подробнее: [Лимитная политика](https://tinkoff.github.io/investAPI/limits/)."""
 
     SUBSCRIPTION_STATUS_INTERNAL_ERROR: _SubscriptionStatus.ValueType  # 7
     """Внутренняя ошибка сервиса."""
+
+    SUBSCRIPTION_STATUS_TOO_MANY_REQUESTS: _SubscriptionStatus.ValueType  # 8
+    """Превышен лимит на количество запросов на подписки в течение установленного отрезка времени"""
 
 class SubscriptionStatus(_SubscriptionStatus, metaclass=_SubscriptionStatusEnumTypeWrapper):
     """Результат подписки."""
@@ -126,10 +129,13 @@ SUBSCRIPTION_STATUS_INTERVAL_IS_INVALID: SubscriptionStatus.ValueType  # 5
 """Некорректный интервал свечей, список возможных значений: [SubscriptionInterval](https://tinkoff.github.io/investAPI/marketdata#subscriptioninterval)."""
 
 SUBSCRIPTION_STATUS_LIMIT_IS_EXCEEDED: SubscriptionStatus.ValueType  # 6
-"""Превышен лимит подписок в рамках стрима, подробнее: [Лимитная политика](https://tinkoff.github.io/investAPI/limits/)."""
+"""Превышен лимит на общее количество подписок в рамках стрима, подробнее: [Лимитная политика](https://tinkoff.github.io/investAPI/limits/)."""
 
 SUBSCRIPTION_STATUS_INTERNAL_ERROR: SubscriptionStatus.ValueType  # 7
 """Внутренняя ошибка сервиса."""
+
+SUBSCRIPTION_STATUS_TOO_MANY_REQUESTS: SubscriptionStatus.ValueType  # 8
+"""Превышен лимит на количество запросов на подписки в течение установленного отрезка времени"""
 
 global___SubscriptionStatus = SubscriptionStatus
 
@@ -253,6 +259,45 @@ class MarketDataRequest(google.protobuf.message.Message):
     def WhichOneof(self, oneof_group: typing_extensions.Literal["payload",b"payload"]) -> typing.Optional[typing_extensions.Literal["subscribe_candles_request","subscribe_order_book_request","subscribe_trades_request","subscribe_info_request","subscribe_last_price_request"]]: ...
 global___MarketDataRequest = MarketDataRequest
 
+class MarketDataServerSideStreamRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    SUBSCRIBE_CANDLES_REQUEST_FIELD_NUMBER: builtins.int
+    SUBSCRIBE_ORDER_BOOK_REQUEST_FIELD_NUMBER: builtins.int
+    SUBSCRIBE_TRADES_REQUEST_FIELD_NUMBER: builtins.int
+    SUBSCRIBE_INFO_REQUEST_FIELD_NUMBER: builtins.int
+    SUBSCRIBE_LAST_PRICE_REQUEST_FIELD_NUMBER: builtins.int
+    @property
+    def subscribe_candles_request(self) -> global___SubscribeCandlesRequest:
+        """Запрос подписки на свечи."""
+        pass
+    @property
+    def subscribe_order_book_request(self) -> global___SubscribeOrderBookRequest:
+        """Запрос подписки на стаканы."""
+        pass
+    @property
+    def subscribe_trades_request(self) -> global___SubscribeTradesRequest:
+        """Запрос подписки на ленту обезличенных сделок."""
+        pass
+    @property
+    def subscribe_info_request(self) -> global___SubscribeInfoRequest:
+        """Запрос подписки на торговые статусы инструментов."""
+        pass
+    @property
+    def subscribe_last_price_request(self) -> global___SubscribeLastPriceRequest:
+        """Запрос подписки на последние цены."""
+        pass
+    def __init__(self,
+        *,
+        subscribe_candles_request: typing.Optional[global___SubscribeCandlesRequest] = ...,
+        subscribe_order_book_request: typing.Optional[global___SubscribeOrderBookRequest] = ...,
+        subscribe_trades_request: typing.Optional[global___SubscribeTradesRequest] = ...,
+        subscribe_info_request: typing.Optional[global___SubscribeInfoRequest] = ...,
+        subscribe_last_price_request: typing.Optional[global___SubscribeLastPriceRequest] = ...,
+        ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["subscribe_candles_request",b"subscribe_candles_request","subscribe_info_request",b"subscribe_info_request","subscribe_last_price_request",b"subscribe_last_price_request","subscribe_order_book_request",b"subscribe_order_book_request","subscribe_trades_request",b"subscribe_trades_request"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["subscribe_candles_request",b"subscribe_candles_request","subscribe_info_request",b"subscribe_info_request","subscribe_last_price_request",b"subscribe_last_price_request","subscribe_order_book_request",b"subscribe_order_book_request","subscribe_trades_request",b"subscribe_trades_request"]) -> None: ...
+global___MarketDataServerSideStreamRequest = MarketDataServerSideStreamRequest
+
 class MarketDataResponse(google.protobuf.message.Message):
     """Пакет биржевой информации по подписке."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
@@ -335,6 +380,7 @@ class SubscribeCandlesRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     SUBSCRIPTION_ACTION_FIELD_NUMBER: builtins.int
     INSTRUMENTS_FIELD_NUMBER: builtins.int
+    WAITING_CLOSE_FIELD_NUMBER: builtins.int
     subscription_action: global___SubscriptionAction.ValueType
     """Изменение статуса подписки."""
 
@@ -342,12 +388,16 @@ class SubscribeCandlesRequest(google.protobuf.message.Message):
     def instruments(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___CandleInstrument]:
         """Массив инструментов для подписки на свечи."""
         pass
+    waiting_close: builtins.bool
+    """Флаг ожидания закрытия временного интервала для отправки свечи."""
+
     def __init__(self,
         *,
         subscription_action: global___SubscriptionAction.ValueType = ...,
         instruments: typing.Optional[typing.Iterable[global___CandleInstrument]] = ...,
+        waiting_close: builtins.bool = ...,
         ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["instruments",b"instruments","subscription_action",b"subscription_action"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["instruments",b"instruments","subscription_action",b"subscription_action","waiting_close",b"waiting_close"]) -> None: ...
 global___SubscribeCandlesRequest = SubscribeCandlesRequest
 
 class CandleInstrument(google.protobuf.message.Message):

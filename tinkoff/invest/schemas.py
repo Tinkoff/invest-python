@@ -73,6 +73,7 @@ class SubscriptionStatus(_grpc_helpers.Enum):
     SUBSCRIPTION_STATUS_INTERVAL_IS_INVALID = 5
     SUBSCRIPTION_STATUS_LIMIT_IS_EXCEEDED = 6
     SUBSCRIPTION_STATUS_INTERNAL_ERROR = 7
+    SUBSCRIPTION_STATUS_TOO_MANY_REQUESTS = 8
 
 
 class TradeDirection(_grpc_helpers.Enum):
@@ -895,6 +896,60 @@ class EditFavoritesResponse(_grpc_helpers.Message):
 
 
 @dataclass(eq=False, repr=True)
+class GetCountriesRequest(_grpc_helpers.Message):
+    pass
+
+
+@dataclass(eq=False, repr=True)
+class GetCountriesResponse(_grpc_helpers.Message):
+    countries: List["CountryResponse"] = _grpc_helpers.message_field(1)
+
+
+@dataclass(eq=False, repr=True)
+class CountryResponse(_grpc_helpers.Message):
+    alfa_two: str = _grpc_helpers.string_field(1)
+    alfa_three: str = _grpc_helpers.string_field(2)
+    name: str = _grpc_helpers.string_field(3)
+    name_brief: str = _grpc_helpers.string_field(4)
+
+
+@dataclass(eq=False, repr=True)
+class FindInstrumentRequest(_grpc_helpers.Message):
+    query: str = _grpc_helpers.string_field(1)
+
+
+@dataclass(eq=False, repr=True)
+class FindInstrumentResponse(_grpc_helpers.Message):
+    instruments: List["InstrumentShort"] = _grpc_helpers.message_field(1)
+
+
+@dataclass(eq=False, repr=True)
+class InstrumentShort(_grpc_helpers.Message):
+    isin: str = _grpc_helpers.string_field(1)
+    figi: str = _grpc_helpers.string_field(2)
+    ticker: str = _grpc_helpers.string_field(3)
+    class_code: str = _grpc_helpers.string_field(4)
+    instrument_type: str = _grpc_helpers.string_field(5)
+    name: str = _grpc_helpers.string_field(6)
+    uid: str = _grpc_helpers.string_field(7)
+
+
+@dataclass(eq=False, repr=True)
+class GetBrandsRequest(_grpc_helpers.Message):
+    pass
+
+
+@dataclass(eq=False, repr=True)
+class GetBrandRequest(_grpc_helpers.Message):
+    id: str = _grpc_helpers.string_field(1)
+
+
+@dataclass(eq=False, repr=True)
+class GetBrandsResponse(_grpc_helpers.Message):
+    brands: List["Brand"] = _grpc_helpers.message_field(1)
+
+
+@dataclass(eq=False, repr=True)
 class MarketDataRequest(_grpc_helpers.Message):
     subscribe_candles_request: "SubscribeCandlesRequest" = _grpc_helpers.message_field(
         1, group="payload"
@@ -910,6 +965,21 @@ class MarketDataRequest(_grpc_helpers.Message):
     )
     subscribe_last_price_request: "SubscribeLastPriceRequest" = (
         _grpc_helpers.message_field(5, group="payload")
+    )
+
+
+@dataclass(eq=False, repr=True)
+class MarketDataServerSideStreamRequest(_grpc_helpers.Message):
+    subscribe_candles_request: "SubscribeCandlesRequest" = _grpc_helpers.message_field(
+        1
+    )
+    subscribe_order_book_request: "SubscribeOrderBookRequest" = (
+        _grpc_helpers.message_field(2)
+    )
+    subscribe_trades_request: "SubscribeTradesRequest" = _grpc_helpers.message_field(3)
+    subscribe_info_request: "SubscribeInfoRequest" = _grpc_helpers.message_field(4)
+    subscribe_last_price_request: "SubscribeLastPriceRequest" = (
+        _grpc_helpers.message_field(5)
     )
 
 
@@ -944,6 +1014,7 @@ class MarketDataResponse(
 class SubscribeCandlesRequest(_grpc_helpers.Message):
     subscription_action: "SubscriptionAction" = _grpc_helpers.enum_field(1)
     instruments: List["CandleInstrument"] = _grpc_helpers.message_field(2)
+    waiting_close: bool = _grpc_helpers.bool_field(3)
 
 
 @dataclass(eq=False, repr=True)

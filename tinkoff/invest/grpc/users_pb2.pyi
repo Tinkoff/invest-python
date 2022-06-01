@@ -335,7 +335,7 @@ class GetInfoResponse(google.protobuf.message.Message):
 
     @property
     def qualified_for_work_with(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
-        """Набор требующих тестирования инструментов и возможностей, с которыми может работать пользователь."""
+        """Набор требующих тестирования инструментов и возможностей, с которыми может работать пользователь. [Подробнее](https://tinkoff.github.io/investAPI/faq_users/)."""
         pass
     tariff: typing.Text
     """Наименование тарифа пользователя."""
