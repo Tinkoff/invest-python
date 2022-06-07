@@ -35,6 +35,7 @@ from .schemas import (
     AssetsResponse,
     BondResponse,
     BondsResponse,
+    Brand,
     BrokerReportRequest,
     BrokerReportResponse,
     CancelOrderRequest,
@@ -52,6 +53,8 @@ from .schemas import (
     EditFavoritesResponse,
     EtfResponse,
     EtfsResponse,
+    FindInstrumentRequest,
+    FindInstrumentResponse,
     FutureResponse,
     FuturesResponse,
     GenerateBrokerReportRequest,
@@ -62,9 +65,14 @@ from .schemas import (
     GetAccruedInterestsResponse,
     GetBondCouponsRequest,
     GetBondCouponsResponse,
+    GetBrandRequest,
+    GetBrandsRequest,
+    GetBrandsResponse,
     GetBrokerReportRequest,
     GetCandlesRequest,
     GetCandlesResponse,
+    GetCountriesRequest,
+    GetCountriesResponse,
     GetDividendsForeignIssuerReportRequest,
     GetDividendsForeignIssuerRequest,
     GetDividendsForeignIssuerResponse,
@@ -618,6 +626,64 @@ class InstrumentsService(_grpc_helpers.Service):
         response = await response_coro
         log_request(await get_tracking_id_from_coro(response_coro), "EditFavorites")
         return _grpc_helpers.protobuf_to_dataclass(response, EditFavoritesResponse)
+
+    @handle_aio_request_error("GetCountries")
+    async def get_countries(
+        self,
+    ) -> GetCountriesResponse:
+        request = GetCountriesRequest()
+        response_coro = await self.stub.GetCountries(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, instruments_pb2.GetCountriesRequest()
+            ),
+            metadata=self.metadata,
+        )
+        response = await response_coro
+        log_request(await get_tracking_id_from_coro(response_coro), "GetCountries")
+        return _grpc_helpers.protobuf_to_dataclass(response, GetCountriesResponse)
+
+    @handle_aio_request_error("FindInstrument")
+    async def find_instrument(self, *, query: str = "") -> FindInstrumentResponse:
+        request = FindInstrumentRequest()
+        request.query = query
+        response_coro = await self.stub.FindInstrument(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, instruments_pb2.FindInstrumentRequest()
+            ),
+            metadata=self.metadata,
+        )
+        response = await response_coro
+        log_request(await get_tracking_id_from_coro(response_coro), "FindInstrument")
+        return _grpc_helpers.protobuf_to_dataclass(response, FindInstrumentResponse)
+
+    @handle_aio_request_error("GetBrands")
+    async def get_brands(
+        self,
+    ) -> GetBrandsResponse:
+        request = GetBrandsRequest()
+        response_coro = await self.stub.GetBrands(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, instruments_pb2.GetBrandsRequest()
+            ),
+            metadata=self.metadata,
+        )
+        response = await response_coro
+        log_request(await get_tracking_id_from_coro(response_coro), "GetBrands")
+        return _grpc_helpers.protobuf_to_dataclass(response, GetBrandsResponse)
+
+    @handle_aio_request_error("GetBrandBy")
+    async def get_brands_by(self, id: str = "") -> Brand:
+        request = GetBrandRequest()
+        request.id = id
+        response_coro = await self.stub.GetBrandBy(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, instruments_pb2.GetBrandRequest()
+            ),
+            metadata=self.metadata,
+        )
+        response = await response_coro
+        log_request(await get_tracking_id_from_coro(response_coro), "GetBrandBy")
+        return _grpc_helpers.protobuf_to_dataclass(response, Brand)
 
 
 class MarketDataService(_grpc_helpers.Service):

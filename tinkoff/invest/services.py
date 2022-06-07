@@ -40,6 +40,7 @@ from .schemas import (
     AssetsResponse,
     BondResponse,
     BondsResponse,
+    Brand,
     BrokerReportRequest,
     BrokerReportResponse,
     CancelOrderRequest,
@@ -57,6 +58,8 @@ from .schemas import (
     EditFavoritesResponse,
     EtfResponse,
     EtfsResponse,
+    FindInstrumentRequest,
+    FindInstrumentResponse,
     FutureResponse,
     FuturesResponse,
     GenerateBrokerReportRequest,
@@ -67,9 +70,14 @@ from .schemas import (
     GetAccruedInterestsResponse,
     GetBondCouponsRequest,
     GetBondCouponsResponse,
+    GetBrandRequest,
+    GetBrandsRequest,
+    GetBrandsResponse,
     GetBrokerReportRequest,
     GetCandlesRequest,
     GetCandlesResponse,
+    GetCountriesRequest,
+    GetCountriesResponse,
     GetDividendsForeignIssuerReportRequest,
     GetDividendsForeignIssuerRequest,
     GetDividendsForeignIssuerResponse,
@@ -106,6 +114,7 @@ from .schemas import (
     InstrumentStatus,
     MarketDataRequest,
     MarketDataResponse,
+    MarketDataServerSideStreamRequest,
     MoneyValue,
     OpenSandboxAccountRequest,
     OpenSandboxAccountResponse,
@@ -707,6 +716,60 @@ class InstrumentsService(_grpc_helpers.Service):
         log_request(get_tracking_id_from_call(call), "EditFavorites")
         return _grpc_helpers.protobuf_to_dataclass(response, EditFavoritesResponse)
 
+    @handle_request_error("GetCountries")
+    def get_countries(
+        self,
+    ) -> GetCountriesResponse:
+        request = GetCountriesRequest()
+        response, call = self.stub.GetCountries.with_call(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, instruments_pb2.GetCountriesRequest()
+            ),
+            metadata=self.metadata,
+        )
+        log_request(get_tracking_id_from_call(call), "GetCountries")
+        return _grpc_helpers.protobuf_to_dataclass(response, GetCountriesResponse)
+
+    @handle_request_error("FindInstrument")
+    def find_instrument(self, *, query: str = "") -> FindInstrumentResponse:
+        request = FindInstrumentRequest()
+        request.query = query
+        response, call = self.stub.FindInstrument.with_call(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, instruments_pb2.FindInstrumentRequest()
+            ),
+            metadata=self.metadata,
+        )
+        log_request(get_tracking_id_from_call(call), "FindInstrument")
+        return _grpc_helpers.protobuf_to_dataclass(response, FindInstrumentResponse)
+
+    @handle_request_error("GetBrands")
+    def get_brands(
+        self,
+    ) -> GetBrandsResponse:
+        request = GetBrandsRequest()
+        response, call = self.stub.GetBrands.with_call(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, instruments_pb2.GetBrandsRequest()
+            ),
+            metadata=self.metadata,
+        )
+        log_request(get_tracking_id_from_call(call), "GetBrands")
+        return _grpc_helpers.protobuf_to_dataclass(response, GetBrandsResponse)
+
+    @handle_request_error("GetBrandBy")
+    def get_brands_by(self, id: str = "") -> Brand:
+        request = GetBrandRequest()
+        request.id = id
+        response, call = self.stub.GetBrandBy.with_call(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, instruments_pb2.GetBrandRequest()
+            ),
+            metadata=self.metadata,
+        )
+        log_request(get_tracking_id_from_call(call), "GetBrandBy")
+        return _grpc_helpers.protobuf_to_dataclass(response, Brand)
+
 
 class MarketDataService(_grpc_helpers.Service):
     _stub_factory = marketdata_pb2_grpc.MarketDataServiceStub
@@ -823,6 +886,28 @@ class MarketDataStreamService(_grpc_helpers.Service):
     ) -> Iterable[MarketDataResponse]:
         for response in self.stub.MarketDataStream(
             request_iterator=self._convert_market_data_stream_request(request_iterator),
+            metadata=self.metadata,
+        ):
+            yield _grpc_helpers.protobuf_to_dataclass(response, MarketDataResponse)
+
+    @staticmethod
+    def _convert_market_data_server_side_stream_request(
+        request_iterator: Iterable[MarketDataServerSideStreamRequest],
+    ) -> Iterable[marketdata_pb2.MarketDataServerSideStreamRequest]:
+        for request in request_iterator:
+            yield _grpc_helpers.dataclass_to_protobuff(
+                request, marketdata_pb2.MarketDataServerSideStreamRequest()
+            )
+
+    @handle_request_error_gen("MarketDataServerSideStream")
+    def market_data_server_side_stream(
+        self,
+        request_iterator: Iterable[MarketDataServerSideStreamRequest],
+    ) -> Iterable[MarketDataResponse]:
+        for response in self.stub.MarketDataServerSideStream(
+            request_iterator=self._convert_market_data_server_side_stream_request(
+                request_iterator
+            ),
             metadata=self.metadata,
         ):
             yield _grpc_helpers.protobuf_to_dataclass(response, MarketDataResponse)
