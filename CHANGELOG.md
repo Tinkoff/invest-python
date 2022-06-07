@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [0.2.0-beta30](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta30) - 2022-06-07
+
+<small>[Compare with 0.2.0-beta29](https://github.com/tinkoff/invest-python/compare/0.2.0-beta29...0.2.0-beta30)</small>
+
+### Bug Fixes
+- Skip placeholder ([7087057](https://github.com/tinkoff/invest-python/commit/7087057da88cfd98d5e3910d402f6219dd28bf36) by Danil Akhtarov).
+
+### Features
+- Support v1.0.8 methods ([405884f](https://github.com/tinkoff/invest-python/commit/405884febd3230c9eb9f29dcce8cb486f6b88f44) by Danil Akhtarov).
+
+
 ## [0.2.0-beta29](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta29) - 2022-06-01
 
 <small>[Compare with 0.2.0-beta28](https://github.com/tinkoff/invest-python/compare/0.2.0-beta28...0.2.0-beta29)</small>
