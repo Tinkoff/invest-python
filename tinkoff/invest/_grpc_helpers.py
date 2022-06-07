@@ -297,6 +297,8 @@ def dataclass_to_protobuff(dataclass_obj: Any, protobuff_obj: T) -> T:  # noqa:C
     dataclass_hints = get_type_hints(dataclass_type)
     for field_name, field_type in dataclass_hints.items():
         field_value = getattr(dataclass_obj, field_name)
+        if field_value is PLACEHOLDER:
+            continue
         origin = get_origin(field_type)
         if origin is None:
             if field_type in PRIMITIVE_TYPES:
