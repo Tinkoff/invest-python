@@ -75,7 +75,7 @@ class MarketDataServiceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def GetLastTrades(self, request, context):
-        """Метод запроса последних обезличенных сделок по инструменту.
+        """Метод запроса последних обезличенных сделок по инструменту на текущий торговый день с максимальным интервалом в 1 час.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')

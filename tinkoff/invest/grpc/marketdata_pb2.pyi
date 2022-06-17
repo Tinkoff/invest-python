@@ -1248,7 +1248,7 @@ class GetTradingStatusResponse(google.protobuf.message.Message):
 global___GetTradingStatusResponse = GetTradingStatusResponse
 
 class GetLastTradesRequest(google.protobuf.message.Message):
-    """Запрос последних обезличенных сделок по инструменту."""
+    """Запрос последних обезличенных сделок по инструменту на текущий торговый день с максимальным интервалом в 1 час."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     FIGI_FIELD_NUMBER: builtins.int
     FROM_FIELD_NUMBER: builtins.int
@@ -1270,7 +1270,7 @@ class GetLastTradesRequest(google.protobuf.message.Message):
 global___GetLastTradesRequest = GetLastTradesRequest
 
 class GetLastTradesResponse(google.protobuf.message.Message):
-    """Последние обезличенные сделки по инструменту."""
+    """Последние обезличенные сделки по инструменту на текущий торговый день с максимальным интервалом в 1 час."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     TRADES_FIELD_NUMBER: builtins.int
     @property
