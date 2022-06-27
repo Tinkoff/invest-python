@@ -3,7 +3,8 @@ import tempfile
 import uuid
 from datetime import datetime, timedelta
 from pathlib import Path
-from typing import Tuple
+from typing import Tuple, List
+from unittest.mock import call
 
 import pytest
 
@@ -23,12 +24,13 @@ from tinkoff.invest.caching.instrument_market_data_storage import (
     InstrumentMarketDataStorage,
 )
 from tinkoff.invest.services import MarketDataCache, MarketDataService
-from tinkoff.invest.utils import candle_interval_to_timedelta, now
+from tinkoff.invest.utils import candle_interval_to_timedelta, now, floor_datetime, \
+    ceil_datetime
 
 logging.basicConfig(format="%(asctime)s %(levelname)s:%(message)s", level=logging.DEBUG)
+logger = logging.getLogger(__name__)
 
-
-def get_historical_candle(time: datetime):
+def get_historical_candle(time: datetime, is_complete: bool = True):
     quotation = Quotation(units=100, nano=0)
     return HistoricCandle(
         open=quotation,
@@ -37,20 +39,24 @@ def get_historical_candle(time: datetime):
         close=quotation,
         volume=100,
         time=time,
-        is_complete=True,
+        is_complete=is_complete,
     )
 
 
 def get_candles_response(start: datetime, end: datetime, interval: CandleInterval):
     delta = candle_interval_to_timedelta(interval)
-    current_time = start.replace(second=0, microsecond=0)
-    times = []
+    start_ceil = ceil_datetime(start.replace(second=0, microsecond=0), delta)
+    current_time = start_ceil
+    candles = []
     while current_time <= end:
-        times.append(current_time)
+        candles.append(get_historical_candle(current_time))
         current_time += delta
         current_time.replace(second=0, microsecond=0)
 
-    return GetCandlesResponse(candles=[get_historical_candle(time) for time in times])
+    if floor_datetime(end, delta) < end < ceil_datetime(end, delta):
+        candles.append(get_historical_candle(end, is_complete=False))
+
+    return GetCandlesResponse(candles=candles)
 
 
 @pytest.fixture()
@@ -110,15 +116,16 @@ class TestCachedLoad:
         figi = uuid.uuid4().hex
         to = now().replace(second=0, microsecond=0)
         from_ = to - timedelta(days=30)
+        interval = CandleInterval.CANDLE_INTERVAL_HOUR
         from_net = list(
             market_data_cache.get_all_candles(
                 figi=figi,
                 from_=from_,
                 to=to,
-                interval=CandleInterval.CANDLE_INTERVAL_HOUR,
+                interval=interval,
             )
         )
-        self.assert_in_range(from_net, start=from_, end=to)
+        self.assert_in_range(from_net, start=from_, end=to, interval=interval)
         market_data_service.get_candles.reset_mock()
 
         from_cache = list(
@@ -126,11 +133,11 @@ class TestCachedLoad:
                 figi=figi,
                 from_=from_,
                 to=to,
-                interval=CandleInterval.CANDLE_INTERVAL_HOUR,
+                interval=interval,
             )
         )
         market_data_service.get_candles.assert_not_called()
-        self.assert_in_range(from_cache, start=from_, end=to)
+        self.assert_in_range(from_cache, start=from_, end=to, interval=interval)
         assert len(from_net) == len(from_cache)
         for cached_candle, net_candle in zip(from_cache, from_net):
             assert cached_candle.__repr__() == net_candle.__repr__()
@@ -141,24 +148,25 @@ class TestCachedLoad:
         figi = uuid.uuid4().hex
         to = now().replace(second=0, microsecond=0)
         from_ = to - timedelta(days=30)
+        interval = CandleInterval.CANDLE_INTERVAL_DAY
         from_net = list(
             market_data_cache.get_all_candles(
                 figi=figi,
                 from_=from_,
                 to=to,
-                interval=CandleInterval.CANDLE_INTERVAL_DAY,
+                interval=interval,
             )
         )
-        self.assert_in_range(from_net, start=from_, end=to)
+        self.assert_in_range(from_net, start=from_, end=to, interval=interval)
         from_cache = list(
             market_data_cache.get_all_candles(
                 figi=figi,
                 from_=from_,
                 to=to,
-                interval=CandleInterval.CANDLE_INTERVAL_DAY,
+                interval=interval,
             )
         )
-        self.assert_in_range(from_cache, start=from_, end=to)
+        self.assert_in_range(from_cache, start=from_, end=to, interval=interval)
         market_data_service.get_candles.reset_mock()
         from_early_uncached = from_ - timedelta(days=7)
 
@@ -167,16 +175,17 @@ class TestCachedLoad:
                 figi=figi,
                 from_=from_early_uncached,
                 to=to,
-                interval=CandleInterval.CANDLE_INTERVAL_DAY,
+                interval=interval,
             )
         )
 
         assert len(market_data_service.get_candles.mock_calls) > 0
-        self.assert_in_range(cache_and_net, start=from_early_uncached, end=to)
+        self.assert_in_range(cache_and_net, start=from_early_uncached, end=to, interval=interval)
 
-    def assert_in_range(self, result_candles, start, end):
-        assert result_candles[0].time == start, "start time assertion error"
-        assert result_candles[-1].time == end, "end time assertion error"
+    def assert_in_range(self, result_candles, start, end, interval):
+        delta = candle_interval_to_timedelta(interval)
+        assert result_candles[0].time == ceil_datetime(start, delta), "start time assertion error"
+        assert result_candles[-1].time == floor_datetime(end, delta), "end time assertion error"
         for candle in result_candles:
             assert start <= candle.time <= end
 
@@ -186,15 +195,16 @@ class TestCachedLoad:
         figi = uuid.uuid4().hex
         to = now().replace(second=0, microsecond=0)
         from_ = to - timedelta(days=30)
+        interval = CandleInterval.CANDLE_INTERVAL_DAY
         from_net = list(
             market_data_cache.get_all_candles(
                 figi=figi,
                 from_=from_,
                 to=to,
-                interval=CandleInterval.CANDLE_INTERVAL_DAY,
+                interval=interval,
             )
         )
-        self.assert_in_range(from_net, start=from_, end=to)
+        self.assert_in_range(from_net, start=from_, end=to, interval=interval)
         market_data_service.get_candles.reset_mock()
         to_later_uncached = to + timedelta(days=7)
 
@@ -203,12 +213,12 @@ class TestCachedLoad:
                 figi=figi,
                 from_=from_,
                 to=to_later_uncached,
-                interval=CandleInterval.CANDLE_INTERVAL_DAY,
+                interval=interval,
             )
         )
 
         assert len(market_data_service.get_candles.mock_calls) > 0
-        self.assert_in_range(cache_and_net, start=from_, end=to_later_uncached)
+        self.assert_in_range(cache_and_net, start=from_, end=to_later_uncached, interval=interval)
 
     def assert_has_cached_ranges(self, cache_storage, ranges):
         meta_file = cache_storage._get_metafile(cache_storage._meta_path)
@@ -310,8 +320,9 @@ class TestCachedLoad:
         self.assert_has_cached_ranges(cache_storage, [(A, D)])
         self.assert_file_count(cache_storage, 2)
 
-    def _get_date_point_by_index(self, *idx, delta=timedelta(days=1)):
-        x0 = now().replace(second=0, microsecond=0)
+    def _get_date_point_by_index(self, *idx, interval=CandleInterval.CANDLE_INTERVAL_DAY):
+        delta = candle_interval_to_timedelta(interval)
+        x0 = ceil_datetime(now(), delta).replace(second=0, microsecond=0)
 
         result = []
         for id_ in idx:
@@ -382,13 +393,41 @@ class TestCachedLoad:
                 interval=interval,
             )
         )
-        self.assert_in_range(result, start=start, end=end)
+        self.assert_in_range(result, start=start, end=end, interval=interval)
         if has_from_net:
             assert (
                 len(market_data_service.get_candles.mock_calls) > 0
             ), "Net was not used"
         else:
             assert len(market_data_service.get_candles.mock_calls) == 0, "Net was used"
+        market_data_service.get_candles.reset_mock()
+
+    def get_by_range_and_assert_ranges(
+        self,
+        request_range: Tuple[datetime, datetime],
+        from_cache_ranges: List[Tuple[datetime, datetime]],
+        from_net_ranges: List[Tuple[datetime, datetime]],
+        figi: str,
+        interval: CandleInterval,
+        market_data_cache: MarketDataCache,
+        market_data_service: MarketDataService,
+    ):
+        start, end = request_range
+        result = list(
+            market_data_cache.get_all_candles(
+                figi=figi,
+                from_=start,
+                to=end,
+                interval=interval,
+            )
+        )
+        net_calls = market_data_service.get_candles.mock_calls
+        assert len(net_calls) == len(from_net_ranges)
+        for actual_net_call, expected_net_range in zip(net_calls, from_net_ranges):
+            kwargs = actual_net_call.kwargs
+            actual_net_range = kwargs['from_'], kwargs['to']
+            assert actual_net_range == expected_net_range
+
         market_data_service.get_candles.reset_mock()
 
     def test_loads_cache_merge_out_left(
@@ -558,3 +597,46 @@ class TestCachedLoad:
         assert any(
             str(file).endswith(f".{settings.meta_extension}") for file in cached_ls
         )
+
+    def test_do_not_cache_if_is_not_complete_candle(
+        self,
+        market_data_service: MarketDataService,
+        market_data_cache: MarketDataCache,
+        settings: MarketDataCacheSettings,
+        log,
+    ):
+        figi = uuid.uuid4().hex
+        interval = CandleInterval.CANDLE_INTERVAL_DAY
+        # +: is_complete=True
+        # -: is_complete=False
+        #   1   2   3   4   5   6   7
+        #   +---+---+---+---+---+---+
+        #   [A    request    D]
+        #   [A    cached   C]
+        #     [B    request       F]
+        #   [A    cached       E]
+        A, B, C, D, E, F = self._get_date_point_by_index(1, 1.5, 5, 5.5, 6, 6.6, interval=interval)
+        self.get_by_range_and_assert_ranges(
+            request_range=(A, D),
+            from_cache_ranges=[],
+            from_net_ranges=[(A, D)],
+            figi=figi,
+            interval=interval,
+            market_data_cache=market_data_cache,
+            market_data_service=market_data_service,
+        )
+        self.get_by_range_and_assert_ranges(
+            request_range=(B, F),
+            from_cache_ranges=[(B, C)],
+            from_net_ranges=[(C, F)],
+            figi=figi,
+            interval=interval,
+            market_data_cache=market_data_cache,
+            market_data_service=market_data_service,
+        )
+
+        cache_storage = InstrumentMarketDataStorage(
+            figi=figi, interval=interval, settings=settings
+        )
+        self.assert_has_cached_ranges(cache_storage, [(A, E)])
+        self.assert_file_count(cache_storage, 2)

@@ -152,7 +152,7 @@ from .utils import (
     candle_interval_to_timedelta,
     datetime_range_floor,
     get_intervals,
-    now,
+    now, floor_datetime,
 )
 
 __all__ = (
@@ -226,6 +226,9 @@ class MarketDataCache(ICandleGetter):
 
         yield from candles
 
+    def _filter_complete_candles(self, candles: Iterable[HistoricCandle]) -> Iterable[HistoricCandle]:
+        return filter(lambda candle: candle.is_complete, candles)
+
     def get_all_candles(
         self,
         *,
@@ -258,11 +261,15 @@ class MarketDataCache(ICandleGetter):
 
             yield from cached_candles
             processed_time = cached_end
-        if processed_time + candle_interval_to_timedelta(interval) <= to:
+
+        delta = candle_interval_to_timedelta(interval)
+        if processed_time + delta <= to:
             yield from self._with_saving_into_cache(
                 storage=figi_cache_storage,
-                from_net=self._get_candles_from_net(figi, interval, processed_time, to),
-                net_range=(processed_time, to),
+                from_net=self._filter_complete_candles(
+                    self._get_candles_from_net(figi, interval, processed_time, to)
+                ),
+                net_range=(processed_time, floor_datetime(to, delta)),
             )
 
     def _get_figi_cache_storage(
