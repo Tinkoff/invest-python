@@ -151,8 +151,10 @@ from .typedefs import AccountId
 from .utils import (
     candle_interval_to_timedelta,
     datetime_range_floor,
+    floor_datetime,
     get_intervals,
-    now, floor_datetime, with_filtering_distinct_candles,
+    now,
+    with_filtering_distinct_candles,
 )
 
 __all__ = (
@@ -216,8 +218,7 @@ class MarketDataCache(ICandleGetter):
             storage.update(
                 [
                     InstrumentDateRangeData(
-                        date_range=filtered_net_range,
-                        historic_candles=filtered_candles
+                        date_range=filtered_net_range, historic_candles=filtered_candles
                     )
                 ]
             )
@@ -225,7 +226,7 @@ class MarketDataCache(ICandleGetter):
             logger.debug(
                 "Filtered net [\n%s\n%s\n]",
                 str(filtered_net_range[0]),
-                str(filtered_net_range[1])
+                str(filtered_net_range[1]),
             )
             logger.debug(
                 "Filtered net real [\n%s\n%s\n]",
@@ -235,7 +236,9 @@ class MarketDataCache(ICandleGetter):
 
         yield from candles
 
-    def _filter_complete_candles(self, candles: Iterable[HistoricCandle]) -> Iterable[HistoricCandle]:
+    def _filter_complete_candles(
+        self, candles: Iterable[HistoricCandle]
+    ) -> Iterable[HistoricCandle]:
         return filter(lambda candle: candle.is_complete, candles)
 
     @with_filtering_distinct_candles
@@ -277,9 +280,7 @@ class MarketDataCache(ICandleGetter):
         if processed_time + interval_delta <= to:
             yield from self._with_saving_into_cache(
                 storage=figi_cache_storage,
-                from_net=self._get_candles_from_net(
-                    figi, interval, processed_time, to
-                ),
+                from_net=self._get_candles_from_net(figi, interval, processed_time, to),
                 net_range=(processed_time, to),
                 interval_delta=interval_delta,
             )
@@ -296,7 +297,9 @@ class MarketDataCache(ICandleGetter):
             self._figi_cache_storages[figi_tuple] = storage
         return storage  # noqa: R504
 
-    def _round_net_range(self, net_range: Tuple[datetime, datetime], interval_delta: timedelta) -> Tuple[datetime, datetime]:
+    def _round_net_range(
+        self, net_range: Tuple[datetime, datetime], interval_delta: timedelta
+    ) -> Tuple[datetime, datetime]:
         start, end = net_range
         return start, floor_datetime(end, interval_delta)
 

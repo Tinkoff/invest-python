@@ -3,7 +3,7 @@ import tempfile
 import uuid
 from datetime import datetime, timedelta
 from pathlib import Path
-from typing import Tuple, List
+from typing import List, Tuple
 
 import pytest
 
@@ -23,8 +23,12 @@ from tinkoff.invest.caching.instrument_market_data_storage import (
     InstrumentMarketDataStorage,
 )
 from tinkoff.invest.services import MarketDataCache, MarketDataService
-from tinkoff.invest.utils import candle_interval_to_timedelta, now, floor_datetime, \
-    ceil_datetime
+from tinkoff.invest.utils import (
+    candle_interval_to_timedelta,
+    ceil_datetime,
+    floor_datetime,
+    now,
+)
 
 logging.basicConfig(format="%(asctime)s %(levelname)s:%(message)s", level=logging.DEBUG)
 logger = logging.getLogger(__name__)
@@ -116,7 +120,11 @@ class TestCachedLoad:
         assert result
 
     def test_loads_from_net_then_from_cache(
-        self, market_data_service: MarketDataService, market_data_cache: MarketDataCache, log, figi: str
+        self,
+        market_data_service: MarketDataService,
+        market_data_cache: MarketDataCache,
+        log,
+        figi: str,
     ):
         interval = CandleInterval.CANDLE_INTERVAL_HOUR
         from_, to = self._get_date_point_by_index(0, 3, interval=interval)
@@ -146,7 +154,10 @@ class TestCachedLoad:
             assert cached_candle.__repr__() == net_candle.__repr__()
 
     def test_loads_from_cache_and_left_from_net(
-        self, market_data_service: MarketDataService, market_data_cache: MarketDataCache, figi: str
+        self,
+        market_data_service: MarketDataService,
+        market_data_cache: MarketDataCache,
+        figi: str,
     ):
         interval = CandleInterval.CANDLE_INTERVAL_DAY
         from_, to = self._get_date_point_by_index(0, 30, interval=interval)
@@ -181,16 +192,22 @@ class TestCachedLoad:
         )
 
         assert len(market_data_service.get_candles.mock_calls) > 0
-        self.assert_in_range(cache_and_net, start=from_early_uncached, end=to, interval=interval)
+        self.assert_in_range(
+            cache_and_net, start=from_early_uncached, end=to, interval=interval
+        )
 
-    def assert_distinct_candles(self, candles: List[HistoricCandle], interval_delta: timedelta):
+    def assert_distinct_candles(
+        self, candles: List[HistoricCandle], interval_delta: timedelta
+    ):
         for candle1, candle2 in zip(candles[:-1], candles[1:-1]):
             diff_delta = candle2.time - candle1.time
             assert timedelta() < diff_delta <= interval_delta
 
     def assert_in_range(self, result_candles, start, end, interval):
         delta = candle_interval_to_timedelta(interval)
-        assert result_candles[0].time == ceil_datetime(start, delta), "start time assertion error"
+        assert result_candles[0].time == ceil_datetime(
+            start, delta
+        ), "start time assertion error"
         assert result_candles[-1].time == end, "end time assertion error"
         for candle in result_candles:
             assert start <= candle.time <= end
@@ -198,7 +215,10 @@ class TestCachedLoad:
         self.assert_distinct_candles(result_candles, delta)
 
     def test_loads_from_cache_and_right_from_net(
-        self, market_data_service: MarketDataService, market_data_cache: MarketDataCache, figi: str
+        self,
+        market_data_service: MarketDataService,
+        market_data_cache: MarketDataCache,
+        figi: str,
     ):
         to = now().replace(second=0, microsecond=0)
         from_ = to - timedelta(days=30)
@@ -225,7 +245,9 @@ class TestCachedLoad:
         )
 
         assert len(market_data_service.get_candles.mock_calls) > 0
-        self.assert_in_range(cache_and_net, start=from_, end=to_later_uncached, interval=interval)
+        self.assert_in_range(
+            cache_and_net, start=from_, end=to_later_uncached, interval=interval
+        )
 
     def assert_has_cached_ranges(self, cache_storage, ranges):
         meta_file = cache_storage._get_metafile(cache_storage._meta_path)
@@ -243,7 +265,7 @@ class TestCachedLoad:
         market_data_service: MarketDataService,
         market_data_cache: MarketDataCache,
         settings: MarketDataCacheSettings,
-            figi: str
+        figi: str,
     ):
 
         interval = CandleInterval.CANDLE_INTERVAL_DAY
@@ -278,7 +300,7 @@ class TestCachedLoad:
         market_data_service: MarketDataService,
         market_data_cache: MarketDataCache,
         settings: MarketDataCacheSettings,
-            figi: str
+        figi: str,
     ):
 
         interval = CandleInterval.CANDLE_INTERVAL_DAY
@@ -320,7 +342,9 @@ class TestCachedLoad:
         self.assert_has_cached_ranges(cache_storage, [(A, D)])
         self.assert_file_count(cache_storage, 2)
 
-    def _get_date_point_by_index(self, *idx, interval=CandleInterval.CANDLE_INTERVAL_DAY):
+    def _get_date_point_by_index(
+        self, *idx, interval=CandleInterval.CANDLE_INTERVAL_DAY
+    ):
         delta = candle_interval_to_timedelta(interval)
         x0 = ceil_datetime(now(), delta).replace(second=0, microsecond=0)
 
@@ -335,7 +359,7 @@ class TestCachedLoad:
         market_data_cache: MarketDataCache,
         settings: MarketDataCacheSettings,
         log,
-            figi: str
+        figi: str,
     ):
         interval = CandleInterval.CANDLE_INTERVAL_DAY
         #   [A request B]
@@ -425,7 +449,7 @@ class TestCachedLoad:
         assert len(net_calls) == len(from_net_ranges)
         for actual_net_call, expected_net_range in zip(net_calls, from_net_ranges):
             kwargs = actual_net_call.kwargs
-            actual_net_range = kwargs['from_'], kwargs['to']
+            actual_net_range = kwargs["from_"], kwargs["to"]
             assert actual_net_range == expected_net_range
 
         self.assert_in_range(result, start, end, interval)
@@ -438,7 +462,7 @@ class TestCachedLoad:
         market_data_cache: MarketDataCache,
         settings: MarketDataCacheSettings,
         log,
-            figi: str
+        figi: str,
     ):
         interval = CandleInterval.CANDLE_INTERVAL_DAY
         #   [A request B]
@@ -484,7 +508,7 @@ class TestCachedLoad:
         market_data_cache: MarketDataCache,
         settings: MarketDataCacheSettings,
         log,
-            figi: str
+        figi: str,
     ):
         interval = CandleInterval.CANDLE_INTERVAL_DAY
         #   [A request B]
@@ -530,7 +554,7 @@ class TestCachedLoad:
         market_data_cache: MarketDataCache,
         settings: MarketDataCacheSettings,
         log,
-        figi: str
+        figi: str,
     ):
         interval = CandleInterval.CANDLE_INTERVAL_DAY
         #   [A request B]
@@ -576,7 +600,7 @@ class TestCachedLoad:
         market_data_cache: MarketDataCache,
         settings: MarketDataCacheSettings,
         log,
-            figi: str
+        figi: str,
     ):
         interval = CandleInterval.CANDLE_INTERVAL_HOUR
 
@@ -606,7 +630,7 @@ class TestCachedLoad:
         market_data_cache: MarketDataCache,
         settings: MarketDataCacheSettings,
         log,
-        figi: str
+        figi: str,
     ):
         interval = CandleInterval.CANDLE_INTERVAL_DAY
         # +: is_complete=True
@@ -617,7 +641,9 @@ class TestCachedLoad:
         #   [A    cached   C]
         #     [B    request       F]
         #   [A    cached       E]
-        A, B, C, D, E, F = self._get_date_point_by_index(1, 1.5, 5, 5.5, 6, 6.6, interval=interval)
+        A, B, C, D, E, F = self._get_date_point_by_index(
+            1, 1.5, 5, 5.5, 6, 6.6, interval=interval
+        )
         self.get_by_range_and_assert_ranges(
             request_range=(A, D),
             from_cache_ranges=[],

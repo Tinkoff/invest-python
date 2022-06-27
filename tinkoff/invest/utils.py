@@ -2,11 +2,11 @@ import ast
 import dataclasses
 from datetime import datetime, timedelta, timezone
 from decimal import Decimal
-from typing import Generator, Tuple, List, Callable, Any, Iterable
+from typing import Any, Callable, Generator, Iterable, List, Tuple
 
 import dateutil.parser
 
-from .schemas import CandleInterval, Quotation, SubscriptionInterval, HistoricCandle
+from .schemas import CandleInterval, HistoricCandle, Quotation, SubscriptionInterval
 
 __all__ = ("get_intervals",)
 
@@ -126,4 +126,5 @@ def filter_distinct_candles(candles: List[HistoricCandle]) -> List[HistoricCandl
 def with_filtering_distinct_candles(f: Callable[[Any], Iterable[HistoricCandle]]):
     def _(*args: Any, **kwargs: Any) -> Iterable[HistoricCandle]:
         yield from filter_distinct_candles(list(f(*args, **kwargs)))
+
     return _
