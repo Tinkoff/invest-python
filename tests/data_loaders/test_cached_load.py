@@ -98,11 +98,16 @@ def log(caplog):  # noqa: PT004
     caplog.set_level(logging.DEBUG)
 
 
+@pytest.fixture()
+def figi():
+    return uuid.uuid4().hex
+
+
 class TestCachedLoad:
-    def test_loads_from_net(self, market_data_cache: MarketDataCache):
+    def test_loads_from_net(self, market_data_cache: MarketDataCache, figi: str):
         result = list(
             market_data_cache.get_all_candles(
-                figi=uuid.uuid4().hex,
+                figi=figi,
                 from_=now() - timedelta(days=30),
                 interval=CandleInterval.CANDLE_INTERVAL_HOUR,
             )
@@ -111,9 +116,8 @@ class TestCachedLoad:
         assert result
 
     def test_loads_from_net_then_from_cache(
-        self, market_data_service: MarketDataService, market_data_cache: MarketDataCache, log
+        self, market_data_service: MarketDataService, market_data_cache: MarketDataCache, log, figi: str
     ):
-        figi = uuid.uuid4().hex
         interval = CandleInterval.CANDLE_INTERVAL_HOUR
         from_, to = self._get_date_point_by_index(0, 3, interval=interval)
         from_net = list(
@@ -142,9 +146,8 @@ class TestCachedLoad:
             assert cached_candle.__repr__() == net_candle.__repr__()
 
     def test_loads_from_cache_and_left_from_net(
-        self, market_data_service: MarketDataService, market_data_cache: MarketDataCache
+        self, market_data_service: MarketDataService, market_data_cache: MarketDataCache, figi: str
     ):
-        figi = uuid.uuid4().hex
         interval = CandleInterval.CANDLE_INTERVAL_DAY
         from_, to = self._get_date_point_by_index(0, 30, interval=interval)
         from_net = list(
@@ -195,9 +198,8 @@ class TestCachedLoad:
         self.assert_distinct_candles(result_candles, delta)
 
     def test_loads_from_cache_and_right_from_net(
-        self, market_data_service: MarketDataService, market_data_cache: MarketDataCache
+        self, market_data_service: MarketDataService, market_data_cache: MarketDataCache, figi: str
     ):
-        figi = uuid.uuid4().hex
         to = now().replace(second=0, microsecond=0)
         from_ = to - timedelta(days=30)
         interval = CandleInterval.CANDLE_INTERVAL_DAY
@@ -241,8 +243,9 @@ class TestCachedLoad:
         market_data_service: MarketDataService,
         market_data_cache: MarketDataCache,
         settings: MarketDataCacheSettings,
+            figi: str
     ):
-        figi = uuid.uuid4().hex
+
         interval = CandleInterval.CANDLE_INTERVAL_DAY
         # [A request B]
         # [A cached  B]  [C request D]
@@ -275,8 +278,9 @@ class TestCachedLoad:
         market_data_service: MarketDataService,
         market_data_cache: MarketDataCache,
         settings: MarketDataCacheSettings,
+            figi: str
     ):
-        figi = uuid.uuid4().hex
+
         interval = CandleInterval.CANDLE_INTERVAL_DAY
         # [A request B]
         # [A cached  B]  [C request D]
@@ -331,8 +335,8 @@ class TestCachedLoad:
         market_data_cache: MarketDataCache,
         settings: MarketDataCacheSettings,
         log,
+            figi: str
     ):
-        figi = uuid.uuid4().hex
         interval = CandleInterval.CANDLE_INTERVAL_DAY
         #   [A request B]
         #   [A cached  B]  [C request D]
@@ -434,8 +438,8 @@ class TestCachedLoad:
         market_data_cache: MarketDataCache,
         settings: MarketDataCacheSettings,
         log,
+            figi: str
     ):
-        figi = uuid.uuid4().hex
         interval = CandleInterval.CANDLE_INTERVAL_DAY
         #   [A request B]
         #   [A cached  B]  [C request D]
@@ -480,8 +484,8 @@ class TestCachedLoad:
         market_data_cache: MarketDataCache,
         settings: MarketDataCacheSettings,
         log,
+            figi: str
     ):
-        figi = uuid.uuid4().hex
         interval = CandleInterval.CANDLE_INTERVAL_DAY
         #   [A request B]
         #   [A cached  B]  [C request D]
@@ -526,8 +530,8 @@ class TestCachedLoad:
         market_data_cache: MarketDataCache,
         settings: MarketDataCacheSettings,
         log,
+        figi: str
     ):
-        figi = uuid.uuid4().hex
         interval = CandleInterval.CANDLE_INTERVAL_DAY
         #   [A request B]
         #   [A cached  B]  [C request D]
@@ -572,8 +576,8 @@ class TestCachedLoad:
         market_data_cache: MarketDataCache,
         settings: MarketDataCacheSettings,
         log,
+            figi: str
     ):
-        figi = uuid.uuid4().hex
         interval = CandleInterval.CANDLE_INTERVAL_HOUR
 
         list(
@@ -602,8 +606,8 @@ class TestCachedLoad:
         market_data_cache: MarketDataCache,
         settings: MarketDataCacheSettings,
         log,
+        figi: str
     ):
-        figi = uuid.uuid4().hex
         interval = CandleInterval.CANDLE_INTERVAL_DAY
         # +: is_complete=True
         # -: is_complete=False
