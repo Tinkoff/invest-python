@@ -241,7 +241,7 @@ class MarketDataCache(ICandleGetter):
     ) -> Iterable[HistoricCandle]:
         return filter(lambda candle: candle.is_complete, candles)
 
-    @with_filtering_distinct_candles
+    @with_filtering_distinct_candles  # type: ignore
     def get_all_candles(
         self,
         *,
