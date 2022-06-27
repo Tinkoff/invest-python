@@ -241,11 +241,7 @@ class TestCachedLoad:
         interval = CandleInterval.CANDLE_INTERVAL_DAY
         # [A request B]
         # [A cached  B]  [C request D]
-        D = now().replace(second=0, microsecond=0)
-        C = D - timedelta(days=3)
-        B = C - timedelta(days=3)
-        A = B - timedelta(days=3)
-
+        A, B, C, D = self._get_date_point_by_index(0, 3, 6, 9)
         self.get_by_range_and_assert_has_cache(
             range=(A, B),
             has_from_net=True,
@@ -282,12 +278,7 @@ class TestCachedLoad:
         # [A cached  B]  [C cached  D]
         #        [E request F]
         # [A         cached         D]
-        D = now().replace(second=0, microsecond=0)
-        F = D - timedelta(days=3)
-        C = F - timedelta(days=3)
-        B = C - timedelta(days=3)
-        E = B - timedelta(days=3)
-        A = E - timedelta(days=3)
+        A, E, B, C, F, D = self._get_date_point_by_index(0, 2, 3, 6, 7, 9)
         self.get_by_range_and_assert_has_cache(
             range=(A, B),
             has_from_net=True,
