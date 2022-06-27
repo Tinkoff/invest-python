@@ -4,7 +4,6 @@ import uuid
 from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Tuple, List
-from unittest.mock import call
 
 import pytest
 
@@ -29,6 +28,7 @@ from tinkoff.invest.utils import candle_interval_to_timedelta, now, floor_dateti
 
 logging.basicConfig(format="%(asctime)s %(levelname)s:%(message)s", level=logging.DEBUG)
 logger = logging.getLogger(__name__)
+
 
 def get_historical_candle(time: datetime, is_complete: bool = True):
     quotation = Quotation(units=100, nano=0)
@@ -111,12 +111,11 @@ class TestCachedLoad:
         assert result
 
     def test_loads_from_net_then_from_cache(
-        self, market_data_service: MarketDataService, market_data_cache: MarketDataCache
+        self, market_data_service: MarketDataService, market_data_cache: MarketDataCache, log
     ):
         figi = uuid.uuid4().hex
-        to = now().replace(second=0, microsecond=0)
-        from_ = to - timedelta(days=30)
         interval = CandleInterval.CANDLE_INTERVAL_HOUR
+        from_, to = self._get_date_point_by_index(0, 3, interval=interval)
         from_net = list(
             market_data_cache.get_all_candles(
                 figi=figi,
@@ -146,9 +145,8 @@ class TestCachedLoad:
         self, market_data_service: MarketDataService, market_data_cache: MarketDataCache
     ):
         figi = uuid.uuid4().hex
-        to = now().replace(second=0, microsecond=0)
-        from_ = to - timedelta(days=30)
         interval = CandleInterval.CANDLE_INTERVAL_DAY
+        from_, to = self._get_date_point_by_index(0, 30, interval=interval)
         from_net = list(
             market_data_cache.get_all_candles(
                 figi=figi,
@@ -182,12 +180,19 @@ class TestCachedLoad:
         assert len(market_data_service.get_candles.mock_calls) > 0
         self.assert_in_range(cache_and_net, start=from_early_uncached, end=to, interval=interval)
 
+    def assert_distinct_candles(self, candles: List[HistoricCandle], interval_delta: timedelta):
+        for candle1, candle2 in zip(candles[:-1], candles[1:-1]):
+            diff_delta = candle2.time - candle1.time
+            assert timedelta() < diff_delta <= interval_delta
+
     def assert_in_range(self, result_candles, start, end, interval):
         delta = candle_interval_to_timedelta(interval)
         assert result_candles[0].time == ceil_datetime(start, delta), "start time assertion error"
-        assert result_candles[-1].time == floor_datetime(end, delta), "end time assertion error"
+        assert result_candles[-1].time == end, "end time assertion error"
         for candle in result_candles:
             assert start <= candle.time <= end
+
+        self.assert_distinct_candles(result_candles, delta)
 
     def test_loads_from_cache_and_right_from_net(
         self, market_data_service: MarketDataService, market_data_cache: MarketDataCache
@@ -418,6 +423,8 @@ class TestCachedLoad:
             kwargs = actual_net_call.kwargs
             actual_net_range = kwargs['from_'], kwargs['to']
             assert actual_net_range == expected_net_range
+
+        self.assert_in_range(result, start, end, interval)
 
         market_data_service.get_candles.reset_mock()
 
