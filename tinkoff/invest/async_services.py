@@ -120,6 +120,8 @@ from .schemas import (
     OrderType,
     PortfolioRequest,
     PortfolioResponse,
+    PortfolioStreamRequest,
+    PortfolioStreamResponse,
     PositionsRequest,
     PositionsResponse,
     PostOrderRequest,
@@ -150,6 +152,7 @@ __all__ = (
     "MarketDataService",
     "MarketDataStreamService",
     "OperationsService",
+    "OperationsStreamService",
     "OrdersStreamService",
     "OrdersService",
     "UsersService",
@@ -172,6 +175,7 @@ class AsyncServices:
         self.market_data = MarketDataService(channel, metadata)
         self.market_data_stream = MarketDataStreamService(channel, metadata)
         self.operations = OperationsService(channel, metadata)
+        self.operations_stream = OperationsStreamService(channel, metadata)
         self.orders_stream = OrdersStreamService(channel, metadata)
         self.orders = OrdersService(channel, metadata)
         self.users = UsersService(channel, metadata)
@@ -943,14 +947,39 @@ class OperationsService(_grpc_helpers.Service):
         )
 
 
+class OperationsStreamService(_grpc_helpers.Service):
+    _stub_factory = operations_pb2_grpc.OperationsStreamServiceStub
+
+    @handle_aio_request_error_gen("PortfolioStream")
+    async def portfolio_stream(
+        self, *, accounts: Optional[List[str]] = None
+    ) -> AsyncIterable[PortfolioStreamResponse]:
+        request = PortfolioStreamRequest()
+        if accounts:
+            request.accounts = accounts
+        else:
+            raise ValueError("accounts can not be empty")
+        async for response in self.stub.PortfolioStream(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, operations_pb2.PortfolioStreamRequest()
+            ),
+            metadata=self.metadata,
+        ):
+            yield _grpc_helpers.protobuf_to_dataclass(response, PortfolioStreamResponse)
+
+
 class OrdersStreamService(_grpc_helpers.Service):
     _stub_factory = orders_pb2_grpc.OrdersStreamServiceStub
 
     @handle_aio_request_error_gen("TradesStream")
     async def trades_stream(
-        self, accounts: List[str]
+        self, *, accounts: Optional[List[str]] = None
     ) -> AsyncIterable[TradesStreamResponse]:
-        request = TradesStreamRequest(accounts=accounts)
+        request = TradesStreamRequest()
+        if accounts:
+            request.accounts = accounts
+        else:
+            raise ValueError("accounts can not be empty")
         async for response in self.stub.TradesStream(
             request=_grpc_helpers.dataclass_to_protobuff(
                 request, orders_pb2.TradesStreamRequest()

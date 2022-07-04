@@ -272,14 +272,14 @@ class InstrumentsServiceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def GetFavorites(self, request, context):
-        """Метод получения избранных инструментов.
+        """Метод получения списка избранных инструментов.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def EditFavorites(self, request, context):
-        """Метод редактирования избранных инструментов.
+        """Метод редактирования списка избранных инструментов.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
