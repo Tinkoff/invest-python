@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [0.2.0-beta31](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta31) - 2022-07-04
+
+<small>[Compare with 0.2.0-beta30](https://github.com/tinkoff/invest-python/compare/0.2.0-beta30...0.2.0-beta31)</small>
+
+### Features
+- Add operationsstreamservice ([4dda0a4](https://github.com/tinkoff/invest-python/commit/4dda0a44b3cebff4e0923a2fe19ce53513e122f2) by Danil Akhtarov).
+
+
 ## [0.2.0-beta30](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta30) - 2022-06-07
 
 <small>[Compare with 0.2.0-beta29](https://github.com/tinkoff/invest-python/compare/0.2.0-beta29...0.2.0-beta30)</small>
