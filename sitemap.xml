@@ -2,17 +2,17 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://tinkoff.github.io/invest-python/</loc>
-         <lastmod>2022-06-17</lastmod>
+         <lastmod>2022-07-04</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://tinkoff.github.io/invest-python/CHANGELOG/</loc>
-         <lastmod>2022-06-17</lastmod>
+         <lastmod>2022-07-04</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://tinkoff.github.io/invest-python/CONTRIBUTING/</loc>
-         <lastmod>2022-06-17</lastmod>
+         <lastmod>2022-07-04</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>
