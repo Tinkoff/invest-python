@@ -595,7 +595,7 @@ class InstrumentsService(_grpc_helpers.Service):
         self,
     ) -> GetFavoritesResponse:
         request = GetFavoritesRequest()
-        response_coro = await self.stub.GetFavorites(
+        response_coro = self.stub.GetFavorites(
             request=_grpc_helpers.dataclass_to_protobuff(
                 request, instruments_pb2.GetFavoritesRequest()
             ),
@@ -617,7 +617,7 @@ class InstrumentsService(_grpc_helpers.Service):
             request.action_type = action_type
         if instruments is not None:
             request.instruments = instruments
-        response_coro = await self.stub.EditFavorites(
+        response_coro = self.stub.EditFavorites(
             request=_grpc_helpers.dataclass_to_protobuff(
                 request, instruments_pb2.EditFavoritesRequest()
             ),
@@ -632,7 +632,7 @@ class InstrumentsService(_grpc_helpers.Service):
         self,
     ) -> GetCountriesResponse:
         request = GetCountriesRequest()
-        response_coro = await self.stub.GetCountries(
+        response_coro = self.stub.GetCountries(
             request=_grpc_helpers.dataclass_to_protobuff(
                 request, instruments_pb2.GetCountriesRequest()
             ),
@@ -646,7 +646,7 @@ class InstrumentsService(_grpc_helpers.Service):
     async def find_instrument(self, *, query: str = "") -> FindInstrumentResponse:
         request = FindInstrumentRequest()
         request.query = query
-        response_coro = await self.stub.FindInstrument(
+        response_coro = self.stub.FindInstrument(
             request=_grpc_helpers.dataclass_to_protobuff(
                 request, instruments_pb2.FindInstrumentRequest()
             ),
@@ -661,7 +661,7 @@ class InstrumentsService(_grpc_helpers.Service):
         self,
     ) -> GetBrandsResponse:
         request = GetBrandsRequest()
-        response_coro = await self.stub.GetBrands(
+        response_coro = self.stub.GetBrands(
             request=_grpc_helpers.dataclass_to_protobuff(
                 request, instruments_pb2.GetBrandsRequest()
             ),
@@ -675,7 +675,7 @@ class InstrumentsService(_grpc_helpers.Service):
     async def get_brands_by(self, id: str = "") -> Brand:
         request = GetBrandRequest()
         request.id = id
-        response_coro = await self.stub.GetBrandBy(
+        response_coro = self.stub.GetBrandBy(
             request=_grpc_helpers.dataclass_to_protobuff(
                 request, instruments_pb2.GetBrandRequest()
             ),
