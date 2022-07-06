@@ -11,3 +11,4 @@ types = fix,ci,feat,build,chore,docs,style,refactor,perf,test,chore,revert
 
 [ignore-by-title]
 regex=^Bump version (.*)
+regex=^Merge(.*)into(.*)
