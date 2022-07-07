@@ -226,6 +226,7 @@ class MarketDataRequest(google.protobuf.message.Message):
     SUBSCRIBE_TRADES_REQUEST_FIELD_NUMBER: builtins.int
     SUBSCRIBE_INFO_REQUEST_FIELD_NUMBER: builtins.int
     SUBSCRIBE_LAST_PRICE_REQUEST_FIELD_NUMBER: builtins.int
+    GET_MY_SUBSCRIPTIONS_FIELD_NUMBER: builtins.int
     @property
     def subscribe_candles_request(self) -> global___SubscribeCandlesRequest:
         """Запрос подписки на свечи."""
@@ -246,6 +247,10 @@ class MarketDataRequest(google.protobuf.message.Message):
     def subscribe_last_price_request(self) -> global___SubscribeLastPriceRequest:
         """Запрос подписки на последние цены."""
         pass
+    @property
+    def get_my_subscriptions(self) -> global___GetMySubscriptions:
+        """Запрос своих подписок."""
+        pass
     def __init__(self,
         *,
         subscribe_candles_request: typing.Optional[global___SubscribeCandlesRequest] = ...,
@@ -253,10 +258,11 @@ class MarketDataRequest(google.protobuf.message.Message):
         subscribe_trades_request: typing.Optional[global___SubscribeTradesRequest] = ...,
         subscribe_info_request: typing.Optional[global___SubscribeInfoRequest] = ...,
         subscribe_last_price_request: typing.Optional[global___SubscribeLastPriceRequest] = ...,
+        get_my_subscriptions: typing.Optional[global___GetMySubscriptions] = ...,
         ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["payload",b"payload","subscribe_candles_request",b"subscribe_candles_request","subscribe_info_request",b"subscribe_info_request","subscribe_last_price_request",b"subscribe_last_price_request","subscribe_order_book_request",b"subscribe_order_book_request","subscribe_trades_request",b"subscribe_trades_request"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["payload",b"payload","subscribe_candles_request",b"subscribe_candles_request","subscribe_info_request",b"subscribe_info_request","subscribe_last_price_request",b"subscribe_last_price_request","subscribe_order_book_request",b"subscribe_order_book_request","subscribe_trades_request",b"subscribe_trades_request"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing_extensions.Literal["payload",b"payload"]) -> typing.Optional[typing_extensions.Literal["subscribe_candles_request","subscribe_order_book_request","subscribe_trades_request","subscribe_info_request","subscribe_last_price_request"]]: ...
+    def HasField(self, field_name: typing_extensions.Literal["get_my_subscriptions",b"get_my_subscriptions","payload",b"payload","subscribe_candles_request",b"subscribe_candles_request","subscribe_info_request",b"subscribe_info_request","subscribe_last_price_request",b"subscribe_last_price_request","subscribe_order_book_request",b"subscribe_order_book_request","subscribe_trades_request",b"subscribe_trades_request"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["get_my_subscriptions",b"get_my_subscriptions","payload",b"payload","subscribe_candles_request",b"subscribe_candles_request","subscribe_info_request",b"subscribe_info_request","subscribe_last_price_request",b"subscribe_last_price_request","subscribe_order_book_request",b"subscribe_order_book_request","subscribe_trades_request",b"subscribe_trades_request"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["payload",b"payload"]) -> typing.Optional[typing_extensions.Literal["subscribe_candles_request","subscribe_order_book_request","subscribe_trades_request","subscribe_info_request","subscribe_last_price_request","get_my_subscriptions"]]: ...
 global___MarketDataRequest = MarketDataRequest
 
 class MarketDataServerSideStreamRequest(google.protobuf.message.Message):
@@ -389,7 +395,7 @@ class SubscribeCandlesRequest(google.protobuf.message.Message):
         """Массив инструментов для подписки на свечи."""
         pass
     waiting_close: builtins.bool
-    """Флаг ожидания закрытия временного интервала для отправки свечи."""
+    """Флаг ожидания закрытия временного интервала для отправки свечи, применяется только для минутных свечей."""
 
     def __init__(self,
         *,
@@ -1283,3 +1289,10 @@ class GetLastTradesResponse(google.protobuf.message.Message):
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["trades",b"trades"]) -> None: ...
 global___GetLastTradesResponse = GetLastTradesResponse
+
+class GetMySubscriptions(google.protobuf.message.Message):
+    """Запрос активных подписок."""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    def __init__(self,
+        ) -> None: ...
+global___GetMySubscriptions = GetMySubscriptions

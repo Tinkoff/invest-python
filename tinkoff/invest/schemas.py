@@ -95,6 +95,7 @@ class OperationState(_grpc_helpers.Enum):
     OPERATION_STATE_UNSPECIFIED = 0
     OPERATION_STATE_EXECUTED = 1
     OPERATION_STATE_CANCELED = 2
+    OPERATION_STATE_PROGRESS = 3
 
 
 class OrderDirection(_grpc_helpers.Enum):
@@ -242,6 +243,13 @@ class RealExchange(_grpc_helpers.Enum):
     REAL_EXCHANGE_MOEX = 1
     REAL_EXCHANGE_RTS = 2
     REAL_EXCHANGE_OTC = 3
+
+
+class PortfolioSubscriptionStatus(_grpc_helpers.Enum):
+    PORTFOLIO_SUBSCRIPTION_STATUS_UNSPECIFIED = 0
+    PORTFOLIO_SUBSCRIPTION_STATUS_SUCCESS = 1
+    PORTFOLIO_SUBSCRIPTION_STATUS_ACCOUNT_NOT_FOUND = 2
+    PORTFOLIO_SUBSCRIPTION_STATUS_INTERNAL_ERROR = 3
 
 
 @dataclass(eq=False, repr=True)
@@ -426,6 +434,7 @@ class Bond(_grpc_helpers.Message):  # pylint:disable=too-many-instance-attribute
     api_trade_available_flag: bool = _grpc_helpers.bool_field(39)
     uid: str = _grpc_helpers.string_field(40)
     real_exchange: "RealExchange" = _grpc_helpers.message_field(41)
+    position_uid: str = _grpc_helpers.string_field(42)
 
 
 @dataclass(eq=False, repr=True)
@@ -457,6 +466,7 @@ class Currency(_grpc_helpers.Message):  # pylint:disable=too-many-instance-attri
     api_trade_available_flag: bool = _grpc_helpers.bool_field(26)
     uid: str = _grpc_helpers.string_field(27)
     real_exchange: "RealExchange" = _grpc_helpers.message_field(28)
+    position_uid: str = _grpc_helpers.string_field(29)
 
 
 @dataclass(eq=False, repr=True)
@@ -492,6 +502,7 @@ class Etf(_grpc_helpers.Message):  # pylint:disable=too-many-instance-attributes
     api_trade_available_flag: bool = _grpc_helpers.bool_field(30)
     uid: str = _grpc_helpers.string_field(31)
     real_exchange: "RealExchange" = _grpc_helpers.message_field(32)
+    position_uid: str = _grpc_helpers.string_field(33)
 
 
 @dataclass(eq=False, repr=True)
@@ -528,6 +539,8 @@ class Future(_grpc_helpers.Message):  # pylint:disable=too-many-instance-attribu
     api_trade_available_flag: bool = _grpc_helpers.bool_field(30)
     uid: str = _grpc_helpers.string_field(31)
     real_exchange: "RealExchange" = _grpc_helpers.message_field(32)
+    position_uid: str = _grpc_helpers.string_field(33)
+    basic_asset_position_uid: str = _grpc_helpers.string_field(34)
 
 
 @dataclass(eq=False, repr=True)
@@ -564,6 +577,7 @@ class Share(_grpc_helpers.Message):  # pylint:disable=too-many-instance-attribut
     api_trade_available_flag: bool = _grpc_helpers.bool_field(32)
     uid: str = _grpc_helpers.string_field(33)
     real_exchange: "RealExchange" = _grpc_helpers.message_field(34)
+    position_uid: str = _grpc_helpers.string_field(35)
 
 
 @dataclass(eq=False, repr=True)
@@ -632,6 +646,7 @@ class Instrument(_grpc_helpers.Message):  # pylint:disable=too-many-instance-att
     api_trade_available_flag: bool = _grpc_helpers.bool_field(24)
     uid: str = _grpc_helpers.string_field(25)
     real_exchange: "RealExchange" = _grpc_helpers.message_field(26)
+    position_uid: str = _grpc_helpers.string_field(27)
 
 
 @dataclass(eq=False, repr=True)
@@ -932,6 +947,8 @@ class InstrumentShort(_grpc_helpers.Message):
     instrument_type: str = _grpc_helpers.string_field(5)
     name: str = _grpc_helpers.string_field(6)
     uid: str = _grpc_helpers.string_field(7)
+    position_uid: str = _grpc_helpers.string_field(8)
+    api_trade_available_flag: str = _grpc_helpers.string_field(11)
 
 
 @dataclass(eq=False, repr=True)
@@ -965,6 +982,9 @@ class MarketDataRequest(_grpc_helpers.Message):
     )
     subscribe_last_price_request: "SubscribeLastPriceRequest" = (
         _grpc_helpers.message_field(5, group="payload")
+    )
+    get_my_subscriptions: "GetMySubscriptions" = _grpc_helpers.message_field(
+        6, group="payload"
     )
 
 
@@ -1269,6 +1289,11 @@ class GetLastTradesResponse(_grpc_helpers.Message):
 
 
 @dataclass(eq=False, repr=True)
+class GetMySubscriptions(_grpc_helpers.Message):
+    pass
+
+
+@dataclass(eq=False, repr=True)
 class OperationsRequest(_grpc_helpers.Message):
     account_id: str = _grpc_helpers.string_field(1)
     from_: datetime = _grpc_helpers.message_field(2)
@@ -1362,6 +1387,7 @@ class PortfolioPosition(_grpc_helpers.Message):
     current_price: "MoneyValue" = _grpc_helpers.message_field(8)
     average_position_price_fifo: "MoneyValue" = _grpc_helpers.message_field(9)
     quantity_lots: "Quotation" = _grpc_helpers.message_field(10)
+    blocked: bool = _grpc_helpers.bool_field(21)
 
 
 @dataclass(eq=False, repr=True)
@@ -1369,6 +1395,8 @@ class PositionsSecurities(_grpc_helpers.Message):
     figi: str = _grpc_helpers.string_field(1)
     blocked: int = _grpc_helpers.int64_field(2)
     balance: int = _grpc_helpers.int64_field(3)
+    exchange_blocked: bool = _grpc_helpers.bool_field(11)
+    instrument_type: str = _grpc_helpers.string_field(16)
 
 
 @dataclass(eq=False, repr=True)
@@ -1805,3 +1833,28 @@ class DividendsForeignIssuerReport(  # pylint:disable=too-many-instance-attribut
     tax: "Quotation" = _grpc_helpers.message_field(10)
     dividend_amount: "Quotation" = _grpc_helpers.message_field(11)
     currency: str = _grpc_helpers.string_field(12)
+
+
+@dataclass(eq=False, repr=True)
+class PortfolioStreamRequest(_grpc_helpers.Message):
+    accounts: List[str] = _grpc_helpers.message_field(1)
+
+
+@dataclass(eq=False, repr=True)
+class PortfolioStreamResponse(_grpc_helpers.Message):
+    subscriptions: "PortfolioSubscriptionResult" = _grpc_helpers.message_field(
+        1, group="payload"
+    )
+    portfolio: "PortfolioResponse" = _grpc_helpers.message_field(2, group="payload")
+    ping: "Ping" = _grpc_helpers.message_field(3, group="payload")
+
+
+@dataclass(eq=False, repr=True)
+class PortfolioSubscriptionResult(_grpc_helpers.Message):
+    accounts: List["AccountSubscriptionStatus"] = _grpc_helpers.message_field(1)
+
+
+@dataclass(eq=False, repr=True)
+class AccountSubscriptionStatus(_grpc_helpers.Message):
+    account_id: str = _grpc_helpers.string_field(1)
+    subscription_status: "PortfolioSubscriptionStatus" = _grpc_helpers.message_field(6)
