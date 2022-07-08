@@ -2,11 +2,11 @@ import ast
 import dataclasses
 from datetime import datetime, timedelta, timezone
 from decimal import Decimal
-from typing import Generator, Tuple
+from typing import Any, Callable, Generator, Iterable, List, Tuple
 
 import dateutil.parser
 
-from .schemas import CandleInterval, Quotation, SubscriptionInterval
+from .schemas import CandleInterval, HistoricCandle, Quotation, SubscriptionInterval
 
 __all__ = ("get_intervals",)
 
@@ -112,3 +112,19 @@ def datetime_range_floor(
 ) -> Tuple[datetime, datetime]:
     start, end = date_range
     return start.replace(second=0, microsecond=0), end.replace(second=0, microsecond=0)
+
+
+def filter_distinct_candles(candles: List[HistoricCandle]) -> List[HistoricCandle]:
+    filtered = []
+    for candle1, candle2 in zip(candles, candles[1:]):
+        if candle2.time - candle1.time > timedelta():
+            filtered.append(candle1)
+    filtered.extend(candles[-1:])
+    return filtered
+
+
+def with_filtering_distinct_candles(f: Callable[[Any], Iterable[HistoricCandle]]):
+    def _(*args: Any, **kwargs: Any) -> Iterable[HistoricCandle]:
+        yield from filter_distinct_candles(list(f(*args, **kwargs)))
+
+    return _
