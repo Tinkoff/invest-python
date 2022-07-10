@@ -56,7 +56,7 @@ class InstrumentsCache(IInstrumentsGetter):
             self.bonds,
             self.currencies,
         ]
-        self._cache = TTLCache(
+        self._cache: TTLCache = TTLCache(
             maxsize=len(self._instruments_methods),
             ttl=self._settings.ttl.total_seconds(),
         )

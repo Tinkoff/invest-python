@@ -1,14 +1,15 @@
 import logging
 from dataclasses import replace
-from typing import Generic
+from typing import Generic, TypeVar
 
-from tinkoff.invest import InstrumentIdType
-from tinkoff.invest.caching.instruments_cache.models import (
-    TInstrumentResponse,
-    TInstrumentsResponse,
-)
+from tinkoff.invest import InstrumentIdType, InstrumentResponse
+from tinkoff.invest.caching.instruments_cache.models import InstrumentsResponse
 
 logger = logging.getLogger(__name__)
+
+
+TInstrumentResponse = TypeVar("TInstrumentResponse", bound=InstrumentResponse)
+TInstrumentsResponse = TypeVar("TInstrumentsResponse", bound=InstrumentsResponse)
 
 
 class InstrumentStorage(Generic[TInstrumentResponse, TInstrumentsResponse]):
