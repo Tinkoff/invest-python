@@ -28,25 +28,31 @@ class InstrumentStorage(Generic[TInstrumentResponse, TInstrumentsResponse]):
             for instrument in self._instruments_response.instruments
         }
 
+        # fmt: off
         self._instrument_by_class_code_id_index = {
-            InstrumentIdType.INSTRUMENT_ID_UNSPECIFIED: self._instrument_by_class_code_figi,
-            InstrumentIdType.INSTRUMENT_ID_TYPE_FIGI: self._instrument_by_class_code_figi,
-            InstrumentIdType.INSTRUMENT_ID_TYPE_TICKER: self._instrument_by_class_code_ticker,
-            InstrumentIdType.INSTRUMENT_ID_TYPE_UID: self._instrument_by_class_code_uid,
+            InstrumentIdType.INSTRUMENT_ID_UNSPECIFIED:
+                self._instrument_by_class_code_figi,
+            InstrumentIdType.INSTRUMENT_ID_TYPE_FIGI:
+                self._instrument_by_class_code_figi,
+            InstrumentIdType.INSTRUMENT_ID_TYPE_TICKER:
+                self._instrument_by_class_code_ticker,
+            InstrumentIdType.INSTRUMENT_ID_TYPE_UID:
+                self._instrument_by_class_code_uid,
         }
+        # fmt: on
 
     def get(
         self, *, id_type: InstrumentIdType, class_code: str, id: str
     ) -> TInstrumentResponse:
         logger.debug(
-            f"Cache request id_type=%s, class_code=%s, id=%s", id_type, class_code, id
+            "Cache request id_type=%s, class_code=%s, id=%s", id_type, class_code, id
         )
         instrument_by_class_code_id = self._instrument_by_class_code_id_index[id_type]
         logger.debug(
-            f"Index for %s found: \n%s", id_type, instrument_by_class_code_id.keys()
+            "Index for %s found: \n%s", id_type, instrument_by_class_code_id.keys()
         )
         key = (class_code, id)
-        logger.debug(f"Cache request key=%s", key)
+        logger.debug("Cache request key=%s", key)
 
         return instrument_by_class_code_id[key]
 

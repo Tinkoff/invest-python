@@ -91,7 +91,7 @@ class InstrumentsCache(IInstrumentsGetter):
         )
         storage = InstrumentStorage(instruments_response=instruments_response)
         self._cache[storage_key] = storage
-        return storage
+        return storage  # noqa: R504
 
     def shares(
         self, *, instrument_status: InstrumentStatus = InstrumentStatus(0)
