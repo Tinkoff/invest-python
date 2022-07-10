@@ -1486,6 +1486,14 @@ python-versions = ">=3.7"
 test = ["pytest"]
 
 [[package]]
+name = "types-cachetools"
+version = "5.2.1"
+description = "Typing stubs for cachetools"
+category = "main"
+optional = false
+python-versions = "*"
+
+[[package]]
 name = "types-protobuf"
 version = "3.19.18"
 description = "Typing stubs for protobuf"
@@ -1594,7 +1602,7 @@ all = ["pandas", "numpy", "matplotlib", "mplfinance"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "31b994f99ec82be6db504a2645980cb0bb3d90ce50619400e40a3c3e4228441c"
+content-hash = "aeb35b092958b9c6400b3496837822cfd79b6a1da18374be3c59add63dc41456"
 
 [metadata.files]
 appnope = [
@@ -1875,6 +1883,7 @@ tomli = [
 ]
 tomlkit = []
 traitlets = []
+types-cachetools = []
 types-protobuf = []
 types-python-dateutil = []
 types-pyyaml = []
