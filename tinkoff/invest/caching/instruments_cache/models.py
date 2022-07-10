@@ -1,4 +1,4 @@
-from typing import TypeVar, List
+from typing import List, TypeVar
 
 
 class InstrumentResponse:
@@ -13,6 +13,5 @@ class InstrumentsResponse:
     instruments: List[InstrumentResponse]
 
 
-TInstrumentResponse = TypeVar('TInstrumentResponse', bound=InstrumentResponse)
-TInstrumentsResponse = TypeVar('TInstrumentsResponse', bound=InstrumentsResponse)
-
+TInstrumentResponse = TypeVar("TInstrumentResponse", bound=InstrumentResponse)
+TInstrumentsResponse = TypeVar("TInstrumentsResponse", bound=InstrumentsResponse)

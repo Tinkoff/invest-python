@@ -15,7 +15,9 @@ from tinkoff.invest.caching.market_data_cache.cache_settings import (
 from tinkoff.invest.caching.market_data_cache.instrument_date_range_market_data import (
     InstrumentDateRangeData,
 )
-from tinkoff.invest.caching.market_data_cache.interface import IInstrumentMarketDataStorage
+from tinkoff.invest.caching.market_data_cache.interface import (
+    IInstrumentMarketDataStorage,
+)
 from tinkoff.invest.schemas import CandleInterval, HistoricCandle
 from tinkoff.invest.utils import dataclass_from_dict, datetime_range_floor
 
