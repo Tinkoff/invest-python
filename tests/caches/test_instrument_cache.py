@@ -1,6 +1,6 @@
 import uuid
 from pprint import pprint
-from typing import Dict, Iterator, Type
+from typing import Dict, Iterator, Type, Callable, Any
 from unittest.mock import Mock
 
 import pytest
@@ -22,7 +22,7 @@ from tinkoff.invest import (
     InstrumentIdType,
     Share,
     ShareResponse,
-    SharesResponse,
+    SharesResponse, InstrumentResponse,
 )
 from tinkoff.invest.caching.instruments_cache.instruments_cache import InstrumentsCache
 from tinkoff.invest.caching.instruments_cache.models import InstrumentsResponse
@@ -158,31 +158,56 @@ def instruments_cache(settings: InstrumentsCacheSettings, mocked_services) -> In
 
 
 class TestInstrumentCache:
+    @pytest.mark.parametrize(
+        ('get_instruments_of_type', 'get_instrument_of_type_by'),
+        [
+            (lambda instruments: instruments.etfs, lambda instruments: instruments.etf_by),
+            (lambda instruments: instruments.shares, lambda instruments: instruments.share_by),
+            (lambda instruments: instruments.bonds, lambda instruments: instruments.bond_by),
+            (lambda instruments: instruments.currencies, lambda instruments: instruments.currency_by),
+            (lambda instruments: instruments.futures, lambda instruments: instruments.future_by),
+        ]
+    )
+    @pytest.mark.parametrize(
+        ('id_type', 'get_id'),
+        [
+            (InstrumentIdType.INSTRUMENT_ID_UNSPECIFIED, lambda instrument: instrument.figi),
+            (InstrumentIdType.INSTRUMENT_ID_TYPE_FIGI, lambda instrument: instrument.figi),
+            (InstrumentIdType.INSTRUMENT_ID_TYPE_TICKER, lambda instrument: instrument.ticker),
+            (InstrumentIdType.INSTRUMENT_ID_TYPE_UID, lambda instrument: instrument.uid),
+        ]
+    )
     def test_gets_from_net_then_cache(
         self,
         mocked_services: Services,
             settings: InstrumentsCacheSettings,
             instruments_cache: InstrumentsCache,
+            get_instruments_of_type: Callable[[InstrumentsService], Callable[[], InstrumentsResponse]],
+            get_instrument_of_type_by: Callable[[InstrumentsService], Callable[[InstrumentIdType, str, str], InstrumentResponse]],
+            id_type: InstrumentIdType,
+            get_id: Callable[[Any], str],
     ):
-        inst = mocked_services.instruments.etfs().instruments[0]
+        get_instruments = get_instruments_of_type(mocked_services.instruments)
+        get_instrument_by = get_instrument_of_type_by(mocked_services.instruments)
+        get_instrument_by_cached = get_instrument_of_type_by(instruments_cache)
 
-        from_server = mocked_services.instruments.etf_by(
-            id_type=InstrumentIdType.INSTRUMENT_ID_TYPE_UID,
+        inst = get_instruments().instruments[0]
+
+        from_server = get_instrument_by(
+            id_type=id_type,
             class_code=inst.class_code,
-            id=inst.uid,
+            id=get_id(inst),
         )
-        pprint(from_server)
 
-        mocked_services.instruments.etf_by.assert_called_once()
-        mocked_services.instruments.etf_by.reset_mock()
+        get_instrument_by.assert_called_once()
+        get_instrument_by.reset_mock()
 
-        from_cache = instruments_cache.etf_by(
-            id_type=InstrumentIdType.INSTRUMENT_ID_TYPE_UID,
+        from_cache = get_instrument_by_cached(
+            id_type=id_type,
             class_code=inst.class_code,
-            id=inst.uid,
+            id=get_id(inst),
         )
-        pprint(from_cache)
 
-        mocked_services.instruments.etf_by.assert_not_called()
+        get_instrument_by.assert_not_called()
 
         assert str(from_server) == str(from_cache)
