@@ -1,6 +1,7 @@
 import uuid
 from pprint import pprint
 from typing import Dict, Iterator, Type
+from unittest.mock import Mock
 
 import pytest
 
@@ -94,7 +95,7 @@ def mock_get_by(instrument_response: InstrumentsResponse, response_type):
         (found_instrument,) = filter(filter_, instrument_response.instruments)
         return response_type(instrument=found_instrument)
 
-    return _mock_get_by
+    return Mock(wraps=_mock_get_by)
 
 
 @pytest.fixture()
@@ -144,10 +145,24 @@ def mocked_services(
     return real_services
 
 
+@pytest.fixture()
+def settings() -> InstrumentsCacheSettings:
+    return InstrumentsCacheSettings()
+
+
+@pytest.fixture()
+def instruments_cache(settings: InstrumentsCacheSettings, mocked_services) -> InstrumentsCache:
+    return InstrumentsCache(
+        settings=settings, instruments_service=mocked_services.instruments
+    )
+
+
 class TestInstrumentCache:
-    def test_a(
+    def test_gets_from_net_then_cache(
         self,
         mocked_services: Services,
+            settings: InstrumentsCacheSettings,
+            instruments_cache: InstrumentsCache,
     ):
         inst = mocked_services.instruments.etfs().instruments[0]
 
@@ -158,10 +173,8 @@ class TestInstrumentCache:
         )
         pprint(from_server)
 
-        settings = InstrumentsCacheSettings()
-        instruments_cache = InstrumentsCache(
-            settings=settings, instruments_service=mocked_services.instruments
-        )
+        mocked_services.instruments.etf_by.assert_called_once()
+        mocked_services.instruments.etf_by.reset_mock()
 
         from_cache = instruments_cache.etf_by(
             id_type=InstrumentIdType.INSTRUMENT_ID_TYPE_UID,
@@ -169,5 +182,7 @@ class TestInstrumentCache:
             id=inst.uid,
         )
         pprint(from_cache)
+
+        mocked_services.instruments.etf_by.assert_not_called()
 
         assert str(from_server) == str(from_cache)
