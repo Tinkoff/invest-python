@@ -22,7 +22,6 @@ from tinkoff.invest import (
     FutureResponse,
     FuturesResponse,
     InstrumentIdType,
-    InstrumentResponse,
     Share,
     ShareResponse,
     SharesResponse,
@@ -30,7 +29,7 @@ from tinkoff.invest import (
 from tinkoff.invest.caching.instruments_cache.instruments_cache import InstrumentsCache
 from tinkoff.invest.caching.instruments_cache.models import InstrumentsResponse
 from tinkoff.invest.caching.instruments_cache.settings import InstrumentsCacheSettings
-from tinkoff.invest.services import InstrumentsService, Services
+from tinkoff.invest.services import Services
 
 
 def uid() -> str:
@@ -107,7 +106,7 @@ def mock_instruments_service(
     mocker,
     instrument_map,
 ) -> Services:
-    real_services.instruments: InstrumentsService = mocker.Mock(
+    real_services.instruments = mocker.Mock(
         wraps=real_services.instruments,
     )
 
@@ -214,13 +213,8 @@ class TestInstrumentCache:
         mocked_services: Services,
         settings: InstrumentsCacheSettings,
         instruments_cache: InstrumentsCache,
-        get_instruments_of_type: Callable[
-            [InstrumentsService], Callable[[], InstrumentsResponse]
-        ],
-        get_instrument_of_type_by: Callable[
-            [InstrumentsService],
-            Callable[[InstrumentIdType, str, str], InstrumentResponse],
-        ],
+        get_instruments_of_type,
+        get_instrument_of_type_by,
         id_type: InstrumentIdType,
         get_id: Callable[[Any], str],
     ):
@@ -253,13 +247,8 @@ class TestInstrumentCache:
         mocked_services: Services,
         settings: InstrumentsCacheSettings,
         instruments_cache: InstrumentsCache,
-        get_instruments_of_type: Callable[
-            [InstrumentsService], Callable[[], InstrumentsResponse]
-        ],
-        get_instrument_of_type_by: Callable[
-            [InstrumentsService],
-            Callable[[InstrumentIdType, str, str], InstrumentResponse],
-        ],
+        get_instruments_of_type,
+        get_instrument_of_type_by,
         id_type: InstrumentIdType,
         get_id: Callable[[Any], str],
     ):
