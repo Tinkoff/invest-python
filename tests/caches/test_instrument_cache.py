@@ -1,4 +1,7 @@
+import random
+import time
 import uuid
+from datetime import timedelta
 from typing import Any, Callable, Dict, Iterator, Type
 from unittest.mock import Mock
 
@@ -159,53 +162,53 @@ def instruments_cache(
     )
 
 
+@pytest.mark.parametrize(
+    ("get_instruments_of_type", "get_instrument_of_type_by"),
+    [
+        (
+            lambda instruments: instruments.etfs,
+            lambda instruments: instruments.etf_by,
+        ),
+        (
+            lambda instruments: instruments.shares,
+            lambda instruments: instruments.share_by,
+        ),
+        (
+            lambda instruments: instruments.bonds,
+            lambda instruments: instruments.bond_by,
+        ),
+        (
+            lambda instruments: instruments.currencies,
+            lambda instruments: instruments.currency_by,
+        ),
+        (
+            lambda instruments: instruments.futures,
+            lambda instruments: instruments.future_by,
+        ),
+    ],
+)
+@pytest.mark.parametrize(
+    ("id_type", "get_id"),
+    [
+        (
+            InstrumentIdType.INSTRUMENT_ID_UNSPECIFIED,
+            lambda instrument: instrument.figi,
+        ),
+        (
+            InstrumentIdType.INSTRUMENT_ID_TYPE_FIGI,
+            lambda instrument: instrument.figi,
+        ),
+        (
+            InstrumentIdType.INSTRUMENT_ID_TYPE_TICKER,
+            lambda instrument: instrument.ticker,
+        ),
+        (
+            InstrumentIdType.INSTRUMENT_ID_TYPE_UID,
+            lambda instrument: instrument.uid,
+        ),
+    ],
+)
 class TestInstrumentCache:
-    @pytest.mark.parametrize(
-        ("get_instruments_of_type", "get_instrument_of_type_by"),
-        [
-            (
-                lambda instruments: instruments.etfs,
-                lambda instruments: instruments.etf_by,
-            ),
-            (
-                lambda instruments: instruments.shares,
-                lambda instruments: instruments.share_by,
-            ),
-            (
-                lambda instruments: instruments.bonds,
-                lambda instruments: instruments.bond_by,
-            ),
-            (
-                lambda instruments: instruments.currencies,
-                lambda instruments: instruments.currency_by,
-            ),
-            (
-                lambda instruments: instruments.futures,
-                lambda instruments: instruments.future_by,
-            ),
-        ],
-    )
-    @pytest.mark.parametrize(
-        ("id_type", "get_id"),
-        [
-            (
-                InstrumentIdType.INSTRUMENT_ID_UNSPECIFIED,
-                lambda instrument: instrument.figi,
-            ),
-            (
-                InstrumentIdType.INSTRUMENT_ID_TYPE_FIGI,
-                lambda instrument: instrument.figi,
-            ),
-            (
-                InstrumentIdType.INSTRUMENT_ID_TYPE_TICKER,
-                lambda instrument: instrument.ticker,
-            ),
-            (
-                InstrumentIdType.INSTRUMENT_ID_TYPE_UID,
-                lambda instrument: instrument.uid,
-            ),
-        ],
-    )
     def test_gets_from_net_then_cache(
         self,
         mocked_services: Services,
@@ -224,15 +227,12 @@ class TestInstrumentCache:
         get_instruments = get_instruments_of_type(mocked_services.instruments)
         get_instrument_by = get_instrument_of_type_by(mocked_services.instruments)
         get_instrument_by_cached = get_instrument_of_type_by(instruments_cache)
-
-        inst = get_instruments().instruments[0]
-
+        (inst,) = random.sample(get_instruments().instruments, k=1)
         from_server = get_instrument_by(
             id_type=id_type,
             class_code=inst.class_code,
             id=get_id(inst),
         )
-
         get_instrument_by.assert_called_once()
         get_instrument_by.reset_mock()
 
@@ -243,5 +243,37 @@ class TestInstrumentCache:
         )
 
         get_instrument_by.assert_not_called()
-
         assert str(from_server) == str(from_cache)
+
+    @pytest.mark.parametrize(
+        "settings", [InstrumentsCacheSettings(ttl=timedelta(milliseconds=10))]
+    )
+    def test_refreshes_on_ttl(
+        self,
+        mocked_services: Services,
+        settings: InstrumentsCacheSettings,
+        instruments_cache: InstrumentsCache,
+        get_instruments_of_type: Callable[
+            [InstrumentsService], Callable[[], InstrumentsResponse]
+        ],
+        get_instrument_of_type_by: Callable[
+            [InstrumentsService],
+            Callable[[InstrumentIdType, str, str], InstrumentResponse],
+        ],
+        id_type: InstrumentIdType,
+        get_id: Callable[[Any], str],
+    ):
+        get_instruments = get_instruments_of_type(mocked_services.instruments)
+        get_instrument_by_cached = get_instrument_of_type_by(instruments_cache)
+        get_instruments.assert_called_once()
+        (inst,) = random.sample(get_instruments().instruments, k=1)
+        get_instruments.reset_mock()
+        time.sleep(0.1)
+
+        _ = get_instrument_by_cached(
+            id_type=id_type,
+            class_code=inst.class_code,
+            id=get_id(inst),
+        )
+
+        get_instruments.assert_called_once()
