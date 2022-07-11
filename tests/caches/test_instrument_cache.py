@@ -49,7 +49,7 @@ def real_services(token: str) -> Iterator[Services]:
 
 
 def gen_meta_ids() -> Dict[str, str]:
-    return dict(class_code=uid(), figi=uid(), ticker=uid(), uid=uid())
+    return {"class_code": uid(), "figi": uid(), "ticker": uid(), "uid": uid()}
 
 
 def gen_instruments(type_: Type, instrument_count: int = 10):
