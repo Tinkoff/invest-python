@@ -29,7 +29,7 @@ class _OrderDirectionEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper.
     """Продажа"""
 
 class OrderDirection(_OrderDirection, metaclass=_OrderDirectionEnumTypeWrapper):
-    """Направление операции"""
+    """Направление операции."""
     pass
 
 ORDER_DIRECTION_UNSPECIFIED: OrderDirection.ValueType  # 0
@@ -59,7 +59,7 @@ class _OrderTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._Enum
     """Рыночная"""
 
 class OrderType(_OrderType, metaclass=_OrderTypeEnumTypeWrapper):
-    """Тип заявки"""
+    """Тип заявки."""
     pass
 
 ORDER_TYPE_UNSPECIFIED: OrderType.ValueType  # 0
@@ -116,6 +116,36 @@ EXECUTION_REPORT_STATUS_PARTIALLYFILL: OrderExecutionReportStatus.ValueType  # 5
 """Частично исполнена"""
 
 global___OrderExecutionReportStatus = OrderExecutionReportStatus
+
+
+class _PriceType:
+    ValueType = typing.NewType('ValueType', builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
+class _PriceTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_PriceType.ValueType], builtins.type):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    PRICE_TYPE_UNSPECIFIED: _PriceType.ValueType  # 0
+    """Значение не определено."""
+
+    PRICE_TYPE_POINT: _PriceType.ValueType  # 1
+    """Цена в пунктах (только для фьючерсов и облигаций)."""
+
+    PRICE_TYPE_CURRENCY: _PriceType.ValueType  # 2
+    """Цена в валюте расчётов по инструменту."""
+
+class PriceType(_PriceType, metaclass=_PriceTypeEnumTypeWrapper):
+    """Тип цены."""
+    pass
+
+PRICE_TYPE_UNSPECIFIED: PriceType.ValueType  # 0
+"""Значение не определено."""
+
+PRICE_TYPE_POINT: PriceType.ValueType  # 1
+"""Цена в пунктах (только для фьючерсов и облигаций)."""
+
+PRICE_TYPE_CURRENCY: PriceType.ValueType  # 2
+"""Цена в валюте расчётов по инструменту."""
+
+global___PriceType = PriceType
 
 
 class TradesStreamRequest(google.protobuf.message.Message):
@@ -587,3 +617,44 @@ class OrderStage(google.protobuf.message.Message):
     def HasField(self, field_name: typing_extensions.Literal["price",b"price"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions.Literal["price",b"price","quantity",b"quantity","trade_id",b"trade_id"]) -> None: ...
 global___OrderStage = OrderStage
+
+class ReplaceOrderRequest(google.protobuf.message.Message):
+    """Запрос изменения выставленной заявки."""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    ACCOUNT_ID_FIELD_NUMBER: builtins.int
+    ORDER_ID_FIELD_NUMBER: builtins.int
+    IDEMPOTENCY_KEY_FIELD_NUMBER: builtins.int
+    QUANTITY_FIELD_NUMBER: builtins.int
+    PRICE_FIELD_NUMBER: builtins.int
+    PRICE_TYPE_FIELD_NUMBER: builtins.int
+    account_id: typing.Text
+    """Номер счета."""
+
+    order_id: typing.Text
+    """Идентификатор заявки на бирже."""
+
+    idempotency_key: typing.Text
+    """Новый идентификатор запроса выставления поручения для целей идемпотентности. Максимальная длина 36 символов. Перезатирает старый ключ."""
+
+    quantity: builtins.int
+    """Количество лотов."""
+
+    @property
+    def price(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Цена за 1 инструмент."""
+        pass
+    price_type: global___PriceType.ValueType
+    """Тип цены."""
+
+    def __init__(self,
+        *,
+        account_id: typing.Text = ...,
+        order_id: typing.Text = ...,
+        idempotency_key: typing.Text = ...,
+        quantity: builtins.int = ...,
+        price: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        price_type: global___PriceType.ValueType = ...,
+        ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["price",b"price"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["account_id",b"account_id","idempotency_key",b"idempotency_key","order_id",b"order_id","price",b"price","price_type",b"price_type","quantity",b"quantity"]) -> None: ...
+global___ReplaceOrderRequest = ReplaceOrderRequest

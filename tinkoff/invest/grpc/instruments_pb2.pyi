@@ -345,7 +345,7 @@ global___RealExchange = RealExchange
 
 
 class TradingSchedulesRequest(google.protobuf.message.Message):
-    """Запрос расписания торгов"""
+    """Запрос расписания торгов."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     EXCHANGE_FIELD_NUMBER: builtins.int
     FROM_FIELD_NUMBER: builtins.int
@@ -367,7 +367,7 @@ class TradingSchedulesRequest(google.protobuf.message.Message):
 global___TradingSchedulesRequest = TradingSchedulesRequest
 
 class TradingSchedulesResponse(google.protobuf.message.Message):
-    """Список торговых площадок"""
+    """Список торговых площадок."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     EXCHANGES_FIELD_NUMBER: builtins.int
     @property
@@ -609,21 +609,21 @@ class Coupon(google.protobuf.message.Message):
 
     @property
     def coupon_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
-        """Дата выплаты купона"""
+        """Дата выплаты купона."""
         pass
     coupon_number: builtins.int
-    """Номер купона"""
+    """Номер купона."""
 
     @property
     def fix_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
-        """(Опционально) Дата фиксации реестра для выплаты купона"""
+        """(Опционально) Дата фиксации реестра для выплаты купона."""
         pass
     @property
     def pay_one_bond(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
-        """Выплата на одну облигацию"""
+        """Выплата на одну облигацию."""
         pass
     coupon_type: global___CouponType.ValueType
-    """Тип купона"""
+    """Тип купона."""
 
     @property
     def coupon_start_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
@@ -819,6 +819,9 @@ class Bond(google.protobuf.message.Message):
     UID_FIELD_NUMBER: builtins.int
     REAL_EXCHANGE_FIELD_NUMBER: builtins.int
     POSITION_UID_FIELD_NUMBER: builtins.int
+    FOR_IIS_FLAG_FIELD_NUMBER: builtins.int
+    FIRST_1MIN_CANDLE_DATE_FIELD_NUMBER: builtins.int
+    FIRST_1DAY_CANDLE_DATE_FIELD_NUMBER: builtins.int
     figi: typing.Text
     """Figi-идентификатор инструмента."""
 
@@ -952,6 +955,17 @@ class Bond(google.protobuf.message.Message):
     position_uid: typing.Text
     """Уникальный идентификатор позиции инструмента."""
 
+    for_iis_flag: builtins.bool
+    """Признак доступности для ИИС."""
+
+    @property
+    def first_1min_candle_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Дата первой минутной свечи."""
+        pass
+    @property
+    def first_1day_candle_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Дата первой дневной свечи."""
+        pass
     def __init__(self,
         *,
         figi: typing.Text = ...,
@@ -994,9 +1008,12 @@ class Bond(google.protobuf.message.Message):
         uid: typing.Text = ...,
         real_exchange: global___RealExchange.ValueType = ...,
         position_uid: typing.Text = ...,
+        for_iis_flag: builtins.bool = ...,
+        first_1min_candle_date: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        first_1day_candle_date: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
         ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["aci_value",b"aci_value","dlong",b"dlong","dlong_min",b"dlong_min","dshort",b"dshort","dshort_min",b"dshort_min","klong",b"klong","kshort",b"kshort","maturity_date",b"maturity_date","min_price_increment",b"min_price_increment","nominal",b"nominal","placement_date",b"placement_date","placement_price",b"placement_price","state_reg_date",b"state_reg_date"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["aci_value",b"aci_value","amortization_flag",b"amortization_flag","api_trade_available_flag",b"api_trade_available_flag","buy_available_flag",b"buy_available_flag","class_code",b"class_code","country_of_risk",b"country_of_risk","country_of_risk_name",b"country_of_risk_name","coupon_quantity_per_year",b"coupon_quantity_per_year","currency",b"currency","dlong",b"dlong","dlong_min",b"dlong_min","dshort",b"dshort","dshort_min",b"dshort_min","exchange",b"exchange","figi",b"figi","floating_coupon_flag",b"floating_coupon_flag","isin",b"isin","issue_kind",b"issue_kind","issue_size",b"issue_size","issue_size_plan",b"issue_size_plan","klong",b"klong","kshort",b"kshort","lot",b"lot","maturity_date",b"maturity_date","min_price_increment",b"min_price_increment","name",b"name","nominal",b"nominal","otc_flag",b"otc_flag","perpetual_flag",b"perpetual_flag","placement_date",b"placement_date","placement_price",b"placement_price","position_uid",b"position_uid","real_exchange",b"real_exchange","sector",b"sector","sell_available_flag",b"sell_available_flag","short_enabled_flag",b"short_enabled_flag","state_reg_date",b"state_reg_date","ticker",b"ticker","trading_status",b"trading_status","uid",b"uid"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["aci_value",b"aci_value","dlong",b"dlong","dlong_min",b"dlong_min","dshort",b"dshort","dshort_min",b"dshort_min","first_1day_candle_date",b"first_1day_candle_date","first_1min_candle_date",b"first_1min_candle_date","klong",b"klong","kshort",b"kshort","maturity_date",b"maturity_date","min_price_increment",b"min_price_increment","nominal",b"nominal","placement_date",b"placement_date","placement_price",b"placement_price","state_reg_date",b"state_reg_date"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["aci_value",b"aci_value","amortization_flag",b"amortization_flag","api_trade_available_flag",b"api_trade_available_flag","buy_available_flag",b"buy_available_flag","class_code",b"class_code","country_of_risk",b"country_of_risk","country_of_risk_name",b"country_of_risk_name","coupon_quantity_per_year",b"coupon_quantity_per_year","currency",b"currency","dlong",b"dlong","dlong_min",b"dlong_min","dshort",b"dshort","dshort_min",b"dshort_min","exchange",b"exchange","figi",b"figi","first_1day_candle_date",b"first_1day_candle_date","first_1min_candle_date",b"first_1min_candle_date","floating_coupon_flag",b"floating_coupon_flag","for_iis_flag",b"for_iis_flag","isin",b"isin","issue_kind",b"issue_kind","issue_size",b"issue_size","issue_size_plan",b"issue_size_plan","klong",b"klong","kshort",b"kshort","lot",b"lot","maturity_date",b"maturity_date","min_price_increment",b"min_price_increment","name",b"name","nominal",b"nominal","otc_flag",b"otc_flag","perpetual_flag",b"perpetual_flag","placement_date",b"placement_date","placement_price",b"placement_price","position_uid",b"position_uid","real_exchange",b"real_exchange","sector",b"sector","sell_available_flag",b"sell_available_flag","short_enabled_flag",b"short_enabled_flag","state_reg_date",b"state_reg_date","ticker",b"ticker","trading_status",b"trading_status","uid",b"uid"]) -> None: ...
 global___Bond = Bond
 
 class Currency(google.protobuf.message.Message):
@@ -1030,6 +1047,9 @@ class Currency(google.protobuf.message.Message):
     UID_FIELD_NUMBER: builtins.int
     REAL_EXCHANGE_FIELD_NUMBER: builtins.int
     POSITION_UID_FIELD_NUMBER: builtins.int
+    FOR_IIS_FLAG_FIELD_NUMBER: builtins.int
+    FIRST_1MIN_CANDLE_DATE_FIELD_NUMBER: builtins.int
+    FIRST_1DAY_CANDLE_DATE_FIELD_NUMBER: builtins.int
     figi: typing.Text
     """Figi-идентификатор инструмента."""
 
@@ -1122,6 +1142,17 @@ class Currency(google.protobuf.message.Message):
     position_uid: typing.Text
     """Уникальный идентификатор позиции инструмента."""
 
+    for_iis_flag: builtins.bool
+    """Признак доступности для ИИС."""
+
+    @property
+    def first_1min_candle_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Дата первой минутной свечи."""
+        pass
+    @property
+    def first_1day_candle_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Дата первой дневной свечи."""
+        pass
     def __init__(self,
         *,
         figi: typing.Text = ...,
@@ -1152,9 +1183,12 @@ class Currency(google.protobuf.message.Message):
         uid: typing.Text = ...,
         real_exchange: global___RealExchange.ValueType = ...,
         position_uid: typing.Text = ...,
+        for_iis_flag: builtins.bool = ...,
+        first_1min_candle_date: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        first_1day_candle_date: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
         ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["dlong",b"dlong","dlong_min",b"dlong_min","dshort",b"dshort","dshort_min",b"dshort_min","klong",b"klong","kshort",b"kshort","min_price_increment",b"min_price_increment","nominal",b"nominal"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["api_trade_available_flag",b"api_trade_available_flag","buy_available_flag",b"buy_available_flag","class_code",b"class_code","country_of_risk",b"country_of_risk","country_of_risk_name",b"country_of_risk_name","currency",b"currency","dlong",b"dlong","dlong_min",b"dlong_min","dshort",b"dshort","dshort_min",b"dshort_min","exchange",b"exchange","figi",b"figi","isin",b"isin","iso_currency_name",b"iso_currency_name","klong",b"klong","kshort",b"kshort","lot",b"lot","min_price_increment",b"min_price_increment","name",b"name","nominal",b"nominal","otc_flag",b"otc_flag","position_uid",b"position_uid","real_exchange",b"real_exchange","sell_available_flag",b"sell_available_flag","short_enabled_flag",b"short_enabled_flag","ticker",b"ticker","trading_status",b"trading_status","uid",b"uid"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["dlong",b"dlong","dlong_min",b"dlong_min","dshort",b"dshort","dshort_min",b"dshort_min","first_1day_candle_date",b"first_1day_candle_date","first_1min_candle_date",b"first_1min_candle_date","klong",b"klong","kshort",b"kshort","min_price_increment",b"min_price_increment","nominal",b"nominal"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["api_trade_available_flag",b"api_trade_available_flag","buy_available_flag",b"buy_available_flag","class_code",b"class_code","country_of_risk",b"country_of_risk","country_of_risk_name",b"country_of_risk_name","currency",b"currency","dlong",b"dlong","dlong_min",b"dlong_min","dshort",b"dshort","dshort_min",b"dshort_min","exchange",b"exchange","figi",b"figi","first_1day_candle_date",b"first_1day_candle_date","first_1min_candle_date",b"first_1min_candle_date","for_iis_flag",b"for_iis_flag","isin",b"isin","iso_currency_name",b"iso_currency_name","klong",b"klong","kshort",b"kshort","lot",b"lot","min_price_increment",b"min_price_increment","name",b"name","nominal",b"nominal","otc_flag",b"otc_flag","position_uid",b"position_uid","real_exchange",b"real_exchange","sell_available_flag",b"sell_available_flag","short_enabled_flag",b"short_enabled_flag","ticker",b"ticker","trading_status",b"trading_status","uid",b"uid"]) -> None: ...
 global___Currency = Currency
 
 class Etf(google.protobuf.message.Message):
@@ -1192,6 +1226,9 @@ class Etf(google.protobuf.message.Message):
     UID_FIELD_NUMBER: builtins.int
     REAL_EXCHANGE_FIELD_NUMBER: builtins.int
     POSITION_UID_FIELD_NUMBER: builtins.int
+    FOR_IIS_FLAG_FIELD_NUMBER: builtins.int
+    FIRST_1MIN_CANDLE_DATE_FIELD_NUMBER: builtins.int
+    FIRST_1DAY_CANDLE_DATE_FIELD_NUMBER: builtins.int
     figi: typing.Text
     """Figi-идентификатор инструмента."""
 
@@ -1298,6 +1335,17 @@ class Etf(google.protobuf.message.Message):
     position_uid: typing.Text
     """Уникальный идентификатор позиции инструмента."""
 
+    for_iis_flag: builtins.bool
+    """Признак доступности для ИИС."""
+
+    @property
+    def first_1min_candle_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Дата первой минутной свечи."""
+        pass
+    @property
+    def first_1day_candle_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Дата первой дневной свечи."""
+        pass
     def __init__(self,
         *,
         figi: typing.Text = ...,
@@ -1332,9 +1380,12 @@ class Etf(google.protobuf.message.Message):
         uid: typing.Text = ...,
         real_exchange: global___RealExchange.ValueType = ...,
         position_uid: typing.Text = ...,
+        for_iis_flag: builtins.bool = ...,
+        first_1min_candle_date: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        first_1day_candle_date: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
         ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["dlong",b"dlong","dlong_min",b"dlong_min","dshort",b"dshort","dshort_min",b"dshort_min","fixed_commission",b"fixed_commission","klong",b"klong","kshort",b"kshort","min_price_increment",b"min_price_increment","num_shares",b"num_shares","released_date",b"released_date"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["api_trade_available_flag",b"api_trade_available_flag","buy_available_flag",b"buy_available_flag","class_code",b"class_code","country_of_risk",b"country_of_risk","country_of_risk_name",b"country_of_risk_name","currency",b"currency","dlong",b"dlong","dlong_min",b"dlong_min","dshort",b"dshort","dshort_min",b"dshort_min","exchange",b"exchange","figi",b"figi","fixed_commission",b"fixed_commission","focus_type",b"focus_type","isin",b"isin","klong",b"klong","kshort",b"kshort","lot",b"lot","min_price_increment",b"min_price_increment","name",b"name","num_shares",b"num_shares","otc_flag",b"otc_flag","position_uid",b"position_uid","real_exchange",b"real_exchange","rebalancing_freq",b"rebalancing_freq","released_date",b"released_date","sector",b"sector","sell_available_flag",b"sell_available_flag","short_enabled_flag",b"short_enabled_flag","ticker",b"ticker","trading_status",b"trading_status","uid",b"uid"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["dlong",b"dlong","dlong_min",b"dlong_min","dshort",b"dshort","dshort_min",b"dshort_min","first_1day_candle_date",b"first_1day_candle_date","first_1min_candle_date",b"first_1min_candle_date","fixed_commission",b"fixed_commission","klong",b"klong","kshort",b"kshort","min_price_increment",b"min_price_increment","num_shares",b"num_shares","released_date",b"released_date"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["api_trade_available_flag",b"api_trade_available_flag","buy_available_flag",b"buy_available_flag","class_code",b"class_code","country_of_risk",b"country_of_risk","country_of_risk_name",b"country_of_risk_name","currency",b"currency","dlong",b"dlong","dlong_min",b"dlong_min","dshort",b"dshort","dshort_min",b"dshort_min","exchange",b"exchange","figi",b"figi","first_1day_candle_date",b"first_1day_candle_date","first_1min_candle_date",b"first_1min_candle_date","fixed_commission",b"fixed_commission","focus_type",b"focus_type","for_iis_flag",b"for_iis_flag","isin",b"isin","klong",b"klong","kshort",b"kshort","lot",b"lot","min_price_increment",b"min_price_increment","name",b"name","num_shares",b"num_shares","otc_flag",b"otc_flag","position_uid",b"position_uid","real_exchange",b"real_exchange","rebalancing_freq",b"rebalancing_freq","released_date",b"released_date","sector",b"sector","sell_available_flag",b"sell_available_flag","short_enabled_flag",b"short_enabled_flag","ticker",b"ticker","trading_status",b"trading_status","uid",b"uid"]) -> None: ...
 global___Etf = Etf
 
 class Future(google.protobuf.message.Message):
@@ -1374,6 +1425,9 @@ class Future(google.protobuf.message.Message):
     REAL_EXCHANGE_FIELD_NUMBER: builtins.int
     POSITION_UID_FIELD_NUMBER: builtins.int
     BASIC_ASSET_POSITION_UID_FIELD_NUMBER: builtins.int
+    FOR_IIS_FLAG_FIELD_NUMBER: builtins.int
+    FIRST_1MIN_CANDLE_DATE_FIELD_NUMBER: builtins.int
+    FIRST_1DAY_CANDLE_DATE_FIELD_NUMBER: builtins.int
     figi: typing.Text
     """Figi-идентификатор инструмента."""
 
@@ -1487,6 +1541,17 @@ class Future(google.protobuf.message.Message):
     basic_asset_position_uid: typing.Text
     """Уникальный идентификатор позиции основного инструмента."""
 
+    for_iis_flag: builtins.bool
+    """Признак доступности для ИИС."""
+
+    @property
+    def first_1min_candle_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Дата первой минутной свечи."""
+        pass
+    @property
+    def first_1day_candle_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Дата первой дневной свечи."""
+        pass
     def __init__(self,
         *,
         figi: typing.Text = ...,
@@ -1523,9 +1588,12 @@ class Future(google.protobuf.message.Message):
         real_exchange: global___RealExchange.ValueType = ...,
         position_uid: typing.Text = ...,
         basic_asset_position_uid: typing.Text = ...,
+        for_iis_flag: builtins.bool = ...,
+        first_1min_candle_date: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        first_1day_candle_date: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
         ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["basic_asset_size",b"basic_asset_size","dlong",b"dlong","dlong_min",b"dlong_min","dshort",b"dshort","dshort_min",b"dshort_min","expiration_date",b"expiration_date","first_trade_date",b"first_trade_date","klong",b"klong","kshort",b"kshort","last_trade_date",b"last_trade_date","min_price_increment",b"min_price_increment"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["api_trade_available_flag",b"api_trade_available_flag","asset_type",b"asset_type","basic_asset",b"basic_asset","basic_asset_position_uid",b"basic_asset_position_uid","basic_asset_size",b"basic_asset_size","buy_available_flag",b"buy_available_flag","class_code",b"class_code","country_of_risk",b"country_of_risk","country_of_risk_name",b"country_of_risk_name","currency",b"currency","dlong",b"dlong","dlong_min",b"dlong_min","dshort",b"dshort","dshort_min",b"dshort_min","exchange",b"exchange","expiration_date",b"expiration_date","figi",b"figi","first_trade_date",b"first_trade_date","futures_type",b"futures_type","klong",b"klong","kshort",b"kshort","last_trade_date",b"last_trade_date","lot",b"lot","min_price_increment",b"min_price_increment","name",b"name","otc_flag",b"otc_flag","position_uid",b"position_uid","real_exchange",b"real_exchange","sector",b"sector","sell_available_flag",b"sell_available_flag","short_enabled_flag",b"short_enabled_flag","ticker",b"ticker","trading_status",b"trading_status","uid",b"uid"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["basic_asset_size",b"basic_asset_size","dlong",b"dlong","dlong_min",b"dlong_min","dshort",b"dshort","dshort_min",b"dshort_min","expiration_date",b"expiration_date","first_1day_candle_date",b"first_1day_candle_date","first_1min_candle_date",b"first_1min_candle_date","first_trade_date",b"first_trade_date","klong",b"klong","kshort",b"kshort","last_trade_date",b"last_trade_date","min_price_increment",b"min_price_increment"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["api_trade_available_flag",b"api_trade_available_flag","asset_type",b"asset_type","basic_asset",b"basic_asset","basic_asset_position_uid",b"basic_asset_position_uid","basic_asset_size",b"basic_asset_size","buy_available_flag",b"buy_available_flag","class_code",b"class_code","country_of_risk",b"country_of_risk","country_of_risk_name",b"country_of_risk_name","currency",b"currency","dlong",b"dlong","dlong_min",b"dlong_min","dshort",b"dshort","dshort_min",b"dshort_min","exchange",b"exchange","expiration_date",b"expiration_date","figi",b"figi","first_1day_candle_date",b"first_1day_candle_date","first_1min_candle_date",b"first_1min_candle_date","first_trade_date",b"first_trade_date","for_iis_flag",b"for_iis_flag","futures_type",b"futures_type","klong",b"klong","kshort",b"kshort","last_trade_date",b"last_trade_date","lot",b"lot","min_price_increment",b"min_price_increment","name",b"name","otc_flag",b"otc_flag","position_uid",b"position_uid","real_exchange",b"real_exchange","sector",b"sector","sell_available_flag",b"sell_available_flag","short_enabled_flag",b"short_enabled_flag","ticker",b"ticker","trading_status",b"trading_status","uid",b"uid"]) -> None: ...
 global___Future = Future
 
 class Share(google.protobuf.message.Message):
@@ -1564,6 +1632,9 @@ class Share(google.protobuf.message.Message):
     UID_FIELD_NUMBER: builtins.int
     REAL_EXCHANGE_FIELD_NUMBER: builtins.int
     POSITION_UID_FIELD_NUMBER: builtins.int
+    FOR_IIS_FLAG_FIELD_NUMBER: builtins.int
+    FIRST_1MIN_CANDLE_DATE_FIELD_NUMBER: builtins.int
+    FIRST_1DAY_CANDLE_DATE_FIELD_NUMBER: builtins.int
     figi: typing.Text
     """Figi-идентификатор инструмента."""
 
@@ -1672,6 +1743,17 @@ class Share(google.protobuf.message.Message):
     position_uid: typing.Text
     """Уникальный идентификатор позиции инструмента."""
 
+    for_iis_flag: builtins.bool
+    """Признак доступности для ИИС."""
+
+    @property
+    def first_1min_candle_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Дата первой минутной свечи."""
+        pass
+    @property
+    def first_1day_candle_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Дата первой дневной свечи."""
+        pass
     def __init__(self,
         *,
         figi: typing.Text = ...,
@@ -1707,9 +1789,12 @@ class Share(google.protobuf.message.Message):
         uid: typing.Text = ...,
         real_exchange: global___RealExchange.ValueType = ...,
         position_uid: typing.Text = ...,
+        for_iis_flag: builtins.bool = ...,
+        first_1min_candle_date: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        first_1day_candle_date: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
         ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["dlong",b"dlong","dlong_min",b"dlong_min","dshort",b"dshort","dshort_min",b"dshort_min","ipo_date",b"ipo_date","klong",b"klong","kshort",b"kshort","min_price_increment",b"min_price_increment","nominal",b"nominal"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["api_trade_available_flag",b"api_trade_available_flag","buy_available_flag",b"buy_available_flag","class_code",b"class_code","country_of_risk",b"country_of_risk","country_of_risk_name",b"country_of_risk_name","currency",b"currency","div_yield_flag",b"div_yield_flag","dlong",b"dlong","dlong_min",b"dlong_min","dshort",b"dshort","dshort_min",b"dshort_min","exchange",b"exchange","figi",b"figi","ipo_date",b"ipo_date","isin",b"isin","issue_size",b"issue_size","issue_size_plan",b"issue_size_plan","klong",b"klong","kshort",b"kshort","lot",b"lot","min_price_increment",b"min_price_increment","name",b"name","nominal",b"nominal","otc_flag",b"otc_flag","position_uid",b"position_uid","real_exchange",b"real_exchange","sector",b"sector","sell_available_flag",b"sell_available_flag","share_type",b"share_type","short_enabled_flag",b"short_enabled_flag","ticker",b"ticker","trading_status",b"trading_status","uid",b"uid"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["dlong",b"dlong","dlong_min",b"dlong_min","dshort",b"dshort","dshort_min",b"dshort_min","first_1day_candle_date",b"first_1day_candle_date","first_1min_candle_date",b"first_1min_candle_date","ipo_date",b"ipo_date","klong",b"klong","kshort",b"kshort","min_price_increment",b"min_price_increment","nominal",b"nominal"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["api_trade_available_flag",b"api_trade_available_flag","buy_available_flag",b"buy_available_flag","class_code",b"class_code","country_of_risk",b"country_of_risk","country_of_risk_name",b"country_of_risk_name","currency",b"currency","div_yield_flag",b"div_yield_flag","dlong",b"dlong","dlong_min",b"dlong_min","dshort",b"dshort","dshort_min",b"dshort_min","exchange",b"exchange","figi",b"figi","first_1day_candle_date",b"first_1day_candle_date","first_1min_candle_date",b"first_1min_candle_date","for_iis_flag",b"for_iis_flag","ipo_date",b"ipo_date","isin",b"isin","issue_size",b"issue_size","issue_size_plan",b"issue_size_plan","klong",b"klong","kshort",b"kshort","lot",b"lot","min_price_increment",b"min_price_increment","name",b"name","nominal",b"nominal","otc_flag",b"otc_flag","position_uid",b"position_uid","real_exchange",b"real_exchange","sector",b"sector","sell_available_flag",b"sell_available_flag","share_type",b"share_type","short_enabled_flag",b"short_enabled_flag","ticker",b"ticker","trading_status",b"trading_status","uid",b"uid"]) -> None: ...
 global___Share = Share
 
 class GetAccruedInterestsRequest(google.protobuf.message.Message):
@@ -1877,6 +1962,9 @@ class Instrument(google.protobuf.message.Message):
     UID_FIELD_NUMBER: builtins.int
     REAL_EXCHANGE_FIELD_NUMBER: builtins.int
     POSITION_UID_FIELD_NUMBER: builtins.int
+    FOR_IIS_FLAG_FIELD_NUMBER: builtins.int
+    FIRST_1MIN_CANDLE_DATE_FIELD_NUMBER: builtins.int
+    FIRST_1DAY_CANDLE_DATE_FIELD_NUMBER: builtins.int
     figi: typing.Text
     """Figi-идентификатор инструмента."""
 
@@ -1965,6 +2053,17 @@ class Instrument(google.protobuf.message.Message):
     position_uid: typing.Text
     """Уникальный идентификатор позиции инструмента."""
 
+    for_iis_flag: builtins.bool
+    """Признак доступности для ИИС."""
+
+    @property
+    def first_1min_candle_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Дата первой минутной свечи."""
+        pass
+    @property
+    def first_1day_candle_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Дата первой дневной свечи."""
+        pass
     def __init__(self,
         *,
         figi: typing.Text = ...,
@@ -1994,9 +2093,12 @@ class Instrument(google.protobuf.message.Message):
         uid: typing.Text = ...,
         real_exchange: global___RealExchange.ValueType = ...,
         position_uid: typing.Text = ...,
+        for_iis_flag: builtins.bool = ...,
+        first_1min_candle_date: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        first_1day_candle_date: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
         ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["dlong",b"dlong","dlong_min",b"dlong_min","dshort",b"dshort","dshort_min",b"dshort_min","klong",b"klong","kshort",b"kshort","min_price_increment",b"min_price_increment"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["api_trade_available_flag",b"api_trade_available_flag","buy_available_flag",b"buy_available_flag","class_code",b"class_code","country_of_risk",b"country_of_risk","country_of_risk_name",b"country_of_risk_name","currency",b"currency","dlong",b"dlong","dlong_min",b"dlong_min","dshort",b"dshort","dshort_min",b"dshort_min","exchange",b"exchange","figi",b"figi","instrument_type",b"instrument_type","isin",b"isin","klong",b"klong","kshort",b"kshort","lot",b"lot","min_price_increment",b"min_price_increment","name",b"name","otc_flag",b"otc_flag","position_uid",b"position_uid","real_exchange",b"real_exchange","sell_available_flag",b"sell_available_flag","short_enabled_flag",b"short_enabled_flag","ticker",b"ticker","trading_status",b"trading_status","uid",b"uid"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["dlong",b"dlong","dlong_min",b"dlong_min","dshort",b"dshort","dshort_min",b"dshort_min","first_1day_candle_date",b"first_1day_candle_date","first_1min_candle_date",b"first_1min_candle_date","klong",b"klong","kshort",b"kshort","min_price_increment",b"min_price_increment"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["api_trade_available_flag",b"api_trade_available_flag","buy_available_flag",b"buy_available_flag","class_code",b"class_code","country_of_risk",b"country_of_risk","country_of_risk_name",b"country_of_risk_name","currency",b"currency","dlong",b"dlong","dlong_min",b"dlong_min","dshort",b"dshort","dshort_min",b"dshort_min","exchange",b"exchange","figi",b"figi","first_1day_candle_date",b"first_1day_candle_date","first_1min_candle_date",b"first_1min_candle_date","for_iis_flag",b"for_iis_flag","instrument_type",b"instrument_type","isin",b"isin","klong",b"klong","kshort",b"kshort","lot",b"lot","min_price_increment",b"min_price_increment","name",b"name","otc_flag",b"otc_flag","position_uid",b"position_uid","real_exchange",b"real_exchange","sell_available_flag",b"sell_available_flag","short_enabled_flag",b"short_enabled_flag","ticker",b"ticker","trading_status",b"trading_status","uid",b"uid"]) -> None: ...
 global___Instrument = Instrument
 
 class GetDividendsRequest(google.protobuf.message.Message):
@@ -3167,6 +3269,9 @@ class InstrumentShort(google.protobuf.message.Message):
     UID_FIELD_NUMBER: builtins.int
     POSITION_UID_FIELD_NUMBER: builtins.int
     API_TRADE_AVAILABLE_FLAG_FIELD_NUMBER: builtins.int
+    FOR_IIS_FLAG_FIELD_NUMBER: builtins.int
+    FIRST_1MIN_CANDLE_DATE_FIELD_NUMBER: builtins.int
+    FIRST_1DAY_CANDLE_DATE_FIELD_NUMBER: builtins.int
     isin: typing.Text
     """Isin инструмента."""
 
@@ -3194,6 +3299,17 @@ class InstrumentShort(google.protobuf.message.Message):
     api_trade_available_flag: builtins.bool
     """Признак доступности торгов через API."""
 
+    for_iis_flag: builtins.bool
+    """Признак доступности для ИИС."""
+
+    @property
+    def first_1min_candle_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Дата первой минутной свечи."""
+        pass
+    @property
+    def first_1day_candle_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Дата первой дневной свечи."""
+        pass
     def __init__(self,
         *,
         isin: typing.Text = ...,
@@ -3205,8 +3321,12 @@ class InstrumentShort(google.protobuf.message.Message):
         uid: typing.Text = ...,
         position_uid: typing.Text = ...,
         api_trade_available_flag: builtins.bool = ...,
+        for_iis_flag: builtins.bool = ...,
+        first_1min_candle_date: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        first_1day_candle_date: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
         ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["api_trade_available_flag",b"api_trade_available_flag","class_code",b"class_code","figi",b"figi","instrument_type",b"instrument_type","isin",b"isin","name",b"name","position_uid",b"position_uid","ticker",b"ticker","uid",b"uid"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["first_1day_candle_date",b"first_1day_candle_date","first_1min_candle_date",b"first_1min_candle_date"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["api_trade_available_flag",b"api_trade_available_flag","class_code",b"class_code","figi",b"figi","first_1day_candle_date",b"first_1day_candle_date","first_1min_candle_date",b"first_1min_candle_date","for_iis_flag",b"for_iis_flag","instrument_type",b"instrument_type","isin",b"isin","name",b"name","position_uid",b"position_uid","ticker",b"ticker","uid",b"uid"]) -> None: ...
 global___InstrumentShort = InstrumentShort
 
 class GetBrandsRequest(google.protobuf.message.Message):

@@ -90,6 +90,8 @@ from .schemas import (
     GetLastTradesResponse,
     GetMarginAttributesRequest,
     GetMarginAttributesResponse,
+    GetOperationsByCursorRequest,
+    GetOperationsByCursorResponse,
     GetOrderBookRequest,
     GetOrderBookResponse,
     GetOrdersRequest,
@@ -129,6 +131,7 @@ from .schemas import (
     PostStopOrderRequest,
     PostStopOrderResponse,
     Quotation,
+    ReplaceOrderRequest,
     SandboxPayInRequest,
     SandboxPayInResponse,
     ShareResponse,
@@ -946,6 +949,25 @@ class OperationsService(_grpc_helpers.Service):
             response, GetDividendsForeignIssuerResponse
         )
 
+    @handle_aio_request_error("GetOperationsByCursor")
+    async def get_operations_by_cursor(
+        self,
+        request: GetOperationsByCursorRequest,
+    ) -> GetOperationsByCursorResponse:
+        response_coro = self.stub.GetOperationsByCursor(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, operations_pb2.GetOperationsByCursorRequest()
+            ),
+            metadata=self.metadata,
+        )
+        response = await response_coro
+        log_request(
+            await get_tracking_id_from_coro(response_coro), "GetOperationsByCursor"
+        )
+        return _grpc_helpers.protobuf_to_dataclass(
+            response, GetOperationsByCursorResponse
+        )
+
 
 class OperationsStreamService(_grpc_helpers.Service):
     _stub_factory = operations_pb2_grpc.OperationsStreamServiceStub
@@ -1070,6 +1092,18 @@ class OrdersService(_grpc_helpers.Service):
         response = await response_coro
         log_request(await get_tracking_id_from_coro(response_coro), "GetOrders")
         return _grpc_helpers.protobuf_to_dataclass(response, GetOrdersResponse)
+
+    @handle_aio_request_error("ReplaceOrder")
+    async def replace_order(self, request: ReplaceOrderRequest) -> PostOrderResponse:
+        response_coro = self.stub.ReplaceOrder(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, orders_pb2.ReplaceOrderRequest()
+            ),
+            metadata=self.metadata,
+        )
+        response = await response_coro
+        log_request(await get_tracking_id_from_coro(response_coro), "ReplaceOrder")
+        return _grpc_helpers.protobuf_to_dataclass(response, PostOrderResponse)
 
 
 class UsersService(_grpc_helpers.Service):

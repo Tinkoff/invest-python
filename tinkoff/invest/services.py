@@ -95,6 +95,8 @@ from .schemas import (
     GetLastTradesResponse,
     GetMarginAttributesRequest,
     GetMarginAttributesResponse,
+    GetOperationsByCursorRequest,
+    GetOperationsByCursorResponse,
     GetOrderBookRequest,
     GetOrderBookResponse,
     GetOrdersRequest,
@@ -135,6 +137,7 @@ from .schemas import (
     PostStopOrderRequest,
     PostStopOrderResponse,
     Quotation,
+    ReplaceOrderRequest,
     SandboxPayInRequest,
     SandboxPayInResponse,
     ShareResponse,
@@ -1062,6 +1065,22 @@ class OperationsService(_grpc_helpers.Service):
             response, GetDividendsForeignIssuerResponse
         )
 
+    @handle_request_error("GetOperationsByCursor")
+    def get_operations_by_cursor(
+        self,
+        request: GetOperationsByCursorRequest,
+    ) -> GetOperationsByCursorResponse:
+        response, call = self.stub.GetOperationsByCursor.with_call(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, operations_pb2.GetOperationsByCursorRequest()
+            ),
+            metadata=self.metadata,
+        )
+        log_request(get_tracking_id_from_call(call), "GetOperationsByCursor")
+        return _grpc_helpers.protobuf_to_dataclass(
+            response, GetOperationsByCursorResponse
+        )
+
 
 class OperationsStreamService(_grpc_helpers.Service):
     _stub_factory = operations_pb2_grpc.OperationsStreamServiceStub
@@ -1182,6 +1201,17 @@ class OrdersService(_grpc_helpers.Service):
         )
         log_request(get_tracking_id_from_call(call), "GetOrders")
         return _grpc_helpers.protobuf_to_dataclass(response, GetOrdersResponse)
+
+    @handle_request_error("ReplaceOrder")
+    def replace_order(self, request: ReplaceOrderRequest) -> PostOrderResponse:
+        response, call = self.stub.ReplaceOrder.with_call(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, orders_pb2.ReplaceOrderRequest()
+            ),
+            metadata=self.metadata,
+        )
+        log_request(get_tracking_id_from_call(call), "ReplaceOrder")
+        return _grpc_helpers.protobuf_to_dataclass(response, PostOrderResponse)
 
 
 class UsersService(_grpc_helpers.Service):

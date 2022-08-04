@@ -252,6 +252,25 @@ class PortfolioSubscriptionStatus(_grpc_helpers.Enum):
     PORTFOLIO_SUBSCRIPTION_STATUS_INTERNAL_ERROR = 3
 
 
+# New
+class InstrumentType(_grpc_helpers.Enum):
+    INSTRUMENT_TYPE_UNSPECIFIED = 0
+    INSTRUMENT_TYPE_BOND = 1
+    INSTRUMENT_TYPE_SHARE = 2
+    INSTRUMENT_TYPE_CURRENCY = 3
+    INSTRUMENT_TYPE_ETF = 4
+    INSTRUMENT_TYPE_FUTURES = 5
+    INSTRUMENT_TYPE_SP = 6
+    INSTRUMENT_TYPE_OPTION = 7
+
+
+# New
+class PriceType(_grpc_helpers.Enum):
+    PRICE_TYPE_UNSPECIFIED = 0
+    PRICE_TYPE_POINT = 1
+    PRICE_TYPE_CURRENCY = 2
+
+
 @dataclass(eq=False, repr=True)
 class MoneyValue(_grpc_helpers.Message):
     currency: str = _grpc_helpers.string_field(1)
@@ -347,7 +366,7 @@ class Coupon(_grpc_helpers.Message):
     coupon_number: int = _grpc_helpers.int64_field(3)
     fix_date: datetime = _grpc_helpers.message_field(4)
     pay_one_bond: "MoneyValue" = _grpc_helpers.message_field(5)
-    coupon_type: "CouponType" = _grpc_helpers.message_field(6)
+    coupon_type: "CouponType" = _grpc_helpers.enum_field(6)
     coupon_start_date: datetime = _grpc_helpers.message_field(7)
     coupon_end_date: datetime = _grpc_helpers.message_field(8)
     coupon_period: int = _grpc_helpers.int32_field(9)
@@ -435,6 +454,9 @@ class Bond(_grpc_helpers.Message):  # pylint:disable=too-many-instance-attribute
     uid: str = _grpc_helpers.string_field(40)
     real_exchange: "RealExchange" = _grpc_helpers.message_field(41)
     position_uid: str = _grpc_helpers.string_field(42)
+    for_iis_flag: bool = _grpc_helpers.bool_field(51)
+    first_1min_candle_date: datetime = _grpc_helpers.message_field(61)
+    first_1day_candle_date: datetime = _grpc_helpers.message_field(62)
 
 
 @dataclass(eq=False, repr=True)
@@ -467,6 +489,9 @@ class Currency(_grpc_helpers.Message):  # pylint:disable=too-many-instance-attri
     uid: str = _grpc_helpers.string_field(27)
     real_exchange: "RealExchange" = _grpc_helpers.message_field(28)
     position_uid: str = _grpc_helpers.string_field(29)
+    for_iis_flag: bool = _grpc_helpers.bool_field(41)
+    first_1min_candle_date: datetime = _grpc_helpers.message_field(56)
+    first_1day_candle_date: datetime = _grpc_helpers.message_field(57)
 
 
 @dataclass(eq=False, repr=True)
@@ -503,6 +528,9 @@ class Etf(_grpc_helpers.Message):  # pylint:disable=too-many-instance-attributes
     uid: str = _grpc_helpers.string_field(31)
     real_exchange: "RealExchange" = _grpc_helpers.message_field(32)
     position_uid: str = _grpc_helpers.string_field(33)
+    for_iis_flag: bool = _grpc_helpers.bool_field(41)
+    first_1min_candle_date: datetime = _grpc_helpers.message_field(56)
+    first_1day_candle_date: datetime = _grpc_helpers.message_field(57)
 
 
 @dataclass(eq=False, repr=True)
@@ -541,6 +569,9 @@ class Future(_grpc_helpers.Message):  # pylint:disable=too-many-instance-attribu
     real_exchange: "RealExchange" = _grpc_helpers.message_field(32)
     position_uid: str = _grpc_helpers.string_field(33)
     basic_asset_position_uid: str = _grpc_helpers.string_field(34)
+    for_iis_flag: bool = _grpc_helpers.bool_field(41)
+    first_1min_candle_date: datetime = _grpc_helpers.message_field(56)
+    first_1day_candle_date: datetime = _grpc_helpers.message_field(57)
 
 
 @dataclass(eq=False, repr=True)
@@ -578,6 +609,9 @@ class Share(_grpc_helpers.Message):  # pylint:disable=too-many-instance-attribut
     uid: str = _grpc_helpers.string_field(33)
     real_exchange: "RealExchange" = _grpc_helpers.message_field(34)
     position_uid: str = _grpc_helpers.string_field(35)
+    for_iis_flag: bool = _grpc_helpers.bool_field(41)
+    first_1min_candle_date: datetime = _grpc_helpers.message_field(56)
+    first_1day_candle_date: datetime = _grpc_helpers.message_field(57)
 
 
 @dataclass(eq=False, repr=True)
@@ -647,6 +681,9 @@ class Instrument(_grpc_helpers.Message):  # pylint:disable=too-many-instance-att
     uid: str = _grpc_helpers.string_field(25)
     real_exchange: "RealExchange" = _grpc_helpers.message_field(26)
     position_uid: str = _grpc_helpers.string_field(27)
+    for_iis_flag: bool = _grpc_helpers.bool_field(36)
+    first_1min_candle_date: datetime = _grpc_helpers.message_field(56)
+    first_1day_candle_date: datetime = _grpc_helpers.message_field(57)
 
 
 @dataclass(eq=False, repr=True)
@@ -698,7 +735,7 @@ class AssetsResponse(_grpc_helpers.Message):
 @dataclass(eq=False, repr=True)
 class AssetFull(_grpc_helpers.Message):
     uid: str = _grpc_helpers.string_field(1)
-    type: "AssetType" = _grpc_helpers.message_field(2)
+    type: "AssetType" = _grpc_helpers.enum_field(2)
     name: str = _grpc_helpers.string_field(3)
     name_brief: str = _grpc_helpers.string_field(4)
     description: str = _grpc_helpers.string_field(5)
@@ -720,7 +757,7 @@ class AssetFull(_grpc_helpers.Message):
 @dataclass(eq=False, repr=True)
 class Asset(_grpc_helpers.Message):
     uid: str = _grpc_helpers.string_field(1)
-    type: "AssetType" = _grpc_helpers.message_field(2)
+    type: "AssetType" = _grpc_helpers.enum_field(2)
     name: str = _grpc_helpers.string_field(3)
     instruments: List["AssetInstrument"] = _grpc_helpers.message_field(4)
 
@@ -745,7 +782,7 @@ class AssetSecurity(_grpc_helpers.Message):
 
 @dataclass(eq=False, repr=True)
 class AssetShare(_grpc_helpers.Message):
-    type: "ShareType" = _grpc_helpers.message_field(1)
+    type: "ShareType" = _grpc_helpers.enum_field(1)
     issue_size: "Quotation" = _grpc_helpers.message_field(2)
     nominal: "Quotation" = _grpc_helpers.message_field(3)
     nominal_currency: str = _grpc_helpers.string_field(4)
@@ -792,9 +829,9 @@ class AssetStructuredProduct(_grpc_helpers.Message):
     borrow_name: str = _grpc_helpers.string_field(1)
     nominal: "Quotation" = _grpc_helpers.message_field(2)
     nominal_currency: str = _grpc_helpers.string_field(3)
-    type: "StructuredProductType" = _grpc_helpers.message_field(4)
+    type: "StructuredProductType" = _grpc_helpers.enum_field(4)
     logic_portfolio: str = _grpc_helpers.string_field(5)
-    asset_type: "AssetType" = _grpc_helpers.message_field(6)
+    asset_type: "AssetType" = _grpc_helpers.enum_field(6)
     basic_asset: str = _grpc_helpers.string_field(7)
     safety_barrier: "Quotation" = _grpc_helpers.message_field(8)
     maturity_date: datetime = _grpc_helpers.message_field(9)
@@ -897,7 +934,7 @@ class FavoriteInstrument(_grpc_helpers.Message):
 @dataclass(eq=False, repr=True)
 class EditFavoritesRequest(_grpc_helpers.Message):
     instruments: List["EditFavoritesRequestInstrument"] = _grpc_helpers.message_field(1)
-    action_type: "EditFavoritesActionType" = _grpc_helpers.message_field(6)
+    action_type: "EditFavoritesActionType" = _grpc_helpers.enum_field(6)
 
 
 @dataclass(eq=False, repr=True)
@@ -949,6 +986,9 @@ class InstrumentShort(_grpc_helpers.Message):
     uid: str = _grpc_helpers.string_field(7)
     position_uid: str = _grpc_helpers.string_field(8)
     api_trade_available_flag: str = _grpc_helpers.string_field(11)
+    for_iis_flag: bool = _grpc_helpers.bool_field(12)
+    first_1min_candle_date: datetime = _grpc_helpers.message_field(26)
+    first_1day_candle_date: datetime = _grpc_helpers.message_field(27)
 
 
 @dataclass(eq=False, repr=True)
@@ -1329,7 +1369,7 @@ class Operation(_grpc_helpers.Message):  # pylint:disable=too-many-instance-attr
     instrument_type: str = _grpc_helpers.string_field(10)
     date: datetime = _grpc_helpers.message_field(11)
     type: str = _grpc_helpers.string_field(12)
-    operation_type: "OperationType" = _grpc_helpers.string_field(13)
+    operation_type: "OperationType" = _grpc_helpers.enum_field(13)
     trades: List["OperationTrade"] = _grpc_helpers.message_field(14)
 
 
@@ -1514,6 +1554,16 @@ class OrderStage(_grpc_helpers.Message):
     price: "MoneyValue" = _grpc_helpers.message_field(1)
     quantity: int = _grpc_helpers.int64_field(2)
     trade_id: str = _grpc_helpers.string_field(3)
+
+
+# New
+class ReplaceOrderRequest(_grpc_helpers.Message):
+    account_id: str = _grpc_helpers.string_field(1)
+    order_id: str = _grpc_helpers.string_field(6)
+    idempotency_key: str = _grpc_helpers.string_field(7)
+    quantity: int = _grpc_helpers.int64_field(11)
+    price: "Quotation" = _grpc_helpers.message_field(12)
+    price_type: "PriceType" = _grpc_helpers.enum_field(13)
 
 
 @dataclass(eq=False, repr=True)
@@ -1858,3 +1908,70 @@ class PortfolioSubscriptionResult(_grpc_helpers.Message):
 class AccountSubscriptionStatus(_grpc_helpers.Message):
     account_id: str = _grpc_helpers.string_field(1)
     subscription_status: "PortfolioSubscriptionStatus" = _grpc_helpers.message_field(6)
+
+
+# New
+class GetOperationsByCursorRequest(_grpc_helpers.Message):
+    account_id: str = _grpc_helpers.string_field(1)
+    instrument_id: str = _grpc_helpers.string_field(2)
+    from_: datetime = _grpc_helpers.message_field(6)
+    to: datetime = _grpc_helpers.message_field(7)
+    cursor: str = _grpc_helpers.string_field(11)
+    limit: int = _grpc_helpers.int32_field(12)
+    operation_types: List["OperationType"] = _grpc_helpers.message_field(13)
+    state: "OperationState" = _grpc_helpers.message_field(14)
+    without_commissions: bool = _grpc_helpers.bool_field(15)
+    without_trades: bool = _grpc_helpers.bool_field(16)
+    without_overnights: bool = _grpc_helpers.bool_field(17)
+
+
+# New
+class GetOperationsByCursorResponse(_grpc_helpers.Message):
+    has_next: bool = _grpc_helpers.bool_field(1)
+    next_cursor: str = _grpc_helpers.string_field(2)
+    items: List["OperationItem"] = _grpc_helpers.message_field(6)
+
+
+# New
+class OperationItem(_grpc_helpers.Message):
+    cursor: str = _grpc_helpers.string_field(1)
+    broker_account_id: str = _grpc_helpers.string_field(6)
+    id: str = _grpc_helpers.string_field(16)
+    parent_operation_id: str = _grpc_helpers.string_field(17)
+    name: str = _grpc_helpers.string_field(18)
+    date: datetime = _grpc_helpers.message_field(21)
+    type: "OperationType" = _grpc_helpers.enum_field(22)
+    description: str = _grpc_helpers.string_field(23)
+    state: "OperationState" = _grpc_helpers.message_field(24)
+    instrument_uid: str = _grpc_helpers.string_field(31)
+    figi: str = _grpc_helpers.string_field(32)
+    instrument_type: str = _grpc_helpers.string_field(33)
+    instrument_kind: "InstrumentType" = _grpc_helpers.enum_field(34)
+    payment: "MoneyValue" = _grpc_helpers.message_field(41)
+    price: "MoneyValue" = _grpc_helpers.message_field(42)
+    commission: "MoneyValue" = _grpc_helpers.message_field(43)
+    yield_: "MoneyValue" = _grpc_helpers.message_field(44)
+    yield_relative: "Quotation" = _grpc_helpers.message_field(45)
+    accrued_int: "MoneyValue" = _grpc_helpers.message_field(46)
+    quantity: int = _grpc_helpers.int64_field(51)
+    quantity_rest: int = _grpc_helpers.int64_field(52)
+    quantity_done: int = _grpc_helpers.int64_field(53)
+    cancel_date_time: datetime = _grpc_helpers.message_field(56)
+    cancel_reason: str = _grpc_helpers.string_field(57)
+    trades_info: "OperationItemTrades" = _grpc_helpers.message_field(61)
+
+
+# New
+class OperationItemTrades(_grpc_helpers.Message):
+    trades_size: int = _grpc_helpers.int32_field(1)
+    trades: List["OperationItemTrade"] = _grpc_helpers.message_field(6)
+
+
+# New
+class OperationItemTrade(_grpc_helpers.Message):
+    num: str = _grpc_helpers.string_field(1)
+    date: datetime = _grpc_helpers.message_field(6)
+    quantity: int = _grpc_helpers.int64_field(11)
+    price: "MoneyValue" = _grpc_helpers.message_field(16)
+    yield_: "MoneyValue" = _grpc_helpers.message_field(21)
+    yield_relative: "Quotation" = _grpc_helpers.message_field(22)
