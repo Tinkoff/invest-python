@@ -266,7 +266,6 @@ class MarketDataCache(ICandleGetter):
         for cached in figi_cache_storage.get(request_range=(from_, to)):
             cached_start, cached_end = cached.date_range
             cached_candles = list(cached.historic_candles)
-            assert cached_start >= processed_time
             if cached_start > processed_time:
                 yield from self._with_saving_into_cache(
                     storage=figi_cache_storage,
