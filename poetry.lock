@@ -143,7 +143,7 @@ uvloop = ["uvloop (>=0.15.2)"]
 name = "cachetools"
 version = "5.2.0"
 description = "Extensible memoizing collections and decorators"
-category = "main"
+category = "dev"
 optional = false
 python-versions = "~=3.7"
 
@@ -1489,7 +1489,7 @@ test = ["pytest"]
 name = "types-cachetools"
 version = "5.2.1"
 description = "Typing stubs for cachetools"
-category = "main"
+category = "dev"
 optional = false
 python-versions = "*"
 
@@ -1602,7 +1602,7 @@ all = ["pandas", "numpy", "matplotlib", "mplfinance"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "f001f6e2d12ed0f90fcbcc729faa987690d28e68153d8ebd7421ad86944c7315"
+content-hash = "70db455ba288db797b5b8159c3c15428bf29339c1087599a37797a257dbfd235"
 
 [metadata.files]
 appnope = [
