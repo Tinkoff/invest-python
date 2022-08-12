@@ -167,7 +167,7 @@ class InstrumentsServiceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def GetBondCoupons(self, request, context):
-        """Метод получения графика выплат купонов по облигации
+        """Метод получения графика выплат купонов по облигации.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')

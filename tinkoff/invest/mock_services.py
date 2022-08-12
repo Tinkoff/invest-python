@@ -119,15 +119,10 @@ class MockedServices(Services):
             quantity: int = 0,
             price: Optional[Quotation] = None,  # pylint: disable=unused-argument
             direction: OrderDirection = OrderDirection(0),
-            account_id: str = "",
-            order_type: OrderType = OrderType(0),
+            account_id: str = "",  # pylint: disable=unused-argument
+            order_type: OrderType = OrderType(0),  # pylint: disable=unused-argument
             order_id: str = "",  # pylint: disable=unused-argument
         ):
-            assert figi == self._settings.share_id
-            assert quantity > 0
-            assert account_id == self._settings.account_id
-            assert order_type.ORDER_TYPE_MARKET
-
             last_candle = self._current_market_data[-1]
             last_market_price = quotation_to_decimal(last_candle.close)
 

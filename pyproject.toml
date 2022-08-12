@@ -4,7 +4,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "tinkoff-investments"
-version = "0.2.0-beta32"
+version = "0.2.0-beta33"
 description = ""
 authors = ["Danil Akhtarov <d.akhtarov@tinkoff.ru>"]
 license = "Apache-2.0"
@@ -31,6 +31,7 @@ types-cachetools = "^5.2.1"
 
 [tool.poetry.dev-dependencies]
 autoflake = "^1.4"
+bandit = "^1.7.4"
 black = {extras = ["jupyter"], version = "^22.1.0"}
 codecov = "^2.1.12"
 flake8 = "^4.0.1"

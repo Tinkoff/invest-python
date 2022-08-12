@@ -7,7 +7,8 @@ OUT = .
 PROTOS = protos
 
 TEST = $(POETRY_RUN) pytest $(args) --verbosity=2 --showlocals --strict-markers --log-level=DEBUG
-CODE = tests tinkoff examples scripts
+MAIN_CODE = tinkoff examples scripts
+CODE = tests $(MAIN_CODE)
 EXCLUDE_CODE = tinkoff/invest/grpc
 
 .PHONY: test
@@ -18,6 +19,7 @@ test:
 lint:
 	$(POETRY_RUN) flake8 --jobs 1 --statistics --show-source $(CODE)
 	$(POETRY_RUN) pylint --jobs 1 --rcfile=setup.cfg $(CODE)
+	$(POETRY_RUN) bandit -r $(MAIN_CODE)
 	$(POETRY_RUN) black --line-length=88 --exclude=$(EXCLUDE_CODE) --check $(CODE)
 	$(POETRY_RUN) pytest --dead-fixtures --dup-fixtures
 	$(POETRY_RUN) mypy $(CODE)

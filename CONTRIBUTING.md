@@ -58,6 +58,14 @@ make gen-grpc
 - tinkoff/invest/schemas.py
 - tinkoff/invest/services.py
 
+### Загрузка proto файлов и генерация клиента
+
+Можно упростить все до одной команды.
+
+```
+make gen-client
+```
+
 ### Release новой версии
 
 ```

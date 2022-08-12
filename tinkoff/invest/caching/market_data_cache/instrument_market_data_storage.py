@@ -184,9 +184,6 @@ class InstrumentMarketDataStorage(
     ) -> Tuple[Tuple[datetime, datetime], Path]:
         new_range = (min(min(range1), min(range2)), max(max(range1), max(range2)))
         new_file = self._get_file_path(date_range=new_range)
-        assert file1 != file2
-        assert file2 != new_file
-        assert file1 != new_file
 
         with open(file1, "r") as infile1:  # pylint: disable=W1514
             reader1 = csv.DictReader(infile1, fieldnames=self._settings.field_names)
@@ -267,7 +264,6 @@ class InstrumentMarketDataStorage(
             for data in data_list:
                 data.date_range = datetime_range_floor(data.date_range)
                 new_file = self._write_candles_file(data)
-                assert data.date_range not in meta_file.cached_range_in_file
                 meta_file.cached_range_in_file[data.date_range] = new_file
             new_cached_range_in_file = self._try_merge_files(
                 meta_file.cached_range_in_file

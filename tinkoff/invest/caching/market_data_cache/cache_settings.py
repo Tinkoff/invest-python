@@ -2,7 +2,7 @@ import contextlib
 import dataclasses
 import enum
 import os
-import pickle  # noqa: S403 Consider possible security implications.
+import pickle  # noqa: S403 # nosec
 from datetime import datetime
 from pathlib import Path
 from typing import Dict, Generator, Sequence, Tuple
@@ -37,7 +37,7 @@ class FileMetaData:
 def meta_file_context(meta_file_path: Path) -> Generator[FileMetaData, None, None]:
     try:
         with open(meta_file_path, "rb") as f:
-            meta = pickle.load(f)  # noqa: S301
+            meta = pickle.load(f)  # noqa: S301 # nosec
     except FileNotFoundError:
         meta = FileMetaData(cached_range_in_file={})
     try:

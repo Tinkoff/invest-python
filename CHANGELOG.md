@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [0.2.0-beta33](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta33) - 2022-08-04
+
+<small>[Compare with 0.2.0-beta32](https://github.com/tinkoff/invest-python/compare/0.2.0-beta32...0.2.0-beta33)</small>
+
+### Bug Fixes
+- Fix is complete caching (#84) ([13b7025](https://github.com/tinkoff/invest-python/commit/13b7025ef3a30eda23178f9af90dd321353dddcd) by Ruslan Sirazhetdinov).
+
+### Features
+- Support grpc v1.0.11 ([80f7f5f](https://github.com/tinkoff/invest-python/commit/80f7f5f507a9773419a4212328cd3f663a66d012) by Danil Akhtarov).
+
+
 ## [0.2.0-beta32](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta32) - 2022-07-07
 
 <small>[Compare with 0.2.0-beta31](https://github.com/tinkoff/invest-python/compare/0.2.0-beta31...0.2.0-beta32)</small>

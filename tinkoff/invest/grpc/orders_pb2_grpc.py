@@ -99,6 +99,11 @@ class OrdersServiceStub(object):
                 request_serializer=tinkoff_dot_invest_dot_grpc_dot_orders__pb2.GetOrdersRequest.SerializeToString,
                 response_deserializer=tinkoff_dot_invest_dot_grpc_dot_orders__pb2.GetOrdersResponse.FromString,
                 )
+        self.ReplaceOrder = channel.unary_unary(
+                '/tinkoff.public.invest.api.contract.v1.OrdersService/ReplaceOrder',
+                request_serializer=tinkoff_dot_invest_dot_grpc_dot_orders__pb2.ReplaceOrderRequest.SerializeToString,
+                response_deserializer=tinkoff_dot_invest_dot_grpc_dot_orders__pb2.PostOrderResponse.FromString,
+                )
 
 
 class OrdersServiceServicer(object):
@@ -135,6 +140,13 @@ class OrdersServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def ReplaceOrder(self, request, context):
+        """Метод изменения выставленной заявки.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_OrdersServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -157,6 +169,11 @@ def add_OrdersServiceServicer_to_server(servicer, server):
                     servicer.GetOrders,
                     request_deserializer=tinkoff_dot_invest_dot_grpc_dot_orders__pb2.GetOrdersRequest.FromString,
                     response_serializer=tinkoff_dot_invest_dot_grpc_dot_orders__pb2.GetOrdersResponse.SerializeToString,
+            ),
+            'ReplaceOrder': grpc.unary_unary_rpc_method_handler(
+                    servicer.ReplaceOrder,
+                    request_deserializer=tinkoff_dot_invest_dot_grpc_dot_orders__pb2.ReplaceOrderRequest.FromString,
+                    response_serializer=tinkoff_dot_invest_dot_grpc_dot_orders__pb2.PostOrderResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -236,5 +253,22 @@ class OrdersService(object):
         return grpc.experimental.unary_unary(request, target, '/tinkoff.public.invest.api.contract.v1.OrdersService/GetOrders',
             tinkoff_dot_invest_dot_grpc_dot_orders__pb2.GetOrdersRequest.SerializeToString,
             tinkoff_dot_invest_dot_grpc_dot_orders__pb2.GetOrdersResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ReplaceOrder(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/tinkoff.public.invest.api.contract.v1.OrdersService/ReplaceOrder',
+            tinkoff_dot_invest_dot_grpc_dot_orders__pb2.ReplaceOrderRequest.SerializeToString,
+            tinkoff_dot_invest_dot_grpc_dot_orders__pb2.PostOrderResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

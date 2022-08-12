@@ -368,6 +368,62 @@ PORTFOLIO_SUBSCRIPTION_STATUS_INTERNAL_ERROR: PortfolioSubscriptionStatus.ValueT
 global___PortfolioSubscriptionStatus = PortfolioSubscriptionStatus
 
 
+class _InstrumentType:
+    ValueType = typing.NewType('ValueType', builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
+class _InstrumentTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_InstrumentType.ValueType], builtins.type):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    INSTRUMENT_TYPE_UNSPECIFIED: _InstrumentType.ValueType  # 0
+    INSTRUMENT_TYPE_BOND: _InstrumentType.ValueType  # 1
+    """Облигация."""
+
+    INSTRUMENT_TYPE_SHARE: _InstrumentType.ValueType  # 2
+    """Акция."""
+
+    INSTRUMENT_TYPE_CURRENCY: _InstrumentType.ValueType  # 3
+    """Валюта."""
+
+    INSTRUMENT_TYPE_ETF: _InstrumentType.ValueType  # 4
+    """Exchange-traded fund. Фонд."""
+
+    INSTRUMENT_TYPE_FUTURES: _InstrumentType.ValueType  # 5
+    """Фьючерс."""
+
+    INSTRUMENT_TYPE_SP: _InstrumentType.ValueType  # 6
+    """Структурная нота."""
+
+    INSTRUMENT_TYPE_OPTION: _InstrumentType.ValueType  # 7
+    """Опцион."""
+
+class InstrumentType(_InstrumentType, metaclass=_InstrumentTypeEnumTypeWrapper):
+    """Тип инструмента."""
+    pass
+
+INSTRUMENT_TYPE_UNSPECIFIED: InstrumentType.ValueType  # 0
+INSTRUMENT_TYPE_BOND: InstrumentType.ValueType  # 1
+"""Облигация."""
+
+INSTRUMENT_TYPE_SHARE: InstrumentType.ValueType  # 2
+"""Акция."""
+
+INSTRUMENT_TYPE_CURRENCY: InstrumentType.ValueType  # 3
+"""Валюта."""
+
+INSTRUMENT_TYPE_ETF: InstrumentType.ValueType  # 4
+"""Exchange-traded fund. Фонд."""
+
+INSTRUMENT_TYPE_FUTURES: InstrumentType.ValueType  # 5
+"""Фьючерс."""
+
+INSTRUMENT_TYPE_SP: InstrumentType.ValueType  # 6
+"""Структурная нота."""
+
+INSTRUMENT_TYPE_OPTION: InstrumentType.ValueType  # 7
+"""Опцион."""
+
+global___InstrumentType = InstrumentType
+
+
 class OperationsRequest(google.protobuf.message.Message):
     """Запрос получения списка операций по счёту."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
@@ -1371,3 +1427,285 @@ class AccountSubscriptionStatus(google.protobuf.message.Message):
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["account_id",b"account_id","subscription_status",b"subscription_status"]) -> None: ...
 global___AccountSubscriptionStatus = AccountSubscriptionStatus
+
+class GetOperationsByCursorRequest(google.protobuf.message.Message):
+    """Запрос списка операций по счёту с пагинацией."""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    ACCOUNT_ID_FIELD_NUMBER: builtins.int
+    INSTRUMENT_ID_FIELD_NUMBER: builtins.int
+    FROM_FIELD_NUMBER: builtins.int
+    TO_FIELD_NUMBER: builtins.int
+    CURSOR_FIELD_NUMBER: builtins.int
+    LIMIT_FIELD_NUMBER: builtins.int
+    OPERATION_TYPES_FIELD_NUMBER: builtins.int
+    STATE_FIELD_NUMBER: builtins.int
+    WITHOUT_COMMISSIONS_FIELD_NUMBER: builtins.int
+    WITHOUT_TRADES_FIELD_NUMBER: builtins.int
+    WITHOUT_OVERNIGHTS_FIELD_NUMBER: builtins.int
+    account_id: typing.Text
+    """Идентификатор счёта клиента."""
+
+    instrument_id: typing.Text
+    """Идентификатор инструмента (Figi инструмента или uid инструмента)"""
+
+    @property
+    def to(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Окончание периода (по UTC)."""
+        pass
+    cursor: typing.Text
+    """Идентификатор элемента, с которого начать формировать ответ."""
+
+    limit: builtins.int
+    """Лимит количества операций."""
+
+    @property
+    def operation_types(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[global___OperationType.ValueType]:
+        """Тип операции. Принимает значение из списка OperationType."""
+        pass
+    state: global___OperationState.ValueType
+    """Статус запрашиваемых операций, возможные значения указаны в OperationState."""
+
+    without_commissions: builtins.bool
+    """Флаг возвращать ли комиссии, по умолчанию false"""
+
+    without_trades: builtins.bool
+    """Флаг ответ без сделок."""
+
+    without_overnights: builtins.bool
+    """Флаг не показывать overnight операций."""
+
+    def __init__(self,
+        *,
+        account_id: typing.Text = ...,
+        instrument_id: typing.Text = ...,
+        to: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        cursor: typing.Text = ...,
+        limit: builtins.int = ...,
+        operation_types: typing.Optional[typing.Iterable[global___OperationType.ValueType]] = ...,
+        state: global___OperationState.ValueType = ...,
+        without_commissions: builtins.bool = ...,
+        without_trades: builtins.bool = ...,
+        without_overnights: builtins.bool = ...,
+        ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["from",b"from","to",b"to"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["account_id",b"account_id","cursor",b"cursor","from",b"from","instrument_id",b"instrument_id","limit",b"limit","operation_types",b"operation_types","state",b"state","to",b"to","without_commissions",b"without_commissions","without_overnights",b"without_overnights","without_trades",b"without_trades"]) -> None: ...
+global___GetOperationsByCursorRequest = GetOperationsByCursorRequest
+
+class GetOperationsByCursorResponse(google.protobuf.message.Message):
+    """Список операций по счёту с пагинацией."""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    HAS_NEXT_FIELD_NUMBER: builtins.int
+    NEXT_CURSOR_FIELD_NUMBER: builtins.int
+    ITEMS_FIELD_NUMBER: builtins.int
+    has_next: builtins.bool
+    """Признак, есть ли следующий элемент."""
+
+    next_cursor: typing.Text
+    """Следующий курсор."""
+
+    @property
+    def items(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___OperationItem]:
+        """Список операций."""
+        pass
+    def __init__(self,
+        *,
+        has_next: builtins.bool = ...,
+        next_cursor: typing.Text = ...,
+        items: typing.Optional[typing.Iterable[global___OperationItem]] = ...,
+        ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["has_next",b"has_next","items",b"items","next_cursor",b"next_cursor"]) -> None: ...
+global___GetOperationsByCursorResponse = GetOperationsByCursorResponse
+
+class OperationItem(google.protobuf.message.Message):
+    """Данные об операции."""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    CURSOR_FIELD_NUMBER: builtins.int
+    BROKER_ACCOUNT_ID_FIELD_NUMBER: builtins.int
+    ID_FIELD_NUMBER: builtins.int
+    PARENT_OPERATION_ID_FIELD_NUMBER: builtins.int
+    NAME_FIELD_NUMBER: builtins.int
+    DATE_FIELD_NUMBER: builtins.int
+    TYPE_FIELD_NUMBER: builtins.int
+    DESCRIPTION_FIELD_NUMBER: builtins.int
+    STATE_FIELD_NUMBER: builtins.int
+    INSTRUMENT_UID_FIELD_NUMBER: builtins.int
+    FIGI_FIELD_NUMBER: builtins.int
+    INSTRUMENT_TYPE_FIELD_NUMBER: builtins.int
+    INSTRUMENT_KIND_FIELD_NUMBER: builtins.int
+    PAYMENT_FIELD_NUMBER: builtins.int
+    PRICE_FIELD_NUMBER: builtins.int
+    COMMISSION_FIELD_NUMBER: builtins.int
+    YIELD_FIELD_NUMBER: builtins.int
+    YIELD_RELATIVE_FIELD_NUMBER: builtins.int
+    ACCRUED_INT_FIELD_NUMBER: builtins.int
+    QUANTITY_FIELD_NUMBER: builtins.int
+    QUANTITY_REST_FIELD_NUMBER: builtins.int
+    QUANTITY_DONE_FIELD_NUMBER: builtins.int
+    CANCEL_DATE_TIME_FIELD_NUMBER: builtins.int
+    CANCEL_REASON_FIELD_NUMBER: builtins.int
+    TRADES_INFO_FIELD_NUMBER: builtins.int
+    cursor: typing.Text
+    """Курсор."""
+
+    broker_account_id: typing.Text
+    """Номер счета клиента."""
+
+    id: typing.Text
+    """Номер поручения."""
+
+    parent_operation_id: typing.Text
+    """Номер родительского поручения."""
+
+    name: typing.Text
+    """Название операции."""
+
+    @property
+    def date(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Дата поручения."""
+        pass
+    type: global___OperationType.ValueType
+    """Тип операции."""
+
+    description: typing.Text
+    """Описание операции."""
+
+    state: global___OperationState.ValueType
+    """Статус поручения."""
+
+    instrument_uid: typing.Text
+    """Уникальный идентификатор инструмента."""
+
+    figi: typing.Text
+    """Figi."""
+
+    instrument_type: typing.Text
+    """Тип инструмента."""
+
+    instrument_kind: global___InstrumentType.ValueType
+    """Тип инструмента."""
+
+    @property
+    def payment(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
+        """Сумма операции."""
+        pass
+    @property
+    def price(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
+        """Цена операции за 1 инструмент."""
+        pass
+    @property
+    def commission(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
+        """Комиссия."""
+        pass
+    @property
+    def yield_relative(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Относительная доходность."""
+        pass
+    @property
+    def accrued_int(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
+        """Накопленный купонный доход."""
+        pass
+    quantity: builtins.int
+    """Количество единиц инструмента."""
+
+    quantity_rest: builtins.int
+    """Неисполненный остаток по сделке."""
+
+    quantity_done: builtins.int
+    """Исполненный остаток."""
+
+    @property
+    def cancel_date_time(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Дата и время снятия заявки."""
+        pass
+    cancel_reason: typing.Text
+    """Причина отмены операции."""
+
+    @property
+    def trades_info(self) -> global___OperationItemTrades:
+        """Массив сделок."""
+        pass
+    def __init__(self,
+        *,
+        cursor: typing.Text = ...,
+        broker_account_id: typing.Text = ...,
+        id: typing.Text = ...,
+        parent_operation_id: typing.Text = ...,
+        name: typing.Text = ...,
+        date: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        type: global___OperationType.ValueType = ...,
+        description: typing.Text = ...,
+        state: global___OperationState.ValueType = ...,
+        instrument_uid: typing.Text = ...,
+        figi: typing.Text = ...,
+        instrument_type: typing.Text = ...,
+        instrument_kind: global___InstrumentType.ValueType = ...,
+        payment: typing.Optional[tinkoff.invest.grpc.common_pb2.MoneyValue] = ...,
+        price: typing.Optional[tinkoff.invest.grpc.common_pb2.MoneyValue] = ...,
+        commission: typing.Optional[tinkoff.invest.grpc.common_pb2.MoneyValue] = ...,
+        yield_relative: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        accrued_int: typing.Optional[tinkoff.invest.grpc.common_pb2.MoneyValue] = ...,
+        quantity: builtins.int = ...,
+        quantity_rest: builtins.int = ...,
+        quantity_done: builtins.int = ...,
+        cancel_date_time: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        cancel_reason: typing.Text = ...,
+        trades_info: typing.Optional[global___OperationItemTrades] = ...,
+        ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["accrued_int",b"accrued_int","cancel_date_time",b"cancel_date_time","commission",b"commission","date",b"date","payment",b"payment","price",b"price","trades_info",b"trades_info","yield",b"yield","yield_relative",b"yield_relative"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["accrued_int",b"accrued_int","broker_account_id",b"broker_account_id","cancel_date_time",b"cancel_date_time","cancel_reason",b"cancel_reason","commission",b"commission","cursor",b"cursor","date",b"date","description",b"description","figi",b"figi","id",b"id","instrument_kind",b"instrument_kind","instrument_type",b"instrument_type","instrument_uid",b"instrument_uid","name",b"name","parent_operation_id",b"parent_operation_id","payment",b"payment","price",b"price","quantity",b"quantity","quantity_done",b"quantity_done","quantity_rest",b"quantity_rest","state",b"state","trades_info",b"trades_info","type",b"type","yield",b"yield","yield_relative",b"yield_relative"]) -> None: ...
+global___OperationItem = OperationItem
+
+class OperationItemTrades(google.protobuf.message.Message):
+    """Массив с информацией о сделках."""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    TRADES_SIZE_FIELD_NUMBER: builtins.int
+    TRADES_FIELD_NUMBER: builtins.int
+    trades_size: builtins.int
+    @property
+    def trades(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___OperationItemTrade]: ...
+    def __init__(self,
+        *,
+        trades_size: builtins.int = ...,
+        trades: typing.Optional[typing.Iterable[global___OperationItemTrade]] = ...,
+        ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["trades",b"trades","trades_size",b"trades_size"]) -> None: ...
+global___OperationItemTrades = OperationItemTrades
+
+class OperationItemTrade(google.protobuf.message.Message):
+    """Сделка по операции."""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    NUM_FIELD_NUMBER: builtins.int
+    DATE_FIELD_NUMBER: builtins.int
+    QUANTITY_FIELD_NUMBER: builtins.int
+    PRICE_FIELD_NUMBER: builtins.int
+    YIELD_FIELD_NUMBER: builtins.int
+    YIELD_RELATIVE_FIELD_NUMBER: builtins.int
+    num: typing.Text
+    """Номер сделки"""
+
+    @property
+    def date(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Дата сделки"""
+        pass
+    quantity: builtins.int
+    """Количество в единицах."""
+
+    @property
+    def price(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
+        """Цена."""
+        pass
+    @property
+    def yield_relative(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Относительная доходность."""
+        pass
+    def __init__(self,
+        *,
+        num: typing.Text = ...,
+        date: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        quantity: builtins.int = ...,
+        price: typing.Optional[tinkoff.invest.grpc.common_pb2.MoneyValue] = ...,
+        yield_relative: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["date",b"date","price",b"price","yield",b"yield","yield_relative",b"yield_relative"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["date",b"date","num",b"num","price",b"price","quantity",b"quantity","yield",b"yield","yield_relative",b"yield_relative"]) -> None: ...
+global___OperationItemTrade = OperationItemTrade
