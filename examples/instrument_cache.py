@@ -36,7 +36,8 @@ def main():
         )
         pprint(from_cache)
 
-        assert str(from_server) == str(from_cache)
+        if str(from_server) != str(from_cache):
+            raise Exception("cache miss")
 
 
 if __name__ == "__main__":
