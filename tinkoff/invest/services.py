@@ -6,15 +6,21 @@ from typing import Dict, Generator, Iterable, List, Optional, Tuple
 
 import grpc
 
+from tinkoff.invest.caching.market_data_cache.cache_settings import (
+    MarketDataCacheSettings,
+)
+from tinkoff.invest.caching.market_data_cache.instrument_date_range_market_data import (
+    InstrumentDateRangeData,
+)
+from tinkoff.invest.caching.market_data_cache.instrument_market_data_storage import (
+    InstrumentMarketDataStorage,
+)
 from tinkoff.invest.market_data_stream.market_data_stream_manager import (
     MarketDataStreamManager,
 )
 
 from . import _grpc_helpers
 from ._errors import handle_request_error, handle_request_error_gen
-from .caching.cache_settings import MarketDataCacheSettings
-from .caching.instrument_date_range_market_data import InstrumentDateRangeData
-from .caching.instrument_market_data_storage import InstrumentMarketDataStorage
 from .grpc import (
     instruments_pb2,
     instruments_pb2_grpc,
@@ -174,6 +180,7 @@ __all__ = (
     "UsersService",
     "SandboxService",
     "StopOrdersService",
+    "MarketDataCache",
 )
 logger = logging.getLogger(__name__)
 

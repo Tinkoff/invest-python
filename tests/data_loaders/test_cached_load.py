@@ -14,12 +14,12 @@ from tinkoff.invest import (
     HistoricCandle,
     Quotation,
 )
-from tinkoff.invest.caching.cache_settings import (
+from tinkoff.invest.caching.market_data_cache.cache_settings import (
     FileMetaData,
     MarketDataCacheSettings,
     meta_file_context,
 )
-from tinkoff.invest.caching.instrument_market_data_storage import (
+from tinkoff.invest.caching.market_data_cache.instrument_market_data_storage import (
     InstrumentMarketDataStorage,
 )
 from tinkoff.invest.services import MarketDataCache, MarketDataService
