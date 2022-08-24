@@ -11,8 +11,7 @@ class RetryClientInterceptor(grpc.UnaryUnaryClientInterceptor):
         def call():
             return continuation(client_call_details, request)
 
-        response = self._retry_manager.call_with_retries(call=call)
-        return response
+        return self._retry_manager.call_with_retries(call=call)
 
     def intercept_unary_unary(self, continuation, client_call_details, request):
         return self._intercept_with_retry(continuation, client_call_details, request)

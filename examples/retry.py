@@ -1,7 +1,6 @@
 import logging
 import os
 from datetime import timedelta
-from pathlib import Path
 
 from tinkoff.invest import CandleInterval
 from tinkoff.invest.caching.market_data_cache.cache_settings import (
@@ -19,7 +18,7 @@ TOKEN = os.environ["INVEST_TOKEN"]
 retry_settings = RetryClientSettings(use_retry=True, max_retry_attempt=2)
 
 with RetryingClient(TOKEN, settings=retry_settings) as client:
-    settings = MarketDataCacheSettings(base_cache_dir=Path("tnkf_data_cache"))
+    settings = MarketDataCacheSettings()
     market_data_cache = MarketDataCache(settings=settings, services=client)
     for candle in market_data_cache.get_all_candles(
         figi="BBG000B9XRY4",
