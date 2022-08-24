@@ -1,4 +1,7 @@
-from typing import Optional
+from typing import Optional, List
+
+import grpc
+from grpc.aio import ClientInterceptor
 
 from .async_services import AsyncServices
 from .channels import create_channel
@@ -17,12 +20,18 @@ class Client:
         sandbox_token: Optional[str] = None,
         options: Optional[ChannelArgumentType] = None,
         app_name: Optional[str] = None,
+        interceptors: Optional[List[ClientInterceptor]] = None,
     ):
         self._token = token
         self._sandbox_token = sandbox_token
         self._options = options
         self._app_name = app_name
+
         self._channel = create_channel(target=target, options=options)
+        if interceptors is None:
+            interceptors = []
+        for interceptor in interceptors:
+            self._channel = grpc.intercept_channel(self._channel, interceptor)
 
     def __enter__(self) -> Services:
         channel = self._channel.__enter__()
