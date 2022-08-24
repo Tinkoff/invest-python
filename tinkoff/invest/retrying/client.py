@@ -12,8 +12,10 @@ class RetryingClient(Client):
         **kwargs,
     ):
         self._retry_manager = RetryManager(settings=settings)
-        self._retry_interceptor = RetryClientInterceptor(retry_manager=self._retry_manager)
-        interceptors = kwargs.get('interceptors', [])
+        self._retry_interceptor = RetryClientInterceptor(
+            retry_manager=self._retry_manager
+        )
+        interceptors = kwargs.get("interceptors", [])
         interceptors.append(self._retry_interceptor)
-        kwargs['interceptors'] = interceptors
+        kwargs["interceptors"] = interceptors
         super().__init__(token, **kwargs)
