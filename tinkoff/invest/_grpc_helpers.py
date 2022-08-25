@@ -240,6 +240,53 @@ class UnknownType(TypeError):
     pass
 
 
+PYTHON_KEYWORDS = (
+    'False',
+    'None',
+    'True',
+    'and',
+    'as',
+    'assert',
+    'async',
+    'await',
+    'break',
+    'class',
+    'continue',
+    'def',
+    'del',
+    'elif',
+    'else',
+    'except',
+    'finally',
+    'for',
+    'from',
+    'global',
+    'if',
+    'import',
+    'in',
+    'is',
+    'lambda',
+    'nonlocal',
+    'not',
+    'or',
+    'pass',
+    'raise',
+    'return',
+    'try',
+    'while',
+    'with',
+    'yield',
+)
+
+
+def to_unsafe_field_name(field_name: str) -> str:
+    if field_name.endswith('_'):
+        unsafe_field_name = field_name[:-1]
+        if unsafe_field_name in PYTHON_KEYWORDS:
+            return unsafe_field_name
+    return field_name
+
+
 # pylint:disable=too-many-nested-blocks
 # pylint:disable=too-many-branches
 # pylint:disable=too-many-locals
@@ -250,7 +297,8 @@ def protobuf_to_dataclass(pb_obj: Any, dataclass_type: Type[T]) -> T:  # noqa:C9
     dataclass_obj = dataclass_type()
     dataclass_fields = dataclass_type.__dataclass_fields__  # type:ignore
     for field_name, field_type in dataclass_hints.items():
-        pb_value = getattr(pb_obj, field_name)
+        unsafe_field_name = to_unsafe_field_name(field_name)
+        pb_value = getattr(pb_obj, unsafe_field_name)
         field_value = _UNKNOWN
         oneof = dataclass_fields[field_name].metadata["proto"].group
         if oneof and pb_obj.WhichOneof(oneof) != field_name:
