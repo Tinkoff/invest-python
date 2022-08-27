@@ -4,6 +4,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [0.2.0-beta34](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta34) - 2022-08-27
+
+<small>[Compare with 0.2.0-beta33](https://github.com/tinkoff/invest-python/compare/0.2.0-beta33...0.2.0-beta34)</small>
+
+### Bug Fixes
+- Fix get operations by cursor (#109) ([6c4385d](https://github.com/tinkoff/invest-python/commit/6c4385d73cdae3176fc306431c639580c03a95ac) by Ruslan Sirazhetdinov).
+
+### Code Refactoring
+- Add cachetools ([35b194c](https://github.com/tinkoff/invest-python/commit/35b194cd396e3d4cff0135f108320816aa0e2645) by Danil Akhtarov).
+
+### Features
+- Sandbox client (#110) ([aa5ff74](https://github.com/tinkoff/invest-python/commit/aa5ff74f7fd9b2d035a0c65351836907980d163f) by Ruslan Sirazhetdinov).
+- Feature instrument caching (#92) ([b180f35](https://github.com/tinkoff/invest-python/commit/b180f35e83fb4dcc8cef423e83b2f7485ecb7253) by Ruslan Sirazhetdinov).
+
+
 ## [0.2.0-beta33](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta33) - 2022-08-04
 
 <small>[Compare with 0.2.0-beta32](https://github.com/tinkoff/invest-python/compare/0.2.0-beta32...0.2.0-beta33)</small>
