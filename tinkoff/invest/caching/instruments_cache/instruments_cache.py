@@ -69,7 +69,7 @@ class InstrumentsCache(IInstrumentsGetter):
         self._assert_cache()
 
     def _assert_cache(self):
-        if self._cache.keys() != set(
+        if self._cache.keys() != set(  # noqa: C417
             map(lambda f: f.__name__, self._instruments_methods)
         ):
             raise KeyError(f"Cache does not have all instrument types {self._cache}")
