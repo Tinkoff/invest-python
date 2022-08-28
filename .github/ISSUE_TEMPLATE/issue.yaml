@@ -13,7 +13,8 @@ body:
   id: to-reproduce
   attributes:
     label: Воспроизведение
-    description: Как можно повторить кейс? Для кода используйте форматирование.
+    description: Код повторяющий кейс
+    render: python
   validations:
     required: false
 - type: dropdown
