@@ -4,7 +4,9 @@ from tinkoff.invest.retrying.retry_manager import RetryManager
 
 
 class RetryClientInterceptor(grpc.UnaryUnaryClientInterceptor):
-    def __init__(self, retry_manager: RetryManager):
+    def __init__(
+        self, retry_manager: RetryManager
+    ):  # pylint: disable=super-init-not-called
         self._retry_manager = retry_manager
 
     def _intercept_with_retry(self, continuation, client_call_details, request):
