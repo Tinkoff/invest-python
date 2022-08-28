@@ -1,4 +1,5 @@
 INVEST_GRPC_API = "invest-public-api.tinkoff.ru"
+INVEST_GRPC_API_SANDBOX = "sandbox-invest-public-api.tinkoff.ru"
 APP_NAME = "tinkoff.invest-python"
 X_TRACKING_ID = "x-tracking-id"
 X_RATELIMIT_LIMIT = "x-ratelimit-limit"

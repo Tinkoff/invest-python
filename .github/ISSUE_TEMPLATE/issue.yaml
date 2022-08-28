@@ -13,7 +13,8 @@ body:
   id: to-reproduce
   attributes:
     label: Воспроизведение
-    description: Как можно повторить кейс? Для кода используйте форматирование.
+    description: Код повторяющий кейс
+    render: python
   validations:
     required: false
 - type: dropdown
@@ -22,6 +23,7 @@ body:
     label: Tinkoff Invest Version
     description: Какая версия библиотеки используется?
     options:
+    - 0.2.0-beta34
     - 0.2.0-beta33
     - 0.2.0-beta32
     - 0.2.0-beta31

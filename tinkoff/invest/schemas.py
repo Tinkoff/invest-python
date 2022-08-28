@@ -1910,7 +1910,7 @@ class AccountSubscriptionStatus(_grpc_helpers.Message):
     subscription_status: "PortfolioSubscriptionStatus" = _grpc_helpers.message_field(6)
 
 
-# New
+@dataclass(eq=False, repr=True)
 class GetOperationsByCursorRequest(_grpc_helpers.Message):
     account_id: str = _grpc_helpers.string_field(1)
     instrument_id: str = _grpc_helpers.string_field(2)
@@ -1925,14 +1925,14 @@ class GetOperationsByCursorRequest(_grpc_helpers.Message):
     without_overnights: bool = _grpc_helpers.bool_field(17)
 
 
-# New
+@dataclass(eq=False, repr=True)
 class GetOperationsByCursorResponse(_grpc_helpers.Message):
     has_next: bool = _grpc_helpers.bool_field(1)
     next_cursor: str = _grpc_helpers.string_field(2)
     items: List["OperationItem"] = _grpc_helpers.message_field(6)
 
 
-# New
+@dataclass(eq=False, repr=True)
 class OperationItem(_grpc_helpers.Message):
     cursor: str = _grpc_helpers.string_field(1)
     broker_account_id: str = _grpc_helpers.string_field(6)
@@ -1961,13 +1961,13 @@ class OperationItem(_grpc_helpers.Message):
     trades_info: "OperationItemTrades" = _grpc_helpers.message_field(61)
 
 
-# New
+@dataclass(eq=False, repr=True)
 class OperationItemTrades(_grpc_helpers.Message):
     trades_size: int = _grpc_helpers.int32_field(1)
     trades: List["OperationItemTrade"] = _grpc_helpers.message_field(6)
 
 
-# New
+@dataclass(eq=False, repr=True)
 class OperationItemTrade(_grpc_helpers.Message):
     num: str = _grpc_helpers.string_field(1)
     date: datetime = _grpc_helpers.message_field(6)
