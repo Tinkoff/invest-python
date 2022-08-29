@@ -56,12 +56,15 @@ class AsyncClient:
         sandbox_token: Optional[str] = None,
         options: Optional[ChannelArgumentType] = None,
         app_name: Optional[str] = None,
+        interceptors: Optional[List[ClientInterceptor]] = None,
     ):
         self._token = token
         self._sandbox_token = sandbox_token
         self._options = options
         self._app_name = app_name
-        self._channel = create_channel(target=target, force_async=True, options=options)
+        self._channel = create_channel(
+            target=target, force_async=True, options=options, interceptors=interceptors
+        )
 
     async def __aenter__(self) -> AsyncServices:
         channel = await self._channel.__aenter__()

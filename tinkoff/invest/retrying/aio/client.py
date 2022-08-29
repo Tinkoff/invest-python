@@ -1,18 +1,18 @@
-from tinkoff.invest import Client
-from tinkoff.invest.retrying.grpc_interceptor import RetryClientInterceptor
-from tinkoff.invest.retrying.retry_manager import RetryManager
+from tinkoff.invest import AsyncClient
+from tinkoff.invest.retrying.aio.grpc_interceptor import AsyncRetryClientInterceptor
+from tinkoff.invest.retrying.aio.retry_manager import AsyncRetryManager
 from tinkoff.invest.retrying.settings import RetryClientSettings
 
 
-class RetryingClient(Client):
+class AsyncRetryingClient(AsyncClient):
     def __init__(
         self,
         token: str,
         settings: RetryClientSettings,
         **kwargs,
     ):
-        self._retry_manager = RetryManager(settings=settings)
-        self._retry_interceptor = RetryClientInterceptor(
+        self._retry_manager = AsyncRetryManager(settings=settings)
+        self._retry_interceptor = AsyncRetryClientInterceptor(
             retry_manager=self._retry_manager
         )
         interceptors = kwargs.get("interceptors", [])
