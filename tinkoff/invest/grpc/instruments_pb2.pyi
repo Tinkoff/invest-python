@@ -74,6 +74,78 @@ COUPON_TYPE_OTHER: CouponType.ValueType  # 7
 global___CouponType = CouponType
 
 
+class _OptionDirection:
+    ValueType = typing.NewType('ValueType', builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
+class _OptionDirectionEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_OptionDirection.ValueType], builtins.type):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    OPTION_DIRECTION_UNSPECIFIED: _OptionDirection.ValueType  # 0
+    OPTION_DIRECTION_PUT: _OptionDirection.ValueType  # 1
+    OPTION_DIRECTION_CALL: _OptionDirection.ValueType  # 2
+class OptionDirection(_OptionDirection, metaclass=_OptionDirectionEnumTypeWrapper):
+    """Тип опциона по направлению сделки."""
+    pass
+
+OPTION_DIRECTION_UNSPECIFIED: OptionDirection.ValueType  # 0
+OPTION_DIRECTION_PUT: OptionDirection.ValueType  # 1
+OPTION_DIRECTION_CALL: OptionDirection.ValueType  # 2
+global___OptionDirection = OptionDirection
+
+
+class _OptionPaymentType:
+    ValueType = typing.NewType('ValueType', builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
+class _OptionPaymentTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_OptionPaymentType.ValueType], builtins.type):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    OPTION_PAYMENT_TYPE_UNSPECIFIED: _OptionPaymentType.ValueType  # 0
+    OPTION_PAYMENT_TYPE_PREMIUM: _OptionPaymentType.ValueType  # 1
+    OPTION_PAYMENT_TYPE_MARGINAL: _OptionPaymentType.ValueType  # 2
+class OptionPaymentType(_OptionPaymentType, metaclass=_OptionPaymentTypeEnumTypeWrapper):
+    """Тип расчетов по опциону."""
+    pass
+
+OPTION_PAYMENT_TYPE_UNSPECIFIED: OptionPaymentType.ValueType  # 0
+OPTION_PAYMENT_TYPE_PREMIUM: OptionPaymentType.ValueType  # 1
+OPTION_PAYMENT_TYPE_MARGINAL: OptionPaymentType.ValueType  # 2
+global___OptionPaymentType = OptionPaymentType
+
+
+class _OptionStyle:
+    ValueType = typing.NewType('ValueType', builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
+class _OptionStyleEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_OptionStyle.ValueType], builtins.type):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    OPTION_STYLE_UNSPECIFIED: _OptionStyle.ValueType  # 0
+    OPTION_STYLE_AMERICAN: _OptionStyle.ValueType  # 1
+    OPTION_STYLE_EUROPEAN: _OptionStyle.ValueType  # 2
+class OptionStyle(_OptionStyle, metaclass=_OptionStyleEnumTypeWrapper):
+    """Тип опциона по стилю."""
+    pass
+
+OPTION_STYLE_UNSPECIFIED: OptionStyle.ValueType  # 0
+OPTION_STYLE_AMERICAN: OptionStyle.ValueType  # 1
+OPTION_STYLE_EUROPEAN: OptionStyle.ValueType  # 2
+global___OptionStyle = OptionStyle
+
+
+class _OptionSettlementType:
+    ValueType = typing.NewType('ValueType', builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
+class _OptionSettlementTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_OptionSettlementType.ValueType], builtins.type):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    OPTION_EXECUTION_TYPE_UNSPECIFIED: _OptionSettlementType.ValueType  # 0
+    OPTION_EXECUTION_TYPE_PHYSICAL_DELIVERY: _OptionSettlementType.ValueType  # 1
+    OPTION_EXECUTION_TYPE_CASH_SETTLEMENT: _OptionSettlementType.ValueType  # 2
+class OptionSettlementType(_OptionSettlementType, metaclass=_OptionSettlementTypeEnumTypeWrapper):
+    """Тип опциона по способу исполнения."""
+    pass
+
+OPTION_EXECUTION_TYPE_UNSPECIFIED: OptionSettlementType.ValueType  # 0
+OPTION_EXECUTION_TYPE_PHYSICAL_DELIVERY: OptionSettlementType.ValueType  # 1
+OPTION_EXECUTION_TYPE_CASH_SETTLEMENT: OptionSettlementType.ValueType  # 2
+global___OptionSettlementType = OptionSettlementType
+
+
 class _InstrumentIdType:
     ValueType = typing.NewType('ValueType', builtins.int)
     V: typing_extensions.TypeAlias = ValueType
@@ -91,6 +163,9 @@ class _InstrumentIdTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrappe
     INSTRUMENT_ID_TYPE_UID: _InstrumentIdType.ValueType  # 3
     """Уникальный идентификатор."""
 
+    INSTRUMENT_ID_TYPE_POSITION_UID: _InstrumentIdType.ValueType  # 4
+    """Идентификатор позиции."""
+
 class InstrumentIdType(_InstrumentIdType, metaclass=_InstrumentIdTypeEnumTypeWrapper):
     """Тип идентификатора инструмента. Подробнее об идентификации инструментов: [Идентификация инструментов](https://tinkoff.github.io/investAPI/faq_identification/)"""
     pass
@@ -106,6 +181,9 @@ INSTRUMENT_ID_TYPE_TICKER: InstrumentIdType.ValueType  # 2
 
 INSTRUMENT_ID_TYPE_UID: InstrumentIdType.ValueType  # 3
 """Уникальный идентификатор."""
+
+INSTRUMENT_ID_TYPE_POSITION_UID: InstrumentIdType.ValueType  # 4
+"""Идентификатор позиции."""
 
 global___InstrumentIdType = InstrumentIdType
 
@@ -744,6 +822,261 @@ class FuturesResponse(google.protobuf.message.Message):
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["instruments",b"instruments"]) -> None: ...
 global___FuturesResponse = FuturesResponse
+
+class OptionResponse(google.protobuf.message.Message):
+    """Данные по опциону."""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    INSTRUMENT_FIELD_NUMBER: builtins.int
+    @property
+    def instrument(self) -> global___Option:
+        """Информация по опциону."""
+        pass
+    def __init__(self,
+        *,
+        instrument: typing.Optional[global___Option] = ...,
+        ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["instrument",b"instrument"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["instrument",b"instrument"]) -> None: ...
+global___OptionResponse = OptionResponse
+
+class OptionsResponse(google.protobuf.message.Message):
+    """Данные по опционам."""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    INSTRUMENTS_FIELD_NUMBER: builtins.int
+    @property
+    def instruments(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Option]:
+        """Массив данных по опциону."""
+        pass
+    def __init__(self,
+        *,
+        instruments: typing.Optional[typing.Iterable[global___Option]] = ...,
+        ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["instruments",b"instruments"]) -> None: ...
+global___OptionsResponse = OptionsResponse
+
+class Option(google.protobuf.message.Message):
+    """Опцион."""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    UID_FIELD_NUMBER: builtins.int
+    POSITION_UID_FIELD_NUMBER: builtins.int
+    TICKER_FIELD_NUMBER: builtins.int
+    CLASS_CODE_FIELD_NUMBER: builtins.int
+    BASIC_ASSET_POSITION_UID_FIELD_NUMBER: builtins.int
+    TRADING_STATUS_FIELD_NUMBER: builtins.int
+    REAL_EXCHANGE_FIELD_NUMBER: builtins.int
+    DIRECTION_FIELD_NUMBER: builtins.int
+    PAYMENT_TYPE_FIELD_NUMBER: builtins.int
+    STYLE_FIELD_NUMBER: builtins.int
+    SETTLEMENT_TYPE_FIELD_NUMBER: builtins.int
+    NAME_FIELD_NUMBER: builtins.int
+    CURRENCY_FIELD_NUMBER: builtins.int
+    SETTLEMENT_CURRENCY_FIELD_NUMBER: builtins.int
+    ASSET_TYPE_FIELD_NUMBER: builtins.int
+    BASIC_ASSET_FIELD_NUMBER: builtins.int
+    EXCHANGE_FIELD_NUMBER: builtins.int
+    COUNTRY_OF_RISK_FIELD_NUMBER: builtins.int
+    COUNTRY_OF_RISK_NAME_FIELD_NUMBER: builtins.int
+    SECTOR_FIELD_NUMBER: builtins.int
+    LOT_FIELD_NUMBER: builtins.int
+    BASIC_ASSET_SIZE_FIELD_NUMBER: builtins.int
+    KLONG_FIELD_NUMBER: builtins.int
+    KSHORT_FIELD_NUMBER: builtins.int
+    DLONG_FIELD_NUMBER: builtins.int
+    DSHORT_FIELD_NUMBER: builtins.int
+    DLONG_MIN_FIELD_NUMBER: builtins.int
+    DSHORT_MIN_FIELD_NUMBER: builtins.int
+    MIN_PRICE_INCREMENT_FIELD_NUMBER: builtins.int
+    STRIKE_PRICE_FIELD_NUMBER: builtins.int
+    EXPIRATION_DATE_FIELD_NUMBER: builtins.int
+    FIRST_TRADE_DATE_FIELD_NUMBER: builtins.int
+    LAST_TRADE_DATE_FIELD_NUMBER: builtins.int
+    FIRST_1MIN_CANDLE_DATE_FIELD_NUMBER: builtins.int
+    FIRST_1DAY_CANDLE_DATE_FIELD_NUMBER: builtins.int
+    SHORT_ENABLED_FLAG_FIELD_NUMBER: builtins.int
+    FOR_IIS_FLAG_FIELD_NUMBER: builtins.int
+    OTC_FLAG_FIELD_NUMBER: builtins.int
+    BUY_AVAILABLE_FLAG_FIELD_NUMBER: builtins.int
+    SELL_AVAILABLE_FLAG_FIELD_NUMBER: builtins.int
+    uid: typing.Text
+    """Уникальный идентификатор инструмента."""
+
+    position_uid: typing.Text
+    """Уникальный идентификатор позиции."""
+
+    ticker: typing.Text
+    """Тикер инструмента."""
+
+    class_code: typing.Text
+    """Класс-код."""
+
+    basic_asset_position_uid: typing.Text
+    """Уникальный идентификатор позиции основного инструмента."""
+
+    trading_status: tinkoff.invest.grpc.common_pb2.SecurityTradingStatus.ValueType
+    """Текущий режим торгов инструмента."""
+
+    real_exchange: global___RealExchange.ValueType
+    """Реальная площадка исполнения расчётов. Допустимые значения: [REAL_EXCHANGE_MOEX, REAL_EXCHANGE_RTS]"""
+
+    direction: global___OptionDirection.ValueType
+    """Направление опциона."""
+
+    payment_type: global___OptionPaymentType.ValueType
+    """Тип расчетов по опциону."""
+
+    style: global___OptionStyle.ValueType
+    """Стиль опциона."""
+
+    settlement_type: global___OptionSettlementType.ValueType
+    """Способ исполнения опциона."""
+
+    name: typing.Text
+    """Название инструмента."""
+
+    currency: typing.Text
+    """Валюта."""
+
+    settlement_currency: typing.Text
+    """Валюта, в которой оценивается контракт."""
+
+    asset_type: typing.Text
+    """Тип актива."""
+
+    basic_asset: typing.Text
+    """Основной актив."""
+
+    exchange: typing.Text
+    """Биржа."""
+
+    country_of_risk: typing.Text
+    """Код страны рисков."""
+
+    country_of_risk_name: typing.Text
+    """Наименование страны рисков."""
+
+    sector: typing.Text
+    """Сектор экономики."""
+
+    lot: builtins.int
+    """Количество бумаг в лоте."""
+
+    @property
+    def basic_asset_size(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Размер основного актива."""
+        pass
+    @property
+    def klong(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Коэффициент ставки риска длинной позиции по клиенту."""
+        pass
+    @property
+    def kshort(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Коэффициент ставки риска короткой позиции по клиенту."""
+        pass
+    @property
+    def dlong(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Ставка риска минимальной маржи лонг."""
+        pass
+    @property
+    def dshort(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Ставка риска минимальной маржи шорт."""
+        pass
+    @property
+    def dlong_min(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Ставка риска начальной маржи лонг."""
+        pass
+    @property
+    def dshort_min(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Ставка риска начальной маржи шорт."""
+        pass
+    @property
+    def min_price_increment(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Минимальный шаг цены."""
+        pass
+    @property
+    def strike_price(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
+        """Цена страйка."""
+        pass
+    @property
+    def expiration_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Дата истечения срока в формате UTC."""
+        pass
+    @property
+    def first_trade_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Дата начала обращения контракта в формате UTC."""
+        pass
+    @property
+    def last_trade_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Дата исполнения в формате UTC."""
+        pass
+    @property
+    def first_1min_candle_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Дата первой минутной свечи в формате UTC."""
+        pass
+    @property
+    def first_1day_candle_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Дата первой дневной свечи в формате UTC."""
+        pass
+    short_enabled_flag: builtins.bool
+    """Признак доступности для операций шорт."""
+
+    for_iis_flag: builtins.bool
+    """Возможность покупки/продажи на ИИС."""
+
+    otc_flag: builtins.bool
+    """Признак внебиржевой ценной бумаги."""
+
+    buy_available_flag: builtins.bool
+    """Признак доступности для покупки."""
+
+    sell_available_flag: builtins.bool
+    """Признак доступности для продажи."""
+
+    def __init__(self,
+        *,
+        uid: typing.Text = ...,
+        position_uid: typing.Text = ...,
+        ticker: typing.Text = ...,
+        class_code: typing.Text = ...,
+        basic_asset_position_uid: typing.Text = ...,
+        trading_status: tinkoff.invest.grpc.common_pb2.SecurityTradingStatus.ValueType = ...,
+        real_exchange: global___RealExchange.ValueType = ...,
+        direction: global___OptionDirection.ValueType = ...,
+        payment_type: global___OptionPaymentType.ValueType = ...,
+        style: global___OptionStyle.ValueType = ...,
+        settlement_type: global___OptionSettlementType.ValueType = ...,
+        name: typing.Text = ...,
+        currency: typing.Text = ...,
+        settlement_currency: typing.Text = ...,
+        asset_type: typing.Text = ...,
+        basic_asset: typing.Text = ...,
+        exchange: typing.Text = ...,
+        country_of_risk: typing.Text = ...,
+        country_of_risk_name: typing.Text = ...,
+        sector: typing.Text = ...,
+        lot: builtins.int = ...,
+        basic_asset_size: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        klong: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        kshort: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        dlong: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        dshort: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        dlong_min: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        dshort_min: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        min_price_increment: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        strike_price: typing.Optional[tinkoff.invest.grpc.common_pb2.MoneyValue] = ...,
+        expiration_date: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        first_trade_date: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        last_trade_date: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        first_1min_candle_date: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        first_1day_candle_date: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        short_enabled_flag: builtins.bool = ...,
+        for_iis_flag: builtins.bool = ...,
+        otc_flag: builtins.bool = ...,
+        buy_available_flag: builtins.bool = ...,
+        sell_available_flag: builtins.bool = ...,
+        ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["basic_asset_size",b"basic_asset_size","dlong",b"dlong","dlong_min",b"dlong_min","dshort",b"dshort","dshort_min",b"dshort_min","expiration_date",b"expiration_date","first_1day_candle_date",b"first_1day_candle_date","first_1min_candle_date",b"first_1min_candle_date","first_trade_date",b"first_trade_date","klong",b"klong","kshort",b"kshort","last_trade_date",b"last_trade_date","min_price_increment",b"min_price_increment","strike_price",b"strike_price"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["asset_type",b"asset_type","basic_asset",b"basic_asset","basic_asset_position_uid",b"basic_asset_position_uid","basic_asset_size",b"basic_asset_size","buy_available_flag",b"buy_available_flag","class_code",b"class_code","country_of_risk",b"country_of_risk","country_of_risk_name",b"country_of_risk_name","currency",b"currency","direction",b"direction","dlong",b"dlong","dlong_min",b"dlong_min","dshort",b"dshort","dshort_min",b"dshort_min","exchange",b"exchange","expiration_date",b"expiration_date","first_1day_candle_date",b"first_1day_candle_date","first_1min_candle_date",b"first_1min_candle_date","first_trade_date",b"first_trade_date","for_iis_flag",b"for_iis_flag","klong",b"klong","kshort",b"kshort","last_trade_date",b"last_trade_date","lot",b"lot","min_price_increment",b"min_price_increment","name",b"name","otc_flag",b"otc_flag","payment_type",b"payment_type","position_uid",b"position_uid","real_exchange",b"real_exchange","sector",b"sector","sell_available_flag",b"sell_available_flag","settlement_currency",b"settlement_currency","settlement_type",b"settlement_type","short_enabled_flag",b"short_enabled_flag","strike_price",b"strike_price","style",b"style","ticker",b"ticker","trading_status",b"trading_status","uid",b"uid"]) -> None: ...
+global___Option = Option
 
 class ShareResponse(google.protobuf.message.Message):
     """Данные по акции."""

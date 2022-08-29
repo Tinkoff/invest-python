@@ -38,6 +38,11 @@ class SandboxServiceStub(object):
                 request_serializer=tinkoff_dot_invest_dot_grpc_dot_orders__pb2.PostOrderRequest.SerializeToString,
                 response_deserializer=tinkoff_dot_invest_dot_grpc_dot_orders__pb2.PostOrderResponse.FromString,
                 )
+        self.ReplaceSandboxOrder = channel.unary_unary(
+                '/tinkoff.public.invest.api.contract.v1.SandboxService/ReplaceSandboxOrder',
+                request_serializer=tinkoff_dot_invest_dot_grpc_dot_orders__pb2.ReplaceOrderRequest.SerializeToString,
+                response_deserializer=tinkoff_dot_invest_dot_grpc_dot_orders__pb2.PostOrderResponse.FromString,
+                )
         self.GetSandboxOrders = channel.unary_unary(
                 '/tinkoff.public.invest.api.contract.v1.SandboxService/GetSandboxOrders',
                 request_serializer=tinkoff_dot_invest_dot_grpc_dot_orders__pb2.GetOrdersRequest.SerializeToString,
@@ -73,6 +78,11 @@ class SandboxServiceStub(object):
                 request_serializer=tinkoff_dot_invest_dot_grpc_dot_sandbox__pb2.SandboxPayInRequest.SerializeToString,
                 response_deserializer=tinkoff_dot_invest_dot_grpc_dot_sandbox__pb2.SandboxPayInResponse.FromString,
                 )
+        self.GetSandboxWithdrawLimits = channel.unary_unary(
+                '/tinkoff.public.invest.api.contract.v1.SandboxService/GetSandboxWithdrawLimits',
+                request_serializer=tinkoff_dot_invest_dot_grpc_dot_operations__pb2.WithdrawLimitsRequest.SerializeToString,
+                response_deserializer=tinkoff_dot_invest_dot_grpc_dot_operations__pb2.WithdrawLimitsResponse.FromString,
+                )
 
 
 class SandboxServiceServicer(object):
@@ -102,6 +112,13 @@ class SandboxServiceServicer(object):
 
     def PostSandboxOrder(self, request, context):
         """Метод выставления торгового поручения в песочнице.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ReplaceSandboxOrder(self, request, context):
+        """Метод изменения выставленной заявки.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -156,6 +173,13 @@ class SandboxServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def GetSandboxWithdrawLimits(self, request, context):
+        """Метод получения доступного остатка для вывода средств в песочнице.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_SandboxServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -177,6 +201,11 @@ def add_SandboxServiceServicer_to_server(servicer, server):
             'PostSandboxOrder': grpc.unary_unary_rpc_method_handler(
                     servicer.PostSandboxOrder,
                     request_deserializer=tinkoff_dot_invest_dot_grpc_dot_orders__pb2.PostOrderRequest.FromString,
+                    response_serializer=tinkoff_dot_invest_dot_grpc_dot_orders__pb2.PostOrderResponse.SerializeToString,
+            ),
+            'ReplaceSandboxOrder': grpc.unary_unary_rpc_method_handler(
+                    servicer.ReplaceSandboxOrder,
+                    request_deserializer=tinkoff_dot_invest_dot_grpc_dot_orders__pb2.ReplaceOrderRequest.FromString,
                     response_serializer=tinkoff_dot_invest_dot_grpc_dot_orders__pb2.PostOrderResponse.SerializeToString,
             ),
             'GetSandboxOrders': grpc.unary_unary_rpc_method_handler(
@@ -213,6 +242,11 @@ def add_SandboxServiceServicer_to_server(servicer, server):
                     servicer.SandboxPayIn,
                     request_deserializer=tinkoff_dot_invest_dot_grpc_dot_sandbox__pb2.SandboxPayInRequest.FromString,
                     response_serializer=tinkoff_dot_invest_dot_grpc_dot_sandbox__pb2.SandboxPayInResponse.SerializeToString,
+            ),
+            'GetSandboxWithdrawLimits': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetSandboxWithdrawLimits,
+                    request_deserializer=tinkoff_dot_invest_dot_grpc_dot_operations__pb2.WithdrawLimitsRequest.FromString,
+                    response_serializer=tinkoff_dot_invest_dot_grpc_dot_operations__pb2.WithdrawLimitsResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -289,6 +323,23 @@ class SandboxService(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/tinkoff.public.invest.api.contract.v1.SandboxService/PostSandboxOrder',
             tinkoff_dot_invest_dot_grpc_dot_orders__pb2.PostOrderRequest.SerializeToString,
+            tinkoff_dot_invest_dot_grpc_dot_orders__pb2.PostOrderResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ReplaceSandboxOrder(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/tinkoff.public.invest.api.contract.v1.SandboxService/ReplaceSandboxOrder',
+            tinkoff_dot_invest_dot_grpc_dot_orders__pb2.ReplaceOrderRequest.SerializeToString,
             tinkoff_dot_invest_dot_grpc_dot_orders__pb2.PostOrderResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
@@ -409,5 +460,22 @@ class SandboxService(object):
         return grpc.experimental.unary_unary(request, target, '/tinkoff.public.invest.api.contract.v1.SandboxService/SandboxPayIn',
             tinkoff_dot_invest_dot_grpc_dot_sandbox__pb2.SandboxPayInRequest.SerializeToString,
             tinkoff_dot_invest_dot_grpc_dot_sandbox__pb2.SandboxPayInResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetSandboxWithdrawLimits(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/tinkoff.public.invest.api.contract.v1.SandboxService/GetSandboxWithdrawLimits',
+            tinkoff_dot_invest_dot_grpc_dot_operations__pb2.WithdrawLimitsRequest.SerializeToString,
+            tinkoff_dot_invest_dot_grpc_dot_operations__pb2.WithdrawLimitsResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

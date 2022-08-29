@@ -424,6 +424,42 @@ INSTRUMENT_TYPE_OPTION: InstrumentType.ValueType  # 7
 global___InstrumentType = InstrumentType
 
 
+class _PositionsAccountSubscriptionStatus:
+    ValueType = typing.NewType('ValueType', builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
+class _PositionsAccountSubscriptionStatusEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_PositionsAccountSubscriptionStatus.ValueType], builtins.type):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    POSITIONS_SUBSCRIPTION_STATUS_UNSPECIFIED: _PositionsAccountSubscriptionStatus.ValueType  # 0
+    """Тип не определён."""
+
+    POSITIONS_SUBSCRIPTION_STATUS_SUCCESS: _PositionsAccountSubscriptionStatus.ValueType  # 1
+    """Успешно."""
+
+    POSITIONS_SUBSCRIPTION_STATUS_ACCOUNT_NOT_FOUND: _PositionsAccountSubscriptionStatus.ValueType  # 2
+    """Счёт не найден или недостаточно прав."""
+
+    POSITIONS_SUBSCRIPTION_STATUS_INTERNAL_ERROR: _PositionsAccountSubscriptionStatus.ValueType  # 3
+    """Произошла ошибка."""
+
+class PositionsAccountSubscriptionStatus(_PositionsAccountSubscriptionStatus, metaclass=_PositionsAccountSubscriptionStatusEnumTypeWrapper):
+    """Результат подписки."""
+    pass
+
+POSITIONS_SUBSCRIPTION_STATUS_UNSPECIFIED: PositionsAccountSubscriptionStatus.ValueType  # 0
+"""Тип не определён."""
+
+POSITIONS_SUBSCRIPTION_STATUS_SUCCESS: PositionsAccountSubscriptionStatus.ValueType  # 1
+"""Успешно."""
+
+POSITIONS_SUBSCRIPTION_STATUS_ACCOUNT_NOT_FOUND: PositionsAccountSubscriptionStatus.ValueType  # 2
+"""Счёт не найден или недостаточно прав."""
+
+POSITIONS_SUBSCRIPTION_STATUS_INTERNAL_ERROR: PositionsAccountSubscriptionStatus.ValueType  # 3
+"""Произошла ошибка."""
+
+global___PositionsAccountSubscriptionStatus = PositionsAccountSubscriptionStatus
+
+
 class OperationsRequest(google.protobuf.message.Message):
     """Запрос получения списка операций по счёту."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
@@ -675,6 +711,7 @@ class PositionsResponse(google.protobuf.message.Message):
     SECURITIES_FIELD_NUMBER: builtins.int
     LIMITS_LOADING_IN_PROGRESS_FIELD_NUMBER: builtins.int
     FUTURES_FIELD_NUMBER: builtins.int
+    OPTIONS_FIELD_NUMBER: builtins.int
     @property
     def money(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[tinkoff.invest.grpc.common_pb2.MoneyValue]:
         """Массив валютных позиций портфеля."""
@@ -694,6 +731,10 @@ class PositionsResponse(google.protobuf.message.Message):
     def futures(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___PositionsFutures]:
         """Список фьючерсов портфеля."""
         pass
+    @property
+    def options(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___PositionsOptions]:
+        """Список опционов портфеля."""
+        pass
     def __init__(self,
         *,
         money: typing.Optional[typing.Iterable[tinkoff.invest.grpc.common_pb2.MoneyValue]] = ...,
@@ -701,8 +742,9 @@ class PositionsResponse(google.protobuf.message.Message):
         securities: typing.Optional[typing.Iterable[global___PositionsSecurities]] = ...,
         limits_loading_in_progress: builtins.bool = ...,
         futures: typing.Optional[typing.Iterable[global___PositionsFutures]] = ...,
+        options: typing.Optional[typing.Iterable[global___PositionsOptions]] = ...,
         ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["blocked",b"blocked","futures",b"futures","limits_loading_in_progress",b"limits_loading_in_progress","money",b"money","securities",b"securities"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["blocked",b"blocked","futures",b"futures","limits_loading_in_progress",b"limits_loading_in_progress","money",b"money","options",b"options","securities",b"securities"]) -> None: ...
 global___PositionsResponse = PositionsResponse
 
 class WithdrawLimitsRequest(google.protobuf.message.Message):
@@ -784,7 +826,7 @@ class PortfolioPosition(google.protobuf.message.Message):
         pass
     @property
     def average_position_price_pt(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Средняя цена лота в позиции в пунктах (для фьючерсов). **Возможна задержка до секунды для пересчёта**."""
+        """Средняя цена позиции в пунктах (для фьючерсов). **Возможна задержка до секунды для пересчёта**."""
         pass
     @property
     def current_price(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
@@ -792,7 +834,7 @@ class PortfolioPosition(google.protobuf.message.Message):
         pass
     @property
     def average_position_price_fifo(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
-        """Средняя цена лота в позиции по методу FIFO. **Возможна задержка до секунды для пересчёта**."""
+        """Средняя цена позиции по методу FIFO. **Возможна задержка до секунды для пересчёта**."""
         pass
     @property
     def quantity_lots(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
@@ -825,6 +867,8 @@ class PositionsSecurities(google.protobuf.message.Message):
     FIGI_FIELD_NUMBER: builtins.int
     BLOCKED_FIELD_NUMBER: builtins.int
     BALANCE_FIELD_NUMBER: builtins.int
+    POSITION_UID_FIELD_NUMBER: builtins.int
+    INSTRUMENT_UID_FIELD_NUMBER: builtins.int
     EXCHANGE_BLOCKED_FIELD_NUMBER: builtins.int
     INSTRUMENT_TYPE_FIELD_NUMBER: builtins.int
     figi: typing.Text
@@ -835,6 +879,12 @@ class PositionsSecurities(google.protobuf.message.Message):
 
     balance: builtins.int
     """Текущий незаблокированный баланс."""
+
+    position_uid: typing.Text
+    """Уникальный идентификатор позиции."""
+
+    instrument_uid: typing.Text
+    """Уникальный идентификатор  инструмента."""
 
     exchange_blocked: builtins.bool
     """Заблокировано на бирже."""
@@ -847,10 +897,12 @@ class PositionsSecurities(google.protobuf.message.Message):
         figi: typing.Text = ...,
         blocked: builtins.int = ...,
         balance: builtins.int = ...,
+        position_uid: typing.Text = ...,
+        instrument_uid: typing.Text = ...,
         exchange_blocked: builtins.bool = ...,
         instrument_type: typing.Text = ...,
         ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["balance",b"balance","blocked",b"blocked","exchange_blocked",b"exchange_blocked","figi",b"figi","instrument_type",b"instrument_type"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["balance",b"balance","blocked",b"blocked","exchange_blocked",b"exchange_blocked","figi",b"figi","instrument_type",b"instrument_type","instrument_uid",b"instrument_uid","position_uid",b"position_uid"]) -> None: ...
 global___PositionsSecurities = PositionsSecurities
 
 class PositionsFutures(google.protobuf.message.Message):
@@ -859,6 +911,8 @@ class PositionsFutures(google.protobuf.message.Message):
     FIGI_FIELD_NUMBER: builtins.int
     BLOCKED_FIELD_NUMBER: builtins.int
     BALANCE_FIELD_NUMBER: builtins.int
+    POSITION_UID_FIELD_NUMBER: builtins.int
+    INSTRUMENT_UID_FIELD_NUMBER: builtins.int
     figi: typing.Text
     """Figi-идентификатор фьючерса."""
 
@@ -868,14 +922,51 @@ class PositionsFutures(google.protobuf.message.Message):
     balance: builtins.int
     """Текущий незаблокированный баланс."""
 
+    position_uid: typing.Text
+    """Уникальный идентификатор позиции."""
+
+    instrument_uid: typing.Text
+    """Уникальный идентификатор  инструмента."""
+
     def __init__(self,
         *,
         figi: typing.Text = ...,
         blocked: builtins.int = ...,
         balance: builtins.int = ...,
+        position_uid: typing.Text = ...,
+        instrument_uid: typing.Text = ...,
         ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["balance",b"balance","blocked",b"blocked","figi",b"figi"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["balance",b"balance","blocked",b"blocked","figi",b"figi","instrument_uid",b"instrument_uid","position_uid",b"position_uid"]) -> None: ...
 global___PositionsFutures = PositionsFutures
+
+class PositionsOptions(google.protobuf.message.Message):
+    """Баланс опциона."""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    POSITION_UID_FIELD_NUMBER: builtins.int
+    INSTRUMENT_UID_FIELD_NUMBER: builtins.int
+    BLOCKED_FIELD_NUMBER: builtins.int
+    BALANCE_FIELD_NUMBER: builtins.int
+    position_uid: typing.Text
+    """Уникальный идентификатор позиции опциона."""
+
+    instrument_uid: typing.Text
+    """Уникальный идентификатор  инструмента."""
+
+    blocked: builtins.int
+    """Заблокировано."""
+
+    balance: builtins.int
+    """Текущий незаблокированный баланс."""
+
+    def __init__(self,
+        *,
+        position_uid: typing.Text = ...,
+        instrument_uid: typing.Text = ...,
+        blocked: builtins.int = ...,
+        balance: builtins.int = ...,
+        ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["balance",b"balance","blocked",b"blocked","instrument_uid",b"instrument_uid","position_uid",b"position_uid"]) -> None: ...
+global___PositionsOptions = PositionsOptions
 
 class BrokerReportRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
@@ -1443,7 +1534,7 @@ class GetOperationsByCursorRequest(google.protobuf.message.Message):
     WITHOUT_TRADES_FIELD_NUMBER: builtins.int
     WITHOUT_OVERNIGHTS_FIELD_NUMBER: builtins.int
     account_id: typing.Text
-    """Идентификатор счёта клиента."""
+    """Идентификатор счёта клиента. Обязательный параметр для данного метода, остальные параметры опциональны."""
 
     instrument_id: typing.Text
     """Идентификатор инструмента (Figi инструмента или uid инструмента)"""
@@ -1456,7 +1547,7 @@ class GetOperationsByCursorRequest(google.protobuf.message.Message):
     """Идентификатор элемента, с которого начать формировать ответ."""
 
     limit: builtins.int
-    """Лимит количества операций."""
+    """Лимит количества операций. По умолчанию устанавливается значение **100**, максимальное значение 1000."""
 
     @property
     def operation_types(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[global___OperationType.ValueType]:
@@ -1469,7 +1560,7 @@ class GetOperationsByCursorRequest(google.protobuf.message.Message):
     """Флаг возвращать ли комиссии, по умолчанию false"""
 
     without_trades: builtins.bool
-    """Флаг ответ без сделок."""
+    """Флаг получения ответа без массива сделок."""
 
     without_overnights: builtins.bool
     """Флаг не показывать overnight операций."""
@@ -1709,3 +1800,148 @@ class OperationItemTrade(google.protobuf.message.Message):
     def HasField(self, field_name: typing_extensions.Literal["date",b"date","price",b"price","yield",b"yield","yield_relative",b"yield_relative"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions.Literal["date",b"date","num",b"num","price",b"price","quantity",b"quantity","yield",b"yield","yield_relative",b"yield_relative"]) -> None: ...
 global___OperationItemTrade = OperationItemTrade
+
+class PositionsStreamRequest(google.protobuf.message.Message):
+    """Запрос установки stream-соединения позиций."""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    ACCOUNTS_FIELD_NUMBER: builtins.int
+    @property
+    def accounts(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+        """Массив идентификаторов счётов пользователя"""
+        pass
+    def __init__(self,
+        *,
+        accounts: typing.Optional[typing.Iterable[typing.Text]] = ...,
+        ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["accounts",b"accounts"]) -> None: ...
+global___PositionsStreamRequest = PositionsStreamRequest
+
+class PositionsStreamResponse(google.protobuf.message.Message):
+    """Информация по изменению позиций портфеля."""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    SUBSCRIPTIONS_FIELD_NUMBER: builtins.int
+    POSITION_FIELD_NUMBER: builtins.int
+    PING_FIELD_NUMBER: builtins.int
+    @property
+    def subscriptions(self) -> global___PositionsSubscriptionResult:
+        """Объект результата подписки."""
+        pass
+    @property
+    def position(self) -> global___PositionData:
+        """Объект стриминга позиций."""
+        pass
+    @property
+    def ping(self) -> tinkoff.invest.grpc.common_pb2.Ping:
+        """Проверка активности стрима."""
+        pass
+    def __init__(self,
+        *,
+        subscriptions: typing.Optional[global___PositionsSubscriptionResult] = ...,
+        position: typing.Optional[global___PositionData] = ...,
+        ping: typing.Optional[tinkoff.invest.grpc.common_pb2.Ping] = ...,
+        ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["payload",b"payload","ping",b"ping","position",b"position","subscriptions",b"subscriptions"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["payload",b"payload","ping",b"ping","position",b"position","subscriptions",b"subscriptions"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["payload",b"payload"]) -> typing.Optional[typing_extensions.Literal["subscriptions","position","ping"]]: ...
+global___PositionsStreamResponse = PositionsStreamResponse
+
+class PositionsSubscriptionResult(google.protobuf.message.Message):
+    """Объект результата подписки."""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    ACCOUNTS_FIELD_NUMBER: builtins.int
+    @property
+    def accounts(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___PositionsSubscriptionStatus]:
+        """Массив счетов клиента."""
+        pass
+    def __init__(self,
+        *,
+        accounts: typing.Optional[typing.Iterable[global___PositionsSubscriptionStatus]] = ...,
+        ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["accounts",b"accounts"]) -> None: ...
+global___PositionsSubscriptionResult = PositionsSubscriptionResult
+
+class PositionsSubscriptionStatus(google.protobuf.message.Message):
+    """Счет клиента."""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    ACCOUNT_ID_FIELD_NUMBER: builtins.int
+    SUBSCRIPTION_STATUS_FIELD_NUMBER: builtins.int
+    account_id: typing.Text
+    """Идентификатор счёта"""
+
+    subscription_status: global___PositionsAccountSubscriptionStatus.ValueType
+    """Результат подписки."""
+
+    def __init__(self,
+        *,
+        account_id: typing.Text = ...,
+        subscription_status: global___PositionsAccountSubscriptionStatus.ValueType = ...,
+        ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["account_id",b"account_id","subscription_status",b"subscription_status"]) -> None: ...
+global___PositionsSubscriptionStatus = PositionsSubscriptionStatus
+
+class PositionData(google.protobuf.message.Message):
+    """Данные о позиции портфеля."""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    ACCOUNT_ID_FIELD_NUMBER: builtins.int
+    MONEY_FIELD_NUMBER: builtins.int
+    SECURITIES_FIELD_NUMBER: builtins.int
+    FUTURES_FIELD_NUMBER: builtins.int
+    OPTIONS_FIELD_NUMBER: builtins.int
+    DATE_FIELD_NUMBER: builtins.int
+    account_id: typing.Text
+    """Идентификатор счёта."""
+
+    @property
+    def money(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___PositionsMoney]:
+        """Массив валютных позиций портфеля."""
+        pass
+    @property
+    def securities(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___PositionsSecurities]:
+        """Список ценно-бумажных позиций портфеля."""
+        pass
+    @property
+    def futures(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___PositionsFutures]:
+        """Список фьючерсов портфеля."""
+        pass
+    @property
+    def options(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___PositionsOptions]:
+        """Список опционов портфеля."""
+        pass
+    @property
+    def date(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Дата и время операции в формате UTC."""
+        pass
+    def __init__(self,
+        *,
+        account_id: typing.Text = ...,
+        money: typing.Optional[typing.Iterable[global___PositionsMoney]] = ...,
+        securities: typing.Optional[typing.Iterable[global___PositionsSecurities]] = ...,
+        futures: typing.Optional[typing.Iterable[global___PositionsFutures]] = ...,
+        options: typing.Optional[typing.Iterable[global___PositionsOptions]] = ...,
+        date: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["date",b"date"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["account_id",b"account_id","date",b"date","futures",b"futures","money",b"money","options",b"options","securities",b"securities"]) -> None: ...
+global___PositionData = PositionData
+
+class PositionsMoney(google.protobuf.message.Message):
+    """Валютная позиция портфеля."""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    AVAILABLE_VALUE_FIELD_NUMBER: builtins.int
+    BLOCKED_VALUE_FIELD_NUMBER: builtins.int
+    @property
+    def available_value(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
+        """Доступное количество валютный позиций."""
+        pass
+    @property
+    def blocked_value(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
+        """Заблокированное количество валютный позиций."""
+        pass
+    def __init__(self,
+        *,
+        available_value: typing.Optional[tinkoff.invest.grpc.common_pb2.MoneyValue] = ...,
+        blocked_value: typing.Optional[tinkoff.invest.grpc.common_pb2.MoneyValue] = ...,
+        ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["available_value",b"available_value","blocked_value",b"blocked_value"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["available_value",b"available_value","blocked_value",b"blocked_value"]) -> None: ...
+global___PositionsMoney = PositionsMoney

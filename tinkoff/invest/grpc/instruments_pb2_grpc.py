@@ -67,6 +67,16 @@ class InstrumentsServiceStub(object):
                 request_serializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.InstrumentsRequest.SerializeToString,
                 response_deserializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.FuturesResponse.FromString,
                 )
+        self.OptionBy = channel.unary_unary(
+                '/tinkoff.public.invest.api.contract.v1.InstrumentsService/OptionBy',
+                request_serializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.InstrumentRequest.SerializeToString,
+                response_deserializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.OptionResponse.FromString,
+                )
+        self.Options = channel.unary_unary(
+                '/tinkoff.public.invest.api.contract.v1.InstrumentsService/Options',
+                request_serializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.InstrumentsRequest.SerializeToString,
+                response_deserializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.OptionsResponse.FromString,
+                )
         self.ShareBy = channel.unary_unary(
                 '/tinkoff.public.invest.api.contract.v1.InstrumentsService/ShareBy',
                 request_serializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.InstrumentRequest.SerializeToString,
@@ -210,6 +220,20 @@ class InstrumentsServiceServicer(object):
 
     def Futures(self, request, context):
         """Метод получения списка фьючерсов.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def OptionBy(self, request, context):
+        """Метод получения опциона по его идентификатору.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def Options(self, request, context):
+        """Метод получения списка опционов.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -365,6 +389,16 @@ def add_InstrumentsServiceServicer_to_server(servicer, server):
                     servicer.Futures,
                     request_deserializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.InstrumentsRequest.FromString,
                     response_serializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.FuturesResponse.SerializeToString,
+            ),
+            'OptionBy': grpc.unary_unary_rpc_method_handler(
+                    servicer.OptionBy,
+                    request_deserializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.InstrumentRequest.FromString,
+                    response_serializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.OptionResponse.SerializeToString,
+            ),
+            'Options': grpc.unary_unary_rpc_method_handler(
+                    servicer.Options,
+                    request_deserializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.InstrumentsRequest.FromString,
+                    response_serializer=tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.OptionsResponse.SerializeToString,
             ),
             'ShareBy': grpc.unary_unary_rpc_method_handler(
                     servicer.ShareBy,
@@ -616,6 +650,40 @@ class InstrumentsService(object):
         return grpc.experimental.unary_unary(request, target, '/tinkoff.public.invest.api.contract.v1.InstrumentsService/Futures',
             tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.InstrumentsRequest.SerializeToString,
             tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.FuturesResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def OptionBy(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/tinkoff.public.invest.api.contract.v1.InstrumentsService/OptionBy',
+            tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.InstrumentRequest.SerializeToString,
+            tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.OptionResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def Options(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/tinkoff.public.invest.api.contract.v1.InstrumentsService/Options',
+            tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.InstrumentsRequest.SerializeToString,
+            tinkoff_dot_invest_dot_grpc_dot_instruments__pb2.OptionsResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 

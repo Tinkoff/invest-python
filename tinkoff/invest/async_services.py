@@ -71,6 +71,8 @@ from .schemas import (
     GetBrokerReportRequest,
     GetCandlesRequest,
     GetCandlesResponse,
+    GetClosePricesRequest,
+    GetClosePricesResponse,
     GetCountriesRequest,
     GetCountriesResponse,
     GetDividendsForeignIssuerReportRequest,
@@ -104,6 +106,7 @@ from .schemas import (
     GetUserTariffRequest,
     GetUserTariffResponse,
     HistoricCandle,
+    InstrumentClosePriceRequest,
     InstrumentIdType,
     InstrumentRequest,
     InstrumentResponse,
@@ -117,6 +120,8 @@ from .schemas import (
     OperationsRequest,
     OperationsResponse,
     OperationState,
+    OptionResponse,
+    OptionsResponse,
     OrderDirection,
     OrderState,
     OrderType,
@@ -126,6 +131,8 @@ from .schemas import (
     PortfolioStreamResponse,
     PositionsRequest,
     PositionsResponse,
+    PositionsStreamRequest,
+    PositionsStreamResponse,
     PostOrderRequest,
     PostOrderResponse,
     PostStopOrderRequest,
@@ -413,6 +420,44 @@ class InstrumentsService(_grpc_helpers.Service):
         response = await response_coro
         log_request(await get_tracking_id_from_coro(response_coro), "Futures")
         return _grpc_helpers.protobuf_to_dataclass(response, FuturesResponse)
+
+    @handle_aio_request_error("OptionBy")
+    async def option_by(
+        self,
+        *,
+        id_type: InstrumentIdType = InstrumentIdType(0),
+        class_code: str = "",
+        id: str = "",
+    ) -> OptionResponse:
+        request = InstrumentRequest()
+        request.id_type = id_type
+        request.class_code = class_code
+        request.id = id
+        response_coro = self.stub.OptionBy(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, instruments_pb2.InstrumentRequest()
+            ),
+            metadata=self.metadata,
+        )
+        response = await response_coro
+        log_request(await get_tracking_id_from_coro(response_coro), "OptionBy")
+        return _grpc_helpers.protobuf_to_dataclass(response, OptionResponse)
+
+    @handle_aio_request_error("Options")
+    async def options(
+        self, *, instrument_status: InstrumentStatus = InstrumentStatus(0)
+    ) -> OptionsResponse:
+        request = InstrumentsRequest()
+        request.instrument_status = instrument_status
+        response_coro = self.stub.Options(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, instruments_pb2.InstrumentsRequest()
+            ),
+            metadata=self.metadata,
+        )
+        response = await response_coro
+        log_request(await get_tracking_id_from_coro(response_coro), "Options")
+        return _grpc_helpers.protobuf_to_dataclass(response, OptionsResponse)
 
     @handle_aio_request_error("ShareBy")
     async def share_by(
@@ -795,6 +840,25 @@ class MarketDataService(_grpc_helpers.Service):
         log_request(await get_tracking_id_from_coro(response_coro), "GetLastTrades")
         return _grpc_helpers.protobuf_to_dataclass(response, GetLastTradesResponse)
 
+    @handle_aio_request_error("GetClosePrices")
+    async def get_close_prices(
+        self,
+        *,
+        instruments: Optional[List[InstrumentClosePriceRequest]] = None,
+    ) -> GetClosePricesResponse:
+        request = GetClosePricesRequest()
+        if instruments:
+            request.instruments = instruments
+        response_coro = self.stub.GetClosePrices(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, marketdata_pb2.GetClosePricesRequest()
+            ),
+            metadata=self.metadata,
+        )
+        response = await response_coro
+        log_request(await get_tracking_id_from_coro(response_coro), "GetClosePrices")
+        return _grpc_helpers.protobuf_to_dataclass(response, GetClosePricesResponse)
+
 
 class MarketDataStreamService(_grpc_helpers.Service):
     _stub_factory = marketdata_pb2_grpc.MarketDataStreamServiceStub
@@ -988,6 +1052,23 @@ class OperationsStreamService(_grpc_helpers.Service):
             metadata=self.metadata,
         ):
             yield _grpc_helpers.protobuf_to_dataclass(response, PortfolioStreamResponse)
+
+    @handle_aio_request_error_gen("PositionsStream")
+    async def positions_stream(
+        self, *, accounts: Optional[List[str]] = None
+    ) -> AsyncIterable[PositionsStreamResponse]:
+        request = PositionsStreamRequest()
+        if accounts:
+            request.accounts = accounts
+        else:
+            raise ValueError("accounts can not be empty")
+        async for response in self.stub.PositionsStream(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, operations_pb2.PositionsStreamRequest()
+            ),
+            metadata=self.metadata,
+        ):
+            yield _grpc_helpers.protobuf_to_dataclass(response, PositionsStreamResponse)
 
 
 class OrdersStreamService(_grpc_helpers.Service):
@@ -1253,6 +1334,23 @@ class SandboxService(_grpc_helpers.Service):
         log_request(await get_tracking_id_from_coro(response_coro), "PostSandboxOrder")
         return _grpc_helpers.protobuf_to_dataclass(response, PostOrderResponse)
 
+    @handle_aio_request_error("ReplaceSandboxOrder")
+    async def replace_sandbox_order(
+        self,
+        request: "ReplaceOrderRequest",
+    ) -> PostOrderResponse:
+        response_coro = self.stub.PostSandboxOrder(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, orders_pb2.ReplaceOrderRequest()
+            ),
+            metadata=self.metadata,
+        )
+        response = await response_coro
+        log_request(
+            await get_tracking_id_from_coro(response_coro), "ReplaceSandboxOrder"
+        )
+        return _grpc_helpers.protobuf_to_dataclass(response, PostOrderResponse)
+
     @handle_aio_request_error("GetSandboxOrders")
     async def get_sandbox_orders(self, *, account_id: str = "") -> GetOrdersResponse:
         request = GetOrdersRequest()
@@ -1384,6 +1482,26 @@ class SandboxService(_grpc_helpers.Service):
         response = await response_coro
         log_request(await get_tracking_id_from_coro(response_coro), "SandboxPayIn")
         return _grpc_helpers.protobuf_to_dataclass(response, SandboxPayInResponse)
+
+    @handle_aio_request_error("GetSandboxWithdrawLimits")
+    async def get_sandbox_withdraw_limits(
+        self,
+        *,
+        account_id: str = "",
+    ) -> WithdrawLimitsResponse:
+        request = WithdrawLimitsRequest()
+        request.account_id = account_id
+        response_coro = self.stub.SandboxPayIn(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, operations_pb2.WithdrawLimitsRequest()
+            ),
+            metadata=self.metadata,
+        )
+        response = await response_coro
+        log_request(
+            await get_tracking_id_from_coro(response_coro), "GetSandboxWithdrawLimits"
+        )
+        return _grpc_helpers.protobuf_to_dataclass(response, WithdrawLimitsResponse)
 
 
 class StopOrdersService(_grpc_helpers.Service):

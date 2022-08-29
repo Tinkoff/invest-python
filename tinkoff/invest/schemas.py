@@ -32,6 +32,7 @@ class InstrumentIdType(_grpc_helpers.Enum):
     INSTRUMENT_ID_TYPE_FIGI = 1
     INSTRUMENT_ID_TYPE_TICKER = 2
     INSTRUMENT_ID_TYPE_UID = 3
+    INSTRUMENT_ID_TYPE_POSITION_UID = 4
 
 
 class InstrumentStatus(_grpc_helpers.Enum):
@@ -252,7 +253,6 @@ class PortfolioSubscriptionStatus(_grpc_helpers.Enum):
     PORTFOLIO_SUBSCRIPTION_STATUS_INTERNAL_ERROR = 3
 
 
-# New
 class InstrumentType(_grpc_helpers.Enum):
     INSTRUMENT_TYPE_UNSPECIFIED = 0
     INSTRUMENT_TYPE_BOND = 1
@@ -264,11 +264,41 @@ class InstrumentType(_grpc_helpers.Enum):
     INSTRUMENT_TYPE_OPTION = 7
 
 
-# New
 class PriceType(_grpc_helpers.Enum):
     PRICE_TYPE_UNSPECIFIED = 0
     PRICE_TYPE_POINT = 1
     PRICE_TYPE_CURRENCY = 2
+
+
+class OptionDirection(_grpc_helpers.Enum):
+    OPTION_DIRECTION_UNSPECIFIED = 0
+    OPTION_DIRECTION_PUT = 1
+    OPTION_DIRECTION_CALL = 2
+
+
+class OptionPaymentType(_grpc_helpers.Enum):
+    OPTION_PAYMENT_TYPE_UNSPECIFIED = 0
+    OPTION_PAYMENT_TYPE_PREMIUM = 1
+    OPTION_PAYMENT_TYPE_MARGINAL = 2
+
+
+class OptionStyle(_grpc_helpers.Enum):
+    OPTION_STYLE_UNSPECIFIED = 0
+    OPTION_STYLE_AMERICAN = 1
+    OPTION_STYLE_EUROPEAN = 2
+
+
+class OptionSettlementType(_grpc_helpers.Enum):
+    OPTION_EXECUTION_TYPE_UNSPECIFIED = 0
+    OPTION_EXECUTION_TYPE_PHYSICAL_DELIVERY = 1
+    OPTION_EXECUTION_TYPE_CASH_SETTLEMENT = 2
+
+
+class PositionsAccountSubscriptionStatus(_grpc_helpers.Enum):
+    POSITIONS_SUBSCRIPTION_STATUS_UNSPECIFIED = 0
+    POSITIONS_SUBSCRIPTION_STATUS_SUCCESS = 1
+    POSITIONS_SUBSCRIPTION_STATUS_ACCOUNT_NOT_FOUND = 2
+    POSITIONS_SUBSCRIPTION_STATUS_INTERNAL_ERROR = 3
 
 
 @dataclass(eq=False, repr=True)
@@ -400,6 +430,65 @@ class FutureResponse(_grpc_helpers.Message):
 @dataclass(eq=False, repr=True)
 class FuturesResponse(_grpc_helpers.Message):
     instruments: List["Future"] = _grpc_helpers.message_field(1)
+
+
+@dataclass(eq=False, repr=True)
+class OptionResponse(_grpc_helpers.Message):
+    instrument: "Option" = _grpc_helpers.message_field(1)
+
+
+@dataclass(eq=False, repr=True)
+class OptionsResponse(_grpc_helpers.Message):
+    instruments: List["Option"] = _grpc_helpers.message_field(1)
+
+
+@dataclass(eq=False, repr=True)
+class Option(_grpc_helpers.Message):
+    uid: str = _grpc_helpers.string_field(1)
+    position_uid: str = _grpc_helpers.string_field(2)
+    ticker: str = _grpc_helpers.string_field(3)
+    class_code: str = _grpc_helpers.string_field(4)
+    basic_asset_position_uid: str = _grpc_helpers.string_field(5)
+
+    trading_status: "SecurityTradingStatus" = _grpc_helpers.message_field(21)
+    real_exchange: "RealExchange" = _grpc_helpers.message_field(31)
+    direction: "OptionDirection" = _grpc_helpers.message_field(41)
+    payment_type: "OptionPaymentType" = _grpc_helpers.message_field(42)
+    style: "OptionStyle" = _grpc_helpers.message_field(43)
+    settlement_type: "OptionSettlementType" = _grpc_helpers.message_field(44)
+
+    name: str = _grpc_helpers.string_field(101)
+    currency: str = _grpc_helpers.string_field(111)
+    settlement_currency: str = _grpc_helpers.string_field(112)
+    asset_type: str = _grpc_helpers.string_field(131)
+    basic_asset: str = _grpc_helpers.string_field(132)
+    exchange: str = _grpc_helpers.string_field(141)
+    country_of_risk: str = _grpc_helpers.string_field(151)
+    country_of_risk_name: str = _grpc_helpers.string_field(152)
+    sector: str = _grpc_helpers.string_field(161)
+
+    lot: int = _grpc_helpers.int32_field(201)
+    basic_asset_size: "Quotation" = _grpc_helpers.message_field(211)
+    klong: "Quotation" = _grpc_helpers.message_field(221)
+    kshort: "Quotation" = _grpc_helpers.message_field(222)
+    dlong: "Quotation" = _grpc_helpers.message_field(223)
+    dshort: "Quotation" = _grpc_helpers.message_field(224)
+    dlong_min: "Quotation" = _grpc_helpers.message_field(225)
+    dshort_min: "Quotation" = _grpc_helpers.message_field(226)
+    min_price_increment: "Quotation" = _grpc_helpers.message_field(231)
+    strike_price: "MoneyValue" = _grpc_helpers.message_field(241)
+
+    expiration_date: datetime = _grpc_helpers.message_field(301)
+    first_trade_date: datetime = _grpc_helpers.message_field(311)
+    last_trade_date: datetime = _grpc_helpers.message_field(312)
+    first_1min_candle_date: datetime = _grpc_helpers.message_field(321)
+    first_1day_candle_date: datetime = _grpc_helpers.message_field(322)
+
+    short_enabled_flag: bool = _grpc_helpers.bool_field(401)
+    for_iis_flag: bool = _grpc_helpers.bool_field(402)
+    otc_flag: bool = _grpc_helpers.bool_field(403)
+    buy_available_flag: bool = _grpc_helpers.bool_field(404)
+    sell_available_flag: bool = _grpc_helpers.bool_field(405)
 
 
 @dataclass(eq=False, repr=True)
@@ -1282,6 +1371,7 @@ class LastPrice(_grpc_helpers.Message):
     figi: str = _grpc_helpers.string_field(1)
     price: "Quotation" = _grpc_helpers.message_field(2)
     time: datetime = _grpc_helpers.message_field(3)
+    instrument_uid: str = _grpc_helpers.string_field(11)
 
 
 @dataclass(eq=False, repr=True)
@@ -1300,6 +1390,9 @@ class GetOrderBookResponse(_grpc_helpers.Message):
     close_price: "Quotation" = _grpc_helpers.message_field(6)
     limit_up: "Quotation" = _grpc_helpers.message_field(7)
     limit_down: "Quotation" = _grpc_helpers.message_field(8)
+    last_price_ts: datetime = _grpc_helpers.message_field(21)
+    close_price_ts: datetime = _grpc_helpers.message_field(22)
+    orderbook_ts: datetime = _grpc_helpers.message_field(23)
 
 
 @dataclass(eq=False, repr=True)
@@ -1331,6 +1424,29 @@ class GetLastTradesResponse(_grpc_helpers.Message):
 @dataclass(eq=False, repr=True)
 class GetMySubscriptions(_grpc_helpers.Message):
     pass
+
+
+@dataclass(eq=False, repr=True)
+class GetClosePricesRequest(_grpc_helpers.Message):
+    instruments: List["InstrumentClosePriceRequest"] = _grpc_helpers.message_field(1)
+
+
+@dataclass(eq=False, repr=True)
+class InstrumentClosePriceRequest(_grpc_helpers.Message):
+    instrument_id: str = _grpc_helpers.string_field(1)
+
+
+@dataclass(eq=False, repr=True)
+class GetClosePricesResponse(_grpc_helpers.Message):
+    close_prices: List["InstrumentClosePriceResponse"] = _grpc_helpers.message_field(1)
+
+
+@dataclass(eq=False, repr=True)
+class InstrumentClosePriceResponse(_grpc_helpers.Message):
+    figi: str = _grpc_helpers.string_field(1)
+    instrument_uid: str = _grpc_helpers.string_field(2)
+    price: "Quotation" = _grpc_helpers.message_field(11)
+    time: datetime = _grpc_helpers.message_field(21)
 
 
 @dataclass(eq=False, repr=True)
@@ -1401,6 +1517,7 @@ class PositionsResponse(_grpc_helpers.Message):
     securities: List["PositionsSecurities"] = _grpc_helpers.message_field(3)
     limits_loading_in_progress: bool = _grpc_helpers.bool_field(4)
     futures: List["PositionsFutures"] = _grpc_helpers.bool_field(5)
+    options: List["PositionsOptions"] = _grpc_helpers.bool_field(6)
 
 
 @dataclass(eq=False, repr=True)
@@ -1435,6 +1552,8 @@ class PositionsSecurities(_grpc_helpers.Message):
     figi: str = _grpc_helpers.string_field(1)
     blocked: int = _grpc_helpers.int64_field(2)
     balance: int = _grpc_helpers.int64_field(3)
+    position_uid: str = _grpc_helpers.string_field(4)
+    instrument_uid: str = _grpc_helpers.string_field(5)
     exchange_blocked: bool = _grpc_helpers.bool_field(11)
     instrument_type: str = _grpc_helpers.string_field(16)
 
@@ -1556,7 +1675,6 @@ class OrderStage(_grpc_helpers.Message):
     trade_id: str = _grpc_helpers.string_field(3)
 
 
-# New
 class ReplaceOrderRequest(_grpc_helpers.Message):
     account_id: str = _grpc_helpers.string_field(1)
     order_id: str = _grpc_helpers.string_field(6)
@@ -1817,6 +1935,16 @@ class PositionsFutures(_grpc_helpers.Message):
     figi: str = _grpc_helpers.string_field(1)
     blocked: int = _grpc_helpers.int64_field(2)
     balance: int = _grpc_helpers.int64_field(3)
+    position_uid: str = _grpc_helpers.string_field(4)
+    instrument_uid: str = _grpc_helpers.string_field(5)
+
+
+@dataclass(eq=False, repr=True)
+class PositionsOptions(_grpc_helpers.Message):
+    position_uid: str = _grpc_helpers.string_field(1)
+    instrument_uid: str = _grpc_helpers.string_field(2)
+    blocked: int = _grpc_helpers.int64_field(11)
+    balance: int = _grpc_helpers.int64_field(21)
 
 
 @dataclass(eq=False, repr=True)
@@ -1975,3 +2103,46 @@ class OperationItemTrade(_grpc_helpers.Message):
     price: "MoneyValue" = _grpc_helpers.message_field(16)
     yield_: "MoneyValue" = _grpc_helpers.message_field(21)
     yield_relative: "Quotation" = _grpc_helpers.message_field(22)
+
+
+@dataclass(eq=False, repr=True)
+class PositionsStreamRequest(_grpc_helpers.Message):
+    accounts: List[str] = _grpc_helpers.string_field(1)
+
+
+@dataclass(eq=False, repr=True)
+class PositionsStreamResponse(_grpc_helpers.Message):
+    subscriptions: "PositionsSubscriptionResult" = _grpc_helpers.message_field(
+        1, group="payload"
+    )
+    position: "PositionData" = _grpc_helpers.message_field(2, group="payload")
+    ping: "Ping" = _grpc_helpers.message_field(3, group="payload")
+
+
+@dataclass(eq=False, repr=True)
+class PositionsSubscriptionResult(_grpc_helpers.Message):
+    accounts: "PositionsSubscriptionStatus" = _grpc_helpers.message_field(1)
+
+
+@dataclass(eq=False, repr=True)
+class PositionsSubscriptionStatus(_grpc_helpers.Message):
+    account_id: str = _grpc_helpers.string_field(1)
+    subscription_status: "PositionsAccountSubscriptionStatus" = (
+        _grpc_helpers.message_field(6)
+    )
+
+
+@dataclass(eq=False, repr=True)
+class PositionData(_grpc_helpers.Message):
+    account_id: str = _grpc_helpers.string_field(1)
+    money: "PositionsMoney" = _grpc_helpers.message_field(2)
+    securities: "PositionsSecurities" = _grpc_helpers.message_field(3)
+    futures: "PositionsFutures" = _grpc_helpers.message_field(4)
+    options: "PositionsOptions" = _grpc_helpers.message_field(5)
+    date: datetime = _grpc_helpers.message_field(6)
+
+
+@dataclass(eq=False, repr=True)
+class PositionsMoney(_grpc_helpers.Message):
+    available_value: "MoneyValue" = _grpc_helpers.message_field(1)
+    blocked_value: "MoneyValue" = _grpc_helpers.message_field(2)

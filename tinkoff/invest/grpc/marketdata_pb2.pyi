@@ -1109,8 +1109,9 @@ class LastPrice(google.protobuf.message.Message):
     FIGI_FIELD_NUMBER: builtins.int
     PRICE_FIELD_NUMBER: builtins.int
     TIME_FIELD_NUMBER: builtins.int
+    INSTRUMENT_UID_FIELD_NUMBER: builtins.int
     figi: typing.Text
-    """Идентификатор инструмента."""
+    """Figi инструмента."""
 
     @property
     def price(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
@@ -1120,14 +1121,18 @@ class LastPrice(google.protobuf.message.Message):
     def time(self) -> google.protobuf.timestamp_pb2.Timestamp:
         """Время получения последней цены в часовом поясе UTC по времени биржи."""
         pass
+    instrument_uid: typing.Text
+    """Uid инструмента"""
+
     def __init__(self,
         *,
         figi: typing.Text = ...,
         price: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
         time: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        instrument_uid: typing.Text = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["price",b"price","time",b"time"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["figi",b"figi","price",b"price","time",b"time"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["figi",b"figi","instrument_uid",b"instrument_uid","price",b"price","time",b"time"]) -> None: ...
 global___LastPrice = LastPrice
 
 class GetOrderBookRequest(google.protobuf.message.Message):
@@ -1160,6 +1165,9 @@ class GetOrderBookResponse(google.protobuf.message.Message):
     CLOSE_PRICE_FIELD_NUMBER: builtins.int
     LIMIT_UP_FIELD_NUMBER: builtins.int
     LIMIT_DOWN_FIELD_NUMBER: builtins.int
+    LAST_PRICE_TS_FIELD_NUMBER: builtins.int
+    CLOSE_PRICE_TS_FIELD_NUMBER: builtins.int
+    ORDERBOOK_TS_FIELD_NUMBER: builtins.int
     figi: typing.Text
     """Figi-идентификатор инструмента."""
 
@@ -1190,6 +1198,18 @@ class GetOrderBookResponse(google.protobuf.message.Message):
     def limit_down(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
         """Нижний лимит цены за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента."""
         pass
+    @property
+    def last_price_ts(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Время получения цены последней сделки."""
+        pass
+    @property
+    def close_price_ts(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Время получения цены закрытия."""
+        pass
+    @property
+    def orderbook_ts(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Время формирования стакана на бирже."""
+        pass
     def __init__(self,
         *,
         figi: typing.Text = ...,
@@ -1200,9 +1220,12 @@ class GetOrderBookResponse(google.protobuf.message.Message):
         close_price: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
         limit_up: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
         limit_down: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        last_price_ts: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        close_price_ts: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        orderbook_ts: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
         ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["close_price",b"close_price","last_price",b"last_price","limit_down",b"limit_down","limit_up",b"limit_up"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["asks",b"asks","bids",b"bids","close_price",b"close_price","depth",b"depth","figi",b"figi","last_price",b"last_price","limit_down",b"limit_down","limit_up",b"limit_up"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["close_price",b"close_price","close_price_ts",b"close_price_ts","last_price",b"last_price","last_price_ts",b"last_price_ts","limit_down",b"limit_down","limit_up",b"limit_up","orderbook_ts",b"orderbook_ts"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["asks",b"asks","bids",b"bids","close_price",b"close_price","close_price_ts",b"close_price_ts","depth",b"depth","figi",b"figi","last_price",b"last_price","last_price_ts",b"last_price_ts","limit_down",b"limit_down","limit_up",b"limit_up","orderbook_ts",b"orderbook_ts"]) -> None: ...
 global___GetOrderBookResponse = GetOrderBookResponse
 
 class GetTradingStatusRequest(google.protobuf.message.Message):
@@ -1296,3 +1319,79 @@ class GetMySubscriptions(google.protobuf.message.Message):
     def __init__(self,
         ) -> None: ...
 global___GetMySubscriptions = GetMySubscriptions
+
+class GetClosePricesRequest(google.protobuf.message.Message):
+    """Запрос цен закрытия торговой сессии по инструментам."""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    INSTRUMENTS_FIELD_NUMBER: builtins.int
+    @property
+    def instruments(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___InstrumentClosePriceRequest]:
+        """Массив по инструментам."""
+        pass
+    def __init__(self,
+        *,
+        instruments: typing.Optional[typing.Iterable[global___InstrumentClosePriceRequest]] = ...,
+        ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["instruments",b"instruments"]) -> None: ...
+global___GetClosePricesRequest = GetClosePricesRequest
+
+class InstrumentClosePriceRequest(google.protobuf.message.Message):
+    """Запрос цен закрытия торговой сессии по инструменту."""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    INSTRUMENT_ID_FIELD_NUMBER: builtins.int
+    instrument_id: typing.Text
+    """Идентификатор инструмента, принимает значение figi или instrument_uid"""
+
+    def __init__(self,
+        *,
+        instrument_id: typing.Text = ...,
+        ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["instrument_id",b"instrument_id"]) -> None: ...
+global___InstrumentClosePriceRequest = InstrumentClosePriceRequest
+
+class GetClosePricesResponse(google.protobuf.message.Message):
+    """Цены закрытия торговой сессии по инструментам."""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    CLOSE_PRICES_FIELD_NUMBER: builtins.int
+    @property
+    def close_prices(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___InstrumentClosePriceResponse]:
+        """Массив по инструментам."""
+        pass
+    def __init__(self,
+        *,
+        close_prices: typing.Optional[typing.Iterable[global___InstrumentClosePriceResponse]] = ...,
+        ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["close_prices",b"close_prices"]) -> None: ...
+global___GetClosePricesResponse = GetClosePricesResponse
+
+class InstrumentClosePriceResponse(google.protobuf.message.Message):
+    """Цена закрытия торговой сессии по инструменту."""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    FIGI_FIELD_NUMBER: builtins.int
+    INSTRUMENT_UID_FIELD_NUMBER: builtins.int
+    PRICE_FIELD_NUMBER: builtins.int
+    TIME_FIELD_NUMBER: builtins.int
+    figi: typing.Text
+    """Figi инструмента."""
+
+    instrument_uid: typing.Text
+    """Uid инструмента."""
+
+    @property
+    def price(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Цена закрытия торговой сессии."""
+        pass
+    @property
+    def time(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Дата совершения торгов."""
+        pass
+    def __init__(self,
+        *,
+        figi: typing.Text = ...,
+        instrument_uid: typing.Text = ...,
+        price: typing.Optional[tinkoff.invest.grpc.common_pb2.Quotation] = ...,
+        time: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["price",b"price","time",b"time"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["figi",b"figi","instrument_uid",b"instrument_uid","price",b"price","time",b"time"]) -> None: ...
+global___InstrumentClosePriceResponse = InstrumentClosePriceResponse

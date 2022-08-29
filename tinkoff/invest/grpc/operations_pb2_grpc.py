@@ -294,6 +294,11 @@ class OperationsStreamServiceStub(object):
                 request_serializer=tinkoff_dot_invest_dot_grpc_dot_operations__pb2.PortfolioStreamRequest.SerializeToString,
                 response_deserializer=tinkoff_dot_invest_dot_grpc_dot_operations__pb2.PortfolioStreamResponse.FromString,
                 )
+        self.PositionsStream = channel.unary_stream(
+                '/tinkoff.public.invest.api.contract.v1.OperationsStreamService/PositionsStream',
+                request_serializer=tinkoff_dot_invest_dot_grpc_dot_operations__pb2.PositionsStreamRequest.SerializeToString,
+                response_deserializer=tinkoff_dot_invest_dot_grpc_dot_operations__pb2.PositionsStreamResponse.FromString,
+                )
 
 
 class OperationsStreamServiceServicer(object):
@@ -306,6 +311,13 @@ class OperationsStreamServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def PositionsStream(self, request, context):
+        """Server-side stream обновлений информации по изменению позиций портфеля
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_OperationsStreamServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -313,6 +325,11 @@ def add_OperationsStreamServiceServicer_to_server(servicer, server):
                     servicer.PortfolioStream,
                     request_deserializer=tinkoff_dot_invest_dot_grpc_dot_operations__pb2.PortfolioStreamRequest.FromString,
                     response_serializer=tinkoff_dot_invest_dot_grpc_dot_operations__pb2.PortfolioStreamResponse.SerializeToString,
+            ),
+            'PositionsStream': grpc.unary_stream_rpc_method_handler(
+                    servicer.PositionsStream,
+                    request_deserializer=tinkoff_dot_invest_dot_grpc_dot_operations__pb2.PositionsStreamRequest.FromString,
+                    response_serializer=tinkoff_dot_invest_dot_grpc_dot_operations__pb2.PositionsStreamResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -338,5 +355,22 @@ class OperationsStreamService(object):
         return grpc.experimental.unary_stream(request, target, '/tinkoff.public.invest.api.contract.v1.OperationsStreamService/PortfolioStream',
             tinkoff_dot_invest_dot_grpc_dot_operations__pb2.PortfolioStreamRequest.SerializeToString,
             tinkoff_dot_invest_dot_grpc_dot_operations__pb2.PortfolioStreamResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PositionsStream(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_stream(request, target, '/tinkoff.public.invest.api.contract.v1.OperationsStreamService/PositionsStream',
+            tinkoff_dot_invest_dot_grpc_dot_operations__pb2.PositionsStreamRequest.SerializeToString,
+            tinkoff_dot_invest_dot_grpc_dot_operations__pb2.PositionsStreamResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

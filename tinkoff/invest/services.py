@@ -82,6 +82,8 @@ from .schemas import (
     GetBrokerReportRequest,
     GetCandlesRequest,
     GetCandlesResponse,
+    GetClosePricesRequest,
+    GetClosePricesResponse,
     GetCountriesRequest,
     GetCountriesResponse,
     GetDividendsForeignIssuerReportRequest,
@@ -115,6 +117,7 @@ from .schemas import (
     GetUserTariffRequest,
     GetUserTariffResponse,
     HistoricCandle,
+    InstrumentClosePriceRequest,
     InstrumentIdType,
     InstrumentRequest,
     InstrumentResponse,
@@ -129,6 +132,8 @@ from .schemas import (
     OperationsRequest,
     OperationsResponse,
     OperationState,
+    OptionResponse,
+    OptionsResponse,
     OrderDirection,
     OrderState,
     OrderType,
@@ -138,6 +143,8 @@ from .schemas import (
     PortfolioStreamResponse,
     PositionsRequest,
     PositionsResponse,
+    PositionsStreamRequest,
+    PositionsStreamResponse,
     PostOrderRequest,
     PostOrderResponse,
     PostStopOrderRequest,
@@ -548,6 +555,42 @@ class InstrumentsService(_grpc_helpers.Service):
         log_request(get_tracking_id_from_call(call), "Futures")
         return _grpc_helpers.protobuf_to_dataclass(response, FuturesResponse)
 
+    @handle_request_error("OptionBy")
+    def option_by(
+        self,
+        *,
+        id_type: InstrumentIdType = InstrumentIdType(0),
+        class_code: str = "",
+        id: str = "",
+    ) -> OptionResponse:
+        request = InstrumentRequest()
+        request.id_type = id_type
+        request.class_code = class_code
+        request.id = id
+        response, call = self.stub.OptionBy.with_call(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, instruments_pb2.InstrumentRequest()
+            ),
+            metadata=self.metadata,
+        )
+        log_request(get_tracking_id_from_call(call), "OptionBy")
+        return _grpc_helpers.protobuf_to_dataclass(response, OptionResponse)
+
+    @handle_request_error("Options")
+    def options(
+        self, *, instrument_status: InstrumentStatus = InstrumentStatus(0)
+    ) -> OptionsResponse:
+        request = InstrumentsRequest()
+        request.instrument_status = instrument_status
+        response, call = self.stub.Options.with_call(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, instruments_pb2.InstrumentsRequest()
+            ),
+            metadata=self.metadata,
+        )
+        log_request(get_tracking_id_from_call(call), "Options")
+        return _grpc_helpers.protobuf_to_dataclass(response, OptionsResponse)
+
     @handle_request_error("ShareBy")
     def share_by(
         self,
@@ -905,6 +948,24 @@ class MarketDataService(_grpc_helpers.Service):
         log_request(get_tracking_id_from_call(call), "GetLastTrades")
         return _grpc_helpers.protobuf_to_dataclass(response, GetLastTradesResponse)
 
+    @handle_request_error("GetClosePrices")
+    def get_close_prices(
+        self,
+        *,
+        instruments: Optional[List[InstrumentClosePriceRequest]] = None,
+    ) -> GetClosePricesResponse:
+        request = GetClosePricesRequest()
+        if instruments:
+            request.instruments = instruments
+        response, call = self.stub.GetClosePrices.with_call(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, marketdata_pb2.GetClosePricesRequest()
+            ),
+            metadata=self.metadata,
+        )
+        log_request(get_tracking_id_from_call(call), "GetClosePrices")
+        return _grpc_helpers.protobuf_to_dataclass(response, GetClosePricesResponse)
+
 
 class MarketDataStreamService(_grpc_helpers.Service):
     _stub_factory = marketdata_pb2_grpc.MarketDataStreamServiceStub
@@ -1107,6 +1168,23 @@ class OperationsStreamService(_grpc_helpers.Service):
             metadata=self.metadata,
         ):
             yield _grpc_helpers.protobuf_to_dataclass(response, PortfolioStreamResponse)
+
+    @handle_request_error_gen("PositionsStream")
+    def positions_stream(
+        self, *, accounts: Optional[List[str]] = None
+    ) -> Iterable[PositionsStreamResponse]:
+        request = PositionsStreamRequest()
+        if accounts:
+            request.accounts = accounts
+        else:
+            raise ValueError("accounts can not be empty")
+        for response in self.stub.PositionsStream(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, operations_pb2.PositionsStreamRequest()
+            ),
+            metadata=self.metadata,
+        ):
+            yield _grpc_helpers.protobuf_to_dataclass(response, PositionsStreamResponse)
 
 
 class OrdersStreamService(_grpc_helpers.Service):
@@ -1351,6 +1429,20 @@ class SandboxService(_grpc_helpers.Service):
         log_request(get_tracking_id_from_call(call), "PostSandboxOrder")
         return _grpc_helpers.protobuf_to_dataclass(response, PostOrderResponse)
 
+    @handle_request_error("ReplaceSandboxOrder")
+    def replace_sandbox_order(
+        self,
+        request: "ReplaceOrderRequest",
+    ) -> PostOrderResponse:
+        response, call = self.stub.PostSandboxOrder.with_call(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, orders_pb2.ReplaceOrderRequest()
+            ),
+            metadata=self.metadata,
+        )
+        log_request(get_tracking_id_from_call(call), "ReplaceSandboxOrder")
+        return _grpc_helpers.protobuf_to_dataclass(response, PostOrderResponse)
+
     @handle_request_error("GetSandboxOrders")
     def get_sandbox_orders(self, *, account_id: str = "") -> GetOrdersResponse:
         request = GetOrdersRequest()
@@ -1465,6 +1557,23 @@ class SandboxService(_grpc_helpers.Service):
         )
         log_request(get_tracking_id_from_call(call), "SandboxPayIn")
         return _grpc_helpers.protobuf_to_dataclass(response, SandboxPayInResponse)
+
+    @handle_request_error("GetSandboxWithdrawLimits")
+    def get_sandbox_withdraw_limits(
+        self,
+        *,
+        account_id: str = "",
+    ) -> WithdrawLimitsResponse:
+        request = WithdrawLimitsRequest()
+        request.account_id = account_id
+        response, call = self.stub.SandboxPayIn.with_call(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, operations_pb2.WithdrawLimitsRequest()
+            ),
+            metadata=self.metadata,
+        )
+        log_request(get_tracking_id_from_call(call), "GetSandboxWithdrawLimits")
+        return _grpc_helpers.protobuf_to_dataclass(response, WithdrawLimitsResponse)
 
 
 class StopOrdersService(_grpc_helpers.Service):
