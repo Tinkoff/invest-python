@@ -250,8 +250,8 @@ class MarketDataCache(ICandleGetter):
             )
             logger.debug(
                 "Filtered net real [\n%s\n%s\n]",
-                str(min(list(map(lambda x: x.time, filtered_candles)))),
-                str(max(list(map(lambda x: x.time, filtered_candles)))),
+                str(min(list(map(lambda x: x.time, filtered_candles)))),  # noqa: C417
+                str(max(list(map(lambda x: x.time, filtered_candles)))),  # noqa: C417
             )
 
         yield from candles
