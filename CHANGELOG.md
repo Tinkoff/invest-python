@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [0.2.0-beta36](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta36) - 2022-09-10
+
+<small>[Compare with 0.2.0-beta35](https://github.com/tinkoff/invest-python/compare/0.2.0-beta35...0.2.0-beta36)</small>
+
+### Bug Fixes
+- Positions_stream model, add example (#115) ([2d5d6b2](https://github.com/tinkoff/invest-python/commit/2d5d6b23a3432464c0663df7bf8afb6bed18eca0) by Ruslan Sirazhetdinov).
+
+### Features
+- Sleep if exhausted (#106) ([d057bcb](https://github.com/tinkoff/invest-python/commit/d057bcbe42ad205b039c2c7f1de21d3161a018ea) by Ruslan Sirazhetdinov).
+
+
 ## [0.2.0-beta35](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta35) - 2022-08-30
 
 <small>[Compare with 0.2.0-beta34](https://github.com/tinkoff/invest-python/compare/0.2.0-beta34...0.2.0-beta35)</small>
