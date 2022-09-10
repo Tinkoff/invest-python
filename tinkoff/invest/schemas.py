@@ -2121,7 +2121,7 @@ class PositionsStreamResponse(_grpc_helpers.Message):
 
 @dataclass(eq=False, repr=True)
 class PositionsSubscriptionResult(_grpc_helpers.Message):
-    accounts: "PositionsSubscriptionStatus" = _grpc_helpers.message_field(1)
+    accounts: List["PositionsSubscriptionStatus"] = _grpc_helpers.message_field(1)
 
 
 @dataclass(eq=False, repr=True)
