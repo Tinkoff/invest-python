@@ -10,6 +10,8 @@ copyright: 'Copyright &copy; 2021 Tinkoff'
 use_directory_urls: true
 nav:
   - 'Главная': 'README.md'
+  - 'API Reference':
+    - Clients: api/clients.md
   - 'Список изменений': 'CHANGELOG.md'
   - 'Участие в проекте': 'CONTRIBUTING.md'
 

@@ -12,6 +12,20 @@ __all__ = ("Client", "AsyncClient")
 
 
 class Client:
+    """
+    ```python
+    import os
+    from tinkoff.invest import Client
+
+    TOKEN = os.environ["INVEST_TOKEN"]
+
+    def main():
+        with Client(TOKEN) as client:
+            print(client.users.get_accounts())
+
+    ```
+    """
+
     def __init__(
         self,
         token: str,
@@ -48,6 +62,26 @@ class Client:
 
 
 class AsyncClient:
+    """
+    ```python
+    import asyncio
+    import os
+
+    from tinkoff.invest import AsyncClient
+
+    TOKEN = os.environ["INVEST_TOKEN"]
+
+
+    async def main():
+        async with AsyncClient(TOKEN) as client:
+            print(await client.users.get_accounts())
+
+
+    if __name__ == "__main__":
+        asyncio.run(main())
+    ```
+    """
+
     def __init__(
         self,
         token: str,
