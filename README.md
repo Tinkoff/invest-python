@@ -40,6 +40,10 @@ with Client(TOKEN) as client:
 
 ### Переопределить target
 
+В Tinkoff Invest API есть два контура - "боевой", предназначенный для исполнения ордеров на бирже и "песочница", предназначенный для тестирования API и торговых гипотез, заявки с которого не выводятся на биржу, а исполняются в эмуляторе.
+
+Переключение между контурами реализовано через target, INVEST_GRPC_API - "боевой", INVEST_GRPC_API_SANDBOX - "песочница"
+
 ```python
 from tinkoff.invest import Client
 from tinkoff.invest.constants import INVEST_GRPC_API
