@@ -525,6 +525,8 @@
     <span class="nb">print</span><span class="p">(</span><span class="n">client</span><span class="o">.</span><span class="n">users</span><span class="o">.</span><span class="n">get_accounts</span><span class="p">())</span>
 </code></pre></div>
 <h3 id="target">Переопределить target</h3>
+<p>В Tinkoff Invest API есть два контура - "боевой", предназначенный для исполнения ордеров на бирже и "песочница", предназначенный для тестирования API и торговых гипотез, заявки с которого не выводятся на биржу, а исполняются в эмуляторе.</p>
+<p>Переключение между контурами реализовано через target, INVEST_GRPC_API - "боевой", INVEST_GRPC_API_SANDBOX - "песочница"</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">tinkoff.invest</span> <span class="kn">import</span> <span class="n">Client</span>
 <span class="kn">from</span> <span class="nn">tinkoff.invest.constants</span> <span class="kn">import</span> <span class="n">INVEST_GRPC_API</span>
 
