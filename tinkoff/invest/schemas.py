@@ -308,7 +308,7 @@ class MoneyValue(_grpc_helpers.Message):
     nano: int = _grpc_helpers.int32_field(3)
 
 
-@dataclass(eq=False, repr=True)
+@dataclass(eq=True, repr=True, frozen=True)
 class Quotation(_grpc_helpers.Message):
     units: int = _grpc_helpers.int64_field(1)
     nano: int = _grpc_helpers.int32_field(2)
@@ -1345,7 +1345,7 @@ class GetCandlesResponse(_grpc_helpers.Message):
     candles: List["HistoricCandle"] = _grpc_helpers.message_field(1)
 
 
-@dataclass(eq=False, repr=True)
+@dataclass(eq=True, repr=True, frozen=True)
 class HistoricCandle(_grpc_helpers.Message):
     open: Quotation = _grpc_helpers.message_field(1)
     high: Quotation = _grpc_helpers.message_field(2)

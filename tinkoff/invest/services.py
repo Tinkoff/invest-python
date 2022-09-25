@@ -372,17 +372,41 @@ class Services(ICandleGetter):
         to: Optional[datetime] = None,
         interval: CandleInterval = CandleInterval(0),
         figi: str = "",
+        allow_candle_duplicates: bool = True,
     ) -> Generator[HistoricCandle, None, None]:
+        """
+        Загрузить все свечи за определенный период порциями.
+
+        :param datetime from_: Начало периода
+        :param to: Конец периода
+        :type to: datetime or None
+        :param CandleInterval interval: Интервал свечей
+        :param str figi: FIGI инструмента
+        :param bool allow_candle_duplicates: Разрешить дубли свечей
+        :return: Генератор свечей
+        :rtype: Generator[HistoricCandle, None, None]
+        """
+
         to = to or now()
 
-        for local_from_, local_to in get_intervals(interval, from_, to):
-            candles_response = self.market_data.get_candles(
+        previous_candles = set()
+        for current_from, current_to in get_intervals(interval, from_, to):
+            candles_response: GetCandlesResponse = self.market_data.get_candles(
                 figi=figi,
                 interval=interval,
-                from_=local_from_,
-                to=local_to,
+                from_=current_from,
+                to=current_to,
             )
-            yield from candles_response.candles
+
+            if allow_candle_duplicates:
+                yield from candles_response.candles
+            else:
+                for candle in candles_response.candles:
+                    if candle not in previous_candles:
+                        yield candle
+                        previous_candles.add(candle)
+
+                previous_candles = set(candles_response.candles)
 
 
 class InstrumentsService(_grpc_helpers.Service):
