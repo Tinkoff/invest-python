@@ -313,6 +313,43 @@ class Quotation(_grpc_helpers.Message):
     units: int = _grpc_helpers.int64_field(1)
     nano: int = _grpc_helpers.int32_field(2)
 
+    def __add__(self, other: "Quotation") -> "Quotation":
+        return Quotation(
+            units=self.units + other.units,
+            nano=self.nano + other.nano,
+        )
+
+    def __sub__(self, other: "Quotation") -> "Quotation":
+        return Quotation(
+            units=self.units - other.units,
+            nano=self.nano - other.nano,
+        )
+
+    def __eq__(self, other: object) -> bool:
+        if not isinstance(other, Quotation):
+            return NotImplemented
+        return self.units == other.units and self.nano == other.nano
+
+    def __lt__(self, other: "Quotation") -> bool:
+        return self.units < other.units or (
+            self.units == other.units and self.nano < other.nano
+        )
+
+    def __le__(self, other: "Quotation") -> bool:
+        return self.units < other.units or (
+            self.units == other.units and self.nano <= other.nano
+        )
+
+    def __gt__(self, other: "Quotation") -> bool:
+        return self.units > other.units or (
+            self.units == other.units and self.nano > other.nano
+        )
+
+    def __ge__(self, other: "Quotation") -> bool:
+        return self.units > other.units or (
+            self.units == other.units and self.nano >= other.nano
+        )
+
 
 @dataclass(eq=False, repr=True)
 class Ping(_grpc_helpers.Message):
