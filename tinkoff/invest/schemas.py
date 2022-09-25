@@ -308,7 +308,7 @@ class MoneyValue(_grpc_helpers.Message):
     nano: int = _grpc_helpers.int32_field(3)
 
 
-@dataclass(eq=True, repr=True, frozen=True)
+@dataclass(eq=False, repr=True)
 class Quotation(_grpc_helpers.Message):
     units: int = _grpc_helpers.int64_field(1)
     nano: int = _grpc_helpers.int32_field(2)

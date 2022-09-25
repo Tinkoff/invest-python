@@ -6,6 +6,7 @@ from datetime import datetime, timedelta, timezone
 from decimal import Decimal
 from typing import (
     Any,
+    Dict,
     Optional,
     Tuple,
     Type,
@@ -294,7 +295,7 @@ def to_unsafe_field_name(field_name: str) -> str:
 # pylint:disable=too-many-statements
 def protobuf_to_dataclass(pb_obj: Any, dataclass_type: Type[T]) -> T:  # noqa:C901
     dataclass_hints = get_type_hints(dataclass_type)
-    dataclass_dict = {}
+    dataclass_dict: Dict[str, Any] = {}
     dataclass_fields = dataclass_type.__dataclass_fields__  # type:ignore
     for field_name, field_type in dataclass_hints.items():
         unsafe_field_name = to_unsafe_field_name(field_name)

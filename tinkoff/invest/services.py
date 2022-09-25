@@ -365,6 +365,7 @@ class Services(ICandleGetter):
                 account_id=account_id, stop_order_id=stop_order.stop_order_id
             )
 
+    # pylint:disable=too-many-nested-blocks
     def get_all_candles(
         self,
         *,
