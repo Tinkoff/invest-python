@@ -865,6 +865,15 @@ class MarketDataService(_grpc_helpers.Service):
         to: Optional[datetime] = None,
         interval: CandleInterval = CandleInterval(0),
     ) -> GetCandlesResponse:
+        """
+        Запрос свечей за определенный интервал.
+
+        Args:
+            figi (str): FIGI инструмента
+            from_ (datetime or None): Дата с которой загружаются котировки
+            to (Optional[datetime]): Дата до которой загружаются котировки
+            interval (CandleInterval): Интервал свечей [CandleInterval](/invest-python/api/services/todo)
+        """
         request = GetCandlesRequest()
         request.figi = figi
         if from_ is not None:

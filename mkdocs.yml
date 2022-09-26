@@ -12,6 +12,9 @@ nav:
   - 'Главная': 'README.md'
   - 'API Reference':
     - Clients: api/clients.md
+    - Сервисы:
+      - MarketData: api/services/market_data.md
+      - MarketDataStream: api/services/market_data_stream.md
   - 'Список изменений': 'CHANGELOG.md'
   - 'Участие в проекте': 'CONTRIBUTING.md'
 
