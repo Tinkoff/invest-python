@@ -95,7 +95,7 @@ class TestGetAllCandles:
             )
         )
 
-        assert result == candles_response.candles * call_count
+        assert result == candles_response.candles
         assert market_data_service.get_candles.call_count == call_count
 
     @pytest.mark.parametrize(
@@ -108,13 +108,6 @@ class TestGetAllCandles:
             ],
         ],
     )
-    @pytest.mark.parametrize(
-        "allow_candle_duplicates",
-        [
-            True,
-            False,
-        ],
-    )
     def test_deduplicates(
         self,
         figi,
@@ -125,7 +118,6 @@ class TestGetAllCandles:
         candles_response,
         interval,
         historical_candle,
-        allow_candle_duplicates,
     ):
         services = mocker.Mock()
         services.market_data = market_data_service
@@ -144,11 +136,7 @@ class TestGetAllCandles:
                 interval=interval,
                 from_=from_,
                 to=to,
-                allow_candle_duplicates=allow_candle_duplicates,
             )
         )
 
-        if allow_candle_duplicates:
-            assert len(candles) > 1
-        else:
-            assert len(candles) == 1
+        assert len(candles) == 1
