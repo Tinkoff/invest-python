@@ -374,18 +374,6 @@ class Services(ICandleGetter):
         interval: CandleInterval = CandleInterval(0),
         figi: str = "",
     ) -> Generator[HistoricCandle, None, None]:
-        """
-        Загрузить все свечи за определенный период порциями.
-
-        :param datetime from_: Начало периода
-        :param to: Конец периода
-        :type to: datetime or None
-        :param CandleInterval interval: Интервал свечей
-        :param str figi: FIGI инструмента
-        :return: Генератор свечей
-        :rtype: Generator[HistoricCandle, None, None]
-        """
-
         to = to or now()
 
         previous_candles = set()
