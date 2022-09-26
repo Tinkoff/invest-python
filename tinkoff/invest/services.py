@@ -373,7 +373,18 @@ class Services(ICandleGetter):
         to: Optional[datetime] = None,
         interval: CandleInterval = CandleInterval(0),
         figi: str = "",
+        allow_candle_duplicates: bool = True,
     ) -> Generator[HistoricCandle, None, None]:
+        """
+        Запрос свечей за определенный интервал.
+
+        Args:
+            from_ (datetime or None): Дата с которой загружаются котировки
+            to (Optional[datetime]): Дата до которой загружаются котировки
+            figi (str): FIGI инструмента
+            interval (CandleInterval): Интервал свечей
+            allow_candle_duplicates (bool): Разрешить свечам дубилроваться
+        """
         to = to or now()
 
         previous_candles = set()
@@ -385,12 +396,15 @@ class Services(ICandleGetter):
                 to=current_to,
             )
 
-            for candle in candles_response.candles:
-                if candle not in previous_candles:
-                    yield candle
-                    previous_candles.add(candle)
+            if allow_candle_duplicates:
+                yield from candles_response.candles
+            else:
+                for candle in candles_response.candles:
+                    if candle not in previous_candles:
+                        yield candle
+                        previous_candles.add(candle)
 
-            previous_candles = set(candles_response.candles)
+                previous_candles = set(candles_response.candles)
 
 
 class InstrumentsService(_grpc_helpers.Service):
