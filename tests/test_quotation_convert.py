@@ -176,3 +176,28 @@ class TestQuotationArithmetic:
 
         expected_comparison = comparator(decimal_left, decimal_right)
         assert actual_comparison == expected_comparison
+
+    @pytest.mark.parametrize(
+        "quotation",
+        [
+            Quotation(
+                units=randrange(-MAX_UNITS, MAX_UNITS),
+                nano=randrange(-MAX_NANO, MAX_NANO),
+            ),
+            Quotation(
+                units=randrange(-MAX_UNITS, 0),
+                nano=randrange(-MAX_NANO, 0),
+            ),
+            Quotation(
+                units=randrange(0, MAX_UNITS),
+                nano=randrange(0, MAX_NANO),
+            ),
+        ],
+    )
+    def test_abs(self, quotation: Quotation):
+        decimal = quotation_to_decimal(quotation)
+
+        actual = abs(decimal)
+
+        expected = abs(decimal)
+        assert actual == expected

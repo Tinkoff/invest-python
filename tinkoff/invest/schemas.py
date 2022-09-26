@@ -2,7 +2,7 @@
 # pylint:disable=too-many-instance-attributes
 from dataclasses import dataclass
 from datetime import datetime
-from typing import List
+from typing import List, SupportsAbs
 
 from . import _grpc_helpers
 
@@ -309,7 +309,7 @@ class MoneyValue(_grpc_helpers.Message):
 
 
 @dataclass(eq=False, repr=True)
-class Quotation(_grpc_helpers.Message):
+class Quotation(_grpc_helpers.Message, SupportsAbs):
     units: int = _grpc_helpers.int64_field(1)
     nano: int = _grpc_helpers.int32_field(2)
 
@@ -349,6 +349,9 @@ class Quotation(_grpc_helpers.Message):
         return self.units > other.units or (
             self.units == other.units and self.nano >= other.nano
         )
+
+    def __abs__(self) -> "Quotation":
+        return Quotation(units=abs(self.units), nano=abs(self.nano))
 
 
 @dataclass(eq=False, repr=True)
