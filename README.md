@@ -61,6 +61,8 @@ with Client(TOKEN, target=INVEST_GRPC_API) as client:
 
 ## Contribution
 
+Для тех, кто хочет внести свои изменения в проект.
+
 - [CONTRIBUTING](https://github.com/Tinkoff/invest-python/blob/main/CONTRIBUTING.md)
 
 ## License
