@@ -335,18 +335,32 @@
     Быстрый старт
   </a>
   
-    <nav class="md-nav" aria-label="Быстрый старт">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    Выполнение команд на локальной машине
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    Установка зависимостей
+  </a>
+  
+    <nav class="md-nav" aria-label="Установка зависимостей">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+  <a href="#_4" class="md-nav__link">
     Запуск тестов
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
+  <a href="#_5" class="md-nav__link">
     Запуск линтеров
   </a>
   
@@ -366,7 +380,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
+  <a href="#_6" class="md-nav__link">
     Запуск автоформатирования
   </a>
   
@@ -380,7 +394,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
+  <a href="#_7" class="md-nav__link">
     Генерация клиента
   </a>
   
@@ -444,18 +458,32 @@
     Быстрый старт
   </a>
   
-    <nav class="md-nav" aria-label="Быстрый старт">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    Выполнение команд на локальной машине
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    Установка зависимостей
+  </a>
+  
+    <nav class="md-nav" aria-label="Установка зависимостей">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+  <a href="#_4" class="md-nav__link">
     Запуск тестов
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
+  <a href="#_5" class="md-nav__link">
     Запуск линтеров
   </a>
   
@@ -475,7 +503,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
+  <a href="#_6" class="md-nav__link">
     Запуск автоформатирования
   </a>
   
@@ -489,7 +517,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
+  <a href="#_7" class="md-nav__link">
     Генерация клиента
   </a>
   
@@ -537,14 +565,37 @@
 <h1 id="contributing">Contributing</h1>
 <p>Спасибо за участие в проекте Tinkoff Invest!</p>
 <h2 id="_1">Быстрый старт</h2>
-<p>Рекомендуем использовать <a href="https://pypi.org/project/poetry/">poetry</a>.</p>
+<ol>
+<li>Сделайте <a href="https://github.com/Tinkoff/invest-python/fork">fork</a> проекта</li>
+<li>Склонируйте репозиторий на свой локальный компьютер
+    <div class="highlight"><pre><span></span><code>git clone https://github.com/Tinkoff/invest-python.git
+</code></pre></div></li>
+<li>Создайте новую ветку для ваших изменений
+    <div class="highlight"><pre><span></span><code>git checkout -b branch_name
+</code></pre></div></li>
+<li>Добавьте изменения и выполните команды на локальной машине (см. ниже)</li>
+<li>Установите зависимости</li>
+<li>Проверьте свой код с помощью тестов и линтеров</li>
+<li>Создайте коммит своих изменений (мы придерживаемся <a href="https://www.conventionalcommits.org/en/v1.0.0/">этих</a> соглашений)
+    <div class="highlight"><pre><span></span><code>git add .
+git commit -m <span class="s2">&quot;feat: add new feature&quot;</span>
+</code></pre></div></li>
+<li>Отправьте свои изменения на github
+    <div class="highlight"><pre><span></span><code>git push
+</code></pre></div></li>
+<li>Создайте Pull Request в этот репозиторий</li>
+</ol>
+<h2 id="_2">Выполнение команд на локальной машине</h2>
+<p>Для работы с проектом рекомендуем использовать <a href="https://pypi.org/project/poetry/">poetry</a>.</p>
+<p>Также рекомендуем использовать таск раннер make.</p>
+<h2 id="_3">Установка зависимостей</h2>
 <div class="highlight"><pre><span></span><code>pip install poetry
 make install
 </code></pre></div>
-<h3 id="_2">Запуск тестов</h3>
+<h3 id="_4">Запуск тестов</h3>
 <div class="highlight"><pre><span></span><code>make test
 </code></pre></div>
-<h3 id="_3">Запуск линтеров</h3>
+<h3 id="_5">Запуск линтеров</h3>
 <div class="highlight"><pre><span></span><code>make lint
 make git-lint
 </code></pre></div>
@@ -553,14 +604,14 @@ make git-lint
 # To remove the hook
 gitlint uninstall-hook
 </code></pre></div>
-<h3 id="_4">Запуск автоформатирования</h3>
+<h3 id="_6">Запуск автоформатирования</h3>
 <div class="highlight"><pre><span></span><code>make format
 </code></pre></div>
 <h3 id="proto">Загрузка proto файлов</h3>
 <div class="highlight"><pre><span></span><code>make download-protos
 </code></pre></div>
 <p>По дефолту загружает из ветки <code>main</code>.</p>
-<h3 id="_5">Генерация клиента</h3>
+<h3 id="_7">Генерация клиента</h3>
 <div class="highlight"><pre><span></span><code>make gen-grpc
 </code></pre></div>
 <p>Затем, добавить изменения в модули:
