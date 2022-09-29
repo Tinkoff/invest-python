@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [0.2.0-beta37](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta37) - 2022-09-29
+
+<small>[Compare with 0.2.0-beta36](https://github.com/tinkoff/invest-python/compare/0.2.0-beta36...0.2.0-beta37)</small>
+
+### Bug Fixes
+- Fix repeated fields in positiondata (#121) ([d9c9b20](https://github.com/tinkoff/invest-python/commit/d9c9b20967a855d8d10e116241e4bd6f380647ab) by Ruslan Sirazhetdinov).
+
+### Features
+- Update dependencies ([2c6860e](https://github.com/tinkoff/invest-python/commit/2c6860ec857bded4a576a379e63639ba10a5f313) by Danil Akhtarov).
+
+
 ## [0.2.0-beta36](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta36) - 2022-09-10
 
 <small>[Compare with 0.2.0-beta35](https://github.com/tinkoff/invest-python/compare/0.2.0-beta35...0.2.0-beta36)</small>
