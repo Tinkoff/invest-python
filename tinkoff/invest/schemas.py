@@ -2135,10 +2135,10 @@ class PositionsSubscriptionStatus(_grpc_helpers.Message):
 @dataclass(eq=False, repr=True)
 class PositionData(_grpc_helpers.Message):
     account_id: str = _grpc_helpers.string_field(1)
-    money: "PositionsMoney" = _grpc_helpers.message_field(2)
-    securities: "PositionsSecurities" = _grpc_helpers.message_field(3)
-    futures: "PositionsFutures" = _grpc_helpers.message_field(4)
-    options: "PositionsOptions" = _grpc_helpers.message_field(5)
+    money: List["PositionsMoney"] = _grpc_helpers.message_field(2)
+    securities: List["PositionsSecurities"] = _grpc_helpers.message_field(3)
+    futures: List["PositionsFutures"] = _grpc_helpers.message_field(4)
+    options: List["PositionsOptions"] = _grpc_helpers.message_field(5)
     date: datetime = _grpc_helpers.message_field(6)
 
 
