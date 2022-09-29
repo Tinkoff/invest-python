@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [0.2.0-beta38](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta38) - 2022-09-29
+
+<small>[Compare with 0.2.0-beta37](https://github.com/tinkoff/invest-python/compare/0.2.0-beta37...0.2.0-beta38)</small>
+
+### Bug Fixes
+- Fix replacesandboxorder ([43fe25f](https://github.com/tinkoff/invest-python/commit/43fe25f3b2bf1968c6cda16ba5abe70405563e10) by Danil Akhtarov).
+
+
 ## [0.2.0-beta37](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta37) - 2022-09-29
 
 <small>[Compare with 0.2.0-beta36](https://github.com/tinkoff/invest-python/compare/0.2.0-beta36...0.2.0-beta37)</small>
