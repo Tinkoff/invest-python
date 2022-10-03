@@ -313,6 +313,11 @@ class Quotation(_grpc_helpers.Message, SupportsAbs):
     units: int = _grpc_helpers.int64_field(1)
     nano: int = _grpc_helpers.int32_field(2)
 
+    def __init__(self, units: int, nano: int):
+        max_quotation_nano = 1_000_000_000
+        self.units = units + nano // max_quotation_nano
+        self.nano = nano % max_quotation_nano
+
     def __add__(self, other: "Quotation") -> "Quotation":
         return Quotation(
             units=self.units + other.units,

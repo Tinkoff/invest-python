@@ -87,6 +87,16 @@ class TestQuotationArithmetic:
                 ),
                 Quotation(units=-0, nano=-200000000),
             ),
+            (
+                Quotation(
+                    units=MAX_UNITS,
+                    nano=MAX_NANO,
+                ),
+                Quotation(
+                    units=MAX_UNITS,
+                    nano=MAX_NANO,
+                ),
+            ),
         ],
     )
     @pytest.mark.parametrize(
@@ -147,6 +157,16 @@ class TestQuotationArithmetic:
                 Quotation(units=0, nano=-200000000),
                 Quotation(units=0, nano=-200000000),
             ),
+            (
+                Quotation(
+                    units=MAX_UNITS,
+                    nano=MAX_NANO,
+                ),
+                Quotation(
+                    units=MAX_UNITS,
+                    nano=MAX_NANO,
+                ),
+            ),
         ],
     )
     @pytest.mark.parametrize(
@@ -201,3 +221,19 @@ class TestQuotationArithmetic:
 
         expected = abs(decimal)
         assert actual == expected
+
+    @pytest.mark.parametrize(
+        ("units", "nano"),
+        [
+            (-MAX_UNITS, MAX_NANO * 1000),
+            (MAX_UNITS, -MAX_NANO + 1123123),
+            (0, MAX_NANO + 1121201203123),
+            (MAX_UNITS * 100, -MAX_UNITS - 121201203123),
+        ],
+    )
+    def test_nano_overfill_transfers(self, units: int, nano: int):
+        quotation = Quotation(units=units, nano=nano)
+        if abs(nano) >= 1e9:
+            assert quotation.nano < 1e9
+            assert quotation.units - units == nano // 1_000_000_000
+            assert quotation.nano == nano % 1_000_000_000
