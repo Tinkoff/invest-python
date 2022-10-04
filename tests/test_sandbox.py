@@ -33,28 +33,45 @@ def account_id(sandbox_service):
 
 
 @pytest.fixture()
-def limit_order(account_id):
-    return {
-        "figi": "BBG333333333",
-        "quantity": 10,
-        "price": Quotation(units=10),
-        "direction": OrderDirection.ORDER_DIRECTION_BUY,
-        "account_id": account_id,
-        "order_type": OrderType.ORDER_TYPE_LIMIT,
-        "order_id": "42",
-    }
+def figi() -> str:
+    return "BBG333333333"
 
 
 @pytest.fixture()
-def market_order(account_id):
+def quantity() -> int:
+    return 10
+
+
+@pytest.fixture()
+def price() -> Quotation:
+    return Quotation(units=10)
+
+
+@pytest.fixture()
+def direction() -> OrderDirection:
+    return OrderDirection.ORDER_DIRECTION_BUY
+
+
+@pytest.fixture()
+def order_type() -> OrderType:
+    return OrderType.ORDER_TYPE_LIMIT
+
+
+@pytest.fixture()
+def order_id() -> str:
+    return ""
+
+
+@pytest.fixture()
+def order(figi, quantity, price, direction, account_id, order_type, order_id):
     return {
-        "figi": "BBG333333333",
-        "quantity": 10,
-        "price": Quotation(units=10),
-        "direction": OrderDirection.ORDER_DIRECTION_BUY,
+        "figi": figi,
+        "quantity": quantity,
+        "price": price,
+        "direction": direction,
         "account_id": account_id,
-        "order_type": OrderType.ORDER_TYPE_MARKET,
-        "order_id": "42",
+        "order_type": order_type,
+        "order_id": order_id,
     }
 
 
@@ -92,63 +109,61 @@ class TestSandboxOperations:
         )
         assert isinstance(response, CloseSandboxAccountResponse)
 
-    def test_post_sandbox_order(self, sandbox_service, limit_order):
+    def test_post_sandbox_order(
+        self, sandbox_service, order, figi, direction, quantity
+    ):
 
-        response = sandbox_service.post_sandbox_order(**limit_order)
+        response = sandbox_service.post_sandbox_order(**order)
         assert isinstance(response.order_id, str)
-        assert response.figi == limit_order["figi"]
-        assert response.direction == limit_order["direction"]
-        assert response.lots_requested == limit_order["quantity"]
+        assert response.figi == figi
+        assert response.direction == direction
+        assert response.lots_requested == quantity
 
-    def test_get_sandbox_orders(self, sandbox_service, limit_order, account_id):
-        _ = sandbox_service.post_sandbox_order(**limit_order)
+    def test_get_sandbox_orders(self, sandbox_service, order, account_id):
+        _ = sandbox_service.post_sandbox_order(**order)
         response = sandbox_service.get_sandbox_orders(
             account_id=account_id,
         )
         assert isinstance(response.orders, list)
         assert len(response.orders) == 1
 
-    def test_cancel_sandbox_order(self, sandbox_service, limit_order, account_id):
-        response = sandbox_service.post_sandbox_order(**limit_order)
+    def test_cancel_sandbox_order(self, sandbox_service, order, account_id):
+        response = sandbox_service.post_sandbox_order(**order)
         response = sandbox_service.cancel_sandbox_order(
             account_id=account_id,
             order_id=response.order_id,
         )
         assert isinstance(response.time, datetime)
 
-    def test_get_sandbox_order_state(self, sandbox_service, limit_order, account_id):
-        response = sandbox_service.post_sandbox_order(**limit_order)
+    def test_get_sandbox_order_state(
+        self, sandbox_service, order, account_id, figi, direction, quantity
+    ):
+        response = sandbox_service.post_sandbox_order(**order)
 
         response = sandbox_service.get_sandbox_order_state(
             account_id=account_id,
             order_id=response.order_id,
         )
-        assert response.figi == limit_order["figi"]
-        assert response.direction == limit_order["direction"]
-        assert response.lots_requested == limit_order["quantity"]
+        assert response.figi == figi
+        assert response.direction == direction
+        assert response.lots_requested == quantity
 
-    def test_get_sandbox_positions(self, sandbox_service, account_id, market_order):
-        _ = sandbox_service.post_sandbox_order(**market_order)
+    @pytest.mark.parametrize("order_type", [OrderType.ORDER_TYPE_MARKET])
+    def test_get_sandbox_positions(self, sandbox_service, account_id, order):
+        _ = sandbox_service.post_sandbox_order(**order)
 
-        response = sandbox_service.get_sandbox_positions(
-            account_id=account_id,
-        )
-        print(f">>> {response=}")
+        response = sandbox_service.get_sandbox_positions(account_id=account_id)
 
-        orders = sandbox_service.get_sandbox_orders(
-            account_id=account_id,
-        )
-        print(f">>> {orders=}")
         assert isinstance(response.money[0], MoneyValue)
         assert response.money[0].currency == "rub"
 
-    def test_get_sandbox_operations(self, sandbox_service, account_id, limit_order):
+    def test_get_sandbox_operations(self, sandbox_service, account_id, order, figi):
         response = sandbox_service.get_sandbox_operations(
             account_id=account_id,
             from_=datetime(1970, 1, 1),
             to=datetime(2050, 1, 1),
             state=OperationState.OPERATION_STATE_EXECUTED,
-            figi=limit_order["figi"],
+            figi=figi,
         )
         assert isinstance(response.operations, list)
 
