@@ -7,7 +7,9 @@ TOKEN = os.environ["INVEST_TOKEN"]
 
 def main():
     with Client(TOKEN) as client:
-        print(client.instruments.get_countries())
+        r = client.instruments.find_instrument(query="тинькофф")
+        for i in r.instruments:
+            print(i)
 
 
 if __name__ == "__main__":
