@@ -58,7 +58,9 @@ class MovingAverageStrategy(InvestStrategy):
             self._settings.short_period + self._settings.long_period
         ) / self._settings.candle_interval_timedelta
         if candles_needed > len(self._data):
-            raise NotEnoughData()
+            raise NotEnoughData(
+                f"Got {len(self._data)} candles but needed {candles_needed}"
+            )
         logger.info("Got enough data for strategy")
 
     def fit(self, candles: Iterable[CandleEvent]) -> None:
