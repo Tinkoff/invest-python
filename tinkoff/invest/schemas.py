@@ -330,6 +330,9 @@ class Quotation(_grpc_helpers.Message, SupportsAbs):
             nano=self.nano - other.nano,
         )
 
+    def __hash__(self) -> int:
+        return hash((self.units, self.nano))
+
     def __eq__(self, other: object) -> bool:
         if not isinstance(other, Quotation):
             return NotImplemented
