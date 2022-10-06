@@ -2,7 +2,7 @@
 # pylint:disable=too-many-instance-attributes
 from dataclasses import dataclass
 from datetime import datetime
-from typing import List
+from typing import List, SupportsAbs
 
 from . import _grpc_helpers
 
@@ -309,9 +309,54 @@ class MoneyValue(_grpc_helpers.Message):
 
 
 @dataclass(eq=False, repr=True)
-class Quotation(_grpc_helpers.Message):
+class Quotation(_grpc_helpers.Message, SupportsAbs):
     units: int = _grpc_helpers.int64_field(1)
     nano: int = _grpc_helpers.int32_field(2)
+
+    def __init__(self, units: int, nano: int):
+        max_quotation_nano = 1_000_000_000
+        self.units = units + nano // max_quotation_nano
+        self.nano = nano % max_quotation_nano
+
+    def __add__(self, other: "Quotation") -> "Quotation":
+        return Quotation(
+            units=self.units + other.units,
+            nano=self.nano + other.nano,
+        )
+
+    def __sub__(self, other: "Quotation") -> "Quotation":
+        return Quotation(
+            units=self.units - other.units,
+            nano=self.nano - other.nano,
+        )
+
+    def __eq__(self, other: object) -> bool:
+        if not isinstance(other, Quotation):
+            return NotImplemented
+        return self.units == other.units and self.nano == other.nano
+
+    def __lt__(self, other: "Quotation") -> bool:
+        return self.units < other.units or (
+            self.units == other.units and self.nano < other.nano
+        )
+
+    def __le__(self, other: "Quotation") -> bool:
+        return self.units < other.units or (
+            self.units == other.units and self.nano <= other.nano
+        )
+
+    def __gt__(self, other: "Quotation") -> bool:
+        return self.units > other.units or (
+            self.units == other.units and self.nano > other.nano
+        )
+
+    def __ge__(self, other: "Quotation") -> bool:
+        return self.units > other.units or (
+            self.units == other.units and self.nano >= other.nano
+        )
+
+    def __abs__(self) -> "Quotation":
+        return Quotation(units=abs(self.units), nano=abs(self.nano))
 
 
 @dataclass(eq=False, repr=True)
@@ -2135,10 +2180,10 @@ class PositionsSubscriptionStatus(_grpc_helpers.Message):
 @dataclass(eq=False, repr=True)
 class PositionData(_grpc_helpers.Message):
     account_id: str = _grpc_helpers.string_field(1)
-    money: "PositionsMoney" = _grpc_helpers.message_field(2)
-    securities: "PositionsSecurities" = _grpc_helpers.message_field(3)
-    futures: "PositionsFutures" = _grpc_helpers.message_field(4)
-    options: "PositionsOptions" = _grpc_helpers.message_field(5)
+    money: List["PositionsMoney"] = _grpc_helpers.message_field(2)
+    securities: List["PositionsSecurities"] = _grpc_helpers.message_field(3)
+    futures: List["PositionsFutures"] = _grpc_helpers.message_field(4)
+    options: List["PositionsOptions"] = _grpc_helpers.message_field(5)
     date: datetime = _grpc_helpers.message_field(6)
 
 

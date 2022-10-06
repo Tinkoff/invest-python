@@ -71,7 +71,7 @@ install:
 
 .PHONY: publish
 publish:
-	poetry publish --build --no-interaction --username=$(pypi_username) --password=$(pypi_password)
+	@poetry publish --build --no-interaction --username=$(pypi_username) --password=$(pypi_password)
 
 .PHONY: download-protos
 download-protos:

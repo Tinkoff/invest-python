@@ -4,7 +4,36 @@
 
 ## Быстрый старт
 
-Рекомендуем использовать [poetry](https://pypi.org/project/poetry/).
+1. Сделайте [fork](https://github.com/Tinkoff/invest-python/fork) проекта
+2. Склонируйте репозиторий на свой локальный компьютер
+    ```bash
+    git clone https://github.com/Tinkoff/invest-python.git
+    ```
+3. Создайте новую ветку для ваших изменений
+    ```bash
+    git checkout -b branch_name
+    ```
+4. Добавьте изменения и выполните команды на локальной машине (см. ниже)
+   1. Установите зависимости
+   2. Проверьте свой код с помощью тестов и линтеров
+5. Создайте коммит своих изменений (мы придерживаемся [этих](https://www.conventionalcommits.org/en/v1.0.0/) соглашений)
+    ```bash
+    git add .
+    git commit -m "feat: add new feature"
+    ```
+6. Отправьте свои изменения на github
+    ```bash
+    git push
+    ```
+7. Создайте Pull Request в этот репозиторий
+
+## Выполнение команд на локальной машине
+
+Для работы с проектом рекомендуем использовать [poetry](https://pypi.org/project/poetry/).
+
+Также рекомендуем использовать таск раннер make.
+
+## Установка зависимостей
 
 ```
 pip install poetry

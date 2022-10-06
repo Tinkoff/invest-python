@@ -1339,7 +1339,7 @@ class SandboxService(_grpc_helpers.Service):
         self,
         request: "ReplaceOrderRequest",
     ) -> PostOrderResponse:
-        response_coro = self.stub.PostSandboxOrder(
+        response_coro = self.stub.ReplaceSandboxOrder(
             request=_grpc_helpers.dataclass_to_protobuff(
                 request, orders_pb2.ReplaceOrderRequest()
             ),
