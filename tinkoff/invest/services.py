@@ -365,6 +365,7 @@ class Services(ICandleGetter):
                 account_id=account_id, stop_order_id=stop_order.stop_order_id
             )
 
+    # pylint:disable=too-many-nested-blocks
     def get_all_candles(
         self,
         *,
@@ -375,14 +376,21 @@ class Services(ICandleGetter):
     ) -> Generator[HistoricCandle, None, None]:
         to = to or now()
 
-        for local_from_, local_to in get_intervals(interval, from_, to):
-            candles_response = self.market_data.get_candles(
+        previous_candles = set()
+        for current_from, current_to in get_intervals(interval, from_, to):
+            candles_response: GetCandlesResponse = self.market_data.get_candles(
                 figi=figi,
                 interval=interval,
-                from_=local_from_,
-                to=local_to,
+                from_=current_from,
+                to=current_to,
             )
-            yield from candles_response.candles
+
+            for candle in candles_response.candles:
+                if candle not in previous_candles:
+                    yield candle
+                    previous_candles.add(candle)
+
+            previous_candles = set(candles_response.candles)
 
 
 class InstrumentsService(_grpc_helpers.Service):

@@ -330,6 +330,9 @@ class Quotation(_grpc_helpers.Message, SupportsAbs):
             nano=self.nano - other.nano,
         )
 
+    def __hash__(self) -> int:
+        return hash((self.units, self.nano))
+
     def __eq__(self, other: object) -> bool:
         if not isinstance(other, Quotation):
             return NotImplemented
@@ -1390,7 +1393,7 @@ class GetCandlesResponse(_grpc_helpers.Message):
     candles: List["HistoricCandle"] = _grpc_helpers.message_field(1)
 
 
-@dataclass(eq=False, repr=True)
+@dataclass(eq=True, repr=True, frozen=True)
 class HistoricCandle(_grpc_helpers.Message):
     open: Quotation = _grpc_helpers.message_field(1)
     high: Quotation = _grpc_helpers.message_field(2)
