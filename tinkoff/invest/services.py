@@ -1527,7 +1527,6 @@ class SandboxService(_grpc_helpers.Service):
             request.to = to
         request.state = state
         request.figi = figi
-        print(f'>>> {request=}')
         response, call = self.stub.GetSandboxOperations.with_call(
             request=_grpc_helpers.dataclass_to_protobuff(
                 request, operations_pb2.OperationsRequest()
