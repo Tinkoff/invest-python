@@ -68,6 +68,11 @@ class SandboxServiceStub(object):
                 request_serializer=tinkoff_dot_invest_dot_grpc_dot_operations__pb2.OperationsRequest.SerializeToString,
                 response_deserializer=tinkoff_dot_invest_dot_grpc_dot_operations__pb2.OperationsResponse.FromString,
                 )
+        self.GetSandboxOperationsByCursor = channel.unary_unary(
+                '/tinkoff.public.invest.api.contract.v1.SandboxService/GetSandboxOperationsByCursor',
+                request_serializer=tinkoff_dot_invest_dot_grpc_dot_operations__pb2.GetOperationsByCursorRequest.SerializeToString,
+                response_deserializer=tinkoff_dot_invest_dot_grpc_dot_operations__pb2.GetOperationsByCursorResponse.FromString,
+                )
         self.GetSandboxPortfolio = channel.unary_unary(
                 '/tinkoff.public.invest.api.contract.v1.SandboxService/GetSandboxPortfolio',
                 request_serializer=tinkoff_dot_invest_dot_grpc_dot_operations__pb2.PortfolioRequest.SerializeToString,
@@ -159,6 +164,13 @@ class SandboxServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def GetSandboxOperationsByCursor(self, request, context):
+        """Метод получения операций в песочнице по номеру счета с пагинацией.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def GetSandboxPortfolio(self, request, context):
         """Метод получения портфолио в песочнице.
         """
@@ -232,6 +244,11 @@ def add_SandboxServiceServicer_to_server(servicer, server):
                     servicer.GetSandboxOperations,
                     request_deserializer=tinkoff_dot_invest_dot_grpc_dot_operations__pb2.OperationsRequest.FromString,
                     response_serializer=tinkoff_dot_invest_dot_grpc_dot_operations__pb2.OperationsResponse.SerializeToString,
+            ),
+            'GetSandboxOperationsByCursor': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetSandboxOperationsByCursor,
+                    request_deserializer=tinkoff_dot_invest_dot_grpc_dot_operations__pb2.GetOperationsByCursorRequest.FromString,
+                    response_serializer=tinkoff_dot_invest_dot_grpc_dot_operations__pb2.GetOperationsByCursorResponse.SerializeToString,
             ),
             'GetSandboxPortfolio': grpc.unary_unary_rpc_method_handler(
                     servicer.GetSandboxPortfolio,
@@ -426,6 +443,23 @@ class SandboxService(object):
         return grpc.experimental.unary_unary(request, target, '/tinkoff.public.invest.api.contract.v1.SandboxService/GetSandboxOperations',
             tinkoff_dot_invest_dot_grpc_dot_operations__pb2.OperationsRequest.SerializeToString,
             tinkoff_dot_invest_dot_grpc_dot_operations__pb2.OperationsResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetSandboxOperationsByCursor(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/tinkoff.public.invest.api.contract.v1.SandboxService/GetSandboxOperationsByCursor',
+            tinkoff_dot_invest_dot_grpc_dot_operations__pb2.GetOperationsByCursorRequest.SerializeToString,
+            tinkoff_dot_invest_dot_grpc_dot_operations__pb2.GetOperationsByCursorResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 

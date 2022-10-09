@@ -1536,6 +1536,22 @@ class SandboxService(_grpc_helpers.Service):
         log_request(get_tracking_id_from_call(call), "GetSandboxOperations")
         return _grpc_helpers.protobuf_to_dataclass(response, OperationsResponse)
 
+    @handle_request_error("GetOperationsByCursor")
+    def get_operations_by_cursor(
+        self,
+        request: GetOperationsByCursorRequest,
+    ) -> GetOperationsByCursorResponse:
+        response, call = self.stub.GetOperationsByCursor.with_call(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, operations_pb2.GetOperationsByCursorRequest()
+            ),
+            metadata=self.metadata,
+        )
+        log_request(get_tracking_id_from_call(call), "GetOperationsByCursor")
+        return _grpc_helpers.protobuf_to_dataclass(
+            response, GetOperationsByCursorResponse
+        )
+
     @handle_request_error("GetSandboxPortfolio")
     def get_sandbox_portfolio(self, *, account_id: str = "") -> PortfolioResponse:
         request = PortfolioRequest()
