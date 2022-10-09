@@ -44,7 +44,7 @@ def quantity() -> int:
 
 @pytest.fixture()
 def price() -> Quotation:
-    return Quotation(units=10)
+    return Quotation(units=10, nano=0)
 
 
 @pytest.fixture()
@@ -112,7 +112,6 @@ class TestSandboxOperations:
     def test_post_sandbox_order(
         self, sandbox_service, order, figi, direction, quantity
     ):
-
         response = sandbox_service.post_sandbox_order(**order)
         assert isinstance(response.order_id, str)
         assert response.figi == figi
