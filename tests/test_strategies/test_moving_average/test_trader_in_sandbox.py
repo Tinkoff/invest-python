@@ -145,7 +145,9 @@ def settings(figi: str, account_id: AccountId) -> MovingAverageStrategySettings:
     os.environ.get("INVEST_SANDBOX_TOKEN") is None,
     reason="Run locally with INVEST_SANDBOX_TOKEN specified",
 )
-@pytest.mark.skip("fix when market closed")
+@pytest.mark.skip(
+    "fix when market closed https://github.com/Tinkoff/invest-python/issues/127"
+)
 class TestMovingAverageStrategyTraderInSandbox:
     def test_trade(
         self,
