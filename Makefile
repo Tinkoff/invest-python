@@ -3,7 +3,9 @@ POETRY_RUN = poetry run
 
 PROTO_DIR = protos/tinkoff/invest/grpc
 PACKAGE_PROTO_DIR = tinkoff/invest/grpc
+PACKAGE_PROTO_DIR_NEW = tinkoff_new/tinkoff/invest/grpc
 OUT = .
+OUT_NEW = tinkoff_new
 PROTOS = protos
 
 TEST = $(POETRY_RUN) pytest $(args)
@@ -94,6 +96,12 @@ gen-grpc:
 	rm -r ${PACKAGE_PROTO_DIR}
 	$(POETRY_RUN) python -m grpc_tools.protoc -I${PROTOS} --python_out=${OUT} --mypy_out=${OUT} --grpc_python_out=${OUT} ${PROTO_DIR}/*.proto
 	touch ${PACKAGE_PROTO_DIR}/__init__.py
+
+.PHONY: gen-grpc-new
+gen-grpc-new:
+	$(POETRY_RUN) python -m grpc_tools.protoc -I${PROTOS} --plugin=protoc-gen-custom-plugin=scripts/ohmyproto_plugin_main.py --custom-plugin_out=$(OUT_NEW) ${PROTO_DIR}/*.proto
+	$(POETRY_RUN) python -m grpc_tools.protoc -I${PROTOS} --plugin=protoc-gen-custom-plugin=scripts/ohmyproto_plugin_grpc.py --custom-plugin_out=$(OUT_NEW) ${PROTO_DIR}/*.proto
+	touch ${PACKAGE_PROTO_DIR_NEW}/__init__.py
 
 .PHONY: gen-client
 gen-client: download-protos gen-grpc

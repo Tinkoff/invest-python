@@ -28,6 +28,7 @@ protobuf = "^3.20.2"
 python-dateutil = "^2.8.2"
 tinkoff = "^0.1.1"
 pydantic = "^1.9.2"
+proto-plus = "^1.22.1"
 
 [tool.poetry.extras]
 all = ["pandas", "numpy", "matplotlib", "mplfinance"]
