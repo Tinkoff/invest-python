@@ -18,12 +18,12 @@ jobs:
 
       - name: Install python dependencies
         run: make install
-#
-#      - name: Gitlint
-#        run: make git-lint
-#
-#      - name: Run linters
-#        run: make lint
+
+      - name: Gitlint
+        run: make git-lint
+
+      - name: Run linters
+        run: make lint
 
       - name: Run test
         run: make test
