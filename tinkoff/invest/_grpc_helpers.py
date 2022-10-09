@@ -6,6 +6,7 @@ from datetime import datetime, timedelta, timezone
 from decimal import Decimal
 from typing import (
     Any,
+    Dict,
     Optional,
     Tuple,
     Type,
@@ -294,7 +295,7 @@ def to_unsafe_field_name(field_name: str) -> str:
 # pylint:disable=too-many-statements
 def protobuf_to_dataclass(pb_obj: Any, dataclass_type: Type[T]) -> T:  # noqa:C901
     dataclass_hints = get_type_hints(dataclass_type)
-    dataclass_obj = dataclass_type()
+    dataclass_dict: Dict[str, Any] = {}
     dataclass_fields = dataclass_type.__dataclass_fields__  # type:ignore
     for field_name, field_type in dataclass_hints.items():
         unsafe_field_name = to_unsafe_field_name(field_name)
@@ -302,7 +303,7 @@ def protobuf_to_dataclass(pb_obj: Any, dataclass_type: Type[T]) -> T:  # noqa:C9
         field_value = _UNKNOWN
         oneof = dataclass_fields[field_name].metadata["proto"].group
         if oneof and pb_obj.WhichOneof(oneof) != field_name:
-            setattr(dataclass_obj, field_name, None)
+            dataclass_dict[field_name] = None
             continue
 
         origin = get_origin(field_type)
@@ -335,9 +336,8 @@ def protobuf_to_dataclass(pb_obj: Any, dataclass_type: Type[T]) -> T:  # noqa:C9
 
         if field_value is _UNKNOWN:
             raise UnknownType(f'type "{field_type}" unknown')
-        setattr(dataclass_obj, field_name, field_value)
-
-    return dataclass_obj
+        dataclass_dict[field_name] = field_value
+    return dataclass_type(**dataclass_dict)
 
 
 def dataclass_to_protobuff(dataclass_obj: Any, protobuff_obj: T) -> T:  # noqa:C901
