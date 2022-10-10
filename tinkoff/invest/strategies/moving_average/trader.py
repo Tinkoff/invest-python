@@ -10,6 +10,7 @@ from tinkoff.invest import (
     MarketDataResponse,
     SubscribeCandlesRequest,
     SubscriptionAction,
+    SubscriptionInterval,
 )
 from tinkoff.invest.services import Services
 from tinkoff.invest.strategies.base.account_manager import AccountManager
@@ -29,11 +30,7 @@ from tinkoff.invest.strategies.moving_average.strategy_state import (
 from tinkoff.invest.strategies.moving_average.supervisor import (
     MovingAverageStrategySupervisor,
 )
-from tinkoff.invest.utils import (
-    candle_interval_to_subscription_interval,
-    floor_datetime,
-    now,
-)
+from tinkoff.invest.utils import floor_datetime, now
 
 logger = logging.getLogger(__name__)
 
@@ -61,15 +58,16 @@ class MovingAverageStrategyTrader(Trader):
         self._supervisor = supervisor
 
         self._data = list(
-            self._load_candles(self._settings.short_period + self._settings.long_period)
+            self._load_candles(
+                (self._settings.short_period + self._settings.long_period) * 3
+            )
         )
         for candle_event in self._data:
             self._supervisor.notify(self._convert_to_data_event(candle_event))
-        self._ensure_marginal_trade_active()
-
-        self._subscribe()
-
         self._strategy.fit(self._data)
+
+        self._ensure_marginal_trade_active()
+        self._subscribe()
 
     def _ensure_marginal_trade_active(self) -> None:
         self._account_manager.ensure_marginal_trade()
@@ -77,9 +75,7 @@ class MovingAverageStrategyTrader(Trader):
     def _subscribe(self):
         current_instrument = CandleInstrument(
             figi=self._settings.share_id,
-            interval=candle_interval_to_subscription_interval(
-                self._settings.candle_interval
-            ),
+            interval=SubscriptionInterval.SUBSCRIPTION_INTERVAL_ONE_MINUTE,
         )
         candle_subscribe_request = MarketDataRequest(
             subscribe_candles_request=SubscribeCandlesRequest(

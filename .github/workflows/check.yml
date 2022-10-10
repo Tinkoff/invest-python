@@ -27,3 +27,5 @@ jobs:
 
       - name: Run test
         run: make test
+        env:
+          INVEST_SANDBOX_TOKEN: ${{ secrets.INVEST_SANDBOX_TOKEN }}

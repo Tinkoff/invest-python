@@ -215,11 +215,11 @@ def start_datetime() -> datetime:
     return datetime(year=2022, month=2, day=16, hour=17, tzinfo=timezone.utc)
 
 
+@pytest.mark.skipif(
+    os.environ.get("INVEST_SANDBOX_TOKEN") is None,
+    reason="Run locally with INVEST_SANDBOX_TOKEN specified",
+)
 class TestMovingAverageStrategyTraderRealMarketData:
-    @pytest.mark.skipif(
-        os.environ.get("INVEST_SANDBOX_TOKEN") is None,
-        reason="Run locally with INVEST_SANDBOX_TOKEN specified",
-    )
     @pytest.mark.freeze_time()
     @pytest.mark.parametrize(
         (
