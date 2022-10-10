@@ -199,6 +199,8 @@ class OperationType(_grpc_helpers.Enum):
     OPERATION_TYPE_TAX_REPO_REFUND_PROGRESSIVE = 42
     OPERATION_TYPE_DIV_EXT = 43
     OPERATION_TYPE_TAX_CORRECTION_COUPON = 44
+    OPERATION_TYPE_CASH_FEE = 45
+    OPERATION_TYPE_OUT_FEE = 46
 
 
 class AccessLevel(_grpc_helpers.Enum):
@@ -537,6 +539,7 @@ class Option(_grpc_helpers.Message):
     otc_flag: bool = _grpc_helpers.bool_field(403)
     buy_available_flag: bool = _grpc_helpers.bool_field(404)
     sell_available_flag: bool = _grpc_helpers.bool_field(405)
+    for_qual_investor_flag: bool = _grpc_helpers.bool_field(406)
 
 
 @dataclass(eq=False, repr=True)
@@ -569,6 +572,7 @@ class Bond(_grpc_helpers.Message):  # pylint:disable=too-many-instance-attribute
     coupon_quantity_per_year: int = _grpc_helpers.int32_field(17)
     maturity_date: datetime = _grpc_helpers.message_field(18)
     nominal: "MoneyValue" = _grpc_helpers.message_field(19)
+    initial_nominal: "MoneyValue" = _grpc_helpers.message_field(20)
     state_reg_date: datetime = _grpc_helpers.message_field(21)
     placement_date: datetime = _grpc_helpers.message_field(22)
     placement_price: "MoneyValue" = _grpc_helpers.message_field(23)
@@ -592,6 +596,7 @@ class Bond(_grpc_helpers.Message):  # pylint:disable=too-many-instance-attribute
     real_exchange: "RealExchange" = _grpc_helpers.message_field(41)
     position_uid: str = _grpc_helpers.string_field(42)
     for_iis_flag: bool = _grpc_helpers.bool_field(51)
+    for_qual_investor_flag: bool = _grpc_helpers.bool_field(52)
     first_1min_candle_date: datetime = _grpc_helpers.message_field(61)
     first_1day_candle_date: datetime = _grpc_helpers.message_field(62)
 
@@ -627,6 +632,7 @@ class Currency(_grpc_helpers.Message):  # pylint:disable=too-many-instance-attri
     real_exchange: "RealExchange" = _grpc_helpers.message_field(28)
     position_uid: str = _grpc_helpers.string_field(29)
     for_iis_flag: bool = _grpc_helpers.bool_field(41)
+    for_qual_investor_flag: bool = _grpc_helpers.bool_field(52)
     first_1min_candle_date: datetime = _grpc_helpers.message_field(56)
     first_1day_candle_date: datetime = _grpc_helpers.message_field(57)
 
@@ -666,6 +672,7 @@ class Etf(_grpc_helpers.Message):  # pylint:disable=too-many-instance-attributes
     real_exchange: "RealExchange" = _grpc_helpers.message_field(32)
     position_uid: str = _grpc_helpers.string_field(33)
     for_iis_flag: bool = _grpc_helpers.bool_field(41)
+    for_qual_investor_flag: bool = _grpc_helpers.bool_field(42)
     first_1min_candle_date: datetime = _grpc_helpers.message_field(56)
     first_1day_candle_date: datetime = _grpc_helpers.message_field(57)
 
@@ -707,6 +714,7 @@ class Future(_grpc_helpers.Message):  # pylint:disable=too-many-instance-attribu
     position_uid: str = _grpc_helpers.string_field(33)
     basic_asset_position_uid: str = _grpc_helpers.string_field(34)
     for_iis_flag: bool = _grpc_helpers.bool_field(41)
+    for_qual_investor_flag: bool = _grpc_helpers.bool_field(42)
     first_1min_candle_date: datetime = _grpc_helpers.message_field(56)
     first_1day_candle_date: datetime = _grpc_helpers.message_field(57)
 
@@ -746,7 +754,8 @@ class Share(_grpc_helpers.Message):  # pylint:disable=too-many-instance-attribut
     uid: str = _grpc_helpers.string_field(33)
     real_exchange: "RealExchange" = _grpc_helpers.message_field(34)
     position_uid: str = _grpc_helpers.string_field(35)
-    for_iis_flag: bool = _grpc_helpers.bool_field(41)
+    for_iis_flag: bool = _grpc_helpers.bool_field(46)
+    for_qual_investor_flag: bool = _grpc_helpers.bool_field(42)
     first_1min_candle_date: datetime = _grpc_helpers.message_field(56)
     first_1day_candle_date: datetime = _grpc_helpers.message_field(57)
 
@@ -819,6 +828,7 @@ class Instrument(_grpc_helpers.Message):  # pylint:disable=too-many-instance-att
     real_exchange: "RealExchange" = _grpc_helpers.message_field(26)
     position_uid: str = _grpc_helpers.string_field(27)
     for_iis_flag: bool = _grpc_helpers.bool_field(36)
+    for_qual_investor_flag: bool = _grpc_helpers.bool_field(37)
     first_1min_candle_date: datetime = _grpc_helpers.message_field(56)
     first_1day_candle_date: datetime = _grpc_helpers.message_field(57)
 
@@ -1126,6 +1136,7 @@ class InstrumentShort(_grpc_helpers.Message):
     for_iis_flag: bool = _grpc_helpers.bool_field(12)
     first_1min_candle_date: datetime = _grpc_helpers.message_field(26)
     first_1day_candle_date: datetime = _grpc_helpers.message_field(27)
+    for_qual_investor_flag: bool = _grpc_helpers.bool_field(28)
 
 
 @dataclass(eq=False, repr=True)
@@ -1218,6 +1229,7 @@ class SubscribeCandlesRequest(_grpc_helpers.Message):
 class CandleInstrument(_grpc_helpers.Message):
     figi: str = _grpc_helpers.string_field(1)
     interval: "SubscriptionInterval" = _grpc_helpers.enum_field(2)
+    instrument_id: str = _grpc_helpers.string_field(3)
 
 
 @dataclass(eq=False, repr=True)
@@ -1231,18 +1243,21 @@ class CandleSubscription(_grpc_helpers.Message):
     figi: str = _grpc_helpers.string_field(1)
     interval: "SubscriptionInterval" = _grpc_helpers.enum_field(2)
     subscription_status: "SubscriptionStatus" = _grpc_helpers.enum_field(3)
+    instrument_uid: str = _grpc_helpers.string_field(4)
 
 
 @dataclass(eq=False, repr=True)
 class SubscribeOrderBookRequest(_grpc_helpers.Message):
     subscription_action: "SubscriptionAction" = _grpc_helpers.enum_field(1)
     instruments: List["OrderBookInstrument"] = _grpc_helpers.message_field(2)
+    instrument_uid: str = _grpc_helpers.string_field(4)
 
 
 @dataclass(eq=False, repr=True)
 class OrderBookInstrument(_grpc_helpers.Message):
     figi: str = _grpc_helpers.string_field(1)
     depth: int = _grpc_helpers.int32_field(2)
+    instrument_uid: str = _grpc_helpers.string_field(3)
 
 
 @dataclass(eq=False, repr=True)
@@ -1258,6 +1273,7 @@ class OrderBookSubscription(_grpc_helpers.Message):
     figi: str = _grpc_helpers.string_field(1)
     depth: int = _grpc_helpers.int32_field(2)
     subscription_status: "SubscriptionStatus" = _grpc_helpers.enum_field(3)
+    instrument_uid: str = _grpc_helpers.string_field(4)
 
 
 @dataclass(eq=False, repr=True)
@@ -1275,6 +1291,7 @@ class SubscribeLastPriceRequest(_grpc_helpers.Message):
 @dataclass(eq=False, repr=True)
 class LastPriceInstrument(_grpc_helpers.Message):
     figi: str = _grpc_helpers.string_field(1)
+    instrument_uid: str = _grpc_helpers.string_field(2)
 
 
 @dataclass(eq=False, repr=True)
@@ -1283,6 +1300,7 @@ class SubscribeLastPriceResponse(_grpc_helpers.Message):
     last_price_subscriptions: List[
         "LastPriceSubscription"
     ] = _grpc_helpers.message_field(2)
+    instrument_uid: str = _grpc_helpers.string_field(3)
 
 
 @dataclass(eq=False, repr=True)
@@ -1294,6 +1312,7 @@ class LastPriceSubscription(_grpc_helpers.Message):
 @dataclass(eq=False, repr=True)
 class TradeInstrument(_grpc_helpers.Message):
     figi: str = _grpc_helpers.string_field(1)
+    instrument_uid: str = _grpc_helpers.string_field(2)
 
 
 @dataclass(eq=False, repr=True)
@@ -1306,6 +1325,7 @@ class SubscribeTradesResponse(_grpc_helpers.Message):
 class TradeSubscription(_grpc_helpers.Message):
     figi: str = _grpc_helpers.string_field(1)
     subscription_status: "SubscriptionStatus" = _grpc_helpers.enum_field(2)
+    instrument_uid: str = _grpc_helpers.string_field(3)
 
 
 @dataclass(eq=False, repr=True)
@@ -1317,6 +1337,7 @@ class SubscribeInfoRequest(_grpc_helpers.Message):
 @dataclass(eq=False, repr=True)
 class InfoInstrument(_grpc_helpers.Message):
     figi: str = _grpc_helpers.string_field(1)
+    instrument_uid: str = _grpc_helpers.string_field(2)
 
 
 @dataclass(eq=False, repr=True)
@@ -1329,6 +1350,7 @@ class SubscribeInfoResponse(_grpc_helpers.Message):
 class InfoSubscription(_grpc_helpers.Message):
     figi: str = _grpc_helpers.string_field(1)
     subscription_status: "SubscriptionStatus" = _grpc_helpers.enum_field(2)
+    instrument_uid: str = _grpc_helpers.string_field(3)
 
 
 @dataclass(eq=False, repr=True)
@@ -1342,6 +1364,7 @@ class Candle(_grpc_helpers.Message):
     volume: int = _grpc_helpers.int64_field(7)
     time: datetime = _grpc_helpers.message_field(8)
     last_trade_ts: datetime = _grpc_helpers.message_field(9)
+    instrument_uid: str = _grpc_helpers.string_field(10)
 
 
 @dataclass(eq=False, repr=True)
@@ -1354,6 +1377,7 @@ class OrderBook(_grpc_helpers.Message):
     time: datetime = _grpc_helpers.message_field(6)
     limit_up: "Quotation" = _grpc_helpers.message_field(7)
     limit_down: "Quotation" = _grpc_helpers.message_field(8)
+    instrument_uid: str = _grpc_helpers.string_field(9)
 
 
 @dataclass(eq=False, repr=True)
@@ -1369,6 +1393,7 @@ class Trade(_grpc_helpers.Message):
     price: "Quotation" = _grpc_helpers.message_field(3)
     quantity: int = _grpc_helpers.int64_field(4)
     time: datetime = _grpc_helpers.message_field(5)
+    instrument_uid: str = _grpc_helpers.string_field(6)
 
 
 @dataclass(eq=False, repr=True)
@@ -1378,6 +1403,7 @@ class TradingStatus(_grpc_helpers.Message):
     time: datetime = _grpc_helpers.enum_field(3)
     limit_order_available_flag: bool = _grpc_helpers.bool_field(4)
     market_order_available_flag: bool = _grpc_helpers.bool_field(5)
+    instrument_uid: str = _grpc_helpers.string_field(6)
 
 
 @dataclass(eq=False, repr=True)
@@ -1386,6 +1412,7 @@ class GetCandlesRequest(_grpc_helpers.Message):
     from_: datetime = _grpc_helpers.message_field(2)
     to: datetime = _grpc_helpers.message_field(3)
     interval: "CandleInterval" = _grpc_helpers.enum_field(4)
+    instrument_uid: str = _grpc_helpers.string_field(5)
 
 
 @dataclass(eq=False, repr=True)
@@ -1407,6 +1434,7 @@ class HistoricCandle(_grpc_helpers.Message):
 @dataclass(eq=False, repr=True)
 class GetLastPricesRequest(_grpc_helpers.Message):
     figi: List[str] = _grpc_helpers.string_field(1)
+    instrument_uid: List[str] = _grpc_helpers.string_field(2)
 
 
 @dataclass(eq=False, repr=True)
@@ -1426,6 +1454,7 @@ class LastPrice(_grpc_helpers.Message):
 class GetOrderBookRequest(_grpc_helpers.Message):
     figi: str = _grpc_helpers.string_field(1)
     depth: int = _grpc_helpers.int32_field(2)
+    instrument_uid: str = _grpc_helpers.string_field(3)
 
 
 @dataclass(eq=False, repr=True)
@@ -1441,11 +1470,13 @@ class GetOrderBookResponse(_grpc_helpers.Message):
     last_price_ts: datetime = _grpc_helpers.message_field(21)
     close_price_ts: datetime = _grpc_helpers.message_field(22)
     orderbook_ts: datetime = _grpc_helpers.message_field(23)
+    instrument_uid: str = _grpc_helpers.string_field(9)
 
 
 @dataclass(eq=False, repr=True)
 class GetTradingStatusRequest(_grpc_helpers.Message):
     figi: str = _grpc_helpers.string_field(1)
+    instrument_uid: str = _grpc_helpers.string_field(2)
 
 
 @dataclass(eq=False, repr=True)
@@ -1455,6 +1486,7 @@ class GetTradingStatusResponse(_grpc_helpers.Message):
     limit_order_available_flag: bool = _grpc_helpers.bool_field(3)
     market_order_available_flag: bool = _grpc_helpers.bool_field(4)
     api_trade_available_flag: bool = _grpc_helpers.bool_field(5)
+    instrument_uid: str = _grpc_helpers.string_field(6)
 
 
 @dataclass(eq=False, repr=True)
@@ -1462,6 +1494,7 @@ class GetLastTradesRequest(_grpc_helpers.Message):
     figi: str = _grpc_helpers.string_field(1)
     from_: datetime = _grpc_helpers.message_field(2)
     to: datetime = _grpc_helpers.message_field(3)
+    instrument_uid: str = _grpc_helpers.string_field(4)
 
 
 @dataclass(eq=False, repr=True)
@@ -1551,6 +1584,7 @@ class PortfolioResponse(_grpc_helpers.Message):
     total_amount_futures: "MoneyValue" = _grpc_helpers.message_field(5)
     expected_yield: "Quotation" = _grpc_helpers.message_field(6)
     positions: List["PortfolioPosition"] = _grpc_helpers.message_field(7)
+    account_id: str = _grpc_helpers.string_field(8)
 
 
 @dataclass(eq=False, repr=True)
@@ -1776,6 +1810,7 @@ class GetMarginAttributesResponse(_grpc_helpers.Message):
     minimal_margin: "MoneyValue" = _grpc_helpers.message_field(3)
     funds_sufficiency_level: "Quotation" = _grpc_helpers.message_field(4)
     amount_of_missing_funds: "MoneyValue" = _grpc_helpers.message_field(5)
+    corrected_margin: "MoneyValue" = _grpc_helpers.message_field(6)
 
 
 @dataclass(eq=False, repr=True)
