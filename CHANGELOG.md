@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [0.2.0-beta39](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta39) - 2022-10-10
+
+<small>[Compare with 0.2.0-beta38](https://github.com/tinkoff/invest-python/compare/0.2.0-beta38...0.2.0-beta39)</small>
+
+### Features
+- New contract support (#126) ([880c529](https://github.com/tinkoff/invest-python/commit/880c529c7c79b98b01ed78660681584536ba90ab) by Ruslan Sirazhetdinov).
+- Add sandbox github actions (#125) ([311d436](https://github.com/tinkoff/invest-python/commit/311d4365cc079d428003b24a4b076b3f0c28b30c) by Ruslan Sirazhetdinov).
+- Deduplicate candles (#118) ([21e7d44](https://github.com/tinkoff/invest-python/commit/21e7d449cb833bda522a04f94e6d6f3ef19bbc9a) by Ruslan Sirazhetdinov).
+- Arithmetics for quotation (#119) ([40932c3](https://github.com/tinkoff/invest-python/commit/40932c33ed06be56496c1b86a6bc87c18aeaf79d) by Ruslan Sirazhetdinov).
+
+
 ## [0.2.0-beta38](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta38) - 2022-09-29
 
 <small>[Compare with 0.2.0-beta37](https://github.com/tinkoff/invest-python/compare/0.2.0-beta37...0.2.0-beta38)</small>
