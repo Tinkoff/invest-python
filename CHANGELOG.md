@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [0.2.0-beta40](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta40) - 2022-10-25
+
+<small>[Compare with 0.2.0-beta39](https://github.com/tinkoff/invest-python/compare/0.2.0-beta39...0.2.0-beta40)</small>
+
+### Bug Fixes
+- Test ([36edfb7](https://github.com/tinkoff/invest-python/commit/36edfb7bf68c8e7e90f39baaab7c5a298767045a) by Ruslan Sirazhetdinov).
+
+### Features
+- Update grpc, support api v1.0.15 ([beec6b9](https://github.com/tinkoff/invest-python/commit/beec6b9bae3b1393053b94c91b73adbc96649327) by Danil Akhtarov).
+
+
 ## [0.2.0-beta39](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta39) - 2022-10-10
 
 <small>[Compare with 0.2.0-beta38](https://github.com/tinkoff/invest-python/compare/0.2.0-beta38...0.2.0-beta39)</small>
