@@ -148,6 +148,8 @@ class _OperationTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._
     """Комиссия за валютный остаток."""
     OPERATION_TYPE_OUT_FEE: _OperationType.ValueType  # 46
     """Комиссия за вывод валюты с брокерского счета."""
+    OPERATION_TYPE_OUT_STAMP_DUTY: _OperationType.ValueType  # 47
+    """Гербовый сбор."""
 
 class OperationType(_OperationType, metaclass=_OperationTypeEnumTypeWrapper):
     """Тип операции."""
@@ -246,6 +248,8 @@ OPERATION_TYPE_CASH_FEE: OperationType.ValueType  # 45
 """Комиссия за валютный остаток."""
 OPERATION_TYPE_OUT_FEE: OperationType.ValueType  # 46
 """Комиссия за вывод валюты с брокерского счета."""
+OPERATION_TYPE_OUT_STAMP_DUTY: OperationType.ValueType  # 47
+"""Гербовый сбор."""
 global___OperationType = OperationType
 
 class _PortfolioSubscriptionStatus:
@@ -1599,18 +1603,15 @@ class OperationItemTrades(google.protobuf.message.Message):
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    TRADES_SIZE_FIELD_NUMBER: builtins.int
     TRADES_FIELD_NUMBER: builtins.int
-    trades_size: builtins.int
     @property
     def trades(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___OperationItemTrade]: ...
     def __init__(
         self,
         *,
-        trades_size: builtins.int = ...,
         trades: collections.abc.Iterable[global___OperationItemTrade] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["trades", b"trades", "trades_size", b"trades_size"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["trades", b"trades"]) -> None: ...
 
 global___OperationItemTrades = OperationItemTrades
 

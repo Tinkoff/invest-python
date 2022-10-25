@@ -1181,7 +1181,7 @@ class Bond(google.protobuf.message.Message):
     def min_price_increment(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
         """Шаг цены."""
     api_trade_available_flag: builtins.bool
-    """Признак доступности торгов через API."""
+    """Параметр указывает на возможность торговать инструментом через API."""
     uid: builtins.str
     """Уникальный идентификатор инструмента."""
     real_exchange: global___RealExchange.ValueType
@@ -1346,7 +1346,7 @@ class Currency(google.protobuf.message.Message):
     def min_price_increment(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
         """Шаг цены."""
     api_trade_available_flag: builtins.bool
-    """Признак доступности торгов через API."""
+    """Параметр указывает на возможность торговать инструментом через API."""
     uid: builtins.str
     """Уникальный идентификатор инструмента."""
     real_exchange: global___RealExchange.ValueType
@@ -1512,7 +1512,7 @@ class Etf(google.protobuf.message.Message):
     def min_price_increment(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
         """Шаг цены."""
     api_trade_available_flag: builtins.bool
-    """Признак доступности торгов через API."""
+    """Параметр указывает на возможность торговать инструментом через API."""
     uid: builtins.str
     """Уникальный идентификатор инструмента."""
     real_exchange: global___RealExchange.ValueType
@@ -1687,7 +1687,7 @@ class Future(google.protobuf.message.Message):
     def min_price_increment(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
         """Шаг цены."""
     api_trade_available_flag: builtins.bool
-    """Признак доступности торгов через API."""
+    """Параметр указывает на возможность торговать инструментом через API."""
     uid: builtins.str
     """Уникальный идентификатор инструмента."""
     real_exchange: global___RealExchange.ValueType
@@ -1863,7 +1863,7 @@ class Share(google.protobuf.message.Message):
     def min_price_increment(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
         """Шаг цены."""
     api_trade_available_flag: builtins.bool
-    """Признак доступности торгов через API."""
+    """Параметр указывает на возможность торговать инструментом через API."""
     uid: builtins.str
     """Уникальный идентификатор инструмента."""
     real_exchange: global___RealExchange.ValueType
@@ -2162,7 +2162,7 @@ class Instrument(google.protobuf.message.Message):
     def min_price_increment(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
         """Шаг цены."""
     api_trade_available_flag: builtins.bool
-    """Признак доступности торгов через API."""
+    """Параметр указывает на возможность торговать инструментом через API."""
     uid: builtins.str
     """Уникальный идентификатор инструмента."""
     real_exchange: global___RealExchange.ValueType
@@ -3166,7 +3166,7 @@ class FavoriteInstrument(google.protobuf.message.Message):
     otc_flag: builtins.bool
     """Признак внебиржевой ценной бумаги."""
     api_trade_available_flag: builtins.bool
-    """Признак доступности торгов через API."""
+    """Параметр указывает на возможность торговать инструментом через API."""
     def __init__(
         self,
         *,
@@ -3367,7 +3367,7 @@ class InstrumentShort(google.protobuf.message.Message):
     position_uid: builtins.str
     """Уникальный идентификатор позиции инструмента."""
     api_trade_available_flag: builtins.bool
-    """Признак доступности торгов через API."""
+    """Параметр указывает на возможность торговать инструментом через API."""
     for_iis_flag: builtins.bool
     """Признак доступности для ИИС."""
     @property

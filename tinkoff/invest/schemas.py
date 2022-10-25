@@ -201,6 +201,7 @@ class OperationType(_grpc_helpers.Enum):
     OPERATION_TYPE_TAX_CORRECTION_COUPON = 44
     OPERATION_TYPE_CASH_FEE = 45
     OPERATION_TYPE_OUT_FEE = 46
+    OPERATION_TYPE_OUT_STAMP_DUTY = 47
 
 
 class AccessLevel(_grpc_helpers.Enum):
@@ -1659,6 +1660,7 @@ class OrderTrades(_grpc_helpers.Message):
     figi: str = _grpc_helpers.string_field(4)
     trades: List["OrderTrade"] = _grpc_helpers.message_field(5)
     account_id: str = _grpc_helpers.string_field(6)
+    instrument_uid: str = _grpc_helpers.string_field(7)
 
 
 @dataclass(eq=False, repr=True)
@@ -1677,6 +1679,7 @@ class PostOrderRequest(_grpc_helpers.Message):
     account_id: str = _grpc_helpers.string_field(5)
     order_type: "OrderType" = _grpc_helpers.enum_field(6)
     order_id: str = _grpc_helpers.string_field(7)
+    instrument_id: str = _grpc_helpers.string_field(8)
 
 
 @dataclass(eq=False, repr=True)
@@ -1699,6 +1702,7 @@ class PostOrderResponse(  # pylint:disable=too-many-instance-attributes
     order_type: "OrderType" = _grpc_helpers.enum_field(14)
     message: str = _grpc_helpers.string_field(15)
     initial_order_price_pt: "Quotation" = _grpc_helpers.message_field(16)
+    instrument_uid: str = _grpc_helpers.string_field(17)
 
 
 @dataclass(eq=False, repr=True)
@@ -1748,6 +1752,7 @@ class OrderState(_grpc_helpers.Message):  # pylint:disable=too-many-instance-att
     currency: str = _grpc_helpers.string_field(16)
     order_type: "OrderType" = _grpc_helpers.enum_field(17)
     order_date: datetime = _grpc_helpers.message_field(18)
+    instrument_uid: str = _grpc_helpers.string_field(19)
 
 
 @dataclass(eq=False, repr=True)
@@ -2174,7 +2179,6 @@ class OperationItem(_grpc_helpers.Message):
 
 @dataclass(eq=False, repr=True)
 class OperationItemTrades(_grpc_helpers.Message):
-    trades_size: int = _grpc_helpers.int32_field(1)
     trades: List["OperationItemTrade"] = _grpc_helpers.message_field(6)
 
 

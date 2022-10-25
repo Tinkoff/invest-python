@@ -1124,7 +1124,7 @@ class GetLastPricesRequest(google.protobuf.message.Message):
         """Массив figi-идентификаторов инструментов."""
     @property
     def instrument_id(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """Идентификатор инструмента, принимает значение figi или instrument_uid"""
+        """Массив идентификаторов инструмента, принимает значения figi или instrument_uid"""
     def __init__(
         self,
         *,

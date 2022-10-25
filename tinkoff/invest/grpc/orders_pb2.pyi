@@ -180,6 +180,7 @@ class OrderTrades(google.protobuf.message.Message):
     FIGI_FIELD_NUMBER: builtins.int
     TRADES_FIELD_NUMBER: builtins.int
     ACCOUNT_ID_FIELD_NUMBER: builtins.int
+    INSTRUMENT_UID_FIELD_NUMBER: builtins.int
     order_id: builtins.str
     """Идентификатор торгового поручения."""
     @property
@@ -194,6 +195,8 @@ class OrderTrades(google.protobuf.message.Message):
         """Массив сделок."""
     account_id: builtins.str
     """Идентификатор счёта."""
+    instrument_uid: builtins.str
+    """UID идентификатор инструмента."""
     def __init__(
         self,
         *,
@@ -203,9 +206,10 @@ class OrderTrades(google.protobuf.message.Message):
         figi: builtins.str = ...,
         trades: collections.abc.Iterable[global___OrderTrade] | None = ...,
         account_id: builtins.str = ...,
+        instrument_uid: builtins.str = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["account_id", b"account_id", "created_at", b"created_at", "direction", b"direction", "figi", b"figi", "order_id", b"order_id", "trades", b"trades"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["account_id", b"account_id", "created_at", b"created_at", "direction", b"direction", "figi", b"figi", "instrument_uid", b"instrument_uid", "order_id", b"order_id", "trades", b"trades"]) -> None: ...
 
 global___OrderTrades = OrderTrades
 
@@ -249,6 +253,7 @@ class PostOrderRequest(google.protobuf.message.Message):
     ACCOUNT_ID_FIELD_NUMBER: builtins.int
     ORDER_TYPE_FIELD_NUMBER: builtins.int
     ORDER_ID_FIELD_NUMBER: builtins.int
+    INSTRUMENT_ID_FIELD_NUMBER: builtins.int
     figi: builtins.str
     """Figi-идентификатор инструмента."""
     quantity: builtins.int
@@ -264,6 +269,8 @@ class PostOrderRequest(google.protobuf.message.Message):
     """Тип заявки."""
     order_id: builtins.str
     """Идентификатор запроса выставления поручения для целей идемпотентности. Максимальная длина 36 символов."""
+    instrument_id: builtins.str
+    """Идентификатор инструмента, принимает значения Figi или Instrument_uid."""
     def __init__(
         self,
         *,
@@ -274,9 +281,10 @@ class PostOrderRequest(google.protobuf.message.Message):
         account_id: builtins.str = ...,
         order_type: global___OrderType.ValueType = ...,
         order_id: builtins.str = ...,
+        instrument_id: builtins.str = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["price", b"price"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["account_id", b"account_id", "direction", b"direction", "figi", b"figi", "order_id", b"order_id", "order_type", b"order_type", "price", b"price", "quantity", b"quantity"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["account_id", b"account_id", "direction", b"direction", "figi", b"figi", "instrument_id", b"instrument_id", "order_id", b"order_id", "order_type", b"order_type", "price", b"price", "quantity", b"quantity"]) -> None: ...
 
 global___PostOrderRequest = PostOrderRequest
 
@@ -301,6 +309,7 @@ class PostOrderResponse(google.protobuf.message.Message):
     ORDER_TYPE_FIELD_NUMBER: builtins.int
     MESSAGE_FIELD_NUMBER: builtins.int
     INITIAL_ORDER_PRICE_PT_FIELD_NUMBER: builtins.int
+    INSTRUMENT_UID_FIELD_NUMBER: builtins.int
     order_id: builtins.str
     """Идентификатор заявки."""
     execution_report_status: global___OrderExecutionReportStatus.ValueType
@@ -341,6 +350,8 @@ class PostOrderResponse(google.protobuf.message.Message):
     @property
     def initial_order_price_pt(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
         """Начальная цена заявки в пунктах (для фьючерсов)."""
+    instrument_uid: builtins.str
+    """UID идентификатор инструмента."""
     def __init__(
         self,
         *,
@@ -360,9 +371,10 @@ class PostOrderResponse(google.protobuf.message.Message):
         order_type: global___OrderType.ValueType = ...,
         message: builtins.str = ...,
         initial_order_price_pt: tinkoff.invest.grpc.common_pb2.Quotation | None = ...,
+        instrument_uid: builtins.str = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["aci_value", b"aci_value", "executed_commission", b"executed_commission", "executed_order_price", b"executed_order_price", "initial_commission", b"initial_commission", "initial_order_price", b"initial_order_price", "initial_order_price_pt", b"initial_order_price_pt", "initial_security_price", b"initial_security_price", "total_order_amount", b"total_order_amount"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["aci_value", b"aci_value", "direction", b"direction", "executed_commission", b"executed_commission", "executed_order_price", b"executed_order_price", "execution_report_status", b"execution_report_status", "figi", b"figi", "initial_commission", b"initial_commission", "initial_order_price", b"initial_order_price", "initial_order_price_pt", b"initial_order_price_pt", "initial_security_price", b"initial_security_price", "lots_executed", b"lots_executed", "lots_requested", b"lots_requested", "message", b"message", "order_id", b"order_id", "order_type", b"order_type", "total_order_amount", b"total_order_amount"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["aci_value", b"aci_value", "direction", b"direction", "executed_commission", b"executed_commission", "executed_order_price", b"executed_order_price", "execution_report_status", b"execution_report_status", "figi", b"figi", "initial_commission", b"initial_commission", "initial_order_price", b"initial_order_price", "initial_order_price_pt", b"initial_order_price_pt", "initial_security_price", b"initial_security_price", "instrument_uid", b"instrument_uid", "lots_executed", b"lots_executed", "lots_requested", b"lots_requested", "message", b"message", "order_id", b"order_id", "order_type", b"order_type", "total_order_amount", b"total_order_amount"]) -> None: ...
 
 global___PostOrderResponse = PostOrderResponse
 
@@ -485,6 +497,7 @@ class OrderState(google.protobuf.message.Message):
     CURRENCY_FIELD_NUMBER: builtins.int
     ORDER_TYPE_FIELD_NUMBER: builtins.int
     ORDER_DATE_FIELD_NUMBER: builtins.int
+    INSTRUMENT_UID_FIELD_NUMBER: builtins.int
     order_id: builtins.str
     """Идентификатор заявки."""
     execution_report_status: global___OrderExecutionReportStatus.ValueType
@@ -531,6 +544,8 @@ class OrderState(google.protobuf.message.Message):
     @property
     def order_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
         """Дата и время выставления заявки в часовом поясе UTC."""
+    instrument_uid: builtins.str
+    """UID идентификатор инструмента."""
     def __init__(
         self,
         *,
@@ -552,9 +567,10 @@ class OrderState(google.protobuf.message.Message):
         currency: builtins.str = ...,
         order_type: global___OrderType.ValueType = ...,
         order_date: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        instrument_uid: builtins.str = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["average_position_price", b"average_position_price", "executed_commission", b"executed_commission", "executed_order_price", b"executed_order_price", "initial_commission", b"initial_commission", "initial_order_price", b"initial_order_price", "initial_security_price", b"initial_security_price", "order_date", b"order_date", "service_commission", b"service_commission", "total_order_amount", b"total_order_amount"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["average_position_price", b"average_position_price", "currency", b"currency", "direction", b"direction", "executed_commission", b"executed_commission", "executed_order_price", b"executed_order_price", "execution_report_status", b"execution_report_status", "figi", b"figi", "initial_commission", b"initial_commission", "initial_order_price", b"initial_order_price", "initial_security_price", b"initial_security_price", "lots_executed", b"lots_executed", "lots_requested", b"lots_requested", "order_date", b"order_date", "order_id", b"order_id", "order_type", b"order_type", "service_commission", b"service_commission", "stages", b"stages", "total_order_amount", b"total_order_amount"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["average_position_price", b"average_position_price", "currency", b"currency", "direction", b"direction", "executed_commission", b"executed_commission", "executed_order_price", b"executed_order_price", "execution_report_status", b"execution_report_status", "figi", b"figi", "initial_commission", b"initial_commission", "initial_order_price", b"initial_order_price", "initial_security_price", b"initial_security_price", "instrument_uid", b"instrument_uid", "lots_executed", b"lots_executed", "lots_requested", b"lots_requested", "order_date", b"order_date", "order_id", b"order_id", "order_type", b"order_type", "service_commission", b"service_commission", "stages", b"stages", "total_order_amount", b"total_order_amount"]) -> None: ...
 
 global___OrderState = OrderState
 
