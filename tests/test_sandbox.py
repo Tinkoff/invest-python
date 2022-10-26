@@ -77,7 +77,7 @@ def order(figi, quantity, price, direction, account_id, order_type, order_id):
 
 @pytest.mark.skipif(
     os.environ.get("INVEST_SANDBOX_TOKEN") is None,
-    reason="Run locally with INVEST_SANDBOX_TOKEN specified",
+    reason="INVEST_SANDBOX_TOKEN should be specified",
 )
 class TestSandboxOperations:
     def test_open_sandbox_account(self, sandbox_service):

@@ -8,10 +8,14 @@ import pytest
 
 from tinkoff.invest import (
     CandleInterval,
+    Client,
     GetMarginAttributesResponse,
+    InstrumentIdType,
     MoneyValue,
     OpenSandboxAccountResponse,
     Quotation,
+    ShareResponse,
+    TradingSchedulesResponse,
 )
 from tinkoff.invest.services import SandboxService, Services
 from tinkoff.invest.strategies.base.account_manager import AccountManager
@@ -31,6 +35,7 @@ from tinkoff.invest.strategies.moving_average.supervisor import (
 )
 from tinkoff.invest.strategies.moving_average.trader import MovingAverageStrategyTrader
 from tinkoff.invest.typedefs import AccountId, ShareId
+from tinkoff.invest.utils import now
 
 logging.basicConfig(format="%(asctime)s %(levelname)s:%(message)s", level=logging.DEBUG)
 logger = logging.getLogger(__name__)
@@ -141,12 +146,36 @@ def settings(figi: str, account_id: AccountId) -> MovingAverageStrategySettings:
     )
 
 
+@pytest.fixture(autouse=True)
+def _ensure_is_market_active(
+    settings: MovingAverageStrategySettings,
+):
+    token = os.environ.get("INVEST_SANDBOX_TOKEN")
+    if token is None:
+        pytest.skip("INVEST_SANDBOX_TOKEN should be specified")
+
+    with Client(token) as client:
+        share_response: ShareResponse = client.instruments.share_by(
+            id_type=InstrumentIdType.INSTRUMENT_ID_TYPE_FIGI, id=settings.share_id
+        )
+        logger.debug("Instrument = %s", share_response.instrument.name)
+        response: TradingSchedulesResponse = client.instruments.trading_schedules(
+            exchange=share_response.instrument.exchange,
+            from_=now(),
+            to=now(),
+        )
+        (exchange,) = response.exchanges
+        logger.debug("Exchange = %s", exchange.exchange)
+        (day,) = exchange.days
+        if day.is_trading_day and day.start_time < now() < day.end_time:
+            return
+
+    pytest.skip("test skipped because market is closed")
+
+
 @pytest.mark.skipif(
     os.environ.get("INVEST_SANDBOX_TOKEN") is None,
-    reason="Run locally with INVEST_SANDBOX_TOKEN specified",
-)
-@pytest.mark.skip(
-    "fix when market closed https://github.com/Tinkoff/invest-python/issues/127"
+    reason="INVEST_SANDBOX_TOKEN should be specified",
 )
 class TestMovingAverageStrategyTraderInSandbox:
     def test_trade(

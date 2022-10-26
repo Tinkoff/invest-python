@@ -217,7 +217,7 @@ def start_datetime() -> datetime:
 
 @pytest.mark.skipif(
     os.environ.get("INVEST_SANDBOX_TOKEN") is None,
-    reason="Run locally with INVEST_SANDBOX_TOKEN specified",
+    reason="INVEST_SANDBOX_TOKEN should be specified",
 )
 class TestMovingAverageStrategyTraderRealMarketData:
     @pytest.mark.freeze_time()
