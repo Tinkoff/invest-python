@@ -156,14 +156,11 @@ class TestSandboxOperations:
         assert isinstance(response.money[0], MoneyValue)
         assert response.money[0].currency == "rub"
 
-    @pytest.mark.skip(
-        "todo GitHub Actions fix https://github.com/Tinkoff/invest-python/issues/128"
-    )
     def test_get_sandbox_operations(self, sandbox_service, account_id, order, figi):
         response = sandbox_service.get_sandbox_operations(
             account_id=account_id,
-            from_=datetime(1970, 1, 1),
-            to=datetime(2050, 1, 1),
+            from_=datetime(2000, 2, 2),
+            to=datetime(2022, 2, 2),
             state=OperationState.OPERATION_STATE_EXECUTED,
             figi=figi,
         )
