@@ -12,6 +12,7 @@ nav:
   - 'Главная': 'README.md'
   - 'API Reference':
     - Clients: api/clients.md
+  - 'Примеры': 'examples.md'
   - 'Список изменений': 'CHANGELOG.md'
   - 'Участие в проекте': 'CONTRIBUTING.md'
 
@@ -23,6 +24,7 @@ theme:
     accent: yellow
 
 plugins:
+- include-markdown
 - termynal: {}
 - search:
     lang: ru
