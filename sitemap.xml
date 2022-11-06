@@ -16,6 +16,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://tinkoff.github.io/invest-python/examples/</loc>
+         <lastmod>2022-11-06</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://tinkoff.github.io/invest-python/api/clients/</loc>
          <lastmod>2022-11-06</lastmod>
          <changefreq>daily</changefreq>
