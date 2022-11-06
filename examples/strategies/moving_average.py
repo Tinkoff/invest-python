@@ -3,8 +3,13 @@ import os
 from datetime import timedelta
 from decimal import Decimal
 
+from matplotlib import pyplot as plt
+
 from tinkoff.invest import CandleInterval, Client
 from tinkoff.invest.strategies.base.account_manager import AccountManager
+from tinkoff.invest.strategies.moving_average.plotter import (
+    MovingAverageStrategyPlotter,
+)
 from tinkoff.invest.strategies.moving_average.signal_executor import (
     MovingAverageSignalExecutor,
 )
@@ -14,6 +19,9 @@ from tinkoff.invest.strategies.moving_average.strategy_settings import (
 )
 from tinkoff.invest.strategies.moving_average.strategy_state import (
     MovingAverageStrategyState,
+)
+from tinkoff.invest.strategies.moving_average.supervisor import (
+    MovingAverageStrategySupervisor,
 )
 from tinkoff.invest.strategies.moving_average.trader import MovingAverageStrategyTrader
 
@@ -50,6 +58,7 @@ def main():
             state=state,
             settings=settings,
         )
+        supervisor = MovingAverageStrategySupervisor()
         trader = MovingAverageStrategyTrader(
             strategy=strategy,
             settings=settings,
@@ -57,7 +66,9 @@ def main():
             state=state,
             signal_executor=signal_executor,
             account_manager=account_manager,
+            supervisor=supervisor,
         )
+        plotter = MovingAverageStrategyPlotter(settings=settings)
 
         initial_balance = account_manager.get_current_balance()
 
@@ -69,4 +80,7 @@ def main():
 
         logger.info("Initial balance %s", initial_balance)
         logger.info("Current balance %s", current_balance)
-        strategy.plot()
+
+        events = supervisor.get_events()
+        plotter.plot(events)
+        plt.show()
