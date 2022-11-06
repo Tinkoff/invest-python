@@ -30,7 +30,7 @@ jobs:
         env:
           INVEST_SANDBOX_TOKEN: ${{ secrets.INVEST_SANDBOX_TOKEN }}
 
- build-windows:
+  build-windows:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v2
