@@ -8,27 +8,27 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-ubuntu:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Install poetry
-        run: pip install poetry==1.1.15
-
-      - name: Install python dependencies
-        run: make install
-
-      - name: Gitlint
-        run: make git-lint
-
-      - name: Run linters
-        run: make lint
-
-      - name: Run test
-        run: make test
-        env:
-          INVEST_SANDBOX_TOKEN: ${{ secrets.INVEST_SANDBOX_TOKEN }}
+#  build-ubuntu:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v2
+#
+#      - name: Install poetry
+#        run: pip install poetry==1.1.15
+#
+#      - name: Install python dependencies
+#        run: make install
+#
+#      - name: Gitlint
+#        run: make git-lint
+#
+#      - name: Run linters
+#        run: make lint
+#
+#      - name: Run test
+#        run: make test
+#        env:
+#          INVEST_SANDBOX_TOKEN: ${{ secrets.INVEST_SANDBOX_TOKEN }}
 
   build-windows:
     runs-on: windows-latest
@@ -42,6 +42,6 @@ jobs:
         run: poetry install -E all
 
       - name: Run test
-        run: python -m pytest --cov
+        run: poetry run pytest --cov
         env:
           INVEST_SANDBOX_TOKEN: ${{ secrets.INVEST_SANDBOX_TOKEN }}
