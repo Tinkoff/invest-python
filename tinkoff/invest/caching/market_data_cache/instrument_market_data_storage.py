@@ -45,13 +45,16 @@ class InstrumentMarketDataStorage(
             instrument_dir=instrument_dir, interval=interval
         )
 
+    @staticmethod
+    def _datetime_to_safe_filename(dt: datetime) -> str:
+        return str(int(dt.timestamp()))
+
     def _get_file_path(self, date_range: Tuple[datetime, datetime]) -> Path:
         start, end = date_range
-        start.strftime("%s")
         filepath = self._get_base_file_path(figi=self._figi, interval=self._interval)
-        filepath = filepath.parent / (
-            filepath.name + f'-{start.strftime("%s")}-{end.strftime("%s")}'
-        )
+        start_str = self._datetime_to_safe_filename(start)
+        end_str = self._datetime_to_safe_filename(end)
+        filepath = filepath.parent / (filepath.name + f"-{start_str}-{end_str}")
         return filepath.with_suffix(f".{self._settings.format_extension}")
 
     def _get_metafile(self, file: Path) -> Path:
