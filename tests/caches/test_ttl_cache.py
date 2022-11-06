@@ -1,7 +1,7 @@
 from datetime import timedelta
 
 from cachetools import TTLCache as StandardTTLCache
-from freezegun import freeze_time
+from pytest_freezegun import freeze_time
 
 from tinkoff.invest.caching.overrides import TTLCache as OverridenTTLCache
 
