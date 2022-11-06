@@ -15,6 +15,12 @@ EXCLUDE_CODE = tinkoff/invest/grpc
 test:
 	$(TEST) --cov
 
+
+.PHONY: test-sandbox
+test-sandbox:
+	$(TEST) --test-sandbox --cov
+
+
 .PHONY: lint
 lint:
 	$(POETRY_RUN) flake8 --jobs 1 --statistics --show-source $(CODE)
