@@ -42,6 +42,6 @@ jobs:
         run: poetry install -E all
 
       - name: Run test
-        run: pytest --cov --verbosity=2 --showlocals --strict-markers --log-level=DEBUG
+        run: python -m pytest --cov
         env:
           INVEST_SANDBOX_TOKEN: ${{ secrets.INVEST_SANDBOX_TOKEN }}
