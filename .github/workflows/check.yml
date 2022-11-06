@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  build-ubuntu:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -27,5 +27,21 @@ jobs:
 
       - name: Run test
         run: make test
+        env:
+          INVEST_SANDBOX_TOKEN: ${{ secrets.INVEST_SANDBOX_TOKEN }}
+
+ build-windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install poetry
+        run: pip install poetry==1.1.15
+
+      - name: Install python dependencies
+        run: poetry install -E all
+
+      - name: Run test
+        run: pytest --cov --verbosity=2 --showlocals --strict-markers --log-level=DEBUG
         env:
           INVEST_SANDBOX_TOKEN: ${{ secrets.INVEST_SANDBOX_TOKEN }}
