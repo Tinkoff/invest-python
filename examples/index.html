@@ -75,6 +75,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#_1" class="md-skip">
+          Перейти к содержанию
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -283,11 +288,28 @@
       <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
       
       
+        
+      
       
       <a href="./" class="md-nav__link md-nav__link--active">
         Примеры
       </a>
       
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../robots/" class="md-nav__link">
+        Готовые роботы
+      </a>
     </li>
   
 
@@ -339,6 +361,8 @@
   
   
   
+    
+  
   
 </nav>
                   </div>
@@ -358,9 +382,8 @@
   </a>
 
 
-  <h1>Примеры</h1>
-
 <p>Больше примеров доступно <a href="https://github.com/Tinkoff/invest-python/tree/main/examples">здесь</a>.</p>
+<h1 id="_1">Получение и вывод в консоль свечей с часовым интервалом за год</h1>
 <p><a href="https://github.com/Tinkoff/invest-python/blob/main/examples/all_candles.py">examples/all_candles.py</a>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">timedelta</span>
@@ -385,8 +408,9 @@
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
     <span class="n">main</span><span class="p">()</span>
-</code></pre></div>
-<a href="https://github.com/Tinkoff/invest-python/blob/main/examples/async_all_candles.py">examples/async_all_candles.py</a>
+</code></pre></div></p>
+<h1 id="_2">Асинхронная функция получения и вывода в консоль свечей с часовым интервалом за год</h1>
+<p><a href="https://github.com/Tinkoff/invest-python/blob/main/examples/async_all_candles.py">examples/async_all_candles.py</a>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">asyncio</span>
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">timedelta</span>
@@ -409,8 +433,9 @@
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
     <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
-</code></pre></div>
-<a href="https://github.com/Tinkoff/invest-python/blob/main/examples/async_client.py">examples/async_client.py</a>
+</code></pre></div></p>
+<h1 id="_3">Асинхронная функция получения и вывода счетов пользователя</h1>
+<p><a href="https://github.com/Tinkoff/invest-python/blob/main/examples/async_client.py">examples/async_client.py</a>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">asyncio</span>
 <span class="kn">import</span> <span class="nn">os</span>
 
@@ -426,8 +451,9 @@
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
     <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
-</code></pre></div>
-<a href="https://github.com/Tinkoff/invest-python/blob/main/examples/async_retrying_client.py">examples/async_retrying_client.py</a>
+</code></pre></div></p>
+<h1 id="_4">Асинхронная функция получения и вывода минутных свечей</h1>
+<p><a href="https://github.com/Tinkoff/invest-python/blob/main/examples/async_retrying_client.py">examples/async_retrying_client.py</a>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">asyncio</span>
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">import</span> <span class="nn">os</span>
@@ -458,8 +484,9 @@
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
     <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
-</code></pre></div>
-<a href="https://github.com/Tinkoff/invest-python/blob/main/examples/async_stream_client.py">examples/async_stream_client.py</a>
+</code></pre></div></p>
+<h1 id="_5">Подписка на стрим котировок по минутным свечам и вывод получаемых свечей в консоль</h1>
+<p><a href="https://github.com/Tinkoff/invest-python/blob/main/examples/async_stream_client.py">examples/async_stream_client.py</a>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">asyncio</span>
 <span class="kn">import</span> <span class="nn">os</span>
 
@@ -500,8 +527,9 @@
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
     <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
-</code></pre></div>
-<a href="https://github.com/Tinkoff/invest-python/blob/main/examples/cancel_orders.py">examples/cancel_orders.py</a>
+</code></pre></div></p>
+<h1 id="_6">Отмена всех выставленных поручений</h1>
+<p><a href="https://github.com/Tinkoff/invest-python/blob/main/examples/cancel_orders.py">examples/cancel_orders.py</a>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">import</span> <span class="nn">os</span>
 
@@ -525,8 +553,9 @@
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
     <span class="n">main</span><span class="p">()</span>
-</code></pre></div>
-<a href="https://github.com/Tinkoff/invest-python/blob/main/examples/client.py">examples/client.py</a>
+</code></pre></div></p>
+<h1 id="_7">Функция получения и вывода счетов клиента</h1>
+<p><a href="https://github.com/Tinkoff/invest-python/blob/main/examples/client.py">examples/client.py</a>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">os</span>
 
 <span class="kn">from</span> <span class="nn">tinkoff.invest</span> <span class="kn">import</span> <span class="n">Client</span>
@@ -541,8 +570,9 @@
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
     <span class="n">main</span><span class="p">()</span>
-</code></pre></div>
-<a href="https://github.com/Tinkoff/invest-python/blob/main/examples/download_all_candles.py">examples/download_all_candles.py</a>
+</code></pre></div></p>
+<h1 id="_8">Загрузка и вывод всех минутных свечей по интрументу</h1>
+<p><a href="https://github.com/Tinkoff/invest-python/blob/main/examples/download_all_candles.py">examples/download_all_candles.py</a>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">timedelta</span>
@@ -575,8 +605,9 @@
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
     <span class="n">main</span><span class="p">()</span>
-</code></pre></div>
-<a href="https://github.com/Tinkoff/invest-python/blob/main/examples/easy_async_stream_client.py">examples/easy_async_stream_client.py</a>
+</code></pre></div></p>
+<h1 id="_9">Асинхронная подписка на стрим минутных свечей</h1>
+<p><a href="https://github.com/Tinkoff/invest-python/blob/main/examples/easy_async_stream_client.py">examples/easy_async_stream_client.py</a>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">asyncio</span>
 <span class="kn">import</span> <span class="nn">os</span>
 
@@ -613,8 +644,9 @@
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
     <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
-</code></pre></div>
-<a href="https://github.com/Tinkoff/invest-python/blob/main/examples/easy_stream_client.py">examples/easy_stream_client.py</a>
+</code></pre></div></p>
+<h1 id="_10">Простая подписка на стрим минутных свечей</h1>
+<p><a href="https://github.com/Tinkoff/invest-python/blob/main/examples/easy_stream_client.py">examples/easy_stream_client.py</a>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">os</span>
 
 <span class="kn">from</span> <span class="nn">tinkoff.invest</span> <span class="kn">import</span> <span class="p">(</span>
@@ -648,8 +680,9 @@
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
     <span class="n">main</span><span class="p">()</span>
-</code></pre></div>
-<a href="https://github.com/Tinkoff/invest-python/blob/main/examples/get_operations_by_cursor.py">examples/get_operations_by_cursor.py</a>
+</code></pre></div></p>
+<h1 id="_11">Получение списка операций и их постраничный вывод</h1>
+<p><a href="https://github.com/Tinkoff/invest-python/blob/main/examples/get_operations_by_cursor.py">examples/get_operations_by_cursor.py</a>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">os</span>
 
 <span class="kn">from</span> <span class="nn">tinkoff.invest</span> <span class="kn">import</span> <span class="n">Client</span><span class="p">,</span> <span class="n">GetOperationsByCursorRequest</span>
@@ -675,8 +708,9 @@
         <span class="n">request</span> <span class="o">=</span> <span class="n">get_request</span><span class="p">(</span><span class="n">cursor</span><span class="o">=</span><span class="n">operations</span><span class="o">.</span><span class="n">next_cursor</span><span class="p">)</span>
         <span class="n">operations</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">operations</span><span class="o">.</span><span class="n">get_operations_by_cursor</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">operations</span><span class="p">)</span>
-</code></pre></div>
-<a href="https://github.com/Tinkoff/invest-python/blob/main/examples/instrument_cache.py">examples/instrument_cache.py</a>
+</code></pre></div></p>
+<h1 id="_12">Функция кэширования инструментов</h1>
+<p><a href="https://github.com/Tinkoff/invest-python/blob/main/examples/instrument_cache.py">examples/instrument_cache.py</a>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
@@ -721,8 +755,9 @@
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
     <span class="n">main</span><span class="p">()</span>
-</code></pre></div>
-<a href="https://github.com/Tinkoff/invest-python/blob/main/examples/instruments.py">examples/instruments.py</a>
+</code></pre></div></p>
+<h1 id="query">Функция получения списка инструментов подходящих под строку query</h1>
+<p><a href="https://github.com/Tinkoff/invest-python/blob/main/examples/instruments.py">examples/instruments.py</a>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">os</span>
 
 <span class="kn">from</span> <span class="nn">tinkoff.invest</span> <span class="kn">import</span> <span class="n">Client</span>
@@ -739,8 +774,9 @@
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
     <span class="n">main</span><span class="p">()</span>
-</code></pre></div>
-<a href="https://github.com/Tinkoff/invest-python/blob/main/examples/logger.py">examples/logger.py</a>
+</code></pre></div></p>
+<h1 id="_13">Функция логгирования ошибок</h1>
+<p><a href="https://github.com/Tinkoff/invest-python/blob/main/examples/logger.py">examples/logger.py</a>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">import</span> <span class="nn">os</span>
 
@@ -764,8 +800,9 @@
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
     <span class="n">main</span><span class="p">()</span>
-</code></pre></div>
-<a href="https://github.com/Tinkoff/invest-python/blob/main/examples/porfolio_stream_client.py">examples/porfolio_stream_client.py</a>
+</code></pre></div></p>
+<h1 id="_14">Подписка на стрим портфолио и вывод информации</h1>
+<p><a href="https://github.com/Tinkoff/invest-python/blob/main/examples/porfolio_stream_client.py">examples/porfolio_stream_client.py</a>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">os</span>
 
 <span class="kn">from</span> <span class="nn">tinkoff.invest</span> <span class="kn">import</span> <span class="n">Client</span>
@@ -784,8 +821,9 @@
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
     <span class="n">main</span><span class="p">()</span>
-</code></pre></div>
-<a href="https://github.com/Tinkoff/invest-python/blob/main/examples/positions_stream.py">examples/positions_stream.py</a>
+</code></pre></div></p>
+<h1 id="_15">Подписка на стрим позиций и вывод информации</h1>
+<p><a href="https://github.com/Tinkoff/invest-python/blob/main/examples/positions_stream.py">examples/positions_stream.py</a>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">os</span>
 
 <span class="kn">from</span> <span class="nn">tinkoff.invest</span> <span class="kn">import</span> <span class="n">Client</span>
@@ -803,8 +841,9 @@
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
     <span class="n">main</span><span class="p">()</span>
-</code></pre></div>
-<a href="https://github.com/Tinkoff/invest-python/blob/main/examples/retrying_client.py">examples/retrying_client.py</a>
+</code></pre></div></p>
+<h1 id="_16">Функция получения и вывода минутных свечей</h1>
+<p><a href="https://github.com/Tinkoff/invest-python/blob/main/examples/retrying_client.py">examples/retrying_client.py</a>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">timedelta</span>
@@ -827,8 +866,9 @@
         <span class="n">interval</span><span class="o">=</span><span class="n">CandleInterval</span><span class="o">.</span><span class="n">CANDLE_INTERVAL_1_MIN</span><span class="p">,</span>
     <span class="p">):</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">candle</span><span class="p">)</span>
-</code></pre></div>
-<a href="https://github.com/Tinkoff/invest-python/blob/main/examples/sandbox_client.py">examples/sandbox_client.py</a>
+</code></pre></div></p>
+<h1 id="_17">Получение и вывод информации об аккаунте пользователя в песочнице</h1>
+<p><a href="https://github.com/Tinkoff/invest-python/blob/main/examples/sandbox_client.py">examples/sandbox_client.py</a>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">os</span>
 
 <span class="kn">from</span> <span class="nn">tinkoff.invest.sandbox.client</span> <span class="kn">import</span> <span class="n">SandboxClient</span>
@@ -843,8 +883,9 @@
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
     <span class="n">main</span><span class="p">()</span>
-</code></pre></div>
-<a href="https://github.com/Tinkoff/invest-python/blob/main/examples/stream_client.py">examples/stream_client.py</a>
+</code></pre></div></p>
+<h1 id="_18">Подписка на стрим минутных свечей и их вывод</h1>
+<p><a href="https://github.com/Tinkoff/invest-python/blob/main/examples/stream_client.py">examples/stream_client.py</a>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">time</span>
 
@@ -923,13 +964,13 @@
       
       
         
-        <a href="../CHANGELOG/" class="md-footer__link md-footer__link--next" aria-label="Вперед: Список изменений" rel="next">
+        <a href="../robots/" class="md-footer__link md-footer__link--next" aria-label="Вперед: Готовые роботы" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Вперед
               </span>
-              Список изменений
+              Готовые роботы
             </div>
           </div>
           <div class="md-footer__button md-icon">
