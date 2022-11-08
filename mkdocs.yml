@@ -13,7 +13,7 @@ nav:
   - 'API Reference':
     - Clients: api/clients.md
   - 'Примеры': 'examples.md'
-  - 'Готовые роботы': 'robots.md'
+  - 'Готовые работы': 'robots.md'
   - 'Список изменений': 'CHANGELOG.md'
   - 'Участие в проекте': 'CONTRIBUTING.md'
 
