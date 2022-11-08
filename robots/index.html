@@ -17,7 +17,7 @@
     
     
       
-        <title>Готовые роботы - Tinkoff Invest</title>
+        <title>Готовые работы - Tinkoff Invest</title>
       
     
     
@@ -109,7 +109,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Готовые роботы
+              Готовые работы
             
           </span>
         </div>
@@ -303,12 +303,46 @@
       <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
       
       
-        
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Готовые работы
+          <span class="md-nav__icon md-icon"></span>
+        </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
-        Готовые роботы
+        Готовые работы
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Содержание раздела">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Содержание раздела
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    Примеры готовых роботов
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    Готовые стратегии
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -361,8 +395,28 @@
   
   
   
-    
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Содержание раздела
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    Примеры готовых роботов
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    Готовые стратегии
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -382,7 +436,9 @@
   </a>
 
 
-<h1 id="_1">Примеры готовых роботов</h1>
+  <h1>Готовые работы</h1>
+
+<h2 id="_1">Примеры готовых роботов</h2>
 <table>
 <thead>
 <tr>
@@ -392,24 +448,24 @@
 </thead>
 <tbody>
 <tr>
-<td>https://github.com/tromario/tinkoff-invest-volume-analysis-robot</td>
+<td><a href="https://github.com/tromario/tinkoff-invest-volume-analysis-robot">tromario/tinkoff-invest-volume-analysis-robot</a></td>
 <td>Проектом был реализован один из методов работы с профилем рынка - реакция на максимальный горизонтальный объем внутри дня за выбранный период.Основной объем работы был заложен в математический аппарат. Работа имеет визуализацию алгоритма.</td>
 </tr>
 <tr>
-<td>https://github.com/qwertyo1/tinkoff-trading-bot</td>
+<td><a href="https://github.com/tromario/tinkoff-invest-volume-analysis-robot">qwertyo1/tinkoff-trading-bot</a></td>
 <td>Проектом реализована простая интервальная стратегия. Несложный код поможет начинающим разработчикам быстро разобраться, запустить, проверить и доработать торговую стратегию под свои цели. Простое ведение статистики через sqllite.</td>
 </tr>
 <tr>
-<td>https://github.com/karpp/investRobot</td>
+<td><a href="https://github.com/karpp/investRobot">karpp/investRobot</a></td>
 <td>investRobot - это робот для алгоритмической торговли на бирже Тинькофф Инвестиций посредством Tinkoff Invest API. В качестве демонстрации представлена одна торговая стратегия, основанная на индикаторе двух скользящих средних.</td>
 </tr>
 <tr>
-<td>https://github.com/EIDiamond/invest-bot</td>
+<td><a href="https://github.com/EIDiamond/invest-bot">EIDiamond/invest-bot</a></td>
 <td>Робот интрадей торговли на Московской бирже с возможность информирования о сделках и результатах торговли в Telegram чат.Удобное решение опционального включения\выключения информирования в Телеграм. Без подключения Телеграм чата все события и результаты пишутся в лог файл.</td>
 </tr>
 </tbody>
 </table>
-<h1 id="_2">Готовые стратегии</h1>
+<h2 id="_2">Готовые стратегии</h2>
 <p>Функция создает дополнительный столбец с действиями ("ma200_support_action"), куда записываются сигналы на шорт или лонг по условиям.
 Затем данные агрегируются и выводятся в виде списка акций, по которым пришли сигналы, в порядке убывания даты сигнала.
 <div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">logging</span>
