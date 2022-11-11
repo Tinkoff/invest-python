@@ -239,7 +239,7 @@ class MovingAverageStrategy(InvestStrategy):
             or PRICE > MA_LONG + 3 * STD
         )
 
-    def predict(self) -> Iterable[Signal]:  # noqa: C901
+    def predict(self) -> Iterable[Signal]:
         logger.info("Strategy predict")
         self._init_MA_LONG_START()
         MA_LONG_START = self._MA_LONG_START

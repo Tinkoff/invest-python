@@ -71,6 +71,7 @@ pytest-freezegun = "^0.4.2"
 pytest-mock = "^3.6.1"
 PyYAML = "^6.0"
 requests = "^2.27.1"
+ruff = "^0.0.111"
 termynal = "^0.2.0"
 toml-sort = "^0.19.0"
 types-cachetools = "^5.2.1"
@@ -81,3 +82,34 @@ types-requests = "^2.27.7"
 
 [tool.poetry.extras]
 all = ["pandas", "numpy", "matplotlib", "mplfinance"]
+
+[tool.ruff]
+line-length = 88
+select = [
+    "D",
+    "B",
+    "C",
+    "E",
+    "F",
+    "Q",
+    "RUF001",
+    "T",
+    "W",
+]
+ignore = [
+    "D100",
+    "D101",
+    "D102",
+    "D103",
+    "D104",
+    "D105",
+    "D106",
+    "D107",
+    "D203",
+    "D213",
+    "B008",
+]
+exclude = [
+    "tinkoff/invest/grpc",
+    "examples",
+]
