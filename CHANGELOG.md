@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [0.2.0-beta41](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta41) - 2022-11-16
+
+<small>[Compare with 0.2.0-beta40](https://github.com/tinkoff/invest-python/compare/0.2.0-beta40...0.2.0-beta41)</small>
+
+### Bug Fixes
+- Fix initializing an empty message #99 (#147) ([b90152b](https://github.com/tinkoff/invest-python/commit/b90152b6505b220cd246cc3729052864005f336f) by Danil Akhtarov).
+- Test only if needed (#142) ([e64aeeb](https://github.com/tinkoff/invest-python/commit/e64aeeb64c42678c13190e9e8eeae47346150537) by Ruslan Sirazhetdinov).
+- Rm strftime (#133) ([b1b6b96](https://github.com/tinkoff/invest-python/commit/b1b6b9651fdc9cfedc678370c77a2dca48732460) by Ruslan Sirazhetdinov).
+- Skip if no trades on the exchange (#131) ([821a2c9](https://github.com/tinkoff/invest-python/commit/821a2c997fdc7230b89f721d13cfd299ba9bf90b) by Ruslan Sirazhetdinov).
+
+
 ## [0.2.0-beta40](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta40) - 2022-10-25
 
 <small>[Compare with 0.2.0-beta39](https://github.com/tinkoff/invest-python/compare/0.2.0-beta39...0.2.0-beta40)</small>
