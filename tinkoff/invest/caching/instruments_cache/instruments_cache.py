@@ -1,8 +1,6 @@
 import logging
 from typing import cast
 
-from cachetools import TTLCache
-
 from tinkoff.invest import (
     Bond,
     BondResponse,
@@ -34,6 +32,7 @@ from tinkoff.invest.caching.instruments_cache.protocol import (
     InstrumentsResponseCallable,
 )
 from tinkoff.invest.caching.instruments_cache.settings import InstrumentsCacheSettings
+from tinkoff.invest.caching.overrides import TTLCache
 from tinkoff.invest.services import InstrumentsService
 
 logger = logging.getLogger(__name__)

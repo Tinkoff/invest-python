@@ -6,7 +6,7 @@ PACKAGE_PROTO_DIR = tinkoff/invest/grpc
 OUT = .
 PROTOS = protos
 
-TEST = $(POETRY_RUN) pytest $(args) --verbosity=2 --showlocals --strict-markers --log-level=DEBUG
+TEST = $(POETRY_RUN) pytest $(args)
 MAIN_CODE = tinkoff examples scripts
 CODE = tests $(MAIN_CODE)
 EXCLUDE_CODE = tinkoff/invest/grpc

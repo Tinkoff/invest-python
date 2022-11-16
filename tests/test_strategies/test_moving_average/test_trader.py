@@ -3,6 +3,7 @@ from datetime import timedelta
 from decimal import Decimal
 from typing import Dict
 
+import matplotlib.pyplot as plt
 import pytest
 
 from tinkoff.invest import (
@@ -129,3 +130,6 @@ class TestMovingAverageStrategyTrader:
 
         events = supervisor.get_events()
         plotter.plot(events)
+        plt.show(block=False)
+        plt.pause(1)
+        plt.close()

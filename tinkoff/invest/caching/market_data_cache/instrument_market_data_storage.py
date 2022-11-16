@@ -209,8 +209,8 @@ class InstrumentMarketDataStorage(
                     ):
                         writer.writerow(candle_dict)
 
-                    file1.unlink()
-                    file2.unlink()
+        file1.unlink()
+        file2.unlink()
         return new_range, new_file
 
     def _get_distinct_product(self, cached_range_in_file) -> Iterable[Tuple]:

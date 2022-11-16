@@ -1,11 +1,11 @@
 import random
-import time
 import uuid
 from datetime import timedelta
 from typing import Any, Callable, Dict, Iterator, Type
 from unittest.mock import Mock
 
 import pytest
+from pytest_freezegun import freeze_time
 
 from tinkoff.invest import (
     Bond,
@@ -153,8 +153,14 @@ def settings() -> InstrumentsCacheSettings:
 
 
 @pytest.fixture()
+def frozen_datetime():
+    with freeze_time() as frozen_datetime:
+        yield frozen_datetime
+
+
+@pytest.fixture()
 def instruments_cache(
-    settings: InstrumentsCacheSettings, mocked_services
+    settings: InstrumentsCacheSettings, mocked_services, frozen_datetime
 ) -> InstrumentsCache:
     return InstrumentsCache(
         settings=settings, instruments_service=mocked_services.instruments
@@ -251,13 +257,14 @@ class TestInstrumentCache:
         get_instrument_of_type_by,
         id_type: InstrumentIdType,
         get_id: Callable[[Any], str],
+        frozen_datetime,
     ):
         get_instruments = get_instruments_of_type(mocked_services.instruments)
         get_instrument_by_cached = get_instrument_of_type_by(instruments_cache)
         get_instruments.assert_called_once()
         (inst,) = random.sample(get_instruments().instruments, k=1)
         get_instruments.reset_mock()
-        time.sleep(0.1)
+        frozen_datetime.tick(timedelta(seconds=10))
 
         _ = get_instrument_by_cached(
             id_type=id_type,

@@ -58,6 +58,5 @@ class StrategyPlotter(abc.ABC, IPlotter):
         mpf.plot(**candle_plot_kwargs, warn_too_much_data=999999999)
 
         clear_output(wait=True)
-        plt.show()
         _fig.canvas.draw()
         _fig.canvas.flush_events()

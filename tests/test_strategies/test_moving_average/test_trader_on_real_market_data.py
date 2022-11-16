@@ -5,6 +5,7 @@ from decimal import Decimal
 from typing import Dict, Iterable, List
 
 import pytest
+from matplotlib import pyplot as plt
 
 from tinkoff.invest import (
     Candle,
@@ -256,10 +257,13 @@ class TestMovingAverageStrategyTraderRealMarketData:
             logger.info("Trade %s", i)
             moving_average_strategy_trader.trade()
 
-        events = supervisor.get_events()
-        plotter.plot(events)
-
         current_balance = account_manager.get_current_balance()
         assert initial_balance != current_balance
         logger.info("Initial balance %s", initial_balance)
         logger.info("Current balance %s", current_balance)
+
+        events = supervisor.get_events()
+        plotter.plot(events)
+        plt.show(block=False)
+        plt.pause(1)
+        plt.close()

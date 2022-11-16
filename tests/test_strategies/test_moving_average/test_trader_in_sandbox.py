@@ -4,6 +4,7 @@ from datetime import timedelta
 from decimal import Decimal
 from typing import Iterator
 
+import matplotlib.pyplot as plt
 import pytest
 
 from tinkoff.invest import (
@@ -201,10 +202,13 @@ class TestMovingAverageStrategyTraderInSandbox:
         except MarketDataNotAvailableError:
             pass
 
-        events = supervisor.get_events()
-        plotter.plot(events)
-
         current_balance = account_manager.get_current_balance()
         assert initial_balance != current_balance
         logger.info("Initial balance %s", initial_balance)
         logger.info("Current balance %s", current_balance)
+
+        events = supervisor.get_events()
+        plotter.plot(events)
+        plt.show(block=False)
+        plt.pause(1)
+        plt.close()
