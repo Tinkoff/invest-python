@@ -160,7 +160,6 @@ class MovingAverageStrategyTrader(Trader):
 
     def trade(self) -> None:
         """Делает попытку следовать стратегии."""
-
         logger.info("Balance: %s", self._account_manager.get_current_balance())
         self._refresh_data()
 

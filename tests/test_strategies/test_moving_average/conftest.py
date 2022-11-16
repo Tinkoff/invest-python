@@ -57,7 +57,8 @@ seed(1338)
 
 
 def create_noise(s0, mu, sigma) -> Callable[[int], Iterable[float]]:
-    """
+    """Create Noise.
+
     Generates a price following a geometric brownian motion process based on the input.
     - s0: Asset initial price.
     - mu: Interest rate expressed annual terms.

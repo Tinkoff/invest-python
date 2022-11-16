@@ -68,9 +68,7 @@ class InstrumentsCache(IInstrumentsGetter):
         self._assert_cache()
 
     def _assert_cache(self):
-        if self._cache.keys() != set(  # noqa: C417
-            map(lambda f: f.__name__, self._instruments_methods)
-        ):
+        if self._cache.keys() != {f.__name__ for f in self._instruments_methods}:
             raise KeyError(f"Cache does not have all instrument types {self._cache}")
 
     def _get_instrument_storage(
@@ -91,7 +89,7 @@ class InstrumentsCache(IInstrumentsGetter):
         )
         storage = InstrumentStorage(instruments_response=instruments_response)
         self._cache[storage_key] = storage
-        return storage  # noqa: R504
+        return storage  # noqa:R504
 
     def shares(
         self, *, instrument_status: InstrumentStatus = InstrumentStatus(0)

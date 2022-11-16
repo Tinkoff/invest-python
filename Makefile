@@ -15,8 +15,15 @@ EXCLUDE_CODE = tinkoff/invest/grpc
 test:
 	$(TEST) --cov
 
+
+.PHONY: test-sandbox
+test-sandbox:
+	$(TEST) --test-sandbox --cov
+
+
 .PHONY: lint
 lint:
+	$(POETRY_RUN) ruff $(CODE)
 	$(POETRY_RUN) flake8 --jobs 1 --statistics --show-source $(CODE)
 	$(POETRY_RUN) pylint --jobs 1 --rcfile=setup.cfg $(CODE)
 	$(POETRY_RUN) bandit -r $(MAIN_CODE)
@@ -28,6 +35,7 @@ lint:
 
 .PHONY: format
 format:
+	$(POETRY_RUN) ruff --fix $(CODE)
 	$(POETRY_RUN) autoflake --recursive --in-place --remove-all-unused-imports --exclude=$(EXCLUDE_CODE) $(CODE)
 	$(POETRY_RUN) isort $(CODE)
 	$(POETRY_RUN) black --line-length=88 --exclude=$(EXCLUDE_CODE) $(CODE)

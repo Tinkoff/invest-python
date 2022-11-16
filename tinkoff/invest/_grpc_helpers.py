@@ -16,8 +16,8 @@ from typing import (
     get_type_hints,
 )
 
-from google.protobuf import symbol_database  # noqa:I900
-from google.protobuf.timestamp_pb2 import Timestamp  # noqa:I90
+from google.protobuf import symbol_database
+from google.protobuf.timestamp_pb2 import Timestamp
 
 _sym_db = symbol_database.Default()
 
@@ -92,7 +92,7 @@ def dataclass_field(
 ) -> dataclasses.Field:
     """Creates a dataclass field with attached protobuf metadata."""
     return dataclasses.field(
-        default=None if optional else PLACEHOLDER,  # type:ignore # noqa:IF100
+        default=None if optional else PLACEHOLDER,  # type:ignore
         metadata={
             "proto": FieldMetadata(
                 number, proto_type, map_types, group, wraps, optional

@@ -12,7 +12,8 @@ __all__ = ("Client", "AsyncClient")
 
 
 class Client:
-    """
+    """Sync client.
+
     ```python
     import os
     from tinkoff.invest import Client
@@ -62,7 +63,8 @@ class Client:
 
 
 class AsyncClient:
-    """
+    """Async client.
+
     ```python
     import asyncio
     import os
