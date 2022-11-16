@@ -343,6 +343,9 @@ def protobuf_to_dataclass(pb_obj: Any, dataclass_type: Type[T]) -> T:  # noqa:C9
 def dataclass_to_protobuff(dataclass_obj: Any, protobuff_obj: T) -> T:  # noqa:C901
     dataclass_type = type(dataclass_obj)
     dataclass_hints = get_type_hints(dataclass_type)
+    if not dataclass_hints:
+        protobuff_obj.SetInParent()  # type:ignore
+        return protobuff_obj
     for field_name, field_type in dataclass_hints.items():
         field_value = getattr(dataclass_obj, field_name)
         if field_value is PLACEHOLDER:
