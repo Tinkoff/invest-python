@@ -173,6 +173,7 @@ def _ensure_is_market_active(
     pytest.skip("test skipped because market is closed")
 
 
+@pytest.mark.test_sandbox()
 @pytest.mark.skipif(
     os.environ.get("INVEST_SANDBOX_TOKEN") is None,
     reason="INVEST_SANDBOX_TOKEN should be specified",
