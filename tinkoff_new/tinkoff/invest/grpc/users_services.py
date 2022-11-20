@@ -11,7 +11,7 @@ class UsersService:
     списка счетов пользователя; </br> **2**. маржинальных показателей по счёту.
     """
 
-    def __init__(self, channel):
+    def __init__(self, channel, metadata):
         self.get_accounts = channel.unary_unary(
             "/tinkoff.public.invest.api.contract.v1.UsersService/GetAccounts",
             request_serializer=users.GetAccountsRequest.serialize,

@@ -673,7 +673,7 @@ class PkgWriter(object):
         self, service: d.ServiceDescriptorProto, scl_prefix: SourceCodeLocation
     ) -> None:
         l = self._write_line
-        l("def __init__(self, channel):")
+        l("def __init__(self, channel, metadata):")
         with self._indent():
             methods = [(i, m) for i, m in enumerate(service.method)]
             if not methods:

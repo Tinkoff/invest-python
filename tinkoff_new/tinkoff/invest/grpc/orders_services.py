@@ -8,7 +8,7 @@ from tinkoff.invest.grpc import orders
 
 class OrdersStreamService:
 
-    def __init__(self, channel):
+    def __init__(self, channel, metadata):
         self.trades_stream = channel.unary_stream(
             "/tinkoff.public.invest.api.contract.v1.OrdersStreamService/TradesStream",
             request_serializer=orders.TradesStreamRequest.serialize,
@@ -23,7 +23,7 @@ class OrdersService:
     расчёт полной стоимости;</br> **5**. получение списка заявок.
     """
 
-    def __init__(self, channel):
+    def __init__(self, channel, metadata):
         self.post_order = channel.unary_unary(
             "/tinkoff.public.invest.api.contract.v1.OrdersService/PostOrder",
             request_serializer=orders.PostOrderRequest.serialize,

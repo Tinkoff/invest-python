@@ -12,7 +12,7 @@ from tinkoff.invest.grpc import users
 class SandboxService:
     """Сервис для работы с песочницей TINKOFF INVEST API"""
 
-    def __init__(self, channel):
+    def __init__(self, channel, metadata):
         self.open_sandbox_account = channel.unary_unary(
             "/tinkoff.public.invest.api.contract.v1.SandboxService/OpenSandboxAccount",
             request_serializer=sandbox.OpenSandboxAccountRequest.serialize,

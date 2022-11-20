@@ -9,7 +9,7 @@ from tinkoff.invest.grpc import marketdata
 class MarketDataService:
     """Сервис получения биржевой информации:</br> **1**. свечи;</br> **2**. стаканы;</br> **3**. торговые статусы;</br> **4**. лента сделок."""
 
-    def __init__(self, channel):
+    def __init__(self, channel, metadata):
         self.get_candles = channel.unary_unary(
             "/tinkoff.public.invest.api.contract.v1.MarketDataService/GetCandles",
             request_serializer=marketdata.GetCandlesRequest.serialize,
@@ -55,7 +55,7 @@ class MarketDataService:
 
 class MarketDataStreamService:
 
-    def __init__(self, channel):
+    def __init__(self, channel, metadata):
         self.market_data_stream = channel.stream_stream(
             "/tinkoff.public.invest.api.contract.v1.MarketDataStreamService/MarketDataStream",
             request_serializer=marketdata.MarketDataRequest.serialize,

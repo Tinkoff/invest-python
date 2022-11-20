@@ -11,7 +11,7 @@ class StopOrdersService:
     выставление;</br> **2**. отмена;</br> **3**. получение списка стоп-заявок.
     """
 
-    def __init__(self, channel):
+    def __init__(self, channel, metadata):
         self.post_stop_order = channel.unary_unary(
             "/tinkoff.public.invest.api.contract.v1.StopOrdersService/PostStopOrder",
             request_serializer=stoporders.PostStopOrderRequest.serialize,
