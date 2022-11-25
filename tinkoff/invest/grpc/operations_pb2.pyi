@@ -511,15 +511,40 @@ class PortfolioRequest(google.protobuf.message.Message):
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
+    class _CurrencyRequest:
+        ValueType = typing.NewType("ValueType", builtins.int)
+        V: typing_extensions.TypeAlias = ValueType
+
+    class _CurrencyRequestEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[PortfolioRequest._CurrencyRequest.ValueType], builtins.type):  # noqa: F821
+        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+        RUB: PortfolioRequest._CurrencyRequest.ValueType  # 0
+        """Рубли"""
+        USD: PortfolioRequest._CurrencyRequest.ValueType  # 1
+        """Доллары"""
+        EUR: PortfolioRequest._CurrencyRequest.ValueType  # 2
+        """Евро"""
+
+    class CurrencyRequest(_CurrencyRequest, metaclass=_CurrencyRequestEnumTypeWrapper): ...
+    RUB: PortfolioRequest.CurrencyRequest.ValueType  # 0
+    """Рубли"""
+    USD: PortfolioRequest.CurrencyRequest.ValueType  # 1
+    """Доллары"""
+    EUR: PortfolioRequest.CurrencyRequest.ValueType  # 2
+    """Евро"""
+
     ACCOUNT_ID_FIELD_NUMBER: builtins.int
+    CURRENCY_FIELD_NUMBER: builtins.int
     account_id: builtins.str
     """Идентификатор счёта пользователя."""
+    currency: global___PortfolioRequest.CurrencyRequest.ValueType
+    """Валюта, в которой требуется рассчитать портфель"""
     def __init__(
         self,
         *,
         account_id: builtins.str = ...,
+        currency: global___PortfolioRequest.CurrencyRequest.ValueType = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["account_id", b"account_id"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["account_id", b"account_id", "currency", b"currency"]) -> None: ...
 
 global___PortfolioRequest = PortfolioRequest
 
@@ -536,6 +561,10 @@ class PortfolioResponse(google.protobuf.message.Message):
     EXPECTED_YIELD_FIELD_NUMBER: builtins.int
     POSITIONS_FIELD_NUMBER: builtins.int
     ACCOUNT_ID_FIELD_NUMBER: builtins.int
+    TOTAL_AMOUNT_OPTIONS_FIELD_NUMBER: builtins.int
+    TOTAL_AMOUNT_SP_FIELD_NUMBER: builtins.int
+    TOTAL_AMOUNT_PORTFOLIO_FIELD_NUMBER: builtins.int
+    VIRTUAL_POSITIONS_FIELD_NUMBER: builtins.int
     @property
     def total_amount_shares(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
         """Общая стоимость акций в портфеле в рублях."""
@@ -559,6 +588,18 @@ class PortfolioResponse(google.protobuf.message.Message):
         """Список позиций портфеля."""
     account_id: builtins.str
     """Идентификатор счёта пользователя."""
+    @property
+    def total_amount_options(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
+        """Общая стоимость фьючерсов в портфеле в рублях."""
+    @property
+    def total_amount_sp(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
+        """Общая стоимость структурных нот в портфеле в рублях"""
+    @property
+    def total_amount_portfolio(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
+        """Общая стоимость портфеля в рублях"""
+    @property
+    def virtual_positions(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___VirtualPortfolioPosition]:
+        """Массив виртуальных позиций портфеля"""
     def __init__(
         self,
         *,
@@ -570,9 +611,13 @@ class PortfolioResponse(google.protobuf.message.Message):
         expected_yield: tinkoff.invest.grpc.common_pb2.Quotation | None = ...,
         positions: collections.abc.Iterable[global___PortfolioPosition] | None = ...,
         account_id: builtins.str = ...,
+        total_amount_options: tinkoff.invest.grpc.common_pb2.MoneyValue | None = ...,
+        total_amount_sp: tinkoff.invest.grpc.common_pb2.MoneyValue | None = ...,
+        total_amount_portfolio: tinkoff.invest.grpc.common_pb2.MoneyValue | None = ...,
+        virtual_positions: collections.abc.Iterable[global___VirtualPortfolioPosition] | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["expected_yield", b"expected_yield", "total_amount_bonds", b"total_amount_bonds", "total_amount_currencies", b"total_amount_currencies", "total_amount_etf", b"total_amount_etf", "total_amount_futures", b"total_amount_futures", "total_amount_shares", b"total_amount_shares"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["account_id", b"account_id", "expected_yield", b"expected_yield", "positions", b"positions", "total_amount_bonds", b"total_amount_bonds", "total_amount_currencies", b"total_amount_currencies", "total_amount_etf", b"total_amount_etf", "total_amount_futures", b"total_amount_futures", "total_amount_shares", b"total_amount_shares"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["expected_yield", b"expected_yield", "total_amount_bonds", b"total_amount_bonds", "total_amount_currencies", b"total_amount_currencies", "total_amount_etf", b"total_amount_etf", "total_amount_futures", b"total_amount_futures", "total_amount_options", b"total_amount_options", "total_amount_portfolio", b"total_amount_portfolio", "total_amount_shares", b"total_amount_shares", "total_amount_sp", b"total_amount_sp"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["account_id", b"account_id", "expected_yield", b"expected_yield", "positions", b"positions", "total_amount_bonds", b"total_amount_bonds", "total_amount_currencies", b"total_amount_currencies", "total_amount_etf", b"total_amount_etf", "total_amount_futures", b"total_amount_futures", "total_amount_options", b"total_amount_options", "total_amount_portfolio", b"total_amount_portfolio", "total_amount_shares", b"total_amount_shares", "total_amount_sp", b"total_amount_sp", "virtual_positions", b"virtual_positions"]) -> None: ...
 
 global___PortfolioResponse = PortfolioResponse
 
@@ -696,6 +741,10 @@ class PortfolioPosition(google.protobuf.message.Message):
     AVERAGE_POSITION_PRICE_FIFO_FIELD_NUMBER: builtins.int
     QUANTITY_LOTS_FIELD_NUMBER: builtins.int
     BLOCKED_FIELD_NUMBER: builtins.int
+    POSITION_UID_FIELD_NUMBER: builtins.int
+    INSTRUMENT_UID_FIELD_NUMBER: builtins.int
+    VAR_MARGIN_FIELD_NUMBER: builtins.int
+    EXPECTED_YIELD_FIFO_FIELD_NUMBER: builtins.int
     figi: builtins.str
     """Figi-идентификатора инструмента."""
     instrument_type: builtins.str
@@ -714,7 +763,7 @@ class PortfolioPosition(google.protobuf.message.Message):
         """Текущий НКД."""
     @property
     def average_position_price_pt(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Средняя цена позиции в пунктах (для фьючерсов). **Возможна задержка до секунды для пересчёта**."""
+        """Deprecated Средняя цена позиции в пунктах (для фьючерсов). **Возможна задержка до секунды для пересчёта**."""
     @property
     def current_price(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
         """Текущая цена за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента.."""
@@ -723,9 +772,19 @@ class PortfolioPosition(google.protobuf.message.Message):
         """Средняя цена позиции по методу FIFO. **Возможна задержка до секунды для пересчёта**."""
     @property
     def quantity_lots(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Количество лотов в портфеле."""
+        """Deprecated Количество лотов в портфеле."""
     blocked: builtins.bool
     """Заблокировано."""
+    position_uid: builtins.str
+    """position_uid-идентификатора инструмента"""
+    instrument_uid: builtins.str
+    """instrument_uid-идентификатора инструмента"""
+    @property
+    def var_margin(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
+        """Вариационная маржа"""
+    @property
+    def expected_yield_fifo(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Текущая рассчитанная доходность позиции."""
     def __init__(
         self,
         *,
@@ -740,11 +799,78 @@ class PortfolioPosition(google.protobuf.message.Message):
         average_position_price_fifo: tinkoff.invest.grpc.common_pb2.MoneyValue | None = ...,
         quantity_lots: tinkoff.invest.grpc.common_pb2.Quotation | None = ...,
         blocked: builtins.bool = ...,
+        position_uid: builtins.str = ...,
+        instrument_uid: builtins.str = ...,
+        var_margin: tinkoff.invest.grpc.common_pb2.MoneyValue | None = ...,
+        expected_yield_fifo: tinkoff.invest.grpc.common_pb2.Quotation | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["average_position_price", b"average_position_price", "average_position_price_fifo", b"average_position_price_fifo", "average_position_price_pt", b"average_position_price_pt", "current_nkd", b"current_nkd", "current_price", b"current_price", "expected_yield", b"expected_yield", "quantity", b"quantity", "quantity_lots", b"quantity_lots"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["average_position_price", b"average_position_price", "average_position_price_fifo", b"average_position_price_fifo", "average_position_price_pt", b"average_position_price_pt", "blocked", b"blocked", "current_nkd", b"current_nkd", "current_price", b"current_price", "expected_yield", b"expected_yield", "figi", b"figi", "instrument_type", b"instrument_type", "quantity", b"quantity", "quantity_lots", b"quantity_lots"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["average_position_price", b"average_position_price", "average_position_price_fifo", b"average_position_price_fifo", "average_position_price_pt", b"average_position_price_pt", "current_nkd", b"current_nkd", "current_price", b"current_price", "expected_yield", b"expected_yield", "expected_yield_fifo", b"expected_yield_fifo", "quantity", b"quantity", "quantity_lots", b"quantity_lots", "var_margin", b"var_margin"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["average_position_price", b"average_position_price", "average_position_price_fifo", b"average_position_price_fifo", "average_position_price_pt", b"average_position_price_pt", "blocked", b"blocked", "current_nkd", b"current_nkd", "current_price", b"current_price", "expected_yield", b"expected_yield", "expected_yield_fifo", b"expected_yield_fifo", "figi", b"figi", "instrument_type", b"instrument_type", "instrument_uid", b"instrument_uid", "position_uid", b"position_uid", "quantity", b"quantity", "quantity_lots", b"quantity_lots", "var_margin", b"var_margin"]) -> None: ...
 
 global___PortfolioPosition = PortfolioPosition
+
+class VirtualPortfolioPosition(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    POSITION_UID_FIELD_NUMBER: builtins.int
+    INSTRUMENT_UID_FIELD_NUMBER: builtins.int
+    FIGI_FIELD_NUMBER: builtins.int
+    INSTRUMENT_TYPE_FIELD_NUMBER: builtins.int
+    QUANTITY_FIELD_NUMBER: builtins.int
+    AVERAGE_POSITION_PRICE_FIELD_NUMBER: builtins.int
+    EXPECTED_YIELD_FIELD_NUMBER: builtins.int
+    EXPECTED_YIELD_FIFO_FIELD_NUMBER: builtins.int
+    EXPIRE_DATE_FIELD_NUMBER: builtins.int
+    CURRENT_PRICE_FIELD_NUMBER: builtins.int
+    AVERAGE_POSITION_PRICE_FIFO_FIELD_NUMBER: builtins.int
+    position_uid: builtins.str
+    """position_uid-идентификатора инструмента"""
+    instrument_uid: builtins.str
+    """instrument_uid-идентификатора инструмента"""
+    figi: builtins.str
+    """Figi-идентификатора инструмента."""
+    instrument_type: builtins.str
+    """Тип инструмента."""
+    @property
+    def quantity(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Количество инструмента в портфеле в штуках."""
+    @property
+    def average_position_price(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
+        """Средневзвешенная цена позиции. **Возможна задержка до секунды для пересчёта**."""
+    @property
+    def expected_yield(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Текущая рассчитанная доходность позиции."""
+    @property
+    def expected_yield_fifo(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Текущая рассчитанная доходность позиции."""
+    @property
+    def expire_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Дата до которой нужно продать виртуальные бумаги, после этой даты виртуальная позиция "сгорит" """
+    @property
+    def current_price(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
+        """Текущая цена за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента.."""
+    @property
+    def average_position_price_fifo(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
+        """Средняя цена позиции по методу FIFO. **Возможна задержка до секунды для пересчёта**."""
+    def __init__(
+        self,
+        *,
+        position_uid: builtins.str = ...,
+        instrument_uid: builtins.str = ...,
+        figi: builtins.str = ...,
+        instrument_type: builtins.str = ...,
+        quantity: tinkoff.invest.grpc.common_pb2.Quotation | None = ...,
+        average_position_price: tinkoff.invest.grpc.common_pb2.MoneyValue | None = ...,
+        expected_yield: tinkoff.invest.grpc.common_pb2.Quotation | None = ...,
+        expected_yield_fifo: tinkoff.invest.grpc.common_pb2.Quotation | None = ...,
+        expire_date: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        current_price: tinkoff.invest.grpc.common_pb2.MoneyValue | None = ...,
+        average_position_price_fifo: tinkoff.invest.grpc.common_pb2.MoneyValue | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["average_position_price", b"average_position_price", "average_position_price_fifo", b"average_position_price_fifo", "current_price", b"current_price", "expected_yield", b"expected_yield", "expected_yield_fifo", b"expected_yield_fifo", "expire_date", b"expire_date", "quantity", b"quantity"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["average_position_price", b"average_position_price", "average_position_price_fifo", b"average_position_price_fifo", "current_price", b"current_price", "expected_yield", b"expected_yield", "expected_yield_fifo", b"expected_yield_fifo", "expire_date", b"expire_date", "figi", b"figi", "instrument_type", b"instrument_type", "instrument_uid", b"instrument_uid", "position_uid", b"position_uid", "quantity", b"quantity"]) -> None: ...
+
+global___VirtualPortfolioPosition = VirtualPortfolioPosition
 
 class PositionsSecurities(google.protobuf.message.Message):
     """Баланс позиции ценной бумаги."""

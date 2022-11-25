@@ -1571,9 +1571,31 @@ class Operation(_grpc_helpers.Message):  # pylint:disable=too-many-instance-attr
     trades: List["OperationTrade"] = _grpc_helpers.message_field(14)
 
 
+class CurrencyRequest(_grpc_helpers.Enum):
+    RUB = 0
+    USD = 1
+    EUR = 2
+
+
 @dataclass(eq=False, repr=True)
 class PortfolioRequest(_grpc_helpers.Message):
     account_id: str = _grpc_helpers.string_field(1)
+    currency: CurrencyRequest = _grpc_helpers.enum_field(2)
+
+
+@dataclass(eq=False, repr=True)
+class VirtualPortfolioPosition(_grpc_helpers.Message):
+    position_uid: str = _grpc_helpers.string_field(1)
+    instrument_uid: str = _grpc_helpers.string_field(2)
+    figi: str = _grpc_helpers.string_field(3)
+    instrument_type: str = _grpc_helpers.string_field(4)
+    quantity: "Quotation" = _grpc_helpers.message_field(5)
+    average_position_price: "MoneyValue" = _grpc_helpers.message_field(6)
+    expected_yield: "Quotation" = _grpc_helpers.message_field(7)
+    expected_yield_fifo: "Quotation" = _grpc_helpers.message_field(8)
+    expire_date: datetime = _grpc_helpers.message_field(9)
+    current_price: "MoneyValue" = _grpc_helpers.message_field(10)
+    average_position_price_fifo: "MoneyValue" = _grpc_helpers.message_field(11)
 
 
 @dataclass(eq=False, repr=True)
@@ -1586,6 +1608,13 @@ class PortfolioResponse(_grpc_helpers.Message):
     expected_yield: "Quotation" = _grpc_helpers.message_field(6)
     positions: List["PortfolioPosition"] = _grpc_helpers.message_field(7)
     account_id: str = _grpc_helpers.string_field(8)
+
+    total_amount_options: MoneyValue = _grpc_helpers.message_field(9)
+    total_amount_sp: MoneyValue = _grpc_helpers.message_field(10)
+    total_amount_portfolio: MoneyValue = _grpc_helpers.message_field(11)
+    virtual_positions: List["VirtualPortfolioPosition"] = _grpc_helpers.message_field(
+        12
+    )
 
 
 @dataclass(eq=False, repr=True)
@@ -1628,6 +1657,10 @@ class PortfolioPosition(_grpc_helpers.Message):
     average_position_price_fifo: "MoneyValue" = _grpc_helpers.message_field(9)
     quantity_lots: "Quotation" = _grpc_helpers.message_field(10)
     blocked: bool = _grpc_helpers.bool_field(21)
+    position_uid: str = _grpc_helpers.string_field(24)
+    instrument_uid: str = _grpc_helpers.string_field(25)
+    var_margin: "MoneyValue" = _grpc_helpers.message_field(26)
+    expected_yield_fifo: "Quotation" = _grpc_helpers.message_field(27)
 
 
 @dataclass(eq=False, repr=True)
@@ -1668,6 +1701,7 @@ class OrderTrade(_grpc_helpers.Message):
     date_time: datetime = _grpc_helpers.message_field(1)
     price: "Quotation" = _grpc_helpers.message_field(2)
     quantity: int = _grpc_helpers.int64_field(3)
+    trade_id: str = _grpc_helpers.string_field(4)
 
 
 @dataclass(eq=False, repr=True)

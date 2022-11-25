@@ -221,23 +221,27 @@ class OrderTrade(google.protobuf.message.Message):
     DATE_TIME_FIELD_NUMBER: builtins.int
     PRICE_FIELD_NUMBER: builtins.int
     QUANTITY_FIELD_NUMBER: builtins.int
+    TRADE_ID_FIELD_NUMBER: builtins.int
     @property
     def date_time(self) -> google.protobuf.timestamp_pb2.Timestamp:
         """Дата и время совершения сделки в часовом поясе UTC."""
     @property
     def price(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Цена одного инструмента, по которой совершена сделка."""
+        """Цена за 1 инструмент, по которой совершена сделка."""
     quantity: builtins.int
     """Количество лотов в сделке."""
+    trade_id: builtins.str
+    """Идентификатор сделки"""
     def __init__(
         self,
         *,
         date_time: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         price: tinkoff.invest.grpc.common_pb2.Quotation | None = ...,
         quantity: builtins.int = ...,
+        trade_id: builtins.str = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["date_time", b"date_time", "price", b"price"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["date_time", b"date_time", "price", b"price", "quantity", b"quantity"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["date_time", b"date_time", "price", b"price", "quantity", b"quantity", "trade_id", b"trade_id"]) -> None: ...
 
 global___OrderTrade = OrderTrade
 
@@ -260,7 +264,7 @@ class PostOrderRequest(google.protobuf.message.Message):
     """Количество лотов."""
     @property
     def price(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Цена одного инструмента. Для получения стоимости лота требуется умножить на лотность инструмента. Игнорируется для рыночных поручений."""
+        """Цена за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента. Игнорируется для рыночных поручений."""
     direction: global___OrderDirection.ValueType
     """Направление операции."""
     account_id: builtins.str
@@ -323,7 +327,7 @@ class PostOrderResponse(google.protobuf.message.Message):
         """Начальная цена заявки. Произведение количества запрошенных лотов на цену."""
     @property
     def executed_order_price(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
-        """Исполненная цена заявки. Произведение средней цены покупки на количество лотов."""
+        """Исполненная средняя цена 1 одного инструмента в заявки."""
     @property
     def total_order_amount(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
         """Итоговая стоимость заявки, включающая все комиссии."""
@@ -588,7 +592,7 @@ class OrderStage(google.protobuf.message.Message):
     quantity: builtins.int
     """Количество лотов."""
     trade_id: builtins.str
-    """Идентификатор торговой операции."""
+    """Идентификатор сделки."""
     def __init__(
         self,
         *,
