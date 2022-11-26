@@ -59,7 +59,7 @@ class MarketDataServiceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def GetLastPrices(self, request, context):
-        """Метод запроса последних цен по инструментам.
+        """Метод запроса цен последних сделок по инструментам.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')

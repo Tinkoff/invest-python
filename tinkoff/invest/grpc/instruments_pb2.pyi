@@ -71,15 +71,21 @@ class _OptionDirection:
 class _OptionDirectionEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_OptionDirection.ValueType], builtins.type):  # noqa: F821
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     OPTION_DIRECTION_UNSPECIFIED: _OptionDirection.ValueType  # 0
+    """Тип не определен."""
     OPTION_DIRECTION_PUT: _OptionDirection.ValueType  # 1
+    """Опцион на продажу."""
     OPTION_DIRECTION_CALL: _OptionDirection.ValueType  # 2
+    """Опцион на покупку."""
 
 class OptionDirection(_OptionDirection, metaclass=_OptionDirectionEnumTypeWrapper):
     """Тип опциона по направлению сделки."""
 
 OPTION_DIRECTION_UNSPECIFIED: OptionDirection.ValueType  # 0
+"""Тип не определен."""
 OPTION_DIRECTION_PUT: OptionDirection.ValueType  # 1
+"""Опцион на продажу."""
 OPTION_DIRECTION_CALL: OptionDirection.ValueType  # 2
+"""Опцион на покупку."""
 global___OptionDirection = OptionDirection
 
 class _OptionPaymentType:
@@ -89,15 +95,21 @@ class _OptionPaymentType:
 class _OptionPaymentTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_OptionPaymentType.ValueType], builtins.type):  # noqa: F821
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     OPTION_PAYMENT_TYPE_UNSPECIFIED: _OptionPaymentType.ValueType  # 0
+    """Тип не определен."""
     OPTION_PAYMENT_TYPE_PREMIUM: _OptionPaymentType.ValueType  # 1
+    """Опционы с использованием премии в расчетах."""
     OPTION_PAYMENT_TYPE_MARGINAL: _OptionPaymentType.ValueType  # 2
+    """Маржируемые опционы."""
 
 class OptionPaymentType(_OptionPaymentType, metaclass=_OptionPaymentTypeEnumTypeWrapper):
     """Тип расчетов по опциону."""
 
 OPTION_PAYMENT_TYPE_UNSPECIFIED: OptionPaymentType.ValueType  # 0
+"""Тип не определен."""
 OPTION_PAYMENT_TYPE_PREMIUM: OptionPaymentType.ValueType  # 1
+"""Опционы с использованием премии в расчетах."""
 OPTION_PAYMENT_TYPE_MARGINAL: OptionPaymentType.ValueType  # 2
+"""Маржируемые опционы."""
 global___OptionPaymentType = OptionPaymentType
 
 class _OptionStyle:
@@ -107,15 +119,21 @@ class _OptionStyle:
 class _OptionStyleEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_OptionStyle.ValueType], builtins.type):  # noqa: F821
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     OPTION_STYLE_UNSPECIFIED: _OptionStyle.ValueType  # 0
+    """Тип не определен."""
     OPTION_STYLE_AMERICAN: _OptionStyle.ValueType  # 1
+    """Американский опцион."""
     OPTION_STYLE_EUROPEAN: _OptionStyle.ValueType  # 2
+    """Европейский опцион."""
 
 class OptionStyle(_OptionStyle, metaclass=_OptionStyleEnumTypeWrapper):
     """Тип опциона по стилю."""
 
 OPTION_STYLE_UNSPECIFIED: OptionStyle.ValueType  # 0
+"""Тип не определен."""
 OPTION_STYLE_AMERICAN: OptionStyle.ValueType  # 1
+"""Американский опцион."""
 OPTION_STYLE_EUROPEAN: OptionStyle.ValueType  # 2
+"""Европейский опцион."""
 global___OptionStyle = OptionStyle
 
 class _OptionSettlementType:
@@ -125,15 +143,21 @@ class _OptionSettlementType:
 class _OptionSettlementTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_OptionSettlementType.ValueType], builtins.type):  # noqa: F821
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     OPTION_EXECUTION_TYPE_UNSPECIFIED: _OptionSettlementType.ValueType  # 0
+    """Тип не определен."""
     OPTION_EXECUTION_TYPE_PHYSICAL_DELIVERY: _OptionSettlementType.ValueType  # 1
+    """Поставочный тип опциона."""
     OPTION_EXECUTION_TYPE_CASH_SETTLEMENT: _OptionSettlementType.ValueType  # 2
+    """Расчетный тип опциона."""
 
 class OptionSettlementType(_OptionSettlementType, metaclass=_OptionSettlementTypeEnumTypeWrapper):
     """Тип опциона по способу исполнения."""
 
 OPTION_EXECUTION_TYPE_UNSPECIFIED: OptionSettlementType.ValueType  # 0
+"""Тип не определен."""
 OPTION_EXECUTION_TYPE_PHYSICAL_DELIVERY: OptionSettlementType.ValueType  # 1
+"""Поставочный тип опциона."""
 OPTION_EXECUTION_TYPE_CASH_SETTLEMENT: OptionSettlementType.ValueType  # 2
+"""Расчетный тип опциона."""
 global___OptionSettlementType = OptionSettlementType
 
 class _InstrumentIdType:

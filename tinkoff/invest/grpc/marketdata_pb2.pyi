@@ -201,7 +201,7 @@ class MarketDataRequest(google.protobuf.message.Message):
         """Запрос подписки на торговые статусы инструментов."""
     @property
     def subscribe_last_price_request(self) -> global___SubscribeLastPriceRequest:
-        """Запрос подписки на последние цены."""
+        """Запрос подписки на цены последних сделок."""
     @property
     def get_my_subscriptions(self) -> global___GetMySubscriptions:
         """Запрос своих подписок."""
@@ -243,7 +243,7 @@ class MarketDataServerSideStreamRequest(google.protobuf.message.Message):
         """Запрос подписки на торговые статусы инструментов."""
     @property
     def subscribe_last_price_request(self) -> global___SubscribeLastPriceRequest:
-        """Запрос подписки на последние цены."""
+        """Запрос подписки на цены последних сделок."""
     def __init__(
         self,
         *,
@@ -303,10 +303,10 @@ class MarketDataResponse(google.protobuf.message.Message):
         """Проверка активности стрима."""
     @property
     def subscribe_last_price_response(self) -> global___SubscribeLastPriceResponse:
-        """Результат подписки на последние цены инструментов."""
+        """Результат подписки на цены последние сделок по инструментам."""
     @property
     def last_price(self) -> global___LastPrice:
-        """Последняя цена."""
+        """Цена последней сделки."""
     def __init__(
         self,
         *,
@@ -709,7 +709,7 @@ class InfoSubscription(google.protobuf.message.Message):
 global___InfoSubscription = InfoSubscription
 
 class SubscribeLastPriceRequest(google.protobuf.message.Message):
-    """Изменение статуса подписки на последнюю цену инструмента."""
+    """Изменение статуса подписки на цену последней сделки по инструменту."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -719,7 +719,7 @@ class SubscribeLastPriceRequest(google.protobuf.message.Message):
     """Изменение статуса подписки."""
     @property
     def instruments(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___LastPriceInstrument]:
-        """Массив инструментов для подписки на последнюю цену."""
+        """Массив инструментов для подписки на цену последней сделки."""
     def __init__(
         self,
         *,
@@ -752,7 +752,7 @@ class LastPriceInstrument(google.protobuf.message.Message):
 global___LastPriceInstrument = LastPriceInstrument
 
 class SubscribeLastPriceResponse(google.protobuf.message.Message):
-    """Результат изменения статуса подписки на последнюю цену."""
+    """Результат изменения статуса подписки на цену последней сделки."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -762,7 +762,7 @@ class SubscribeLastPriceResponse(google.protobuf.message.Message):
     """Уникальный идентификатор запроса, подробнее: [tracking_id](https://tinkoff.github.io/investAPI/grpc#tracking-id)."""
     @property
     def last_price_subscriptions(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___LastPriceSubscription]:
-        """Массив статусов подписки на последнюю цену."""
+        """Массив статусов подписки на цену последней сделки."""
     def __init__(
         self,
         *,
@@ -774,7 +774,7 @@ class SubscribeLastPriceResponse(google.protobuf.message.Message):
 global___SubscribeLastPriceResponse = SubscribeLastPriceResponse
 
 class LastPriceSubscription(google.protobuf.message.Message):
-    """Статус подписки на последнюю цену."""
+    """Статус подписки на цену последней сделки."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -1113,7 +1113,7 @@ class HistoricCandle(google.protobuf.message.Message):
 global___HistoricCandle = HistoricCandle
 
 class GetLastPricesRequest(google.protobuf.message.Message):
-    """Запрос получения последних цен."""
+    """Запрос получения цен последних сделок."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -1136,14 +1136,14 @@ class GetLastPricesRequest(google.protobuf.message.Message):
 global___GetLastPricesRequest = GetLastPricesRequest
 
 class GetLastPricesResponse(google.protobuf.message.Message):
-    """Список последних цен."""
+    """Список цен последних сделок."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     LAST_PRICES_FIELD_NUMBER: builtins.int
     @property
     def last_prices(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___LastPrice]:
-        """Массив последних цен."""
+        """Массив цен последних сделок."""
     def __init__(
         self,
         *,
@@ -1154,7 +1154,7 @@ class GetLastPricesResponse(google.protobuf.message.Message):
 global___GetLastPricesResponse = GetLastPricesResponse
 
 class LastPrice(google.protobuf.message.Message):
-    """Информация о цене."""
+    """Информация о цене последней сделки."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -1166,7 +1166,7 @@ class LastPrice(google.protobuf.message.Message):
     """Figi инструмента."""
     @property
     def price(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
-        """Последняя цена за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента. Для перевод цен в валюту рекомендуем использовать [информацию со страницы](https://tinkoff.github.io/investAPI/faq_marketdata/)"""
+        """Цена последней сделки за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента. Для перевод цен в валюту рекомендуем использовать [информацию со страницы](https://tinkoff.github.io/investAPI/faq_marketdata/)"""
     @property
     def time(self) -> google.protobuf.timestamp_pb2.Timestamp:
         """Время получения последней цены в часовом поясе UTC по времени биржи."""
