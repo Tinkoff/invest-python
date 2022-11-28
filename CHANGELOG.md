@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [0.2.0-beta42](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta42) - 2022-11-28
+
+<small>[Compare with 0.2.0-beta41](https://github.com/tinkoff/invest-python/compare/0.2.0-beta41...0.2.0-beta42)</small>
+
+### Features
+- New contract support (#153) ([56ff1f2](https://github.com/tinkoff/invest-python/commit/56ff1f2f77c7401a8d3edfaadc9aafbbc2fc6803) by Ruslan Sirazhetdinov).
+- Add py.typed (#150) ([fe729de](https://github.com/tinkoff/invest-python/commit/fe729de45a2320976c95c0bbe85528e85532df7c) by Danil Akhtarov).
+- Windows ci test (#140) ([3d6fcdf](https://github.com/tinkoff/invest-python/commit/3d6fcdfdf943eba96ca02a114fbcda093e0d05f8) by Ruslan Sirazhetdinov).
+
+
 ## [0.2.0-beta41](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta41) - 2022-11-16
 
 <small>[Compare with 0.2.0-beta40](https://github.com/tinkoff/invest-python/compare/0.2.0-beta40...0.2.0-beta41)</small>
