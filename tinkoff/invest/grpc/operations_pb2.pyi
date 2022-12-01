@@ -150,6 +150,34 @@ class _OperationTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._
     """Комиссия за вывод валюты с брокерского счета."""
     OPERATION_TYPE_OUT_STAMP_DUTY: _OperationType.ValueType  # 47
     """Гербовый сбор."""
+    OPERATION_TYPE_OUTPUT_SWIFT: _OperationType.ValueType  # 50
+    """	SWIFT-перевод"""
+    OPERATION_TYPE_INPUT_SWIFT: _OperationType.ValueType  # 51
+    """	SWIFT-перевод"""
+    OPERATION_TYPE_OUTPUT_ACQUIRING: _OperationType.ValueType  # 53
+    """ Перевод на карту"""
+    OPERATION_TYPE_INPUT_ACQUIRING: _OperationType.ValueType  # 54
+    """	Перевод с карты"""
+    OPERATION_TYPE_OUTPUT_PENALTY: _OperationType.ValueType  # 55
+    """	Комиссия за вывод средств"""
+    OPERATION_TYPE_ADVICE_FEE: _OperationType.ValueType  # 56
+    """	Списание оплаты за сервис Советов"""
+    OPERATION_TYPE_TRANS_IIS_BS: _OperationType.ValueType  # 57
+    """ Перевод ценных бумаг с ИИС на Брокерский счет"""
+    OPERATION_TYPE_TRANS_BS_BS: _OperationType.ValueType  # 58
+    """ Перевод ценных бумаг с одного брокерского счета на другой"""
+    OPERATION_TYPE_OUT_MULTI: _OperationType.ValueType  # 59
+    """ Вывод денежных средств со счета"""
+    OPERATION_TYPE_INP_MULTI: _OperationType.ValueType  # 60
+    """ Пополнение денежных средств со счета"""
+    OPERATION_TYPE_OVER_PLACEMENT: _OperationType.ValueType  # 61
+    """ Размещение биржевого овернайта"""
+    OPERATION_TYPE_OVER_COM: _OperationType.ValueType  # 62
+    """ Списание комиссии"""
+    OPERATION_TYPE_OVER_INCOME: _OperationType.ValueType  # 63
+    """ Доход от оверанайта"""
+    OPERATION_TYPE_OPTION_EXPIRATION: _OperationType.ValueType  # 64
+    """Экспирация"""
 
 class OperationType(_OperationType, metaclass=_OperationTypeEnumTypeWrapper):
     """Тип операции."""
@@ -250,6 +278,34 @@ OPERATION_TYPE_OUT_FEE: OperationType.ValueType  # 46
 """Комиссия за вывод валюты с брокерского счета."""
 OPERATION_TYPE_OUT_STAMP_DUTY: OperationType.ValueType  # 47
 """Гербовый сбор."""
+OPERATION_TYPE_OUTPUT_SWIFT: OperationType.ValueType  # 50
+"""	SWIFT-перевод"""
+OPERATION_TYPE_INPUT_SWIFT: OperationType.ValueType  # 51
+"""	SWIFT-перевод"""
+OPERATION_TYPE_OUTPUT_ACQUIRING: OperationType.ValueType  # 53
+""" Перевод на карту"""
+OPERATION_TYPE_INPUT_ACQUIRING: OperationType.ValueType  # 54
+"""	Перевод с карты"""
+OPERATION_TYPE_OUTPUT_PENALTY: OperationType.ValueType  # 55
+"""	Комиссия за вывод средств"""
+OPERATION_TYPE_ADVICE_FEE: OperationType.ValueType  # 56
+"""	Списание оплаты за сервис Советов"""
+OPERATION_TYPE_TRANS_IIS_BS: OperationType.ValueType  # 57
+""" Перевод ценных бумаг с ИИС на Брокерский счет"""
+OPERATION_TYPE_TRANS_BS_BS: OperationType.ValueType  # 58
+""" Перевод ценных бумаг с одного брокерского счета на другой"""
+OPERATION_TYPE_OUT_MULTI: OperationType.ValueType  # 59
+""" Вывод денежных средств со счета"""
+OPERATION_TYPE_INP_MULTI: OperationType.ValueType  # 60
+""" Пополнение денежных средств со счета"""
+OPERATION_TYPE_OVER_PLACEMENT: OperationType.ValueType  # 61
+""" Размещение биржевого овернайта"""
+OPERATION_TYPE_OVER_COM: OperationType.ValueType  # 62
+""" Списание комиссии"""
+OPERATION_TYPE_OVER_INCOME: OperationType.ValueType  # 63
+""" Доход от оверанайта"""
+OPERATION_TYPE_OPTION_EXPIRATION: OperationType.ValueType  # 64
+"""Экспирация"""
 global___OperationType = OperationType
 
 class _PortfolioSubscriptionStatus:
@@ -419,6 +475,7 @@ class Operation(google.protobuf.message.Message):
     TYPE_FIELD_NUMBER: builtins.int
     OPERATION_TYPE_FIELD_NUMBER: builtins.int
     TRADES_FIELD_NUMBER: builtins.int
+    ASSET_UID_FIELD_NUMBER: builtins.int
     id: builtins.str
     """Идентификатор операции."""
     parent_operation_id: builtins.str
@@ -451,6 +508,8 @@ class Operation(google.protobuf.message.Message):
     @property
     def trades(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___OperationTrade]:
         """Массив сделок."""
+    asset_uid: builtins.str
+    """Идентификатор актива"""
     def __init__(
         self,
         *,
@@ -468,9 +527,10 @@ class Operation(google.protobuf.message.Message):
         type: builtins.str = ...,
         operation_type: global___OperationType.ValueType = ...,
         trades: collections.abc.Iterable[global___OperationTrade] | None = ...,
+        asset_uid: builtins.str = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["date", b"date", "payment", b"payment", "price", b"price"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["currency", b"currency", "date", b"date", "figi", b"figi", "id", b"id", "instrument_type", b"instrument_type", "operation_type", b"operation_type", "parent_operation_id", b"parent_operation_id", "payment", b"payment", "price", b"price", "quantity", b"quantity", "quantity_rest", b"quantity_rest", "state", b"state", "trades", b"trades", "type", b"type"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["asset_uid", b"asset_uid", "currency", b"currency", "date", b"date", "figi", b"figi", "id", b"id", "instrument_type", b"instrument_type", "operation_type", b"operation_type", "parent_operation_id", b"parent_operation_id", "payment", b"payment", "price", b"price", "quantity", b"quantity", "quantity_rest", b"quantity_rest", "state", b"state", "trades", b"trades", "type", b"type"]) -> None: ...
 
 global___Operation = Operation
 
@@ -1635,6 +1695,7 @@ class OperationItem(google.protobuf.message.Message):
     CANCEL_DATE_TIME_FIELD_NUMBER: builtins.int
     CANCEL_REASON_FIELD_NUMBER: builtins.int
     TRADES_INFO_FIELD_NUMBER: builtins.int
+    ASSET_UID_FIELD_NUMBER: builtins.int
     cursor: builtins.str
     """Курсор."""
     broker_account_id: builtins.str
@@ -1691,6 +1752,8 @@ class OperationItem(google.protobuf.message.Message):
     @property
     def trades_info(self) -> global___OperationItemTrades:
         """Массив сделок."""
+    asset_uid: builtins.str
+    """Идентификатор актива"""
     def __init__(
         self,
         *,
@@ -1718,9 +1781,10 @@ class OperationItem(google.protobuf.message.Message):
         cancel_date_time: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         cancel_reason: builtins.str = ...,
         trades_info: global___OperationItemTrades | None = ...,
+        asset_uid: builtins.str = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["accrued_int", b"accrued_int", "cancel_date_time", b"cancel_date_time", "commission", b"commission", "date", b"date", "payment", b"payment", "price", b"price", "trades_info", b"trades_info", "yield", b"yield", "yield_relative", b"yield_relative"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["accrued_int", b"accrued_int", "broker_account_id", b"broker_account_id", "cancel_date_time", b"cancel_date_time", "cancel_reason", b"cancel_reason", "commission", b"commission", "cursor", b"cursor", "date", b"date", "description", b"description", "figi", b"figi", "id", b"id", "instrument_kind", b"instrument_kind", "instrument_type", b"instrument_type", "instrument_uid", b"instrument_uid", "name", b"name", "parent_operation_id", b"parent_operation_id", "payment", b"payment", "price", b"price", "quantity", b"quantity", "quantity_done", b"quantity_done", "quantity_rest", b"quantity_rest", "state", b"state", "trades_info", b"trades_info", "type", b"type", "yield", b"yield", "yield_relative", b"yield_relative"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["accrued_int", b"accrued_int", "asset_uid", b"asset_uid", "broker_account_id", b"broker_account_id", "cancel_date_time", b"cancel_date_time", "cancel_reason", b"cancel_reason", "commission", b"commission", "cursor", b"cursor", "date", b"date", "description", b"description", "figi", b"figi", "id", b"id", "instrument_kind", b"instrument_kind", "instrument_type", b"instrument_type", "instrument_uid", b"instrument_uid", "name", b"name", "parent_operation_id", b"parent_operation_id", "payment", b"payment", "price", b"price", "quantity", b"quantity", "quantity_done", b"quantity_done", "quantity_rest", b"quantity_rest", "state", b"state", "trades_info", b"trades_info", "type", b"type", "yield", b"yield", "yield_relative", b"yield_relative"]) -> None: ...
 
 global___OperationItem = OperationItem
 

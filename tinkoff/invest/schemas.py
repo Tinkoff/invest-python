@@ -202,6 +202,20 @@ class OperationType(_grpc_helpers.Enum):
     OPERATION_TYPE_CASH_FEE = 45
     OPERATION_TYPE_OUT_FEE = 46
     OPERATION_TYPE_OUT_STAMP_DUTY = 47
+    OPERATION_TYPE_OUTPUT_SWIFT = 50
+    OPERATION_TYPE_INPUT_SWIFT = 51
+    OPERATION_TYPE_OUTPUT_ACQUIRING = 53
+    OPERATION_TYPE_INPUT_ACQUIRING = 54
+    OPERATION_TYPE_OUTPUT_PENALTY = 55
+    OPERATION_TYPE_ADVICE_FEE = 56
+    OPERATION_TYPE_TRANS_IIS_BS = 57
+    OPERATION_TYPE_TRANS_BS_BS = 58
+    OPERATION_TYPE_OUT_MULTI = 59
+    OPERATION_TYPE_INP_MULTI = 60
+    OPERATION_TYPE_OVER_PLACEMENT = 61
+    OPERATION_TYPE_OVER_COM = 62
+    OPERATION_TYPE_OVER_INCOME = 63
+    OPERATION_TYPE_OPTION_EXPIRATION = 64
 
 
 class AccessLevel(_grpc_helpers.Enum):
@@ -1569,6 +1583,7 @@ class Operation(_grpc_helpers.Message):  # pylint:disable=too-many-instance-attr
     type: str = _grpc_helpers.string_field(12)
     operation_type: "OperationType" = _grpc_helpers.enum_field(13)
     trades: List["OperationTrade"] = _grpc_helpers.message_field(14)
+    asset_uid: str = _grpc_helpers.string_field(16)
 
 
 class CurrencyRequest(_grpc_helpers.Enum):
@@ -2209,6 +2224,7 @@ class OperationItem(_grpc_helpers.Message):
     cancel_date_time: datetime = _grpc_helpers.message_field(56)
     cancel_reason: str = _grpc_helpers.string_field(57)
     trades_info: "OperationItemTrades" = _grpc_helpers.message_field(61)
+    asset_uid: str = _grpc_helpers.string_field(64)
 
 
 @dataclass(eq=False, repr=True)
