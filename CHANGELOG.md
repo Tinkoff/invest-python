@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [0.2.0-beta43](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta43) - 2022-12-02
+
+<small>[Compare with 0.2.0-beta42](https://github.com/tinkoff/invest-python/compare/0.2.0-beta42...0.2.0-beta43)</small>
+
+### Features
+- New contract support v1.0.18 (#157) ([de2f29b](https://github.com/tinkoff/invest-python/commit/de2f29b735a0b45efc1b7968a8ff730ab09ee163) by Ruslan Sirazhetdinov).
+
+
 ## [0.2.0-beta42](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta42) - 2022-11-28
 
 <small>[Compare with 0.2.0-beta41](https://github.com/tinkoff/invest-python/compare/0.2.0-beta41...0.2.0-beta42)</small>
