@@ -1320,11 +1320,7 @@ class OldUsersService(_grpc_helpers.Service):
     @handle_request_error("GetAccounts")
     def get_accounts(self) -> GetAccountsResponse:
         request = GetAccountsRequest()
-        response, call = self._new_service.get_accounts.with_call(
-            request,
-            metadata=self.metadata,
-        )
-        log_request(get_tracking_id_from_call(call), "GetAccounts")
+        response = self._new_service.get_accounts(request)
         return response
 
     @handle_request_error("GetMarginAttributes")

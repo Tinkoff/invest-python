@@ -3,6 +3,7 @@ import os
 from tinkoff.invest import Client
 
 TOKEN = os.environ["INVEST_TOKEN"]
+print(TOKEN)
 
 
 def main():
