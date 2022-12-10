@@ -19,7 +19,10 @@ class _ClientCallDetails(
 
 def header_adder_interceptor(headers: Iterable[Tuple[str, str]]):
     def intercept_call(
-        call_details: ClientCallDetails, request_iterator, request_streaming, response_streaming
+        call_details: ClientCallDetails,
+        request_iterator,
+        request_streaming,
+        response_streaming,
     ):
         metadata = []
         if call_details.metadata is not None:
@@ -44,10 +47,12 @@ def header_adder_interceptor(headers: Iterable[Tuple[str, str]]):
             call_details.wait_for_ready,
             call_details.compression,
         )
+
         def postprocess(r):
             print(r)
             print(get_tracking_id_from_call(r))
             return r
+
         return call_details, request_iterator, None
 
     return generic_interceptor.create(intercept_call)

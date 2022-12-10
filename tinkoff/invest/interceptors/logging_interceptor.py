@@ -1,16 +1,14 @@
-import collections
-from typing import Iterable, Tuple
-
-import grpc
-
 from tinkoff.invest.interceptors import generic_interceptor
 from tinkoff.invest.interceptors.client_call_details import ClientCallDetails
-from tinkoff.invest.logging import log_request, get_tracking_id_from_call
+from tinkoff.invest.logging import get_tracking_id_from_call, log_request
 
 
 def logging_interceptor():
     def intercept_call(
-        call_details: ClientCallDetails, request_iterator, request_streaming, response_streaming
+        call_details: ClientCallDetails,
+        request_iterator,
+        request_streaming,
+        response_streaming,
     ):
         log_request(get_tracking_id_from_call(call), call_details.method)
         call_details = ClientCallDetails(
