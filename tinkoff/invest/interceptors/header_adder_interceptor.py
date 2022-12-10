@@ -20,8 +20,8 @@ def header_adder_interceptor(headers: Iterable[Tuple[str, str]]):
     def intercept_call(
         call_details: ClientCallDetails,
         request_iterator,
-        request_streaming,
-        response_streaming,
+        _request_streaming,
+        _response_streaming,
     ):
         metadata = []
         if call_details.metadata is not None:

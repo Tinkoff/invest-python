@@ -9,8 +9,8 @@ def log_request_interceptor():
     def intercept_call(
         call_details: ClientCallDetails,
         request_iterator,
-        request_streaming,
-        response_streaming,
+        _request_streaming,
+        _response_streaming,
     ):
         def postprocess(call: Outcome):
             log_request(get_tracking_id_from_call(call), call_details.method)
