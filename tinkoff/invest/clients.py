@@ -5,6 +5,7 @@ from grpc.aio import ClientInterceptor
 
 from .async_services import AsyncServices
 from .channels import create_channel
+from .interceptors.log_request_interceptor import log_request_interceptor
 from .interceptors.metadata_adder_interceptor import metadata_adder_interceptor
 from .metadata import get_metadata
 from .services import Services
@@ -69,7 +70,7 @@ class Client:
         return False
 
     def _add_logging_interceptor(self, interceptors):
-        log_request(get_tracking_id_from_call(call), "GetAccounts")
+        interceptors.append(log_request_interceptor())
 
 
 class AsyncClient:

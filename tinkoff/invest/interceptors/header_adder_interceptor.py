@@ -5,6 +5,7 @@ import grpc
 
 from tinkoff.invest.interceptors import generic_interceptor
 from tinkoff.invest.interceptors.client_call_details import ClientCallDetails
+from tinkoff.invest.logging import get_tracking_id_from_call
 
 
 class _ClientCallDetails(
@@ -35,7 +36,6 @@ def header_adder_interceptor(headers: Iterable[Tuple[str, str]]):
                     value,
                 )
             )
-        print(metadata)
         call_details = ClientCallDetails(
             call_details.method,
             call_details.timeout,
@@ -44,6 +44,10 @@ def header_adder_interceptor(headers: Iterable[Tuple[str, str]]):
             call_details.wait_for_ready,
             call_details.compression,
         )
+        def postprocess(r):
+            print(r)
+            print(get_tracking_id_from_call(r))
+            return r
         return call_details, request_iterator, None
 
     return generic_interceptor.create(intercept_call)

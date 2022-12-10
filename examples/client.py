@@ -1,9 +1,11 @@
+import logging
 import os
 
 from tinkoff.invest import Client
 
 TOKEN = os.environ["INVEST_TOKEN"]
-print(TOKEN)
+
+logging.basicConfig(level=logging.INFO)
 
 
 def main():
