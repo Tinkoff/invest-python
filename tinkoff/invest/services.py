@@ -18,7 +18,23 @@ from tinkoff.invest.caching.market_data_cache.instrument_market_data_storage imp
 from tinkoff.invest.market_data_stream.market_data_stream_manager import (
     MarketDataStreamManager,
 )
-from tinkoff_new.tinkoff.invest.grpc.sandbox import OpenSandboxAccountRequest
+from tinkoff_new.tinkoff.invest.grpc.orders import (
+    GetOrdersRequest as NewGetOrdersRequest,
+)
+from tinkoff_new.tinkoff.invest.grpc.orders import (
+    GetOrdersResponse as NewGetOrdersResponse,
+)
+from tinkoff_new.tinkoff.invest.grpc.orders import (
+    PostOrderRequest as NewPostOrderRequest,
+)
+from tinkoff_new.tinkoff.invest.grpc.orders import (
+    PostOrderResponse as NewPostOrderResponse,
+)
+from tinkoff_new.tinkoff.invest.grpc.sandbox import (
+    CloseSandboxAccountRequest,
+    CloseSandboxAccountResponse,
+    OpenSandboxAccountRequest,
+)
 from tinkoff_new.tinkoff.invest.grpc.sandbox_services import SandboxService
 from tinkoff_new.tinkoff.invest.grpc.users import (
     GetAccountsRequest,
@@ -43,7 +59,6 @@ from .grpc import (
     sandbox_pb2_grpc,
     stoporders_pb2,
     stoporders_pb2_grpc,
-    users_pb2,
     users_pb2_grpc,
 )
 from .logging import get_tracking_id_from_call, log_request
@@ -63,8 +78,6 @@ from .schemas import (
     CancelStopOrderRequest,
     CancelStopOrderResponse,
     CandleInterval,
-    CloseSandboxAccountRequest,
-    CloseSandboxAccountResponse,
     CurrenciesResponse,
     CurrencyResponse,
     EditFavoritesActionType,
@@ -1329,31 +1342,21 @@ class OldUsersService(_grpc_helpers.Service):
     ) -> GetMarginAttributesResponse:
         request = GetMarginAttributesRequest()
         request.account_id = account_id
-        response, call = self._new_service.get_margin_attributes.with_call(
-            request,
-            metadata=self.metadata,
-        )
-        log_request(get_tracking_id_from_call(call), "GetMarginAttributes")
+        response = self._new_service.get_margin_attributes(request)
         return response
 
     @handle_request_error("GetUserTariff")
     def get_user_tariff(self) -> GetUserTariffResponse:
         request = GetUserTariffRequest()
-        response, call = self._new_service.get_user_tariff.with_call(
-            request,
-            metadata=self.metadata,
-        )
-        log_request(get_tracking_id_from_call(call), "GetUserTariff")
+        response = self._new_service.get_user_tariff(request)
         return response
 
     @handle_request_error("GetInfo")
     def get_info(self) -> GetInfoResponse:
         request = GetInfoRequest()
-        response, call = self._new_service.get_info.with_call(
+        response = self._new_service.get_info(
             request,
-            metadata=self.metadata,
         )
-        log_request(get_tracking_id_from_call(call), "GetInfo")
         return response
 
 
@@ -1367,24 +1370,14 @@ class OldSandboxService(_grpc_helpers.Service):
     @handle_request_error("OpenSandboxAccount")
     def open_sandbox_account(self) -> OpenSandboxAccountResponse:
         request = OpenSandboxAccountRequest()
-        response, call = self._new_service.open_sandbox_account.with_call(
-            request,
-            metadata=self.metadata,
-        )
-        log_request(get_tracking_id_from_call(call), "OpenSandboxAccount")
+        response = self._new_service.open_sandbox_account(request)
         return response
 
     @handle_request_error("GetSandboxAccounts")
     def get_sandbox_accounts(self) -> GetAccountsResponse:
         request = GetAccountsRequest()
-        response, call = self.stub.GetSandboxAccounts.with_call(
-            request=_grpc_helpers.dataclass_to_protobuff(
-                request, users_pb2.GetAccountsRequest()
-            ),
-            metadata=self.metadata,
-        )
-        log_request(get_tracking_id_from_call(call), "GetSandboxAccounts")
-        return _grpc_helpers.protobuf_to_dataclass(response, GetAccountsResponse)
+        response = self._new_service.get_sandbox_accounts(request)
+        return response
 
     @handle_request_error("CloseSandboxAccount")
     def close_sandbox_account(
@@ -1392,16 +1385,8 @@ class OldSandboxService(_grpc_helpers.Service):
     ) -> CloseSandboxAccountResponse:
         request = CloseSandboxAccountRequest()
         request.account_id = account_id
-        response, call = self.stub.CloseSandboxAccount.with_call(
-            request=_grpc_helpers.dataclass_to_protobuff(
-                request, sandbox_pb2.CloseSandboxAccountRequest()
-            ),
-            metadata=self.metadata,
-        )
-        log_request(get_tracking_id_from_call(call), "CloseSandboxAccount")
-        return _grpc_helpers.protobuf_to_dataclass(
-            response, CloseSandboxAccountResponse
-        )
+        response = self._new_service.close_sandbox_account(request)
+        return response
 
     @handle_request_error("PostSandboxOrder")
     def post_sandbox_order(
@@ -1414,8 +1399,8 @@ class OldSandboxService(_grpc_helpers.Service):
         account_id: str = "",
         order_type: OrderType = OrderType(0),
         order_id: str = "",
-    ) -> PostOrderResponse:
-        request = PostOrderRequest()
+    ) -> NewPostOrderResponse:
+        request = NewPostOrderRequest()
         request.figi = figi
         request.quantity = quantity
         if price is not None:
@@ -1424,14 +1409,8 @@ class OldSandboxService(_grpc_helpers.Service):
         request.account_id = account_id
         request.order_type = order_type
         request.order_id = order_id
-        response, call = self.stub.PostSandboxOrder.with_call(
-            request=_grpc_helpers.dataclass_to_protobuff(
-                request, orders_pb2.PostOrderRequest()
-            ),
-            metadata=self.metadata,
-        )
-        log_request(get_tracking_id_from_call(call), "PostSandboxOrder")
-        return _grpc_helpers.protobuf_to_dataclass(response, PostOrderResponse)
+        response = self._new_service.post_sandbox_order(request)
+        return response
 
     @handle_request_error("ReplaceSandboxOrder")
     def replace_sandbox_order(
@@ -1448,17 +1427,11 @@ class OldSandboxService(_grpc_helpers.Service):
         return _grpc_helpers.protobuf_to_dataclass(response, PostOrderResponse)
 
     @handle_request_error("GetSandboxOrders")
-    def get_sandbox_orders(self, *, account_id: str = "") -> GetOrdersResponse:
-        request = GetOrdersRequest()
+    def get_sandbox_orders(self, *, account_id: str = "") -> NewGetOrdersResponse:
+        request = NewGetOrdersRequest()
         request.account_id = account_id
-        response, call = self.stub.GetSandboxOrders.with_call(
-            request=_grpc_helpers.dataclass_to_protobuff(
-                request, orders_pb2.GetOrdersRequest()
-            ),
-            metadata=self.metadata,
-        )
-        log_request(get_tracking_id_from_call(call), "GetSandboxOrders")
-        return _grpc_helpers.protobuf_to_dataclass(response, GetOrdersResponse)
+        response = self._new_service.get_sandbox_orders(request)
+        return response
 
     @handle_request_error("CancelSandboxOrder")
     def cancel_sandbox_order(
