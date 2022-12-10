@@ -1333,8 +1333,7 @@ class OldUsersService(_grpc_helpers.Service):
     @handle_request_error("GetAccounts")
     def get_accounts(self) -> GetAccountsResponse:
         request = GetAccountsRequest()
-        response = self._new_service.get_accounts(request)
-        return response
+        return self._new_service.get_accounts(request)
 
     @handle_request_error("GetMarginAttributes")
     def get_margin_attributes(
@@ -1342,22 +1341,19 @@ class OldUsersService(_grpc_helpers.Service):
     ) -> GetMarginAttributesResponse:
         request = GetMarginAttributesRequest()
         request.account_id = account_id
-        response = self._new_service.get_margin_attributes(request)
-        return response
+        return self._new_service.get_margin_attributes(request)
 
     @handle_request_error("GetUserTariff")
     def get_user_tariff(self) -> GetUserTariffResponse:
         request = GetUserTariffRequest()
-        response = self._new_service.get_user_tariff(request)
-        return response
+        return self._new_service.get_user_tariff(request)
 
     @handle_request_error("GetInfo")
     def get_info(self) -> GetInfoResponse:
         request = GetInfoRequest()
-        response = self._new_service.get_info(
+        return self._new_service.get_info(
             request,
         )
-        return response
 
 
 class OldSandboxService(_grpc_helpers.Service):
@@ -1370,14 +1366,12 @@ class OldSandboxService(_grpc_helpers.Service):
     @handle_request_error("OpenSandboxAccount")
     def open_sandbox_account(self) -> OpenSandboxAccountResponse:
         request = OpenSandboxAccountRequest()
-        response = self._new_service.open_sandbox_account(request)
-        return response
+        return self._new_service.open_sandbox_account(request)
 
     @handle_request_error("GetSandboxAccounts")
     def get_sandbox_accounts(self) -> GetAccountsResponse:
         request = GetAccountsRequest()
-        response = self._new_service.get_sandbox_accounts(request)
-        return response
+        return self._new_service.get_sandbox_accounts(request)
 
     @handle_request_error("CloseSandboxAccount")
     def close_sandbox_account(
@@ -1385,8 +1379,7 @@ class OldSandboxService(_grpc_helpers.Service):
     ) -> CloseSandboxAccountResponse:
         request = CloseSandboxAccountRequest()
         request.account_id = account_id
-        response = self._new_service.close_sandbox_account(request)
-        return response
+        return self._new_service.close_sandbox_account(request)
 
     @handle_request_error("PostSandboxOrder")
     def post_sandbox_order(
@@ -1409,8 +1402,7 @@ class OldSandboxService(_grpc_helpers.Service):
         request.account_id = account_id
         request.order_type = order_type
         request.order_id = order_id
-        response = self._new_service.post_sandbox_order(request)
-        return response
+        return self._new_service.post_sandbox_order(request)
 
     @handle_request_error("ReplaceSandboxOrder")
     def replace_sandbox_order(
@@ -1430,8 +1422,7 @@ class OldSandboxService(_grpc_helpers.Service):
     def get_sandbox_orders(self, *, account_id: str = "") -> NewGetOrdersResponse:
         request = NewGetOrdersRequest()
         request.account_id = account_id
-        response = self._new_service.get_sandbox_orders(request)
-        return response
+        return self._new_service.get_sandbox_orders(request)
 
     @handle_request_error("CancelSandboxOrder")
     def cancel_sandbox_order(
