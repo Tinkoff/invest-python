@@ -1961,6 +1961,7 @@ class PostStopOrderRequest(_grpc_helpers.Message):
     expiration_type: "StopOrderExpirationType" = _grpc_helpers.enum_field(7)
     stop_order_type: "StopOrderType" = _grpc_helpers.enum_field(8)
     expire_date: datetime = _grpc_helpers.message_field(9)
+    instrument_id: str = _grpc_helpers.string_field(10)
 
 
 @dataclass(eq=False, repr=True)
@@ -2002,6 +2003,7 @@ class StopOrder(_grpc_helpers.Message):  # pylint:disable=too-many-instance-attr
     expiration_time: datetime = _grpc_helpers.message_field(9)
     price: "MoneyValue" = _grpc_helpers.message_field(10)
     stop_price: "MoneyValue" = _grpc_helpers.message_field(11)
+    instrument_uid: str = _grpc_helpers.string_field(12)
 
 
 @dataclass(eq=False, repr=True)

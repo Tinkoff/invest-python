@@ -110,6 +110,7 @@ class PostStopOrderRequest(google.protobuf.message.Message):
     EXPIRATION_TYPE_FIELD_NUMBER: builtins.int
     STOP_ORDER_TYPE_FIELD_NUMBER: builtins.int
     EXPIRE_DATE_FIELD_NUMBER: builtins.int
+    INSTRUMENT_ID_FIELD_NUMBER: builtins.int
     figi: builtins.str
     """Figi-идентификатор инструмента."""
     quantity: builtins.int
@@ -131,6 +132,8 @@ class PostStopOrderRequest(google.protobuf.message.Message):
     @property
     def expire_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
         """Дата и время окончания действия стоп-заявки в часовом поясе UTC. **Для ExpirationType = GoodTillDate заполнение обязательно**."""
+    instrument_id: builtins.str
+    """Идентификатор инструмента, принимает значения Figi или instrument_uid"""
     def __init__(
         self,
         *,
@@ -143,9 +146,10 @@ class PostStopOrderRequest(google.protobuf.message.Message):
         expiration_type: global___StopOrderExpirationType.ValueType = ...,
         stop_order_type: global___StopOrderType.ValueType = ...,
         expire_date: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        instrument_id: builtins.str = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["expire_date", b"expire_date", "price", b"price", "stop_price", b"stop_price"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["account_id", b"account_id", "direction", b"direction", "expiration_type", b"expiration_type", "expire_date", b"expire_date", "figi", b"figi", "price", b"price", "quantity", b"quantity", "stop_order_type", b"stop_order_type", "stop_price", b"stop_price"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["account_id", b"account_id", "direction", b"direction", "expiration_type", b"expiration_type", "expire_date", b"expire_date", "figi", b"figi", "instrument_id", b"instrument_id", "price", b"price", "quantity", b"quantity", "stop_order_type", b"stop_order_type", "stop_price", b"stop_price"]) -> None: ...
 
 global___PostStopOrderRequest = PostStopOrderRequest
 
@@ -257,6 +261,7 @@ class StopOrder(google.protobuf.message.Message):
     EXPIRATION_TIME_FIELD_NUMBER: builtins.int
     PRICE_FIELD_NUMBER: builtins.int
     STOP_PRICE_FIELD_NUMBER: builtins.int
+    INSTRUMENT_UID_FIELD_NUMBER: builtins.int
     stop_order_id: builtins.str
     """Идентификатор-идентификатор стоп-заявки."""
     lots_requested: builtins.int
@@ -284,6 +289,8 @@ class StopOrder(google.protobuf.message.Message):
     @property
     def stop_price(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
         """Цена активации стоп-заявки за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента."""
+    instrument_uid: builtins.str
+    """instrument_uid идентификатор инструмента"""
     def __init__(
         self,
         *,
@@ -298,8 +305,9 @@ class StopOrder(google.protobuf.message.Message):
         expiration_time: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         price: tinkoff.invest.grpc.common_pb2.MoneyValue | None = ...,
         stop_price: tinkoff.invest.grpc.common_pb2.MoneyValue | None = ...,
+        instrument_uid: builtins.str = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["activation_date_time", b"activation_date_time", "create_date", b"create_date", "expiration_time", b"expiration_time", "price", b"price", "stop_price", b"stop_price"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["activation_date_time", b"activation_date_time", "create_date", b"create_date", "currency", b"currency", "direction", b"direction", "expiration_time", b"expiration_time", "figi", b"figi", "lots_requested", b"lots_requested", "order_type", b"order_type", "price", b"price", "stop_order_id", b"stop_order_id", "stop_price", b"stop_price"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["activation_date_time", b"activation_date_time", "create_date", b"create_date", "currency", b"currency", "direction", b"direction", "expiration_time", b"expiration_time", "figi", b"figi", "instrument_uid", b"instrument_uid", "lots_requested", b"lots_requested", "order_type", b"order_type", "price", b"price", "stop_order_id", b"stop_order_id", "stop_price", b"stop_price"]) -> None: ...
 
 global___StopOrder = StopOrder
