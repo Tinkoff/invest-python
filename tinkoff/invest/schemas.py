@@ -555,6 +555,8 @@ class Option(_grpc_helpers.Message):
     buy_available_flag: bool = _grpc_helpers.bool_field(404)
     sell_available_flag: bool = _grpc_helpers.bool_field(405)
     for_qual_investor_flag: bool = _grpc_helpers.bool_field(406)
+    weekend_flag: bool = _grpc_helpers.bool_field(407)
+    blocked_tca_flag: bool = _grpc_helpers.bool_field(408)
 
 
 @dataclass(eq=False, repr=True)
@@ -612,6 +614,8 @@ class Bond(_grpc_helpers.Message):  # pylint:disable=too-many-instance-attribute
     position_uid: str = _grpc_helpers.string_field(42)
     for_iis_flag: bool = _grpc_helpers.bool_field(51)
     for_qual_investor_flag: bool = _grpc_helpers.bool_field(52)
+    weekend_flag: bool = _grpc_helpers.bool_field(53)
+    blocked_tca_flag: bool = _grpc_helpers.bool_field(54)
     first_1min_candle_date: datetime = _grpc_helpers.message_field(61)
     first_1day_candle_date: datetime = _grpc_helpers.message_field(62)
 
@@ -648,6 +652,8 @@ class Currency(_grpc_helpers.Message):  # pylint:disable=too-many-instance-attri
     position_uid: str = _grpc_helpers.string_field(29)
     for_iis_flag: bool = _grpc_helpers.bool_field(41)
     for_qual_investor_flag: bool = _grpc_helpers.bool_field(52)
+    weekend_flag: bool = _grpc_helpers.bool_field(53)
+    blocked_tca_flag: bool = _grpc_helpers.bool_field(54)
     first_1min_candle_date: datetime = _grpc_helpers.message_field(56)
     first_1day_candle_date: datetime = _grpc_helpers.message_field(57)
 
@@ -688,6 +694,8 @@ class Etf(_grpc_helpers.Message):  # pylint:disable=too-many-instance-attributes
     position_uid: str = _grpc_helpers.string_field(33)
     for_iis_flag: bool = _grpc_helpers.bool_field(41)
     for_qual_investor_flag: bool = _grpc_helpers.bool_field(42)
+    weekend_flag: bool = _grpc_helpers.bool_field(43)
+    blocked_tca_flag: bool = _grpc_helpers.bool_field(44)
     first_1min_candle_date: datetime = _grpc_helpers.message_field(56)
     first_1day_candle_date: datetime = _grpc_helpers.message_field(57)
 
@@ -730,6 +738,8 @@ class Future(_grpc_helpers.Message):  # pylint:disable=too-many-instance-attribu
     basic_asset_position_uid: str = _grpc_helpers.string_field(34)
     for_iis_flag: bool = _grpc_helpers.bool_field(41)
     for_qual_investor_flag: bool = _grpc_helpers.bool_field(42)
+    weekend_flag: bool = _grpc_helpers.bool_field(43)
+    blocked_tca_flag: bool = _grpc_helpers.bool_field(44)
     first_1min_candle_date: datetime = _grpc_helpers.message_field(56)
     first_1day_candle_date: datetime = _grpc_helpers.message_field(57)
 
@@ -770,7 +780,9 @@ class Share(_grpc_helpers.Message):  # pylint:disable=too-many-instance-attribut
     real_exchange: "RealExchange" = _grpc_helpers.message_field(34)
     position_uid: str = _grpc_helpers.string_field(35)
     for_iis_flag: bool = _grpc_helpers.bool_field(46)
-    for_qual_investor_flag: bool = _grpc_helpers.bool_field(42)
+    for_qual_investor_flag: bool = _grpc_helpers.bool_field(47)
+    weekend_flag: bool = _grpc_helpers.bool_field(48)
+    blocked_tca_flag: bool = _grpc_helpers.bool_field(49)
     first_1min_candle_date: datetime = _grpc_helpers.message_field(56)
     first_1day_candle_date: datetime = _grpc_helpers.message_field(57)
 
@@ -844,6 +856,8 @@ class Instrument(_grpc_helpers.Message):  # pylint:disable=too-many-instance-att
     position_uid: str = _grpc_helpers.string_field(27)
     for_iis_flag: bool = _grpc_helpers.bool_field(36)
     for_qual_investor_flag: bool = _grpc_helpers.bool_field(37)
+    weekend_flag: bool = _grpc_helpers.bool_field(38)
+    blocked_tca_flag: bool = _grpc_helpers.bool_field(39)
     first_1min_candle_date: datetime = _grpc_helpers.message_field(56)
     first_1day_candle_date: datetime = _grpc_helpers.message_field(57)
 
@@ -1152,6 +1166,8 @@ class InstrumentShort(_grpc_helpers.Message):
     first_1min_candle_date: datetime = _grpc_helpers.message_field(26)
     first_1day_candle_date: datetime = _grpc_helpers.message_field(27)
     for_qual_investor_flag: bool = _grpc_helpers.bool_field(28)
+    weekend_flag: bool = _grpc_helpers.bool_field(29)
+    blocked_tca_flag: bool = _grpc_helpers.bool_field(30)
 
 
 @dataclass(eq=False, repr=True)
