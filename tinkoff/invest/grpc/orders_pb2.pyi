@@ -229,7 +229,7 @@ class OrderTrade(google.protobuf.message.Message):
     def price(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
         """Цена за 1 инструмент, по которой совершена сделка."""
     quantity: builtins.int
-    """Количество лотов в сделке."""
+    """Количество штук в сделке."""
     trade_id: builtins.str
     """Идентификатор сделки"""
     def __init__(

@@ -650,7 +650,7 @@ class PortfolioResponse(google.protobuf.message.Message):
     """Идентификатор счёта пользователя."""
     @property
     def total_amount_options(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
-        """Общая стоимость фьючерсов в портфеле в рублях."""
+        """Общая стоимость опционов в портфеле в рублях."""
     @property
     def total_amount_sp(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
         """Общая стоимость структурных нот в портфеле в рублях"""
@@ -1701,9 +1701,9 @@ class OperationItem(google.protobuf.message.Message):
     broker_account_id: builtins.str
     """Номер счета клиента."""
     id: builtins.str
-    """Номер поручения."""
+    """Идентификатор операции, может меняться с течением времени."""
     parent_operation_id: builtins.str
-    """Номер родительского поручения."""
+    """Идентификатор родительской операции, может измениться, если изменился id родительской операции."""
     name: builtins.str
     """Название операции."""
     @property

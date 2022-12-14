@@ -61,7 +61,8 @@ class OperationsServiceServicer(object):
     """
 
     def GetOperations(self, request, context):
-        """Метод получения списка операций по счёту.
+        """Метод получения списка операций по счёту.При работе с данным методом необходимо учитывать
+        [особенности взаимодействия](/investAPI/operations_problems) с данным методом.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -103,7 +104,8 @@ class OperationsServiceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def GetOperationsByCursor(self, request, context):
-        """Метод получения списка операций по счёту с пагинацией.
+        """Метод получения списка операций по счёту с пагинацией. При работе с данным методом необходимо учитывать
+        [особенности взаимодействия](/investAPI/operations_problems) с данным методом.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
