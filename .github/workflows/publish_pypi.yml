@@ -16,7 +16,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Install poetry
-        run: pip install poetry==1.1.15
+        run: make install-poetry
 
       - name: Publish package to pypi
         run: make publish

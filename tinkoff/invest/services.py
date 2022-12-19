@@ -1536,7 +1536,7 @@ class SandboxService(_grpc_helpers.Service):
         self,
         request: GetOperationsByCursorRequest,
     ) -> GetOperationsByCursorResponse:
-        response, call = self.stub.GetOperationsByCursor.with_call(
+        response, call = self.stub.GetSandboxOperationsByCursor.with_call(
             request=_grpc_helpers.dataclass_to_protobuff(
                 request, operations_pb2.GetOperationsByCursorRequest()
             ),
