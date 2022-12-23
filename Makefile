@@ -15,11 +15,9 @@ EXCLUDE_CODE = tinkoff/invest/grpc
 test:
 	$(TEST) --cov
 
-
 .PHONY: test-sandbox
 test-sandbox:
 	$(TEST) --test-sandbox --cov
-
 
 .PHONY: lint
 lint:
@@ -72,6 +70,14 @@ bump-version:
 	git add . && git commit -m "Bump version $(v)"
 	git tag -m "" -a $(v)
 	make update-changelog
+
+.PHONY: install-poetry
+install-poetry:
+	pip install poetry==1.3.1
+
+.PHONY: install-docs
+install-docs:
+	poetry install --only docs
 
 .PHONY: install
 install:

@@ -221,7 +221,7 @@ class Enum(enum.IntEnum):
             raise ValueError(f"Unknown value {name} for enum {cls.__name__}") from e
 
 
-class Message(ABC):
+class Message:
     ...
 
 
