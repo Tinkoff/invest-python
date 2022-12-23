@@ -22,6 +22,9 @@ jobs:
       - name: Run linters
         run: make lint
 
+      - name: Test docs
+        run: make docs
+
       - name: Run test
         run: make test
         env:
