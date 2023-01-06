@@ -1585,7 +1585,7 @@ class SandboxService(_grpc_helpers.Service):
     ) -> WithdrawLimitsResponse:
         request = WithdrawLimitsRequest()
         request.account_id = account_id
-        response, call = self.stub.SandboxPayIn.with_call(
+        response, call = self.stub.GetSandboxWithdrawLimits.with_call(
             request=_grpc_helpers.dataclass_to_protobuff(
                 request, operations_pb2.WithdrawLimitsRequest()
             ),
