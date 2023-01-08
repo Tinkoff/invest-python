@@ -4,11 +4,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## [0.2.0-beta44](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta44) - 2022-12-16
+## [0.2.0-beta45](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta45) - 2023-01-08
+
+<small>[Compare with 0.2.0-beta44](https://github.com/tinkoff/invest-python/compare/0.2.0-beta44...0.2.0-beta45)</small>
+
+### Bug Fixes
+- Fix sandbox get_operations_by_cursor (#167) ([b52d675](https://github.com/tinkoff/invest-python/commit/b52d675fdd51e279d16c4d28bcea0581cc2c52b5) by Danil Akhtarov).
+
+### Features
+- Get_sandbox_withdraw_limits fix (#173) ([b2b4982](https://github.com/tinkoff/invest-python/commit/b2b49826f246513de82cd1abf4060a6bd6fc8441) by SourInjir).
+
+
+## [0.2.0-beta44](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta44) - 2022-12-17
 
 <small>[Compare with 0.2.0-beta43](https://github.com/tinkoff/invest-python/compare/0.2.0-beta43...0.2.0-beta44)</small>
 
 ### Features
+- Release (#166) ([f0f95fa](https://github.com/tinkoff/invest-python/commit/f0f95fa580143316be942ae3518a71f098739eb9) by Ruslan Sirazhetdinov).
 - Contracts v1.0.19 (#163) ([00607b5](https://github.com/tinkoff/invest-python/commit/00607b5c02256697c8edac0e8bf5afa926ee8d65) by Ruslan Sirazhetdinov).
 
 
