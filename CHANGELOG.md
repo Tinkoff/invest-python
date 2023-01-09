@@ -1,329 +1,286 @@
 # Changelog
-All notable changes to this project will be documented in this file.
 
-The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
-and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
+## 0.2.0-beta45 (2023-01-09)
 
-## [0.2.0-beta45](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta45) - 2023-01-08
+#### New Features
 
-<small>[Compare with 0.2.0-beta44](https://github.com/tinkoff/invest-python/compare/0.2.0-beta44...0.2.0-beta45)</small>
+* get_sandbox_withdraw_limits fix ([#173](https://github.com/Tinkoff/invest-python/issues/173))
+#### Fixes
 
-### Bug Fixes
-- Fix sandbox get_operations_by_cursor (#167) ([b52d675](https://github.com/tinkoff/invest-python/commit/b52d675fdd51e279d16c4d28bcea0581cc2c52b5) by Danil Akhtarov).
+* fix sandbox get_operations_by_cursor ([#167](https://github.com/Tinkoff/invest-python/issues/167))
+#### Docs
 
-### Features
-- Get_sandbox_withdraw_limits fix (#173) ([b2b4982](https://github.com/tinkoff/invest-python/commit/b2b49826f246513de82cd1abf4060a6bd6fc8441) by SourInjir).
+* fix deps ([#168](https://github.com/Tinkoff/invest-python/issues/168))
 
+Full set of changes: [`0.2.0-beta44...0.2.0-beta45`](https://github.com/Tinkoff/invest-python/compare/0.2.0-beta44...0.2.0-beta45)
 
-## [0.2.0-beta44](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta44) - 2022-12-17
+## 0.2.0-beta44 (2022-12-18)
 
-<small>[Compare with 0.2.0-beta43](https://github.com/tinkoff/invest-python/compare/0.2.0-beta43...0.2.0-beta44)</small>
+#### New Features
 
-### Features
-- Release (#166) ([f0f95fa](https://github.com/tinkoff/invest-python/commit/f0f95fa580143316be942ae3518a71f098739eb9) by Ruslan Sirazhetdinov).
-- Contracts v1.0.19 (#163) ([00607b5](https://github.com/tinkoff/invest-python/commit/00607b5c02256697c8edac0e8bf5afa926ee8d65) by Ruslan Sirazhetdinov).
+* release ([#166](https://github.com/Tinkoff/invest-python/issues/166))
+* contracts v1.0.19 ([#163](https://github.com/Tinkoff/invest-python/issues/163))
+#### Docs
 
+* fix edit_uri ([#159](https://github.com/Tinkoff/invest-python/issues/159))
 
-## [0.2.0-beta43](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta43) - 2022-12-02
+Full set of changes: [`0.2.0-beta43...0.2.0-beta44`](https://github.com/Tinkoff/invest-python/compare/0.2.0-beta43...0.2.0-beta44)
 
-<small>[Compare with 0.2.0-beta42](https://github.com/tinkoff/invest-python/compare/0.2.0-beta42...0.2.0-beta43)</small>
+## 0.2.0-beta43 (2022-12-02)
 
-### Features
-- New contract support v1.0.18 (#157) ([de2f29b](https://github.com/tinkoff/invest-python/commit/de2f29b735a0b45efc1b7968a8ff730ab09ee163) by Ruslan Sirazhetdinov).
+#### New Features
 
+* new contract support v1.0.18 ([#157](https://github.com/Tinkoff/invest-python/issues/157))
+#### Others
 
-## [0.2.0-beta42](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta42) - 2022-11-28
+* bump 0.2.0-beta43 ([#158](https://github.com/Tinkoff/invest-python/issues/158))
 
-<small>[Compare with 0.2.0-beta41](https://github.com/tinkoff/invest-python/compare/0.2.0-beta41...0.2.0-beta42)</small>
+Full set of changes: [`0.2.0-beta42...0.2.0-beta43`](https://github.com/Tinkoff/invest-python/compare/0.2.0-beta42...0.2.0-beta43)
 
-### Features
-- New contract support (#153) ([56ff1f2](https://github.com/tinkoff/invest-python/commit/56ff1f2f77c7401a8d3edfaadc9aafbbc2fc6803) by Ruslan Sirazhetdinov).
-- Add py.typed (#150) ([fe729de](https://github.com/tinkoff/invest-python/commit/fe729de45a2320976c95c0bbe85528e85532df7c) by Danil Akhtarov).
-- Windows ci test (#140) ([3d6fcdf](https://github.com/tinkoff/invest-python/commit/3d6fcdfdf943eba96ca02a114fbcda093e0d05f8) by Ruslan Sirazhetdinov).
+## 0.2.0-beta42 (2022-11-28)
 
+#### New Features
 
-## [0.2.0-beta41](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta41) - 2022-11-16
+* new contract support ([#153](https://github.com/Tinkoff/invest-python/issues/153))
+* add py.typed ([#150](https://github.com/Tinkoff/invest-python/issues/150))
+* windows ci test ([#140](https://github.com/Tinkoff/invest-python/issues/140))
+#### Docs
 
-<small>[Compare with 0.2.0-beta40](https://github.com/tinkoff/invest-python/compare/0.2.0-beta40...0.2.0-beta41)</small>
+* update changelog
 
-### Bug Fixes
-- Fix initializing an empty message #99 (#147) ([b90152b](https://github.com/tinkoff/invest-python/commit/b90152b6505b220cd246cc3729052864005f336f) by Danil Akhtarov).
-- Test only if needed (#142) ([e64aeeb](https://github.com/tinkoff/invest-python/commit/e64aeeb64c42678c13190e9e8eeae47346150537) by Ruslan Sirazhetdinov).
-- Rm strftime (#133) ([b1b6b96](https://github.com/tinkoff/invest-python/commit/b1b6b9651fdc9cfedc678370c77a2dca48732460) by Ruslan Sirazhetdinov).
-- Skip if no trades on the exchange (#131) ([821a2c9](https://github.com/tinkoff/invest-python/commit/821a2c997fdc7230b89f721d13cfd299ba9bf90b) by Ruslan Sirazhetdinov).
+Full set of changes: [`0.2.0-beta41...0.2.0-beta42`](https://github.com/Tinkoff/invest-python/compare/0.2.0-beta41...0.2.0-beta42)
 
+## 0.2.0-beta41 (2022-11-16)
 
-## [0.2.0-beta40](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta40) - 2022-10-25
+#### Fixes
 
-<small>[Compare with 0.2.0-beta39](https://github.com/tinkoff/invest-python/compare/0.2.0-beta39...0.2.0-beta40)</small>
+* fix initializing an empty message [#99](https://github.com/Tinkoff/invest-python/issues/99) ([#147](https://github.com/Tinkoff/invest-python/issues/147))
+* test only if needed ([#142](https://github.com/Tinkoff/invest-python/issues/142))
+* rm strftime ([#133](https://github.com/Tinkoff/invest-python/issues/133))
+* skip if no trades on the exchange ([#131](https://github.com/Tinkoff/invest-python/issues/131))
+#### Docs
 
-### Bug Fixes
-- Test ([36edfb7](https://github.com/tinkoff/invest-python/commit/36edfb7bf68c8e7e90f39baaab7c5a298767045a) by Ruslan Sirazhetdinov).
+* update documentation ([#145](https://github.com/Tinkoff/invest-python/issues/145))
+* update documentation ([#143](https://github.com/Tinkoff/invest-python/issues/143))
+* include examples to docs ([#139](https://github.com/Tinkoff/invest-python/issues/139))
+* update changelog
+#### Others
 
-### Features
-- Update grpc, support api v1.0.15 ([beec6b9](https://github.com/tinkoff/invest-python/commit/beec6b9bae3b1393053b94c91b73adbc96649327) by Danil Akhtarov).
+* add ruff linter ([#146](https://github.com/Tinkoff/invest-python/issues/146))
+* fix tests ([#135](https://github.com/Tinkoff/invest-python/issues/135))
 
+Full set of changes: [`0.2.0-beta40...0.2.0-beta41`](https://github.com/Tinkoff/invest-python/compare/0.2.0-beta40...0.2.0-beta41)
 
-## [0.2.0-beta39](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta39) - 2022-10-10
+## 0.2.0-beta40 (2022-10-25)
 
-<small>[Compare with 0.2.0-beta38](https://github.com/tinkoff/invest-python/compare/0.2.0-beta38...0.2.0-beta39)</small>
+#### New Features
 
-### Features
-- New contract support (#126) ([880c529](https://github.com/tinkoff/invest-python/commit/880c529c7c79b98b01ed78660681584536ba90ab) by Ruslan Sirazhetdinov).
-- Add sandbox github actions (#125) ([311d436](https://github.com/tinkoff/invest-python/commit/311d4365cc079d428003b24a4b076b3f0c28b30c) by Ruslan Sirazhetdinov).
-- Deduplicate candles (#118) ([21e7d44](https://github.com/tinkoff/invest-python/commit/21e7d449cb833bda522a04f94e6d6f3ef19bbc9a) by Ruslan Sirazhetdinov).
-- Arithmetics for quotation (#119) ([40932c3](https://github.com/tinkoff/invest-python/commit/40932c33ed06be56496c1b86a6bc87c18aeaf79d) by Ruslan Sirazhetdinov).
+* update grpc, support api v1.0.15
+#### Fixes
 
+* test
+#### Docs
 
-## [0.2.0-beta38](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta38) - 2022-09-29
+* update changelog
 
-<small>[Compare with 0.2.0-beta37](https://github.com/tinkoff/invest-python/compare/0.2.0-beta37...0.2.0-beta38)</small>
+Full set of changes: [`0.2.0-beta39...0.2.0-beta40`](https://github.com/Tinkoff/invest-python/compare/0.2.0-beta39...0.2.0-beta40)
 
-### Bug Fixes
-- Fix replacesandboxorder ([43fe25f](https://github.com/tinkoff/invest-python/commit/43fe25f3b2bf1968c6cda16ba5abe70405563e10) by Danil Akhtarov).
+## 0.2.0-beta39 (2022-10-10)
 
+#### New Features
 
-## [0.2.0-beta37](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta37) - 2022-09-29
+* new contract support ([#126](https://github.com/Tinkoff/invest-python/issues/126))
+* add sandbox GitHub actions ([#125](https://github.com/Tinkoff/invest-python/issues/125))
+* deduplicate candles ([#118](https://github.com/Tinkoff/invest-python/issues/118))
+* arithmetics for Quotation ([#119](https://github.com/Tinkoff/invest-python/issues/119))
+#### Docs
 
-<small>[Compare with 0.2.0-beta36](https://github.com/tinkoff/invest-python/compare/0.2.0-beta36...0.2.0-beta37)</small>
+* update changelog
 
-### Bug Fixes
-- Fix repeated fields in positiondata (#121) ([d9c9b20](https://github.com/tinkoff/invest-python/commit/d9c9b20967a855d8d10e116241e4bd6f380647ab) by Ruslan Sirazhetdinov).
+Full set of changes: [`0.2.0-beta38...0.2.0-beta39`](https://github.com/Tinkoff/invest-python/compare/0.2.0-beta38...0.2.0-beta39)
 
-### Features
-- Update dependencies ([2c6860e](https://github.com/tinkoff/invest-python/commit/2c6860ec857bded4a576a379e63639ba10a5f313) by Danil Akhtarov).
+## 0.2.0-beta38 (2022-09-29)
 
+#### Fixes
 
-## [0.2.0-beta36](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta36) - 2022-09-10
+* fix ReplaceSandboxOrder
+#### Docs
 
-<small>[Compare with 0.2.0-beta35](https://github.com/tinkoff/invest-python/compare/0.2.0-beta35...0.2.0-beta36)</small>
+* update contributing
+* update changelog
+#### Others
 
-### Bug Fixes
-- Positions_stream model, add example (#115) ([2d5d6b2](https://github.com/tinkoff/invest-python/commit/2d5d6b23a3432464c0663df7bf8afb6bed18eca0) by Ruslan Sirazhetdinov).
+* fix makefile
 
-### Features
-- Sleep if exhausted (#106) ([d057bcb](https://github.com/tinkoff/invest-python/commit/d057bcbe42ad205b039c2c7f1de21d3161a018ea) by Ruslan Sirazhetdinov).
+Full set of changes: [`0.2.0-beta37...0.2.0-beta38`](https://github.com/Tinkoff/invest-python/compare/0.2.0-beta37...0.2.0-beta38)
 
+## 0.2.0-beta37 (2022-09-29)
 
-## [0.2.0-beta35](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta35) - 2022-08-30
+#### New Features
 
-<small>[Compare with 0.2.0-beta34](https://github.com/tinkoff/invest-python/compare/0.2.0-beta34...0.2.0-beta35)</small>
+* update dependencies
+#### Fixes
 
-### Bug Fixes
-- Format code in issue template (#108) ([4a2c1c7](https://github.com/tinkoff/invest-python/commit/4a2c1c7d1184164a38b4c74c6a1f1f1b5770b0fd) by Ruslan Sirazhetdinov).
+* fix repeated fields in PositionData ([#121](https://github.com/Tinkoff/invest-python/issues/121))
+#### Docs
 
-### Features
-- Support v1.0.12 ([ba0729e](https://github.com/tinkoff/invest-python/commit/ba0729e62cc4361d3259a7614fc82ed272be36be) by Danil Akhtarov).
+* add sandbox description ([#117](https://github.com/Tinkoff/invest-python/issues/117))
+* add api reference
+* update readme
+* update changelog
+#### Others
 
+* fix poetry version
 
-## [0.2.0-beta34](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta34) - 2022-08-27
+Full set of changes: [`0.2.0-beta36...0.2.0-beta37`](https://github.com/Tinkoff/invest-python/compare/0.2.0-beta36...0.2.0-beta37)
 
-<small>[Compare with 0.2.0-beta33](https://github.com/tinkoff/invest-python/compare/0.2.0-beta33...0.2.0-beta34)</small>
+## 0.2.0-beta36 (2022-09-10)
 
-### Bug Fixes
-- Fix get operations by cursor (#109) ([6c4385d](https://github.com/tinkoff/invest-python/commit/6c4385d73cdae3176fc306431c639580c03a95ac) by Ruslan Sirazhetdinov).
+#### New Features
 
-### Code Refactoring
-- Add cachetools ([35b194c](https://github.com/tinkoff/invest-python/commit/35b194cd396e3d4cff0135f108320816aa0e2645) by Danil Akhtarov).
+* sleep if exhausted ([#106](https://github.com/Tinkoff/invest-python/issues/106))
+#### Fixes
 
-### Features
-- Sandbox client (#110) ([aa5ff74](https://github.com/tinkoff/invest-python/commit/aa5ff74f7fd9b2d035a0c65351836907980d163f) by Ruslan Sirazhetdinov).
-- Feature instrument caching (#92) ([b180f35](https://github.com/tinkoff/invest-python/commit/b180f35e83fb4dcc8cef423e83b2f7485ecb7253) by Ruslan Sirazhetdinov).
+* positions_stream model, add example ([#115](https://github.com/Tinkoff/invest-python/issues/115))
+#### Docs
 
+* update changelog
 
-## [0.2.0-beta33](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta33) - 2022-08-04
+Full set of changes: [`0.2.0-beta35...0.2.0-beta36`](https://github.com/Tinkoff/invest-python/compare/0.2.0-beta35...0.2.0-beta36)
 
-<small>[Compare with 0.2.0-beta32](https://github.com/tinkoff/invest-python/compare/0.2.0-beta32...0.2.0-beta33)</small>
+## 0.2.0-beta35 (2022-08-30)
 
-### Bug Fixes
-- Fix is complete caching (#84) ([13b7025](https://github.com/tinkoff/invest-python/commit/13b7025ef3a30eda23178f9af90dd321353dddcd) by Ruslan Sirazhetdinov).
+#### New Features
 
-### Features
-- Support grpc v1.0.11 ([80f7f5f](https://github.com/tinkoff/invest-python/commit/80f7f5f507a9773419a4212328cd3f663a66d012) by Danil Akhtarov).
+* support v1.0.12
+#### Fixes
 
+* format code in issue template ([#108](https://github.com/Tinkoff/invest-python/issues/108))
+#### Docs
 
-## [0.2.0-beta32](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta32) - 2022-07-07
+* update changelog
 
-<small>[Compare with 0.2.0-beta31](https://github.com/tinkoff/invest-python/compare/0.2.0-beta31...0.2.0-beta32)</small>
+Full set of changes: [`0.2.0-beta34...0.2.0-beta35`](https://github.com/Tinkoff/invest-python/compare/0.2.0-beta34...0.2.0-beta35)
 
-### Bug Fixes
-- Rm excess await (#88) ([a412965](https://github.com/tinkoff/invest-python/commit/a412965adcee426d7c49d5a0b8934ddbc5d19794) by Ruslan Sirazhetdinov).
+## 0.2.0-beta34 (2022-08-27)
 
+#### New Features
 
-## [0.2.0-beta31](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta31) - 2022-07-04
+* sandbox client ([#110](https://github.com/Tinkoff/invest-python/issues/110))
+* Feature instrument caching ([#92](https://github.com/Tinkoff/invest-python/issues/92))
+#### Fixes
 
-<small>[Compare with 0.2.0-beta30](https://github.com/tinkoff/invest-python/compare/0.2.0-beta30...0.2.0-beta31)</small>
+* fix get operations by cursor ([#109](https://github.com/Tinkoff/invest-python/issues/109))
+#### Refactorings
 
-### Features
-- Add operationsstreamservice ([4dda0a4](https://github.com/tinkoff/invest-python/commit/4dda0a44b3cebff4e0923a2fe19ce53513e122f2) by Danil Akhtarov).
+* add cachetools
+#### Docs
 
+* update changelog
+#### Others
 
-## [0.2.0-beta30](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta30) - 2022-06-07
+* fix bandit
+* add bandit
 
-<small>[Compare with 0.2.0-beta29](https://github.com/tinkoff/invest-python/compare/0.2.0-beta29...0.2.0-beta30)</small>
+Full set of changes: [`0.2.0-beta33...0.2.0-beta34`](https://github.com/Tinkoff/invest-python/compare/0.2.0-beta33...0.2.0-beta34)
 
-### Bug Fixes
-- Skip placeholder ([7087057](https://github.com/tinkoff/invest-python/commit/7087057da88cfd98d5e3910d402f6219dd28bf36) by Danil Akhtarov).
+## 0.2.0-beta33 (2022-08-04)
 
-### Features
-- Support v1.0.8 methods ([405884f](https://github.com/tinkoff/invest-python/commit/405884febd3230c9eb9f29dcce8cb486f6b88f44) by Danil Akhtarov).
+#### New Features
 
+* support grpc V1.0.11
+#### Fixes
 
-## [0.2.0-beta29](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta29) - 2022-06-01
+* fix is complete caching ([#84](https://github.com/Tinkoff/invest-python/issues/84))
+#### Docs
 
-<small>[Compare with 0.2.0-beta28](https://github.com/tinkoff/invest-python/compare/0.2.0-beta28...0.2.0-beta29)</small>
+* update changelog
 
-### Features
-- Support v1.0.8 schemas ([08eac8e](https://github.com/tinkoff/invest-python/commit/08eac8e950c00fdb0dcd3703944beff4c07064f5) by Danil Akhtarov).
+Full set of changes: [`0.2.0-beta32...0.2.0-beta33`](https://github.com/Tinkoff/invest-python/compare/0.2.0-beta32...0.2.0-beta33)
 
+## 0.2.0-beta32 (2022-07-07)
 
-## [0.2.0-beta28](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta28) - 2022-05-23
+#### Fixes
 
-<small>[Compare with 0.2.0-beta27](https://github.com/tinkoff/invest-python/compare/0.2.0-beta27...0.2.0-beta28)</small>
+* rm excess await ([#88](https://github.com/Tinkoff/invest-python/issues/88))
+#### Docs
 
-### Bug Fixes
-- Fix `min() arg is an empty sequence` error on get_all_candles (#71) ([872e563](https://github.com/tinkoff/invest-python/commit/872e56358fd69734629820c56e8b536ef51b707e) by Anton Semenov).
+* add examples
+* update changelog
+#### Others
 
-### Features
-- Add target arg ([86e9a48](https://github.com/tinkoff/invest-python/commit/86e9a4828c99e2a7eaf23ca614b0e905d76e1eaa) by Danil Akhtarov).
+* ignore merge into message ([#89](https://github.com/Tinkoff/invest-python/issues/89))
 
+Full set of changes: [`0.2.0-beta31...0.2.0-beta32`](https://github.com/Tinkoff/invest-python/compare/0.2.0-beta31...0.2.0-beta32)
 
-## [0.2.0-beta27](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta27) - 2022-05-11
+## 0.2.0-beta31 (2022-07-04)
 
-<small>[Compare with 0.2.0-beta26](https://github.com/tinkoff/invest-python/compare/0.2.0-beta26...0.2.0-beta27)</small>
+#### New Features
 
-### Bug Fixes
-- Add dateutil (#66) ([552ef32](https://github.com/tinkoff/invest-python/commit/552ef320e102e67bfb9276f48d544c8542b38a5f) by Ruslan Sirazhetdinov).
-- Add gitlint to pyproject.toml ([1a6a922](https://github.com/tinkoff/invest-python/commit/1a6a9221038f59922c7da98773a2eafa1f772f31) by Danil Akhtarov).
+* add OperationsStreamService
+#### Docs
 
+* update pydocs
+* update changelog
 
-## [0.2.0-beta26](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta26) - 2022-05-06
+Full set of changes: [`0.2.0-beta30...0.2.0-beta31`](https://github.com/Tinkoff/invest-python/compare/0.2.0-beta30...0.2.0-beta31)
 
-<small>[Compare with 0.2.0-beta25](https://github.com/tinkoff/invest-python/compare/0.2.0-beta25...0.2.0-beta26)</small>
+## 0.2.0-beta30 (2022-06-07)
 
+#### New Features
 
-## [0.2.0-beta25](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta25) - 2022-05-03
+* support v1.0.8 methods
+#### Fixes
 
-<small>[Compare with 0.2.0-beta24](https://github.com/tinkoff/invest-python/compare/0.2.0-beta24...0.2.0-beta25)</small>
+* skip PLACEHOLDER
+#### Docs
 
+* update changelog
 
-## [0.2.0-beta24](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta24) - 2022-05-01
+Full set of changes: [`0.2.0-beta29...0.2.0-beta30`](https://github.com/Tinkoff/invest-python/compare/0.2.0-beta29...0.2.0-beta30)
 
-<small>[Compare with 0.2.0-beta23](https://github.com/tinkoff/invest-python/compare/0.2.0-beta23...0.2.0-beta24)</small>
+## 0.2.0-beta29 (2022-06-01)
 
+#### New Features
 
-## [0.2.0-beta23](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta23) - 2022-04-25
+* support v1.0.8 schemas
+#### Docs
 
-<small>[Compare with 0.2.0-beta22](https://github.com/tinkoff/invest-python/compare/0.2.0-beta22...0.2.0-beta23)</small>
+* update changelog
 
+Full set of changes: [`0.2.0-beta28...0.2.0-beta29`](https://github.com/Tinkoff/invest-python/compare/0.2.0-beta28...0.2.0-beta29)
 
-## [0.2.0-beta22](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta22) - 2022-04-24
+## 0.2.0-beta28 (2022-05-23)
 
-<small>[Compare with 0.2.0-beta21](https://github.com/tinkoff/invest-python/compare/0.2.0-beta21...0.2.0-beta22)</small>
+#### New Features
 
+* add target arg
+#### Fixes
 
-## [0.2.0-beta21](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta21) - 2022-04-23
+* Fix `min() arg is an empty sequence` error on get_all_candles ([#71](https://github.com/Tinkoff/invest-python/issues/71))
+#### Docs
 
-<small>[Compare with 0.2.0-beta20](https://github.com/tinkoff/invest-python/compare/0.2.0-beta20...0.2.0-beta21)</small>
+* update changelog
+#### Others
 
+* Fix gitlint
 
-## [0.2.0-beta20](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta20) - 2022-04-07
+Full set of changes: [`0.2.0-beta27...0.2.0-beta28`](https://github.com/Tinkoff/invest-python/compare/0.2.0-beta27...0.2.0-beta28)
 
-<small>[Compare with 0.2.0-beta19](https://github.com/tinkoff/invest-python/compare/0.2.0-beta19...0.2.0-beta20)</small>
+## 0.2.0-beta27 (2022-05-11)
 
+#### Fixes
 
-## [0.2.0-beta19](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta19) - 2022-03-22
+* add dateutil ([#66](https://github.com/Tinkoff/invest-python/issues/66))
+* add gitlint to pyproject.toml
+#### Docs
 
-<small>[Compare with 0.2.0-beta18](https://github.com/tinkoff/invest-python/compare/0.2.0-beta18...0.2.0-beta19)</small>
+* update changelog
+#### Others
 
+* fix make git-lint
 
-## [0.2.0-beta18](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta18) - 2022-03-16
+Full set of changes: [`0.2.0-beta26...0.2.0-beta27`](https://github.com/Tinkoff/invest-python/compare/0.2.0-beta26...0.2.0-beta27)
 
-<small>[Compare with 0.2.0-beta17](https://github.com/tinkoff/invest-python/compare/0.2.0-beta17...0.2.0-beta18)</small>
-
-
-## [0.2.0-beta17](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta17) - 2022-03-13
-
-<small>[Compare with 0.2.0-beta16](https://github.com/tinkoff/invest-python/compare/0.2.0-beta16...0.2.0-beta17)</small>
-
-
-## [0.2.0-beta16](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta16) - 2022-03-04
-
-<small>[Compare with 0.2.0-beta15](https://github.com/tinkoff/invest-python/compare/0.2.0-beta15...0.2.0-beta16)</small>
-
-
-## [0.2.0-beta15](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta15) - 2022-02-18
-
-<small>[Compare with 0.2.0-beta14](https://github.com/tinkoff/invest-python/compare/0.2.0-beta14...0.2.0-beta15)</small>
-
-
-## [0.2.0-beta14](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta14) - 2022-02-03
-
-<small>[Compare with 0.2.0-beta13](https://github.com/tinkoff/invest-python/compare/0.2.0-beta13...0.2.0-beta14)</small>
-
-
-## [0.2.0-beta13](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta13) - 2022-02-01
-
-<small>[Compare with 0.2.0-beta12](https://github.com/tinkoff/invest-python/compare/0.2.0-beta12...0.2.0-beta13)</small>
-
-
-## [0.2.0-beta12](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta12) - 2022-01-31
-
-<small>[Compare with 0.2.0-beta11](https://github.com/tinkoff/invest-python/compare/0.2.0-beta11...0.2.0-beta12)</small>
-
-
-## [0.2.0-beta11](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta11) - 2022-01-31
-
-<small>[Compare with 0.2.0-beta10](https://github.com/tinkoff/invest-python/compare/0.2.0-beta10...0.2.0-beta11)</small>
-
-
-## [0.2.0-beta10](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta10) - 2022-01-31
-
-<small>[Compare with 0.2.0-beta9](https://github.com/tinkoff/invest-python/compare/0.2.0-beta9...0.2.0-beta10)</small>
-
-
-## [0.2.0-beta9](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta9) - 2022-01-31
-
-<small>[Compare with 0.2.0-beta8](https://github.com/tinkoff/invest-python/compare/0.2.0-beta8...0.2.0-beta9)</small>
-
-
-## [0.2.0-beta8](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta8) - 2022-01-28
-
-<small>[Compare with 0.2.0-beta7](https://github.com/tinkoff/invest-python/compare/0.2.0-beta7...0.2.0-beta8)</small>
-
-
-## [0.2.0-beta7](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta7) - 2022-01-28
-
-<small>[Compare with 0.2.0-beta6](https://github.com/tinkoff/invest-python/compare/0.2.0-beta6...0.2.0-beta7)</small>
-
-
-## [0.2.0-beta6](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta6) - 2022-01-25
-
-<small>[Compare with 0.2.0-beta5](https://github.com/tinkoff/invest-python/compare/0.2.0-beta5...0.2.0-beta6)</small>
-
-
-## [0.2.0-beta5](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta5) - 2022-01-23
-
-<small>[Compare with 0.2.0-beta4](https://github.com/tinkoff/invest-python/compare/0.2.0-beta4...0.2.0-beta5)</small>
-
-
-## [0.2.0-beta4](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta4) - 2022-01-20
-
-<small>[Compare with 0.2.0-beta3](https://github.com/tinkoff/invest-python/compare/0.2.0-beta3...0.2.0-beta4)</small>
-
-
-## [0.2.0-beta3](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta3) - 2022-01-19
-
-<small>[Compare with 0.2.0-beta1](https://github.com/tinkoff/invest-python/compare/0.2.0-beta1...0.2.0-beta3)</small>
-
-
-## [0.2.0-beta1](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta1) - 2022-01-18
-
-<small>[Compare with 0.2.0-beta0](https://github.com/tinkoff/invest-python/compare/0.2.0-beta0...0.2.0-beta1)</small>
-
-
-## [0.2.0-beta0](https://github.com/tinkoff/invest-python/releases/tag/0.2.0-beta0) - 2022-01-18
-
-<small>[Compare with first commit](https://github.com/tinkoff/invest-python/compare/dde96aeaf663a122a2a6e305ca8417058c7ca4af...0.2.0-beta0)</small>
-
+## 0.2.0-beta26 (2022-05-07)
 

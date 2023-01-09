@@ -54,12 +54,16 @@ docs:
 docs-serve:
 	$(POETRY_RUN) mkdocs serve
 
-.PHONY: docs-changelog
-docs-changelog:
-	$(POETRY_RUN) git-changelog -s conventional -o CHANGELOG.md .
+.PHONY: changelog
+changelog:
+ifeq ($(v),)
+	$(POETRY_RUN) auto-changelog --starting-commit 6186fc50ce5bca4f4bc7595956137871fb8b05e5
+else
+	$(POETRY_RUN) auto-changelog --starting-commit 6186fc50ce5bca4f4bc7595956137871fb8b05e5 -v $(v)
+endif
 
 .PHONY: update-changelog
-update-changelog: docs-changelog
+update-changelog: changelog
 	git add .
 	git commit -m "docs: update changelog"
 
@@ -67,9 +71,8 @@ update-changelog: docs-changelog
 bump-version:
 	poetry version $(v)
 	$(POETRY_RUN) python -m scripts.update_issue_templates $(v)
-	git add . && git commit -m "Bump version $(v)"
-	git tag -m "" -a $(v)
-	make update-changelog
+	make changelog v=$(v)
+	git add . && git commit -m "bump: bump version $(v)"
 
 .PHONY: install-poetry
 install-poetry:

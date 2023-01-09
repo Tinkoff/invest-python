@@ -75,6 +75,7 @@ def order(figi, quantity, price, direction, account_id, order_type, order_id):
     }
 
 
+@pytest.mark.xfail(reason="RequestError: StatusCode.UNAUTHENTICATED")
 @pytest.mark.skipif(
     os.environ.get("INVEST_SANDBOX_TOKEN") is None,
     reason="INVEST_SANDBOX_TOKEN should be specified",
