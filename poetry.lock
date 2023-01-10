@@ -95,6 +95,24 @@ tests = ["cloudpickle", "coverage[toml] (>=5.0.2)", "hypothesis", "mypy (>=0.900
 tests-no-zope = ["cloudpickle", "coverage[toml] (>=5.0.2)", "hypothesis", "mypy (>=0.900,!=0.940)", "pympler", "pytest (>=4.3.0)", "pytest-mypy-plugins"]
 
 [[package]]
+name = "auto-changelog"
+version = "0.6.0"
+description = "Simple tool to generate nice, formatted changelogs from vcs"
+category = "dev"
+optional = false
+python-versions = ">=3.7.2"
+files = [
+    {file = "auto_changelog-0.6.0-py3-none-any.whl", hash = "sha256:c14e647b767758f483a7567d7be5a0c79b8ecbd52b4bdc6fed2a98aba9ed86d8"},
+    {file = "auto_changelog-0.6.0.tar.gz", hash = "sha256:ae930fd187d32df92a0e63b96a710a954cd387fcb4a592492abfcd0d3cfbd6fa"},
+]
+
+[package.dependencies]
+Click = ">=8.0"
+docopt = ">=0.6.2"
+gitpython = ">=2.1"
+jinja2 = ">=3.0"
+
+[[package]]
 name = "autoflake"
 version = "1.7.8"
 description = "Removes unused imports and unused variables"
@@ -459,6 +477,17 @@ files = [
 
 [package.extras]
 graph = ["objgraph (>=1.7.2)"]
+
+[[package]]
+name = "docopt"
+version = "0.6.2"
+description = "Pythonic argument parser, that will make you smile"
+category = "dev"
+optional = false
+python-versions = "*"
+files = [
+    {file = "docopt-0.6.2.tar.gz", hash = "sha256:49b3a825280bd66b3aa83585ef59c4a8c82f2c8a522dbe754a8bc8d08c85c491"},
+]
 
 [[package]]
 name = "eradicate"
@@ -829,22 +858,6 @@ python-dateutil = ">=2.8.1"
 
 [package.extras]
 dev = ["flake8", "markdown", "twine", "wheel"]
-
-[[package]]
-name = "git-changelog"
-version = "0.5.0"
-description = "Automatic Changelog generator using Jinja2 templates."
-category = "dev"
-optional = false
-python-versions = ">=3.6.2"
-files = [
-    {file = "git-changelog-0.5.0.tar.gz", hash = "sha256:6a1b43d21edb2b42e6c21250de97761602ff01deb8f139c84ba1b11cc591bd92"},
-    {file = "git_changelog-0.5.0-py3-none-any.whl", hash = "sha256:ca7fd3371dd6918c6c19202bbccadc59030da48a5fe350601f15fc5c36c1431a"},
-]
-
-[package.dependencies]
-Jinja2 = ">=2.10,<4"
-semver = ">=2.13,<3.0"
 
 [[package]]
 name = "gitdb"
@@ -2455,18 +2468,6 @@ files = [
 ]
 
 [[package]]
-name = "semver"
-version = "2.13.0"
-description = "Python helper for Semantic Versioning (http://semver.org/)"
-category = "dev"
-optional = false
-python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
-files = [
-    {file = "semver-2.13.0-py2.py3-none-any.whl", hash = "sha256:ced8b23dceb22134307c1b8abfa523da14198793d9787ac838e70e29e77458d4"},
-    {file = "semver-2.13.0.tar.gz", hash = "sha256:fa0fe2722ee1c3f57eac478820c3a5ae2f624af8264cbdf9000c980ff7f75e3f"},
-]
-
-[[package]]
 name = "setuptools"
 version = "65.6.3"
 description = "Easily download, build, install, upgrade, and uninstall Python packages"
@@ -2939,4 +2940,4 @@ all = ["pandas", "numpy", "matplotlib", "mplfinance"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8"
-content-hash = "0e4e5de1fbae54e993379014128ccb2cd5e86d735e078818cfd4ce947a24a85c"
+content-hash = "5fef07c903777a2f75ac48f8af9bb5f336934351599ca3c36ab5f686fb83045d"

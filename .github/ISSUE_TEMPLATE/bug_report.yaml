@@ -1,6 +1,6 @@
 name: Bug Report
 description: Сообщить об ошибке
-title: '[Bug] '
+title: '[Bug] Title'
 labels:
 - bug
 assignees:
@@ -23,7 +23,7 @@ body:
   attributes:
     label: Воспроизведение
     description: Код повторяющий кейс
-    render: python
+    render: Python
   validations:
     required: false
 - type: dropdown
@@ -51,14 +51,6 @@ body:
     - 0.2.0-beta29
     - 0.2.0-beta28
     - 0.2.0-beta27
-    - 0.2.0-beta26
-    - 0.2.0-beta25
-    - 0.2.0-beta24
-    - 0.2.0-beta23
-    - 0.2.0-beta22
-    - 0.2.0-beta21
-    - 0.2.0-beta20
-    - 0.2.0-beta19
     - Другая
   validations:
     required: true
@@ -68,6 +60,7 @@ body:
     label: Python Version
     description: Какая версия Python-а используется?
     options:
+    - '3.11'
     - '3.10'
     - '3.9'
     - '3.8'
@@ -93,4 +86,4 @@ body:
     label: Логи
     description: Скопируйте и вставьте сюда логи. Не забудьте скрыть чувствительные
       данные.
-    render: shell
+    render: Shell

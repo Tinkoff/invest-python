@@ -7,10 +7,7 @@ ignore-fixup-commits=true
 ignore-squash-commits=true
 
 [contrib-title-conventional-commits]
-types = fix,ci,feat,build,chore,docs,style,refactor,perf,test,chore,revert
-
-[ignore-by-title:bump]
-regex=^Bump version (.*)
+types = fix,ci,feat,build,chore,docs,style,refactor,perf,test,chore,revert,bump
 
 [ignore-by-title:merge]
 regex=^Merge(.*)into(.*)
