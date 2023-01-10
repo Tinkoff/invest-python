@@ -656,7 +656,8 @@ gitlint uninstall-hook
 <h3 id="release">Release новой версии</h3>
 <div class="highlight"><pre><span></span><code>make bump-version v=&lt;new-version&gt;
 </code></pre></div>
-<p>Команда установит новую версию и установит tag.
+<p>Команда установит новую версию.
+Далее проходим процесс ревью и устанавливаем tag коммиту в ветке мастер и отправляем на сервер.
 После отправки tag-а в github <code>git push --tags</code>, будет запущена джоба <code>publish_pypi</code>.</p>
 <p><em>Стоит запускать инструкцию <code>make bump-version</code>, как только все изменения были зафиксированы в гите.</em></p>
 
@@ -701,7 +702,7 @@ gitlint uninstall-hook
       <div class="md-copyright">
   
     <div class="md-copyright__highlight">
-      Copyright &copy; 2021 Tinkoff
+      Copyright &copy; 2023 Tinkoff
     </div>
   
   
