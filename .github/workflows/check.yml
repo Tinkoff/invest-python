@@ -34,7 +34,9 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v2
-      - run: choco install make
+
+      - name: Install make
+        run: choco install make
 
       - name: Install python dependencies
         run: make install-poetry install

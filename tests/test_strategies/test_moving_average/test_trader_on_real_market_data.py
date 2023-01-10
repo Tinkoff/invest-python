@@ -216,7 +216,6 @@ def start_datetime() -> datetime:
     return datetime(year=2022, month=2, day=16, hour=17, tzinfo=timezone.utc)
 
 
-@pytest.mark.xfail(reason="RequestError: StatusCode.UNAUTHENTICATED")
 @pytest.mark.skipif(
     os.environ.get("INVEST_SANDBOX_TOKEN") is None,
     reason="INVEST_SANDBOX_TOKEN should be specified",
