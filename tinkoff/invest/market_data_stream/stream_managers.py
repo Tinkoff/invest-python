@@ -62,13 +62,24 @@ class CandlesStreamManager(
         self,
         subscription_action: SubscriptionAction,
         instruments: List[CandleInstrument],
+        waiting_close: bool
     ) -> MarketDataRequest:
         return MarketDataRequest(
             subscribe_candles_request=SubscribeCandlesRequest(
                 subscription_action=subscription_action,
                 instruments=instruments,
+                waiting_close=waiting_close
             )
         )
+        
+    def subscribe(self, instruments: List[TInstrument], waiting_close: bool = False) -> TMarketDataStreamManager:
+        self._parent_manager.subscribe(  # type: ignore
+            self._get_request(
+                SubscriptionAction.SUBSCRIPTION_ACTION_SUBSCRIBE, instruments, waiting_close
+            )
+        )
+
+        return self._parent_manager
 
 
 class OrderBookStreamManager(

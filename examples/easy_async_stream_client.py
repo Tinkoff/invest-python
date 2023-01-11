@@ -23,7 +23,8 @@ async def main():
                     figi="BBG004730N88",
                     interval=SubscriptionInterval.SUBSCRIPTION_INTERVAL_ONE_MINUTE,
                 )
-            ]
+            ],
+            waiting_close=True
         )
         async for marketdata in market_data_stream:
             print(marketdata)
