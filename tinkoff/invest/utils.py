@@ -6,7 +6,7 @@ from typing import Any, Callable, Generator, Iterable, List, Tuple
 
 import dateutil.parser
 
-from .schemas import CandleInterval, HistoricCandle, Quotation, SubscriptionInterval
+from .schemas import CandleInterval, HistoricCandle, Quotation, SubscriptionInterval, MoneyValue
 
 __all__ = (
     "get_intervals",
@@ -44,7 +44,7 @@ def get_intervals(
         local_from += max_interval
 
 
-def quotation_to_decimal(quotation: Quotation) -> Decimal:
+def quotation_to_decimal(quotation: Quotation | MoneyValue) -> Decimal:
     fractional = quotation.nano / Decimal("10e8")
     return Decimal(quotation.units) + fractional
 
