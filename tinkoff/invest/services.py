@@ -867,9 +867,11 @@ class MarketDataService(_grpc_helpers.Service):
         from_: Optional[datetime] = None,
         to: Optional[datetime] = None,
         interval: CandleInterval = CandleInterval(0),
+        instrument_id: str = "",
     ) -> GetCandlesResponse:
         request = GetCandlesRequest()
         request.figi = figi
+        request.instrument_id = instrument_id
         if from_ is not None:
             request.from_ = from_
         if to is not None:
@@ -886,12 +888,14 @@ class MarketDataService(_grpc_helpers.Service):
 
     @handle_request_error("GetLastPrices")
     def get_last_prices(
-        self, *, figi: Optional[List[str]] = None
+        self, *, figi: Optional[List[str]] = None, instrument_id: Optional[List[str]] = None,
     ) -> GetLastPricesResponse:
         figi = figi or []
+        instrument_id = instrument_id or []
 
         request = GetLastPricesRequest()
         request.figi = figi
+        request.instrument_id = instrument_id
         response, call = self.stub.GetLastPrices.with_call(
             request=_grpc_helpers.dataclass_to_protobuff(
                 request, marketdata_pb2.GetLastPricesRequest()

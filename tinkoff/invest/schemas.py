@@ -1443,7 +1443,7 @@ class GetCandlesRequest(_grpc_helpers.Message):
     from_: datetime = _grpc_helpers.message_field(2)
     to: datetime = _grpc_helpers.message_field(3)
     interval: "CandleInterval" = _grpc_helpers.enum_field(4)
-    instrument_uid: str = _grpc_helpers.string_field(5)
+    instrument_id: str = _grpc_helpers.string_field(5)
 
 
 @dataclass(eq=False, repr=True)
@@ -1465,7 +1465,7 @@ class HistoricCandle(_grpc_helpers.Message):
 @dataclass(eq=False, repr=True)
 class GetLastPricesRequest(_grpc_helpers.Message):
     figi: List[str] = _grpc_helpers.string_field(1)
-    instrument_uid: List[str] = _grpc_helpers.string_field(2)
+    instrument_id: List[str] = _grpc_helpers.string_field(2)
 
 
 @dataclass(eq=False, repr=True)
