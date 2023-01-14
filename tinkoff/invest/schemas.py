@@ -1367,7 +1367,7 @@ class SubscribeInfoRequest(_grpc_helpers.Message):
 @dataclass(eq=False, repr=True)
 class InfoInstrument(_grpc_helpers.Message):
     figi: str = _grpc_helpers.string_field(1)
-    instrument_uid: str = _grpc_helpers.string_field(2)
+    instrument_id: str = _grpc_helpers.string_field(2)
 
 
 @dataclass(eq=False, repr=True)
