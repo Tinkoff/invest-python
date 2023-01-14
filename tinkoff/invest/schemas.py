@@ -1281,14 +1281,13 @@ class CandleSubscription(_grpc_helpers.Message):
 class SubscribeOrderBookRequest(_grpc_helpers.Message):
     subscription_action: "SubscriptionAction" = _grpc_helpers.enum_field(1)
     instruments: List["OrderBookInstrument"] = _grpc_helpers.message_field(2)
-    instrument_uid: str = _grpc_helpers.string_field(4)
 
 
 @dataclass(eq=False, repr=True)
 class OrderBookInstrument(_grpc_helpers.Message):
     figi: str = _grpc_helpers.string_field(1)
     depth: int = _grpc_helpers.int32_field(2)
-    instrument_uid: str = _grpc_helpers.string_field(3)
+    instrument_id: str = _grpc_helpers.string_field(3)
 
 
 @dataclass(eq=False, repr=True)
