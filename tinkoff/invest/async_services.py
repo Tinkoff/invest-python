@@ -791,10 +791,11 @@ class MarketDataService(_grpc_helpers.Service):
 
     @handle_aio_request_error("GetOrderBook")
     async def get_order_book(
-        self, *, figi: str = "", depth: int = 0
+        self, *, figi: str = "", depth: int = 0, instrument_id: str = ""
     ) -> GetOrderBookResponse:
         request = GetOrderBookRequest()
         request.figi = figi
+        request.instrument_id = instrument_id
         request.depth = depth
         response_coro = self.stub.GetOrderBook(
             request=_grpc_helpers.dataclass_to_protobuff(

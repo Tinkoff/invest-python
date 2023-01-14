@@ -906,9 +906,10 @@ class MarketDataService(_grpc_helpers.Service):
         return _grpc_helpers.protobuf_to_dataclass(response, GetLastPricesResponse)
 
     @handle_request_error("GetOrderBook")
-    def get_order_book(self, *, figi: str = "", depth: int = 0) -> GetOrderBookResponse:
+    def get_order_book(self, *, figi: str = "", depth: int = 0, instrument_id: str = "") -> GetOrderBookResponse:
         request = GetOrderBookRequest()
         request.figi = figi
+        request.instrument_id = instrument_id
         request.depth = depth
         response, call = self.stub.GetOrderBook.with_call(
             request=_grpc_helpers.dataclass_to_protobuff(

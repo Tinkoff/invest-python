@@ -1485,7 +1485,7 @@ class LastPrice(_grpc_helpers.Message):
 class GetOrderBookRequest(_grpc_helpers.Message):
     figi: str = _grpc_helpers.string_field(1)
     depth: int = _grpc_helpers.int32_field(2)
-    instrument_uid: str = _grpc_helpers.string_field(3)
+    instrument_id: str = _grpc_helpers.string_field(3)
 
 
 @dataclass(eq=False, repr=True)
