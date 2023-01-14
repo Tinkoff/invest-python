@@ -808,9 +808,10 @@ class MarketDataService(_grpc_helpers.Service):
         return _grpc_helpers.protobuf_to_dataclass(response, GetOrderBookResponse)
 
     @handle_aio_request_error("GetTradingStatus")
-    async def get_trading_status(self, *, figi: str = "") -> GetTradingStatusResponse:
+    async def get_trading_status(self, *, figi: str = "", instrument_id: str = "") -> GetTradingStatusResponse:
         request = GetTradingStatusRequest()
         request.figi = figi
+        request.instrument_id = instrument_id
         response_coro = self.stub.GetTradingStatus(
             request=_grpc_helpers.dataclass_to_protobuff(
                 request, marketdata_pb2.GetTradingStatusRequest()
