@@ -888,7 +888,10 @@ class MarketDataService(_grpc_helpers.Service):
 
     @handle_request_error("GetLastPrices")
     def get_last_prices(
-        self, *, figi: Optional[List[str]] = None, instrument_id: Optional[List[str]] = None,
+        self,
+        *,
+        figi: Optional[List[str]] = None,
+        instrument_id: Optional[List[str]] = None,
     ) -> GetLastPricesResponse:
         figi = figi or []
         instrument_id = instrument_id or []
@@ -906,7 +909,9 @@ class MarketDataService(_grpc_helpers.Service):
         return _grpc_helpers.protobuf_to_dataclass(response, GetLastPricesResponse)
 
     @handle_request_error("GetOrderBook")
-    def get_order_book(self, *, figi: str = "", depth: int = 0, instrument_id: str = "") -> GetOrderBookResponse:
+    def get_order_book(
+        self, *, figi: str = "", depth: int = 0, instrument_id: str = ""
+    ) -> GetOrderBookResponse:
         request = GetOrderBookRequest()
         request.figi = figi
         request.instrument_id = instrument_id
@@ -921,7 +926,9 @@ class MarketDataService(_grpc_helpers.Service):
         return _grpc_helpers.protobuf_to_dataclass(response, GetOrderBookResponse)
 
     @handle_request_error("GetTradingStatus")
-    def get_trading_status(self, *, figi: str = "", instrument_id: str = "") -> GetTradingStatusResponse:
+    def get_trading_status(
+        self, *, figi: str = "", instrument_id: str = ""
+    ) -> GetTradingStatusResponse:
         request = GetTradingStatusRequest()
         request.figi = figi
         request.instrument_id = instrument_id

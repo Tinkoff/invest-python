@@ -771,7 +771,10 @@ class MarketDataService(_grpc_helpers.Service):
 
     @handle_aio_request_error("GetLastPrices")
     async def get_last_prices(
-        self, *, figi: Optional[List[str]] = None, instrument_id: Optional[List[str]] = None,
+        self,
+        *,
+        figi: Optional[List[str]] = None,
+        instrument_id: Optional[List[str]] = None,
     ) -> GetLastPricesResponse:
         figi = figi or []
         instrument_id = instrument_id or []
@@ -808,7 +811,9 @@ class MarketDataService(_grpc_helpers.Service):
         return _grpc_helpers.protobuf_to_dataclass(response, GetOrderBookResponse)
 
     @handle_aio_request_error("GetTradingStatus")
-    async def get_trading_status(self, *, figi: str = "", instrument_id: str = "") -> GetTradingStatusResponse:
+    async def get_trading_status(
+        self, *, figi: str = "", instrument_id: str = ""
+    ) -> GetTradingStatusResponse:
         request = GetTradingStatusRequest()
         request.figi = figi
         request.instrument_id = instrument_id
