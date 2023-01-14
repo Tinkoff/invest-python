@@ -1525,7 +1525,7 @@ class GetLastTradesRequest(_grpc_helpers.Message):
     figi: str = _grpc_helpers.string_field(1)
     from_: datetime = _grpc_helpers.message_field(2)
     to: datetime = _grpc_helpers.message_field(3)
-    instrument_uid: str = _grpc_helpers.string_field(4)
+    instrument_id: str = _grpc_helpers.string_field(4)
 
 
 @dataclass(eq=False, repr=True)

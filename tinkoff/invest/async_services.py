@@ -829,9 +829,11 @@ class MarketDataService(_grpc_helpers.Service):
         figi: str = "",
         from_: Optional[datetime] = None,
         to: Optional[datetime] = None,
+        instrument_id: str = "",
     ) -> GetLastTradesResponse:
         request = GetLastTradesRequest()
         request.figi = figi
+        request.instrument_id = instrument_id
         if from_ is not None:
             request.from_ = from_
         if to is not None:
