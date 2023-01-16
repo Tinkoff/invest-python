@@ -1281,14 +1281,13 @@ class CandleSubscription(_grpc_helpers.Message):
 class SubscribeOrderBookRequest(_grpc_helpers.Message):
     subscription_action: "SubscriptionAction" = _grpc_helpers.enum_field(1)
     instruments: List["OrderBookInstrument"] = _grpc_helpers.message_field(2)
-    instrument_uid: str = _grpc_helpers.string_field(4)
 
 
 @dataclass(eq=False, repr=True)
 class OrderBookInstrument(_grpc_helpers.Message):
     figi: str = _grpc_helpers.string_field(1)
     depth: int = _grpc_helpers.int32_field(2)
-    instrument_uid: str = _grpc_helpers.string_field(3)
+    instrument_id: str = _grpc_helpers.string_field(3)
 
 
 @dataclass(eq=False, repr=True)
@@ -1322,7 +1321,7 @@ class SubscribeLastPriceRequest(_grpc_helpers.Message):
 @dataclass(eq=False, repr=True)
 class LastPriceInstrument(_grpc_helpers.Message):
     figi: str = _grpc_helpers.string_field(1)
-    instrument_uid: str = _grpc_helpers.string_field(2)
+    instrument_id: str = _grpc_helpers.string_field(2)
 
 
 @dataclass(eq=False, repr=True)
@@ -1331,19 +1330,19 @@ class SubscribeLastPriceResponse(_grpc_helpers.Message):
     last_price_subscriptions: List[
         "LastPriceSubscription"
     ] = _grpc_helpers.message_field(2)
-    instrument_uid: str = _grpc_helpers.string_field(3)
 
 
 @dataclass(eq=False, repr=True)
 class LastPriceSubscription(_grpc_helpers.Message):
     figi: str = _grpc_helpers.string_field(1)
     subscription_status: "SubscriptionStatus" = _grpc_helpers.message_field(2)
+    instrument_uid: str = _grpc_helpers.string_field(3)
 
 
 @dataclass(eq=False, repr=True)
 class TradeInstrument(_grpc_helpers.Message):
     figi: str = _grpc_helpers.string_field(1)
-    instrument_uid: str = _grpc_helpers.string_field(2)
+    instrument_id: str = _grpc_helpers.string_field(2)
 
 
 @dataclass(eq=False, repr=True)
@@ -1368,7 +1367,7 @@ class SubscribeInfoRequest(_grpc_helpers.Message):
 @dataclass(eq=False, repr=True)
 class InfoInstrument(_grpc_helpers.Message):
     figi: str = _grpc_helpers.string_field(1)
-    instrument_uid: str = _grpc_helpers.string_field(2)
+    instrument_id: str = _grpc_helpers.string_field(2)
 
 
 @dataclass(eq=False, repr=True)
@@ -1443,7 +1442,7 @@ class GetCandlesRequest(_grpc_helpers.Message):
     from_: datetime = _grpc_helpers.message_field(2)
     to: datetime = _grpc_helpers.message_field(3)
     interval: "CandleInterval" = _grpc_helpers.enum_field(4)
-    instrument_uid: str = _grpc_helpers.string_field(5)
+    instrument_id: str = _grpc_helpers.string_field(5)
 
 
 @dataclass(eq=False, repr=True)
@@ -1465,7 +1464,7 @@ class HistoricCandle(_grpc_helpers.Message):
 @dataclass(eq=False, repr=True)
 class GetLastPricesRequest(_grpc_helpers.Message):
     figi: List[str] = _grpc_helpers.string_field(1)
-    instrument_uid: List[str] = _grpc_helpers.string_field(2)
+    instrument_id: List[str] = _grpc_helpers.string_field(2)
 
 
 @dataclass(eq=False, repr=True)
@@ -1485,7 +1484,7 @@ class LastPrice(_grpc_helpers.Message):
 class GetOrderBookRequest(_grpc_helpers.Message):
     figi: str = _grpc_helpers.string_field(1)
     depth: int = _grpc_helpers.int32_field(2)
-    instrument_uid: str = _grpc_helpers.string_field(3)
+    instrument_id: str = _grpc_helpers.string_field(3)
 
 
 @dataclass(eq=False, repr=True)
@@ -1507,7 +1506,7 @@ class GetOrderBookResponse(_grpc_helpers.Message):
 @dataclass(eq=False, repr=True)
 class GetTradingStatusRequest(_grpc_helpers.Message):
     figi: str = _grpc_helpers.string_field(1)
-    instrument_uid: str = _grpc_helpers.string_field(2)
+    instrument_id: str = _grpc_helpers.string_field(2)
 
 
 @dataclass(eq=False, repr=True)
@@ -1525,7 +1524,7 @@ class GetLastTradesRequest(_grpc_helpers.Message):
     figi: str = _grpc_helpers.string_field(1)
     from_: datetime = _grpc_helpers.message_field(2)
     to: datetime = _grpc_helpers.message_field(3)
-    instrument_uid: str = _grpc_helpers.string_field(4)
+    instrument_id: str = _grpc_helpers.string_field(4)
 
 
 @dataclass(eq=False, repr=True)

@@ -749,9 +749,11 @@ class MarketDataService(_grpc_helpers.Service):
         from_: Optional[datetime] = None,
         to: Optional[datetime] = None,
         interval: CandleInterval = CandleInterval(0),
+        instrument_id: str = "",
     ) -> GetCandlesResponse:
         request = GetCandlesRequest()
         request.figi = figi
+        request.instrument_id = instrument_id
         if from_ is not None:
             request.from_ = from_
         if to is not None:
@@ -769,12 +771,17 @@ class MarketDataService(_grpc_helpers.Service):
 
     @handle_aio_request_error("GetLastPrices")
     async def get_last_prices(
-        self, *, figi: Optional[List[str]] = None
+        self,
+        *,
+        figi: Optional[List[str]] = None,
+        instrument_id: Optional[List[str]] = None,
     ) -> GetLastPricesResponse:
         figi = figi or []
+        instrument_id = instrument_id or []
 
         request = GetLastPricesRequest()
         request.figi = figi
+        request.instrument_id = instrument_id
         response_coro = self.stub.GetLastPrices(
             request=_grpc_helpers.dataclass_to_protobuff(
                 request, marketdata_pb2.GetLastPricesRequest()
@@ -787,10 +794,11 @@ class MarketDataService(_grpc_helpers.Service):
 
     @handle_aio_request_error("GetOrderBook")
     async def get_order_book(
-        self, *, figi: str = "", depth: int = 0
+        self, *, figi: str = "", depth: int = 0, instrument_id: str = ""
     ) -> GetOrderBookResponse:
         request = GetOrderBookRequest()
         request.figi = figi
+        request.instrument_id = instrument_id
         request.depth = depth
         response_coro = self.stub.GetOrderBook(
             request=_grpc_helpers.dataclass_to_protobuff(
@@ -803,9 +811,12 @@ class MarketDataService(_grpc_helpers.Service):
         return _grpc_helpers.protobuf_to_dataclass(response, GetOrderBookResponse)
 
     @handle_aio_request_error("GetTradingStatus")
-    async def get_trading_status(self, *, figi: str = "") -> GetTradingStatusResponse:
+    async def get_trading_status(
+        self, *, figi: str = "", instrument_id: str = ""
+    ) -> GetTradingStatusResponse:
         request = GetTradingStatusRequest()
         request.figi = figi
+        request.instrument_id = instrument_id
         response_coro = self.stub.GetTradingStatus(
             request=_grpc_helpers.dataclass_to_protobuff(
                 request, marketdata_pb2.GetTradingStatusRequest()
@@ -823,9 +834,11 @@ class MarketDataService(_grpc_helpers.Service):
         figi: str = "",
         from_: Optional[datetime] = None,
         to: Optional[datetime] = None,
+        instrument_id: str = "",
     ) -> GetLastTradesResponse:
         request = GetLastTradesRequest()
         request.figi = figi
+        request.instrument_id = instrument_id
         if from_ is not None:
             request.from_ = from_
         if to is not None:

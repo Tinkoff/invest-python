@@ -867,9 +867,11 @@ class MarketDataService(_grpc_helpers.Service):
         from_: Optional[datetime] = None,
         to: Optional[datetime] = None,
         interval: CandleInterval = CandleInterval(0),
+        instrument_id: str = "",
     ) -> GetCandlesResponse:
         request = GetCandlesRequest()
         request.figi = figi
+        request.instrument_id = instrument_id
         if from_ is not None:
             request.from_ = from_
         if to is not None:
@@ -886,12 +888,17 @@ class MarketDataService(_grpc_helpers.Service):
 
     @handle_request_error("GetLastPrices")
     def get_last_prices(
-        self, *, figi: Optional[List[str]] = None
+        self,
+        *,
+        figi: Optional[List[str]] = None,
+        instrument_id: Optional[List[str]] = None,
     ) -> GetLastPricesResponse:
         figi = figi or []
+        instrument_id = instrument_id or []
 
         request = GetLastPricesRequest()
         request.figi = figi
+        request.instrument_id = instrument_id
         response, call = self.stub.GetLastPrices.with_call(
             request=_grpc_helpers.dataclass_to_protobuff(
                 request, marketdata_pb2.GetLastPricesRequest()
@@ -902,9 +909,12 @@ class MarketDataService(_grpc_helpers.Service):
         return _grpc_helpers.protobuf_to_dataclass(response, GetLastPricesResponse)
 
     @handle_request_error("GetOrderBook")
-    def get_order_book(self, *, figi: str = "", depth: int = 0) -> GetOrderBookResponse:
+    def get_order_book(
+        self, *, figi: str = "", depth: int = 0, instrument_id: str = ""
+    ) -> GetOrderBookResponse:
         request = GetOrderBookRequest()
         request.figi = figi
+        request.instrument_id = instrument_id
         request.depth = depth
         response, call = self.stub.GetOrderBook.with_call(
             request=_grpc_helpers.dataclass_to_protobuff(
@@ -916,9 +926,12 @@ class MarketDataService(_grpc_helpers.Service):
         return _grpc_helpers.protobuf_to_dataclass(response, GetOrderBookResponse)
 
     @handle_request_error("GetTradingStatus")
-    def get_trading_status(self, *, figi: str = "") -> GetTradingStatusResponse:
+    def get_trading_status(
+        self, *, figi: str = "", instrument_id: str = ""
+    ) -> GetTradingStatusResponse:
         request = GetTradingStatusRequest()
         request.figi = figi
+        request.instrument_id = instrument_id
         response, call = self.stub.GetTradingStatus.with_call(
             request=_grpc_helpers.dataclass_to_protobuff(
                 request, marketdata_pb2.GetTradingStatusRequest()
@@ -935,9 +948,11 @@ class MarketDataService(_grpc_helpers.Service):
         figi: str = "",
         from_: Optional[datetime] = None,
         to: Optional[datetime] = None,
+        instrument_id: str = "",
     ) -> GetLastTradesResponse:
         request = GetLastTradesRequest()
         request.figi = figi
+        request.instrument_id = instrument_id
         if from_ is not None:
             request.from_ = from_
         if to is not None:
