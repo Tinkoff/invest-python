@@ -1330,13 +1330,13 @@ class SubscribeLastPriceResponse(_grpc_helpers.Message):
     last_price_subscriptions: List[
         "LastPriceSubscription"
     ] = _grpc_helpers.message_field(2)
-    instrument_uid: str = _grpc_helpers.string_field(3)
 
 
 @dataclass(eq=False, repr=True)
 class LastPriceSubscription(_grpc_helpers.Message):
     figi: str = _grpc_helpers.string_field(1)
     subscription_status: "SubscriptionStatus" = _grpc_helpers.message_field(2)
+    instrument_uid: str = _grpc_helpers.string_field(3)
 
 
 @dataclass(eq=False, repr=True)
