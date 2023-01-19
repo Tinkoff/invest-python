@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.2.0-beta46 (2023-01-18)
+
+#### Fixes
+
+* fix instrument_uid to instrument_id ([#179](https://github.com/Tinkoff/invest-python/issues/179))
+#### Docs
+
+* update changelog
+#### Others
+
+* update workflows ([#175](https://github.com/Tinkoff/invest-python/issues/175))
+
+Full set of changes: [`0.2.0-beta45...0.2.0-beta46`](https://github.com/Tinkoff/invest-python/compare/0.2.0-beta45...0.2.0-beta46)
+
 ## 0.2.0-beta45 (2023-01-09)
 
 #### New Features
