@@ -16,7 +16,7 @@
 4. Добавьте изменения и выполните команды на локальной машине (см. ниже)
    1. Установите зависимости
    2. Проверьте свой код с помощью тестов и линтеров
-5. Создайте коммит своих изменений (мы придерживаемся [этих](https://www.conventionalcommits.org/en/v1.0.0/) соглашений)
+5. Создайте коммит своих изменений. Формат описан ниже
     ```bash
     git add .
     git commit -m "feat: add new feature"
@@ -26,6 +26,41 @@
     git push
     ```
 7. Создайте Pull Request в этот репозиторий
+
+## Commit Message Format
+
+Мы придерживаемся соглашений [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) для наименование коммитов.
+
+> A specification for adding human and machine readable meaning to commit messages.
+
+Body и Footer можно указать по желанию.
+
+### Commit Message Header
+
+```
+<type>(<scope>): <short summary>
+  │       │             │
+  │       │             └─⫸ Summary in present tense. Not capitalized. No period at the end.
+  │       │
+  │       └─⫸ Commit Scope: grpc, async, mypy, schemas, sandbox
+  │
+  └─⫸ Commit Type: feat|fix|build|ci|docs|perf|refactor|test|chore
+```
+
+#### Type
+
+| feat     | Features                 | A new feature                                                                                          |
+|----------|--------------------------|--------------------------------------------------------------------------------------------------------|
+| fix      | Bug Fixes                | A bug fix                                                                                              |
+| docs     | Documentation            | Documentation only changes                                                                             |
+| style    | Styles                   | Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc) |
+| refactor | Code Refactoring         | A code change that neither fixes a bug nor adds a feature                                              |
+| perf     | Performance Improvements | A code change that improves performance                                                                |
+| test     | Tests                    | Adding missing tests or correcting existing tests                                                      |
+| build    | Builds                   | Changes that affect the build system or external dependencies (example scopes: mypy, pip, pytest)      |
+| ci       | Continuous Integrations  | Changes to our CI configuration files and scripts (example scopes: Github Actions)                     |
+| chore    | Chores                   | Other changes that don't modify src or test files                                                      |
+| revert   | Reverts                  | Reverts a previous commit                                                                              |
 
 ## Выполнение команд на локальной машине
 
