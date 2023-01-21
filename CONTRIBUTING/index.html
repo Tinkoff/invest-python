@@ -368,6 +368,39 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#commit-message-format" class="md-nav__link">
+    Commit Message Format
+  </a>
+  
+    <nav class="md-nav" aria-label="Commit Message Format">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#commit-message-header" class="md-nav__link">
+    Commit Message Header
+  </a>
+  
+    <nav class="md-nav" aria-label="Commit Message Header">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#type" class="md-nav__link">
+    Type
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#_2" class="md-nav__link">
     Выполнение команд на локальной машине
   </a>
@@ -491,6 +524,39 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#commit-message-format" class="md-nav__link">
+    Commit Message Format
+  </a>
+  
+    <nav class="md-nav" aria-label="Commit Message Format">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#commit-message-header" class="md-nav__link">
+    Commit Message Header
+  </a>
+  
+    <nav class="md-nav" aria-label="Commit Message Header">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#type" class="md-nav__link">
+    Type
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#_2" class="md-nav__link">
     Выполнение команд на локальной машине
   </a>
@@ -606,7 +672,7 @@
 <li>Добавьте изменения и выполните команды на локальной машине (см. ниже)</li>
 <li>Установите зависимости</li>
 <li>Проверьте свой код с помощью тестов и линтеров</li>
-<li>Создайте коммит своих изменений (мы придерживаемся <a href="https://www.conventionalcommits.org/en/v1.0.0/">этих</a> соглашений)
+<li>Создайте коммит своих изменений. Формат описан ниже
     <div class="highlight"><pre><span></span><code>git add .
 git commit -m <span class="s2">&quot;feat: add new feature&quot;</span>
 </code></pre></div></li>
@@ -615,6 +681,83 @@ git commit -m <span class="s2">&quot;feat: add new feature&quot;</span>
 </code></pre></div></li>
 <li>Создайте Pull Request в этот репозиторий</li>
 </ol>
+<h2 id="commit-message-format">Commit Message Format</h2>
+<p>Мы придерживаемся соглашений <a href="https://www.conventionalcommits.org/en/v1.0.0/">Conventional Commits</a> для наименование коммитов.</p>
+<blockquote>
+<p>A specification for adding human and machine readable meaning to commit messages.</p>
+</blockquote>
+<p>Body и Footer можно указать по желанию.</p>
+<h3 id="commit-message-header">Commit Message Header</h3>
+<div class="highlight"><pre><span></span><code>&lt;type&gt;(&lt;scope&gt;): &lt;short summary&gt;
+  │       │             │
+  │       │             └─⫸ Summary in present tense. Not capitalized. No period at the end.
+  │       │
+  │       └─⫸ Commit Scope: grpc, async, mypy, schemas, sandbox
+  │
+  └─⫸ Commit Type: feat|fix|build|ci|docs|perf|refactor|test|chore
+</code></pre></div>
+<h4 id="type">Type</h4>
+<table>
+<thead>
+<tr>
+<th>feat</th>
+<th>Features</th>
+<th>A new feature</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>fix</td>
+<td>Bug Fixes</td>
+<td>A bug fix</td>
+</tr>
+<tr>
+<td>docs</td>
+<td>Documentation</td>
+<td>Documentation only changes</td>
+</tr>
+<tr>
+<td>style</td>
+<td>Styles</td>
+<td>Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)</td>
+</tr>
+<tr>
+<td>refactor</td>
+<td>Code Refactoring</td>
+<td>A code change that neither fixes a bug nor adds a feature</td>
+</tr>
+<tr>
+<td>perf</td>
+<td>Performance Improvements</td>
+<td>A code change that improves performance</td>
+</tr>
+<tr>
+<td>test</td>
+<td>Tests</td>
+<td>Adding missing tests or correcting existing tests</td>
+</tr>
+<tr>
+<td>build</td>
+<td>Builds</td>
+<td>Changes that affect the build system or external dependencies (example scopes: mypy, pip, pytest)</td>
+</tr>
+<tr>
+<td>ci</td>
+<td>Continuous Integrations</td>
+<td>Changes to our CI configuration files and scripts (example scopes: Github Actions)</td>
+</tr>
+<tr>
+<td>chore</td>
+<td>Chores</td>
+<td>Other changes that don't modify src or test files</td>
+</tr>
+<tr>
+<td>revert</td>
+<td>Reverts</td>
+<td>Reverts a previous commit</td>
+</tr>
+</tbody>
+</table>
 <h2 id="_2">Выполнение команд на локальной машине</h2>
 <p>Для работы с проектом рекомендуем использовать <a href="https://pypi.org/project/poetry/">poetry</a>.</p>
 <p>Также рекомендуем использовать таск раннер make.</p>
