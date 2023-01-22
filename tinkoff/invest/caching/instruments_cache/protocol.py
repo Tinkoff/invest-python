@@ -9,3 +9,6 @@ class InstrumentsResponseCallable(Protocol):
         self, *, instrument_status: InstrumentStatus = InstrumentStatus(0)
     ) -> InstrumentsResponse:
         ...
+
+    def __name__(self) -> str:
+        ...

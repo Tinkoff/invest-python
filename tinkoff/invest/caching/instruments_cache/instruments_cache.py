@@ -95,7 +95,7 @@ class InstrumentsCache(IInstrumentsGetter):
         self, *, instrument_status: InstrumentStatus = InstrumentStatus(0)
     ) -> SharesResponse:
         storage = cast(
-            InstrumentStorage[ShareResponse, SharesResponse],
+            InstrumentStorage[ShareResponse, SharesResponse],  # type: ignore
             self._get_instrument_storage(self._instruments_service.shares),
         )
         return storage.get_instruments_response()
@@ -108,7 +108,7 @@ class InstrumentsCache(IInstrumentsGetter):
         id: str = "",
     ) -> ShareResponse:
         storage = cast(
-            InstrumentStorage[Share, SharesResponse],
+            InstrumentStorage[Share, SharesResponse],  # type: ignore
             self._get_instrument_storage(self._instruments_service.shares),
         )
         share = storage.get(id_type=id_type, class_code=class_code, id=id)
@@ -118,7 +118,7 @@ class InstrumentsCache(IInstrumentsGetter):
         self, *, instrument_status: InstrumentStatus = InstrumentStatus(0)
     ) -> FuturesResponse:
         storage = cast(
-            InstrumentStorage[FutureResponse, FuturesResponse],
+            InstrumentStorage[FutureResponse, FuturesResponse],  # type: ignore
             self._get_instrument_storage(self._instruments_service.futures),
         )
         return storage.get_instruments_response()
@@ -131,7 +131,7 @@ class InstrumentsCache(IInstrumentsGetter):
         id: str = "",
     ) -> FutureResponse:
         storage = cast(
-            InstrumentStorage[Future, FuturesResponse],
+            InstrumentStorage[Future, FuturesResponse],  # type: ignore
             self._get_instrument_storage(self._instruments_service.futures),
         )
         future = storage.get(id_type=id_type, class_code=class_code, id=id)
@@ -141,7 +141,7 @@ class InstrumentsCache(IInstrumentsGetter):
         self, *, instrument_status: InstrumentStatus = InstrumentStatus(0)
     ) -> EtfsResponse:
         storage = cast(
-            InstrumentStorage[EtfResponse, EtfsResponse],
+            InstrumentStorage[EtfResponse, EtfsResponse],  # type: ignore
             self._get_instrument_storage(self._instruments_service.etfs),
         )
         return storage.get_instruments_response()
@@ -154,7 +154,7 @@ class InstrumentsCache(IInstrumentsGetter):
         id: str = "",
     ) -> EtfResponse:
         storage = cast(
-            InstrumentStorage[Etf, EtfsResponse],
+            InstrumentStorage[Etf, EtfsResponse],  # type: ignore
             self._get_instrument_storage(self._instruments_service.etfs),
         )
         etf = storage.get(id_type=id_type, class_code=class_code, id=id)
@@ -164,7 +164,7 @@ class InstrumentsCache(IInstrumentsGetter):
         self, *, instrument_status: InstrumentStatus = InstrumentStatus(0)
     ) -> BondsResponse:
         storage = cast(
-            InstrumentStorage[BondResponse, BondsResponse],
+            InstrumentStorage[BondResponse, BondsResponse],  # type: ignore
             self._get_instrument_storage(self._instruments_service.bonds),
         )
         return storage.get_instruments_response()
@@ -177,7 +177,7 @@ class InstrumentsCache(IInstrumentsGetter):
         id: str = "",
     ) -> BondResponse:
         storage = cast(
-            InstrumentStorage[Bond, BondsResponse],
+            InstrumentStorage[Bond, BondsResponse],  # type: ignore
             self._get_instrument_storage(self._instruments_service.bonds),
         )
         bond = storage.get(id_type=id_type, class_code=class_code, id=id)
@@ -187,7 +187,7 @@ class InstrumentsCache(IInstrumentsGetter):
         self, *, instrument_status: InstrumentStatus = InstrumentStatus(0)
     ) -> CurrenciesResponse:
         storage = cast(
-            InstrumentStorage[CurrencyResponse, CurrenciesResponse],
+            InstrumentStorage[CurrencyResponse, CurrenciesResponse],  # type: ignore
             self._get_instrument_storage(self._instruments_service.currencies),
         )
         return storage.get_instruments_response()
@@ -200,7 +200,7 @@ class InstrumentsCache(IInstrumentsGetter):
         id: str = "",
     ) -> CurrencyResponse:
         storage = cast(
-            InstrumentStorage[Currency, CurrenciesResponse],
+            InstrumentStorage[Currency, CurrenciesResponse],  # type: ignore
             self._get_instrument_storage(self._instruments_service.currencies),
         )
         currency = storage.get(id_type=id_type, class_code=class_code, id=id)
