@@ -1,10 +1,14 @@
 """Example - How to create takeprofit buy order."""
 import os
-from decimal import Decimal
 import logging
-from tinkoff.invest import InstrumentIdType
-from tinkoff.invest import Client, StopOrderDirection, \
-    StopOrderType, StopOrderExpirationType
+from decimal import Decimal
+from tinkoff.invest import (
+    Client,
+    InstrumentIdType,
+    StopOrderExpirationType,
+    StopOrderDirection,
+    StopOrderType
+)
 from tinkoff.invest.utils import quotation_to_decimal, decimal_to_quotation
 from tinkoff.invest.exceptions import InvestError
 
