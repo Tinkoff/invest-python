@@ -3,7 +3,7 @@ import logging
 import os
 
 from tinkoff.invest import Client
-from tinkoff.invest.exceptions import InvestError
+from tinkoff.invest.exceptions import RequestError
 
 TOKEN = os.environ["INVEST_TOKEN"]
 
@@ -29,7 +29,7 @@ def main():
                 logger.info("Stop Order: %s was canceled.", stop_order.stop_order_id)
             logger.info("Orders: %s",
                         client.stop_orders.get_stop_orders(account_id=account_id))
-        except InvestError as error:
+        except RequestError as error:
             logger.error('Failed to cancel all orders. Error: %s', error)
 
 
