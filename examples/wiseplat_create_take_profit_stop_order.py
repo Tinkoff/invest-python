@@ -2,12 +2,13 @@
 from decimal import Decimal
 import logging
 import os
+
 from tinkoff.invest import (
     Client,
     InstrumentIdType,
     StopOrderExpirationType,
     StopOrderDirection,
-    StopOrderType
+    StopOrderType,
 )
 from tinkoff.invest.utils import quotation_to_decimal, decimal_to_quotation
 from tinkoff.invest.exceptions import InvestError

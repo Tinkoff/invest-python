@@ -1,6 +1,7 @@
 """Example - How to cancel all stop orders."""
 import logging
 import os
+
 from tinkoff.invest import Client
 from tinkoff.invest.exceptions import InvestError
 
