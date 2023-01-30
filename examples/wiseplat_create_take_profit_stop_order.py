@@ -1,7 +1,7 @@
 """Example - How to create takeprofit buy order."""
-import os
-import logging
 from decimal import Decimal
+import logging
+import os
 from tinkoff.invest import (
     Client,
     InstrumentIdType,
