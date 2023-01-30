@@ -1,7 +1,8 @@
 """Example - How to create takeprofit buy order."""
-from decimal import Decimal
 import logging
 import os
+
+from decimal import Decimal
 
 from tinkoff.invest import (
     Client,
@@ -61,17 +62,19 @@ def main():
               f'min price increment {min_price_increment}')
 
         # creating takeprofit buy order
+        stop_order_type = StopOrderType.STOP_ORDER_TYPE_TAKE_PROFIT
+        direction = StopOrderDirection.STOP_ORDER_DIRECTION_BUY
+        exp_type = StopOrderExpirationType.STOP_ORDER_EXPIRATION_TYPE_GOOD_TILL_CANCEL
         try:
-            exp_type = StopOrderExpirationType.STOP_ORDER_EXPIRATION_TYPE_GOOD_TILL_CANCEL
             response = client.stop_orders.post_stop_order(
                 figi=figi,
                 quantity=1,
                 price=decimal_to_quotation(Decimal(calculated_price)),
                 stop_price=decimal_to_quotation(Decimal(calculated_price)),
-                direction=StopOrderDirection.STOP_ORDER_DIRECTION_BUY,
+                direction=direction,
                 account_id=account_id,
                 expiration_type=exp_type,
-                stop_order_type=StopOrderType.STOP_ORDER_TYPE_TAKE_PROFIT,
+                stop_order_type=stop_order_type,
                 expire_date=None,
             )
             print(response)
