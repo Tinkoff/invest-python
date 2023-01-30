@@ -10,7 +10,7 @@ from tinkoff.invest import (
     StopOrderDirection,
     StopOrderType,
 )
-from tinkoff.invest.utils import quotation_to_decimal, decimal_to_quotation
+from tinkoff.invest.utils import decimal_to_quotation, quotation_to_decimal
 from tinkoff.invest.exceptions import InvestError
 
 TOKEN = os.environ["INVEST_TOKEN"]
