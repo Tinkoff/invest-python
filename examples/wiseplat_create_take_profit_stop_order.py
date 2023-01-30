@@ -62,6 +62,7 @@ def main():
 
         # creating takeprofit buy order
         try:
+            exp_type = StopOrderExpirationType.STOP_ORDER_EXPIRATION_TYPE_GOOD_TILL_CANCEL
             response = client.stop_orders.post_stop_order(
                 figi=figi,
                 quantity=1,
@@ -69,7 +70,7 @@ def main():
                 stop_price=decimal_to_quotation(Decimal(calculated_price)),
                 direction=StopOrderDirection.STOP_ORDER_DIRECTION_BUY,
                 account_id=account_id,
-                expiration_type=StopOrderExpirationType.STOP_ORDER_EXPIRATION_TYPE_GOOD_TILL_CANCEL,
+                expiration_type=exp_type,
                 stop_order_type=StopOrderType.STOP_ORDER_TYPE_TAKE_PROFIT,
                 expire_date=None,
             )
