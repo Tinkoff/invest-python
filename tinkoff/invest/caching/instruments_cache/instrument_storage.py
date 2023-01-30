@@ -1,9 +1,12 @@
 import logging
 from dataclasses import replace
-from typing import Generic, TypeVar
+from typing import Dict, Generic, Tuple, TypeVar, cast
 
-from tinkoff.invest import InstrumentIdType, InstrumentResponse
-from tinkoff.invest.caching.instruments_cache.models import InstrumentsResponse
+from tinkoff.invest import InstrumentIdType
+from tinkoff.invest.caching.instruments_cache.models import (
+    InstrumentResponse,
+    InstrumentsResponse,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -16,15 +19,21 @@ class InstrumentStorage(Generic[TInstrumentResponse, TInstrumentsResponse]):
     def __init__(self, instruments_response: TInstrumentsResponse):
         self._instruments_response = instruments_response
 
-        self._instrument_by_class_code_figi = {
+        self._instrument_by_class_code_figi: Dict[
+            Tuple[str, str], InstrumentResponse
+        ] = {
             (instrument.class_code, instrument.figi): instrument
             for instrument in self._instruments_response.instruments
         }
-        self._instrument_by_class_code_ticker = {
+        self._instrument_by_class_code_ticker: Dict[
+            Tuple[str, str], InstrumentResponse
+        ] = {
             (instrument.class_code, instrument.ticker): instrument
             for instrument in self._instruments_response.instruments
         }
-        self._instrument_by_class_code_uid = {
+        self._instrument_by_class_code_uid: Dict[
+            Tuple[str, str], InstrumentResponse
+        ] = {
             (instrument.class_code, instrument.uid): instrument
             for instrument in self._instruments_response.instruments
         }
@@ -55,7 +64,7 @@ class InstrumentStorage(Generic[TInstrumentResponse, TInstrumentsResponse]):
         key = (class_code, id)
         logger.debug("Cache request key=%s", key)
 
-        return instrument_by_class_code_id[key]
+        return cast(TInstrumentResponse, instrument_by_class_code_id[key])
 
     def get_instruments_response(self) -> TInstrumentsResponse:
         return replace(self._instruments_response, **{})
