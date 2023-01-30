@@ -427,6 +427,19 @@
     Запуск линтеров
   </a>
   
+    <nav class="md-nav" aria-label="Запуск линтеров">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#using-gitlint-as-a-commit-msg-hook" class="md-nav__link">
+    Using gitlint as a commit-msg hook
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -570,6 +583,19 @@
     Запуск линтеров
   </a>
   
+    <nav class="md-nav" aria-label="Запуск линтеров">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#using-gitlint-as-a-commit-msg-hook" class="md-nav__link">
+    Using gitlint as a commit-msg hook
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -638,20 +664,20 @@
 <ol>
 <li>Сделайте <a href="https://github.com/Tinkoff/invest-python/fork">fork</a> проекта</li>
 <li>Склонируйте репозиторий на свой локальный компьютер
-    <div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/Tinkoff/invest-python.git
+    <div class="highlight"><pre><span></span><code>git clone https://github.com/Tinkoff/invest-python.git
 </code></pre></div></li>
 <li>Создайте новую ветку для ваших изменений
-    <div class="highlight"><pre><span></span><code>git<span class="w"> </span>checkout<span class="w"> </span>-b<span class="w"> </span>branch_name
+    <div class="highlight"><pre><span></span><code>git checkout -b branch_name
 </code></pre></div></li>
 <li>Добавьте изменения и выполните команды на локальной машине (см. ниже)</li>
 <li>Установите зависимости</li>
 <li>Проверьте свой код с помощью тестов и линтеров</li>
 <li>Создайте коммит своих изменений. Формат описан ниже
-    <div class="highlight"><pre><span></span><code>git<span class="w"> </span>add<span class="w"> </span>.
-git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;feat: add new feature&quot;</span>
+    <div class="highlight"><pre><span></span><code>git add .
+git commit -m <span class="s2">&quot;feat: add new feature&quot;</span>
 </code></pre></div></li>
 <li>Отправьте свои изменения на github
-    <div class="highlight"><pre><span></span><code>git<span class="w"> </span>push
+    <div class="highlight"><pre><span></span><code>git push
 </code></pre></div></li>
 <li>Создайте Pull Request в этот репозиторий</li>
 </ol>
@@ -744,6 +770,12 @@ make install
 </code></pre></div>
 <h3 id="_5">Запуск линтеров</h3>
 <div class="highlight"><pre><span></span><code>make lint
+make git-lint
+</code></pre></div>
+<h4 id="using-gitlint-as-a-commit-msg-hook">Using gitlint as a commit-msg hook</h4>
+<div class="highlight"><pre><span></span><code>gitlint install-hook
+# To remove the hook
+gitlint uninstall-hook
 </code></pre></div>
 <h3 id="_6">Запуск автоформатирования</h3>
 <div class="highlight"><pre><span></span><code>make format
@@ -765,7 +797,12 @@ make install
 <div class="highlight"><pre><span></span><code>make gen-client
 </code></pre></div>
 <h3 id="release">Release новой версии</h3>
-<p>Релиз новой версии происходит автоматически после слияния изменений в main ветку.</p>
+<div class="highlight"><pre><span></span><code>make bump-version v=&lt;new-version&gt;
+</code></pre></div>
+<p>Команда установит новую версию.
+Далее проходим процесс ревью и устанавливаем tag коммиту в ветке мастер и отправляем на сервер.
+После отправки tag-а в github <code>git push --tags</code>, будет запущена джоба <code>publish_pypi</code>.</p>
+<p><em>Стоит запускать инструкцию <code>make bump-version</code>, как только все изменения были зафиксированы в гите.</em></p>
 
 
 
