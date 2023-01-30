@@ -11,8 +11,8 @@ from tinkoff.invest import (
     StopOrderDirection,
     StopOrderType,
 )
+from tinkoff.invest.exceptions import InvestError
 from tinkoff.invest.utils import decimal_to_quotation, quotation_to_decimal
-from tinkoff.invest.exceptions import RequestError
 
 TOKEN = os.environ["INVEST_TOKEN"]
 
@@ -79,7 +79,7 @@ def main():
             )
             print(response)
             print("stop_order_id=", response.stop_order_id)
-        except RequestError as error:
+        except InvestError as error:
             logger.error('Posting trade takeprofit order failed. Exception: %s', error)
 
 
