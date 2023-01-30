@@ -1,9 +1,7 @@
 """Example - How to create takeprofit buy order."""
 import os
-
 from decimal import Decimal
 import logging
-
 from tinkoff.invest import InstrumentIdType
 from tinkoff.invest import Client, StopOrderDirection, StopOrderType, StopOrderExpirationType
 from tinkoff.invest.utils import quotation_to_decimal, decimal_to_quotation
@@ -23,8 +21,7 @@ def main():
         account_id = account.id
         logger.info("Orders: %s", client.orders.get_orders(account_id=account_id))
 
-        # figi="BBG004730N88"  # SBER
-        figi = "BBG004730ZJ9"  # VTBR
+        figi = "BBG004730ZJ9"  # BBG004730ZJ9 - VTBR / BBG004730N88 - SBER
 
         # getting the last price for instrument
         last_price = client.market_data.get_last_prices(figi=[figi]).last_prices[0].price
@@ -49,7 +46,8 @@ def main():
               f'number_digits_after_point={number_digits_after_point}')
 
         # calculation of the price for instrument which is divisible to min price increment
-        calculated_price = round(calculated_price / min_price_increment) * min_price_increment
+        calculated_price = round(
+            calculated_price / min_price_increment) * min_price_increment
         print(f'let\'s send stop order at price = '
               f'{calculated_price:.{number_digits_after_point}f} divisible to '
               f'min price increment {min_price_increment}')
