@@ -3,7 +3,8 @@ import os
 from decimal import Decimal
 import logging
 from tinkoff.invest import InstrumentIdType
-from tinkoff.invest import Client, StopOrderDirection, StopOrderType, StopOrderExpirationType
+from tinkoff.invest import Client, StopOrderDirection, \
+    StopOrderType, StopOrderExpirationType
 from tinkoff.invest.utils import quotation_to_decimal, decimal_to_quotation
 from tinkoff.invest.exceptions import InvestError
 
@@ -24,7 +25,8 @@ def main():
         figi = "BBG004730ZJ9"  # BBG004730ZJ9 - VTBR / BBG004730N88 - SBER
 
         # getting the last price for instrument
-        last_price = client.market_data.get_last_prices(figi=[figi]).last_prices[0].price
+        last_price = client.market_data.get_last_prices(
+            figi=[figi]).last_prices[0].price
         last_price = quotation_to_decimal(last_price)
         print(f'figi, last price = {last_price}')
 
@@ -45,7 +47,8 @@ def main():
         print(f'min_price_increment = {min_price_increment}, '
               f'number_digits_after_point={number_digits_after_point}')
 
-        # calculation of the price for instrument which is divisible to min price increment
+        # calculation of the price for instrument which is
+        # divisible to min price increment
         calculated_price = round(
             calculated_price / min_price_increment) * min_price_increment
         print(f'let\'s send stop order at price = '
