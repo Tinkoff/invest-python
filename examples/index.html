@@ -444,6 +444,20 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#-" class="md-nav__link">
+    Создание тэйк-профит стоп ордера
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    Отмена всех выставленных стоп ордеров
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -650,6 +664,20 @@
         <li class="md-nav__item">
   <a href="#_18" class="md-nav__link">
     Подписка на стрим минутных свечей и их вывод
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-" class="md-nav__link">
+    Создание тэйк-профит стоп ордера
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    Отмена всех выставленных стоп ордеров
   </a>
   
 </li>
@@ -1217,6 +1245,143 @@
             <span class="n">request_iterator</span><span class="p">()</span>
         <span class="p">):</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">marketdata</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</code></pre></div></p>
+<h2 id="-">Создание тэйк-профит стоп ордера</h2>
+<p><a href="https://github.com/Tinkoff/invest-python/blob/main/examples/wiseplat_create_take_profit_stop_order.py">examples/wiseplat_create_take_profit_stop_order.py</a>
+<div class="highlight"><pre><span></span><code><span class="sd">&quot;&quot;&quot;Example - How to create takeprofit buy order.&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
+
+<span class="kn">from</span> <span class="nn">tinkoff.invest</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">Client</span><span class="p">,</span>
+    <span class="n">InstrumentIdType</span><span class="p">,</span>
+    <span class="n">StopOrderDirection</span><span class="p">,</span>
+    <span class="n">StopOrderExpirationType</span><span class="p">,</span>
+    <span class="n">StopOrderType</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">tinkoff.invest.exceptions</span> <span class="kn">import</span> <span class="n">InvestError</span>
+<span class="kn">from</span> <span class="nn">tinkoff.invest.utils</span> <span class="kn">import</span> <span class="n">decimal_to_quotation</span><span class="p">,</span> <span class="n">quotation_to_decimal</span>
+
+<span class="n">TOKEN</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;INVEST_TOKEN&quot;</span><span class="p">]</span>
+
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%(asctime)s</span><span class="s2"> </span><span class="si">%(levelname)s</span><span class="s2">:</span><span class="si">%(message)s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Example - How to create takeprofit buy order.&quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="n">Client</span><span class="p">(</span><span class="n">TOKEN</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">users</span><span class="o">.</span><span class="n">get_accounts</span><span class="p">()</span>
+        <span class="n">account</span><span class="p">,</span> <span class="o">*</span><span class="n">_</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">accounts</span>
+        <span class="n">account_id</span> <span class="o">=</span> <span class="n">account</span><span class="o">.</span><span class="n">id</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Orders: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">client</span><span class="o">.</span><span class="n">orders</span><span class="o">.</span><span class="n">get_orders</span><span class="p">(</span><span class="n">account_id</span><span class="o">=</span><span class="n">account_id</span><span class="p">))</span>
+
+        <span class="n">figi</span> <span class="o">=</span> <span class="s2">&quot;BBG004730ZJ9&quot;</span>  <span class="c1"># BBG004730ZJ9 - VTBR / BBG004730N88 - SBER</span>
+
+        <span class="c1"># getting the last price for instrument</span>
+        <span class="n">last_price</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">client</span><span class="o">.</span><span class="n">market_data</span><span class="o">.</span><span class="n">get_last_prices</span><span class="p">(</span><span class="n">figi</span><span class="o">=</span><span class="p">[</span><span class="n">figi</span><span class="p">])</span><span class="o">.</span><span class="n">last_prices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">price</span>
+        <span class="p">)</span>
+        <span class="n">last_price</span> <span class="o">=</span> <span class="n">quotation_to_decimal</span><span class="p">(</span><span class="n">last_price</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;figi, last price = </span><span class="si">{</span><span class="n">last_price</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1"># setting the percentage by which the takeprofit stop order</span>
+        <span class="c1"># should be set below the last price</span>
+        <span class="n">percent_down</span> <span class="o">=</span> <span class="mi">5</span>
+
+        <span class="c1"># calculation of the price for takeprofit stop order</span>
+        <span class="n">calculated_price</span> <span class="o">=</span> <span class="n">last_price</span> <span class="o">-</span> <span class="n">last_price</span> <span class="o">*</span> <span class="n">Decimal</span><span class="p">(</span><span class="n">percent_down</span> <span class="o">/</span> <span class="mi">100</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;calculated_price = </span><span class="si">{</span><span class="n">calculated_price</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1"># getting the min price increment and the number of digits after point</span>
+        <span class="n">min_price_increment</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">instruments</span><span class="o">.</span><span class="n">get_instrument_by</span><span class="p">(</span>
+            <span class="n">id_type</span><span class="o">=</span><span class="n">InstrumentIdType</span><span class="o">.</span><span class="n">INSTRUMENT_ID_TYPE_FIGI</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="n">figi</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">instrument</span><span class="o">.</span><span class="n">min_price_increment</span>
+        <span class="n">number_digits_after_point</span> <span class="o">=</span> <span class="mi">9</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">min_price_increment</span><span class="o">.</span><span class="n">nano</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">min_price_increment</span> <span class="o">=</span> <span class="n">quotation_to_decimal</span><span class="p">(</span><span class="n">min_price_increment</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;min_price_increment = </span><span class="si">{</span><span class="n">min_price_increment</span><span class="si">}</span><span class="s2">, &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;number_digits_after_point=</span><span class="si">{</span><span class="n">number_digits_after_point</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+
+        <span class="c1"># calculation of the price for instrument which is</span>
+        <span class="c1"># divisible to min price increment</span>
+        <span class="n">calculated_price</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="nb">round</span><span class="p">(</span><span class="n">calculated_price</span> <span class="o">/</span> <span class="n">min_price_increment</span><span class="p">)</span> <span class="o">*</span> <span class="n">min_price_increment</span>
+        <span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;let&#39;s send stop order at price = &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">calculated_price</span><span class="si">:</span><span class="s2">.</span><span class="si">{</span><span class="n">number_digits_after_point</span><span class="si">}</span><span class="s2">f</span><span class="si">}</span><span class="s2"> divisible to &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;min price increment </span><span class="si">{</span><span class="n">min_price_increment</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+
+        <span class="c1"># creating takeprofit buy order</span>
+        <span class="n">stop_order_type</span> <span class="o">=</span> <span class="n">StopOrderType</span><span class="o">.</span><span class="n">STOP_ORDER_TYPE_TAKE_PROFIT</span>
+        <span class="n">direction</span> <span class="o">=</span> <span class="n">StopOrderDirection</span><span class="o">.</span><span class="n">STOP_ORDER_DIRECTION_BUY</span>
+        <span class="n">exp_type</span> <span class="o">=</span> <span class="n">StopOrderExpirationType</span><span class="o">.</span><span class="n">STOP_ORDER_EXPIRATION_TYPE_GOOD_TILL_CANCEL</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">stop_orders</span><span class="o">.</span><span class="n">post_stop_order</span><span class="p">(</span>
+                <span class="n">figi</span><span class="o">=</span><span class="n">figi</span><span class="p">,</span>
+                <span class="n">quantity</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                <span class="n">price</span><span class="o">=</span><span class="n">decimal_to_quotation</span><span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="n">calculated_price</span><span class="p">)),</span>
+                <span class="n">stop_price</span><span class="o">=</span><span class="n">decimal_to_quotation</span><span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="n">calculated_price</span><span class="p">)),</span>
+                <span class="n">direction</span><span class="o">=</span><span class="n">direction</span><span class="p">,</span>
+                <span class="n">account_id</span><span class="o">=</span><span class="n">account_id</span><span class="p">,</span>
+                <span class="n">expiration_type</span><span class="o">=</span><span class="n">exp_type</span><span class="p">,</span>
+                <span class="n">stop_order_type</span><span class="o">=</span><span class="n">stop_order_type</span><span class="p">,</span>
+                <span class="n">expire_date</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;stop_order_id=&quot;</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">stop_order_id</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">InvestError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Posting trade takeprofit order failed. Exception: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</code></pre></div></p>
+<h2 id="_19">Отмена всех выставленных стоп ордеров</h2>
+<p><a href="https://github.com/Tinkoff/invest-python/blob/main/examples/wiseplat_cancel_all_stop_orders.py">examples/wiseplat_cancel_all_stop_orders.py</a>
+<div class="highlight"><pre><span></span><code><span class="sd">&quot;&quot;&quot;Example - How to cancel all stop orders.&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="kn">from</span> <span class="nn">tinkoff.invest</span> <span class="kn">import</span> <span class="n">Client</span>
+<span class="kn">from</span> <span class="nn">tinkoff.invest.exceptions</span> <span class="kn">import</span> <span class="n">InvestError</span>
+
+<span class="n">TOKEN</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;INVEST_TOKEN&quot;</span><span class="p">]</span>
+
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%(asctime)s</span><span class="s2"> </span><span class="si">%(levelname)s</span><span class="s2">:</span><span class="si">%(message)s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Example - How to cancel all stop orders.&quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="n">Client</span><span class="p">(</span><span class="n">TOKEN</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">users</span><span class="o">.</span><span class="n">get_accounts</span><span class="p">()</span>
+        <span class="n">account</span><span class="p">,</span> <span class="o">*</span><span class="n">_</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">accounts</span>
+        <span class="n">account_id</span> <span class="o">=</span> <span class="n">account</span><span class="o">.</span><span class="n">id</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">stop_orders_response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">stop_orders</span><span class="o">.</span><span class="n">get_stop_orders</span><span class="p">(</span>
+                <span class="n">account_id</span><span class="o">=</span><span class="n">account_id</span>
+            <span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Stop Orders: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">stop_orders_response</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">stop_order</span> <span class="ow">in</span> <span class="n">stop_orders_response</span><span class="o">.</span><span class="n">stop_orders</span><span class="p">:</span>
+                <span class="n">client</span><span class="o">.</span><span class="n">stop_orders</span><span class="o">.</span><span class="n">cancel_stop_order</span><span class="p">(</span>
+                    <span class="n">account_id</span><span class="o">=</span><span class="n">account_id</span><span class="p">,</span> <span class="n">stop_order_id</span><span class="o">=</span><span class="n">stop_order</span><span class="o">.</span><span class="n">stop_order_id</span>
+                <span class="p">)</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Stop Order: </span><span class="si">%s</span><span class="s2"> was canceled.&quot;</span><span class="p">,</span> <span class="n">stop_order</span><span class="o">.</span><span class="n">stop_order_id</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                <span class="s2">&quot;Orders: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">client</span><span class="o">.</span><span class="n">stop_orders</span><span class="o">.</span><span class="n">get_stop_orders</span><span class="p">(</span><span class="n">account_id</span><span class="o">=</span><span class="n">account_id</span><span class="p">)</span>
+            <span class="p">)</span>
+        <span class="k">except</span> <span class="n">InvestError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Failed to cancel all orders. Error: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span>
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
