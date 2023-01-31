@@ -95,3 +95,13 @@
 ~~~python
 {% include "../examples/stream_client.py" %}
 ~~~
+## Создание тэйк-профит стоп ордера
+[examples/wiseplat_create_take_profit_stop_order.py](https://github.com/Tinkoff/invest-python/blob/main/examples/wiseplat_create_take_profit_stop_order.py)
+~~~python
+{% include "../examples/wiseplat_create_take_profit_stop_order.py" %}
+~~~
+## Отмена всех выставленных стоп ордеров
+[examples/wiseplat_cancel_all_stop_orders.py](https://github.com/Tinkoff/invest-python/blob/main/examples/wiseplat_cancel_all_stop_orders.py)
+~~~python
+{% include "../examples/wiseplat_cancel_all_stop_orders.py" %}
+~~~
