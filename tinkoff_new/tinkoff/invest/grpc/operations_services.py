@@ -18,7 +18,9 @@ class OperationsService:
             request_serializer=operations.OperationsRequest.serialize,
             response_deserializer=operations.OperationsResponse.deserialize,
         )
-        """Метод получения списка операций по счёту."""
+        """Метод получения списка операций по счёту.При работе с данным методом необходимо учитывать
+        [особенности взаимодействия](/investAPI/operations_problems) с данным методом.
+        """
 
         self.get_portfolio = channel.unary_unary(
             "/tinkoff.public.invest.api.contract.v1.OperationsService/GetPortfolio",
@@ -60,7 +62,9 @@ class OperationsService:
             request_serializer=operations.GetOperationsByCursorRequest.serialize,
             response_deserializer=operations.GetOperationsByCursorResponse.deserialize,
         )
-        """Метод получения списка операций по счёту с пагинацией."""
+        """Метод получения списка операций по счёту с пагинацией. При работе с данным методом необходимо учитывать
+        [особенности взаимодействия](/investAPI/operations_problems) с данным методом.
+        """
 
 
 class OperationsStreamService:

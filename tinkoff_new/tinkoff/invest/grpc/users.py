@@ -5,7 +5,7 @@ isort:skip_file
 """
 import proto
 from google.protobuf import timestamp_pb2
-from tinkoff_new.tinkoff.invest.grpc import common
+from tinkoff.invest.grpc import common
 
 __protobuf__ = proto.module(package=__name__)
 

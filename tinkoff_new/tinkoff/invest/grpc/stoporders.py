@@ -88,6 +88,9 @@ class StopOrder(proto.Message):
     stop_price = proto.Field(common.MoneyValue, number=11)
     """Цена активации стоп-заявки за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента."""
 
+    instrument_uid = proto.Field(proto.STRING, number=12)
+    """instrument_uid идентификатор инструмента"""
+
 
 class PostStopOrderRequest(proto.Message):
     """Запрос выставления стоп-заявки."""
@@ -118,6 +121,9 @@ class PostStopOrderRequest(proto.Message):
 
     expire_date = proto.Field(timestamp_pb2.Timestamp, number=9)
     """Дата и время окончания действия стоп-заявки в часовом поясе UTC. **Для ExpirationType = GoodTillDate заполнение обязательно**."""
+
+    instrument_id = proto.Field(proto.STRING, number=10)
+    """Идентификатор инструмента, принимает значения Figi или instrument_uid"""
 
 
 class PostStopOrderResponse(proto.Message):

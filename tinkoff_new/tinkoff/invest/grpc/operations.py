@@ -5,7 +5,7 @@ isort:skip_file
 """
 import proto
 from google.protobuf import timestamp_pb2
-from tinkoff_new.tinkoff.invest.grpc import common
+from tinkoff.invest.grpc import common
 
 __protobuf__ = proto.module(package=__name__)
 
@@ -173,6 +173,48 @@ class OperationType(proto.Enum):
     OPERATION_TYPE_OUT_STAMP_DUTY = 47
     """Гербовый сбор."""
 
+    OPERATION_TYPE_OUTPUT_SWIFT = 50
+    """	SWIFT-перевод"""
+
+    OPERATION_TYPE_INPUT_SWIFT = 51
+    """	SWIFT-перевод"""
+
+    OPERATION_TYPE_OUTPUT_ACQUIRING = 53
+    """ Перевод на карту"""
+
+    OPERATION_TYPE_INPUT_ACQUIRING = 54
+    """	Перевод с карты"""
+
+    OPERATION_TYPE_OUTPUT_PENALTY = 55
+    """	Комиссия за вывод средств"""
+
+    OPERATION_TYPE_ADVICE_FEE = 56
+    """	Списание оплаты за сервис Советов"""
+
+    OPERATION_TYPE_TRANS_IIS_BS = 57
+    """ Перевод ценных бумаг с ИИС на Брокерский счет"""
+
+    OPERATION_TYPE_TRANS_BS_BS = 58
+    """ Перевод ценных бумаг с одного брокерского счета на другой"""
+
+    OPERATION_TYPE_OUT_MULTI = 59
+    """ Вывод денежных средств со счета"""
+
+    OPERATION_TYPE_INP_MULTI = 60
+    """ Пополнение денежных средств со счета"""
+
+    OPERATION_TYPE_OVER_PLACEMENT = 61
+    """ Размещение биржевого овернайта"""
+
+    OPERATION_TYPE_OVER_COM = 62
+    """ Списание комиссии"""
+
+    OPERATION_TYPE_OVER_INCOME = 63
+    """ Доход от оверанайта"""
+
+    OPERATION_TYPE_OPTION_EXPIRATION = 64
+    """Экспирация"""
+
 
 class PortfolioSubscriptionStatus(proto.Enum):
     """Результат подписки."""
@@ -330,7 +372,7 @@ class PortfolioPosition(proto.Message):
     """Текущий НКД."""
 
     average_position_price_pt = proto.Field(common.Quotation, number=7)
-    """Средняя цена позиции в пунктах (для фьючерсов). **Возможна задержка до секунды для пересчёта**."""
+    """Deprecated Средняя цена позиции в пунктах (для фьючерсов). **Возможна задержка до секунды для пересчёта**."""
 
     current_price = proto.Field(common.MoneyValue, number=8)
     """Текущая цена за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента.."""
@@ -339,10 +381,58 @@ class PortfolioPosition(proto.Message):
     """Средняя цена позиции по методу FIFO. **Возможна задержка до секунды для пересчёта**."""
 
     quantity_lots = proto.Field(common.Quotation, number=10)
-    """Количество лотов в портфеле."""
+    """Deprecated Количество лотов в портфеле."""
 
     blocked = proto.Field(proto.BOOL, number=21)
     """Заблокировано."""
+
+    position_uid = proto.Field(proto.STRING, number=24)
+    """position_uid-идентификатора инструмента"""
+
+    instrument_uid = proto.Field(proto.STRING, number=25)
+    """instrument_uid-идентификатора инструмента"""
+
+    var_margin = proto.Field(common.MoneyValue, number=26)
+    """Вариационная маржа"""
+
+    expected_yield_fifo = proto.Field(common.Quotation, number=27)
+    """Текущая рассчитанная доходность позиции."""
+
+
+class VirtualPortfolioPosition(proto.Message):
+
+    position_uid = proto.Field(proto.STRING, number=1)
+    """position_uid-идентификатора инструмента"""
+
+    instrument_uid = proto.Field(proto.STRING, number=2)
+    """instrument_uid-идентификатора инструмента"""
+
+    figi = proto.Field(proto.STRING, number=3)
+    """Figi-идентификатора инструмента."""
+
+    instrument_type = proto.Field(proto.STRING, number=4)
+    """Тип инструмента."""
+
+    quantity = proto.Field(common.Quotation, number=5)
+    """Количество инструмента в портфеле в штуках."""
+
+    average_position_price = proto.Field(common.MoneyValue, number=6)
+    """Средневзвешенная цена позиции. **Возможна задержка до секунды для пересчёта**."""
+
+    expected_yield = proto.Field(common.Quotation, number=7)
+    """Текущая рассчитанная доходность позиции."""
+
+    expected_yield_fifo = proto.Field(common.Quotation, number=8)
+    """Текущая рассчитанная доходность позиции."""
+
+    expire_date = proto.Field(timestamp_pb2.Timestamp, number=9)
+    """Дата до которой нужно продать виртуальные бумаги, после этой даты виртуальная позиция "сгорит" """
+
+    current_price = proto.Field(common.MoneyValue, number=10)
+    """Текущая цена за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента.."""
+
+    average_position_price_fifo = proto.Field(common.MoneyValue, number=11)
+    """Средняя цена позиции по методу FIFO. **Возможна задержка до секунды для пересчёта**."""
 
 
 class GenerateBrokerReportRequest(proto.Message):
@@ -642,40 +732,30 @@ class Operation(proto.Message):
     trades = proto.RepeatedField(OperationTrade, number=14)
     """Массив сделок."""
 
+    asset_uid = proto.Field(proto.STRING, number=16)
+    """Идентификатор актива"""
+
 
 class PortfolioRequest(proto.Message):
     """Запрос получения текущего портфеля по счёту."""
 
+    class CurrencyRequest(proto.Enum):
+
+        RUB = 0
+        """Рубли"""
+
+        USD = 1
+        """Доллары"""
+
+        EUR = 2
+        """Евро"""
+
+
     account_id = proto.Field(proto.STRING, number=1)
     """Идентификатор счёта пользователя."""
 
-
-class PortfolioResponse(proto.Message):
-    """Текущий портфель по счёту."""
-
-    total_amount_shares = proto.Field(common.MoneyValue, number=1)
-    """Общая стоимость акций в портфеле в рублях."""
-
-    total_amount_bonds = proto.Field(common.MoneyValue, number=2)
-    """Общая стоимость облигаций в портфеле в рублях."""
-
-    total_amount_etf = proto.Field(common.MoneyValue, number=3)
-    """Общая стоимость фондов в портфеле в рублях."""
-
-    total_amount_currencies = proto.Field(common.MoneyValue, number=4)
-    """Общая стоимость валют в портфеле в рублях."""
-
-    total_amount_futures = proto.Field(common.MoneyValue, number=5)
-    """Общая стоимость фьючерсов в портфеле в рублях."""
-
-    expected_yield = proto.Field(common.Quotation, number=6)
-    """Текущая относительная доходность портфеля, в %."""
-
-    positions = proto.RepeatedField(PortfolioPosition, number=7)
-    """Список позиций портфеля."""
-
-    account_id = proto.Field(proto.STRING, number=8)
-    """Идентификатор счёта пользователя."""
+    currency = proto.Field(PortfolioRequest.CurrencyRequest, number=2)
+    """Валюта, в которой требуется рассчитать портфель"""
 
 
 class PositionsRequest(proto.Message):
@@ -782,12 +862,6 @@ class GetOperationsByCursorRequest(proto.Message):
     """Флаг не показывать overnight операций."""
 
 
-class OperationItemTrades(proto.Message):
-    """Массив с информацией о сделках."""
-
-    trades = proto.RepeatedField(OperationItemTrade, number=6)
-
-
 class OperationItem(proto.Message):
     """Данные об операции."""
 
@@ -798,10 +872,10 @@ class OperationItem(proto.Message):
     """Номер счета клиента."""
 
     id = proto.Field(proto.STRING, number=16)
-    """Номер поручения."""
+    """Идентификатор операции, может меняться с течением времени."""
 
     parent_operation_id = proto.Field(proto.STRING, number=17)
-    """Номер родительского поручения."""
+    """Идентификатор родительской операции, может измениться, если изменился id родительской операции."""
 
     name = proto.Field(proto.STRING, number=18)
     """Название операции."""
@@ -866,6 +940,14 @@ class OperationItem(proto.Message):
     trades_info = proto.Field(OperationItemTrades, number=61)
     """Массив сделок."""
 
+    asset_uid = proto.Field(proto.STRING, number=64)
+    """Идентификатор актива"""
+
+
+class OperationItemTrades(proto.Message):
+    """Массив с информацией о сделках."""
+
+    trades = proto.RepeatedField(OperationItemTrade, number=6)
 
 class PositionsStreamRequest(proto.Message):
     """Запрос установки stream-соединения позиций."""
@@ -886,6 +968,46 @@ class OperationsResponse(proto.Message):
 
     operations = proto.RepeatedField(Operation, number=1)
     """Массив операций."""
+
+
+class PortfolioResponse(proto.Message):
+    """Текущий портфель по счёту."""
+
+    total_amount_shares = proto.Field(common.MoneyValue, number=1)
+    """Общая стоимость акций в портфеле в рублях."""
+
+    total_amount_bonds = proto.Field(common.MoneyValue, number=2)
+    """Общая стоимость облигаций в портфеле в рублях."""
+
+    total_amount_etf = proto.Field(common.MoneyValue, number=3)
+    """Общая стоимость фондов в портфеле в рублях."""
+
+    total_amount_currencies = proto.Field(common.MoneyValue, number=4)
+    """Общая стоимость валют в портфеле в рублях."""
+
+    total_amount_futures = proto.Field(common.MoneyValue, number=5)
+    """Общая стоимость фьючерсов в портфеле в рублях."""
+
+    expected_yield = proto.Field(common.Quotation, number=6)
+    """Текущая относительная доходность портфеля, в %."""
+
+    positions = proto.RepeatedField(PortfolioPosition, number=7)
+    """Список позиций портфеля."""
+
+    account_id = proto.Field(proto.STRING, number=8)
+    """Идентификатор счёта пользователя."""
+
+    total_amount_options = proto.Field(common.MoneyValue, number=9)
+    """Общая стоимость опционов в портфеле в рублях."""
+
+    total_amount_sp = proto.Field(common.MoneyValue, number=10)
+    """Общая стоимость структурных нот в портфеле в рублях"""
+
+    total_amount_portfolio = proto.Field(common.MoneyValue, number=11)
+    """Общая стоимость портфеля в рублях"""
+
+    virtual_positions = proto.RepeatedField(VirtualPortfolioPosition, number=12)
+    """Массив виртуальных позиций портфеля"""
 
 
 class GetOperationsByCursorResponse(proto.Message):
@@ -942,28 +1064,6 @@ class PortfolioStreamResponse(proto.Message):
     """Проверка активности стрима."""
 
 
-class PositionData(proto.Message):
-    """Данные о позиции портфеля."""
-
-    account_id = proto.Field(proto.STRING, number=1)
-    """Идентификатор счёта."""
-
-    money = proto.RepeatedField(PositionsMoney, number=2)
-    """Массив валютных позиций портфеля."""
-
-    securities = proto.RepeatedField(PositionsSecurities, number=3)
-    """Список ценно-бумажных позиций портфеля."""
-
-    futures = proto.RepeatedField(PositionsFutures, number=4)
-    """Список фьючерсов портфеля."""
-
-    options = proto.RepeatedField(PositionsOptions, number=5)
-    """Список опционов портфеля."""
-
-    date = proto.Field(timestamp_pb2.Timestamp, number=6)
-    """Дата и время операции в формате UTC."""
-
-
 class PositionsStreamResponse(proto.Message):
     """Информация по изменению позиций портфеля."""
 
@@ -997,3 +1097,26 @@ class PositionsResponse(proto.Message):
 
     options = proto.RepeatedField(PositionsOptions, number=6)
     """Список опционов портфеля."""
+
+
+class PositionData(proto.Message):
+    """Данные о позиции портфеля."""
+
+    account_id = proto.Field(proto.STRING, number=1)
+    """Идентификатор счёта."""
+
+    money = proto.RepeatedField(PositionsMoney, number=2)
+    """Массив валютных позиций портфеля."""
+
+    securities = proto.RepeatedField(PositionsSecurities, number=3)
+    """Список ценно-бумажных позиций портфеля."""
+
+    futures = proto.RepeatedField(PositionsFutures, number=4)
+    """Список фьючерсов портфеля."""
+
+    options = proto.RepeatedField(PositionsOptions, number=5)
+    """Список опционов портфеля."""
+
+    date = proto.Field(timestamp_pb2.Timestamp, number=6)
+    """Дата и время операции в формате UTC."""
+

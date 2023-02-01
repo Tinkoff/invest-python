@@ -22,7 +22,7 @@ class MarketDataService:
             request_serializer=marketdata.GetLastPricesRequest.serialize,
             response_deserializer=marketdata.GetLastPricesResponse.deserialize,
         )
-        """Метод запроса последних цен по инструментам."""
+        """Метод запроса цен последних сделок по инструментам."""
 
         self.get_order_book = channel.unary_unary(
             "/tinkoff.public.invest.api.contract.v1.MarketDataService/GetOrderBook",

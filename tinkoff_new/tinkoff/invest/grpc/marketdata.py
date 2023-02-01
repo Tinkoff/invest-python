@@ -135,13 +135,13 @@ class Trade(proto.Message):
 
 
 class LastPrice(proto.Message):
-    """Информация о цене."""
+    """Информация о цене последней сделки."""
 
     figi = proto.Field(proto.STRING, number=1)
     """Figi инструмента."""
 
     price = proto.Field(common.Quotation, number=2)
-    """Последняя цена за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента. Для перевод цен в валюту рекомендуем использовать [информацию со страницы](https://tinkoff.github.io/investAPI/faq_marketdata/)"""
+    """Цена последней сделки за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента. Для перевод цен в валюту рекомендуем использовать [информацию со страницы](https://tinkoff.github.io/investAPI/faq_marketdata/)"""
 
     time = proto.Field(timestamp_pb2.Timestamp, number=3)
     """Время получения последней цены в часовом поясе UTC по времени биржи."""
@@ -298,13 +298,13 @@ class InfoSubscription(proto.Message):
 
 
 class SubscribeLastPriceRequest(proto.Message):
-    """Изменение статуса подписки на последнюю цену инструмента."""
+    """Изменение статуса подписки на цену последней сделки по инструменту."""
 
     subscription_action = proto.Field(SubscriptionAction, number=1)
     """Изменение статуса подписки."""
 
     instruments = proto.RepeatedField(LastPriceInstrument, number=2)
-    """Массив инструментов для подписки на последнюю цену."""
+    """Массив инструментов для подписки на цену последней сделки."""
 
 
 class LastPriceInstrument(proto.Message):
@@ -318,7 +318,7 @@ class LastPriceInstrument(proto.Message):
 
 
 class LastPriceSubscription(proto.Message):
-    """Статус подписки на последнюю цену."""
+    """Статус подписки на цену последней сделки."""
 
     figi = proto.Field(proto.STRING, number=1)
     """Figi-идентификатор инструмента."""
@@ -479,13 +479,13 @@ class SubscribeInfoResponse(proto.Message):
 
 
 class SubscribeLastPriceResponse(proto.Message):
-    """Результат изменения статуса подписки на последнюю цену."""
+    """Результат изменения статуса подписки на цену последней сделки."""
 
     tracking_id = proto.Field(proto.STRING, number=1)
     """Уникальный идентификатор запроса, подробнее: [tracking_id](https://tinkoff.github.io/investAPI/grpc#tracking-id)."""
 
     last_price_subscriptions = proto.RepeatedField(LastPriceSubscription, number=2)
-    """Массив статусов подписки на последнюю цену."""
+    """Массив статусов подписки на цену последней сделки."""
 
 
 class GetCandlesRequest(proto.Message):
@@ -508,7 +508,7 @@ class GetCandlesRequest(proto.Message):
 
 
 class GetLastPricesRequest(proto.Message):
-    """Запрос получения последних цен."""
+    """Запрос получения цен последних сделок."""
 
     figi = proto.RepeatedField(proto.STRING, number=1)
     """Массив figi-идентификаторов инструментов."""
@@ -617,10 +617,10 @@ class GetCandlesResponse(proto.Message):
 
 
 class GetLastPricesResponse(proto.Message):
-    """Список последних цен."""
+    """Список цен последних сделок."""
 
     last_prices = proto.RepeatedField(LastPrice, number=1)
-    """Массив последних цен."""
+    """Массив цен последних сделок."""
 
 
 class GetLastTradesResponse(proto.Message):
@@ -699,7 +699,7 @@ class MarketDataServerSideStreamRequest(proto.Message):
     """Запрос подписки на торговые статусы инструментов."""
 
     subscribe_last_price_request = proto.Field(SubscribeLastPriceRequest, number=5)
-    """Запрос подписки на последние цены."""
+    """Запрос подписки на цены последних сделок."""
 
 
 class MarketDataRequest(proto.Message):
@@ -718,7 +718,7 @@ class MarketDataRequest(proto.Message):
     """Запрос подписки на торговые статусы инструментов."""
 
     subscribe_last_price_request = proto.Field(SubscribeLastPriceRequest, number=5, oneof="payload", optional=True)
-    """Запрос подписки на последние цены."""
+    """Запрос подписки на цены последних сделок."""
 
     get_my_subscriptions = proto.Field(GetMySubscriptions, number=6, oneof="payload", optional=True)
     """Запрос своих подписок."""
@@ -755,8 +755,8 @@ class MarketDataResponse(proto.Message):
     """Проверка активности стрима."""
 
     subscribe_last_price_response = proto.Field(SubscribeLastPriceResponse, number=10, oneof="payload", optional=True)
-    """Результат подписки на последние цены инструментов."""
+    """Результат подписки на цены последние сделок по инструментам."""
 
     last_price = proto.Field(LastPrice, number=11, oneof="payload", optional=True)
-    """Последняя цена."""
+    """Цена последней сделки."""
 

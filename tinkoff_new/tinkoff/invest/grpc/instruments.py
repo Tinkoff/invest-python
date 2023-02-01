@@ -42,29 +42,53 @@ class OptionDirection(proto.Enum):
     """Тип опциона по направлению сделки."""
 
     OPTION_DIRECTION_UNSPECIFIED = 0
+    """Тип не определен."""
+
     OPTION_DIRECTION_PUT = 1
+    """Опцион на продажу."""
+
     OPTION_DIRECTION_CALL = 2
+    """Опцион на покупку."""
+
 
 class OptionPaymentType(proto.Enum):
     """Тип расчетов по опциону."""
 
     OPTION_PAYMENT_TYPE_UNSPECIFIED = 0
+    """Тип не определен."""
+
     OPTION_PAYMENT_TYPE_PREMIUM = 1
+    """Опционы с использованием премии в расчетах."""
+
     OPTION_PAYMENT_TYPE_MARGINAL = 2
+    """Маржируемые опционы."""
+
 
 class OptionStyle(proto.Enum):
     """Тип опциона по стилю."""
 
     OPTION_STYLE_UNSPECIFIED = 0
+    """Тип не определен."""
+
     OPTION_STYLE_AMERICAN = 1
+    """Американский опцион."""
+
     OPTION_STYLE_EUROPEAN = 2
+    """Европейский опцион."""
+
 
 class OptionSettlementType(proto.Enum):
     """Тип опциона по способу исполнения."""
 
     OPTION_EXECUTION_TYPE_UNSPECIFIED = 0
+    """Тип не определен."""
+
     OPTION_EXECUTION_TYPE_PHYSICAL_DELIVERY = 1
+    """Поставочный тип опциона."""
+
     OPTION_EXECUTION_TYPE_CASH_SETTLEMENT = 2
+    """Расчетный тип опциона."""
+
 
 class InstrumentIdType(proto.Enum):
     """Тип идентификатора инструмента. Подробнее об идентификации инструментов: [Идентификация инструментов](https://tinkoff.github.io/investAPI/faq_identification/)"""
@@ -316,6 +340,12 @@ class Option(proto.Message):
     for_qual_investor_flag = proto.Field(proto.BOOL, number=406)
     """Флаг отображающий доступность торговли инструментом только для квалифицированных инвесторов."""
 
+    weekend_flag = proto.Field(proto.BOOL, number=407)
+    """Флаг отображающий доступность торговли инструментом по выходным"""
+
+    blocked_tca_flag = proto.Field(proto.BOOL, number=408)
+    """Флаг заблокированного ТКС"""
+
 
 class Bond(proto.Message):
     """Объект передачи информации об облигации."""
@@ -449,6 +479,12 @@ class Bond(proto.Message):
     for_qual_investor_flag = proto.Field(proto.BOOL, number=52)
     """Флаг отображающий доступность торговли инструментом только для квалифицированных инвесторов."""
 
+    weekend_flag = proto.Field(proto.BOOL, number=53)
+    """Флаг отображающий доступность торговли инструментом по выходным"""
+
+    blocked_tca_flag = proto.Field(proto.BOOL, number=54)
+    """Флаг заблокированного ТКС"""
+
     first_1min_candle_date = proto.Field(timestamp_pb2.Timestamp, number=61)
     """Дата первой минутной свечи."""
 
@@ -548,6 +584,12 @@ class Currency(proto.Message):
 
     for_qual_investor_flag = proto.Field(proto.BOOL, number=52)
     """Флаг отображающий доступность торговли инструментом только для квалифицированных инвесторов."""
+
+    weekend_flag = proto.Field(proto.BOOL, number=53)
+    """Флаг отображающий доступность торговли инструментом по выходным"""
+
+    blocked_tca_flag = proto.Field(proto.BOOL, number=54)
+    """Флаг заблокированного ТКС"""
 
     first_1min_candle_date = proto.Field(timestamp_pb2.Timestamp, number=56)
     """Дата первой минутной свечи."""
@@ -660,6 +702,12 @@ class Etf(proto.Message):
 
     for_qual_investor_flag = proto.Field(proto.BOOL, number=42)
     """Флаг отображающий доступность торговли инструментом только для квалифицированных инвесторов."""
+
+    weekend_flag = proto.Field(proto.BOOL, number=43)
+    """Флаг отображающий доступность торговли инструментом по выходным"""
+
+    blocked_tca_flag = proto.Field(proto.BOOL, number=44)
+    """Флаг заблокированного ТКС"""
 
     first_1min_candle_date = proto.Field(timestamp_pb2.Timestamp, number=56)
     """Дата первой минутной свечи."""
@@ -779,6 +827,12 @@ class Future(proto.Message):
     for_qual_investor_flag = proto.Field(proto.BOOL, number=42)
     """Флаг отображающий доступность торговли инструментом только для квалифицированных инвесторов."""
 
+    weekend_flag = proto.Field(proto.BOOL, number=43)
+    """Флаг отображающий доступность торговли инструментом по выходным"""
+
+    blocked_tca_flag = proto.Field(proto.BOOL, number=44)
+    """Флаг заблокированного ТКС"""
+
     first_1min_candle_date = proto.Field(timestamp_pb2.Timestamp, number=56)
     """Дата первой минутной свечи."""
 
@@ -893,6 +947,12 @@ class Share(proto.Message):
 
     for_qual_investor_flag = proto.Field(proto.BOOL, number=47)
     """Флаг отображающий доступность торговли инструментом только для квалифицированных инвесторов."""
+
+    weekend_flag = proto.Field(proto.BOOL, number=48)
+    """Флаг отображающий доступность торговли инструментом по выходным"""
+
+    blocked_tca_flag = proto.Field(proto.BOOL, number=49)
+    """Флаг заблокированного ТКС"""
 
     first_1min_candle_date = proto.Field(timestamp_pb2.Timestamp, number=56)
     """Дата первой минутной свечи."""
@@ -1133,6 +1193,12 @@ class Instrument(proto.Message):
 
     for_qual_investor_flag = proto.Field(proto.BOOL, number=37)
     """Флаг отображающий доступность торговли инструментом только для квалифицированных инвесторов."""
+
+    weekend_flag = proto.Field(proto.BOOL, number=38)
+    """Флаг отображающий доступность торговли инструментом по выходным"""
+
+    blocked_tca_flag = proto.Field(proto.BOOL, number=39)
+    """Флаг заблокированного ТКС"""
 
     first_1min_candle_date = proto.Field(timestamp_pb2.Timestamp, number=56)
     """Дата первой минутной свечи."""
@@ -1544,6 +1610,12 @@ class InstrumentShort(proto.Message):
 
     for_qual_investor_flag = proto.Field(proto.BOOL, number=28)
     """Флаг отображающий доступность торговли инструментом только для квалифицированных инвесторов."""
+
+    weekend_flag = proto.Field(proto.BOOL, number=29)
+    """Флаг отображающий доступность торговли инструментом по выходным"""
+
+    blocked_tca_flag = proto.Field(proto.BOOL, number=30)
+    """Флаг заблокированного ТКС"""
 
 
 class TradingSchedulesRequest(proto.Message):

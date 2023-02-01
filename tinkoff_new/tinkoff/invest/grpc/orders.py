@@ -5,7 +5,7 @@ isort:skip_file
 """
 import proto
 from google.protobuf import timestamp_pb2
-from tinkoff_new.tinkoff.invest.grpc import common
+from tinkoff.invest.grpc import common
 
 __protobuf__ = proto.module(package=__name__)
 
@@ -76,10 +76,13 @@ class OrderTrade(proto.Message):
     """Дата и время совершения сделки в часовом поясе UTC."""
 
     price = proto.Field(common.Quotation, number=2)
-    """Цена одного инструмента, по которой совершена сделка."""
+    """Цена за 1 инструмент, по которой совершена сделка."""
 
     quantity = proto.Field(proto.INT64, number=3)
-    """Количество лотов в сделке."""
+    """Количество штук в сделке."""
+
+    trade_id = proto.Field(proto.STRING, number=4)
+    """Идентификатор сделки"""
 
 
 class OrderStage(proto.Message):
@@ -92,7 +95,7 @@ class OrderStage(proto.Message):
     """Количество лотов."""
 
     trade_id = proto.Field(proto.STRING, number=3)
-    """Идентификатор торговой операции."""
+    """Идентификатор сделки."""
 
 
 class TradesStreamRequest(proto.Message):
@@ -137,7 +140,7 @@ class PostOrderRequest(proto.Message):
     """Количество лотов."""
 
     price = proto.Field(common.Quotation, number=3)
-    """Цена одного инструмента. Для получения стоимости лота требуется умножить на лотность инструмента. Игнорируется для рыночных поручений."""
+    """Цена за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента. Игнорируется для рыночных поручений."""
 
     direction = proto.Field(OrderDirection, number=4)
     """Направление операции."""
@@ -174,7 +177,7 @@ class PostOrderResponse(proto.Message):
     """Начальная цена заявки. Произведение количества запрошенных лотов на цену."""
 
     executed_order_price = proto.Field(common.MoneyValue, number=6)
-    """Исполненная цена заявки. Произведение средней цены покупки на количество лотов."""
+    """Исполненная средняя цена 1 одного инструмента в заявки."""
 
     total_order_amount = proto.Field(common.MoneyValue, number=7)
     """Итоговая стоимость заявки, включающая все комиссии."""
