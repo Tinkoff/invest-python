@@ -3,8 +3,8 @@ import logging
 import os
 
 from pandas import DataFrame
-from tinkoff.invest import Client
 
+from tinkoff.invest import Client
 from tinkoff.invest.services import InstrumentsService
 from tinkoff.invest.utils import quotation_to_decimal
 
@@ -19,8 +19,8 @@ def main():
 
     ticker = "VTBR"  # "BRH3" "SBER" "VTBR"
 
-    with Client(TOKEN) as cl:
-        instruments: InstrumentsService = cl.instruments
+    with Client(TOKEN) as client:
+        instruments: InstrumentsService = client.instruments
         tickers = []
         for method in ["shares", "bonds", "etfs", "currencies", "futures"]:
             for item in getattr(instruments, method)().instruments:
@@ -51,17 +51,17 @@ def main():
                     }
                 )
 
-        df = DataFrame(tickers)
+        tickers_df = DataFrame(tickers)
 
-        df = df[df["ticker"] == ticker]
-        if df.empty:
+        ticker_df = tickers_df[tickers_df["ticker"] == ticker]
+        if ticker_df.empty:
             logger.error("There is no such ticker: %s", ticker)
             return
 
-        figi = df["figi"].iloc[0]
+        figi = ticker_df["figi"].iloc[0]
         print(f"\nTicker {ticker} have figi={figi}\n")
         print(f"Additional info for this {ticker} ticker:")
-        print(df.iloc[0])
+        print(ticker_df.iloc[0])
 
 
 if __name__ == "__main__":
