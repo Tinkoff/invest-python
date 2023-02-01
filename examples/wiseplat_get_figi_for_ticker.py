@@ -4,6 +4,7 @@ import os
 
 from pandas import DataFrame
 from tinkoff.invest import Client
+
 from tinkoff.invest.services import InstrumentsService
 from tinkoff.invest.utils import quotation_to_decimal
 
@@ -20,10 +21,10 @@ def main():
 
     with Client(TOKEN) as cl:
         instruments: InstrumentsService = cl.instruments
-        l = []
+        tickers = []
         for method in ["shares", "bonds", "etfs", "currencies", "futures"]:
             for item in getattr(instruments, method)().instruments:
-                l.append(
+                tickers.append(
                     {
                         "name": item.name,
                         "ticker": item.ticker,
@@ -50,7 +51,7 @@ def main():
                     }
                 )
 
-        df = DataFrame(l)
+        df = DataFrame(tickers)
 
         df = df[df["ticker"] == ticker]
         if df.empty:
