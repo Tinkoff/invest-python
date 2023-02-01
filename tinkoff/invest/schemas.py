@@ -1826,6 +1826,7 @@ class OrderStage(_grpc_helpers.Message):
     trade_id: str = _grpc_helpers.string_field(3)
 
 
+@dataclass(eq=False, repr=True)
 class ReplaceOrderRequest(_grpc_helpers.Message):
     account_id: str = _grpc_helpers.string_field(1)
     order_id: str = _grpc_helpers.string_field(6)

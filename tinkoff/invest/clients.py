@@ -5,6 +5,9 @@ from grpc.aio import ClientInterceptor
 
 from .async_services import AsyncServices
 from .channels import create_channel
+from .interceptors.log_request_interceptor import log_request_interceptor
+from .interceptors.metadata_adder_interceptor import metadata_adder_interceptor
+from .metadata import get_metadata
 from .services import Services
 from .typedefs import ChannelArgumentType
 
@@ -41,12 +44,18 @@ class Client:
         self._sandbox_token = sandbox_token
         self._options = options
         self._app_name = app_name
+        self._metadata = get_metadata(token, app_name)
 
         self._channel = create_channel(target=target, options=options)
         if interceptors is None:
             interceptors = []
+        self._add_metadata_interceptor(interceptors)
+        self._add_logging_interceptor(interceptors)
         for interceptor in interceptors:
             self._channel = grpc.intercept_channel(self._channel, interceptor)
+
+    def _add_metadata_interceptor(self, interceptors):
+        interceptors.append(metadata_adder_interceptor(self._metadata))
 
     def __enter__(self) -> Services:
         channel = self._channel.__enter__()
@@ -60,6 +69,9 @@ class Client:
     def __exit__(self, exc_type, exc_val, exc_tb):
         self._channel.__exit__(exc_type, exc_val, exc_tb)
         return False
+
+    def _add_logging_interceptor(self, interceptors):
+        interceptors.append(log_request_interceptor())
 
 
 class AsyncClient:

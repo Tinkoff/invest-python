@@ -12,7 +12,7 @@ class InstrumentsService:
     размера гарантийного обеспечения по фьючерсам;</br>**5**. дивидендов по ценной бумаге.
     """
 
-    def __init__(self, channel):
+    def __init__(self, channel, metadata):
         self.trading_schedules = channel.unary_unary(
             "/tinkoff.public.invest.api.contract.v1.InstrumentsService/TradingSchedules",
             request_serializer=instruments.TradingSchedulesRequest.serialize,

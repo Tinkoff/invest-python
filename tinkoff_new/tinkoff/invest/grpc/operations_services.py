@@ -12,7 +12,7 @@ class OperationsService:
     доступного остатка для вывода средств;</br> **5**. получения различных отчётов.
     """
 
-    def __init__(self, channel):
+    def __init__(self, channel, metadata):
         self.get_operations = channel.unary_unary(
             "/tinkoff.public.invest.api.contract.v1.OperationsService/GetOperations",
             request_serializer=operations.OperationsRequest.serialize,
@@ -65,7 +65,7 @@ class OperationsService:
 
 class OperationsStreamService:
 
-    def __init__(self, channel):
+    def __init__(self, channel, metadata):
         self.portfolio_stream = channel.unary_stream(
             "/tinkoff.public.invest.api.contract.v1.OperationsStreamService/PortfolioStream",
             request_serializer=operations.PortfolioStreamRequest.serialize,

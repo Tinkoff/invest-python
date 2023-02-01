@@ -5,7 +5,7 @@ isort:skip_file
 """
 import proto
 from google.protobuf import timestamp_pb2
-from tinkoff.invest.grpc import common
+from tinkoff_new.tinkoff.invest.grpc import common
 
 __protobuf__ = proto.module(package=__name__)
 
@@ -782,6 +782,12 @@ class GetOperationsByCursorRequest(proto.Message):
     """Флаг не показывать overnight операций."""
 
 
+class OperationItemTrades(proto.Message):
+    """Массив с информацией о сделках."""
+
+    trades = proto.RepeatedField(OperationItemTrade, number=6)
+
+
 class OperationItem(proto.Message):
     """Данные об операции."""
 
@@ -861,11 +867,6 @@ class OperationItem(proto.Message):
     """Массив сделок."""
 
 
-class OperationItemTrades(proto.Message):
-    """Массив с информацией о сделках."""
-
-    trades = proto.RepeatedField(OperationItemTrade, number=6)
-
 class PositionsStreamRequest(proto.Message):
     """Запрос установки stream-соединения позиций."""
 
@@ -941,6 +942,28 @@ class PortfolioStreamResponse(proto.Message):
     """Проверка активности стрима."""
 
 
+class PositionData(proto.Message):
+    """Данные о позиции портфеля."""
+
+    account_id = proto.Field(proto.STRING, number=1)
+    """Идентификатор счёта."""
+
+    money = proto.RepeatedField(PositionsMoney, number=2)
+    """Массив валютных позиций портфеля."""
+
+    securities = proto.RepeatedField(PositionsSecurities, number=3)
+    """Список ценно-бумажных позиций портфеля."""
+
+    futures = proto.RepeatedField(PositionsFutures, number=4)
+    """Список фьючерсов портфеля."""
+
+    options = proto.RepeatedField(PositionsOptions, number=5)
+    """Список опционов портфеля."""
+
+    date = proto.Field(timestamp_pb2.Timestamp, number=6)
+    """Дата и время операции в формате UTC."""
+
+
 class PositionsStreamResponse(proto.Message):
     """Информация по изменению позиций портфеля."""
 
@@ -974,26 +997,3 @@ class PositionsResponse(proto.Message):
 
     options = proto.RepeatedField(PositionsOptions, number=6)
     """Список опционов портфеля."""
-
-
-class PositionData(proto.Message):
-    """Данные о позиции портфеля."""
-
-    account_id = proto.Field(proto.STRING, number=1)
-    """Идентификатор счёта."""
-
-    money = proto.RepeatedField(PositionsMoney, number=2)
-    """Массив валютных позиций портфеля."""
-
-    securities = proto.RepeatedField(PositionsSecurities, number=3)
-    """Список ценно-бумажных позиций портфеля."""
-
-    futures = proto.RepeatedField(PositionsFutures, number=4)
-    """Список фьючерсов портфеля."""
-
-    options = proto.RepeatedField(PositionsOptions, number=5)
-    """Список опционов портфеля."""
-
-    date = proto.Field(timestamp_pb2.Timestamp, number=6)
-    """Дата и время операции в формате UTC."""
-
