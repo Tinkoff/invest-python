@@ -33,10 +33,10 @@ lint:
 
 .PHONY: format
 format:
-	$(POETRY_RUN) ruff --fix $(CODE)
 	$(POETRY_RUN) autoflake --recursive --in-place --remove-all-unused-imports --exclude=$(EXCLUDE_CODE) $(CODE)
 	$(POETRY_RUN) isort $(CODE)
 	$(POETRY_RUN) black --line-length=88 --exclude=$(EXCLUDE_CODE) $(CODE)
+	$(POETRY_RUN) ruff --fix $(CODE)
 	$(POETRY_RUN) toml-sort --in-place pyproject.toml
 
 .PHONY: check
@@ -54,25 +54,16 @@ docs:
 docs-serve:
 	$(POETRY_RUN) mkdocs serve
 
-.PHONY: changelog
-changelog:
-ifeq ($(v),)
-	$(POETRY_RUN) auto-changelog --starting-commit 6186fc50ce5bca4f4bc7595956137871fb8b05e5
-else
-	$(POETRY_RUN) auto-changelog --starting-commit 6186fc50ce5bca4f4bc7595956137871fb8b05e5 -v $(v)
-endif
-
-.PHONY: update-changelog
-update-changelog: changelog
-	git add .
-	git commit -m "docs: update changelog"
+.PHONY: next-version
+next-version:
+	@$(POETRY_RUN) python -m scripts.version
 
 .PHONY: bump-version
 bump-version:
 	poetry version $(v)
 	$(POETRY_RUN) python -m scripts.update_issue_templates $(v)
-	make changelog v=$(v)
 	git add . && git commit -m "chore(release): bump version to $(v)"
+	git tag -a $(v) -m ""
 
 .PHONY: install-poetry
 install-poetry:
@@ -81,6 +72,10 @@ install-poetry:
 .PHONY: install-docs
 install-docs:
 	poetry install --only docs
+
+.PHONY: install-bump
+install-bump:
+	poetry install --only bump
 
 .PHONY: install
 install:
@@ -102,7 +97,3 @@ gen-grpc:
 
 .PHONY: gen-client
 gen-client: download-protos gen-grpc
-
-.PHONY: git-lint
-git-lint:
-	$(POETRY_RUN) gitlint

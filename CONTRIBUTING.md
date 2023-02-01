@@ -85,15 +85,6 @@ make test
 
 ```
 make lint
-make git-lint
-```
-
-#### Using gitlint as a commit-msg hook
-
-```
-gitlint install-hook
-# To remove the hook
-gitlint uninstall-hook
 ```
 
 ### Запуск автоформатирования
@@ -132,12 +123,4 @@ make gen-client
 
 ### Release новой версии
 
-```
-make bump-version v=<new-version>
-```
-
-Команда установит новую версию.
-Далее проходим процесс ревью и устанавливаем tag коммиту в ветке мастер и отправляем на сервер.
-После отправки tag-а в github `git push --tags`, будет запущена джоба `publish_pypi`.
-
-_Стоит запускать инструкцию `make bump-version`, как только все изменения были зафиксированы в гите._
+Релиз новой версии происходит автоматически после слияния изменений в main ветку.

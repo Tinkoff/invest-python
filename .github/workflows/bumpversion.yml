@@ -1,0 +1,33 @@
+name: Bump version
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "tinkoff/**"
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.BOT_ACCESS_TOKEN }}
+
+      - name: Git user
+        run: |
+          git config --local user.name 'github-actions[bot]'
+          git config --local user.email 'github-actions[bot]@users.noreply.github.com'
+
+      - name: Install python dependencies
+        run: make install-poetry install-bump
+
+      - name: Bump version
+        run: make bump-version v=$(make next-version)
+
+      - name: Push
+        run: |
+          git push
+          git push --tags
