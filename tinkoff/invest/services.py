@@ -6,31 +6,23 @@ from typing import Dict, Generator, Iterable, List, Optional, Tuple
 
 import grpc
 
-from tinkoff_new.tinkoff.invest.grpc.orders import (
-    GetOrdersRequest as NewGetOrdersRequest,
-)
-from tinkoff_new.tinkoff.invest.grpc.orders import (
-    GetOrdersResponse as NewGetOrdersResponse,
-)
-from tinkoff_new.tinkoff.invest.grpc.orders import (
-    PostOrderRequest as NewPostOrderRequest,
-)
-from tinkoff_new.tinkoff.invest.grpc.orders import (
-    PostOrderResponse as NewPostOrderResponse,
-)
-from tinkoff_new.tinkoff.invest.grpc.sandbox import (
+from tinkoff.invest.grpc.orders import GetOrdersRequest as NewGetOrdersRequest
+from tinkoff.invest.grpc.orders import GetOrdersResponse as NewGetOrdersResponse
+from tinkoff.invest.grpc.orders import PostOrderRequest as NewPostOrderRequest
+from tinkoff.invest.grpc.orders import PostOrderResponse as NewPostOrderResponse
+from tinkoff.invest.grpc.sandbox import (
     CloseSandboxAccountRequest,
     CloseSandboxAccountResponse,
     OpenSandboxAccountRequest,
 )
-from tinkoff_new.tinkoff.invest.grpc.sandbox_services import SandboxService
-from tinkoff_new.tinkoff.invest.grpc.users import (
+from tinkoff.invest.grpc.sandbox_services import SandboxService
+from tinkoff.invest.grpc.users import (
     GetAccountsRequest,
     GetInfoRequest,
     GetMarginAttributesRequest,
     GetUserTariffRequest,
 )
-from tinkoff_new.tinkoff.invest.grpc.users_services import UsersService
+from tinkoff.invest.grpc.users_services import UsersService
 
 from . import _grpc_helpers
 from ._errors import handle_request_error, handle_request_error_gen
