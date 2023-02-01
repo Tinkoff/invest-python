@@ -20,18 +20,15 @@ from tinkoff.invest.strategies.base.signal import (
     Signal,
 )
 from tinkoff.invest.strategies.base.strategy_interface import InvestStrategy
-from tinkoff.invest.strategies.moving_average.strategy_settings import (
-    MovingAverageStrategySettings,
-)
-from tinkoff.invest.strategies.moving_average.strategy_state import (
-    MovingAverageStrategyState,
-)
 from tinkoff.invest.utils import (
     candle_interval_to_timedelta,
     ceil_datetime,
     floor_datetime,
     now,
 )
+
+from .strategy_settings import MovingAverageStrategySettings
+from .strategy_state import MovingAverageStrategyState
 
 logger = logging.getLogger(__name__)
 

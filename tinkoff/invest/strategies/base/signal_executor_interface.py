@@ -1,6 +1,6 @@
 from typing import Protocol
 
-from tinkoff.invest.strategies.base.signal import Signal
+from .signal import Signal
 
 
 class ISignalExecutor(Protocol):

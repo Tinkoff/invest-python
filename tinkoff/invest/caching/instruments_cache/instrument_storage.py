@@ -3,10 +3,8 @@ from dataclasses import replace
 from typing import Dict, Generic, Tuple, TypeVar, cast
 
 from tinkoff.invest import InstrumentIdType
-from tinkoff.invest.caching.instruments_cache.models import (
-    InstrumentResponse,
-    InstrumentsResponse,
-)
+
+from .models import InstrumentResponse, InstrumentsResponse
 
 logger = logging.getLogger(__name__)
 

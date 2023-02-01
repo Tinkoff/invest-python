@@ -3,12 +3,10 @@ from decimal import Decimal
 
 from tinkoff.invest import Quotation
 from tinkoff.invest.services import Services
-from tinkoff.invest.strategies.base.errors import (
-    InsufficientMarginalTradeFunds,
-    MarginalTradeIsNotActive,
-)
-from tinkoff.invest.strategies.base.strategy_settings_base import StrategySettings
 from tinkoff.invest.utils import quotation_to_decimal
+
+from .errors import InsufficientMarginalTradeFunds, MarginalTradeIsNotActive
+from .strategy_settings_base import StrategySettings
 
 logger = logging.getLogger(__name__)
 

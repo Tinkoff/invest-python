@@ -11,12 +11,9 @@ from tinkoff.invest.strategies.base.signal import (
     Signal,
 )
 from tinkoff.invest.strategies.base.signal_executor_base import SignalExecutor
-from tinkoff.invest.strategies.moving_average.strategy_settings import (
-    MovingAverageStrategySettings,
-)
-from tinkoff.invest.strategies.moving_average.strategy_state import (
-    MovingAverageStrategyState,
-)
+
+from .strategy_settings import MovingAverageStrategySettings
+from .strategy_state import MovingAverageStrategyState
 
 logger = logging.getLogger(__name__)
 

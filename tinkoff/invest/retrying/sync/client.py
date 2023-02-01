@@ -1,7 +1,8 @@
 from tinkoff.invest import Client
 from tinkoff.invest.retrying.settings import RetryClientSettings
-from tinkoff.invest.retrying.sync.grpc_interceptor import RetryClientInterceptor
-from tinkoff.invest.retrying.sync.retry_manager import RetryManager
+
+from .grpc_interceptor import RetryClientInterceptor
+from .retry_manager import RetryManager
 
 
 class RetryingClient(Client):

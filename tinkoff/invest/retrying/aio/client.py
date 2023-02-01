@@ -1,7 +1,8 @@
 from tinkoff.invest import AsyncClient
-from tinkoff.invest.retrying.aio.grpc_interceptor import AsyncRetryClientInterceptor
-from tinkoff.invest.retrying.aio.retry_manager import AsyncRetryManager
 from tinkoff.invest.retrying.settings import RetryClientSettings
+
+from .grpc_interceptor import AsyncRetryClientInterceptor
+from .retry_manager import AsyncRetryManager
 
 
 class AsyncRetryingClient(AsyncClient):

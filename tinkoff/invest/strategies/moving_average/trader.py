@@ -20,17 +20,12 @@ from tinkoff.invest.strategies.base.models import CandleEvent
 from tinkoff.invest.strategies.base.signal import CloseSignal, OpenSignal, Signal
 from tinkoff.invest.strategies.base.signal_executor_base import SignalExecutor
 from tinkoff.invest.strategies.base.trader_base import Trader
-from tinkoff.invest.strategies.moving_average.strategy import MovingAverageStrategy
-from tinkoff.invest.strategies.moving_average.strategy_settings import (
-    MovingAverageStrategySettings,
-)
-from tinkoff.invest.strategies.moving_average.strategy_state import (
-    MovingAverageStrategyState,
-)
-from tinkoff.invest.strategies.moving_average.supervisor import (
-    MovingAverageStrategySupervisor,
-)
 from tinkoff.invest.utils import floor_datetime, now
+
+from .strategy import MovingAverageStrategy
+from .strategy_settings import MovingAverageStrategySettings
+from .strategy_state import MovingAverageStrategyState
+from .supervisor import MovingAverageStrategySupervisor
 
 logger = logging.getLogger(__name__)
 

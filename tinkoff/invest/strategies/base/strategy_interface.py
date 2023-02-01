@@ -1,7 +1,7 @@
 from typing import Iterable, Protocol
 
-from tinkoff.invest.strategies.base.models import CandleEvent
-from tinkoff.invest.strategies.base.signal import Signal
+from .models import CandleEvent
+from .signal import Signal
 
 
 class InvestStrategy(Protocol):

@@ -3,8 +3,8 @@ from typing import Iterable, Tuple
 
 import grpc
 
-from tinkoff.invest.interceptors import generic_interceptor
-from tinkoff.invest.interceptors.client_call_details import ClientCallDetails
+from . import generic_interceptor
+from .client_call_details import ClientCallDetails
 
 
 class _ClientCallDetails(

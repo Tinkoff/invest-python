@@ -1,8 +1,9 @@
 from grpc.framework.foundation.callable_util import Outcome
 
-from tinkoff.invest.interceptors import generic_interceptor
-from tinkoff.invest.interceptors.client_call_details import ClientCallDetails
 from tinkoff.invest.logging import get_tracking_id_from_call, log_request
+
+from . import generic_interceptor
+from .client_call_details import ClientCallDetails
 
 
 def log_request_interceptor():

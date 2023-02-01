@@ -1,6 +1,6 @@
 import logging
 
-from tinkoff.invest.retrying.settings import RetryClientSettings
+from .settings import RetryClientSettings
 
 logger = logging.getLogger(__name__)
 

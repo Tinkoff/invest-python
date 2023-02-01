@@ -1,15 +1,16 @@
 import abc
 from typing import Generic
 
-from tinkoff.invest.market_data_stream.stream_managers import (
+from tinkoff.invest.schemas import MarketDataRequest
+
+from .stream_managers import (
     CandlesStreamManager,
     InfoStreamManager,
     LastPriceStreamManager,
     OrderBookStreamManager,
     TradesStreamManager,
 )
-from tinkoff.invest.market_data_stream.typevars import TMarketDataStreamManager
-from tinkoff.invest.schemas import MarketDataRequest
+from .typevars import TMarketDataStreamManager
 
 
 class IMarketDataStreamManager(abc.ABC, Generic[TMarketDataStreamManager]):

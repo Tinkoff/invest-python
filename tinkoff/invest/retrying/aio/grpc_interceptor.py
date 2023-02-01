@@ -1,6 +1,6 @@
 import grpc
 
-from tinkoff.invest.retrying.aio.retry_manager import AsyncRetryManager
+from .retry_manager import AsyncRetryManager
 
 
 class AsyncRetryClientInterceptor(grpc.aio.UnaryUnaryClientInterceptor):

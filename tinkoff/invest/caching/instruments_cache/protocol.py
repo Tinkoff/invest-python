@@ -1,7 +1,8 @@
 from typing import Protocol
 
 from tinkoff.invest import InstrumentStatus
-from tinkoff.invest.caching.instruments_cache.models import InstrumentsResponse
+
+from .models import InstrumentsResponse
 
 
 class InstrumentsResponseCallable(Protocol):

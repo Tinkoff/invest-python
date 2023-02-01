@@ -1,7 +1,7 @@
 import abc
 from typing import Iterable, Protocol, Type
 
-from tinkoff.invest.strategies.base.event import StrategyEvent
+from .event import StrategyEvent
 
 
 class IStrategySupervisor(Protocol):

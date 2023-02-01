@@ -20,20 +20,14 @@ from tinkoff.invest import (
     ShareResponse,
     SharesResponse,
 )
-from tinkoff.invest.caching.instruments_cache.instrument_storage import (
-    InstrumentStorage,
-)
-from tinkoff.invest.caching.instruments_cache.interface import IInstrumentsGetter
-from tinkoff.invest.caching.instruments_cache.models import (
-    InstrumentResponse,
-    InstrumentsResponse,
-)
-from tinkoff.invest.caching.instruments_cache.protocol import (
-    InstrumentsResponseCallable,
-)
-from tinkoff.invest.caching.instruments_cache.settings import InstrumentsCacheSettings
 from tinkoff.invest.caching.overrides import TTLCache
 from tinkoff.invest.services import InstrumentsService
+
+from .instrument_storage import InstrumentStorage
+from .interface import IInstrumentsGetter
+from .models import InstrumentResponse, InstrumentsResponse
+from .protocol import InstrumentsResponseCallable
+from .settings import InstrumentsCacheSettings
 
 logger = logging.getLogger(__name__)
 

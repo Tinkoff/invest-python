@@ -1,13 +1,14 @@
 from tinkoff.invest import OrderDirection, OrderType
 from tinkoff.invest.services import Services
-from tinkoff.invest.strategies.base.signal import (
+
+from .signal import (
     CloseLongMarketOrder,
     CloseShortMarketOrder,
     OpenLongMarketOrder,
     OpenShortMarketOrder,
 )
-from tinkoff.invest.strategies.base.signal_executor_interface import ISignalExecutor
-from tinkoff.invest.strategies.base.strategy_settings_base import StrategySettings
+from .signal_executor_interface import ISignalExecutor
+from .strategy_settings_base import StrategySettings
 
 
 class SignalExecutor(ISignalExecutor):

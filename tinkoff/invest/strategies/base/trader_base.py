@@ -6,11 +6,12 @@ from typing import Iterable
 import tinkoff
 from tinkoff.invest import HistoricCandle
 from tinkoff.invest.services import Services
-from tinkoff.invest.strategies.base.models import Candle, CandleEvent
-from tinkoff.invest.strategies.base.strategy_interface import InvestStrategy
-from tinkoff.invest.strategies.base.strategy_settings_base import StrategySettings
-from tinkoff.invest.strategies.base.trader_interface import ITrader
 from tinkoff.invest.utils import now, quotation_to_decimal
+
+from .models import Candle, CandleEvent
+from .strategy_interface import InvestStrategy
+from .strategy_settings_base import StrategySettings
+from .trader_interface import ITrader
 
 logger = logging.getLogger(__name__)
 

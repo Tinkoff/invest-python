@@ -189,7 +189,7 @@ class Descriptors(object):
 
 
 class PkgWriter(object):
-    """Writes a single pyi file"""
+    """Writes a single pyi file."""
 
     def __init__(
         self,
@@ -220,7 +220,7 @@ class PkgWriter(object):
 
     def _import(self, path: str, name: str) -> str:
         """Imports a stdlib path and returns a handle to it
-        eg. self._import("typing", "Optional") -> "Optional"
+        eg. self._import("typing", "Optional") -> "Optional".
         """
         imp = path.replace("/", ".")
         if imp == "google.protobuf.timestamp":
@@ -233,7 +233,7 @@ class PkgWriter(object):
             return ".".join((imp + "." + name).split(".")[-2:])
 
     def _import_message(self, name: str) -> str:
-        """Import a referenced message and return a handle"""
+        """Import a referenced message and return a handle."""
         message_fd = self.descriptors.message_to_fd[name]
         assert message_fd.name.endswith(".proto")
 
@@ -299,7 +299,7 @@ class PkgWriter(object):
         )
 
     def _write_comments(self, scl: SourceCodeLocation) -> bool:
-        """Return true if any comments were written"""
+        """Return true if any comments were written."""
         if not self._has_comments(scl):
             return False
 
@@ -736,9 +736,8 @@ class PkgWriter(object):
           if set, type the field with generic interfaces. Eg.
           - Iterable[int] rather than RepeatedScalarFieldContainer[int]
           - Mapping[k, v] rather than MessageMap[k, v]
-          Can be useful for input types (eg constructor)
+          Can be useful for input types (eg constructor).
         """
-
         mapping: Dict[d.FieldDescriptorProto.Type.V, Callable[[], str]] = {
             d.FieldDescriptorProto.TYPE_DOUBLE: lambda: self._import("proto", "DOUBLE"),
             d.FieldDescriptorProto.TYPE_FLOAT: lambda: self._import("proto", "FLOAT"),
@@ -863,7 +862,7 @@ def generate_mypy_stubs(
         output.name = fd.name[:-6].replace("-", "_").replace(".", "/") + ".py"
         output.content = HEADER + pkg_writer.write()
         if not quiet:
-            print("Writing mypy to", output.name, file=sys.stderr)
+            pass
 
 
 def generate_mypy_grpc_stubs(
@@ -891,7 +890,7 @@ def generate_mypy_grpc_stubs(
         output.name = fd.name[:-6].replace("-", "_").replace(".", "/") + "_services.py"
         output.content = HEADER + pkg_writer.write()
         if not quiet:
-            print("Writing mypy to", output.name, file=sys.stderr)
+            pass
 
 
 @contextmanager
@@ -899,7 +898,6 @@ def code_generation() -> Iterator[
     Tuple[plugin_pb2.CodeGeneratorRequest, plugin_pb2.CodeGeneratorResponse],
 ]:
     if len(sys.argv) > 1 and sys.argv[1] in ("-V", "--version"):
-        print("ohmyproto " + __version__)
         sys.exit(0)
 
     # Read request message from stdin

@@ -117,4 +117,5 @@ ignore = [
 exclude = [
     "tinkoff/invest/grpc",
     "examples/*",
+    "scripts/*",
 ]
