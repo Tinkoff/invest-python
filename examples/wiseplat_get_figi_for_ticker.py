@@ -3,8 +3,8 @@ import logging
 import os
 
 from pandas import DataFrame
-from tinkoff.invest import Client
 
+from tinkoff.invest import Client
 from tinkoff.invest.services import InstrumentsService
 from tinkoff.invest.utils import quotation_to_decimal
 
