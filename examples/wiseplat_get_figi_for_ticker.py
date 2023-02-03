@@ -37,7 +37,7 @@ def main():
                         ),
                         "scale": 9 - len(str(item.min_price_increment.nano)) + 1,
                         "lot": item.lot,
-                        "trading_status": getattr(item, 'trading_status')._name_,  # pylint: disable=W0212
+                        "trading_status": item.trading_status._name_,  # pylint: disable=W0212
                         "api_trade_available_flag": item.api_trade_available_flag,
                         "currency": item.currency,
                         "exchange": item.exchange,
