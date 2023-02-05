@@ -4,7 +4,7 @@ import os
 
 from pandas import DataFrame
 
-from tinkoff.invest import Client
+from tinkoff.invest import Client, SecurityTradingStatus
 from tinkoff.invest.services import InstrumentsService
 from tinkoff.invest.utils import quotation_to_decimal
 
@@ -37,7 +37,9 @@ def main():
                         ),
                         "scale": 9 - len(str(item.min_price_increment.nano)) + 1,
                         "lot": item.lot,
-                        "trading_status": item.trading_status._name_,  # pylint: disable=W0212 # noqa: E501
+                        "trading_status": str(
+                            SecurityTradingStatus(item.trading_status).name
+                        ),
                         "api_trade_available_flag": item.api_trade_available_flag,
                         "currency": item.currency,
                         "exchange": item.exchange,
