@@ -2,7 +2,15 @@ import ast
 import dataclasses
 from datetime import datetime, timedelta, timezone
 from decimal import Decimal
-from typing import Any, Callable, Generator, Iterable, List, Tuple, Union
+from typing import (
+    Any,
+    Callable,
+    Generator,
+    Iterable,
+    List,
+    Tuple,
+    Union,
+)
 
 import dateutil.parser
 
