@@ -2,7 +2,7 @@ import ast
 import dataclasses
 from datetime import datetime, timedelta, timezone
 from decimal import Decimal
-from typing import Any, Callable, Generator, Iterable, List, Tuple
+from typing import Any, Callable, Generator, Iterable, List, Tuple, Union
 
 import dateutil.parser
 
@@ -44,7 +44,7 @@ def get_intervals(
         local_from += max_interval
 
 
-def quotation_to_decimal(quotation: Quotation | MoneyValue) -> Decimal:
+def quotation_to_decimal(quotation: Union[Quotation, MoneyValue]) -> Decimal:
     fractional = quotation.nano / Decimal("10e8")
     return Decimal(quotation.units) + fractional
 
