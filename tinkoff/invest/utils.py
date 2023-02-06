@@ -14,7 +14,14 @@ from typing import (
 
 import dateutil.parser
 
-from .schemas import CandleInterval, HistoricCandle, Quotation, SubscriptionInterval, MoneyValue
+from .schemas import (
+    CandleInterval,
+    HistoricCandle,
+    Quotation,
+    SubscriptionInterval,
+    MoneyValue,
+)
+
 
 __all__ = (
     "get_intervals",
