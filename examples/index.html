@@ -458,6 +458,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#figi" class="md-nav__link">
+    Получение figi для тикера
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -678,6 +685,13 @@
         <li class="md-nav__item">
   <a href="#_19" class="md-nav__link">
     Отмена всех выставленных стоп ордеров
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#figi" class="md-nav__link">
+    Получение figi для тикера
   </a>
   
 </li>
@@ -1382,6 +1396,77 @@
             <span class="p">)</span>
         <span class="k">except</span> <span class="n">InvestError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Failed to cancel all orders. Error: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</code></pre></div></p>
+<h2 id="figi">Получение figi для тикера</h2>
+<p><a href="https://github.com/Tinkoff/invest-python/blob/main/examples/wiseplat_get_figi_for_ticker.py">examples/wiseplat_get_figi_for_ticker.py</a>
+<div class="highlight"><pre><span></span><code><span class="sd">&quot;&quot;&quot;Example - How to get figi by name of ticker.&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="kn">from</span> <span class="nn">pandas</span> <span class="kn">import</span> <span class="n">DataFrame</span>
+
+<span class="kn">from</span> <span class="nn">tinkoff.invest</span> <span class="kn">import</span> <span class="n">Client</span><span class="p">,</span> <span class="n">SecurityTradingStatus</span>
+<span class="kn">from</span> <span class="nn">tinkoff.invest.services</span> <span class="kn">import</span> <span class="n">InstrumentsService</span>
+<span class="kn">from</span> <span class="nn">tinkoff.invest.utils</span> <span class="kn">import</span> <span class="n">quotation_to_decimal</span>
+
+<span class="n">TOKEN</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;INVEST_TOKEN&quot;</span><span class="p">]</span>
+
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%(asctime)s</span><span class="s2"> </span><span class="si">%(levelname)s</span><span class="s2">:</span><span class="si">%(message)s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Example - How to get figi by name of ticker.&quot;&quot;&quot;</span>
+
+    <span class="n">ticker</span> <span class="o">=</span> <span class="s2">&quot;VTBR&quot;</span>  <span class="c1"># &quot;BRH3&quot; &quot;SBER&quot; &quot;VTBR&quot;</span>
+
+    <span class="k">with</span> <span class="n">Client</span><span class="p">(</span><span class="n">TOKEN</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+        <span class="n">instruments</span><span class="p">:</span> <span class="n">InstrumentsService</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">instruments</span>
+        <span class="n">tickers</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">method</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;shares&quot;</span><span class="p">,</span> <span class="s2">&quot;bonds&quot;</span><span class="p">,</span> <span class="s2">&quot;etfs&quot;</span><span class="p">,</span> <span class="s2">&quot;currencies&quot;</span><span class="p">,</span> <span class="s2">&quot;futures&quot;</span><span class="p">]:</span>
+            <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">instruments</span><span class="p">,</span> <span class="n">method</span><span class="p">)()</span><span class="o">.</span><span class="n">instruments</span><span class="p">:</span>
+                <span class="n">tickers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                    <span class="p">{</span>
+                        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">item</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+                        <span class="s2">&quot;ticker&quot;</span><span class="p">:</span> <span class="n">item</span><span class="o">.</span><span class="n">ticker</span><span class="p">,</span>
+                        <span class="s2">&quot;class_code&quot;</span><span class="p">:</span> <span class="n">item</span><span class="o">.</span><span class="n">class_code</span><span class="p">,</span>
+                        <span class="s2">&quot;figi&quot;</span><span class="p">:</span> <span class="n">item</span><span class="o">.</span><span class="n">figi</span><span class="p">,</span>
+                        <span class="s2">&quot;uid&quot;</span><span class="p">:</span> <span class="n">item</span><span class="o">.</span><span class="n">uid</span><span class="p">,</span>
+                        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="n">method</span><span class="p">,</span>
+                        <span class="s2">&quot;min_price_increment&quot;</span><span class="p">:</span> <span class="n">quotation_to_decimal</span><span class="p">(</span>
+                            <span class="n">item</span><span class="o">.</span><span class="n">min_price_increment</span>
+                        <span class="p">),</span>
+                        <span class="s2">&quot;scale&quot;</span><span class="p">:</span> <span class="mi">9</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">min_price_increment</span><span class="o">.</span><span class="n">nano</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+                        <span class="s2">&quot;lot&quot;</span><span class="p">:</span> <span class="n">item</span><span class="o">.</span><span class="n">lot</span><span class="p">,</span>
+                        <span class="s2">&quot;trading_status&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span>
+                            <span class="n">SecurityTradingStatus</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">trading_status</span><span class="p">)</span><span class="o">.</span><span class="n">name</span>
+                        <span class="p">),</span>
+                        <span class="s2">&quot;api_trade_available_flag&quot;</span><span class="p">:</span> <span class="n">item</span><span class="o">.</span><span class="n">api_trade_available_flag</span><span class="p">,</span>
+                        <span class="s2">&quot;currency&quot;</span><span class="p">:</span> <span class="n">item</span><span class="o">.</span><span class="n">currency</span><span class="p">,</span>
+                        <span class="s2">&quot;exchange&quot;</span><span class="p">:</span> <span class="n">item</span><span class="o">.</span><span class="n">exchange</span><span class="p">,</span>
+                        <span class="s2">&quot;buy_available_flag&quot;</span><span class="p">:</span> <span class="n">item</span><span class="o">.</span><span class="n">buy_available_flag</span><span class="p">,</span>
+                        <span class="s2">&quot;sell_available_flag&quot;</span><span class="p">:</span> <span class="n">item</span><span class="o">.</span><span class="n">sell_available_flag</span><span class="p">,</span>
+                        <span class="s2">&quot;short_enabled_flag&quot;</span><span class="p">:</span> <span class="n">item</span><span class="o">.</span><span class="n">short_enabled_flag</span><span class="p">,</span>
+                        <span class="s2">&quot;klong&quot;</span><span class="p">:</span> <span class="n">quotation_to_decimal</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">klong</span><span class="p">),</span>
+                        <span class="s2">&quot;kshort&quot;</span><span class="p">:</span> <span class="n">quotation_to_decimal</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">kshort</span><span class="p">),</span>
+                    <span class="p">}</span>
+                <span class="p">)</span>
+
+        <span class="n">tickers_df</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">(</span><span class="n">tickers</span><span class="p">)</span>
+
+        <span class="n">ticker_df</span> <span class="o">=</span> <span class="n">tickers_df</span><span class="p">[</span><span class="n">tickers_df</span><span class="p">[</span><span class="s2">&quot;ticker&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">ticker</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">ticker_df</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;There is no such ticker: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">ticker</span><span class="p">)</span>
+            <span class="k">return</span>
+
+        <span class="n">figi</span> <span class="o">=</span> <span class="n">ticker_df</span><span class="p">[</span><span class="s2">&quot;figi&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Ticker </span><span class="si">{</span><span class="n">ticker</span><span class="si">}</span><span class="s2"> have figi=</span><span class="si">{</span><span class="n">figi</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Additional info for this </span><span class="si">{</span><span class="n">ticker</span><span class="si">}</span><span class="s2"> ticker:&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">ticker_df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
