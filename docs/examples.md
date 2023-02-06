@@ -105,3 +105,8 @@
 ~~~python
 {% include "../examples/wiseplat_cancel_all_stop_orders.py" %}
 ~~~
+## Получение figi для тикера
+[examples/wiseplat_get_figi_for_ticker.py](https://github.com/Tinkoff/invest-python/blob/main/examples/wiseplat_get_figi_for_ticker.py)
+~~~python
+{% include "../examples/wiseplat_get_figi_for_ticker.py" %}
+~~~
