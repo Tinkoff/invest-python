@@ -19,11 +19,10 @@ logger = logging.getLogger(__name__)
 def add_money_sandbox(client, account_id, money, currency="rub"):
     """Function to add money to sandbox account."""
     money = decimal_to_quotation(Decimal(money))
-    pay_in = client.sandbox.sandbox_pay_in(
+    return client.sandbox.sandbox_pay_in(
         account_id=account_id,
         amount=MoneyValue(units=money.units, nano=money.nano, currency=currency),
     )
-    return pay_in
 
 
 def main():
