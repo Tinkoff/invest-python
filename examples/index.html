@@ -465,6 +465,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    Получение / установка баланса для песочницы. Получение / закрытие всех песочниц. Создание новой песочницы.
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -692,6 +699,13 @@
         <li class="md-nav__item">
   <a href="#figi" class="md-nav__link">
     Получение figi для тикера
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    Получение / установка баланса для песочницы. Получение / закрытие всех песочниц. Создание новой песочницы.
   </a>
   
 </li>
@@ -1467,6 +1481,106 @@
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Ticker </span><span class="si">{</span><span class="n">ticker</span><span class="si">}</span><span class="s2"> have figi=</span><span class="si">{</span><span class="n">figi</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Additional info for this </span><span class="si">{</span><span class="n">ticker</span><span class="si">}</span><span class="s2"> ticker:&quot;</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">ticker_df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</code></pre></div></p>
+<h2 id="_20">Получение / установка баланса для песочницы. Получение / закрытие всех песочниц. Создание новой песочницы.</h2>
+<p><a href="https://github.com/Tinkoff/invest-python/blob/main/examples/wiseplat_set_get_sandbox_balance.py">examples/wiseplat_set_get_sandbox_balance.py</a>
+<div class="highlight"><pre><span></span><code><span class="sd">&quot;&quot;&quot; Example - How to set/get balance for sandbox account.</span>
+<span class="sd">    How to get/close all sandbox accounts.</span>
+<span class="sd">    How to open new sandbox account. &quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
+
+<span class="kn">from</span> <span class="nn">tinkoff.invest</span> <span class="kn">import</span> <span class="n">Client</span><span class="p">,</span> <span class="n">MoneyValue</span>
+<span class="kn">from</span> <span class="nn">tinkoff.invest.utils</span> <span class="kn">import</span> <span class="n">decimal_to_quotation</span><span class="p">,</span> <span class="n">quotation_to_decimal</span>
+
+<span class="n">TOKEN</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;INVEST_TOKEN&quot;</span><span class="p">]</span>
+
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%(asctime)s</span><span class="s2"> </span><span class="si">%(levelname)s</span><span class="s2">:</span><span class="si">%(message)s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">add_money_sandbox</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">account_id</span><span class="p">,</span> <span class="n">money</span><span class="p">,</span> <span class="n">currency</span><span class="o">=</span><span class="s2">&quot;rub&quot;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Function to add money to sandbox account.&quot;&quot;&quot;</span>
+    <span class="n">money</span> <span class="o">=</span> <span class="n">decimal_to_quotation</span><span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="n">money</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">client</span><span class="o">.</span><span class="n">sandbox</span><span class="o">.</span><span class="n">sandbox_pay_in</span><span class="p">(</span>
+        <span class="n">account_id</span><span class="o">=</span><span class="n">account_id</span><span class="p">,</span>
+        <span class="n">amount</span><span class="o">=</span><span class="n">MoneyValue</span><span class="p">(</span><span class="n">units</span><span class="o">=</span><span class="n">money</span><span class="o">.</span><span class="n">units</span><span class="p">,</span> <span class="n">nano</span><span class="o">=</span><span class="n">money</span><span class="o">.</span><span class="n">nano</span><span class="p">,</span> <span class="n">currency</span><span class="o">=</span><span class="n">currency</span><span class="p">),</span>
+    <span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Example - How to set/get balance for sandbox account.</span>
+<span class="sd">    How to get/close all sandbox accounts.</span>
+<span class="sd">    How to open new sandbox account.&quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="n">Client</span><span class="p">(</span><span class="n">TOKEN</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+        <span class="c1"># get all sandbox accounts</span>
+        <span class="n">sandbox_accounts</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">sandbox</span><span class="o">.</span><span class="n">get_sandbox_accounts</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">sandbox_accounts</span><span class="p">)</span>
+
+        <span class="c1"># close all sandbox accounts</span>
+        <span class="k">for</span> <span class="n">sandbox_account</span> <span class="ow">in</span> <span class="n">sandbox_accounts</span><span class="o">.</span><span class="n">accounts</span><span class="p">:</span>
+            <span class="n">client</span><span class="o">.</span><span class="n">sandbox</span><span class="o">.</span><span class="n">close_sandbox_account</span><span class="p">(</span><span class="n">account_id</span><span class="o">=</span><span class="n">sandbox_account</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+
+        <span class="c1"># open new sandbox account</span>
+        <span class="n">sandbox_account</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">sandbox</span><span class="o">.</span><span class="n">open_sandbox_account</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">sandbox_account</span><span class="o">.</span><span class="n">account_id</span><span class="p">)</span>
+
+        <span class="n">account_id</span> <span class="o">=</span> <span class="n">sandbox_account</span><span class="o">.</span><span class="n">account_id</span>
+
+        <span class="c1"># add initial 2 000 000 to sandbox account</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">add_money_sandbox</span><span class="p">(</span><span class="n">client</span><span class="o">=</span><span class="n">client</span><span class="p">,</span> <span class="n">account_id</span><span class="o">=</span><span class="n">account_id</span><span class="p">,</span> <span class="n">money</span><span class="o">=</span><span class="mi">2000000</span><span class="p">))</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+            <span class="s2">&quot;positions: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">client</span><span class="o">.</span><span class="n">sandbox</span><span class="o">.</span><span class="n">get_sandbox_positions</span><span class="p">(</span><span class="n">account_id</span><span class="o">=</span><span class="n">account_id</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span>
+            <span class="s2">&quot;money: &quot;</span><span class="p">,</span>
+            <span class="nb">float</span><span class="p">(</span>
+                <span class="n">quotation_to_decimal</span><span class="p">(</span>
+                    <span class="n">client</span><span class="o">.</span><span class="n">sandbox</span><span class="o">.</span><span class="n">get_sandbox_positions</span><span class="p">(</span><span class="n">account_id</span><span class="o">=</span><span class="n">account_id</span><span class="p">)</span><span class="o">.</span><span class="n">money</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="p">)</span>
+            <span class="p">),</span>
+        <span class="p">)</span>
+
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+            <span class="s2">&quot;orders: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">client</span><span class="o">.</span><span class="n">sandbox</span><span class="o">.</span><span class="n">get_sandbox_orders</span><span class="p">(</span><span class="n">account_id</span><span class="o">=</span><span class="n">account_id</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+            <span class="s2">&quot;positions: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">client</span><span class="o">.</span><span class="n">sandbox</span><span class="o">.</span><span class="n">get_sandbox_positions</span><span class="p">(</span><span class="n">account_id</span><span class="o">=</span><span class="n">account_id</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+            <span class="s2">&quot;portfolio: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">client</span><span class="o">.</span><span class="n">sandbox</span><span class="o">.</span><span class="n">get_sandbox_portfolio</span><span class="p">(</span><span class="n">account_id</span><span class="o">=</span><span class="n">account_id</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+            <span class="s2">&quot;operations: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="n">client</span><span class="o">.</span><span class="n">sandbox</span><span class="o">.</span><span class="n">get_sandbox_operations</span><span class="p">(</span>
+                <span class="n">account_id</span><span class="o">=</span><span class="n">account_id</span><span class="p">,</span>
+                <span class="n">from_</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+                <span class="n">to</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+            <span class="p">),</span>
+        <span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+            <span class="s2">&quot;withdraw_limits: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="n">client</span><span class="o">.</span><span class="n">sandbox</span><span class="o">.</span><span class="n">get_sandbox_withdraw_limits</span><span class="p">(</span><span class="n">account_id</span><span class="o">=</span><span class="n">account_id</span><span class="p">),</span>
+        <span class="p">)</span>
+
+        <span class="c1"># add + 2 000 000 to sandbox account, total is 4 000 000</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">add_money_sandbox</span><span class="p">(</span><span class="n">client</span><span class="o">=</span><span class="n">client</span><span class="p">,</span> <span class="n">account_id</span><span class="o">=</span><span class="n">account_id</span><span class="p">,</span> <span class="n">money</span><span class="o">=</span><span class="mi">2000000</span><span class="p">))</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+            <span class="s2">&quot;positions: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">client</span><span class="o">.</span><span class="n">sandbox</span><span class="o">.</span><span class="n">get_sandbox_positions</span><span class="p">(</span><span class="n">account_id</span><span class="o">=</span><span class="n">account_id</span><span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="c1"># close new sandbox account</span>
+        <span class="n">sandbox_account</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">sandbox</span><span class="o">.</span><span class="n">close_sandbox_account</span><span class="p">(</span>
+            <span class="n">account_id</span><span class="o">=</span><span class="n">sandbox_account</span><span class="o">.</span><span class="n">account_id</span>
+        <span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">sandbox_account</span><span class="p">)</span>
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
