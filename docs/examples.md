@@ -110,3 +110,8 @@
 ~~~python
 {% include "../examples/wiseplat_get_figi_for_ticker.py" %}
 ~~~
+## Получение / установка баланса для песочницы. Получение / закрытие всех песочниц. Создание новой песочницы.
+[examples/wiseplat_set_get_sandbox_balance.py](https://github.com/Tinkoff/invest-python/blob/main/examples/wiseplat_set_get_sandbox_balance.py)
+~~~python
+{% include "../examples/wiseplat_set_get_sandbox_balance.py" %}
+~~~
