@@ -228,6 +228,7 @@ class AsyncServices:
         to: Optional[datetime] = None,
         interval: CandleInterval = CandleInterval(0),
         figi: str = "",
+        instrument_id: str = "",
     ) -> AsyncGenerator[HistoricCandle, None]:
         to = to or now()
 
@@ -237,6 +238,7 @@ class AsyncServices:
                 interval=interval,
                 from_=local_from_,
                 to=local_to,
+                instrument_id=instrument_id,
             )
             for candle in candles_response.candles:
                 yield candle
@@ -1119,9 +1121,11 @@ class OrdersService(_grpc_helpers.Service):
         account_id: str = "",
         order_type: OrderType = OrderType(0),
         order_id: str = "",
+        instrument_id: str = "",
     ) -> PostOrderResponse:
         request = PostOrderRequest()
         request.figi = figi
+        request.instrument_id = instrument_id
         request.quantity = quantity
         if price is not None:
             request.price = price
@@ -1327,9 +1331,11 @@ class SandboxService(_grpc_helpers.Service):
         account_id: str = "",
         order_type: OrderType = OrderType(0),
         order_id: str = "",
+        instrument_id: str = "",
     ) -> PostOrderResponse:
         request = PostOrderRequest()
         request.figi = figi
+        request.instrument_id = instrument_id
         request.quantity = quantity
         if price is not None:
             request.price = price
@@ -1533,9 +1539,11 @@ class StopOrdersService(_grpc_helpers.Service):
         expiration_type: StopOrderExpirationType = StopOrderExpirationType(0),
         stop_order_type: StopOrderType = StopOrderType(0),
         expire_date: Optional[datetime] = None,
+        instrument_id: str = "",
     ) -> PostStopOrderResponse:
         request = PostStopOrderRequest()
         request.figi = figi
+        request.instrument_id = instrument_id
         request.quantity = quantity
         if price is not None:
             request.price = price
