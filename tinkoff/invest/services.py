@@ -107,6 +107,8 @@ from .schemas import (
     GetOrderStateRequest,
     GetStopOrdersRequest,
     GetStopOrdersResponse,
+    GetTradingStatusesRequest,
+    GetTradingStatusesResponse,
     GetTradingStatusRequest,
     GetTradingStatusResponse,
     GetUserTariffRequest,
@@ -158,7 +160,7 @@ from .schemas import (
     TradingSchedulesRequest,
     TradingSchedulesResponse,
     WithdrawLimitsRequest,
-    WithdrawLimitsResponse, GetTradingStatusesResponse, GetTradingStatusesRequest,
+    WithdrawLimitsResponse,
 )
 from .typedefs import AccountId
 from .utils import (
@@ -943,10 +945,11 @@ class MarketDataService(_grpc_helpers.Service):
 
     @handle_request_error("GetTradingStatuses")
     def get_trading_statuses(
-        self, *, instrument_ids: List[str] = ()
+        self, *, instrument_ids: Optional[List[str]] = None
     ) -> GetTradingStatusesResponse:
         request = GetTradingStatusesRequest()
-        request.instrument_id = instrument_ids
+        if instrument_ids:
+            request.instrument_id = instrument_ids
         response, call = self.stub.GetTradingStatuses.with_call(
             request=_grpc_helpers.dataclass_to_protobuff(
                 request, marketdata_pb2.GetTradingStatusesRequest()
