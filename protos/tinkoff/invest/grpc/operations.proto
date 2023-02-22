@@ -78,6 +78,8 @@ message Operation {
   OperationType operation_type = 13; //Тип операции.
   repeated OperationTrade trades = 14; //Массив сделок.
   string asset_uid = 16;	//Идентификатор актива
+  string position_uid	= 17; //position_uid-идентификатора инструмента.
+  string instrument_uid	= 18; //Уникальный идентификатор инструмента.
 }
 
 //Сделка по операции.
@@ -101,19 +103,19 @@ message PortfolioRequest {
 
 //Текущий портфель по счёту.
 message PortfolioResponse {
-  MoneyValue total_amount_shares = 1; //Общая стоимость акций в портфеле в рублях.
-  MoneyValue total_amount_bonds = 2; //Общая стоимость облигаций в портфеле в рублях.
-  MoneyValue total_amount_etf = 3; //Общая стоимость фондов в портфеле в рублях.
-  MoneyValue total_amount_currencies = 4; //Общая стоимость валют в портфеле в рублях.
-  MoneyValue total_amount_futures = 5; //Общая стоимость фьючерсов в портфеле в рублях.
+  MoneyValue total_amount_shares = 1; //Общая стоимость акций в портфеле.
+  MoneyValue total_amount_bonds = 2; //Общая стоимость облигаций в портфеле.
+  MoneyValue total_amount_etf = 3; //Общая стоимость фондов в портфеле.
+  MoneyValue total_amount_currencies = 4; //Общая стоимость валют в портфеле.
+  MoneyValue total_amount_futures = 5; //Общая стоимость фьючерсов в портфеле.
   Quotation expected_yield = 6; //Текущая относительная доходность портфеля, в %.
   repeated PortfolioPosition positions = 7; //Список позиций портфеля.
   string account_id = 8; //Идентификатор счёта пользователя.
 
-  MoneyValue total_amount_options = 9; //Общая стоимость опционов в портфеле в рублях.
-  MoneyValue total_amount_sp = 10; //Общая стоимость структурных нот в портфеле в рублях
-  MoneyValue total_amount_portfolio = 11; //Общая стоимость портфеля в рублях
-  repeated VirtualPortfolioPosition virtual_positions = 12; //Массив виртуальных позиций портфеля
+  MoneyValue total_amount_options = 9; //Общая стоимость опционов в портфеле.
+  MoneyValue total_amount_sp = 10; //Общая стоимость структурных нот в портфеле.
+  MoneyValue total_amount_portfolio = 11; //Общая стоимость портфеля.
+  repeated VirtualPortfolioPosition virtual_positions = 12; //Массив виртуальных позиций портфеля.
 }
 
 //Запрос позиций портфеля по счёту.
@@ -152,10 +154,11 @@ message PortfolioPosition {
   Quotation expected_yield = 5; //Текущая рассчитанная доходность позиции.
   MoneyValue current_nkd = 6; // Текущий НКД.
   Quotation average_position_price_pt = 7; // Deprecated Средняя цена позиции в пунктах (для фьючерсов). **Возможна задержка до секунды для пересчёта**.
-  MoneyValue current_price = 8; //Текущая цена за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента..
+  MoneyValue current_price = 8; //Текущая цена за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента.
   MoneyValue average_position_price_fifo = 9; //Средняя цена позиции по методу FIFO. **Возможна задержка до секунды для пересчёта**.
   Quotation quantity_lots = 10; //Deprecated Количество лотов в портфеле.
-  bool blocked = 21; //Заблокировано.
+  bool blocked = 21; //Заблокировано на бирже.
+  Quotation blocked_lots = 22; //Количество бумаг, заблокированных выставленными заявками.
   string position_uid = 24; //position_uid-идентификатора инструмента
   string instrument_uid = 25; //instrument_uid-идентификатора инструмента
   MoneyValue var_margin = 26; //Вариационная маржа
@@ -172,14 +175,14 @@ message VirtualPortfolioPosition {
   Quotation expected_yield = 7; //Текущая рассчитанная доходность позиции.
   Quotation expected_yield_fifo = 8; //Текущая рассчитанная доходность позиции.
   google.protobuf.Timestamp expire_date = 9; //Дата до которой нужно продать виртуальные бумаги, после этой даты виртуальная позиция "сгорит"
-  MoneyValue current_price = 10; //Текущая цена за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента..
+  MoneyValue current_price = 10; //Текущая цена за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента.
   MoneyValue average_position_price_fifo = 11; //Средняя цена позиции по методу FIFO. **Возможна задержка до секунды для пересчёта**.
 }
 
 //Баланс позиции ценной бумаги.
 message PositionsSecurities {
   string figi = 1; //Figi-идентификатор бумаги.
-  int64 blocked = 2; //Заблокировано.
+  int64 blocked = 2; //Количество бумаг заблокированных выставленными заявками.
   int64 balance = 3;  //Текущий незаблокированный баланс.
   string position_uid = 4; //Уникальный идентификатор позиции.
   string instrument_uid = 5; //Уникальный идентификатор  инструмента.
@@ -190,7 +193,7 @@ message PositionsSecurities {
 //Баланс фьючерса.
 message PositionsFutures {
   string figi = 1; //Figi-идентификатор фьючерса.
-  int64 blocked = 2; //Заблокировано.
+  int64 blocked = 2; //Количество бумаг заблокированных выставленными заявками.
   int64 balance = 3;  //Текущий незаблокированный баланс.
   string position_uid = 4; //Уникальный идентификатор позиции.
   string instrument_uid = 5; //Уникальный идентификатор  инструмента.
@@ -200,7 +203,7 @@ message PositionsFutures {
 message PositionsOptions {
   string position_uid = 1; //Уникальный идентификатор позиции опциона.
   string instrument_uid = 2; //Уникальный идентификатор  инструмента.
-  int64 blocked = 11; //Заблокировано.
+  int64 blocked = 11; //Количество бумаг заблокированных выставленными заявками.
   int64 balance = 21;  //Текущий незаблокированный баланс.
 }
 
@@ -469,6 +472,7 @@ message OperationItem {
   string figi = 32; //Figi.
   string instrument_type = 33; //Тип инструмента.
   InstrumentType instrument_kind	= 34; //Тип инструмента.
+  string position_uid	= 35; //position_uid-идентификатора инструмента.
   MoneyValue payment = 41; //Сумма операции.
   MoneyValue price = 42; //Цена операции за 1 инструмент.
   MoneyValue commission = 43; //Комиссия.
@@ -497,18 +501,6 @@ message OperationItemTrade {
   MoneyValue price = 16; //Цена.
   MoneyValue yield = 21; //Доходность.
   Quotation yield_relative = 22; //Относительная доходность.
-}
-
-//Тип инструмента.
-enum InstrumentType {
-  INSTRUMENT_TYPE_UNSPECIFIED = 0;
-  INSTRUMENT_TYPE_BOND = 1; //Облигация.
-  INSTRUMENT_TYPE_SHARE	= 2; //Акция.
-  INSTRUMENT_TYPE_CURRENCY = 3; //Валюта.
-  INSTRUMENT_TYPE_ETF = 4; //Exchange-traded fund. Фонд.
-  INSTRUMENT_TYPE_FUTURES = 5; //Фьючерс.
-  INSTRUMENT_TYPE_SP = 6; //Структурная нота.
-  INSTRUMENT_TYPE_OPTION = 7; //Опцион.
 }
 
 //Запрос установки stream-соединения позиций.
