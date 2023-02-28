@@ -22,6 +22,10 @@ class RequestError(InvestError):
         self.metadata = metadata
 
 
+class UnauthenticatedError(RequestError):
+    pass
+
+
 class AioRequestError(InvestError):
     def __init__(  # pylint:disable=super-init-not-called
         self, code: StatusCode, details: str, metadata: Any
@@ -29,6 +33,10 @@ class AioRequestError(InvestError):
         self.code = code
         self.details = details
         self.metadata = metadata
+
+
+class AioUnauthenticatedError(AioRequestError):
+    pass
 
 
 class MarketDataStreamError(InvestError):
