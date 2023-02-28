@@ -59,10 +59,17 @@ class TestGetAllCandles:
         ("interval", "call_count"),
         [
             (CandleInterval.CANDLE_INTERVAL_1_MIN, 31),
+            (CandleInterval.CANDLE_INTERVAL_2_MIN, 31),
+            (CandleInterval.CANDLE_INTERVAL_3_MIN, 31),
             (CandleInterval.CANDLE_INTERVAL_5_MIN, 31),
+            (CandleInterval.CANDLE_INTERVAL_10_MIN, 31),
             (CandleInterval.CANDLE_INTERVAL_15_MIN, 31),
             (CandleInterval.CANDLE_INTERVAL_HOUR, 5),
+            (CandleInterval.CANDLE_INTERVAL_2_HOUR, 5),
+            (CandleInterval.CANDLE_INTERVAL_4_HOUR, 5),
             (CandleInterval.CANDLE_INTERVAL_DAY, 1),
+            (CandleInterval.CANDLE_INTERVAL_WEEK, 1),
+            (CandleInterval.CANDLE_INTERVAL_MONTH, 1),
         ],
     )
     @pytest.mark.parametrize("use_to", [True, False])

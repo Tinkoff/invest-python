@@ -101,6 +101,8 @@ from .schemas import (
     GetOrderStateRequest,
     GetStopOrdersRequest,
     GetStopOrdersResponse,
+    GetTradingStatusesRequest,
+    GetTradingStatusesResponse,
     GetTradingStatusRequest,
     GetTradingStatusResponse,
     GetUserTariffRequest,
@@ -828,6 +830,25 @@ class MarketDataService(_grpc_helpers.Service):
         response = await response_coro
         log_request(await get_tracking_id_from_coro(response_coro), "GetTradingStatus")
         return _grpc_helpers.protobuf_to_dataclass(response, GetTradingStatusResponse)
+
+    @handle_aio_request_error("GetTradingStatuses")
+    async def get_trading_statuses(
+        self, *, instrument_ids: Optional[List[str]] = None
+    ) -> GetTradingStatusesResponse:
+        request = GetTradingStatusesRequest()
+        if instrument_ids:
+            request.instrument_id = instrument_ids
+        response_coro = self.stub.GetTradingStatuses(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, marketdata_pb2.GetTradingStatusesRequest()
+            ),
+            metadata=self.metadata,
+        )
+        response = await response_coro
+        log_request(
+            await get_tracking_id_from_coro(response_coro), "GetTradingStatuses"
+        )
+        return _grpc_helpers.protobuf_to_dataclass(response, GetTradingStatusesResponse)
 
     @handle_aio_request_error("GetLastTrades")
     async def get_last_trades(

@@ -158,6 +158,22 @@ class _CandleIntervalEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper.
     """1 час."""
     CANDLE_INTERVAL_DAY: _CandleInterval.ValueType  # 5
     """1 день."""
+    CANDLE_INTERVAL_2_MIN: _CandleInterval.ValueType  # 6
+    """2 минуты."""
+    CANDLE_INTERVAL_3_MIN: _CandleInterval.ValueType  # 7
+    """3 минуты."""
+    CANDLE_INTERVAL_10_MIN: _CandleInterval.ValueType  # 8
+    """10 минут."""
+    CANDLE_INTERVAL_30_MIN: _CandleInterval.ValueType  # 9
+    """30 минут."""
+    CANDLE_INTERVAL_2_HOUR: _CandleInterval.ValueType  # 10
+    """2 часа."""
+    CANDLE_INTERVAL_4_HOUR: _CandleInterval.ValueType  # 11
+    """4 часа."""
+    CANDLE_INTERVAL_WEEK: _CandleInterval.ValueType  # 12
+    """1 неделя."""
+    CANDLE_INTERVAL_MONTH: _CandleInterval.ValueType  # 13
+    """1 месяц."""
 
 class CandleInterval(_CandleInterval, metaclass=_CandleIntervalEnumTypeWrapper):
     """Интервал свечей."""
@@ -174,6 +190,22 @@ CANDLE_INTERVAL_HOUR: CandleInterval.ValueType  # 4
 """1 час."""
 CANDLE_INTERVAL_DAY: CandleInterval.ValueType  # 5
 """1 день."""
+CANDLE_INTERVAL_2_MIN: CandleInterval.ValueType  # 6
+"""2 минуты."""
+CANDLE_INTERVAL_3_MIN: CandleInterval.ValueType  # 7
+"""3 минуты."""
+CANDLE_INTERVAL_10_MIN: CandleInterval.ValueType  # 8
+"""10 минут."""
+CANDLE_INTERVAL_30_MIN: CandleInterval.ValueType  # 9
+"""30 минут."""
+CANDLE_INTERVAL_2_HOUR: CandleInterval.ValueType  # 10
+"""2 часа."""
+CANDLE_INTERVAL_4_HOUR: CandleInterval.ValueType  # 11
+"""4 часа."""
+CANDLE_INTERVAL_WEEK: CandleInterval.ValueType  # 12
+"""1 неделя."""
+CANDLE_INTERVAL_MONTH: CandleInterval.ValueType  # 13
+"""1 месяц."""
 global___CandleInterval = CandleInterval
 
 class MarketDataRequest(google.protobuf.message.Message):
@@ -363,7 +395,7 @@ class CandleInstrument(google.protobuf.message.Message):
     INTERVAL_FIELD_NUMBER: builtins.int
     INSTRUMENT_ID_FIELD_NUMBER: builtins.int
     figi: builtins.str
-    """Figi-идентификатор инструмента."""
+    """Deprecated Figi-идентификатор инструмента. Необходимо использовать instrument_id."""
     interval: global___SubscriptionInterval.ValueType
     """Интервал свечей."""
     instrument_id: builtins.str
@@ -461,7 +493,7 @@ class OrderBookInstrument(google.protobuf.message.Message):
     DEPTH_FIELD_NUMBER: builtins.int
     INSTRUMENT_ID_FIELD_NUMBER: builtins.int
     figi: builtins.str
-    """Figi-идентификатор инструмента."""
+    """Deprecated Figi-идентификатор инструмента. Необходимо использовать instrument_id."""
     depth: builtins.int
     """Глубина стакана."""
     instrument_id: builtins.str
@@ -558,7 +590,7 @@ class TradeInstrument(google.protobuf.message.Message):
     FIGI_FIELD_NUMBER: builtins.int
     INSTRUMENT_ID_FIELD_NUMBER: builtins.int
     figi: builtins.str
-    """Figi-идентификатор инструмента."""
+    """Deprecated Figi-идентификатор инструмента. Необходимо использовать instrument_id."""
     instrument_id: builtins.str
     """Идентификатор инструмента, принимает значение figi или instrument_uid"""
     def __init__(
@@ -648,7 +680,7 @@ class InfoInstrument(google.protobuf.message.Message):
     FIGI_FIELD_NUMBER: builtins.int
     INSTRUMENT_ID_FIELD_NUMBER: builtins.int
     figi: builtins.str
-    """Figi-идентификатор инструмента."""
+    """Deprecated Figi-идентификатор инструмента. Необходимо использовать instrument_id."""
     instrument_id: builtins.str
     """Идентификатор инструмента, принимает значение figi или instrument_uid"""
     def __init__(
@@ -738,7 +770,7 @@ class LastPriceInstrument(google.protobuf.message.Message):
     FIGI_FIELD_NUMBER: builtins.int
     INSTRUMENT_ID_FIELD_NUMBER: builtins.int
     figi: builtins.str
-    """Figi-идентификатор инструмента."""
+    """Deprecated Figi-идентификатор инструмента. Необходимо использовать instrument_id."""
     instrument_id: builtins.str
     """Идентификатор инструмента, принимает значение figi или instrument_uid"""
     def __init__(
@@ -1026,14 +1058,14 @@ class GetCandlesRequest(google.protobuf.message.Message):
     INTERVAL_FIELD_NUMBER: builtins.int
     INSTRUMENT_ID_FIELD_NUMBER: builtins.int
     figi: builtins.str
-    """Figi-идентификатор инструмента."""
+    """Deprecated Figi-идентификатор инструмента. Необходимо использовать instrument_id."""
     @property
     def to(self) -> google.protobuf.timestamp_pb2.Timestamp:
         """Окончание запрашиваемого периода в часовом поясе UTC."""
     interval: global___CandleInterval.ValueType
     """Интервал запрошенных свечей."""
     instrument_id: builtins.str
-    """Идентификатор инструмента, принимает значение figi или instrument_uid"""
+    """Идентификатор инструмента, принимает значение figi или instrument_uid."""
     def __init__(
         self,
         *,
@@ -1121,10 +1153,10 @@ class GetLastPricesRequest(google.protobuf.message.Message):
     INSTRUMENT_ID_FIELD_NUMBER: builtins.int
     @property
     def figi(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """Массив figi-идентификаторов инструментов."""
+        """Deprecated Figi-идентификатор инструмента. Необходимо использовать instrument_id."""
     @property
     def instrument_id(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """Массив идентификаторов инструмента, принимает значения figi или instrument_uid"""
+        """Массив идентификаторов инструмента, принимает значения figi или instrument_uid."""
     def __init__(
         self,
         *,
@@ -1194,11 +1226,11 @@ class GetOrderBookRequest(google.protobuf.message.Message):
     DEPTH_FIELD_NUMBER: builtins.int
     INSTRUMENT_ID_FIELD_NUMBER: builtins.int
     figi: builtins.str
-    """Figi-идентификатор инструмента."""
+    """Deprecated Figi-идентификатор инструмента. Необходимо использовать instrument_id."""
     depth: builtins.int
     """Глубина стакана."""
     instrument_id: builtins.str
-    """Идентификатор инструмента, принимает значение figi или instrument_uid"""
+    """Идентификатор инструмента, принимает значение figi или instrument_uid."""
     def __init__(
         self,
         *,
@@ -1259,7 +1291,7 @@ class GetOrderBookResponse(google.protobuf.message.Message):
     def orderbook_ts(self) -> google.protobuf.timestamp_pb2.Timestamp:
         """Время формирования стакана на бирже."""
     instrument_uid: builtins.str
-    """Uid инструмента"""
+    """Uid инструмента."""
     def __init__(
         self,
         *,
@@ -1289,9 +1321,9 @@ class GetTradingStatusRequest(google.protobuf.message.Message):
     FIGI_FIELD_NUMBER: builtins.int
     INSTRUMENT_ID_FIELD_NUMBER: builtins.int
     figi: builtins.str
-    """Идентификатор инструмента."""
+    """Deprecated Figi-идентификатор инструмента. Необходимо использовать instrument_id."""
     instrument_id: builtins.str
-    """Идентификатор инструмента, принимает значение figi или instrument_uid"""
+    """Идентификатор инструмента, принимает значение figi или instrument_uid."""
     def __init__(
         self,
         *,
@@ -1301,6 +1333,42 @@ class GetTradingStatusRequest(google.protobuf.message.Message):
     def ClearField(self, field_name: typing_extensions.Literal["figi", b"figi", "instrument_id", b"instrument_id"]) -> None: ...
 
 global___GetTradingStatusRequest = GetTradingStatusRequest
+
+class GetTradingStatusesRequest(google.protobuf.message.Message):
+    """Запрос получения торгового статуса."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    INSTRUMENT_ID_FIELD_NUMBER: builtins.int
+    @property
+    def instrument_id(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Идентификатор инструмента, принимает значение figi или instrument_uid"""
+    def __init__(
+        self,
+        *,
+        instrument_id: collections.abc.Iterable[builtins.str] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["instrument_id", b"instrument_id"]) -> None: ...
+
+global___GetTradingStatusesRequest = GetTradingStatusesRequest
+
+class GetTradingStatusesResponse(google.protobuf.message.Message):
+    """Информация о торговом статусе."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    TRADING_STATUSES_FIELD_NUMBER: builtins.int
+    @property
+    def trading_statuses(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___GetTradingStatusResponse]:
+        """Массив информации о торговых статусах"""
+    def __init__(
+        self,
+        *,
+        trading_statuses: collections.abc.Iterable[global___GetTradingStatusResponse] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["trading_statuses", b"trading_statuses"]) -> None: ...
+
+global___GetTradingStatusesResponse = GetTradingStatusesResponse
 
 class GetTradingStatusResponse(google.protobuf.message.Message):
     """Информация о торговом статусе."""
@@ -1324,7 +1392,7 @@ class GetTradingStatusResponse(google.protobuf.message.Message):
     api_trade_available_flag: builtins.bool
     """Признак доступности торгов через API."""
     instrument_uid: builtins.str
-    """Uid инструмента"""
+    """Uid инструмента."""
     def __init__(
         self,
         *,
@@ -1349,12 +1417,12 @@ class GetLastTradesRequest(google.protobuf.message.Message):
     TO_FIELD_NUMBER: builtins.int
     INSTRUMENT_ID_FIELD_NUMBER: builtins.int
     figi: builtins.str
-    """Figi-идентификатор инструмента"""
+    """Deprecated Figi-идентификатор инструмента. Необходимо использовать instrument_id."""
     @property
     def to(self) -> google.protobuf.timestamp_pb2.Timestamp:
         """Окончание запрашиваемого периода в часовом поясе UTC."""
     instrument_id: builtins.str
-    """Идентификатор инструмента, принимает значение figi или instrument_uid"""
+    """Идентификатор инструмента, принимает значение figi или instrument_uid."""
     def __init__(
         self,
         *,
@@ -1375,7 +1443,7 @@ class GetLastTradesResponse(google.protobuf.message.Message):
     TRADES_FIELD_NUMBER: builtins.int
     @property
     def trades(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Trade]:
-        """Массив сделок"""
+        """Массив сделок."""
     def __init__(
         self,
         *,
@@ -1421,7 +1489,7 @@ class InstrumentClosePriceRequest(google.protobuf.message.Message):
 
     INSTRUMENT_ID_FIELD_NUMBER: builtins.int
     instrument_id: builtins.str
-    """Идентификатор инструмента, принимает значение figi или instrument_uid"""
+    """Идентификатор инструмента, принимает значение figi или instrument_uid."""
     def __init__(
         self,
         *,

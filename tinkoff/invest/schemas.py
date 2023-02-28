@@ -90,6 +90,14 @@ class CandleInterval(_grpc_helpers.Enum):
     CANDLE_INTERVAL_15_MIN = 3
     CANDLE_INTERVAL_HOUR = 4
     CANDLE_INTERVAL_DAY = 5
+    CANDLE_INTERVAL_2_MIN = 6
+    CANDLE_INTERVAL_3_MIN = 7
+    CANDLE_INTERVAL_10_MIN = 8
+    CANDLE_INTERVAL_30_MIN = 9
+    CANDLE_INTERVAL_2_HOUR = 10
+    CANDLE_INTERVAL_4_HOUR = 11
+    CANDLE_INTERVAL_WEEK = 12
+    CANDLE_INTERVAL_MONTH = 13
 
 
 class OperationState(_grpc_helpers.Enum):
@@ -279,6 +287,7 @@ class InstrumentType(_grpc_helpers.Enum):
     INSTRUMENT_TYPE_FUTURES = 5
     INSTRUMENT_TYPE_SP = 6
     INSTRUMENT_TYPE_OPTION = 7
+    INSTRUMENT_TYPE_CLEARING_CERTIFICATE = 8
 
 
 class PriceType(_grpc_helpers.Enum):
@@ -316,6 +325,13 @@ class PositionsAccountSubscriptionStatus(_grpc_helpers.Enum):
     POSITIONS_SUBSCRIPTION_STATUS_SUCCESS = 1
     POSITIONS_SUBSCRIPTION_STATUS_ACCOUNT_NOT_FOUND = 2
     POSITIONS_SUBSCRIPTION_STATUS_INTERNAL_ERROR = 3
+
+
+class RiskLevel(_grpc_helpers.Enum):
+    RISK_LEVEL_UNSPECIFIED = 0
+    RISK_LEVEL_LOW = 1
+    RISK_LEVEL_MODERATE = 2
+    RISK_LEVEL_HIGH = 3
 
 
 @dataclass(eq=False, repr=True)
@@ -418,6 +434,8 @@ class TradingDay(_grpc_helpers.Message):  # pylint:disable=too-many-instance-att
     clearing_end_time: datetime = _grpc_helpers.message_field(13)
     premarket_start_time: datetime = _grpc_helpers.message_field(14)
     premarket_end_time: datetime = _grpc_helpers.message_field(15)
+    closing_auction_start_time: datetime = _grpc_helpers.message_field(16)
+    opening_auction_end_time: datetime = _grpc_helpers.message_field(17)
 
 
 @dataclass(eq=False, repr=True)
@@ -557,6 +575,7 @@ class Option(_grpc_helpers.Message):
     for_qual_investor_flag: bool = _grpc_helpers.bool_field(406)
     weekend_flag: bool = _grpc_helpers.bool_field(407)
     blocked_tca_flag: bool = _grpc_helpers.bool_field(408)
+    api_trade_available_flag: bool = _grpc_helpers.bool_field(409)
 
 
 @dataclass(eq=False, repr=True)
@@ -616,8 +635,10 @@ class Bond(_grpc_helpers.Message):  # pylint:disable=too-many-instance-attribute
     for_qual_investor_flag: bool = _grpc_helpers.bool_field(52)
     weekend_flag: bool = _grpc_helpers.bool_field(53)
     blocked_tca_flag: bool = _grpc_helpers.bool_field(54)
+    subordinated_flag: bool = _grpc_helpers.bool_field(55)
     first_1min_candle_date: datetime = _grpc_helpers.message_field(61)
     first_1day_candle_date: datetime = _grpc_helpers.message_field(62)
+    risk_level: "RiskLevel" = _grpc_helpers.enum_field(63)
 
 
 @dataclass(eq=False, repr=True)
@@ -858,6 +879,7 @@ class Instrument(_grpc_helpers.Message):  # pylint:disable=too-many-instance-att
     for_qual_investor_flag: bool = _grpc_helpers.bool_field(37)
     weekend_flag: bool = _grpc_helpers.bool_field(38)
     blocked_tca_flag: bool = _grpc_helpers.bool_field(39)
+    instrument_kind: "InstrumentType" = _grpc_helpers.enum_field(40)
     first_1min_candle_date: datetime = _grpc_helpers.message_field(56)
     first_1day_candle_date: datetime = _grpc_helpers.message_field(57)
 
@@ -947,6 +969,7 @@ class AssetCurrency(_grpc_helpers.Message):
 class AssetSecurity(_grpc_helpers.Message):
     isin: str = _grpc_helpers.string_field(1)
     type: str = _grpc_helpers.string_field(2)
+    instrument_kind: "InstrumentType" = _grpc_helpers.enum_field(10)
     share: "AssetShare" = _grpc_helpers.message_field(3, group="ext")
     bond: "AssetBond" = _grpc_helpers.message_field(4, group="ext")
     sp: "AssetStructuredProduct" = _grpc_helpers.message_field(5, group="ext")
@@ -1078,6 +1101,7 @@ class AssetInstrument(_grpc_helpers.Message):
     ticker: str = _grpc_helpers.string_field(4)
     class_code: str = _grpc_helpers.string_field(5)
     links: List["InstrumentLink"] = _grpc_helpers.message_field(6)
+    instrument_kind: "InstrumentType" = _grpc_helpers.enum_field(10)
 
 
 @dataclass(eq=False, repr=True)
@@ -1105,6 +1129,7 @@ class FavoriteInstrument(_grpc_helpers.Message):
     instrument_type: str = _grpc_helpers.string_field(11)
     otc_flag: bool = _grpc_helpers.bool_field(16)
     api_trade_available_flag: bool = _grpc_helpers.bool_field(17)
+    instrument_kind: "InstrumentType" = _grpc_helpers.enum_field(18)
 
 
 @dataclass(eq=False, repr=True)
@@ -1161,6 +1186,7 @@ class InstrumentShort(_grpc_helpers.Message):
     name: str = _grpc_helpers.string_field(6)
     uid: str = _grpc_helpers.string_field(7)
     position_uid: str = _grpc_helpers.string_field(8)
+    instrument_kind: "InstrumentType" = _grpc_helpers.enum_field(10)
     api_trade_available_flag: str = _grpc_helpers.string_field(11)
     for_iis_flag: bool = _grpc_helpers.bool_field(12)
     first_1min_candle_date: datetime = _grpc_helpers.message_field(26)
@@ -1510,6 +1536,16 @@ class GetTradingStatusRequest(_grpc_helpers.Message):
 
 
 @dataclass(eq=False, repr=True)
+class GetTradingStatusesRequest(_grpc_helpers.Message):
+    instrument_id: List[str] = _grpc_helpers.message_field(1)
+
+
+@dataclass(eq=False, repr=True)
+class GetTradingStatusesResponse(_grpc_helpers.Message):
+    trading_statuses: List["GetTradingStatusResponse"] = _grpc_helpers.message_field(1)
+
+
+@dataclass(eq=False, repr=True)
 class GetTradingStatusResponse(_grpc_helpers.Message):
     figi: str = _grpc_helpers.string_field(1)
     trading_status: "SecurityTradingStatus" = _grpc_helpers.enum_field(2)
@@ -1599,6 +1635,8 @@ class Operation(_grpc_helpers.Message):  # pylint:disable=too-many-instance-attr
     operation_type: "OperationType" = _grpc_helpers.enum_field(13)
     trades: List["OperationTrade"] = _grpc_helpers.message_field(14)
     asset_uid: str = _grpc_helpers.string_field(16)
+    position_uid: str = _grpc_helpers.string_field(17)
+    instrument_uid: str = _grpc_helpers.string_field(18)
 
 
 class CurrencyRequest(_grpc_helpers.Enum):
@@ -1687,6 +1725,7 @@ class PortfolioPosition(_grpc_helpers.Message):
     average_position_price_fifo: "MoneyValue" = _grpc_helpers.message_field(9)
     quantity_lots: "Quotation" = _grpc_helpers.message_field(10)
     blocked: bool = _grpc_helpers.bool_field(21)
+    blocked_lots: "Quotation" = _grpc_helpers.message_field(22)
     position_uid: str = _grpc_helpers.string_field(24)
     instrument_uid: str = _grpc_helpers.string_field(25)
     var_margin: "MoneyValue" = _grpc_helpers.message_field(26)
@@ -2229,6 +2268,7 @@ class OperationItem(_grpc_helpers.Message):
     figi: str = _grpc_helpers.string_field(32)
     instrument_type: str = _grpc_helpers.string_field(33)
     instrument_kind: "InstrumentType" = _grpc_helpers.enum_field(34)
+    position_uid: str = _grpc_helpers.string_field(35)
     payment: "MoneyValue" = _grpc_helpers.message_field(41)
     price: "MoneyValue" = _grpc_helpers.message_field(42)
     commission: "MoneyValue" = _grpc_helpers.message_field(43)

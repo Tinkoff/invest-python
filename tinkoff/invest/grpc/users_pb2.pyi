@@ -258,10 +258,10 @@ class GetUserTariffResponse(google.protobuf.message.Message):
     STREAM_LIMITS_FIELD_NUMBER: builtins.int
     @property
     def unary_limits(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___UnaryLimit]:
-        """Массив лимитов пользователя по unary-запросам"""
+        """Массив лимитов пользователя по unary-запросам."""
     @property
     def stream_limits(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___StreamLimit]:
-        """Массив лимитов пользователей для stream-соединений"""
+        """Массив лимитов пользователей для stream-соединений."""
     def __init__(
         self,
         *,
@@ -280,10 +280,10 @@ class UnaryLimit(google.protobuf.message.Message):
     LIMIT_PER_MINUTE_FIELD_NUMBER: builtins.int
     METHODS_FIELD_NUMBER: builtins.int
     limit_per_minute: builtins.int
-    """Количество unary-запросов в минуту"""
+    """Количество unary-запросов в минуту."""
     @property
     def methods(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """Названия методов"""
+        """Названия методов."""
     def __init__(
         self,
         *,
@@ -302,10 +302,10 @@ class StreamLimit(google.protobuf.message.Message):
     LIMIT_FIELD_NUMBER: builtins.int
     STREAMS_FIELD_NUMBER: builtins.int
     limit: builtins.int
-    """Максимальное количество stream-соединений"""
+    """Максимальное количество stream-соединений."""
     @property
     def streams(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """Названия stream-методов"""
+        """Названия stream-методов."""
     def __init__(
         self,
         *,
