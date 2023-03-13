@@ -49,7 +49,7 @@ class PrintOnlyCandlesStrategy:
         """
         logger.debug(
             "Start getting historical data for %s "
-            "days back from now. figi=%s" % (self.days_back, self.figi)
+            "days back from now. figi=%s", self.days_back, self.figi
         )
         async for candle in self.client.get_all_candles(
             figi=self.figi,
@@ -60,7 +60,7 @@ class PrintOnlyCandlesStrategy:
             if candle not in self.candles:
                 if candle.is_complete:  # if candle is complete
                     self.candles.append(candle)
-                    logger.debug("Found %s - figi=%s" % (candle, self.figi))
+                    logger.debug("Found %s - figi=%s", candle, self.figi)
 
     async def ensure_market_open(self):
         """
@@ -74,7 +74,7 @@ class PrintOnlyCandlesStrategy:
             trading_status.market_order_available_flag
             and trading_status.api_trade_available_flag
         ):
-            logger.debug("Waiting for the market to open. figi=%s" % self.figi)
+            logger.debug("Waiting for the market to open. figi=%s", self.figi)
             await asyncio.sleep(60)
             trading_status = await self.client.market_data.get_trading_status(
                 figi=self.figi
@@ -88,7 +88,7 @@ class PrintOnlyCandlesStrategy:
                 await self.get_historical_data()
 
             except AioRequestError as are:
-                logger.error("Client error %s" % are)
+                logger.error("Client error %s", are)
 
             await asyncio.sleep(self.check_interval)
 
@@ -100,7 +100,7 @@ class PrintOnlyCandlesStrategy:
                     (await self.client.users.get_accounts()).accounts.pop().id
                 )
             except AioRequestError as are:
-                logger.error("Error taking account id. Stopping strategy. %s" % are)
+                logger.error("Error taking account id. Stopping strategy. %s", are)
                 return
         await self.main_cycle()
 
