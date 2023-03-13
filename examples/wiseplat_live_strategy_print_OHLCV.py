@@ -11,11 +11,7 @@ import os
 from datetime import timedelta
 from typing import Optional
 
-from tinkoff.invest import (
-    AioRequestError,
-    AsyncClient,
-    CandleInterval,
-)
+from tinkoff.invest import AioRequestError, AsyncClient, CandleInterval
 from tinkoff.invest.async_services import AsyncServices
 from tinkoff.invest.utils import now
 
