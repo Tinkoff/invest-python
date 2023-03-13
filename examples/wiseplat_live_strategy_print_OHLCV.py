@@ -48,8 +48,9 @@ class PrintOnlyCandlesStrategy:
         :return: list of HistoricCandle
         """
         logger.debug(
-            "Start getting historical data for %s "
-            "days back from now. figi=%s", self.days_back, self.figi
+            "Start getting historical data for %s " "days back from now. figi=%s",
+            self.days_back,
+            self.figi,
         )
         async for candle in self.client.get_all_candles(
             figi=self.figi,
