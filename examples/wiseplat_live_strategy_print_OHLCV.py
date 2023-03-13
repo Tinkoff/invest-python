@@ -9,13 +9,13 @@ import asyncio
 import logging
 import os
 from datetime import timedelta
-from typing import Optional
+from typing import List, Optional
 
-from tinkoff.invest import AioRequestError, AsyncClient, CandleInterval
+from tinkoff.invest import AioRequestError, AsyncClient, CandleInterval, HistoricCandle
 from tinkoff.invest.async_services import AsyncServices
 from tinkoff.invest.utils import now
 
-TOKEN = os.environ["INVEST_TOKEN"]  # for Sandbox set flag in row 156 to True
+TOKEN = os.environ["INVEST_TOKEN"]
 
 logging.basicConfig(format="%(asctime)s %(levelname)s:%(message)s", level=logging.DEBUG)
 logger = logging.getLogger(__name__)
@@ -38,7 +38,7 @@ class PrintOnlyCandlesStrategy:
         self.days_back = days_back
         self.check_interval = check_interval
         self.client = client
-        self.candles = []
+        self.candles: List[HistoricCandle] = []
 
     async def get_historical_data(self):
         """
