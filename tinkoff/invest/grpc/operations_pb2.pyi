@@ -336,48 +336,6 @@ PORTFOLIO_SUBSCRIPTION_STATUS_INTERNAL_ERROR: PortfolioSubscriptionStatus.ValueT
 """Произошла ошибка."""
 global___PortfolioSubscriptionStatus = PortfolioSubscriptionStatus
 
-class _InstrumentType:
-    ValueType = typing.NewType("ValueType", builtins.int)
-    V: typing_extensions.TypeAlias = ValueType
-
-class _InstrumentTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_InstrumentType.ValueType], builtins.type):  # noqa: F821
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
-    INSTRUMENT_TYPE_UNSPECIFIED: _InstrumentType.ValueType  # 0
-    INSTRUMENT_TYPE_BOND: _InstrumentType.ValueType  # 1
-    """Облигация."""
-    INSTRUMENT_TYPE_SHARE: _InstrumentType.ValueType  # 2
-    """Акция."""
-    INSTRUMENT_TYPE_CURRENCY: _InstrumentType.ValueType  # 3
-    """Валюта."""
-    INSTRUMENT_TYPE_ETF: _InstrumentType.ValueType  # 4
-    """Exchange-traded fund. Фонд."""
-    INSTRUMENT_TYPE_FUTURES: _InstrumentType.ValueType  # 5
-    """Фьючерс."""
-    INSTRUMENT_TYPE_SP: _InstrumentType.ValueType  # 6
-    """Структурная нота."""
-    INSTRUMENT_TYPE_OPTION: _InstrumentType.ValueType  # 7
-    """Опцион."""
-
-class InstrumentType(_InstrumentType, metaclass=_InstrumentTypeEnumTypeWrapper):
-    """Тип инструмента."""
-
-INSTRUMENT_TYPE_UNSPECIFIED: InstrumentType.ValueType  # 0
-INSTRUMENT_TYPE_BOND: InstrumentType.ValueType  # 1
-"""Облигация."""
-INSTRUMENT_TYPE_SHARE: InstrumentType.ValueType  # 2
-"""Акция."""
-INSTRUMENT_TYPE_CURRENCY: InstrumentType.ValueType  # 3
-"""Валюта."""
-INSTRUMENT_TYPE_ETF: InstrumentType.ValueType  # 4
-"""Exchange-traded fund. Фонд."""
-INSTRUMENT_TYPE_FUTURES: InstrumentType.ValueType  # 5
-"""Фьючерс."""
-INSTRUMENT_TYPE_SP: InstrumentType.ValueType  # 6
-"""Структурная нота."""
-INSTRUMENT_TYPE_OPTION: InstrumentType.ValueType  # 7
-"""Опцион."""
-global___InstrumentType = InstrumentType
-
 class _PositionsAccountSubscriptionStatus:
     ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
@@ -476,6 +434,8 @@ class Operation(google.protobuf.message.Message):
     OPERATION_TYPE_FIELD_NUMBER: builtins.int
     TRADES_FIELD_NUMBER: builtins.int
     ASSET_UID_FIELD_NUMBER: builtins.int
+    POSITION_UID_FIELD_NUMBER: builtins.int
+    INSTRUMENT_UID_FIELD_NUMBER: builtins.int
     id: builtins.str
     """Идентификатор операции."""
     parent_operation_id: builtins.str
@@ -510,6 +470,10 @@ class Operation(google.protobuf.message.Message):
         """Массив сделок."""
     asset_uid: builtins.str
     """Идентификатор актива"""
+    position_uid: builtins.str
+    """position_uid-идентификатора инструмента."""
+    instrument_uid: builtins.str
+    """Уникальный идентификатор инструмента."""
     def __init__(
         self,
         *,
@@ -528,9 +492,11 @@ class Operation(google.protobuf.message.Message):
         operation_type: global___OperationType.ValueType = ...,
         trades: collections.abc.Iterable[global___OperationTrade] | None = ...,
         asset_uid: builtins.str = ...,
+        position_uid: builtins.str = ...,
+        instrument_uid: builtins.str = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["date", b"date", "payment", b"payment", "price", b"price"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["asset_uid", b"asset_uid", "currency", b"currency", "date", b"date", "figi", b"figi", "id", b"id", "instrument_type", b"instrument_type", "operation_type", b"operation_type", "parent_operation_id", b"parent_operation_id", "payment", b"payment", "price", b"price", "quantity", b"quantity", "quantity_rest", b"quantity_rest", "state", b"state", "trades", b"trades", "type", b"type"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["asset_uid", b"asset_uid", "currency", b"currency", "date", b"date", "figi", b"figi", "id", b"id", "instrument_type", b"instrument_type", "instrument_uid", b"instrument_uid", "operation_type", b"operation_type", "parent_operation_id", b"parent_operation_id", "payment", b"payment", "position_uid", b"position_uid", "price", b"price", "quantity", b"quantity", "quantity_rest", b"quantity_rest", "state", b"state", "trades", b"trades", "type", b"type"]) -> None: ...
 
 global___Operation = Operation
 
@@ -627,19 +593,19 @@ class PortfolioResponse(google.protobuf.message.Message):
     VIRTUAL_POSITIONS_FIELD_NUMBER: builtins.int
     @property
     def total_amount_shares(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
-        """Общая стоимость акций в портфеле в рублях."""
+        """Общая стоимость акций в портфеле."""
     @property
     def total_amount_bonds(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
-        """Общая стоимость облигаций в портфеле в рублях."""
+        """Общая стоимость облигаций в портфеле."""
     @property
     def total_amount_etf(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
-        """Общая стоимость фондов в портфеле в рублях."""
+        """Общая стоимость фондов в портфеле."""
     @property
     def total_amount_currencies(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
-        """Общая стоимость валют в портфеле в рублях."""
+        """Общая стоимость валют в портфеле."""
     @property
     def total_amount_futures(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
-        """Общая стоимость фьючерсов в портфеле в рублях."""
+        """Общая стоимость фьючерсов в портфеле."""
     @property
     def expected_yield(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
         """Текущая относительная доходность портфеля, в %."""
@@ -650,16 +616,16 @@ class PortfolioResponse(google.protobuf.message.Message):
     """Идентификатор счёта пользователя."""
     @property
     def total_amount_options(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
-        """Общая стоимость опционов в портфеле в рублях."""
+        """Общая стоимость опционов в портфеле."""
     @property
     def total_amount_sp(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
-        """Общая стоимость структурных нот в портфеле в рублях"""
+        """Общая стоимость структурных нот в портфеле."""
     @property
     def total_amount_portfolio(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
-        """Общая стоимость портфеля в рублях"""
+        """Общая стоимость портфеля."""
     @property
     def virtual_positions(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___VirtualPortfolioPosition]:
-        """Массив виртуальных позиций портфеля"""
+        """Массив виртуальных позиций портфеля."""
     def __init__(
         self,
         *,
@@ -801,6 +767,7 @@ class PortfolioPosition(google.protobuf.message.Message):
     AVERAGE_POSITION_PRICE_FIFO_FIELD_NUMBER: builtins.int
     QUANTITY_LOTS_FIELD_NUMBER: builtins.int
     BLOCKED_FIELD_NUMBER: builtins.int
+    BLOCKED_LOTS_FIELD_NUMBER: builtins.int
     POSITION_UID_FIELD_NUMBER: builtins.int
     INSTRUMENT_UID_FIELD_NUMBER: builtins.int
     VAR_MARGIN_FIELD_NUMBER: builtins.int
@@ -826,7 +793,7 @@ class PortfolioPosition(google.protobuf.message.Message):
         """Deprecated Средняя цена позиции в пунктах (для фьючерсов). **Возможна задержка до секунды для пересчёта**."""
     @property
     def current_price(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
-        """Текущая цена за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента.."""
+        """Текущая цена за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента."""
     @property
     def average_position_price_fifo(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
         """Средняя цена позиции по методу FIFO. **Возможна задержка до секунды для пересчёта**."""
@@ -834,7 +801,10 @@ class PortfolioPosition(google.protobuf.message.Message):
     def quantity_lots(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
         """Deprecated Количество лотов в портфеле."""
     blocked: builtins.bool
-    """Заблокировано."""
+    """Заблокировано на бирже."""
+    @property
+    def blocked_lots(self) -> tinkoff.invest.grpc.common_pb2.Quotation:
+        """Количество бумаг, заблокированных выставленными заявками."""
     position_uid: builtins.str
     """position_uid-идентификатора инструмента"""
     instrument_uid: builtins.str
@@ -859,13 +829,14 @@ class PortfolioPosition(google.protobuf.message.Message):
         average_position_price_fifo: tinkoff.invest.grpc.common_pb2.MoneyValue | None = ...,
         quantity_lots: tinkoff.invest.grpc.common_pb2.Quotation | None = ...,
         blocked: builtins.bool = ...,
+        blocked_lots: tinkoff.invest.grpc.common_pb2.Quotation | None = ...,
         position_uid: builtins.str = ...,
         instrument_uid: builtins.str = ...,
         var_margin: tinkoff.invest.grpc.common_pb2.MoneyValue | None = ...,
         expected_yield_fifo: tinkoff.invest.grpc.common_pb2.Quotation | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["average_position_price", b"average_position_price", "average_position_price_fifo", b"average_position_price_fifo", "average_position_price_pt", b"average_position_price_pt", "current_nkd", b"current_nkd", "current_price", b"current_price", "expected_yield", b"expected_yield", "expected_yield_fifo", b"expected_yield_fifo", "quantity", b"quantity", "quantity_lots", b"quantity_lots", "var_margin", b"var_margin"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["average_position_price", b"average_position_price", "average_position_price_fifo", b"average_position_price_fifo", "average_position_price_pt", b"average_position_price_pt", "blocked", b"blocked", "current_nkd", b"current_nkd", "current_price", b"current_price", "expected_yield", b"expected_yield", "expected_yield_fifo", b"expected_yield_fifo", "figi", b"figi", "instrument_type", b"instrument_type", "instrument_uid", b"instrument_uid", "position_uid", b"position_uid", "quantity", b"quantity", "quantity_lots", b"quantity_lots", "var_margin", b"var_margin"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["average_position_price", b"average_position_price", "average_position_price_fifo", b"average_position_price_fifo", "average_position_price_pt", b"average_position_price_pt", "blocked_lots", b"blocked_lots", "current_nkd", b"current_nkd", "current_price", b"current_price", "expected_yield", b"expected_yield", "expected_yield_fifo", b"expected_yield_fifo", "quantity", b"quantity", "quantity_lots", b"quantity_lots", "var_margin", b"var_margin"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["average_position_price", b"average_position_price", "average_position_price_fifo", b"average_position_price_fifo", "average_position_price_pt", b"average_position_price_pt", "blocked", b"blocked", "blocked_lots", b"blocked_lots", "current_nkd", b"current_nkd", "current_price", b"current_price", "expected_yield", b"expected_yield", "expected_yield_fifo", b"expected_yield_fifo", "figi", b"figi", "instrument_type", b"instrument_type", "instrument_uid", b"instrument_uid", "position_uid", b"position_uid", "quantity", b"quantity", "quantity_lots", b"quantity_lots", "var_margin", b"var_margin"]) -> None: ...
 
 global___PortfolioPosition = PortfolioPosition
 
@@ -908,7 +879,7 @@ class VirtualPortfolioPosition(google.protobuf.message.Message):
         """Дата до которой нужно продать виртуальные бумаги, после этой даты виртуальная позиция "сгорит" """
     @property
     def current_price(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
-        """Текущая цена за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента.."""
+        """Текущая цена за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента."""
     @property
     def average_position_price_fifo(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
         """Средняя цена позиции по методу FIFO. **Возможна задержка до секунды для пересчёта**."""
@@ -947,7 +918,7 @@ class PositionsSecurities(google.protobuf.message.Message):
     figi: builtins.str
     """Figi-идентификатор бумаги."""
     blocked: builtins.int
-    """Заблокировано."""
+    """Количество бумаг заблокированных выставленными заявками."""
     balance: builtins.int
     """Текущий незаблокированный баланс."""
     position_uid: builtins.str
@@ -986,7 +957,7 @@ class PositionsFutures(google.protobuf.message.Message):
     figi: builtins.str
     """Figi-идентификатор фьючерса."""
     blocked: builtins.int
-    """Заблокировано."""
+    """Количество бумаг заблокированных выставленными заявками."""
     balance: builtins.int
     """Текущий незаблокированный баланс."""
     position_uid: builtins.str
@@ -1020,7 +991,7 @@ class PositionsOptions(google.protobuf.message.Message):
     instrument_uid: builtins.str
     """Уникальный идентификатор  инструмента."""
     blocked: builtins.int
-    """Заблокировано."""
+    """Количество бумаг заблокированных выставленными заявками."""
     balance: builtins.int
     """Текущий незаблокированный баланс."""
     def __init__(
@@ -1683,6 +1654,7 @@ class OperationItem(google.protobuf.message.Message):
     FIGI_FIELD_NUMBER: builtins.int
     INSTRUMENT_TYPE_FIELD_NUMBER: builtins.int
     INSTRUMENT_KIND_FIELD_NUMBER: builtins.int
+    POSITION_UID_FIELD_NUMBER: builtins.int
     PAYMENT_FIELD_NUMBER: builtins.int
     PRICE_FIELD_NUMBER: builtins.int
     COMMISSION_FIELD_NUMBER: builtins.int
@@ -1721,8 +1693,10 @@ class OperationItem(google.protobuf.message.Message):
     """Figi."""
     instrument_type: builtins.str
     """Тип инструмента."""
-    instrument_kind: global___InstrumentType.ValueType
+    instrument_kind: tinkoff.invest.grpc.common_pb2.InstrumentType.ValueType
     """Тип инструмента."""
+    position_uid: builtins.str
+    """position_uid-идентификатора инструмента."""
     @property
     def payment(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
         """Сумма операции."""
@@ -1769,7 +1743,8 @@ class OperationItem(google.protobuf.message.Message):
         instrument_uid: builtins.str = ...,
         figi: builtins.str = ...,
         instrument_type: builtins.str = ...,
-        instrument_kind: global___InstrumentType.ValueType = ...,
+        instrument_kind: tinkoff.invest.grpc.common_pb2.InstrumentType.ValueType = ...,
+        position_uid: builtins.str = ...,
         payment: tinkoff.invest.grpc.common_pb2.MoneyValue | None = ...,
         price: tinkoff.invest.grpc.common_pb2.MoneyValue | None = ...,
         commission: tinkoff.invest.grpc.common_pb2.MoneyValue | None = ...,
@@ -1784,7 +1759,7 @@ class OperationItem(google.protobuf.message.Message):
         asset_uid: builtins.str = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["accrued_int", b"accrued_int", "cancel_date_time", b"cancel_date_time", "commission", b"commission", "date", b"date", "payment", b"payment", "price", b"price", "trades_info", b"trades_info", "yield", b"yield", "yield_relative", b"yield_relative"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["accrued_int", b"accrued_int", "asset_uid", b"asset_uid", "broker_account_id", b"broker_account_id", "cancel_date_time", b"cancel_date_time", "cancel_reason", b"cancel_reason", "commission", b"commission", "cursor", b"cursor", "date", b"date", "description", b"description", "figi", b"figi", "id", b"id", "instrument_kind", b"instrument_kind", "instrument_type", b"instrument_type", "instrument_uid", b"instrument_uid", "name", b"name", "parent_operation_id", b"parent_operation_id", "payment", b"payment", "price", b"price", "quantity", b"quantity", "quantity_done", b"quantity_done", "quantity_rest", b"quantity_rest", "state", b"state", "trades_info", b"trades_info", "type", b"type", "yield", b"yield", "yield_relative", b"yield_relative"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["accrued_int", b"accrued_int", "asset_uid", b"asset_uid", "broker_account_id", b"broker_account_id", "cancel_date_time", b"cancel_date_time", "cancel_reason", b"cancel_reason", "commission", b"commission", "cursor", b"cursor", "date", b"date", "description", b"description", "figi", b"figi", "id", b"id", "instrument_kind", b"instrument_kind", "instrument_type", b"instrument_type", "instrument_uid", b"instrument_uid", "name", b"name", "parent_operation_id", b"parent_operation_id", "payment", b"payment", "position_uid", b"position_uid", "price", b"price", "quantity", b"quantity", "quantity_done", b"quantity_done", "quantity_rest", b"quantity_rest", "state", b"state", "trades_info", b"trades_info", "type", b"type", "yield", b"yield", "yield_relative", b"yield_relative"]) -> None: ...
 
 global___OperationItem = OperationItem
 

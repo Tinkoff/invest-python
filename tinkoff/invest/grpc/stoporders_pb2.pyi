@@ -112,7 +112,7 @@ class PostStopOrderRequest(google.protobuf.message.Message):
     EXPIRE_DATE_FIELD_NUMBER: builtins.int
     INSTRUMENT_ID_FIELD_NUMBER: builtins.int
     figi: builtins.str
-    """Figi-идентификатор инструмента."""
+    """Deprecated Figi-идентификатор инструмента. Необходимо использовать instrument_id."""
     quantity: builtins.int
     """Количество лотов."""
     @property
@@ -133,7 +133,7 @@ class PostStopOrderRequest(google.protobuf.message.Message):
     def expire_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
         """Дата и время окончания действия стоп-заявки в часовом поясе UTC. **Для ExpirationType = GoodTillDate заполнение обязательно**."""
     instrument_id: builtins.str
-    """Идентификатор инструмента, принимает значения Figi или instrument_uid"""
+    """Идентификатор инструмента, принимает значения Figi или instrument_uid."""
     def __init__(
         self,
         *,
@@ -290,7 +290,7 @@ class StopOrder(google.protobuf.message.Message):
     def stop_price(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
         """Цена активации стоп-заявки за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента."""
     instrument_uid: builtins.str
-    """instrument_uid идентификатор инструмента"""
+    """instrument_uid идентификатор инструмента."""
     def __init__(
         self,
         *,

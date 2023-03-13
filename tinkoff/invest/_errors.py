@@ -1,10 +1,15 @@
 from functools import wraps
 from typing import Any, Callable, TypeVar, cast
 
-from grpc import Call, RpcError
+from grpc import Call, RpcError, StatusCode
 from grpc.aio import AioRpcError
 
-from .exceptions import AioRequestError, RequestError
+from .exceptions import (
+    AioRequestError,
+    AioUnauthenticatedError,
+    RequestError,
+    UnauthenticatedError,
+)
 from .logging import get_metadata_from_aio_error, get_metadata_from_call, log_error
 
 TFunc = TypeVar("TFunc", bound=Callable[..., Any])
@@ -25,9 +30,15 @@ def handle_request_error(name: str):
                         name,
                         f"{e.code().name} {e.details()}",  # type:ignore
                     )
-                    raise RequestError(
-                        e.code(), e.details(), metadata  # type:ignore
-                    ) from e
+                    status_code = e.code()  # type:ignore
+                    details = e.details()  # type:ignore
+
+                    if status_code == StatusCode.UNAUTHENTICATED:
+                        raise UnauthenticatedError(
+                            status_code, details, metadata
+                        ) from e
+
+                    raise RequestError(status_code, details, metadata) from e
                 raise
 
         return cast(TFunc, wrapper)
@@ -50,9 +61,15 @@ def handle_request_error_gen(name: str):
                         name,
                         f"{e.code().name} {e.details()}",  # type:ignore
                     )
-                    raise RequestError(
-                        e.code(), e.details(), metadata  # type:ignore
-                    ) from e
+                    status_code = e.code()  # type:ignore
+                    details = e.details()  # type:ignore
+
+                    if status_code == StatusCode.UNAUTHENTICATED:
+                        raise UnauthenticatedError(
+                            status_code, details, metadata
+                        ) from e
+
+                    raise RequestError(status_code, details, metadata) from e
                 raise
 
         return cast(TFunc, wrapper)
@@ -74,9 +91,13 @@ def handle_aio_request_error(name: str):
                     name,
                     f"{e.code().name} {e.details()}",  # type:ignore
                 )
-                raise AioRequestError(
-                    e.code(), e.details(), metadata  # type:ignore
-                ) from e
+                status_code = e.code()  # type:ignore
+                details = e.details()  # type:ignore
+
+                if status_code == StatusCode.UNAUTHENTICATED:
+                    raise AioUnauthenticatedError(status_code, details, metadata) from e
+
+                raise AioRequestError(status_code, details, metadata) from e
 
         return cast(TFunc, wrapper)
 
@@ -98,9 +119,13 @@ def handle_aio_request_error_gen(name: str):
                     name,
                     f"{e.code().name} {e.details()}",  # type:ignore
                 )
-                raise AioRequestError(
-                    e.code(), e.details(), metadata  # type:ignore
-                ) from e
+                status_code = e.code()  # type:ignore
+                details = e.details()  # type:ignore
+
+                if status_code == StatusCode.UNAUTHENTICATED:
+                    raise AioUnauthenticatedError(status_code, details, metadata) from e
+
+                raise AioRequestError(status_code, details, metadata) from e
 
         return cast(TFunc, wrapper)
 

@@ -15,6 +15,7 @@ from tinkoff.invest import (
     OrderType,
     Quotation,
 )
+from tinkoff.invest.exceptions import UnauthenticatedError
 
 
 @pytest.fixture()
@@ -78,6 +79,10 @@ def order(figi, quantity, price, direction, account_id, order_type, order_id):
 @pytest.mark.skipif(
     os.environ.get("INVEST_SANDBOX_TOKEN") is None,
     reason="INVEST_SANDBOX_TOKEN should be specified",
+)
+@pytest.mark.xfail(
+    raises=UnauthenticatedError,
+    reason="INVEST_SANDBOX_TOKEN is incorrect",
 )
 class TestSandboxOperations:
     def test_open_sandbox_account(self, sandbox_service):

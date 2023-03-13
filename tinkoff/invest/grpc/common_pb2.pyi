@@ -17,6 +17,52 @@ else:
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
+class _InstrumentType:
+    ValueType = typing.NewType("ValueType", builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
+
+class _InstrumentTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_InstrumentType.ValueType], builtins.type):  # noqa: F821
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    INSTRUMENT_TYPE_UNSPECIFIED: _InstrumentType.ValueType  # 0
+    INSTRUMENT_TYPE_BOND: _InstrumentType.ValueType  # 1
+    """Облигация."""
+    INSTRUMENT_TYPE_SHARE: _InstrumentType.ValueType  # 2
+    """Акция."""
+    INSTRUMENT_TYPE_CURRENCY: _InstrumentType.ValueType  # 3
+    """Валюта."""
+    INSTRUMENT_TYPE_ETF: _InstrumentType.ValueType  # 4
+    """Exchange-traded fund. Фонд."""
+    INSTRUMENT_TYPE_FUTURES: _InstrumentType.ValueType  # 5
+    """Фьючерс."""
+    INSTRUMENT_TYPE_SP: _InstrumentType.ValueType  # 6
+    """Структурная нота."""
+    INSTRUMENT_TYPE_OPTION: _InstrumentType.ValueType  # 7
+    """Опцион."""
+    INSTRUMENT_TYPE_CLEARING_CERTIFICATE: _InstrumentType.ValueType  # 8
+    """Clearing certificate."""
+
+class InstrumentType(_InstrumentType, metaclass=_InstrumentTypeEnumTypeWrapper):
+    """Тип инструмента."""
+
+INSTRUMENT_TYPE_UNSPECIFIED: InstrumentType.ValueType  # 0
+INSTRUMENT_TYPE_BOND: InstrumentType.ValueType  # 1
+"""Облигация."""
+INSTRUMENT_TYPE_SHARE: InstrumentType.ValueType  # 2
+"""Акция."""
+INSTRUMENT_TYPE_CURRENCY: InstrumentType.ValueType  # 3
+"""Валюта."""
+INSTRUMENT_TYPE_ETF: InstrumentType.ValueType  # 4
+"""Exchange-traded fund. Фонд."""
+INSTRUMENT_TYPE_FUTURES: InstrumentType.ValueType  # 5
+"""Фьючерс."""
+INSTRUMENT_TYPE_SP: InstrumentType.ValueType  # 6
+"""Структурная нота."""
+INSTRUMENT_TYPE_OPTION: InstrumentType.ValueType  # 7
+"""Опцион."""
+INSTRUMENT_TYPE_CLEARING_CERTIFICATE: InstrumentType.ValueType  # 8
+"""Clearing certificate."""
+global___InstrumentType = InstrumentType
+
 class _SecurityTradingStatus:
     ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType

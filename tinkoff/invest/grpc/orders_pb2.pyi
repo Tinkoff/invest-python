@@ -231,7 +231,7 @@ class OrderTrade(google.protobuf.message.Message):
     quantity: builtins.int
     """Количество штук в сделке."""
     trade_id: builtins.str
-    """Идентификатор сделки"""
+    """Идентификатор сделки."""
     def __init__(
         self,
         *,
@@ -259,7 +259,7 @@ class PostOrderRequest(google.protobuf.message.Message):
     ORDER_ID_FIELD_NUMBER: builtins.int
     INSTRUMENT_ID_FIELD_NUMBER: builtins.int
     figi: builtins.str
-    """Figi-идентификатор инструмента."""
+    """Deprecated Figi-идентификатор инструмента. Необходимо использовать instrument_id."""
     quantity: builtins.int
     """Количество лотов."""
     @property
@@ -588,7 +588,7 @@ class OrderStage(google.protobuf.message.Message):
     TRADE_ID_FIELD_NUMBER: builtins.int
     @property
     def price(self) -> tinkoff.invest.grpc.common_pb2.MoneyValue:
-        """Цена за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента.."""
+        """Цена за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента."""
     quantity: builtins.int
     """Количество лотов."""
     trade_id: builtins.str

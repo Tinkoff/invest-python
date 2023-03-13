@@ -130,6 +130,8 @@ message TradingDay {
   google.protobuf.Timestamp clearing_end_time = 13; // Время окончания основного клиринга в часовом поясе UTC.
   google.protobuf.Timestamp premarket_start_time = 14; // Время начала премаркета в часовом поясе UTC.
   google.protobuf.Timestamp premarket_end_time = 15; // Время окончания премаркета в часовом поясе UTC.
+  google.protobuf.Timestamp closing_auction_start_time = 16; // Время начала аукциона закрытия в часовом поясе UTC.
+  google.protobuf.Timestamp opening_auction_end_time = 17; // Время окончания аукциона открытия в часовом поясе UTC.
 }
 
 //Запрос получения инструмента по идентификатору.
@@ -279,8 +281,9 @@ message Option {
   bool buy_available_flag = 404; //Признак доступности для покупки.
   bool sell_available_flag = 405; //Признак доступности для продажи.
   bool for_qual_investor_flag = 406; //Флаг отображающий доступность торговли инструментом только для квалифицированных инвесторов.
-  bool weekend_flag = 407; //Флаг отображающий доступность торговли инструментом по выходным
-  bool blocked_tca_flag = 408; //Флаг заблокированного ТКС
+  bool weekend_flag = 407; //Флаг отображающий доступность торговли инструментом по выходным.
+  bool blocked_tca_flag = 408; //Флаг заблокированного ТКС.
+  bool api_trade_available_flag = 409; //Параметр указывает на возможность торговать инструментом через API.
 }
 
 //Тип опциона по направлению сделки.
@@ -375,8 +378,10 @@ message Bond {
   bool for_qual_investor_flag = 52; //Флаг отображающий доступность торговли инструментом только для квалифицированных инвесторов.
   bool weekend_flag = 53; //Флаг отображающий доступность торговли инструментом по выходным
   bool blocked_tca_flag = 54; //Флаг заблокированного ТКС
+  bool subordinated_flag = 55; //Признак субординированной облигации.
   google.protobuf.Timestamp first_1min_candle_date = 61; //Дата первой минутной свечи.
   google.protobuf.Timestamp first_1day_candle_date = 62; //Дата первой дневной свечи.
+  RiskLevel risk_level = 63; //Уровень риска.
 }
 
 //Объект передачи информации о валюте.
@@ -417,8 +422,8 @@ message Currency {
 
   bool for_iis_flag = 41; //Признак доступности для ИИС.
   bool for_qual_investor_flag = 52; //Флаг отображающий доступность торговли инструментом только для квалифицированных инвесторов.
-  bool weekend_flag = 53; //Флаг отображающий доступность торговли инструментом по выходным
-  bool blocked_tca_flag = 54; //Флаг заблокированного ТКС
+  bool weekend_flag = 53; //Флаг отображающий доступность торговли инструментом по выходным.
+  bool blocked_tca_flag = 54; //Флаг заблокированного ТКС.
   google.protobuf.Timestamp first_1min_candle_date = 56; //Дата первой минутной свечи.
   google.protobuf.Timestamp first_1day_candle_date = 57; //Дата первой дневной свечи.
 }
@@ -465,8 +470,8 @@ message Etf {
 
   bool for_iis_flag = 41; //Признак доступности для ИИС.
   bool for_qual_investor_flag = 42; //Флаг отображающий доступность торговли инструментом только для квалифицированных инвесторов.
-  bool weekend_flag = 43; //Флаг отображающий доступность торговли инструментом по выходным
-  bool blocked_tca_flag = 44; //Флаг заблокированного ТКС
+  bool weekend_flag = 43; //Флаг отображающий доступность торговли инструментом по выходным.
+  bool blocked_tca_flag = 44; //Флаг заблокированного ТКС.
   google.protobuf.Timestamp first_1min_candle_date = 56; //Дата первой минутной свечи.
   google.protobuf.Timestamp first_1day_candle_date = 57; //Дата первой дневной свечи.
 }
@@ -515,8 +520,8 @@ message Future {
 
   bool for_iis_flag = 41; //Признак доступности для ИИС.
   bool for_qual_investor_flag = 42; //Флаг отображающий доступность торговли инструментом только для квалифицированных инвесторов.
-  bool weekend_flag = 43; //Флаг отображающий доступность торговли инструментом по выходным
-  bool blocked_tca_flag = 44; //Флаг заблокированного ТКС
+  bool weekend_flag = 43; //Флаг отображающий доступность торговли инструментом по выходным.
+  bool blocked_tca_flag = 44; //Флаг заблокированного ТКС.
   google.protobuf.Timestamp first_1min_candle_date = 56; //Дата первой минутной свечи.
   google.protobuf.Timestamp first_1day_candle_date = 57; //Дата первой дневной свечи.
 }
@@ -662,6 +667,7 @@ message Instrument {
   bool for_qual_investor_flag = 37; //Флаг отображающий доступность торговли инструментом только для квалифицированных инвесторов.
   bool weekend_flag = 38; //Флаг отображающий доступность торговли инструментом по выходным
   bool blocked_tca_flag = 39; //Флаг заблокированного ТКС
+  InstrumentType instrument_kind	= 40; //Тип инструмента.
   google.protobuf.Timestamp first_1min_candle_date = 56; //Дата первой минутной свечи.
   google.protobuf.Timestamp first_1day_candle_date = 57; //Дата первой дневной свечи.
 }
@@ -773,6 +779,7 @@ message AssetCurrency {
 message AssetSecurity {
   string isin = 1; //ISIN-идентификатор ценной бумаги.
   string type = 2; //Тип ценной бумаги.
+  InstrumentType instrument_kind	= 10; //Тип инструмента.
   oneof ext {
     AssetShare share = 3; //Акция. Заполняется только для акций (тип актива asset.type = "ASSET_TYPE_SECURITY" и security.type = share).
     AssetBond bond = 4; //Облигация. Заполняется только для облигаций (тип актива asset.type = "ASSET_TYPE_SECURITY" и security.type = bond).
@@ -911,6 +918,7 @@ message AssetInstrument {
   string ticker = 4; //Тикер инструмента.
   string class_code = 5; //Класс-код (секция торгов).
   repeated InstrumentLink links = 6; //Массив связанных инструментов.
+  InstrumentType instrument_kind	= 10; //Тип инструмента.
 }
 
 //Связь с другим инструментом.
@@ -937,6 +945,7 @@ message FavoriteInstrument {
   string instrument_type = 11; //Тип инструмента.
   bool otc_flag = 16; //Признак внебиржевой ценной бумаги.
   bool api_trade_available_flag = 17; //Параметр указывает на возможность торговать инструментом через API.
+  InstrumentType instrument_kind	= 18; //Тип инструмента.
 }
 
 //Запрос редактирования списка избранных инструментов.
@@ -1006,6 +1015,7 @@ message InstrumentShort {
   string name = 6; //Название инструмента.
   string uid = 7; //Уникальный идентификатор инструмента.
   string position_uid = 8; //Уникальный идентификатор позиции инструмента.
+  InstrumentType instrument_kind	= 10; //Тип инструмента.
   bool api_trade_available_flag = 11; //Параметр указывает на возможность торговать инструментом через API.
   bool for_iis_flag = 12; //Признак доступности для ИИС.
   google.protobuf.Timestamp first_1min_candle_date = 26; //Дата первой минутной свечи.
@@ -1026,4 +1036,12 @@ message GetBrandRequest {
 //Список брендов.
 message GetBrandsResponse {
   repeated Brand brands = 1; //Массив брендов.
+}
+
+//Уровень риска облигации.
+enum RiskLevel {
+    RISK_LEVEL_UNSPECIFIED = 0;
+    RISK_LEVEL_LOW = 1; //Низкий уровень риска
+    RISK_LEVEL_MODERATE = 2; //Средний уровень риска
+    RISK_LEVEL_HIGH = 3; //Высокий уровень риска
 }

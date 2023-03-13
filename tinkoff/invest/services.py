@@ -107,6 +107,8 @@ from .schemas import (
     GetOrderStateRequest,
     GetStopOrdersRequest,
     GetStopOrdersResponse,
+    GetTradingStatusesRequest,
+    GetTradingStatusesResponse,
     GetTradingStatusRequest,
     GetTradingStatusResponse,
     GetUserTariffRequest,
@@ -940,6 +942,22 @@ class MarketDataService(_grpc_helpers.Service):
         )
         log_request(get_tracking_id_from_call(call), "GetTradingStatus")
         return _grpc_helpers.protobuf_to_dataclass(response, GetTradingStatusResponse)
+
+    @handle_request_error("GetTradingStatuses")
+    def get_trading_statuses(
+        self, *, instrument_ids: Optional[List[str]] = None
+    ) -> GetTradingStatusesResponse:
+        request = GetTradingStatusesRequest()
+        if instrument_ids:
+            request.instrument_id = instrument_ids
+        response, call = self.stub.GetTradingStatuses.with_call(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, marketdata_pb2.GetTradingStatusesRequest()
+            ),
+            metadata=self.metadata,
+        )
+        log_request(get_tracking_id_from_call(call), "GetTradingStatuses")
+        return _grpc_helpers.protobuf_to_dataclass(response, GetTradingStatusesResponse)
 
     @handle_request_error("GetLastTrades")
     def get_last_trades(
