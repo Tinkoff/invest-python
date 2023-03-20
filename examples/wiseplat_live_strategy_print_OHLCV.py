@@ -113,7 +113,7 @@ async def run_strategy(portfolio, timeframe, days_back, check_interval):
     # pylint: disable=unnecessary-dunder-call
     client = await AsyncClient(token=TOKEN, app_name="TinkoffApp").__aenter__()
     for instrument in portfolio:
-        strategy = PrintOnlyCandlesStrategy(
+        strategy = LogOnlyCandlesStrategy(
             figi=instrument,
             timeframe=timeframe,
             days_back=days_back,
