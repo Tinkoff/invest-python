@@ -60,7 +60,7 @@ class LogOnlyCandlesStrategy:
             interval=self.timeframe,
         ):
             if candle not in self.candles:
-                if candle.is_complete:  # if candle is complete
+                if candle.is_complete:
                     self.candles.append(candle)
                     logger.debug("Found %s - figi=%s", candle, self.figi)
 
