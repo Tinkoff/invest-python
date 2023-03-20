@@ -126,7 +126,9 @@ async def run_strategy(portfolio, timeframe, days_back, check_interval):
 
 if __name__ == "__main__":
 
-    portfolio = {"BBG004730N88", "BBG004730ZJ9"}  # SBER, VTBR
+    sber_figi = "BBG004730N88"
+    vtbr_figi = "BBG004730ZJ9"
+    portfolio = {sber_figi, vtbr_figi}
     timeframe = (
         CandleInterval.CANDLE_INTERVAL_1_MIN
     )
