@@ -89,6 +89,10 @@ class LogOnlyCandlesStrategy:
                 await self.ensure_market_open()
                 await self.get_historical_data()
 
+                # put your strategy code here for live
+                # to generate signals for buying or selling tickers
+                logger.debug("- live mode: run some strategy code to buy or sell - figi=%s", self.figi)
+
             except AioRequestError as are:
                 logger.error("Client error %s", are)
 
