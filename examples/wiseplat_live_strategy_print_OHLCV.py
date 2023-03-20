@@ -129,7 +129,7 @@ if __name__ == "__main__":
     portfolio = {"BBG004730N88", "BBG004730ZJ9"}  # SBER, VTBR
     timeframe = (
         CandleInterval.CANDLE_INTERVAL_1_MIN
-    )  # ..._1_MIN,..._5_MIN, ..._15_MIN, ..._HOUR, ..._DAY
+    )
     days_back = 1
     check_interval = 10  # seconds to check interval for new completed candle
 
