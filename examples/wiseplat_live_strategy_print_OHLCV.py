@@ -91,7 +91,10 @@ class LogOnlyCandlesStrategy:
 
                 # put your strategy code here for live
                 # to generate signals for buying or selling tickers
-                logger.debug("- live mode: run some strategy code to buy or sell - figi=%s", self.figi)
+                logger.debug(
+                    "- live mode: run some strategy code to buy or sell - figi=%s",
+                    self.figi,
+                )
 
             except AioRequestError as are:
                 logger.error("Client error %s", are)
@@ -133,9 +136,7 @@ if __name__ == "__main__":
     sber_figi = "BBG004730N88"
     vtbr_figi = "BBG004730ZJ9"
     portfolio = {sber_figi, vtbr_figi}
-    timeframe = (
-        CandleInterval.CANDLE_INTERVAL_1_MIN
-    )
+    timeframe = CandleInterval.CANDLE_INTERVAL_1_MIN
     days_back = 1
     check_interval = 10  # seconds to check interval for new completed candle
 
