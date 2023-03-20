@@ -21,7 +21,7 @@ logging.basicConfig(format="%(asctime)s %(levelname)s:%(message)s", level=loggin
 logger = logging.getLogger(__name__)
 
 
-class PrintOnlyCandlesStrategy:
+class LogOnlyCandlesStrategy:
     """PrintOnlyCandles strategy."""
 
     def __init__(
