@@ -22,7 +22,8 @@ logger = logging.getLogger(__name__)
 
 
 class LogOnlyCandlesStrategy:
-    """PrintOnlyCandles strategy."""
+    """This class is responsible for a strategy. You can put here
+    your methods for your strategy."""
 
     def __init__(
         self,
