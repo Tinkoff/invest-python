@@ -17,6 +17,7 @@ from tinkoff.invest import (
     PortfolioResponse,
     Quotation,
 )
+from tinkoff.invest.exceptions import UnauthenticatedError
 from tinkoff.invest.services import Services
 from tinkoff.invest.strategies.base.account_manager import AccountManager
 from tinkoff.invest.strategies.moving_average.plotter import (
@@ -219,6 +220,10 @@ def start_datetime() -> datetime:
 @pytest.mark.skipif(
     os.environ.get("INVEST_SANDBOX_TOKEN") is None,
     reason="INVEST_SANDBOX_TOKEN should be specified",
+)
+@pytest.mark.xfail(
+    raises=UnauthenticatedError,
+    reason="INVEST_SANDBOX_TOKEN is incorrect",
 )
 class TestMovingAverageStrategyTraderRealMarketData:
     @pytest.mark.freeze_time()
