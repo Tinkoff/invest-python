@@ -128,7 +128,7 @@ async def run_strategy(portfolio, timeframe, days_back, check_interval):
                 check_interval=check_interval,
                 client=client,
             )
-        strategy_tasks.append(asyncio.create_task(strategy.start()))
+            strategy_tasks.append(asyncio.create_task(strategy.start()))
         await asyncio.gather(*strategy_tasks)
 
 
