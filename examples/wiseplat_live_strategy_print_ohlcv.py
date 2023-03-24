@@ -118,17 +118,18 @@ async def run_strategy(portfolio, timeframe, days_back, check_interval):
     """From this function we are starting
     strategy for every ticker from portfolio.
     """
-    # pylint: disable=unnecessary-dunder-call
-    client = await AsyncClient(token=TOKEN, app_name="TinkoffApp").__aenter__()
-    for instrument in portfolio:
-        strategy = LogOnlyCandlesStrategy(
-            figi=instrument,
-            timeframe=timeframe,
-            days_back=days_back,
-            check_interval=check_interval,
-            client=client,
-        )
-        asyncio.create_task(strategy.start())
+    async with AsyncClient(token=TOKEN, app_name="TinkoffApp") as client:
+        strategy_tasks = []
+        for instrument in portfolio:
+            strategy = LogOnlyCandlesStrategy(
+                figi=instrument,
+                timeframe=timeframe,
+                days_back=days_back,
+                check_interval=check_interval,
+                client=client,
+            )
+        strategy_tasks.append(asyncio.create_task(strategy.start()))
+        await asyncio.gather(*strategy_tasks)
 
 
 if __name__ == "__main__":
@@ -141,7 +142,7 @@ if __name__ == "__main__":
     check_interval = 10  # seconds to check interval for new completed candle
 
     loop = asyncio.get_event_loop()
-    loop.create_task(
+    task = loop.create_task(
         run_strategy(
             portfolio=portfolio,
             timeframe=timeframe,
@@ -149,4 +150,4 @@ if __name__ == "__main__":
             check_interval=check_interval,
         )
     )
-    loop.run_forever()
+    loop.run_until_complete(task)
