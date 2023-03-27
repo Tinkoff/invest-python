@@ -18,6 +18,7 @@ from tinkoff.invest import (
     ShareResponse,
     TradingSchedulesResponse,
 )
+from tinkoff.invest.exceptions import UnauthenticatedError
 from tinkoff.invest.services import SandboxService, Services
 from tinkoff.invest.strategies.base.account_manager import AccountManager
 from tinkoff.invest.strategies.base.errors import MarketDataNotAvailableError
@@ -178,6 +179,10 @@ def _ensure_is_market_active(
 @pytest.mark.skipif(
     os.environ.get("INVEST_SANDBOX_TOKEN") is None,
     reason="INVEST_SANDBOX_TOKEN should be specified",
+)
+@pytest.mark.xfail(
+    raises=UnauthenticatedError,
+    reason="INVEST_SANDBOX_TOKEN is incorrect",
 )
 class TestMovingAverageStrategyTraderInSandbox:
     def test_trade(
