@@ -115,3 +115,8 @@
 ~~~python
 {% include "../examples/wiseplat_set_get_sandbox_balance.py" %}
 ~~~
+## Пример live стратегии для нескольких тикеров. Вывод OHLCV для каждой сформировавшейся свечи.
+[examples/wiseplat_live_strategy_print_ohlcv.py](https://github.com/Tinkoff/invest-python/blob/main/examples/wiseplat_live_strategy_print_ohlcv.py)
+~~~python
+{% include "../examples/wiseplat_live_strategy_print_ohlcv.py" %}
+~~~
