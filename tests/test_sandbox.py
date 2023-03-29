@@ -7,7 +7,6 @@ import pytest
 
 from tinkoff.invest import (
     Account,
-    Client,
     CloseSandboxAccountResponse,
     MoneyValue,
     OperationState,

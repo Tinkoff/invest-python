@@ -59,9 +59,7 @@ def main():
             ),
         )
 
-        logger.info(
-            "orders: %s", client.orders.get_orders(account_id=account_id)
-        )
+        logger.info("orders: %s", client.orders.get_orders(account_id=account_id))
         logger.info(
             "positions: %s", client.operations.get_positions(account_id=account_id)
         )

@@ -4,8 +4,8 @@ import logging
 from datetime import datetime, timedelta
 from typing import Dict, Generator, Iterable, List, Optional, Tuple
 
-import deprecation
 import grpc
+from deprecation import deprecated
 from grpc.aio import Metadata
 
 from . import _grpc_helpers
@@ -173,7 +173,6 @@ from .utils import (
     now,
     with_filtering_distinct_candles,
 )
-from deprecation import deprecated
 
 __all__ = (
     "Services",
@@ -1431,7 +1430,7 @@ class SandboxService(_grpc_helpers.Service):
         log_request(get_tracking_id_from_call(call), "OpenSandboxAccount")
         return _grpc_helpers.protobuf_to_dataclass(response, OpenSandboxAccountResponse)
 
-    @deprecated(details='Use `client.users.get_accounts(...)` method instead')
+    @deprecated(details="Use `client.users.get_accounts(...)` method instead")
     @handle_request_error("GetSandboxAccounts")
     def get_sandbox_accounts(self) -> GetAccountsResponse:
         return self._users.get_accounts()
@@ -1453,7 +1452,7 @@ class SandboxService(_grpc_helpers.Service):
             response, CloseSandboxAccountResponse
         )
 
-    @deprecated(details='Use `client.orders.post_order(...)` method instead')
+    @deprecated(details="Use `client.orders.post_order(...)` method instead")
     @handle_request_error("PostSandboxOrder")
     def post_sandbox_order(
         self,
@@ -1478,7 +1477,7 @@ class SandboxService(_grpc_helpers.Service):
             instrument_id=instrument_id,
         )
 
-    @deprecated(details='Use `client.orders.replace_order(...)` method instead')
+    @deprecated(details="Use `client.orders.replace_order(...)` method instead")
     @handle_request_error("ReplaceSandboxOrder")
     def replace_sandbox_order(
         self,
@@ -1486,31 +1485,31 @@ class SandboxService(_grpc_helpers.Service):
     ) -> PostOrderResponse:
         return self._orders.replace_order(request=request)
 
-    @deprecated(details='Use `client.orders.get_orders(...)` method instead')
+    @deprecated(details="Use `client.orders.get_orders(...)` method instead")
     @handle_request_error("GetSandboxOrders")
     def get_sandbox_orders(self, *, account_id: str = "") -> GetOrdersResponse:
         return self._orders.get_orders(account_id=account_id)
 
-    @deprecated(details='Use `client.orders.cancel_order(...)` method instead')
+    @deprecated(details="Use `client.orders.cancel_order(...)` method instead")
     @handle_request_error("CancelSandboxOrder")
     def cancel_sandbox_order(
         self, *, account_id: str = "", order_id: str = ""
     ) -> CancelOrderResponse:
         return self._orders.cancel_order(account_id=account_id, order_id=order_id)
 
-    @deprecated(details='Use `client.orders.get_order_state(...)` method instead')
+    @deprecated(details="Use `client.orders.get_order_state(...)` method instead")
     @handle_request_error("GetSandboxOrderState")
     def get_sandbox_order_state(
         self, *, account_id: str = "", order_id: str = ""
     ) -> OrderState:
         return self._orders.get_order_state(account_id=account_id, order_id=order_id)
 
-    @deprecated(details='Use `client.operations.get_positions(...)` method instead')
+    @deprecated(details="Use `client.operations.get_positions(...)` method instead")
     @handle_request_error("GetSandboxPositions")
     def get_sandbox_positions(self, *, account_id: str = "") -> PositionsResponse:
         return self._operations.get_positions(account_id=account_id)
 
-    @deprecated(details='Use `client.operations.get_operations(...)` method instead')
+    @deprecated(details="Use `client.operations.get_operations(...)` method instead")
     @handle_request_error("GetSandboxOperations")
     def get_sandbox_operations(
         self,
@@ -1536,7 +1535,7 @@ class SandboxService(_grpc_helpers.Service):
     ) -> GetOperationsByCursorResponse:
         return self._operations.get_operations_by_cursor(request=request)
 
-    @deprecated(details='Use `client.operations.get_portfolio(...)` method instead')
+    @deprecated(details="Use `client.operations.get_portfolio(...)` method instead")
     @handle_request_error("GetSandboxPortfolio")
     def get_sandbox_portfolio(self, *, account_id: str = "") -> PortfolioResponse:
         return self._operations.get_portfolio(account_id=account_id)
@@ -1558,7 +1557,9 @@ class SandboxService(_grpc_helpers.Service):
         log_request(get_tracking_id_from_call(call), "SandboxPayIn")
         return _grpc_helpers.protobuf_to_dataclass(response, SandboxPayInResponse)
 
-    @deprecated(details='Use `client.operations.get_withdraw_limits(...)` method instead')
+    @deprecated(
+        details="Use `client.operations.get_withdraw_limits(...)` method instead"
+    )
     @handle_request_error("GetSandboxWithdrawLimits")
     def get_sandbox_withdraw_limits(
         self,
