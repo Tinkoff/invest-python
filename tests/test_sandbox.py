@@ -16,11 +16,12 @@ from tinkoff.invest import (
     Quotation,
 )
 from tinkoff.invest.exceptions import UnauthenticatedError
+from tinkoff.invest.sandbox.client import SandboxClient
 
 
 @pytest.fixture()
 def sandbox_service():
-    with Client(token=os.environ["INVEST_SANDBOX_TOKEN"]) as client:
+    with SandboxClient(token=os.environ["INVEST_SANDBOX_TOKEN"]) as client:
         yield client.sandbox
 
 
