@@ -7,7 +7,7 @@ from tinkoff.invest.strategies.base.strategy_supervisor import StrategySuperviso
 
 
 class MovingAverageStrategySupervisor(StrategySupervisor):
-    def __init__(self):
+    def __init__(self) -> None:
         self._events: Dict[Type[StrategyEvent], List[StrategyEvent]] = {}
 
     def notify(self, event: StrategyEvent) -> None:

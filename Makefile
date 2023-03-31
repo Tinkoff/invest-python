@@ -24,7 +24,7 @@ lint:
 	$(POETRY_RUN) ruff $(CODE)
 	$(POETRY_RUN) flake8 --jobs 1 --statistics --show-source $(CODE)
 	$(POETRY_RUN) pylint --jobs 1 --rcfile=setup.cfg $(CODE)
-	$(POETRY_RUN) bandit -r $(MAIN_CODE)
+	$(POETRY_RUN) bandit -c pyproject.toml -r $(MAIN_CODE)
 	$(POETRY_RUN) black --line-length=88 --exclude=$(EXCLUDE_CODE) --check $(CODE)
 	$(POETRY_RUN) pytest --dead-fixtures --dup-fixtures
 	$(POETRY_RUN) mypy $(CODE)

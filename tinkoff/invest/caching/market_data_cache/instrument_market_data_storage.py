@@ -185,7 +185,7 @@ class InstrumentMarketDataStorage(
         file2: Path,
         range2: Tuple[datetime, datetime],
     ) -> Tuple[Tuple[datetime, datetime], Path]:
-        new_range = (min(min(range1), min(range2)), max(max(range1), max(range2)))
+        new_range = (min([*range1, *range2]), max([*range1, *range2]))
         new_file = self._get_file_path(date_range=new_range)
 
         with open(file1, "r") as infile1:  # pylint: disable=W1514

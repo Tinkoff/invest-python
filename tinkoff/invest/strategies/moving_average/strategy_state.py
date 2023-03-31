@@ -1,5 +1,5 @@
 class MovingAverageStrategyState:
-    def __init__(self):
+    def __init__(self) -> None:
         self._long_open: bool = False
         self._short_open: bool = False
         self._position: int = 0

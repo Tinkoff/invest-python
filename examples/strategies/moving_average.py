@@ -34,7 +34,7 @@ FIGI = os.environ["INVEST_FIGI"]
 ACCOUNT_ID = os.environ["INVEST_ACCOUNT_ID"]
 
 
-def main():
+def main() -> None:
     with Client(TOKEN) as services:
         settings = MovingAverageStrategySettings(
             share_id=FIGI,

@@ -2,5 +2,5 @@ from typing import Protocol
 
 
 class ITrader(Protocol):
-    def trade(self):
+    def trade(self) -> None:
         pass

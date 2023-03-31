@@ -158,7 +158,7 @@ class MovingAverageStrategyPlotter(StrategyPlotter):
             "time": [e.candle_event.time for e in data_events],
         }
         df = pd.DataFrame(params, index=params["time"])
-        return cast(PlotKwargs, dict(data=df["price"], **style))
+        return cast(PlotKwargs, {"data": df["price"], **style})
 
     def get_signal_plot_kwargs(
         self, strategy_events: List[StrategyEvent]

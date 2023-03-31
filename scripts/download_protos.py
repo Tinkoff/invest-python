@@ -41,11 +41,11 @@ def main() -> int:
     return 0
 
 
-def _clear_in_start():
+def _clear_in_start() -> None:
     shutil.rmtree(OUTPUT_PATH, ignore_errors=True)
 
 
-def _download_protos():
+def _download_protos() -> None:
     session = requests.session()
     response = session.get(URL, stream=True)
     if response.status_code != HTTPStatus.OK:
@@ -56,24 +56,24 @@ def _download_protos():
             f.write(chunk)
 
 
-def _extract_protos():
+def _extract_protos() -> None:
     with ZipFile(PROTOS_TMP_ZIP) as zf:
         for name in FILES:
             zf.extract(f"{ZIP_PROTOS_PATH}/{name}", path=".")
 
 
-def _move_protos():
+def _move_protos() -> None:
     os.makedirs(OUTPUT_PATH, exist_ok=True)
     for name in FILES:
         shutil.move(f"{ZIP_PROTOS_PATH}/{name}", OUTPUT_PATH)
 
 
-def _clear_in_end():
+def _clear_in_end() -> None:
     os.remove(PROTOS_TMP_ZIP)
     shutil.rmtree(ZIP_PROTOS_ROOT_PATH)
 
 
-def _modify_protos():
+def _modify_protos() -> None:
     for name in FILES:
         with open(f"{OUTPUT_PATH}/{name}", "r", encoding="utf-8") as f:
             protofile_text = f.read()
