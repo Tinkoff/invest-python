@@ -17,7 +17,7 @@ async def main():
         market_data_stream: AsyncMarketDataStreamManager = (
             client.create_market_data_stream()
         )
-        market_data_stream.candles.subscribe(
+        market_data_stream.candles.waiting_close().subscribe(
             [
                 CandleInstrument(
                     figi="BBG004730N88",
