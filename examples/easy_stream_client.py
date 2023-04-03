@@ -14,7 +14,7 @@ TOKEN = os.environ["INVEST_TOKEN"]
 def main():
     with Client(TOKEN) as client:
         market_data_stream: MarketDataStreamManager = client.create_market_data_stream()
-        market_data_stream.candles.subscribe(
+        market_data_stream.candles.waiting_close().subscribe(
             [
                 CandleInstrument(
                     figi="BBG004730N88",

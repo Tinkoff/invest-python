@@ -54,9 +54,12 @@ class BaseStreamManager(abc.ABC, Generic[TInstrument, TMarketDataStreamManager])
 class CandlesStreamManager(
     BaseStreamManager[CandleInstrument, TMarketDataStreamManager]
 ):
-    def __init__(self, parent_manager: TMarketDataStreamManager):
+    def __init__(
+        self, parent_manager: TMarketDataStreamManager, waiting_close: bool = False
+    ):
         super().__init__(parent_manager)
         self._parent_manager = parent_manager
+        self._waiting_close = waiting_close
 
     def _get_request(
         self,
@@ -67,7 +70,14 @@ class CandlesStreamManager(
             subscribe_candles_request=SubscribeCandlesRequest(
                 subscription_action=subscription_action,
                 instruments=instruments,
+                waiting_close=self._waiting_close,
             )
+        )
+
+    def waiting_close(self, enabled: bool = True) -> "CandlesStreamManager":
+        """Добавить флаг ожидания завершения интервала минутной свечи."""
+        return CandlesStreamManager(
+            parent_manager=self._parent_manager, waiting_close=enabled
         )
 
 
