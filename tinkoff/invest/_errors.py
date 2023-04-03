@@ -15,7 +15,7 @@ from .logging import get_metadata_from_aio_error, get_metadata_from_call, log_er
 TFunc = TypeVar("TFunc", bound=Callable[..., Any])
 
 
-def handle_request_error(name: str):
+def handle_request_error(name: str) -> Callable[[TFunc], TFunc]:
     def decorator(func: TFunc) -> TFunc:
         @wraps(func)
         def wrapper(*args: Any, **kwargs: Any) -> Any:
@@ -46,7 +46,7 @@ def handle_request_error(name: str):
     return decorator
 
 
-def handle_request_error_gen(name: str):
+def handle_request_error_gen(name: str) -> Callable[[TFunc], TFunc]:
     def decorator(func: TFunc) -> TFunc:
         @wraps(func)
         def wrapper(*args: Any, **kwargs: Any) -> Any:
@@ -77,7 +77,7 @@ def handle_request_error_gen(name: str):
     return decorator
 
 
-def handle_aio_request_error(name: str):
+def handle_aio_request_error(name: str) -> Callable[[TFunc], TFunc]:
     def decorator(func: TFunc) -> TFunc:
         @wraps(func)
         async def wrapper(*args: Any, **kwargs: Any) -> Any:
@@ -104,7 +104,7 @@ def handle_aio_request_error(name: str):
     return decorator
 
 
-def handle_aio_request_error_gen(name: str):
+def handle_aio_request_error_gen(name: str) -> Callable[[TFunc], TFunc]:
     def decorator(func: TFunc) -> TFunc:
         @wraps(func)
         async def wrapper(*args: Any, **kwargs: Any) -> Any:
