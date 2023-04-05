@@ -1583,6 +1583,9 @@ class SandboxService(_grpc_helpers.Service):
         log_request(get_tracking_id_from_call(call), "GetSandboxOperations")
         return _grpc_helpers.protobuf_to_dataclass(response, OperationsResponse)
 
+    @deprecated(
+        details="Use `SandboxClient.operations.get_operations_by_cursor` method instead"
+    )
     @handle_request_error("GetOperationsByCursor")
     def get_operations_by_cursor(
         self,
