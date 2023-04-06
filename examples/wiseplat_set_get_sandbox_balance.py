@@ -7,7 +7,8 @@ import os
 from datetime import datetime
 from decimal import Decimal
 
-from tinkoff.invest import Client, MoneyValue
+from tinkoff.invest import MoneyValue
+from tinkoff.invest.sandbox.client import SandboxClient
 from tinkoff.invest.utils import decimal_to_quotation, quotation_to_decimal
 
 TOKEN = os.environ["INVEST_TOKEN"]
@@ -29,9 +30,9 @@ def main():
     """Example - How to set/get balance for sandbox account.
     How to get/close all sandbox accounts.
     How to open new sandbox account."""
-    with Client(TOKEN) as client:
+    with SandboxClient(TOKEN) as client:
         # get all sandbox accounts
-        sandbox_accounts = client.sandbox.get_sandbox_accounts()
+        sandbox_accounts = client.users.get_accounts()
         print(sandbox_accounts)
 
         # close all sandbox accounts
@@ -47,29 +48,27 @@ def main():
         # add initial 2 000 000 to sandbox account
         print(add_money_sandbox(client=client, account_id=account_id, money=2000000))
         logger.info(
-            "positions: %s", client.sandbox.get_sandbox_positions(account_id=account_id)
+            "positions: %s", client.operations.get_positions(account_id=account_id)
         )
         print(
             "money: ",
             float(
                 quotation_to_decimal(
-                    client.sandbox.get_sandbox_positions(account_id=account_id).money[0]
+                    client.operations.get_positions(account_id=account_id).money[0]
                 )
             ),
         )
 
+        logger.info("orders: %s", client.orders.get_orders(account_id=account_id))
         logger.info(
-            "orders: %s", client.sandbox.get_sandbox_orders(account_id=account_id)
+            "positions: %s", client.operations.get_positions(account_id=account_id)
         )
         logger.info(
-            "positions: %s", client.sandbox.get_sandbox_positions(account_id=account_id)
-        )
-        logger.info(
-            "portfolio: %s", client.sandbox.get_sandbox_portfolio(account_id=account_id)
+            "portfolio: %s", client.operations.get_portfolio(account_id=account_id)
         )
         logger.info(
             "operations: %s",
-            client.sandbox.get_sandbox_operations(
+            client.operations.get_operations(
                 account_id=account_id,
                 from_=datetime(2023, 1, 1),
                 to=datetime(2023, 2, 5),
@@ -77,13 +76,13 @@ def main():
         )
         logger.info(
             "withdraw_limits: %s",
-            client.sandbox.get_sandbox_withdraw_limits(account_id=account_id),
+            client.operations.get_withdraw_limits(account_id=account_id),
         )
 
         # add + 2 000 000 to sandbox account, total is 4 000 000
         print(add_money_sandbox(client=client, account_id=account_id, money=2000000))
         logger.info(
-            "positions: %s", client.sandbox.get_sandbox_positions(account_id=account_id)
+            "positions: %s", client.operations.get_positions(account_id=account_id)
         )
 
         # close new sandbox account
