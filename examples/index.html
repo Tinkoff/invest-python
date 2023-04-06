@@ -1511,7 +1511,8 @@
 <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
 
-<span class="kn">from</span> <span class="nn">tinkoff.invest</span> <span class="kn">import</span> <span class="n">Client</span><span class="p">,</span> <span class="n">MoneyValue</span>
+<span class="kn">from</span> <span class="nn">tinkoff.invest</span> <span class="kn">import</span> <span class="n">MoneyValue</span>
+<span class="kn">from</span> <span class="nn">tinkoff.invest.sandbox.client</span> <span class="kn">import</span> <span class="n">SandboxClient</span>
 <span class="kn">from</span> <span class="nn">tinkoff.invest.utils</span> <span class="kn">import</span> <span class="n">decimal_to_quotation</span><span class="p">,</span> <span class="n">quotation_to_decimal</span>
 
 <span class="n">TOKEN</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;INVEST_TOKEN&quot;</span><span class="p">]</span>
@@ -1533,9 +1534,9 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Example - How to set/get balance for sandbox account.</span>
 <span class="sd">    How to get/close all sandbox accounts.</span>
 <span class="sd">    How to open new sandbox account.&quot;&quot;&quot;</span>
-    <span class="k">with</span> <span class="n">Client</span><span class="p">(</span><span class="n">TOKEN</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+    <span class="k">with</span> <span class="n">SandboxClient</span><span class="p">(</span><span class="n">TOKEN</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
         <span class="c1"># get all sandbox accounts</span>
-        <span class="n">sandbox_accounts</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">sandbox</span><span class="o">.</span><span class="n">get_sandbox_accounts</span><span class="p">()</span>
+        <span class="n">sandbox_accounts</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">users</span><span class="o">.</span><span class="n">get_accounts</span><span class="p">()</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">sandbox_accounts</span><span class="p">)</span>
 
         <span class="c1"># close all sandbox accounts</span>
@@ -1551,29 +1552,27 @@
         <span class="c1"># add initial 2 000 000 to sandbox account</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">add_money_sandbox</span><span class="p">(</span><span class="n">client</span><span class="o">=</span><span class="n">client</span><span class="p">,</span> <span class="n">account_id</span><span class="o">=</span><span class="n">account_id</span><span class="p">,</span> <span class="n">money</span><span class="o">=</span><span class="mi">2000000</span><span class="p">))</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
-            <span class="s2">&quot;positions: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">client</span><span class="o">.</span><span class="n">sandbox</span><span class="o">.</span><span class="n">get_sandbox_positions</span><span class="p">(</span><span class="n">account_id</span><span class="o">=</span><span class="n">account_id</span><span class="p">)</span>
+            <span class="s2">&quot;positions: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">client</span><span class="o">.</span><span class="n">operations</span><span class="o">.</span><span class="n">get_positions</span><span class="p">(</span><span class="n">account_id</span><span class="o">=</span><span class="n">account_id</span><span class="p">)</span>
         <span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span>
             <span class="s2">&quot;money: &quot;</span><span class="p">,</span>
             <span class="nb">float</span><span class="p">(</span>
                 <span class="n">quotation_to_decimal</span><span class="p">(</span>
-                    <span class="n">client</span><span class="o">.</span><span class="n">sandbox</span><span class="o">.</span><span class="n">get_sandbox_positions</span><span class="p">(</span><span class="n">account_id</span><span class="o">=</span><span class="n">account_id</span><span class="p">)</span><span class="o">.</span><span class="n">money</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                    <span class="n">client</span><span class="o">.</span><span class="n">operations</span><span class="o">.</span><span class="n">get_positions</span><span class="p">(</span><span class="n">account_id</span><span class="o">=</span><span class="n">account_id</span><span class="p">)</span><span class="o">.</span><span class="n">money</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
                 <span class="p">)</span>
             <span class="p">),</span>
         <span class="p">)</span>
 
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;orders: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">client</span><span class="o">.</span><span class="n">orders</span><span class="o">.</span><span class="n">get_orders</span><span class="p">(</span><span class="n">account_id</span><span class="o">=</span><span class="n">account_id</span><span class="p">))</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
-            <span class="s2">&quot;orders: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">client</span><span class="o">.</span><span class="n">sandbox</span><span class="o">.</span><span class="n">get_sandbox_orders</span><span class="p">(</span><span class="n">account_id</span><span class="o">=</span><span class="n">account_id</span><span class="p">)</span>
+            <span class="s2">&quot;positions: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">client</span><span class="o">.</span><span class="n">operations</span><span class="o">.</span><span class="n">get_positions</span><span class="p">(</span><span class="n">account_id</span><span class="o">=</span><span class="n">account_id</span><span class="p">)</span>
         <span class="p">)</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
-            <span class="s2">&quot;positions: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">client</span><span class="o">.</span><span class="n">sandbox</span><span class="o">.</span><span class="n">get_sandbox_positions</span><span class="p">(</span><span class="n">account_id</span><span class="o">=</span><span class="n">account_id</span><span class="p">)</span>
-        <span class="p">)</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
-            <span class="s2">&quot;portfolio: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">client</span><span class="o">.</span><span class="n">sandbox</span><span class="o">.</span><span class="n">get_sandbox_portfolio</span><span class="p">(</span><span class="n">account_id</span><span class="o">=</span><span class="n">account_id</span><span class="p">)</span>
+            <span class="s2">&quot;portfolio: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">client</span><span class="o">.</span><span class="n">operations</span><span class="o">.</span><span class="n">get_portfolio</span><span class="p">(</span><span class="n">account_id</span><span class="o">=</span><span class="n">account_id</span><span class="p">)</span>
         <span class="p">)</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
             <span class="s2">&quot;operations: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span>
-            <span class="n">client</span><span class="o">.</span><span class="n">sandbox</span><span class="o">.</span><span class="n">get_sandbox_operations</span><span class="p">(</span>
+            <span class="n">client</span><span class="o">.</span><span class="n">operations</span><span class="o">.</span><span class="n">get_operations</span><span class="p">(</span>
                 <span class="n">account_id</span><span class="o">=</span><span class="n">account_id</span><span class="p">,</span>
                 <span class="n">from_</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
                 <span class="n">to</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
@@ -1581,13 +1580,13 @@
         <span class="p">)</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
             <span class="s2">&quot;withdraw_limits: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span>
-            <span class="n">client</span><span class="o">.</span><span class="n">sandbox</span><span class="o">.</span><span class="n">get_sandbox_withdraw_limits</span><span class="p">(</span><span class="n">account_id</span><span class="o">=</span><span class="n">account_id</span><span class="p">),</span>
+            <span class="n">client</span><span class="o">.</span><span class="n">operations</span><span class="o">.</span><span class="n">get_withdraw_limits</span><span class="p">(</span><span class="n">account_id</span><span class="o">=</span><span class="n">account_id</span><span class="p">),</span>
         <span class="p">)</span>
 
         <span class="c1"># add + 2 000 000 to sandbox account, total is 4 000 000</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">add_money_sandbox</span><span class="p">(</span><span class="n">client</span><span class="o">=</span><span class="n">client</span><span class="p">,</span> <span class="n">account_id</span><span class="o">=</span><span class="n">account_id</span><span class="p">,</span> <span class="n">money</span><span class="o">=</span><span class="mi">2000000</span><span class="p">))</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
-            <span class="s2">&quot;positions: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">client</span><span class="o">.</span><span class="n">sandbox</span><span class="o">.</span><span class="n">get_sandbox_positions</span><span class="p">(</span><span class="n">account_id</span><span class="o">=</span><span class="n">account_id</span><span class="p">)</span>
+            <span class="s2">&quot;positions: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">client</span><span class="o">.</span><span class="n">operations</span><span class="o">.</span><span class="n">get_positions</span><span class="p">(</span><span class="n">account_id</span><span class="o">=</span><span class="n">account_id</span><span class="p">)</span>
         <span class="p">)</span>
 
         <span class="c1"># close new sandbox account</span>
