@@ -2,7 +2,7 @@ import ast
 import dataclasses
 from datetime import datetime, timedelta, timezone
 from decimal import Decimal
-from typing import Any, Callable, Generator, Iterable, List, Tuple
+from typing import Any, Callable, Generator, Iterable, List, Protocol, Tuple
 
 import dateutil.parser
 
@@ -53,13 +53,22 @@ def get_intervals(
 
 
 def quotation_to_decimal(quotation: Quotation) -> Decimal:
-    fractional = quotation.nano / Decimal("10e8")
-    return Decimal(quotation.units) + fractional
+    return money_to_decimal(quotation)
 
 
 def decimal_to_quotation(decimal: Decimal) -> Quotation:
     fractional = decimal % 1
     return Quotation(units=int(decimal // 1), nano=int(fractional * Decimal("10e8")))
+
+
+class MoneyProtocol(Protocol):
+    units: int
+    nano: int
+
+
+def money_to_decimal(money: MoneyProtocol) -> Decimal:
+    fractional = money.nano / Decimal("10e8")
+    return Decimal(money.units) + fractional
 
 
 # fmt: off
