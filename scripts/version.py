@@ -1,8 +1,9 @@
 import re
+from typing import Tuple
 
 from tomlkit import loads
 
-Version = tuple[str, str, str, str, str]
+Version = Tuple[str, str, str, str, str]
 
 
 def main() -> None:
@@ -29,13 +30,20 @@ def next_beta_version(version: Version) -> Version:
     major, minor, patch, prerelease, buildmetadata = version
     if not prerelease:
         return major, minor, patch, prerelease, buildmetadata
-    prerelease_n = int(prerelease.removeprefix("beta"))
+    prerelease_n = int(remove_prefix(prerelease, "beta"))
     return (major, minor, patch, "beta" + str(prerelease_n + 1), buildmetadata)
 
 
 def version_to_str(version: Version) -> str:
     major, minor, patch, prerelease, _ = version
     return f"{major}.{minor}.{patch}-{prerelease}"
+
+
+def remove_prefix(text: str, prefix: str) -> str:
+    if text.startswith(prefix):
+        prefix_len = len(prefix)
+        return text[prefix_len:]
+    return text
 
 
 if __name__ == "__main__":
