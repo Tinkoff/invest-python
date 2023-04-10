@@ -27,7 +27,7 @@ lint:
 	$(POETRY_RUN) bandit -r $(MAIN_CODE)
 	$(POETRY_RUN) black --line-length=88 --exclude=$(EXCLUDE_CODE) --check $(CODE)
 	$(POETRY_RUN) pytest --dead-fixtures --dup-fixtures
-	$(POETRY_RUN) mypy $(CODE)
+	$(POETRY_RUN) mypy $(MAIN_CODE)
 	$(POETRY_RUN) poetry check
 	$(POETRY_RUN) toml-sort --check pyproject.toml
 
