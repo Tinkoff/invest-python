@@ -2852,4 +2852,4 @@ all = ["matplotlib", "mplfinance", "numpy", "pandas"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8"
-content-hash = "09e114f896e7045aad70b2538cd6d880da214639962bf6a0d9849ec778a69f01"
+content-hash = "839d108da5378c5d21824e0ef93895ed6fa4bab1a587fb7ff4c44f66a3f080f1"
