@@ -13,22 +13,6 @@ __all__ = ("create_channel",)
 MAX_RECEIVE_MESSAGE_LENGTH_OPTION = "grpc.max_receive_message_length"
 
 
-def _contains_option(options: ChannelArgumentType, expected_option_name: str) -> bool:
-    for option_name, _ in options:
-        if option_name == expected_option_name:
-            return True
-    return False
-
-
-def _with_max_receive_message_length_option(
-    options: ChannelArgumentType,
-) -> ChannelArgumentType:
-    if not _contains_option(options, MAX_RECEIVE_MESSAGE_LENGTH_OPTION):
-        option = (MAX_RECEIVE_MESSAGE_LENGTH_OPTION, MAX_RECEIVE_MESSAGE_LENGTH)
-        return list(itertools.chain(options, [option]))
-    return options
-
-
 def create_channel(
     *,
     target: Optional[str] = None,
@@ -48,3 +32,19 @@ def create_channel(
     if force_async:
         return grpc.aio.secure_channel(*args, interceptors)
     return grpc.secure_channel(*args)
+
+
+def _with_max_receive_message_length_option(
+    options: ChannelArgumentType,
+) -> ChannelArgumentType:
+    if not _contains_option(options, MAX_RECEIVE_MESSAGE_LENGTH_OPTION):
+        option = (MAX_RECEIVE_MESSAGE_LENGTH_OPTION, MAX_RECEIVE_MESSAGE_LENGTH)
+        return list(itertools.chain(options, [option]))
+    return options
+
+
+def _contains_option(options: ChannelArgumentType, expected_option_name: str) -> bool:
+    for option_name, _ in options:
+        if option_name == expected_option_name:
+            return True
+    return False
