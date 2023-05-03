@@ -6,3 +6,5 @@ X_RATELIMIT_LIMIT = "x-ratelimit-limit"
 X_RATELIMIT_REMAINING = "x-ratelimit-remaining"
 X_RATELIMIT_RESET = "x-ratelimit-reset"
 MESSAGE = "message"
+MEGABYTE = 1024 * 1024
+MAX_RECEIVE_MESSAGE_LENGTH = 10 * MEGABYTE
