@@ -301,18 +301,22 @@ class StreamLimit(google.protobuf.message.Message):
 
     LIMIT_FIELD_NUMBER: builtins.int
     STREAMS_FIELD_NUMBER: builtins.int
+    OPEN_FIELD_NUMBER: builtins.int
     limit: builtins.int
     """Максимальное количество stream-соединений."""
     @property
     def streams(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """Названия stream-методов."""
+    open: builtins.int
+    """Текущее количество открытых stream-соединений."""
     def __init__(
         self,
         *,
         limit: builtins.int = ...,
         streams: collections.abc.Iterable[builtins.str] | None = ...,
+        open: builtins.int = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["limit", b"limit", "streams", b"streams"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["limit", b"limit", "open", b"open", "streams", b"streams"]) -> None: ...
 
 global___StreamLimit = StreamLimit
 

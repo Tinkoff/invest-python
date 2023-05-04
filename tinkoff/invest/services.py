@@ -60,6 +60,7 @@ from .schemas import (
     EditFavoritesResponse,
     EtfResponse,
     EtfsResponse,
+    FilterOptionsRequest,
     FindInstrumentRequest,
     FindInstrumentResponse,
     FutureResponse,
@@ -582,6 +583,7 @@ class InstrumentsService(_grpc_helpers.Service):
         log_request(get_tracking_id_from_call(call), "OptionBy")
         return _grpc_helpers.protobuf_to_dataclass(response, OptionResponse)
 
+    @deprecated(details="Use `Client.instruments.options_by(...)` method instead")
     @handle_request_error("Options")
     def options(
         self, *, instrument_status: InstrumentStatus = InstrumentStatus(0)
@@ -595,6 +597,22 @@ class InstrumentsService(_grpc_helpers.Service):
             metadata=self.metadata,
         )
         log_request(get_tracking_id_from_call(call), "Options")
+        return _grpc_helpers.protobuf_to_dataclass(response, OptionsResponse)
+
+    @handle_request_error("OptionsBy")
+    def options_by(
+        self, *, basic_asset_uid: str = "", basic_asset_position_uid: str = ""
+    ) -> OptionsResponse:
+        request = FilterOptionsRequest()
+        request.basic_asset_uid = basic_asset_uid
+        request.basic_asset_position_uid = basic_asset_position_uid
+        response, call = self.stub.OptionsBy.with_call(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, instruments_pb2.FilterOptionsRequest()
+            ),
+            metadata=self.metadata,
+        )
+        log_request(get_tracking_id_from_call(call), "OptionsBy")
         return _grpc_helpers.protobuf_to_dataclass(response, OptionsResponse)
 
     @handle_request_error("ShareBy")

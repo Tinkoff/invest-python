@@ -117,6 +117,7 @@ class OrderType(_grpc_helpers.Enum):
     ORDER_TYPE_UNSPECIFIED = 0
     ORDER_TYPE_LIMIT = 1
     ORDER_TYPE_MARKET = 2
+    ORDER_TYPE_BESTPRICE = 3
 
 
 class OrderExecutionReportStatus(_grpc_helpers.Enum):
@@ -451,6 +452,12 @@ class InstrumentsRequest(_grpc_helpers.Message):
 
 
 @dataclass(eq=False, repr=True)
+class FilterOptionsRequest(_grpc_helpers.Message):
+    basic_asset_uid: str = _grpc_helpers.string_field(1)
+    basic_asset_position_uid: str = _grpc_helpers.string_field(2)
+
+
+@dataclass(eq=False, repr=True)
 class BondResponse(_grpc_helpers.Message):
     instrument: "Bond" = _grpc_helpers.message_field(1)
 
@@ -636,6 +643,7 @@ class Bond(_grpc_helpers.Message):  # pylint:disable=too-many-instance-attribute
     weekend_flag: bool = _grpc_helpers.bool_field(53)
     blocked_tca_flag: bool = _grpc_helpers.bool_field(54)
     subordinated_flag: bool = _grpc_helpers.bool_field(55)
+    liquidity_flag: bool = _grpc_helpers.bool_field(56)
     first_1min_candle_date: datetime = _grpc_helpers.message_field(61)
     first_1day_candle_date: datetime = _grpc_helpers.message_field(62)
     risk_level: "RiskLevel" = _grpc_helpers.enum_field(63)
@@ -717,6 +725,7 @@ class Etf(_grpc_helpers.Message):  # pylint:disable=too-many-instance-attributes
     for_qual_investor_flag: bool = _grpc_helpers.bool_field(42)
     weekend_flag: bool = _grpc_helpers.bool_field(43)
     blocked_tca_flag: bool = _grpc_helpers.bool_field(44)
+    liquidity_flag: bool = _grpc_helpers.bool_field(45)
     first_1min_candle_date: datetime = _grpc_helpers.message_field(56)
     first_1day_candle_date: datetime = _grpc_helpers.message_field(57)
 
@@ -804,6 +813,7 @@ class Share(_grpc_helpers.Message):  # pylint:disable=too-many-instance-attribut
     for_qual_investor_flag: bool = _grpc_helpers.bool_field(47)
     weekend_flag: bool = _grpc_helpers.bool_field(48)
     blocked_tca_flag: bool = _grpc_helpers.bool_field(49)
+    liquidity_flag: bool = _grpc_helpers.bool_field(50)
     first_1min_candle_date: datetime = _grpc_helpers.message_field(56)
     first_1day_candle_date: datetime = _grpc_helpers.message_field(57)
 
@@ -922,7 +932,7 @@ class AssetResponse(_grpc_helpers.Message):
 
 @dataclass(eq=False, repr=True)
 class AssetsRequest(_grpc_helpers.Message):
-    pass
+    instrument_type: "InstrumentType" = _grpc_helpers.enum_field(1)
 
 
 @dataclass(eq=False, repr=True)
@@ -1102,6 +1112,7 @@ class AssetInstrument(_grpc_helpers.Message):
     class_code: str = _grpc_helpers.string_field(5)
     links: List["InstrumentLink"] = _grpc_helpers.message_field(6)
     instrument_kind: "InstrumentType" = _grpc_helpers.enum_field(10)
+    position_uid: str = _grpc_helpers.string_field(11)
 
 
 @dataclass(eq=False, repr=True)
@@ -1169,6 +1180,8 @@ class CountryResponse(_grpc_helpers.Message):
 @dataclass(eq=False, repr=True)
 class FindInstrumentRequest(_grpc_helpers.Message):
     query: str = _grpc_helpers.string_field(1)
+    instrument_kind: "InstrumentType" = _grpc_helpers.enum_field(2)
+    api_trade_available_flag: bool = _grpc_helpers.bool_field(3)
 
 
 @dataclass(eq=False, repr=True)
@@ -1856,6 +1869,7 @@ class OrderState(_grpc_helpers.Message):  # pylint:disable=too-many-instance-att
     order_type: "OrderType" = _grpc_helpers.enum_field(17)
     order_date: datetime = _grpc_helpers.message_field(18)
     instrument_uid: str = _grpc_helpers.string_field(19)
+    order_request_id: str = _grpc_helpers.string_field(20)
 
 
 @dataclass(eq=False, repr=True)
@@ -1942,6 +1956,7 @@ class UnaryLimit(_grpc_helpers.Message):
 class StreamLimit(_grpc_helpers.Message):
     limit: int = _grpc_helpers.int32_field(1)
     streams: List[str] = _grpc_helpers.string_field(2)
+    open: int = _grpc_helpers.int32_field(3)
 
 
 @dataclass(eq=False, repr=True)
