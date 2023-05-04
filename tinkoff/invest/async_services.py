@@ -4,6 +4,7 @@ from datetime import datetime
 from typing import AsyncGenerator, AsyncIterable, List, Optional
 
 import grpc
+from deprecation import deprecated
 
 from . import _grpc_helpers
 from ._errors import handle_aio_request_error, handle_aio_request_error_gen
@@ -53,6 +54,7 @@ from .schemas import (
     EditFavoritesResponse,
     EtfResponse,
     EtfsResponse,
+    FilterOptionsRequest,
     FindInstrumentRequest,
     FindInstrumentResponse,
     FutureResponse,
@@ -447,6 +449,7 @@ class InstrumentsService(_grpc_helpers.Service):
         log_request(await get_tracking_id_from_coro(response_coro), "OptionBy")
         return _grpc_helpers.protobuf_to_dataclass(response, OptionResponse)
 
+    @deprecated(details="Use `Client.instruments.options_by(...)` method instead")
     @handle_aio_request_error("Options")
     async def options(
         self, *, instrument_status: InstrumentStatus = InstrumentStatus(0)
@@ -461,6 +464,23 @@ class InstrumentsService(_grpc_helpers.Service):
         )
         response = await response_coro
         log_request(await get_tracking_id_from_coro(response_coro), "Options")
+        return _grpc_helpers.protobuf_to_dataclass(response, OptionsResponse)
+
+    @handle_aio_request_error("OptionsBy")
+    async def options_by(
+        self, *, basic_asset_uid: str = "", basic_asset_position_uid: str = ""
+    ) -> OptionsResponse:
+        request = FilterOptionsRequest()
+        request.basic_asset_uid = basic_asset_uid
+        request.basic_asset_position_uid = basic_asset_position_uid
+        response_coro = self.stub.OptionsBy(
+            request=_grpc_helpers.dataclass_to_protobuff(
+                request, instruments_pb2.FilterOptionsRequest()
+            ),
+            metadata=self.metadata,
+        )
+        response = await response_coro
+        log_request(await get_tracking_id_from_coro(response_coro), "OptionsBy")
         return _grpc_helpers.protobuf_to_dataclass(response, OptionsResponse)
 
     @handle_aio_request_error("ShareBy")

@@ -56,6 +56,8 @@ class _OrderTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._Enum
     """Лимитная"""
     ORDER_TYPE_MARKET: _OrderType.ValueType  # 2
     """Рыночная"""
+    ORDER_TYPE_BESTPRICE: _OrderType.ValueType  # 3
+    """Лучшая цена"""
 
 class OrderType(_OrderType, metaclass=_OrderTypeEnumTypeWrapper):
     """Тип заявки."""
@@ -66,6 +68,8 @@ ORDER_TYPE_LIMIT: OrderType.ValueType  # 1
 """Лимитная"""
 ORDER_TYPE_MARKET: OrderType.ValueType  # 2
 """Рыночная"""
+ORDER_TYPE_BESTPRICE: OrderType.ValueType  # 3
+"""Лучшая цена"""
 global___OrderType = OrderType
 
 class _OrderExecutionReportStatus:
@@ -293,7 +297,10 @@ class PostOrderRequest(google.protobuf.message.Message):
 global___PostOrderRequest = PostOrderRequest
 
 class PostOrderResponse(google.protobuf.message.Message):
-    """Информация о выставлении поручения."""
+    """Прочитайте  про ключ идемпотентности [здесь](https://tinkoff.github.io/investAPI/head-orders/)
+
+    Информация о выставлении поручения.
+    """
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -315,7 +322,7 @@ class PostOrderResponse(google.protobuf.message.Message):
     INITIAL_ORDER_PRICE_PT_FIELD_NUMBER: builtins.int
     INSTRUMENT_UID_FIELD_NUMBER: builtins.int
     order_id: builtins.str
-    """Идентификатор заявки."""
+    """Биржевой идентификатор заявки."""
     execution_report_status: global___OrderExecutionReportStatus.ValueType
     """Текущий статус заявки."""
     lots_requested: builtins.int
@@ -502,8 +509,9 @@ class OrderState(google.protobuf.message.Message):
     ORDER_TYPE_FIELD_NUMBER: builtins.int
     ORDER_DATE_FIELD_NUMBER: builtins.int
     INSTRUMENT_UID_FIELD_NUMBER: builtins.int
+    ORDER_REQUEST_ID_FIELD_NUMBER: builtins.int
     order_id: builtins.str
-    """Идентификатор заявки."""
+    """Биржевой идентификатор заявки."""
     execution_report_status: global___OrderExecutionReportStatus.ValueType
     """Текущий статус заявки."""
     lots_requested: builtins.int
@@ -550,6 +558,8 @@ class OrderState(google.protobuf.message.Message):
         """Дата и время выставления заявки в часовом поясе UTC."""
     instrument_uid: builtins.str
     """UID идентификатор инструмента."""
+    order_request_id: builtins.str
+    """Идентификатор ключа идемпотентности, переданный клиентом."""
     def __init__(
         self,
         *,
@@ -572,9 +582,10 @@ class OrderState(google.protobuf.message.Message):
         order_type: global___OrderType.ValueType = ...,
         order_date: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         instrument_uid: builtins.str = ...,
+        order_request_id: builtins.str = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["average_position_price", b"average_position_price", "executed_commission", b"executed_commission", "executed_order_price", b"executed_order_price", "initial_commission", b"initial_commission", "initial_order_price", b"initial_order_price", "initial_security_price", b"initial_security_price", "order_date", b"order_date", "service_commission", b"service_commission", "total_order_amount", b"total_order_amount"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["average_position_price", b"average_position_price", "currency", b"currency", "direction", b"direction", "executed_commission", b"executed_commission", "executed_order_price", b"executed_order_price", "execution_report_status", b"execution_report_status", "figi", b"figi", "initial_commission", b"initial_commission", "initial_order_price", b"initial_order_price", "initial_security_price", b"initial_security_price", "instrument_uid", b"instrument_uid", "lots_executed", b"lots_executed", "lots_requested", b"lots_requested", "order_date", b"order_date", "order_id", b"order_id", "order_type", b"order_type", "service_commission", b"service_commission", "stages", b"stages", "total_order_amount", b"total_order_amount"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["average_position_price", b"average_position_price", "currency", b"currency", "direction", b"direction", "executed_commission", b"executed_commission", "executed_order_price", b"executed_order_price", "execution_report_status", b"execution_report_status", "figi", b"figi", "initial_commission", b"initial_commission", "initial_order_price", b"initial_order_price", "initial_security_price", b"initial_security_price", "instrument_uid", b"instrument_uid", "lots_executed", b"lots_executed", "lots_requested", b"lots_requested", "order_date", b"order_date", "order_id", b"order_id", "order_request_id", b"order_request_id", "order_type", b"order_type", "service_commission", b"service_commission", "stages", b"stages", "total_order_amount", b"total_order_amount"]) -> None: ...
 
 global___OrderState = OrderState
 
