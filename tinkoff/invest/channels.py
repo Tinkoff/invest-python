@@ -31,7 +31,7 @@ def create_channel(
     args = (target, creds, options, compression)
     if force_async:
         return grpc.aio.secure_channel(*args, interceptors)
-    return grpc.secure_channel(*args)
+    return grpc.intercept_channel(grpc.secure_channel(*args), *interceptors or [])
 
 
 def _with_max_receive_message_length_option(
