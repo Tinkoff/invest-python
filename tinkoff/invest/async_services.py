@@ -116,6 +116,7 @@ from .schemas import (
     InstrumentResponse,
     InstrumentsRequest,
     InstrumentStatus,
+    InstrumentType,
     MarketDataRequest,
     MarketDataResponse,
     MoneyValue,
@@ -719,9 +720,19 @@ class InstrumentsService(_grpc_helpers.Service):
         return _grpc_helpers.protobuf_to_dataclass(response, GetCountriesResponse)
 
     @handle_aio_request_error("FindInstrument")
-    async def find_instrument(self, *, query: str = "") -> FindInstrumentResponse:
+    async def find_instrument(
+        self,
+        *,
+        query: str = "",
+        instrument_kind: Optional[InstrumentType] = None,
+        api_trade_available_flag: Optional[bool] = None,
+    ) -> FindInstrumentResponse:
         request = FindInstrumentRequest()
         request.query = query
+        if instrument_kind is not None:
+            request.instrument_kind = instrument_kind
+        if api_trade_available_flag is not None:
+            request.api_trade_available_flag = api_trade_available_flag
         response_coro = self.stub.FindInstrument(
             request=_grpc_helpers.dataclass_to_protobuff(
                 request, instruments_pb2.FindInstrumentRequest()
