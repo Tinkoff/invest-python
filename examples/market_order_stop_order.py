@@ -43,12 +43,6 @@ TAKE_PROFIT_PERCENTAGE = 0.05
 STOP_LOSS_PERCENTAGE = -0.02
 
 
-def post_stop_orders(
-    client: Client,
-):
-    pass
-
-
 def main():
     if USE_SANDBOX:
         logger.info("Using Sandbox market")
