@@ -13,7 +13,7 @@ BBG001M2SC01 84.120000000р
 BBG000K3STR7 134.900000000р
 BBG00F9XX7H4 142.000000000р
 """
-
+import decimal
 import logging
 import os
 import uuid
@@ -28,6 +28,7 @@ from tinkoff.invest import (
     StopOrderType,
 )
 from tinkoff.invest.sandbox.client import SandboxClient
+from tinkoff.invest.services import Services
 from tinkoff.invest.utils import decimal_to_quotation, money_to_decimal
 
 TOKEN = os.environ["INVEST_TOKEN"]
@@ -69,45 +70,18 @@ def main():
             direction=OrderDirection.ORDER_DIRECTION_BUY,
             account_id=account_id,
             order_type=OrderType.ORDER_TYPE_MARKET,
-            order_id=uuid.uuid4().hex,
-            instrument_id=order_id,
+            order_id=order_id,
+            instrument_id=INSTRUMENT_ID,
         )
 
         status = post_order_response.execution_report_status
         if status == OrderExecutionReportStatus.EXECUTION_REPORT_STATUS_FILL:
             logger.info("Order was fulfilled, posting stop orders.")
 
-            executed_order_price = money_to_decimal(
-                post_order_response.executed_order_price
-            )
-            take_profit_price = executed_order_price * (1 + TAKE_PROFIT_PERCENTAGE)
-            take_profit_response = client.stop_orders.post_stop_order(
-                quantity=QUANTITY,
-                stop_price=decimal_to_quotation(take_profit_price),
-                direction=StopOrderDirection.STOP_ORDER_DIRECTION_SELL,
+            post_stop_orders(
+                client=client,
                 account_id=account_id,
-                stop_order_type=StopOrderType.STOP_ORDER_TYPE_TAKE_PROFIT,
-                instrument_id=INSTRUMENT_ID,
-            )
-            logger.info(
-                "Take profit order was placed stop_order_id=%s. Price: %s",
-                take_profit_response.stop_order_id,
-                take_profit_price,
-            )
-
-            stop_loss_price = executed_order_price * (1 + STOP_LOSS_PERCENTAGE)
-            take_profit_response = client.stop_orders.post_stop_order(
-                quantity=QUANTITY,
-                stop_price=decimal_to_quotation(stop_loss_price),
-                direction=StopOrderDirection.STOP_ORDER_DIRECTION_SELL,
-                account_id=account_id,
-                stop_order_type=StopOrderType.STOP_ORDER_TYPE_STOP_LOSS,
-                instrument_id=INSTRUMENT_ID,
-            )
-            logger.info(
-                "Stop loss order was placed stop_order_id=%s. Price: %s",
-                take_profit_response.stop_order_id,
-                stop_loss_price,
+                post_order_response=post_order_response,
             )
         else:
             logger.info(
@@ -117,6 +91,43 @@ def main():
             )
             logger.info("Cancelling all orders.")
             client.cancel_all_orders(account_id=account_id)
+
+
+def post_stop_orders(
+    client: Services, account_id: str, post_order_response: PostOrderResponse
+):
+    executed_order_price = money_to_decimal(post_order_response.executed_order_price)
+    take_profit_price = executed_order_price * decimal.Decimal(
+        (1 + TAKE_PROFIT_PERCENTAGE)
+    )
+    take_profit_response = client.stop_orders.post_stop_order(
+        quantity=QUANTITY,
+        price=decimal_to_quotation(take_profit_price),
+        stop_price=decimal_to_quotation(take_profit_price),
+        direction=StopOrderDirection.STOP_ORDER_DIRECTION_SELL,
+        account_id=account_id,
+        stop_order_type=StopOrderType.STOP_ORDER_TYPE_TAKE_PROFIT,
+        instrument_id=INSTRUMENT_ID,
+    )
+    logger.info(
+        "Take profit order was placed stop_order_id=%s. Price: %s",
+        take_profit_response.stop_order_id,
+        take_profit_price,
+    )
+    stop_loss_price = executed_order_price * decimal.Decimal((1 + STOP_LOSS_PERCENTAGE))
+    take_profit_response = client.stop_orders.post_stop_order(
+        quantity=QUANTITY,
+        stop_price=decimal_to_quotation(stop_loss_price),
+        direction=StopOrderDirection.STOP_ORDER_DIRECTION_SELL,
+        account_id=account_id,
+        stop_order_type=StopOrderType.STOP_ORDER_TYPE_STOP_LOSS,
+        instrument_id=INSTRUMENT_ID,
+    )
+    logger.info(
+        "Stop loss order was placed stop_order_id=%s. Price: %s",
+        take_profit_response.stop_order_id,
+        stop_loss_price,
+    )
 
 
 if __name__ == "__main__":
