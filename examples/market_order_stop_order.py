@@ -13,10 +13,11 @@ BBG001M2SC01 84.120000000р
 BBG000K3STR7 134.900000000р
 BBG00F9XX7H4 142.000000000р
 """
-import decimal
 import logging
 import os
 import uuid
+from datetime import timedelta
+from decimal import Decimal
 
 from tinkoff.invest import (
     Client,
@@ -25,11 +26,12 @@ from tinkoff.invest import (
     OrderType,
     PostOrderResponse,
     StopOrderDirection,
+    StopOrderExpirationType,
     StopOrderType,
 )
 from tinkoff.invest.sandbox.client import SandboxClient
 from tinkoff.invest.services import Services
-from tinkoff.invest.utils import decimal_to_quotation, money_to_decimal
+from tinkoff.invest.utils import decimal_to_quotation, money_to_decimal, now
 
 TOKEN = os.environ["INVEST_TOKEN"]
 
@@ -39,9 +41,12 @@ logging.basicConfig(level=logging.INFO)
 
 QUANTITY = 1
 INSTRUMENT_ID = "BBG001M2SC01"
-USE_SANDBOX = True
+USE_SANDBOX = False
 TAKE_PROFIT_PERCENTAGE = 0.05
 STOP_LOSS_PERCENTAGE = -0.02
+MIN_PRICE_STEP = 0.02
+STOP_ORDER_EXPIRE_DURATION = timedelta(hours=1)
+EXPIRATION_TYPE = StopOrderExpirationType.STOP_ORDER_EXPIRATION_TYPE_GOOD_TILL_DATE
 
 
 def main():
@@ -97,9 +102,8 @@ def post_stop_orders(
     client: Services, account_id: str, post_order_response: PostOrderResponse
 ):
     executed_order_price = money_to_decimal(post_order_response.executed_order_price)
-    take_profit_price = executed_order_price * decimal.Decimal(
-        (1 + TAKE_PROFIT_PERCENTAGE)
-    )
+    take_profit_price = executed_order_price * Decimal((1 + TAKE_PROFIT_PERCENTAGE))
+    take_profit_price -= take_profit_price % Decimal(MIN_PRICE_STEP)
     take_profit_response = client.stop_orders.post_stop_order(
         quantity=QUANTITY,
         price=decimal_to_quotation(take_profit_price),
@@ -108,20 +112,26 @@ def post_stop_orders(
         account_id=account_id,
         stop_order_type=StopOrderType.STOP_ORDER_TYPE_TAKE_PROFIT,
         instrument_id=INSTRUMENT_ID,
+        expire_date=now() + STOP_ORDER_EXPIRE_DURATION,
+        expiration_type=EXPIRATION_TYPE,
     )
     logger.info(
         "Take profit order was placed stop_order_id=%s. Price: %s",
         take_profit_response.stop_order_id,
         take_profit_price,
     )
-    stop_loss_price = executed_order_price * decimal.Decimal((1 + STOP_LOSS_PERCENTAGE))
+    stop_loss_price = executed_order_price * Decimal((1 + STOP_LOSS_PERCENTAGE))
+    stop_loss_price -= stop_loss_price % Decimal(MIN_PRICE_STEP)
     take_profit_response = client.stop_orders.post_stop_order(
         quantity=QUANTITY,
+        price=decimal_to_quotation(stop_loss_price),
         stop_price=decimal_to_quotation(stop_loss_price),
         direction=StopOrderDirection.STOP_ORDER_DIRECTION_SELL,
         account_id=account_id,
         stop_order_type=StopOrderType.STOP_ORDER_TYPE_STOP_LOSS,
         instrument_id=INSTRUMENT_ID,
+        expire_date=now() + STOP_ORDER_EXPIRE_DURATION,
+        expiration_type=EXPIRATION_TYPE,
     )
     logger.info(
         "Stop loss order was placed stop_order_id=%s. Price: %s",
