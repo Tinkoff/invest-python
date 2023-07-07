@@ -124,7 +124,6 @@ def post_stop_orders(
     stop_loss_price -= stop_loss_price % Decimal(MIN_PRICE_STEP)
     take_profit_response = client.stop_orders.post_stop_order(
         quantity=QUANTITY,
-        price=decimal_to_quotation(stop_loss_price - Decimal(MIN_PRICE_STEP)),
         stop_price=decimal_to_quotation(stop_loss_price),
         direction=StopOrderDirection.STOP_ORDER_DIRECTION_SELL,
         account_id=account_id,
