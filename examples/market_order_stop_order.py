@@ -29,7 +29,6 @@ from tinkoff.invest import (
     StopOrderExpirationType,
     StopOrderType,
 )
-from tinkoff.invest.sandbox.client import SandboxClient
 from tinkoff.invest.services import Services
 from tinkoff.invest.utils import decimal_to_quotation, money_to_decimal, now
 
@@ -41,7 +40,6 @@ logging.basicConfig(level=logging.INFO)
 
 QUANTITY = 1
 INSTRUMENT_ID = "BBG001M2SC01"
-USE_SANDBOX = False
 TAKE_PROFIT_PERCENTAGE = 0.05
 STOP_LOSS_PERCENTAGE = -0.02
 MIN_PRICE_STEP = 0.02
@@ -50,14 +48,8 @@ EXPIRATION_TYPE = StopOrderExpirationType.STOP_ORDER_EXPIRATION_TYPE_GOOD_TILL_D
 
 
 def main():
-    if USE_SANDBOX:
-        logger.info("Using Sandbox market")
-        client_cls = SandboxClient
-    else:
-        logger.info("Using Real market")
-        client_cls = Client
-
-    with client_cls(TOKEN) as client:
+    logger.info("Using Real market")
+    with Client(TOKEN) as client:
         response = client.users.get_accounts()
         account, *_ = response.accounts
         account_id = account.id
