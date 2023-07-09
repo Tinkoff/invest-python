@@ -1,6 +1,9 @@
-from pydantic import BaseSettings, conint
+import dataclasses
+
+from tinkoff.invest.retrying.settings_protocol import RetryClientSettingsProtocol
 
 
-class RetryClientSettings(BaseSettings):
+@dataclasses.dataclass()
+class RetryClientSettings(RetryClientSettingsProtocol):
     use_retry: bool = True
-    max_retry_attempt: conint(ge=0) = 3  # type: ignore
+    max_retry_attempt: int = 3

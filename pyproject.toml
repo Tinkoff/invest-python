@@ -23,7 +23,6 @@ grpcio = "^1.39.0"
 protobuf = "^4.21.6"
 python-dateutil = "^2.8.2"
 tinkoff = "^0.1.1"
-pydantic = "^1.9.2"
 deprecation = "^2.1.0"
 matplotlib = { version = "^3.5.1", optional = true}
 mplfinance = { version = "^0.12.8-beta.9", optional = true}
