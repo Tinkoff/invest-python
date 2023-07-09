@@ -1649,7 +1649,7 @@ name = "numpy"
 version = "1.24.1"
 description = "Fundamental package for array computing in Python"
 category = "main"
-optional = false
+optional = true
 python-versions = ">=3.8"
 files = [
     {file = "numpy-1.24.1-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:179a7ef0889ab769cc03573b6217f54c8bd8e16cef80aad369e1e8185f994cd7"},
@@ -1699,7 +1699,7 @@ name = "pandas"
 version = "2.0.3"
 description = "Powerful data structures for data analysis, time series, and statistics"
 category = "main"
-optional = false
+optional = true
 python-versions = ">=3.8"
 files = [
     {file = "pandas-2.0.3-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:e4c7c9f27a4185304c7caf96dc7d91bc60bc162221152de697c98eb0b2648dd8"},
@@ -2312,7 +2312,7 @@ name = "pytz"
 version = "2022.7.1"
 description = "World timezone definitions, modern and historical"
 category = "main"
-optional = false
+optional = true
 python-versions = "*"
 files = [
     {file = "pytz-2022.7.1-py2.py3-none-any.whl", hash = "sha256:78f4f37d8198e0627c5f1143240bb0206b8691d8d7ac6d78fee88b78733f8c4a"},
@@ -2710,7 +2710,7 @@ name = "tzdata"
 version = "2023.3"
 description = "Provider of IANA time zone data"
 category = "main"
-optional = false
+optional = true
 python-versions = ">=2"
 files = [
     {file = "tzdata-2023.3-py2.py3-none-any.whl", hash = "sha256:7e65763eef3120314099b6939b5546db7adce1e7d6f2e179e3df563c70511eda"},
@@ -2883,4 +2883,4 @@ all = ["pandas", "numpy", "matplotlib", "mplfinance"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8"
-content-hash = "53c23d080886aebf817a9fd25e8196ce93e4460832306f9177a45b72291da00e"
+content-hash = "786752436ad483d8212a13c43f96ac7cbe92d498b1f6d6710d0fa46d5b97455f"
