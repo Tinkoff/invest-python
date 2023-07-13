@@ -1,14 +1,14 @@
 from tinkoff.invest import AsyncClient
 from tinkoff.invest.retrying.aio.grpc_interceptor import AsyncRetryClientInterceptor
 from tinkoff.invest.retrying.aio.retry_manager import AsyncRetryManager
-from tinkoff.invest.retrying.settings import RetryClientSettings
+from tinkoff.invest.retrying.settings_protocol import RetryClientSettingsProtocol
 
 
 class AsyncRetryingClient(AsyncClient):
     def __init__(
         self,
         token: str,
-        settings: RetryClientSettings,
+        settings: RetryClientSettingsProtocol,
         **kwargs,
     ):
         self._retry_manager = AsyncRetryManager(settings=settings)

@@ -1,12 +1,12 @@
 import logging
 
-from tinkoff.invest.retrying.settings import RetryClientSettings
+from tinkoff.invest.retrying.settings_protocol import RetryClientSettingsProtocol
 
 logger = logging.getLogger(__name__)
 
 
 class BaseRetryManager:
-    def __init__(self, settings: RetryClientSettings):
+    def __init__(self, settings: RetryClientSettingsProtocol):
         self._settings = settings
 
     def get_initial_retries(self):

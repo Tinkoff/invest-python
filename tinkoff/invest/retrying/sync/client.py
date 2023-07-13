@@ -1,5 +1,5 @@
 from tinkoff.invest import Client
-from tinkoff.invest.retrying.settings import RetryClientSettings
+from tinkoff.invest.retrying.settings_protocol import RetryClientSettingsProtocol
 from tinkoff.invest.retrying.sync.grpc_interceptor import RetryClientInterceptor
 from tinkoff.invest.retrying.sync.retry_manager import RetryManager
 
@@ -8,7 +8,7 @@ class RetryingClient(Client):
     def __init__(
         self,
         token: str,
-        settings: RetryClientSettings,
+        settings: RetryClientSettingsProtocol,
         **kwargs,
     ):
         self._retry_manager = RetryManager(settings=settings)
