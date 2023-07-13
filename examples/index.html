@@ -1131,7 +1131,7 @@
 
 <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
     <span class="k">with</span> <span class="n">Client</span><span class="p">(</span><span class="n">TOKEN</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
-        <span class="n">r</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">instruments</span><span class="o">.</span><span class="n">find_instrument</span><span class="p">(</span><span class="n">query</span><span class="o">=</span><span class="s2">&quot;тинькофф&quot;</span><span class="p">)</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">instruments</span><span class="o">.</span><span class="n">find_instrument</span><span class="p">(</span><span class="n">query</span><span class="o">=</span><span class="s2">&quot;BBG001M2SC01&quot;</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">r</span><span class="o">.</span><span class="n">instruments</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
 
