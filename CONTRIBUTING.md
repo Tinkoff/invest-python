@@ -7,8 +7,9 @@
 1. Сделайте [fork](https://github.com/Tinkoff/invest-python/fork) проекта
 2. Склонируйте репозиторий на свой локальный компьютер
     ```bash
-    git clone https://github.com/Tinkoff/invest-python.git
+    git clone https://github.com/username/invest-python.git
     ```
+    > Вы должны использовать свой username вместо `username`
 3. Создайте новую ветку для ваших изменений
     ```bash
     git checkout -b branch_name
@@ -66,14 +67,30 @@ Body и Footer можно указать по желанию.
 
 Для работы с проектом рекомендуем использовать [poetry](https://pypi.org/project/poetry/).
 
-Также рекомендуем использовать таск раннер make.
+Также рекомендуем использовать таск раннер make. Все команды описаны в Makefile. Вы можете их скопировать и запускать напрямую.
 
 ## Установка зависимостей
 
 ```
-pip install poetry
+make install-poetry
 make install
 ```
+
+### Виртуальное окружение
+
+По умолчанию, poetry создает виртуальное окружение в директории `~/.cache/pypoetry/virtualenvs/`. Чтобы создавать виртуальное окружение в директории проекта, выполните команду:
+
+```
+poetry config virtualenvs.in-project true
+```
+
+Вы можете сами создать виртуальное окружение в директории проекта:
+
+```
+python -m venv .venv
+```
+
+poetry будет использовать его.
 
 ### Запуск тестов
 
