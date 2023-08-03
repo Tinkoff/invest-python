@@ -14,6 +14,7 @@ from tinkoff.invest import (
     HistoricCandle,
     Quotation,
 )
+from tinkoff.invest.caching.market_data_cache import MarketDataCache
 from tinkoff.invest.caching.market_data_cache.cache_settings import (
     FileMetaData,
     MarketDataCacheSettings,
@@ -22,7 +23,7 @@ from tinkoff.invest.caching.market_data_cache.cache_settings import (
 from tinkoff.invest.caching.market_data_cache.instrument_market_data_storage import (
     InstrumentMarketDataStorage,
 )
-from tinkoff.invest.services import MarketDataCache, MarketDataService
+from tinkoff.invest.services import MarketDataService
 from tinkoff.invest.utils import (
     candle_interval_to_timedelta,
     ceil_datetime,
