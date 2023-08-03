@@ -14,7 +14,7 @@ from tinkoff.invest import (
     HistoricCandle,
     Quotation,
 )
-from tinkoff.invest.caching.market_data_cache import MarketDataCache
+from tinkoff.invest.caching.market_data_cache.cache import MarketDataCache
 from tinkoff.invest.caching.market_data_cache.cache_settings import (
     FileMetaData,
     MarketDataCacheSettings,

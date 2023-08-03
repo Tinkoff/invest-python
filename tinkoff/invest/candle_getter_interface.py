@@ -10,9 +10,9 @@ class ICandleGetter(abc.ABC):
         *,
         from_: datetime,
         to: Optional[datetime],
-        interval: "CandleInterval",  # noqa: F821 Undefined name `CandleInterval`
+        interval: "CandleInterval",  # type: ignore # noqa: F821 Undefined name
         figi: str,
-    ) -> Generator[
-        "HistoricCandle", None, None  # noqa: F821 Undefined name `HistoricCandle`
+    ) -> Generator[  # type: ignore
+        "HistoricCandle", None, None  # noqa: F821 Undefined name
     ]:
         pass
