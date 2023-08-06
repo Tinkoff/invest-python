@@ -168,10 +168,10 @@ from .schemas import (
 from .typedefs import AccountId
 from .utils import (
     candle_interval_to_timedelta,
-    datetime_range_floor,
     floor_datetime,
     get_intervals,
     now,
+    round_datetime_range,
     with_filtering_distinct_candles,
 )
 
@@ -233,25 +233,32 @@ class MarketDataCache(ICandleGetter):
     ) -> Iterable[HistoricCandle]:
         candles = list(from_net)
         if candles:
-            filtered_net_range = self._round_net_range(net_range, interval_delta)
             filtered_candles = list(self._filter_complete_candles(candles))
+            filtered_net_range_real = (
+                min(list(map(lambda x: x.time, filtered_candles))),  # noqa: C417
+                max(list(map(lambda x: x.time, filtered_candles))),  # noqa: C417
+            )
+            filtered_net_range_real_rounded = self._round_net_range(
+                filtered_net_range_real, interval_delta
+            )
             storage.update(
                 [
                     InstrumentDateRangeData(
-                        date_range=filtered_net_range, historic_candles=filtered_candles
+                        date_range=filtered_net_range_real_rounded,
+                        historic_candles=filtered_candles,
                     )
                 ]
             )
             logger.debug("From net [\n%s\n%s\n]", str(net_range[0]), str(net_range[1]))
             logger.debug(
-                "Filtered net [\n%s\n%s\n]",
-                str(filtered_net_range[0]),
-                str(filtered_net_range[1]),
+                "Filtered net real [\n%s\n%s\n]",
+                str(filtered_net_range_real[0]),
+                str(filtered_net_range_real[1]),
             )
             logger.debug(
                 "Filtered net real [\n%s\n%s\n]",
-                str(min(list(map(lambda x: x.time, filtered_candles)))),  # noqa: C417
-                str(max(list(map(lambda x: x.time, filtered_candles)))),  # noqa: C417
+                str(filtered_net_range_real_rounded[0]),
+                str(filtered_net_range_real_rounded[1]),
             )
 
         yield from candles
@@ -272,7 +279,7 @@ class MarketDataCache(ICandleGetter):
     ) -> Generator[HistoricCandle, None, None]:
         interval_delta = candle_interval_to_timedelta(interval)
         to = to or now()
-        from_, to = datetime_range_floor((from_, to))
+        from_, to = round_datetime_range(date_range=(from_, to), interval=interval)
         logger.debug("Request [\n%s\n%s\n]", str(from_), str(to))
 
         processed_time = from_
@@ -320,7 +327,9 @@ class MarketDataCache(ICandleGetter):
         self, net_range: Tuple[datetime, datetime], interval_delta: timedelta
     ) -> Tuple[datetime, datetime]:
         start, end = net_range
-        return start, floor_datetime(end, interval_delta)
+        return floor_datetime(start, interval_delta), floor_datetime(
+            end, interval_delta
+        )
 
 
 class Services(ICandleGetter):

@@ -21,7 +21,7 @@ def main():
         for candle in market_data_cache.get_all_candles(
             figi="BBG004730N88",
             from_=now() - timedelta(days=3),
-            interval=CandleInterval.CANDLE_INTERVAL_1_MIN,
+            interval=CandleInterval.CANDLE_INTERVAL_DAY,
         ):
             print(candle.time)
 
